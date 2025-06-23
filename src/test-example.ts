@@ -1,6 +1,6 @@
 // Simple test to verify the parser works
-import { parseAdorableCSS } from './myparser/parser'
-import { generateCSSFromAdorableCSS } from './myparser/generator'
+import { parseAdorableCSS } from './parser/parser'
+import { generateCSSFromAdorableCSS } from './parser/generator'
 
 console.log('Testing AdorableCSS Parser...')
 
