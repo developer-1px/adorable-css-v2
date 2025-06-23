@@ -1,6 +1,5 @@
 <script lang="ts">
-  import { parseAdorableCSS } from '../parser/parser';
-  import { generateCSSFromAdorableCSS } from '../parser/generator';
+  import { parseAdorableCSS, generateCSSFromAdorableCSS } from 'adorable-css';
   
   let input = 'hbox(center) p(20) bg(#f0f0f0) hover:c(blue)';
   let result: any = null;

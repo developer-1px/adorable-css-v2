@@ -1,0 +1,65 @@
+{
+  "name": "adorable-css",
+  "version": "2.0.0-beta.1",
+  "description": "Figma-first CSS utility framework with natural syntax",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./parser": {
+      "types": "./dist/parser/index.d.ts",
+      "import": "./dist/parser/index.mjs",
+      "require": "./dist/parser/index.js"
+    },
+    "./rules": {
+      "types": "./dist/rules/index.d.ts",
+      "import": "./dist/rules/index.mjs",
+      "require": "./dist/rules/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui"
+  },
+  "keywords": [
+    "css",
+    "utility",
+    "framework",
+    "figma",
+    "design-system",
+    "adorable-css"
+  ],
+  "author": "developer-1px",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/developer-1px/adorable-css-v2.git",
+    "directory": "packages/adorable-css-core"
+  },
+  "homepage": "https://adorable-css.com",
+  "bugs": {
+    "url": "https://github.com/developer-1px/adorable-css-v2/issues"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.8"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

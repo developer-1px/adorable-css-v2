@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { generateCSSFromAdorableCSS } from '../parser/generator';
+  import { generateCSSFromAdorableCSS } from 'adorable-css';
   import { referenceData } from './referenceData';
 
   function generateCSS(syntax: string): string {

@@ -1,0 +1,51 @@
+{
+  "name": "adorable-css-cdn",
+  "version": "2.0.0-beta.1",
+  "description": "CDN distribution of AdorableCSS - Browser-ready CSS utility framework",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "css",
+    "utility",
+    "framework",
+    "cdn",
+    "browser",
+    "adorable-css"
+  ],
+  "author": "developer-1px",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/developer-1px/adorable-css-v2.git",
+    "directory": "packages/adorable-css-cdn"
+  },
+  "homepage": "https://adorable-css.com",
+  "bugs": {
+    "url": "https://github.com/developer-1px/adorable-css-v2/issues"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

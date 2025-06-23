@@ -1,30 +1,44 @@
 {
-  "name": "adorable-css-v2",
+  "name": "adorable-css-v2-monorepo",
   "private": true,
-  "version": "0.0.0",
+  "version": "2.0.0-beta.1",
   "type": "module",
+  "workspaces": [
+    "homepage",
+    "packages/*"
+  ],
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json",
-    "test": "vitest",
-    "test:ui": "vitest --ui",
-    "test:run": "vitest run",
-    "test:watch": "vitest --watch",
-    "test:coverage": "vitest run --coverage"
+    "dev": "pnpm --filter homepage dev",
+    "build": "pnpm --recursive --filter './packages/*' build",
+    "build:homepage": "pnpm --filter homepage build",
+    "preview": "pnpm --filter homepage preview",
+    "check": "pnpm --recursive typecheck",
+    "test": "pnpm --recursive test",
+    "test:core": "pnpm --filter adorable-css test",
+    "clean": "pnpm --recursive exec rm -rf dist node_modules/.cache",
+    "release": "pnpm build && pnpm publish --recursive --filter './packages/*'",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "publish-packages": "changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.27.0",
     "@sveltejs/vite-plugin-svelte": "^5.0.3",
     "@tsconfig/svelte": "^5.0.4",
     "@vitest/ui": "^3.2.4",
     "svelte": "^5.28.1",
     "svelte-check": "^4.1.6",
+    "tsup": "^8.0.0",
     "typescript": "~5.8.3",
     "vite": "^6.3.5",
     "vitest": "^3.2.4"
   },
   "dependencies": {
     "unocss": "^66.2.3"
-  }
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  },
+  "packageManager": "pnpm@8.15.0"
 }
