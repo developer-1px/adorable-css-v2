@@ -1,186 +1,251 @@
 // AdorableCSS v2 - CDN Entry Point
-import { generateCSSFromAdorableCSS } from './cssGenerator'
+import { generateCSS } from "adorable-css";
 
 // Types for browser environment
 interface AdorableCSSV2 {
-  version: string
-  init: (options?: AdorableCSSOptions) => void
-  generate: (classes: string[]) => string
-  destroy: () => void
+  version: string;
+  init: (options?: AdorableCSSOptions) => void;
+  generate: (classes: string[], options?: { debug?: boolean }) => string;
+  destroy: () => void;
 }
 
 interface AdorableCSSOptions {
-  watch?: boolean
-  target?: HTMLElement | string
-  debug?: boolean
+  watch?: boolean;
+  target?: HTMLElement | string;
+  debug?: boolean;
 }
 
 // Create the main AdorableCSS v2 object
 const AdorableCSSV2: AdorableCSSV2 = {
-  version: '2.0.0-beta.1',
-  
+  version: "2.0.0-beta.1",
+
   init: (options: AdorableCSSOptions = {}) => {
-    if (typeof window === 'undefined') {
-      console.warn('AdorableCSS v2 is intended for browser use only')
-      return
+    if (typeof window === "undefined") {
+      console.warn("AdorableCSS v2 is intended for browser use only");
+      return;
     }
-    
-    const { watch = true, target, debug = false } = options
-    
+
+    const { watch = true, target, debug = false } = options;
+
     // Create or get style element
-    let styleElement = document.getElementById('adorable-css-v2-styles') as HTMLStyleElement
+    let styleElement = document.getElementById(
+      "adorable-css-v2-styles"
+    ) as HTMLStyleElement;
     if (!styleElement) {
-      styleElement = document.createElement('style')
-      styleElement.id = 'adorable-css-v2-styles'
-      styleElement.setAttribute('data-adorable-css-v2', 'true')
-      
+      styleElement = document.createElement("style");
+      styleElement.id = "adorable-css-v2-styles";
+      styleElement.setAttribute("data-adorable-css-v2", "true");
+
       // Insert before other stylesheets to allow overrides
-      const head = document.head
-      const firstStylesheet = head.querySelector('style, link[rel="stylesheet"]')
+      const head = document.head;
+      const firstStylesheet = head.querySelector(
+        'style, link[rel="stylesheet"]'
+      );
       if (firstStylesheet) {
-        head.insertBefore(styleElement, firstStylesheet)
+        head.insertBefore(styleElement, firstStylesheet);
       } else {
-        head.appendChild(styleElement)
+        head.appendChild(styleElement);
       }
     }
-    
-    if (!watch) return
-    
-    const classList = new Set<string>()
-    
+
+    if (!watch) return;
+
+    const classList = new Set<string>();
+
     const updateStyles = () => {
-      const css = generateCSSFromAdorableCSS([...classList])
-      styleElement.innerHTML = css
-      
+      const classArray = [...classList];
+      const css = generateCSS(classArray);
+      styleElement.innerHTML = css;
+
       if (debug) {
-        console.log('AdorableCSS v2: Updated styles for classes:', [...classList])
+        // Check which classes failed to generate CSS
+        const failedClasses = checkFailedClasses(classArray);
+
+        if (failedClasses.length > 0) {
+          console.warn("AdorableCSS v2: Failed to generate CSS for classes:", failedClasses);
+          console.log("These classes might need to be added to the core rules. Please report them!");
+        }
+
+        console.log("AdorableCSS v2: Updated styles for classes:", classArray);
+        console.log(`Generated ${classArray.length} classes, ${failedClasses.length} failed`);
       }
-    }
-    
+    };
+
     const processElement = (element: Element) => {
       element.classList.forEach((className) => {
         if (!classList.has(className)) {
-          classList.add(className)
+          classList.add(className);
         }
-      })
-    }
-    
+      });
+    };
+
     const scanForClasses = (root: Element = document.documentElement) => {
-      let hasNewClasses = false
-      
+      let hasNewClasses = false;
+
       // Process root element
-      const rootClassCount = classList.size
-      processElement(root)
-      if (classList.size > rootClassCount) hasNewClasses = true
-      
+      const rootClassCount = classList.size;
+      processElement(root);
+      if (classList.size > rootClassCount) hasNewClasses = true;
+
       // Process all descendants
-      const elements = root.querySelectorAll('*')
+      const elements = root.querySelectorAll("*");
       elements.forEach((element) => {
-        const beforeCount = classList.size
-        processElement(element)
-        if (classList.size > beforeCount) hasNewClasses = true
-      })
-      
+        const beforeCount = classList.size;
+        processElement(element);
+        if (classList.size > beforeCount) hasNewClasses = true;
+      });
+
       if (hasNewClasses) {
-        updateStyles()
+        updateStyles();
       }
-    }
-    
+    };
+
     // Initial scan
-    scanForClasses()
-    
+    scanForClasses();
+
     // Watch for changes
     const observer = new MutationObserver((mutations) => {
-      let shouldUpdate = false
-      
+      let shouldUpdate = false;
+
       mutations.forEach((mutation) => {
-        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
-          const beforeCount = classList.size
-          processElement(mutation.target as Element)
-          if (classList.size > beforeCount) shouldUpdate = true
+        if (
+          mutation.type === "attributes" &&
+          mutation.attributeName === "class"
+        ) {
+          const beforeCount = classList.size;
+          processElement(mutation.target as Element);
+          if (classList.size > beforeCount) shouldUpdate = true;
         }
-        
-        if (mutation.type === 'childList') {
+
+        if (mutation.type === "childList") {
           mutation.addedNodes.forEach((node) => {
             if (node.nodeType === Node.ELEMENT_NODE) {
-              const beforeCount = classList.size
-              scanForClasses(node as Element)
-              if (classList.size > beforeCount) shouldUpdate = true
+              const beforeCount = classList.size;
+              scanForClasses(node as Element);
+              if (classList.size > beforeCount) shouldUpdate = true;
             }
-          })
+          });
         }
-      })
-      
+      });
+
       if (shouldUpdate) {
-        updateStyles()
+        updateStyles();
       }
-    })
-    
-    const targetElement = typeof target === 'string' 
-      ? document.querySelector(target) || document.documentElement
-      : target || document.documentElement
-    
+    });
+
+    const targetElement =
+      typeof target === "string"
+        ? document.querySelector(target) || document.documentElement
+        : target || document.documentElement;
+
     observer.observe(targetElement, {
       childList: true,
       subtree: true,
       attributes: true,
-      attributeFilter: ['class']
-    })
-    
+      attributeFilter: ["class"],
+    });
+
     // Store observer for cleanup
-    ;(window as any).__adorableCSSV2Observer = observer
-    ;(window as any).__adorableCSSV2StyleElement = styleElement
-    
+    (window as any).__adorableCSSV2Observer = observer;
+    (window as any).__adorableCSSV2StyleElement = styleElement;
+
     if (debug) {
-      console.log('AdorableCSS v2: Initialized and watching for class changes')
+      console.log("AdorableCSS v2: Initialized and watching for class changes");
     }
   },
-  
-  generate: (classes: string[]) => {
-    return generateCSSFromAdorableCSS(classes)
+
+  generate: (classes: string[], options?: { debug?: boolean }) => {
+    const css = generateCSS(classes);
+    
+    if (options?.debug) {
+      // Check which classes failed to generate CSS
+      const failedClasses = checkFailedClasses(classes);
+
+      if (failedClasses.length > 0) {
+        console.warn("AdorableCSS v2: Failed to generate CSS for classes:", failedClasses);
+        console.log("These classes might need to be added to the core rules. Please report them!");
+      }
+
+      console.log(`Generated CSS for ${classes.length} classes, ${failedClasses.length} failed`);
+    }
+    
+    return css;
   },
-  
+
   destroy: () => {
-    if (typeof window === 'undefined') return
-    
+    if (typeof window === "undefined") return;
+
     // Clean up observer
-    const observer = (window as any).__adorableCSSV2Observer
+    const observer = (window as any).__adorableCSSV2Observer;
     if (observer) {
-      observer.disconnect()
-      delete (window as any).__adorableCSSV2Observer
+      observer.disconnect();
+      delete (window as any).__adorableCSSV2Observer;
     }
-    
+
     // Remove style element
-    const styleElement = (window as any).__adorableCSSV2StyleElement
+    const styleElement = (window as any).__adorableCSSV2StyleElement;
     if (styleElement && styleElement.parentNode) {
-      styleElement.parentNode.removeChild(styleElement)
-      delete (window as any).__adorableCSSV2StyleElement
+      styleElement.parentNode.removeChild(styleElement);
+      delete (window as any).__adorableCSSV2StyleElement;
     }
-  }
-}
+  },
+};
 
 // Auto-initialize in browser environment
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
   // Check if auto-init is disabled
-  const script = document.currentScript as HTMLScriptElement
-  const autoInit = script?.getAttribute('data-auto-init') !== 'false'
-  
+  const script = document.currentScript as HTMLScriptElement;
+  const autoInit = script?.getAttribute("data-auto-init") !== "false";
+
   if (autoInit) {
     // Initialize when DOM is ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        AdorableCSSV2.init()
-      })
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", () => {
+        AdorableCSSV2.init();
+      });
     } else {
-      AdorableCSSV2.init()
+      AdorableCSSV2.init();
     }
   }
-  
+
   // Make available globally
-  ;(window as any).AdorableCSSV2 = AdorableCSSV2
+  (window as any).AdorableCSSV2 = AdorableCSSV2;
+}
+
+// Utility function to check which classes fail to generate CSS
+export function checkFailedClasses(classes: string[]): string[] {
+  return classes.filter(className => {
+    const css = generateCSS([className]);
+    // Check if CSS is empty or only contains empty rules (e.g., ".class{}")
+    if (!css || css.trim() === '') return true;
+    
+    // Check if the CSS rule is empty (only contains selector with empty braces)
+    const cssWithoutWhitespace = css.replace(/\s/g, '');
+    const emptyRulePattern = /^\.[\w\\():-]+\{\}$/;
+    return emptyRulePattern.test(cssWithoutWhitespace);
+  });
+}
+
+// Utility function to analyze CSS generation results
+export function analyzeClasses(classes: string[]): {
+  total: number;
+  successful: string[];
+  failed: string[];
+  successRate: string;
+} {
+  const failed = checkFailedClasses(classes);
+  const successful = classes.filter(c => !failed.includes(c));
+  const successRate = classes.length === 0 ? '100%' : `${Math.round((successful.length / classes.length) * 100)}%`;
+  
+  return {
+    total: classes.length,
+    successful,
+    failed,
+    successRate
+  };
 }
 
 // Export for module systems
-export default AdorableCSSV2
-export { AdorableCSSV2, generateCSSFromAdorableCSS }
-export type { AdorableCSSOptions }
+export default AdorableCSSV2;
+export { generateCSS, generateCSS as generateCSSFromAdorableCSS };
+export type { AdorableCSSOptions };
