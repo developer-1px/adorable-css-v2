@@ -31,7 +31,8 @@
       "Bash(pnpm check:*)",
       "Bash(npm install:*)",
       "WebFetch(domain:www.figma.com)",
-      "Bash(git init:*)"
+      "Bash(git init:*)",
+      "Bash(pnpm add:*)"
     ],
     "deny": []
   }
