@@ -19,8 +19,15 @@ export const referenceData: ReferenceData = {
       {property: 'font-weight', syntax: ['font(bold)', 'font(500)']},
       {property: 'font-combined', syntax: ['font(16/24)', 'font(16/24/-2%)', 'font(Inter/16/24/-2%/500)']}
     ],
+    'Font Family Presets': [
+      {property: 'font-family-presets', syntax: ['font-family(sf-mono)', 'font-family(inter)', 'font-family(system)', 'font-family(mono)', 'font-family(serif)']}
+    ],
     'Color': [
-      {property: 'color', syntax: ['c(#000)', 'c(#000.5)']}
+      {property: 'color', syntax: ['c(#000)', 'c(#000.5)']},
+      {property: 'color-gradient', syntax: ['c(red..blue)', 'c(#ff0000..#0000ff)', 'c(white..#e0e7ff)']}
+    ],
+    'Text Shadow': [
+      {property: 'text-shadow', syntax: ['text-shadow(0/2px/4px/rgba(0,0,0,0.1))', 'text-shadow(2/4)', 'text-shadow(1)']}
     ],
     'Alignment': [
       {property: 'text-align', syntax: ['text(left)', 'text(center)', 'text(right)']}
@@ -55,14 +62,18 @@ export const referenceData: ReferenceData = {
     ],
     'Flexbox': [
       {property: 'flex-wrap', syntax: ['wrap', 'nowrap']},
-      {property: 'hbox-alignment', syntax: ['hbox(top)', 'hbox(bottom)', 'hbox(fill)', 'hbox(right)', 'hbox(reverse)']},
-      {property: 'hbox-combined', syntax: ['hbox(top+right)', 'hbox(bottom+right)', 'hbox(fill+reverse+left)']},
+      {property: 'hbox-alignment', syntax: ['hbox(center)', 'hbox(end)', 'hbox(between)', 'hbox(around)']},
+      {property: 'hbox-combined', syntax: ['hbox(center+center)', 'hbox(between+center)', 'hbox(end+stretch)']},
       {
         property: 'vbox-alignment',
-        syntax: ['vbox(top)', 'vbox(bottom)', 'vbox(fill)', 'vbox(left)', 'vbox(right)', 'vbox(reverse)']
+        syntax: ['vbox(center)', 'vbox(end)', 'vbox(between)', 'vbox(around)']
       },
-      {property: 'center-alignment', syntax: ['pack', 'vpack']},
-      {property: 'justify-content(TBD)', syntax: ['hbox(between)', 'vbox(around)', 'hbox(evenly)']},
+      {property: 'center-alignment', syntax: ['pack']},
+      {property: 'justify-content', syntax: ['hbox(between)', 'vbox(around)', 'hbox(center)']},
+    ],
+    'Pack Shorthand': [
+      {property: 'pack-shorthand', syntax: ['hbox(pack)', 'vbox(pack)']},
+      {property: 'layout-combinations', syntax: ['hbox(between+center)', 'vbox(around+stretch)', 'hbox(end+end)']}
     ],
     'Grid': [
       {property: 'grid-template', syntax: ['grid-cols(3)', 'grid-rows(2)']},
@@ -70,14 +81,13 @@ export const referenceData: ReferenceData = {
       {property: 'grid-position', syntax: ['col-start(2)', 'row-end(4)']}
     ],
     'Position': [
-      {property: 'position', syntax: ['static', 'relative', 'absolute', 'fixed', 'sticky']},
-      {property: 'coordinates', syntax: ['(0,0)', '(..0,..0)', '(10..20, 30..40)']},
-      {property: 'layer', syntax: ['layer', 'layer(top)', 'layer(right)', 'layer(bottom+left)']}
+      {property: 'position', syntax: ['static', 'relative', 'absolute', 'fixed']},
+      {property: 'coordinates', syntax: ['x(0)', 'y(0)', 'z(10)']},
+      {property: 'positioning', syntax: ['absolute', 'relative', 'fixed']}
     ],
     'Spacing': [
-      {property: 'padding', syntax: ['p(16)', 'pt(16)', 'pr(16)', 'pb(16)', 'pl(16)', 'px(16)', 'py(16)']},
-      {property: 'margin', syntax: ['m(16)', 'mt(16)', 'mx(auto)']},
-      {property: 'gap', syntax: ['gap(16)', 'gap(16/24)', 'gap(auto)']}
+      {property: 'padding', syntax: ['p(16)', 'p(16/24)', 'p(10/20/10/20)']},
+      {property: 'gap', syntax: ['gap(16)', 'gap(16/24)']}
     ]
   },
   '크기 및 제한 (Size & Constraints)': {
@@ -91,7 +101,7 @@ export const referenceData: ReferenceData = {
       {property: 'size', syntax: ['300x200']}
     ],
     'Min/Max Size': [
-      {property: 'constraints', syntax: ['w(300..)', 'h(..600)', 'w(300..600)']}
+      {property: 'constraints', syntax: ['w(300)', 'h(200)', 'w(hug)', 'w(fill)']}
     ],
     'Aspect Ratio': [
       {property: 'aspect-ratio', syntax: ['16:9', '1:1', '4:3']}
@@ -101,10 +111,14 @@ export const referenceData: ReferenceData = {
     'Background': [
       {property: 'background-color', syntax: ['bg(#fff)', 'bg(#000.5)', 'bg(transparent)']},
       {property: 'background-gradient', syntax: ['bg(linear/45deg/#f00/#00f)', 'bg(radial/circle/#f00/#00f)']},
-      {property: 'background-image', syntax: ['bg-image(url)']}
+      {property: 'background-simple-gradient', syntax: ['bg(#667eea..#764ba2)', 'bg(red..blue)', 'bg(gradient/135deg/#667eea/#764ba2)']},
+      {property: 'background-image', syntax: ['bg(\'url.png\')']}
     ],
     'Border': [
-      {property: 'border', syntax: ['b(1/#000/solid)', 'bt(1/#000)', 'bx(1/#000)']}
+      {property: 'border', syntax: ['b(1)', 'r(8)', 'border(1/solid/#333)']}
+    ],
+    'Directional Borders': [
+      {property: 'border-directional', syntax: ['border(top/1/#333)', 'border(right/2/dashed/red)', 'border(bottom/3)', 'border(left/1/dotted/#666)']}
     ],
     'Radius': [
       {property: 'border-radius', syntax: ['r(8)', 'r(8/0)', 'r(8/0/16/0)', 'r()']}
@@ -121,19 +135,24 @@ export const referenceData: ReferenceData = {
         syntax: ['blur(4)', 'brightness(.8)', 'contrast(1.2)', 'grayscale', 'sepia', 'saturate(1.5)']
       }
     ],
+    'Backdrop Filter': [
+      {property: 'backdrop-filter', syntax: ['backdrop(blur/10)', 'backdrop(blur/5)', 'backdrop(brightness(1.2))']}
+    ],
     'Blend Mode': [
       {property: 'blend-mode', syntax: ['mix-blend(multiply)', 'bg-blend(screen)']}
     ]
   },
   '인터랙션 제어 (Interaction Control)': {
     'Cursor': [
-      {property: 'cursor', syntax: ['cursor(pointer)', 'cursor(not-allowed)']}
+      {property: 'cursor', syntax: ['cursor(pointer)', 'cursor(not-allowed)']},
+      {property: 'cursor-shorthand', syntax: ['pointer']}
     ],
     'Pointer Events': [
       {property: 'pointer-events', syntax: ['pointer(none)', 'pointer(auto)']}
     ],
     'User Select': [
-      {property: 'user-select', syntax: ['select(none)', 'select(text)', 'select(all)']}
+      {property: 'user-select', syntax: ['select(none)', 'select(text)', 'select(all)']},
+      {property: 'user-select-shorthand', syntax: ['select-none']}
     ],
     'Resize': [
       {property: 'resize', syntax: ['resize', 'resize(x)', 'resize(y)', 'resize-none']}
@@ -163,7 +182,8 @@ export const referenceData: ReferenceData = {
       {property: 'transition-timing', syntax: ['duration(300)', 'delay(100)', 'ease(in-out)', 'ease(linear)']}
     ],
     'Animation': [
-      {property: 'animation', syntax: ['animate(spin)', 'animate(ping)']}
+      {property: 'animation', syntax: ['animate(spin)', 'animate(ping)']},
+      {property: 'animation-custom', syntax: ['animate(float/6s/ease-in-out/infinite)', 'animate(fade/2s)', 'animate(bounce)']}
     ],
     'Transform': [
       {property: 'transform', syntax: ['scale(1.1)', 'rotate(45)', 'translate(10/20)', 'skew(x/12)', 'skew(y/12)']},
@@ -173,6 +193,9 @@ export const referenceData: ReferenceData = {
   '고급 및 유틸리티 (Advanced & Utilities)': {
     'Stacking': [
       {property: 'z-index', syntax: ['z(0)', 'z(10)', 'z(auto)', 'z(top)']}
+    ],
+    'Size Utilities': [
+      {property: 'size-utilities', syntax: ['fit', 'fill', 'center']}
     ],
     'Scroll': [
       {property: 'overflow', syntax: ['scroll', 'scroll(x)', 'scroll(y)', 'clip']},

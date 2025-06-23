@@ -1,10 +1,10 @@
 <script lang="ts">
-  import { generateCSSFromAdorableCSS } from 'adorable-css';
+  import { generateCSSFromAdorableCSS } from 'adorable-css-cdn';
   import { referenceData } from './referenceData';
 
   function generateCSS(syntax: string): string {
     try {
-      return generateCSSFromAdorableCSS(syntax);
+      return generateCSSFromAdorableCSS([syntax]);
     } catch (error) {
       return `/* Error: ${syntax} */`;
     }

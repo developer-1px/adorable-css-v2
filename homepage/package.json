@@ -23,6 +23,7 @@
     "vitest": "^3.2.4"
   },
   "dependencies": {
-    "adorable-css": "workspace:*"
+    "adorable-css": "workspace:*",
+    "adorable-css-cdn": "workspace:*"
   }
 }

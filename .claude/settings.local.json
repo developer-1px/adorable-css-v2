@@ -33,7 +33,9 @@
       "WebFetch(domain:www.figma.com)",
       "Bash(git init:*)",
       "Bash(pnpm add:*)",
-      "Bash(git remote add:*)"
+      "Bash(git remote add:*)",
+      "Bash(pnpm:*)",
+      "Bash(true)"
     ],
     "deny": []
   }

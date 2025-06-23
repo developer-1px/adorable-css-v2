@@ -182,5 +182,5 @@ if (typeof window !== 'undefined') {
 
 // Export for module systems
 export default AdorableCSSV2
-export { AdorableCSSV2 }
+export { AdorableCSSV2, generateCSSFromAdorableCSS }
 export type { AdorableCSSOptions }

@@ -1,12 +1,14 @@
 <script lang="ts">
   import ParserVisualizer from './lib/ParserVisualizer.svelte';
   import Reference from './lib/Reference.svelte';
+  import TestPage from './TestPage.svelte';
+  import ShowcasePage from './ShowcasePage.svelte';
   
-  let currentPage = 'parser'; // 'parser' or 'reference'
+  let currentPage = 'showcase'; // 'showcase', 'parser', 'reference', or 'test'
   
   // Simple hash-based routing
   function updatePage() {
-    const hash = window.location.hash.slice(1) || 'parser';
+    const hash = window.location.hash.slice(1) || 'showcase';
     currentPage = hash;
   }
   
@@ -27,6 +29,12 @@
       <h1 class="nav-title">AdorableCSS</h1>
       <div class="nav-links">
         <button 
+          class="nav-link {currentPage === 'showcase' ? 'active' : ''}"
+          on:click={() => navigateTo('showcase')}
+        >
+          홈
+        </button>
+        <button 
           class="nav-link {currentPage === 'parser' ? 'active' : ''}"
           on:click={() => navigateTo('parser')}
         >
@@ -38,15 +46,25 @@
         >
           레퍼런스
         </button>
+        <button 
+          class="nav-link {currentPage === 'test' ? 'active' : ''}"
+          on:click={() => navigateTo('test')}
+        >
+          CDN 테스트
+        </button>
       </div>
     </div>
   </nav>
   
   <main class="main-content">
-    {#if currentPage === 'parser'}
+    {#if currentPage === 'showcase'}
+      <ShowcasePage />
+    {:else if currentPage === 'parser'}
       <ParserVisualizer />
     {:else if currentPage === 'reference'}
       <Reference />
+    {:else if currentPage === 'test'}
+      <TestPage />
     {/if}
   </main>
 </div>

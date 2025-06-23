@@ -3,15 +3,11 @@
   "private": true,
   "version": "2.0.0-beta.1",
   "type": "module",
-  "workspaces": [
-    "homepage",
-    "packages/*"
-  ],
   "scripts": {
-    "dev": "pnpm --filter homepage dev",
+    "dev": "pnpm --filter adorable-css-homepage dev",
     "build": "pnpm --recursive --filter './packages/*' build",
-    "build:homepage": "pnpm --filter homepage build",
-    "preview": "pnpm --filter homepage preview",
+    "build:homepage": "pnpm --filter adorable-css-homepage build",
+    "preview": "pnpm --filter adorable-css-homepage preview",
     "check": "pnpm --recursive typecheck",
     "test": "pnpm --recursive test",
     "test:core": "pnpm --filter adorable-css test",
@@ -38,7 +34,7 @@
   },
   "engines": {
     "node": ">=18",
-    "pnpm": ">=8"
+    "pnpm": ">=10"
   },
-  "packageManager": "pnpm@8.15.0"
+  "packageManager": "pnpm@10.8.0"
 }
