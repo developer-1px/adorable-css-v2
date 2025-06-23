@@ -1,0 +1,38 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm install:*)",
+      "Bash(pnpm test:*)",
+      "Bash(npm run build:*)",
+      "Bash(npx tsc:*)",
+      "Bash(cp:*)",
+      "Bash(ls:*)",
+      "Bash(pnpm build)",
+      "Bash(grep:*)",
+      "Bash(pnpm dev:*)",
+      "Bash(timeout 30s pnpm build 2 >& 1)",
+      "Bash(NODE_ENV=production pnpm build --silent 2 >& 1)",
+      "Bash(mkdir:*)",
+      "Bash(touch:*)",
+      "Bash(find:*)",
+      "Bash(npm test:*)",
+      "Bash(mv:*)",
+      "Bash(npx tsx:*)",
+      "Bash(node:*)",
+      "Bash(rm:*)",
+      "Bash(npm run dev:*)",
+      "Bash(pkill:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(rg:*)",
+      "Bash(cat:*)",
+      "WebFetch(domain:unocss.dev)",
+      "Bash(pnpm check:*)",
+      "Bash(npm install:*)",
+      "WebFetch(domain:www.figma.com)",
+      "Bash(git init:*)"
+    ],
+    "deny": []
+  }
+}
