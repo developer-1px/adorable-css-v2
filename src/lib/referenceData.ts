@@ -12,6 +12,41 @@ export interface ReferenceData {
 }
 
 export const referenceData: ReferenceData = {
+  '타이포그래피 (Typography)': {
+    'Font': [
+      {property: 'font-family', syntax: ['font(Inter)']},
+      {property: 'font-size', syntax: ['font(16)', 'font(1rem)']},
+      {property: 'font-weight', syntax: ['font(bold)', 'font(500)']},
+      {property: 'font-combined', syntax: ['font(16/24)', 'font(16/24/-2%)', 'font(Inter/16/24/-2%/500)']}
+    ],
+    'Color': [
+      {property: 'color', syntax: ['c(#000)', 'c(#000.5)']}
+    ],
+    'Alignment': [
+      {property: 'text-align', syntax: ['text(left)', 'text(center)', 'text(right)']}
+    ],
+    'Decoration': [
+      {property: 'text-decoration', syntax: ['underline', 'strike', 'no-underline']}
+    ],
+    'Transform': [
+      {property: 'text-transform', syntax: ['uppercase', 'lowercase', 'capitalize']}
+    ],
+    'Style': [
+      {property: 'font-style', syntax: ['italic', 'not-italic']}
+    ],
+    'Whitespace': [
+      {property: 'white-space', syntax: ['nowrap', 'pre', 'pre-wrap']}
+    ],
+    'Overflow': [
+      {property: 'text-overflow', syntax: ['truncate', 'max-lines(3)']}
+    ],
+    'Word Break': [
+      {property: 'word-break', syntax: ['break(all)', 'break(word)']}
+    ],
+    'List Style': [
+      {property: 'list-style', syntax: ['list(disc)', 'list(decimal)', 'list(none)']}
+    ]
+  },
   '레이아웃 (Layout)': {
     'Display': [
       {property: 'display', syntax: ['block', 'inline-block', 'inline', 'none']},
@@ -88,41 +123,6 @@ export const referenceData: ReferenceData = {
     ],
     'Blend Mode': [
       {property: 'blend-mode', syntax: ['mix-blend(multiply)', 'bg-blend(screen)']}
-    ]
-  },
-  '타이포그래피 (Typography)': {
-    'Font': [
-      {property: 'font-family', syntax: ['font(Inter)']},
-      {property: 'font-size', syntax: ['font(16)', 'font(1rem)']},
-      {property: 'font-weight', syntax: ['font(bold)', 'font(500)']},
-      {property: 'font-combined', syntax: ['font(16/24)', 'font(16/24/-2%)', 'font(Inter/16/24/-2%/500)']}
-    ],
-    'Color': [
-      {property: 'color', syntax: ['c(#000)', 'c(#000.5)']}
-    ],
-    'Alignment': [
-      {property: 'text-align', syntax: ['text(left)', 'text(center)', 'text(right)']}
-    ],
-    'Decoration': [
-      {property: 'text-decoration', syntax: ['underline', 'strike', 'no-underline']}
-    ],
-    'Transform': [
-      {property: 'text-transform', syntax: ['uppercase', 'lowercase', 'capitalize']}
-    ],
-    'Style': [
-      {property: 'font-style', syntax: ['italic', 'not-italic']}
-    ],
-    'Whitespace': [
-      {property: 'white-space', syntax: ['nowrap', 'pre', 'pre-wrap']}
-    ],
-    'Overflow': [
-      {property: 'text-overflow', syntax: ['truncate', 'max-lines(3)']}
-    ],
-    'Word Break': [
-      {property: 'word-break', syntax: ['break(all)', 'break(word)']}
-    ],
-    'List Style': [
-      {property: 'list-style', syntax: ['list(disc)', 'list(decimal)', 'list(none)']}
     ]
   },
   '인터랙션 제어 (Interaction Control)': {

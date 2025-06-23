@@ -85,3 +85,24 @@ Generates code from Figma designs:
 - No test framework configured - manual testing required
 - Type checking via `pnpm check` before commits
 - The project is designed as a UnoCSS plugin for framework compatibility
+
+### Code Convention
+
+**CRITICAL: Declarative Code Convention**
+- **Write code that matches requirements exactly**
+- Code should be self-documenting and readable
+- Avoid clever abstractions that make code hard to understand
+- Requirements and code implementation should be 1:1 mapping
+- Choose clarity over brevity when they conflict
+- This convention is mandatory for all rule implementations
+
+**Example**: Instead of complex loops, write clear conditional logic that matches the specification:
+```typescript
+// Good: Clear and matches requirements
+if (isNaN(+part) && !part.includes('%')) {
+  result['font-family'] = String(cssvar(part));
+}
+
+// Bad: Clever but unclear
+processors[getPropertyIndex(part)](part);
+```

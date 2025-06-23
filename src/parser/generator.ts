@@ -1,134 +1,70 @@
 import { parseAdorableCSS } from "./parser";
-import { RULES_FOR_UNOCSS } from "../rules/rules";
-
-// Simple CSS escape function for testing
-function cssEscape(value: string): string {
-  return value.replace(/[()#:.]/g, "\\$&");
-}
+import { getRuleHandler } from "../rules";
+import type { CSSRule, ParsedSelector } from "../rules/types";
+import { cssEscape } from "./cssEscape";
 
 // Convert CSS object to string
-function cssObjectToString(obj: any): string {
-  if (typeof obj === "string") return obj;
-  if (typeof obj !== "object" || obj === null) return "";
-
-  return Object.entries(obj)
-    .filter(([key, value]) => !key.startsWith("[") && typeof value === "string") // Skip special symbols
+const cssObjectToString = (obj: CSSRule): string => 
+  Object.entries(obj || {})
     .map(([key, value]) => `${key}: ${value}`)
     .join("; ");
-}
+
+// Create ParsedSelector from AST node
+const createParsedSelector = (node: any): ParsedSelector => ({
+  type: node.name ? 'function' : 'keyword',
+  name: node.name || node.image,
+  args: node.args?.map((arg: any) => arg.image)
+});
+
+// Generate CSS from parsed selector
+const generateCSSFromSelector = (selector: ParsedSelector): string => {
+  const handler = getRuleHandler(selector.name);
+  if (!handler) return "";
+
+  const result = selector.type === 'function' && selector.args
+    ? handler(selector.args.join(""))
+    : handler();
+    
+  return cssObjectToString(result);
+};
+
+// Handle pseudo-class selector
+const handlePseudoClass = (v: any, rawSelector: string): { selector: string; css: string } => {
+  const combinator = v.combinators[0];
+  const pseudoClass = v.selector.image;
+  const targetSelector = combinator.selector;
+  
+  return {
+    selector: `${rawSelector}:${pseudoClass}`,
+    css: generateCSSFromSelector(createParsedSelector(targetSelector))
+  };
+};
+
+// Handle regular selector
+const handleRegularSelector = (v: any): string => 
+  generateCSSFromSelector(createParsedSelector(v.selector));
 
 export function generateCSSFromAdorableCSS(value: string): string {
   try {
     const result = parseAdorableCSS(value);
-
     const rawSelector = "." + cssEscape(value);
-    const rules: string[] = [];
-    let actualSelector = rawSelector; // Will be modified for pseudo-classes
-
-    result.value.forEach((v: any) => {
-      // Handle pseudo-classes (hover:, active:, etc.)
-      if (v.combinators && v.combinators.length > 0) {
-        v.combinators.forEach((combinator: any) => {
-          if (combinator.combinator === ":") {
-            const pseudoClass = v.selector.image; // e.g., "hover"
-            const targetSelector = combinator.selector;
-            const name: string = targetSelector.name || targetSelector.image;
-            const handler = (RULES_FOR_UNOCSS as any)[name];
-
-            // Update selector to include pseudo-class
-            actualSelector = `${rawSelector}:${pseudoClass}`;
-
-            if (handler) {
-              const keyword = !targetSelector.name && handler.length === 0;
-              const fn = targetSelector.name && handler.length >= 1;
-
-              if (fn) {
-                const args = targetSelector.args
-                  .map((arg: any) => arg.image)
-                  .join("");
-                console.log(
-                  `Calling pseudo ${name}(${args}) - handler exists:`,
-                  !!handler
-                );
-                const result = handler(args);
-
-                // Handle generator functions
-                if (result && typeof result[Symbol.iterator] === "function") {
-                  for (const cssRule of result) {
-                    rules.push(cssObjectToString(cssRule));
-                  }
-                } else {
-                  rules.push(cssObjectToString(result));
-                }
-              } else if (keyword) {
-                const result = handler();
-
-                // Handle generator functions
-                if (result && typeof result[Symbol.iterator] === "function") {
-                  for (const cssRule of result) {
-                    rules.push(cssObjectToString(cssRule));
-                  }
-                } else {
-                  rules.push(cssObjectToString(result));
-                }
-              }
-            }
-          }
-        });
+    let actualSelector = rawSelector;
+    
+    const cssRules = result.value.map((v: any) => {
+      if (v.combinators?.length > 0 && v.combinators[0].combinator === ":") {
+        const { selector, css } = handlePseudoClass(v, rawSelector);
+        actualSelector = selector;
+        return css;
       } else {
-        // Handle regular selectors (no pseudo-classes)
-        const name: string = v.selector.name || v.selector.image;
-        const handler = (RULES_FOR_UNOCSS as any)[name];
-
-        // selector
-        if (!handler) {
-        }
-        // function
-        else {
-          const keyword = !v.selector.name && handler.length === 0;
-          const fn = v.selector.name && handler.length >= 1;
-
-          if (fn) {
-            const args = v.selector.args.map((arg: any) => arg.image).join("");
-            console.log(
-              `Calling ${name}(${args}) - handler exists:`,
-              !!handler
-            );
-            const result = handler(args);
-
-            // Handle generator functions
-            if (result && typeof result[Symbol.iterator] === "function") {
-              for (const cssRule of result) {
-                rules.push(cssObjectToString(cssRule));
-              }
-            } else {
-              rules.push(cssObjectToString(result));
-            }
-          }
-          //
-          else if (keyword) {
-            const result = handler();
-
-            // Handle generator functions
-            if (result && typeof result[Symbol.iterator] === "function") {
-              for (const cssRule of result) {
-                rules.push(cssObjectToString(cssRule));
-              }
-            } else {
-              rules.push(cssObjectToString(result));
-            }
-          }
-        }
+        return handleRegularSelector(v);
       }
-    });
+    }).filter(Boolean);
 
-    const rule = rules.filter((r) => r).join("; ");
-    if (rule.includes("&")) {
-      // @TODO: 단순 & 치환이 아닌, 문법적 치환이 필요함
-      return rule.replace(/&/g, actualSelector);
-    }
-
-    return `${actualSelector}{${rule}}`;
+    const cssBody = cssRules.join("; ");
+    return cssBody.includes("&") 
+      ? cssBody.replace(/&/g, actualSelector)
+      : `${actualSelector}{${cssBody}}`;
+      
   } catch (e) {
     throw e;
   }
