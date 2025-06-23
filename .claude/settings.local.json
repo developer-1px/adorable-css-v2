@@ -35,7 +35,8 @@
       "Bash(pnpm add:*)",
       "Bash(git remote add:*)",
       "Bash(pnpm:*)",
-      "Bash(true)"
+      "Bash(true)",
+      "Bash(tree:*)"
     ],
     "deny": []
   }

@@ -80,7 +80,7 @@ export const makeHEX = (value: string) => {
         .split('')
         .map((value) => parseInt(value + value, 16))
         .join(',') +
-      ',.' +
+      ',0.' +
       a +
       ')'
     )
@@ -88,7 +88,7 @@ export const makeHEX = (value: string) => {
     return (
       'rgba(' +
       [rgb.slice(1, 3), rgb.slice(3, 5), rgb.slice(5, 7)].map((value) => parseInt(value, 16)).join(',') +
-      ',.' +
+      ',0.' +
       a +
       ')'
     )
@@ -109,6 +109,11 @@ export const makeColor = (value = 'transparent') => {
   if (value === '-') return 'transparent'
   if (value === 'transparent') return 'transparent'
   if (value.startsWith('--')) return `var(${value})`
+
+  // Handle hex colors with alpha (#fff.3, #000000.5)
+  if (value.startsWith('#')) {
+    return makeHEX(value)
+  }
 
   // c(255,255,155) or c(100%,0,0)
   if (value.split(',').every((v) => parseFloat(v) >= 0)) {

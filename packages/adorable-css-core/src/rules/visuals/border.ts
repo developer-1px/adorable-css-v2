@@ -94,7 +94,62 @@ export const bl: RuleHandler = (args?: string): CSSRule => {
   return { 'border-left': `${width} ${style} ${color}` };
 };
 
+// Directional border: border(top/1/#333)
+export const border: RuleHandler = (args?: string): CSSRule => {
+  if (!args) return { border: '1px solid currentColor' };
+  
+  const parts = args.split('/');
+  const directions = ['top', 'right', 'bottom', 'left'];
+  
+  if (directions.includes(parts[0])) {
+    const direction = parts[0];
+    const remainingParts = parts.slice(1);
+    
+    if (remainingParts.length === 0) {
+      return { [`border-${direction}`]: '1px solid currentColor' };
+    } else if (remainingParts.length === 1) {
+      return { [`border-${direction}`]: `${px(remainingParts[0])} solid currentColor` };
+    } else if (remainingParts.length === 2) {
+      const width = px(remainingParts[0]);
+      const second = remainingParts[1];
+      const borderStyles = ['none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset'];
+      if (borderStyles.includes(second)) {
+        return { [`border-${direction}`]: `${width} ${second} currentColor` };
+      } else {
+        return { [`border-${direction}`]: `${width} solid ${makeColor(second)}` };
+      }
+    } else {
+      const width = px(remainingParts[0]);
+      const style = remainingParts[1] || 'solid';
+      const color = remainingParts[2] ? makeColor(remainingParts[2]) : 'currentColor';
+      return { [`border-${direction}`]: `${width} ${style} ${color}` };
+    }
+  }
+  
+  // Regular border: border(1/solid/#333) or border(1/#333)
+  if (!args.includes('/')) {
+    return { border: `${String(px(args))} solid currentColor` };
+  }
+  
+  const width = parts[0] ? String(px(parts[0])) : '1px';
+  // Check if second part is a style or color
+  const borderStyles = ['none', 'hidden', 'dotted', 'dashed', 'solid', 'double', 'groove', 'ridge', 'inset', 'outset'];
+  if (parts.length === 2) {
+    if (borderStyles.includes(parts[1])) {
+      return { border: `${width} ${parts[1]} currentColor` };
+    } else {
+      // It's a color
+      return { border: `${width} solid ${makeColor(parts[1])}` };
+    }
+  } else {
+    // width/style/color
+    const style = parts[1] || 'solid';
+    const color = parts[2] ? String(makeColor(parts[2])) : 'currentColor';
+    return { border: `${width} ${style} ${color}` };
+  }
+};
+
 export const borderRules = {
-  b, r,
+  b, r, border,
   bt, br, bb, bl
 };

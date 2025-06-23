@@ -76,12 +76,28 @@ export function parseAdorableCSS(input: string) {
 
   function SimpleSelector(): any {
     return options(
+      () => Position(),
       () => CSSLiteral(),
       () => FunctionCall(),
       () => Range(),
       () => consume("(ident)"),
       () => consume("&")
     );
+  }
+
+  function Position(): any {
+    consume("(");
+    const x = Term();
+    consume(",");
+    skipWs();
+    const y = Term();
+    consume(")");
+    return {
+      type: "position",
+      x,
+      y,
+      image: `(${x.image},${y.image})`,
+    };
   }
 
   function CombinatorSelector(): any {

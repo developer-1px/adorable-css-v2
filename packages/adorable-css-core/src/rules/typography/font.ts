@@ -35,3 +35,18 @@ export const font: RuleHandler = (args?: string): CSSRule => {
   return result;
 };
 
+// Font family presets
+export const fontFamily: RuleHandler = (value?: string): CSSRule => {
+  if (!value) return {};
+  
+  const fontMap: Record<string, string> = {
+    'sf-mono': "'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace",
+    'inter': "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",
+    'system': "-apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif",
+    'mono': "'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace",
+    'serif': "Georgia, 'Times New Roman', Times, serif"
+  };
+  
+  return { 'font-family': fontMap[value] || value };
+};
+

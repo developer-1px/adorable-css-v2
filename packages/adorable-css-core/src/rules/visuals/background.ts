@@ -10,6 +10,12 @@ export const bg: RuleHandler = (args?: string): CSSRule => {
   // bg(current)
   if (args === 'current') return { 'background-color': 'currentColor' };
   
+  // bg(#667eea..#764ba2) - simple gradient with .. syntax
+  if (args.includes('..')) {
+    const [start, end] = args.split('..');
+    return { 'background': `linear-gradient(135deg, ${start}, ${end})` };
+  }
+  
   // bg(linear/45deg/#f00/#00f) - gradient
   if (args.startsWith('linear/')) {
     const gradientValue = args.replace(/\//g, ' ').replace('linear ', 'linear-gradient(');

@@ -1,122 +1,129 @@
-import type { CSSRule, RuleHandler } from '../types';
-import { px as pxValue } from '../../values/makeValue';
+import type { CSSRule, RuleHandler } from "../types";
+import { px } from "../../values/makeValue";
 
-// Padding utilities
-export const p: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
-  return { padding: String(pxValue(args)) };
+const makePaddingRule = (
+  prefix: "" | "x" | "y" | "t" | "b" | "l" | "r"
+): RuleHandler => {
+  return (args?: string): CSSRule => {
+    if (!args) return {};
+    if (args === "hug")
+      return prefix === "x"
+        ? { "padding-left": "0.6em", "padding-right": "0.6em" }
+        : { "padding-top": "0.2em", "padding-bottom": "0.2em" };
+
+    const values = args.split("/");
+    const properties: Record<string, string> = {};
+
+    const cssValues = values.map((v) => String(px(v)));
+
+    if (prefix === "") {
+      if (cssValues.length === 1) return { padding: cssValues[0] };
+      if (cssValues.length === 2)
+        return {
+          "padding-top": cssValues[0],
+          "padding-right": cssValues[1],
+          "padding-bottom": cssValues[0],
+          "padding-left": cssValues[1],
+        };
+      if (cssValues.length === 4)
+        return {
+          "padding-top": cssValues[0],
+          "padding-right": cssValues[1],
+          "padding-bottom": cssValues[2],
+          "padding-left": cssValues[3],
+        };
+    }
+    if (prefix === "x") {
+      properties["padding-left"] = cssValues[0];
+      properties["padding-right"] = cssValues[0];
+    }
+    if (prefix === "y") {
+      properties["padding-top"] = cssValues[0];
+      properties["padding-bottom"] = cssValues[0];
+    }
+    if (prefix === "t") properties["padding-top"] = cssValues[0];
+    if (prefix === "b") properties["padding-bottom"] = cssValues[0];
+    if (prefix === "l") properties["padding-left"] = cssValues[0];
+    if (prefix === "r") properties["padding-right"] = cssValues[0];
+
+    return properties;
+  };
 };
 
-export const pt: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
-  return { 'padding-top': String(pxValue(args)) };
+export const p = makePaddingRule("");
+
+const makeMarginRule = (
+  prefix: "" | "x" | "y" | "t" | "b" | "l" | "r"
+): RuleHandler => {
+  return (args?: string): CSSRule => {
+    if (!args) return {};
+
+    const values = args.split("/");
+    const properties: Record<string, string> = {};
+
+    const cssValues = values.map((v) => String(px(v)));
+
+    if (prefix === "") {
+      if (cssValues.length === 1) return { margin: cssValues[0] };
+      if (cssValues.length === 2)
+        return {
+          "margin-top": cssValues[0],
+          "margin-right": cssValues[1],
+          "margin-bottom": cssValues[0],
+          "margin-left": cssValues[1],
+        };
+      if (cssValues.length === 4)
+        return {
+          "margin-top": cssValues[0],
+          "margin-right": cssValues[1],
+          "margin-bottom": cssValues[2],
+          "margin-left": cssValues[3],
+        };
+    }
+    if (prefix === "x") {
+      properties["margin-left"] = cssValues[0];
+      properties["margin-right"] = cssValues[0];
+    }
+    if (prefix === "y") {
+      properties["margin-top"] = cssValues[0];
+      properties["margin-bottom"] = cssValues[0];
+    }
+    if (prefix === "t") properties["margin-top"] = cssValues[0];
+    if (prefix === "b") properties["margin-bottom"] = cssValues[0];
+    if (prefix === "l") properties["margin-left"] = cssValues[0];
+    if (prefix === "r") properties["margin-right"] = cssValues[0];
+
+    return properties;
+  };
 };
 
-export const pr: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
-  return { 'padding-right': String(pxValue(args)) };
-};
+export const m = makeMarginRule("");
+export const mx = makeMarginRule("x");
+export const my = makeMarginRule("y");
+export const mt = makeMarginRule("t");
+export const mb = makeMarginRule("b");
+export const ml = makeMarginRule("l");
+export const mr = makeMarginRule("r");
 
-export const pb: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
-  return { 'padding-bottom': String(pxValue(args)) };
-};
-
-export const pl: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
-  return { 'padding-left': String(pxValue(args)) };
-};
-
-export const px: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
-  const value = String(pxValue(args));
-  return { 'padding-left': value, 'padding-right': value };
-};
-
-export const py: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
-  const value = String(pxValue(args));
-  return { 'padding-top': value, 'padding-bottom': value };
-};
-
-// Margin utilities
-export const m: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
-  
-  // m(auto) for centering
-  if (args === 'auto') return { margin: 'auto' };
-  
-  return { margin: String(pxValue(args)) };
-};
-
-export const mt: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
-  
-  if (args === 'auto') return { 'margin-top': 'auto' };
-  return { 'margin-top': String(pxValue(args)) };
-};
-
-export const mr: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
-  
-  if (args === 'auto') return { 'margin-right': 'auto' };
-  return { 'margin-right': String(pxValue(args)) };
-};
-
-export const mb: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
-  
-  if (args === 'auto') return { 'margin-bottom': 'auto' };
-  return { 'margin-bottom': String(pxValue(args)) };
-};
-
-export const ml: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
-  
-  if (args === 'auto') return { 'margin-left': 'auto' };
-  return { 'margin-left': String(pxValue(args)) };
-};
-
-export const mx: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
-  
-  if (args === 'auto') {
-    return { 'margin-left': 'auto', 'margin-right': 'auto' };
-  }
-  
-  const value = String(pxValue(args));
-  return { 'margin-left': value, 'margin-right': value };
-};
-
-export const my: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
-  
-  if (args === 'auto') {
-    return { 'margin-top': 'auto', 'margin-bottom': 'auto' };
-  }
-  
-  const value = String(pxValue(args));
-  return { 'margin-top': value, 'margin-bottom': value };
-};
-
-// Gap utility for flexbox/grid
 export const gap: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
-  
-  // gap(16/24) for row-gap/column-gap
-  if (args.includes('/')) {
-    const [rowGap, colGap] = args.split('/');
-    return {
-      'row-gap': String(pxValue(rowGap)),
-      'column-gap': String(pxValue(colGap))
-    };
-  }
-  
-  return { gap: String(pxValue(args)) };
+  return { gap: String(px(args)) };
 };
 
 export const spacingRules = {
-  p, pt, pr, pb, pl, px, py,
-  m, mt, mr, mb, ml, mx, my,
-  gap
+  p,
+  px: makePaddingRule("x"),
+  py: makePaddingRule("y"),
+  pt: makePaddingRule("t"),
+  pb: makePaddingRule("b"),
+  pl: makePaddingRule("l"),
+  pr: makePaddingRule("r"),
+  gap,
+  m,
+  mx,
+  my,
+  mt,
+  mb,
+  ml,
+  mr,
 };

@@ -1,5 +1,5 @@
-import { positionRules } from './position';
+import { positionRules } from "./position";
 
 export const positionCategoryRules = {
-  ...positionRules
+  ...positionRules,
 };

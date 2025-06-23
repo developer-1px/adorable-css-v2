@@ -1,9 +1,9 @@
-import { font } from './font';
+import { font, fontFamily } from './font';
 import { c } from './color';
-import { text } from './text';
+import { text, textShadow } from './text';
 
 export const typographyRules = {
-  font, c, text,
+  font, c, text, 'font-family': fontFamily, 'text-shadow': textShadow,
   
   // Font weights
   '100': () => ({ 'font-weight': '100' }),

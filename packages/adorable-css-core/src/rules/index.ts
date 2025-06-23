@@ -3,6 +3,7 @@ import { layoutRules } from './layout';
 import { visualRules } from './visuals';
 import { positionCategoryRules } from './position';
 import { interactionRules } from './interaction';
+import { utilityRules } from './utilities';
 
 // Main rules registry
 export const rules = {
@@ -10,7 +11,8 @@ export const rules = {
   ...layoutRules,
   ...visualRules,
   ...positionCategoryRules,
-  ...interactionRules
+  ...interactionRules,
+  ...utilityRules
 };
 
 // Helper function to get rule handler
