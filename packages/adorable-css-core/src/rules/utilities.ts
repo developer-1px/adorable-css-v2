@@ -23,6 +23,16 @@ export const selectNone: KeywordRuleHandler = () => ({
   'user-select': 'none' 
 });
 
+export const select = (value?: string): CSSRule => {
+  if (!value) return {};
+  return { 'user-select': value };
+};
+
+export const pointerEvents = (value?: string): CSSRule => {
+  if (!value) return {};
+  return { 'pointer-events': value };
+};
+
 export const transition: KeywordRuleHandler = () => ({ 
   transition: 'all 0.2s ease' 
 });
@@ -31,7 +41,8 @@ export const utilityRules = {
   fit,
   fill,
   center,
-  pointer,
+  pointer: pointerEvents,
   'select-none': selectNone,
+  select,
   transition,
 };

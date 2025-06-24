@@ -29,11 +29,11 @@
       </div>
       
       <div class="hero-title vbox gap(16)">
-        <h1 class="font(72/1.1) bold c(white..#e0e7ff) text-shadow(0/4px/8px/#000.3) animate(fade/2s/ease-in-out)">
+        <h1 class="font-responsive(56/96) bold gradient-text(white/#e0e7ff/135deg) text-shadow(0/4px/8px/#000.3) animate(fade/2s/ease-in-out) glow-pulse(white/24/0.1)">
           AdorableCSS v2
         </h1>
-        <div class="hero-subtitle font(24/1.4) c(#94a3b8..#cbd5e1) text-shadow(0/2px/4px/#000.2)">
-          세상에서 가장 <span class="c(#667eea..#764ba2) bold">Figma스러운</span> CSS 프레임워크
+        <div class="hero-subtitle font-responsive(20/28) c(#94a3b8..#cbd5e1) text-shadow(0/2px/4px/#000.2)">
+          세상에서 가장 <span class="gradient-text(#667eea/#764ba2/135deg) bold neon(#667eea)">Figma스러운</span> CSS 프레임워크
         </div>
       </div>
       
@@ -42,42 +42,42 @@
         <span class="c(#10b981) font(16) italic">Figma Auto Layout을 코드로 그대로 구현</span>
       </p>
       
-      <!-- Enhanced CTA Buttons -->
-      <div class="hero-cta hbox(center) gap(20) pt(32) animate(fade/3s/ease-in-out)">
-        <button class="cta-primary hbox(pack) gap(8) p(18/36) r(12) bg(#667eea..#764ba2) c(white) font(16) bold shadow(0/8px/32px/#667eea.3) transition hover:scale(1.05) hover:shadow(0/12px/40px/#667eea.4) active:scale(0.98) backdrop(blur/10)">
+      <!-- Enhanced CTA Buttons with Plugin Effects -->
+      <div class="hero-cta hbox(center) gap-responsive(16/24) pt(32) animate(fade/3s/ease-in-out)">
+        <button class="cta-primary hbox(pack) gap(8) p-responsive(16/20) r(12) card-gradient(#667eea/#764ba2/135deg/3) c(white) font-responsive(14/18) bold glow(#667eea/16/0.4) transition hover:scale(1.05) hover:glow-pulse active:scale(0.98)">
           <span>🚀</span>
           <span>Get Started</span>
         </button>
-        <button class="cta-secondary hbox(pack) gap(8) p(18/36) r(12) b(1/#334155) c(#94a3b8) font(16) bg(#0f0f0f.8) backdrop(blur/10) transition hover:bg(#1e293b.8) hover:c(white) hover:b(1/#667eea)">
+        <button class="cta-secondary hbox(pack) gap(8) p-responsive(16/20) r(12) glass(16/0.1) c(#94a3b8) font-responsive(14/18) transition hover:glass(16/0.2) hover:c(white) hover:glow(#667eea/12/0.3)">
           <span>📖</span>
           <span>Documentation</span>
         </button>
-        <button class="cta-github hbox(pack) gap(8) p(18/36) r(12) bg(#1a1a1a) b(1/#333) c(#e5e7eb) font(16) transition hover:bg(#2a2a2a) hover:scale(1.02)">
+        <button class="cta-github hbox(pack) gap(8) p-responsive(16/20) r(12) card-dark(2/12) c(#e5e7eb) font-responsive(14/18) transition hover:glow(white/8/0.2) hover:scale(1.02)">
           <span>⭐</span>
           <span>GitHub</span>
         </button>
       </div>
       
-      <!-- Live code preview -->
-      <div class="hero-preview vbox gap(16) p(24) r(16) bg(#0a0a0a.8) backdrop(blur/20) b(1/#334155.3) w(600) animate(fade/3.5s/ease-in-out)">
+      <!-- Live code preview with Glass Effect -->
+      <div class="hero-preview glass-card(20/0.08) w(600) animate(fade/3.5s/ease-in-out) glow(#667eea/32/0.2) hover:glow-pulse(#667eea/40/0.3) transition">
         <div class="hbox(between+center) gap(16)">
-          <span class="font(12) c(#10b981) font-family(mono) uppercase">Live Preview</span>
+          <span class="font(12) c(#10b981) font-family(mono) uppercase">Live Preview ✨</span>
           <div class="hbox gap(4)">
-            <div class="w(8) h(8) r() bg(#ef4444)"></div>
-            <div class="w(8) h(8) r() bg(#f59e0b)"></div>
-            <div class="w(8) h(8) r() bg(#10b981)"></div>
+            <div class="w(8) h(8) r() bg(#ef4444) glow(#ef4444/4/0.6)"></div>
+            <div class="w(8) h(8) r() bg(#f59e0b) glow(#f59e0b/4/0.6)"></div>
+            <div class="w(8) h(8) r() bg(#10b981) glow(#10b981/4/0.6)"></div>
           </div>
         </div>
-        <code class="font(14/1.6) c(#fbbf24) font-family(mono) text(left)">
-          vbox(pack) gap(16) p(24) r(12)<br>
-          bg(#667eea..#764ba2) shadow(lg)<br>
-          hover:scale(1.05) transition
+        <code class="font-responsive(12/16) c(#fbbf24) font-family(mono) text(left)">
+          <span class="c(#667eea)">card</span><span class="c(#94a3b8)">(</span><span class="c(#f59e0b)">3</span><span class="c(#94a3b8)">)</span> <span class="c(#667eea)">glow</span><span class="c(#94a3b8)">(</span><span class="c(#10b981)">#667eea</span><span class="c(#94a3b8)">)</span><br>
+          <span class="c(#667eea)">glass</span><span class="c(#94a3b8)">(</span><span class="c(#f59e0b)">20/0.2</span><span class="c(#94a3b8)">)</span> <span class="c(#667eea)">backdrop-blur</span><span class="c(#94a3b8)">(</span><span class="c(#f59e0b)">16</span><span class="c(#94a3b8)">)</span><br>
+          <span class="c(#667eea)">font-responsive</span><span class="c(#94a3b8)">(</span><span class="c(#f59e0b)">16/32</span><span class="c(#94a3b8)">)</span>
         </code>
       </div>
     </div>
     
     <!-- Enhanced scroll indicator -->
-    <div class="scroll-indicator absolute bottom(40) left(50%) translate(-50%/0) vbox(pack) gap(12) opacity(.7) animate(bounce/2s/ease-in-out/infinite)">
+    <div class="scroll-indicator absolute bottom(40) x(center) vbox(pack) gap(12) opacity(.7) animate(bounce/2s/ease-in-out/infinite)">
       <div class="scroll-text font(12) c(#94a3b8) font-family(mono) uppercase tracking(.1em)">Scroll</div>
       <div class="scroll-arrow vbox gap(4)">
         <div class="w(2) h(20) r(1) bg(#94a3b8..#667eea)"></div>
@@ -102,31 +102,31 @@
         </p>
       </div>
       
-      <div class="features-grid grid grid-cols(3) gap(40)">
-        <!-- Auto Layout Feature -->
-        <div class="feature-card vbox gap(28) p(36) r(20) bg(linear/135deg/#1a1a1a/#2a2a2a) b(1/#334155.5) shadow(0/8px/32px/#000.3) transition hover:translate(0/-12) hover:shadow(0/16px/48px/#667eea.2) hover:b(1/#667eea.3)">
+      <div class="features-grid grid-responsive(1/3) gap-responsive(24/40)">
+        <!-- Auto Layout Feature with Plugin Effects -->
+        <div class="feature-card card-hover(3/20) glass-dark(16/0.05) glow(#667eea/20/0.1) hover:glow-pulse(#667eea/32/0.3) transition hover:scale(1.02)">
           <div class="feature-header hbox(between+center)">
-            <div class="feature-icon w(72) h(72) r(18) bg(#667eea..#764ba2) vbox(pack) shadow(0/4px/16px/#667eea.3) text-shadow(0/2px/4px/#000.3)">
-              <div class="font(28) c(white)">📦</div>
+            <div class="feature-icon card-gradient(#667eea/#764ba2/135deg/2) w(72) h(72) vbox(pack) glow(#667eea/12/0.6) float-animation(4/8)">
+              <div class="font-responsive(24/32) c(white)">📦</div>
             </div>
-            <div class="feature-number font(48) c(#334155) font(Inter) bold">01</div>
+            <div class="feature-number font-responsive(36/48) c(#334155.5) font(Inter) bold opacity(.3)">01</div>
           </div>
-          <div class="vbox gap(16)">
-            <h3 class="font(28/1.3) bold c(white..#e0e7ff)">Auto Layout</h3>
-            <p class="font(15/1.6) c(#94a3b8..#cbd5e1)">
-              Figma의 Auto Layout을 그대로 구현합니다. <code class="font-family(mono) c(#667eea)">hbox</code>, <code class="font-family(mono) c(#667eea)">vbox</code>, <code class="font-family(mono) c(#667eea)">gap</code>으로 직관적인 레이아웃을 구성하고, <code class="font-family(mono) c(#667eea)">pack</code> 단축어로 완벽한 중앙 정렬을 한 번에 처리합니다.
+          <div class="vbox gap-responsive(12/20)">
+            <h3 class="font-responsive(24/32) bold gradient-text(white/#e0e7ff/135deg)">Auto Layout</h3>
+            <p class="font-responsive(14/18) c(#94a3b8..#cbd5e1)">
+              Figma의 Auto Layout을 그대로 구현합니다. <code class="font-family(mono) c(#667eea) glow-ring(#667eea/1)">hbox</code>, <code class="font-family(mono) c(#667eea) glow-ring(#667eea/1)">vbox</code>, <code class="font-family(mono) c(#667eea) glow-ring(#667eea/1)">gap</code>으로 직관적인 레이아웃을 구성하고, <code class="font-family(mono) c(#667eea) glow-ring(#667eea/1)">pack</code> 단축어로 완벽한 중앙 정렬을 한 번에 처리합니다.
             </p>
           </div>
-          <div class="code-sample p(20) r(12) bg(#0a0a0a.8) b(1/#334155.3) backdrop(blur/10)">
-            <code class="font(13/1.5) c(#fbbf24) font-family(mono)">
+          <div class="code-sample glass(12/0.08) p-responsive(16/24) glow(#667eea/8/0.2)">
+            <code class="font-responsive(12/16) c(#fbbf24) font-family(mono)">
               <span class="c(#667eea)">hbox</span><span class="c(#94a3b8)">(</span><span class="c(#10b981)">pack</span><span class="c(#94a3b8)">)</span> <span class="c(#667eea)">gap</span><span class="c(#94a3b8)">(</span><span class="c(#f59e0b)">16</span><span class="c(#94a3b8)">)</span><br>
               <span class="c(#667eea)">vbox</span><span class="c(#94a3b8)">(</span><span class="c(#10b981)">center+middle</span><span class="c(#94a3b8)">)</span>
             </code>
           </div>
         </div>
 
-        <!-- Smart Sizing Feature -->
-        <div class="feature-card vbox gap(28) p(36) r(20) bg(linear/135deg/#1a1a1a/#2a2a2a) b(1/#334155.5) shadow(0/8px/32px/#000.3) transition hover:translate(0/-12) hover:shadow(0/16px/48px/#10b981.2) hover:b(1/#10b981.3)">
+        <!-- Smart Sizing Feature with Plugin Effects -->
+        <div class="feature-card card-hover(3/20) glass-dark(16/0.05) glow(#10b981/20/0.1) hover:glow-pulse(#10b981/32/0.3) transition hover:scale(1.02)">
           <div class="feature-header hbox(between+center)">
             <div class="feature-icon w(72) h(72) r(18) bg(#10b981..#059669) vbox(pack) shadow(0/4px/16px/#10b981.3)">
               <div class="font(28) c(white)">🔧</div>

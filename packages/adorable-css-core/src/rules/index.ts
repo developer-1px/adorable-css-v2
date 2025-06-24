@@ -4,6 +4,7 @@ import { visualRules } from './visuals';
 import { positionCategoryRules } from './position';
 import { interactionRules } from './interaction';
 import { utilityRules } from './utilities';
+import { glowRules, glassRules, cardRules, responsiveRules, advancedRules, adminRules } from './plugins';
 
 // Main rules registry
 export const rules = {
@@ -12,7 +13,13 @@ export const rules = {
   ...visualRules,
   ...positionCategoryRules,
   ...interactionRules,
-  ...utilityRules
+  ...utilityRules,
+  ...glowRules,
+  ...glassRules,
+  ...cardRules,
+  ...responsiveRules,
+  ...advancedRules,
+  ...adminRules
 };
 
 // Helper function to get rule handler

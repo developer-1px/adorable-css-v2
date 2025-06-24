@@ -17,16 +17,20 @@ export const overflow: RuleHandler = (args?: string): CSSRule => {
 };
 
 export const scroll: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return { overflow: 'scroll' };
+  if (!args) return { overflow: 'auto' };
   
-  // scroll(x) -> overflow-x: scroll
-  if (args === 'x') return { 'overflow-x': 'scroll' };
-  if (args === 'y') return { 'overflow-y': 'scroll' };
+  // scroll(x) -> overflow-x: auto
+  if (args === 'x') return { 'overflow-x': 'auto' };
+  if (args === 'y') return { 'overflow-y': 'auto' };
   
-  return { overflow: 'scroll' };
+  return { overflow: 'auto' };
 };
 
-export const clip = (): CSSRule => ({ overflow: 'clip' });
+export const clip: RuleHandler = (args?: string): CSSRule => {
+  if (!args) return { overflow: 'hidden' };
+  if (args === 'none') return { overflow: 'visible' };
+  return { overflow: 'hidden' };
+};
 
 export const overflowRules = {
   overflow,

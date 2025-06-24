@@ -27,7 +27,7 @@ export const font: RuleHandler = (args?: string): CSSRule => {
       result['letter-spacing'] = String(px(percentToEm(part)));
     }
     // font-weight (number 100-900 or weight keyword)
-    else if ((+part >= 100 && +part <= 900) || ['bold', 'normal', 'light', 'medium'].includes(part)) {
+    else if ((+part >= 100 && +part <= 900) || ['thin', 'extralight', 'light', 'normal', 'medium', 'semibold', 'bold', 'extrabold', 'black'].includes(part)) {
       result['font-weight'] = part;
     }
   });

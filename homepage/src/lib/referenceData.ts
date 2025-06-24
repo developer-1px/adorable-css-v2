@@ -99,24 +99,24 @@ export const referenceData: ReferenceData = {
       { property: "flex-wrap", syntax: ["wrap", "nowrap"] },
       {
         property: "hbox-alignment",
-        syntax: ["hbox(center)", "hbox(end)", "hbox(between)", "hbox(around)"],
+        syntax: ["hbox(center)", "hbox(end)", "hbox(around)", "gap(auto)"],
       },
       {
         property: "hbox-combined",
         syntax: [
           "hbox(center+center)",
-          "hbox(between+center)",
           "hbox(end+stretch)",
+          "gap(auto)",
         ],
       },
       {
         property: "vbox-alignment",
-        syntax: ["vbox(center)", "vbox(end)", "vbox(between)", "vbox(around)"],
+        syntax: ["vbox(center)", "vbox(end)", "vbox(around)", "gap(auto)"],
       },
       { property: "center-alignment", syntax: ["pack"] },
       {
         property: "justify-content",
-        syntax: ["hbox(between)", "vbox(around)", "hbox(center)"],
+        syntax: ["hbox(center)", "vbox(around)", "gap(auto)"],
       },
     ],
     "Pack Shorthand": [
@@ -124,9 +124,9 @@ export const referenceData: ReferenceData = {
       {
         property: "layout-combinations",
         syntax: [
-          "hbox(between+center)",
           "vbox(around+stretch)",
           "hbox(end+end)",
+          "gap(auto)",
         ],
       },
     ],

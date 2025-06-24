@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdorableCSS v2 Plugin Test</title>
+    <script src="./dist/index.global.js"></script>
+    <style>
+        /* AdorableCSS v2 Plugin Keyframes */
+        @keyframes glow-pulse {
+            0% { filter: brightness(1) saturate(1); }
+            100% { filter: brightness(1.2) saturate(1.3); }
+        }
+        
+        @keyframes float-10 {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes float-8 {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        
+        @keyframes neon-flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes skeleton-loading {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        
+        body {
+            margin: 0;
+            background: #0a0a0a;
+            color: white;
+            font-family: Inter, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-responsive(1200) p-responsive(20/40) vbox gap-responsive(32/48)">
+        <h1 class="font-responsive(32/56) bold gradient-text(#667eea/#764ba2/135deg) text(center)">
+            AdorableCSS v2 Plugin Test
+        </h1>
+        
+        <!-- Glow Effects -->
+        <section class="vbox gap(24)">
+            <h2 class="font(24) bold c(white)">✨ Glow Effects</h2>
+            <div class="hbox gap(20) wrap">
+                <div class="card(2/12) p(20) glow(#667eea/16/0.5)">
+                    <span class="font(14) c(white)">glow(#667eea/16/0.5)</span>
+                </div>
+                <div class="card(2/12) p(20) glow-pulse(#10b981/20/0.6)">
+                    <span class="font(14) c(white)">glow-pulse(#10b981)</span>
+                </div>
+                <div class="card(2/12) p(20) glow-ring(#f59e0b/3)">
+                    <span class="font(14) c(white)">glow-ring(#f59e0b/3)</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Glass Effects -->
+        <section class="vbox gap(24)">
+            <h2 class="font(24) bold c(white)">🌟 Glass Effects</h2>
+            <div class="hbox gap(20) wrap">
+                <div class="glass(20/0.2) p(20)">
+                    <span class="font(14) c(white)">glass(20/0.2)</span>
+                </div>
+                <div class="glass-card(16/0.1)">
+                    <span class="font(14) c(white)">glass-card(16/0.1)</span>
+                </div>
+                <div class="glass-dark(12/0.15) p(20)">
+                    <span class="font(14) c(white)">glass-dark(12/0.15)</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Card Effects -->
+        <section class="vbox gap(24)">
+            <h2 class="font(24) bold c(white)">📦 Card Effects</h2>
+            <div class="grid-responsive(1/3) gap(20)">
+                <div class="card(3/16) p(24)">
+                    <h3 class="font(18) bold c(#0a0a0a) mb(12)">Standard Card</h3>
+                    <p class="font(14) c(#666)">card(3/16)</p>
+                </div>
+                <div class="card-hover(4/20) p(24)">
+                    <h3 class="font(18) bold c(#0a0a0a) mb(12)">Hover Card</h3>
+                    <p class="font(14) c(#666)">card-hover(4/20)</p>
+                </div>
+                <div class="card-gradient(#667eea/#764ba2/135deg/2) p(24)">
+                    <h3 class="font(18) bold c(white) mb(12)">Gradient Card</h3>
+                    <p class="font(14) c(#e0e7ff)">card-gradient</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Responsive Typography -->
+        <section class="vbox gap(24)">
+            <h2 class="font(24) bold c(white)">📱 Responsive Typography</h2>
+            <div class="vbox gap(16)">
+                <p class="font-responsive(16/32) c(#94a3b8)">
+                    이 텍스트는 font-responsive(16/32)로 뷰포트 크기에 따라 16px부터 32px까지 자동으로 조절됩니다.
+                </p>
+                <p class="font-responsive(12/24) c(#64748b)">
+                    이 텍스트는 font-responsive(12/24)로 더 작은 범위에서 조절됩니다.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Advanced Effects -->
+        <section class="vbox gap(24)">
+            <h2 class="font(24) bold c(white)">🎨 Advanced Effects</h2>
+            <div class="hbox gap(20) wrap">
+                <div class="card(2/12) p(20) morphism(16/0.2)">
+                    <span class="font(14) c(#333)">morphism</span>
+                </div>
+                <div class="p(20)">
+                    <span class="font(18) neon(#00ffff)">neon(#00ffff)</span>
+                </div>
+                <div class="loading-spinner(32/#667eea)"></div>
+                <div class="skeleton w(200) h(20)"></div>
+            </div>
+        </section>
+        
+        <!-- Interactive Demo -->
+        <section class="vbox gap(24)">
+            <h2 class="font(24) bold c(white)">🎯 Interactive Demo</h2>
+            <div class="hbox gap(20) wrap">
+                <button class="card-gradient(#667eea/#764ba2/135deg/3) p(16/32) r(12) c(white) font(16) bold glow(#667eea/16/0.4) transition hover:glow-pulse hover:scale(1.05) active:scale(0.95)">
+                    Gradient Button
+                </button>
+                <button class="glass(16/0.1) p(16/32) r(12) c(white) font(16) transition hover:glass(16/0.2) hover:glow(#10b981/12/0.3)">
+                    Glass Button
+                </button>
+                <button class="card-dark(2/12) p(16/32) c(#e5e7eb) font(16) transition hover:glow(white/8/0.2) hover:scale(1.02)">
+                    Dark Button
+                </button>
+            </div>
+        </section>
+    </div>
+    
+    <script>
+        // Initialize AdorableCSS v2 with debug mode
+        AdorableCSSV2.init({ debug: true });
+        
+        console.log('AdorableCSS v2 Plugin Test Page Loaded');
+    </script>
+</body>
+</html>

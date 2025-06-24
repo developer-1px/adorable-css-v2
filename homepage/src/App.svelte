@@ -3,6 +3,7 @@
   import Reference from './lib/Reference.svelte';
   import TestPage from './TestPage.svelte';
   import ShowcasePage from './ShowcasePage.svelte';
+  import Showcase2 from './Showcase2.svelte';
   
   let currentPage = 'showcase'; // 'showcase', 'parser', 'reference', or 'test'
   
@@ -47,6 +48,12 @@
           레퍼런스
         </button>
         <button 
+          class="nav-link {currentPage === 'showcase2' ? 'active' : ''}"
+          on:click={() => navigateTo('showcase2')}
+        >
+          Admin Console
+        </button>
+        <button 
           class="nav-link {currentPage === 'test' ? 'active' : ''}"
           on:click={() => navigateTo('test')}
         >
@@ -59,6 +66,8 @@
   <main class="main-content">
     {#if currentPage === 'showcase'}
       <ShowcasePage />
+    {:else if currentPage === 'showcase2'}
+      <Showcase2 />
     {:else if currentPage === 'parser'}
       <ParserVisualizer />
     {:else if currentPage === 'reference'}
