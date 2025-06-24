@@ -50,12 +50,65 @@ export const vbox: RuleHandler = (value = '') => {
   return rules;
 };
 
+// Additional flex utilities
+export const inlineFlex: KeywordRuleHandler = () => ({ display: 'inline-flex' });
+export const flex: KeywordRuleHandler = () => ({ flex: '1 1 0%' });
+export const flexWrap: KeywordRuleHandler = () => ({ 'flex-wrap': 'wrap' });
+
+// Standalone flexbox alignment utilities
+export const items: RuleHandler = (value?: string): CSSRule => {
+  if (!value) return {};
+  
+  const alignMap: Record<string, string> = {
+    start: 'flex-start',
+    end: 'flex-end',
+    center: 'center',
+    baseline: 'baseline',
+    stretch: 'stretch'
+  };
+  
+  return { 'align-items': alignMap[value] || value };
+};
+
+export const justify: RuleHandler = (value?: string): CSSRule => {
+  if (!value) return {};
+  
+  const justifyMap: Record<string, string> = {
+    start: 'flex-start',
+    end: 'flex-end',
+    center: 'center',
+    between: 'space-between',
+    around: 'space-around',
+    evenly: 'space-evenly'
+  };
+  
+  return { 'justify-content': justifyMap[value] || value };
+};
+
+// Flex grow/shrink
+export const shrink: RuleHandler = (value?: string): CSSRule => {
+  if (!value) return {};
+  return { 'flex-shrink': value };
+};
+
+export const grow: RuleHandler = (value?: string): CSSRule => {
+  if (!value) return {};
+  return { 'flex-grow': value };
+};
+
 export const displayRules = {
   block,
   inline,
   'inline-block': inlineBlock,
+  'inline-flex': inlineFlex,
   none,
   grid,
   hbox,
-  vbox
+  vbox,
+  flex,
+  'flex-wrap': flexWrap,
+  items,
+  justify,
+  shrink,
+  grow
 };

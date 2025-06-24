@@ -1,45 +1,30 @@
 <script lang="ts">
-  export let variant: 'default' | 'success' | 'warning' | 'error' | 'info' = 'default';
-  export let size: 'sm' | 'md' = 'sm';
-  export let dot = false;
+  export let variant: 'default' | 'secondary' | 'destructive' | 'outline' = 'default';
+  export let className = '';
   
-  const variants = {
-    default: 'bg(#f4f4f5) c(#525252) border(1/#e5e5e5)',
-    success: 'bg(#d1fae5) c(#059669) border(1/#86efac)',
-    warning: 'bg(#fef3c7) c(#d97706) border(1/#fcd34d)',
-    error: 'bg(#fee2e2) c(#dc2626) border(1/#fca5a5)',
-    info: 'bg(#dbeafe) c(#2563eb) border(1/#93c5fd)'
+  // shadcn/ui Badge variants using CVA pattern
+  const badgeVariants = {
+    default: 'border(1/transparent) bg(--colors-primary-600) c(--colors-primary-50) hover:bg(--colors-primary-700)',
+    secondary: 'border(1/transparent) bg(--colors-gray-100) c(--colors-gray-900) hover:bg(--colors-gray-200)',
+    destructive: 'border(1/transparent) bg(--colors-error-600) c(--colors-error-50) hover:bg(--colors-error-700)',
+    outline: 'border(1/--colors-gray-200) c(--colors-gray-950) bg(transparent)'
   };
   
-  const sizes = {
-    sm: 'px(8) py(2) font(11)',
-    md: 'px(12) py(4) font(12)'
-  };
+  const baseClasses = `
+    inline-flex items(center) r(full) border px(sm) py(xs) 
+    font(xs) semibold transition-colors focus:outline(none) 
+    focus:ring(2/--colors-primary-500) focus:ring-offset(2)
+  `.replace(/\s+/g, ' ').trim();
+  
+  $: variantClass = badgeVariants[variant];
 </script>
 
-<span class="badge hbox(center) gap(6) r(9999) medium border(1) {variants[variant]} {sizes[size]}">
-  {#if dot}
-    <span class="badge-dot w(6) h(6) r() bg(currentColor) opacity(80)"></span>
-  {/if}
+<div class="{baseClasses} {variantClass} {className}">
   <slot />
-</span>
+</div>
 
 <style>
-  .badge {
-    display: inline-flex;
-    white-space: nowrap;
-  }
-  
-  @keyframes pulse {
-    0%, 100% {
-      opacity: 0.8;
-    }
-    50% {
-      opacity: 0.4;
-    }
-  }
-  
-  .badge-dot {
-    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  div {
+    user-select: none;
   }
 </style>

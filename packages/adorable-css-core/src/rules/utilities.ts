@@ -1,4 +1,7 @@
 import type { CSSRule, KeywordRuleHandler } from './types';
+import { transitionRules } from './utilities/transitions';
+import { focusRules } from './utilities/focus';
+import { transformRules } from './utilities/transforms';
 
 // Additional utilities
 export const fit: KeywordRuleHandler = () => ({ 
@@ -45,4 +48,7 @@ export const utilityRules = {
   'select-none': selectNone,
   select,
   transition,
+  ...transitionRules,
+  ...focusRules,
+  ...transformRules
 };

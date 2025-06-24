@@ -32,6 +32,24 @@ export const bg: RuleHandler = (args?: string): CSSRule => {
   return { 'background-color': String(makeColor(args)) };
 };
 
+// Background opacity utility
+export const bgOpacity: RuleHandler = (args?: string): CSSRule => {
+  if (!args) return {};
+  
+  // Convert percentage or decimal to opacity value
+  let opacity = args;
+  if (args.includes('%')) {
+    opacity = (parseFloat(args) / 100).toString();
+  } else if (parseFloat(args) > 1) {
+    opacity = (parseFloat(args) / 100).toString();
+  }
+  
+  return { 
+    opacity: opacity
+  };
+};
+
 export const backgroundRules = {
-  bg
+  bg,
+  'bg-opacity': bgOpacity
 };

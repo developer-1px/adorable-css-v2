@@ -1,55 +1,125 @@
 <script lang="ts">
-  export let variant: 'primary' | 'secondary' | 'ghost' | 'danger' = 'primary';
-  export let size: 'sm' | 'md' | 'lg' = 'md';
+  import { createEventDispatcher } from 'svelte';
+  
+  export let variant: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link' = 'default';
+  export let size: 'default' | 'sm' | 'lg' | 'icon' = 'default';
   export let disabled = false;
+  export let loading = false;
+  export let asChild = false;
+  export let href: string | undefined = undefined;
   
-  const variants = {
-    primary: 'bg(#0a0a0a) c(white) hover:bg(#262626) active:bg(#404040) disabled:bg(#737373)',
-    secondary: 'bg(white) c(#0a0a0a) border(1/#e5e5e5) hover:bg(#fafafa) hover:border(1/#d4d4d4) active:bg(#f5f5f5)',
-    ghost: 'c(#525252) hover:bg(#fafafa) hover:c(#0a0a0a) active:bg(#f5f5f5)',
-    danger: 'bg(#dc2626) c(white) hover:bg(#b91c1c) active:bg(#991b1b)'
+  const dispatch = createEventDispatcher();
+  
+  // shadcn/ui inspired button variants using Class Variance Authority pattern
+  const buttonVariants = {
+    variant: {
+      default: 'bg(--colors-primary-600) c(--colors-primary-50) hover:bg(--colors-primary-700) active:bg(--colors-primary-800) shadow(sm) hover:shadow(md)',
+      destructive: 'bg(--colors-error-600) c(--colors-error-50) hover:bg(--colors-error-700) active:bg(--colors-error-800) shadow(sm) hover:shadow(md)',
+      outline: 'border(1/--colors-gray-300) bg(transparent) c(--colors-gray-900) hover:bg(--colors-gray-100) hover:c(--colors-gray-900) active:bg(--colors-gray-200)',
+      secondary: 'bg(--colors-gray-100) c(--colors-gray-900) hover:bg(--colors-gray-200) active:bg(--colors-gray-300)',
+      ghost: 'c(--colors-gray-700) hover:bg(--colors-gray-100) hover:c(--colors-gray-900) active:bg(--colors-gray-200)',
+      link: 'c(--colors-primary-600) underline-offset(4) hover:underline hover:c(--colors-primary-700) active:c(--colors-primary-800) bg(transparent)'
+    },
+    size: {
+      default: 'h(2xl) px(md) py(xs) font(sm)',
+      sm: 'h(2xl) px(sm) py(xs) font(sm) r(md)',
+      lg: 'h(3xl) px(xl) py(sm) font(md)',
+      icon: 'h(2xl) w(2xl) p(0)'
+    }
   };
   
-  const sizes = {
-    sm: 'h(32) px(12) font(13) gap(6)',
-    md: 'h(40) px(16) font(14) gap(8)', 
-    lg: 'h(48) px(20) font(15) gap(10)'
-  };
+  // Get variant and size classes
+  $: variantClass = buttonVariants.variant[variant];
+  $: sizeClass = buttonVariants.size[size];
+  
+  // Base classes shared across all variants
+  const baseClasses = `
+    inline-flex items(center) justify(center) nowrap r(md) 
+    medium ring-offset(--colors-white) transition-colors duration(150) ease(out)
+    focus-visible:outline(none) focus-visible:ring(2/--colors-primary-500) focus-visible:ring-offset(2)
+    disabled:pointer-events(none) disabled:opacity(50)
+    active:scale(98%) transition-transform
+  `.replace(/\s+/g, ' ').trim();
+  
+  function handleClick(event: MouseEvent) {
+    if (!disabled && !loading) {
+      dispatch('click', event);
+    }
+  }
 </script>
 
-<button
-  class="button hbox(center) r(8) medium transition shadow(sm) disabled:opacity(.5) disabled:cursor(not-allowed) active:scale(0.98) {variants[variant]} {sizes[size]}"
-  {disabled}
-  on:click
->
-  <slot />
-</button>
+{#if href && !disabled}
+  <a 
+    {href}
+    class="{baseClasses} {variantClass} {sizeClass}"
+    on:click={handleClick}
+    role="button"
+    tabindex="0"
+  >
+    {#if loading}
+      <div class="loading-spinner w(md) h(md) mr(xs) border(2/currentColor) border-t(2/transparent) r(full) animate(spin)"></div>
+    {/if}
+    <slot />
+  </a>
+{:else}
+  <button
+    type="button"
+    class="{baseClasses} {variantClass} {sizeClass}"
+    disabled={disabled || loading}
+    on:click={handleClick}
+  >
+    {#if loading}
+      <div class="loading-spinner w(md) h(md) mr(xs) border(2/currentColor) border-t(2/transparent) r(full) animate(spin)"></div>
+    {/if}
+    <slot />
+  </button>
+{/if}
 
 <style>
-  .button {
-    position: relative;
-    white-space: nowrap;
-    user-select: none;
-    -webkit-tap-highlight-color: transparent;
-    outline: none;
+  /* Loading spinner animation */
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
   
-  .button:focus-visible {
-    box-shadow: 0 0 0 3px rgba(10, 10, 10, 0.1);
+  .animate-spin {
+    animation: spin 1s linear infinite;
   }
   
-  .button::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 8px;
-    background: linear-gradient(to bottom, rgba(255,255,255,0.1), transparent);
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.2s;
+  /* Enhanced focus ring for accessibility */
+  button:focus-visible,
+  a:focus-visible {
+    outline: 2px solid var(--colors-primary-500);
+    outline-offset: 2px;
   }
   
-  .button:hover::before {
-    opacity: 1;
+  /* Subtle pressed state */
+  button:active,
+  a:active {
+    transform: scale(0.98);
+    transition-duration: 75ms;
+  }
+  
+  /* Remove default button styles */
+  :where(button) {
+    border: none;
+    background: none;
+    font-family: inherit;
+    cursor: pointer;
+  }
+  
+  /* Remove default link styles */
+  :where(a) {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  /* Loading state improvements */
+  .loading-spinner {
+    border-color: currentColor transparent transparent transparent;
   }
 </style>

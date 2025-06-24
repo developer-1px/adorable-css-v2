@@ -4,7 +4,9 @@ import { visualRules } from './visuals';
 import { positionCategoryRules } from './position';
 import { interactionRules } from './interaction';
 import { utilityRules } from './utilities';
+import { effectsRules } from './effects';
 import { glowRules, glassRules, cardRules, responsiveRules, advancedRules, adminRules } from './plugins';
+import { headingRules } from './plugins/heading';
 
 // Main rules registry
 export const rules = {
@@ -14,12 +16,34 @@ export const rules = {
   ...positionCategoryRules,
   ...interactionRules,
   ...utilityRules,
+  ...effectsRules,
   ...glowRules,
   ...glassRules,
   ...cardRules,
   ...responsiveRules,
   ...advancedRules,
-  ...adminRules
+  ...adminRules,
+  ...headingRules
+};
+
+// Grouped rules for testing/debugging
+export const groupedRules = {
+  typography: typographyRules,
+  layout: layoutRules,
+  visuals: visualRules,
+  position: positionCategoryRules,
+  interaction: interactionRules,
+  utilities: utilityRules,
+  effects: effectsRules,
+  plugins: {
+    glow: glowRules,
+    glass: glassRules,
+    card: cardRules,
+    responsive: responsiveRules,
+    advanced: advancedRules,
+    admin: adminRules,
+    heading: headingRules
+  }
 };
 
 // Helper function to get rule handler

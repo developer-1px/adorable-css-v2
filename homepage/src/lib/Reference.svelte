@@ -9,10 +9,10 @@
     { id: 'all', name: '전체', icon: '🎨' },
     { id: 'layout', name: '레이아웃', icon: '📐' },
     { id: 'position', name: '위치', icon: '📍' },
-    { id: 'typography', name: '타이포그래피', icon: '✏️' },
+    { id: 'typography', name: '텍스트', icon: '✏️' },
     { id: 'spacing', name: '여백', icon: '📏' },
-    { id: 'visuals', name: '시각효과', icon: '🎨' },
-    { id: 'interaction', name: '인터랙션', icon: '👆' },
+    { id: 'visuals', name: '비주얼', icon: '🎨' },
+    { id: 'interaction', name: '상호작용', icon: '👆' },
     { id: 'responsive', name: '반응형', icon: '📱' }
   ];
   
@@ -31,35 +31,64 @@
   const referenceData: Record<string, ReferenceSection[]> = {
     layout: [
       {
+        title: 'Display',
+        icon: '💻',
+        items: [
+          { syntax: 'block', desc: 'block', example: 'block' },
+          { syntax: 'inline', desc: 'inline', example: 'inline' },
+          { syntax: 'inline-block', desc: 'inline-block', example: 'inline-block' },
+          { syntax: 'none', desc: 'none', example: 'none' },
+          { syntax: 'hidden', desc: 'display: none', example: 'hidden' },
+          { syntax: 'flex', desc: 'flex: 1', example: 'flex' },
+          { syntax: 'inline-flex', desc: 'inline-flex', example: 'inline-flex' },
+          { syntax: 'table', desc: 'table', example: 'table' },
+          { syntax: 'table-cell', desc: 'table-cell', example: 'table-cell' },
+          { syntax: 'table-row', desc: 'table-row', example: 'table-row' }
+        ]
+      },
+      {
         title: 'Flexbox',
         icon: '📦',
         items: [
-          { syntax: 'hbox', desc: '가로 방향 flex 컨테이너', example: 'hbox gap(16)' },
-          { syntax: 'vbox', desc: '세로 방향 flex 컨테이너', example: 'vbox gap(20)' },
-          { syntax: 'hbox(pack)', desc: '가로/세로 중앙 정렬', example: 'hbox(pack) w(200) h(200)' },
-          { syntax: 'gap(auto)', desc: 'flexbox 아이템 사이 자동 간격', example: 'hbox gap(auto)' },
-          { syntax: 'gap(16)', desc: 'flex/grid 아이템 간격', example: 'hbox gap(16)' },
-          { syntax: 'flex', desc: 'flex: 1 (늘어나기)', example: 'hbox > div.flex' }
+          { syntax: 'hbox', desc: 'flex 가로', example: 'hbox gap(16)' },
+          { syntax: 'vbox', desc: 'flex 세로', example: 'vbox gap(20)' },
+          { syntax: 'hbox(pack)', desc: '정중앙', example: 'hbox(pack)' },
+          { syntax: 'hbox(center)', desc: 'align center', example: 'hbox(center)' },
+          { syntax: 'hbox(end)', desc: 'justify end', example: 'hbox(end)' },
+          { syntax: 'hbox(end+center)', desc: '복합 정렬', example: 'hbox(end+center)' },
+          { syntax: 'gap(16)', desc: '간격', example: 'gap(16)' },
+          { syntax: 'gap(auto)', desc: '자동 간격', example: 'gap(auto)' },
+          { syntax: 'flex', desc: 'flex: 1', example: 'flex' },
+          { syntax: 'wrap', desc: 'flex-wrap', example: 'hbox wrap' },
+          { syntax: 'nowrap', desc: 'no wrap', example: 'nowrap' }
         ]
       },
       {
         title: 'Grid',
         icon: '🏗️',
         items: [
-          { syntax: 'grid(3)', desc: '3열 그리드', example: 'grid(3) gap(20)' },
-          { syntax: 'grid(1/3)', desc: '반응형 그리드', example: 'sm:grid(1) md:grid(3)' },
-          { syntax: 'col-span(2)', desc: '2열 차지', example: 'grid(3) > div.col-span(2)' }
+          { syntax: 'grid(3)', desc: '3열', example: 'grid(3)' },
+          { syntax: 'grid(1/3)', desc: '반응형', example: 'grid(1/3)' },
+          { syntax: 'grid-cols(4)', desc: '4열', example: 'grid-cols(4)' },
+          { syntax: 'grid-rows(2)', desc: '2행', example: 'grid-rows(2)' },
+          { syntax: 'col-span(2)', desc: '2열 차지', example: 'col-span(2)' },
+          { syntax: 'row-span(3)', desc: '3행 차지', example: 'row-span(3)' }
         ]
       },
       {
         title: 'Size',
         icon: '📏',
         items: [
-          { syntax: 'w(200)', desc: '너비 200px', example: 'w(200) h(100)' },
-          { syntax: 'w(fill)', desc: '너비 100%', example: 'w(fill)' },
-          { syntax: 'w(hug)', desc: '콘텐츠에 맞춤', example: 'w(hug) px(20)' },
-          { syntax: 'h(screen)', desc: '뷰포트 높이', example: 'h(screen) vbox(pack)' },
-          { syntax: 'w(200..400)', desc: '최소/최대 너비', example: 'w(200..400)' }
+          { syntax: 'w(200)', desc: '200px', example: 'w(200)' },
+          { syntax: 'w(fill)', desc: '100%', example: 'w(fill)' },
+          { syntax: 'w(hug)', desc: 'fit-content', example: 'w(hug)' },
+          { syntax: 'w(50%)', desc: '50%', example: 'w(50%)' },
+          { syntax: 'h(screen)', desc: '100vh', example: 'h(screen)' },
+          { syntax: 'h(auto)', desc: 'auto', example: 'h(auto)' },
+          { syntax: 'w(200..400)', desc: 'min/max', example: 'w(200..400)' },
+          { syntax: 'w(200..)', desc: 'min-width', example: 'w(200..)' },
+          { syntax: 'w(..400)', desc: 'max-width', example: 'w(..400)' },
+          { syntax: 'size(100)', desc: 'w+h 100px', example: 'size(100)' }
         ]
       }
     ],
@@ -92,23 +121,37 @@
         title: 'Font',
         icon: '🔤',
         items: [
-          { syntax: 'font(16)', desc: '폰트 크기', example: 'font(16) c(#333)' },
-          { syntax: 'font(Inter/16/1.5)', desc: '폰트/크기/행간', example: 'font(Inter/16/1.5)' },
-          { syntax: 'bold', desc: 'font-weight: bold', example: 'font(20) bold' },
-          { syntax: 'medium', desc: 'font-weight: 500', example: 'font(14) medium' },
-          { syntax: 'font-responsive(16/32)', desc: '반응형 폰트', example: 'font-responsive(16/32)' }
+          { syntax: 'font(16)', desc: '16px', example: 'font(16)' },
+          { syntax: 'font(sm)', desc: '토큰', example: 'font(sm)' },
+          { syntax: 'font(Inter/16/1.5)', desc: '패밀리/크기/행간', example: 'font(Inter/16/1.5)' },
+          { syntax: 'font(16/24)', desc: '크기/행간', example: 'font(16/24)' },
+          { syntax: 'font(16/1.5/-2%)', desc: '크기/행간/자간', example: 'font(16/1.5/-2%)' },
+          { syntax: 'thin', desc: '100', example: 'thin' },
+          { syntax: 'light', desc: '300', example: 'light' },
+          { syntax: 'medium', desc: '500', example: 'medium' },
+          { syntax: 'semibold', desc: '600', example: 'semibold' },
+          { syntax: 'bold', desc: '700', example: 'bold' },
+          { syntax: 'heavy', desc: '900', example: 'heavy' }
         ]
       },
       {
         title: 'Text',
         icon: '✍️',
         items: [
-          { syntax: 'c(#333)', desc: '텍스트 색상', example: 'c(#333)' },
-          { syntax: 'c(#333.5)', desc: '투명도 포함', example: 'c(#000.5)' },
-          { syntax: 'c(red..blue)', desc: '그라디언트 텍스트', example: 'c(#667eea..#764ba2)' },
-          { syntax: 'text(center)', desc: '텍스트 정렬', example: 'text(center)' },
-          { syntax: 'uppercase', desc: '대문자 변환', example: 'uppercase tracking(.1em)' },
-          { syntax: 'truncate', desc: '텍스트 말줄임', example: 'truncate w(200)' }
+          { syntax: 'c(#333)', desc: '색상', example: 'c(#333)' },
+          { syntax: 'c(#333.5)', desc: '투명도', example: 'c(#000.5)' },
+          { syntax: 'c(red)', desc: '명명된 색', example: 'c(red)' },
+          { syntax: 'c(red..blue)', desc: '그라디언트', example: 'c(red..blue)' },
+          { syntax: 'text(center)', desc: '중앙', example: 'text(center)' },
+          { syntax: 'text(right)', desc: '오른쪽', example: 'text(right)' },
+          { syntax: 'uppercase', desc: '대문자', example: 'uppercase' },
+          { syntax: 'capitalize', desc: '첫글자 대문자', example: 'capitalize' },
+          { syntax: 'italic', desc: '기울임', example: 'italic' },
+          { syntax: 'underline', desc: '밑줄', example: 'underline' },
+          { syntax: 'line-through', desc: '취소선', example: 'line-through' },
+          { syntax: 'truncate', desc: '말줄임', example: 'truncate' },
+          { syntax: 'nowrap', desc: '줄바꿈 없음', example: 'nowrap' },
+          { syntax: 'letter-spacing(.1em)', desc: '자간', example: 'letter-spacing(.1em)' }
         ]
       }
     ],
@@ -117,20 +160,30 @@
         title: 'Padding',
         icon: '📦',
         items: [
-          { syntax: 'p(20)', desc: '모든 방향 padding', example: 'p(20)' },
-          { syntax: 'px(20)', desc: '좌우 padding', example: 'px(20) py(10)' },
-          { syntax: 'py(20)', desc: '상하 padding', example: 'py(20)' },
+          { syntax: 'p(20)', desc: '모든 방향', example: 'p(20)' },
+          { syntax: 'p(sm)', desc: '토큰', example: 'p(sm)' },
+          { syntax: 'px(20)', desc: '좌우', example: 'px(20)' },
+          { syntax: 'py(20)', desc: '상하', example: 'py(20)' },
           { syntax: 'p(20/40)', desc: '상하/좌우', example: 'p(20/40)' },
-          { syntax: 'pt(20)', desc: 'padding-top', example: 'pt(20) pb(10)' }
+          { syntax: 'p(10/20/30/40)', desc: '상/우/하/좌', example: 'p(10/20/30/40)' },
+          { syntax: 'pt(20)', desc: '위', example: 'pt(20)' },
+          { syntax: 'pr(20)', desc: '오른쪽', example: 'pr(20)' },
+          { syntax: 'pb(20)', desc: '아래', example: 'pb(20)' },
+          { syntax: 'pl(20)', desc: '왼쪽', example: 'pl(20)' }
         ]
       },
       {
         title: 'Margin',
         icon: '🔲',
         items: [
-          { syntax: 'mt(20)', desc: 'margin-top', example: 'mt(20)' },
-          { syntax: 'mx(auto)', desc: '가로 중앙 정렬', example: 'w(400) mx(auto)' },
-          { syntax: 'mb(16)', desc: 'margin-bottom', example: 'mb(16)' }
+          { syntax: 'm(20)', desc: '모든 방향', example: 'm(20)' },
+          { syntax: 'm(md)', desc: '토큰', example: 'm(md)' },
+          { syntax: 'mx(auto)', desc: '가로 중앙', example: 'mx(auto)' },
+          { syntax: 'my(20)', desc: '상하', example: 'my(20)' },
+          { syntax: 'mt(20)', desc: '위', example: 'mt(20)' },
+          { syntax: 'mr(20)', desc: '오른쪽', example: 'mr(20)' },
+          { syntax: 'mb(20)', desc: '아래', example: 'mb(20)' },
+          { syntax: 'ml(20)', desc: '왼쪽', example: 'ml(20)' }
         ]
       }
     ],
@@ -166,36 +219,81 @@
           { syntax: 'blur(10)', desc: '블러 효과', example: 'blur(10)' },
           { syntax: 'backdrop(blur/10)', desc: '배경 블러', example: 'backdrop(blur/10)' }
         ]
+      },
+      {
+        title: 'Transform',
+        icon: '🔄',
+        items: [
+          { syntax: 'scale(1.1)', desc: '크기', example: 'scale(1.1)' },
+          { syntax: 'scale(x/1.2)', desc: 'x축', example: 'scale(x/1.2)' },
+          { syntax: 'rotate(45)', desc: '회전', example: 'rotate(45)' },
+          { syntax: 'translate(10/20)', desc: '이동', example: 'translate(10/20)' },
+          { syntax: 'skew(x/15)', desc: '기울기', example: 'skew(x/15)' },
+          { syntax: 'origin(center)', desc: '기준점', example: 'origin(center)' }
+        ]
+      },
+      {
+        title: 'Animation',
+        icon: '🎬',
+        items: [
+          { syntax: 'transition', desc: '전환', example: 'transition' },
+          { syntax: 'transition(colors)', desc: '색상만', example: 'transition(colors)' },
+          { syntax: 'duration(300)', desc: '시간', example: 'duration(300)' },
+          { syntax: 'delay(100)', desc: '지연', example: 'delay(100)' },
+          { syntax: 'ease(in-out)', desc: '이징', example: 'ease(in-out)' },
+          { syntax: 'animate(spin)', desc: '회전', example: 'animate(spin)' },
+          { syntax: 'animate(ping)', desc: '핑', example: 'animate(ping)' },
+          { syntax: 'animate(bounce)', desc: '바운스', example: 'animate(bounce)' }
+        ]
+      },
+      {
+        title: 'SVG',
+        icon: '🎨',
+        items: [
+          { syntax: 'fill(currentColor)', desc: '채우기', example: 'fill(currentColor)' },
+          { syntax: 'fill(#ff0000)', desc: '색상', example: 'fill(#ff0000)' },
+          { syntax: 'stroke(2/#000)', desc: '선', example: 'stroke(2/#000)' },
+          { syntax: 'stroke-width(2)', desc: '선 두께', example: 'stroke-width(2)' }
+        ]
       }
     ],
     interaction: [
       {
-        title: 'Display & Visibility',
+        title: 'Display',
         icon: '👁️',
         items: [
-          { syntax: 'hidden', desc: 'display: none', example: 'sm:hidden md:block' },
-          { syntax: 'block', desc: 'display: block', example: 'hidden sm:block' },
-          { syntax: 'inline', desc: 'display: inline', example: 'inline' }
+          { syntax: 'hidden', desc: 'none', example: 'hidden' },
+          { syntax: 'block', desc: 'block', example: 'block' },
+          { syntax: 'inline', desc: 'inline', example: 'inline' },
+          { syntax: 'inline-block', desc: 'inline-block', example: 'inline-block' },
+          { syntax: 'flex', desc: 'flex: 1', example: 'flex' },
+          { syntax: 'table', desc: 'table', example: 'table' },
+          { syntax: 'sr-only', desc: '스크린리더', example: 'sr-only' }
         ]
       },
       {
         title: 'Overflow',
         icon: '📜',
         items: [
-          { syntax: 'clip', desc: 'overflow: hidden', example: 'clip' },
-          { syntax: 'clip(none)', desc: 'overflow: visible', example: 'clip(none)' },
-          { syntax: 'scroll(y)', desc: 'overflow-y: auto', example: 'h(400) scroll(y)' },
-          { syntax: 'scroll(x)', desc: 'overflow-x: auto', example: 'w(300) scroll(x)' }
+          { syntax: 'clip', desc: 'hidden', example: 'clip' },
+          { syntax: 'clip(none)', desc: 'visible', example: 'clip(none)' },
+          { syntax: 'scroll', desc: 'auto', example: 'scroll' },
+          { syntax: 'scroll(y)', desc: 'y auto', example: 'scroll(y)' },
+          { syntax: 'scroll(x)', desc: 'x auto', example: 'scroll(x)' },
+          { syntax: 'scrollbar(none)', desc: '스크롤바 숨김', example: 'scrollbar(none)' }
         ]
       },
       {
         title: 'Interaction',
         icon: '🖱️',
         items: [
-          { syntax: 'cursor(pointer)', desc: '포인터 커서', example: 'hover:bg(#f5f5f5) cursor(pointer)' },
-          { syntax: 'pointer(none)', desc: '클릭 비활성화', example: 'pointer(none) opacity(.5)' },
-          { syntax: 'select(none)', desc: '텍스트 선택 금지', example: 'select(none)' },
-          { syntax: 'transition', desc: '부드러운 전환', example: 'transition hover:scale(1.05)' }
+          { syntax: 'cursor(pointer)', desc: '포인터', example: 'cursor(pointer)' },
+          { syntax: 'cursor(not-allowed)', desc: '금지', example: 'cursor(not-allowed)' },
+          { syntax: 'pointer(none)', desc: '클릭금지', example: 'pointer(none)' },
+          { syntax: 'select(none)', desc: '선택금지', example: 'select(none)' },
+          { syntax: 'select(all)', desc: '전체선택', example: 'select(all)' },
+          { syntax: 'resize', desc: '크기조정', example: 'resize' },
+          { syntax: 'appearance(none)', desc: '기본스타일 제거', example: 'appearance(none)' }
         ]
       }
     ],
@@ -204,20 +302,28 @@
         title: 'Breakpoints',
         icon: '📱',
         items: [
-          { syntax: 'sm:hidden', desc: '640px 이상에서 숨김', example: 'sm:hidden' },
-          { syntax: 'md:grid(2)', desc: '768px 이상에서 2열', example: 'grid(1) md:grid(2)' },
-          { syntax: 'lg:font(20)', desc: '1024px 이상에서 폰트 20', example: 'font(16) lg:font(20)' },
-          { syntax: '~sm:hidden', desc: '640px 미만에서 숨김', example: '~sm:hidden' }
+          { syntax: 'sm:', desc: '640px+', example: 'sm:hidden' },
+          { syntax: 'md:', desc: '768px+', example: 'md:grid(2)' },
+          { syntax: 'lg:', desc: '1024px+', example: 'lg:font(20)' },
+          { syntax: 'xl:', desc: '1280px+', example: 'xl:w(1200)' },
+          { syntax: '~sm:', desc: '~640px', example: '~sm:hidden' },
+          { syntax: '~md:', desc: '~768px', example: '~md:vbox' }
         ]
       },
       {
         title: 'States',
         icon: '🎯',
         items: [
-          { syntax: 'hover:bg(#f5f5f5)', desc: '호버 상태', example: 'hover:bg(#f5f5f5) transition' },
-          { syntax: 'active:scale(0.98)', desc: '클릭 상태', example: 'active:scale(0.98)' },
-          { syntax: 'focus:border(1/#000)', desc: '포커스 상태', example: 'focus:border(1/#3b82f6)' },
-          { syntax: 'disabled:opacity(.5)', desc: '비활성 상태', example: 'disabled:opacity(.5)' }
+          { syntax: 'hover:', desc: '호버', example: 'hover:bg(#f5)' },
+          { syntax: 'active:', desc: '클릭', example: 'active:scale(.98)' },
+          { syntax: 'focus:', desc: '포커스', example: 'focus:ring(2)' },
+          { syntax: 'disabled:', desc: '비활성', example: 'disabled:opacity(.5)' },
+          { syntax: 'checked:', desc: '체크', example: 'checked:bg(blue)' },
+          { syntax: 'group-hover:', desc: '그룹호버', example: 'group-hover:visible' },
+          { syntax: 'first:', desc: '첫번째', example: 'first:mt(0)' },
+          { syntax: 'last:', desc: '마지막', example: 'last:mb(0)' },
+          { syntax: 'odd:', desc: '홀수', example: 'odd:bg(#f5)' },
+          { syntax: 'even:', desc: '짝수', example: 'even:bg(#fa)' }
         ]
       }
     ]
@@ -253,38 +359,44 @@
       const css = generateCSS([syntax]);
       // Extract just the CSS properties
       const match = css.match(/\{([^}]+)\}/);
-      return match ? match[1].trim() : css;
+      const content = match ? match[1].trim() : css;
+      // Simplify output for common cases
+      return content
+        .replace(/;\s*/g, '; ')
+        .replace(/:\s*/g, ': ')
+        .replace(/;$/, '') // Remove trailing semicolon
+        .trim();
     } catch {
-      return '/* 예제 참고 */';
+      return '/* - */';
     }
   }
   
   $: categoryData = getCategoryData();
 </script>
 
-<div class="reference-container vbox w(fill) min-h(screen) bg(#fafbfc)">
+<div class="reference-container vbox w(fill) min-h(screen) bg(#f8fafc)">
   <!-- Header -->
-  <header class="reference-header vbox gap(24) p(32) bg(white) border-bottom(1/#e5e5e5)">
+  <header class="reference-header vbox gap(8) p(12) bg(white) border-bottom(1/#e5e7eb)">
     <div class="vbox gap(8) text(center)">
-      <h1 class="font(40) bold c(#0a0a0a) tracking(-0.02em)">AdorableCSS v2 Reference</h1>
-      <p class="font(18) c(#525252)">모든 유틸리티 클래스와 사용법을 한눈에</p>
+      <h1 class="font(20) bold c(#0f172a) letter-spacing(-0.02em)">AdorableCSS v2 Reference</h1>
+      <p class="font(12) c(#64748b)">모든 유틸리티 클래스와 사용법</p>
     </div>
     
     <!-- Controls -->
-    <div class="controls hbox gap(16) w(800) mx(auto)">
+    <div class="controls hbox gap(8) w(500) mx(auto)">
       <div class="search-wrapper relative flex">
         <input
           type="search"
           bind:value={searchQuery}
           placeholder="유틸리티 검색... (예: hbox, font, bg)"
-          class="search-input w(fill) h(48) pl(48) pr(16) r(24) bg(#f5f5f5) border(1/transparent) font(15) c(#0a0a0a) placeholder:c(#a3a3a3) focus:bg(white) focus:border(1/#3b82f6) focus:shadow(0/0/0/4px/#3b82f620) transition"
+          class="search-input w(fill) h(32) pl(32) pr(10) r(16) bg(#f1f5f9) border(1/transparent) font(12) c(#0f172a) placeholder:c(#94a3b8) focus:bg(white) focus:border(1/#3b82f6) focus:shadow(0/0/0/2px/#3b82f620) transition"
         />
-        <span class="search-icon absolute left(16) y(center) c(#737373) font(18) pointer(none)">🔍</span>
+        <span class="search-icon absolute left(10) y(center) c(#64748b) font(12) pointer(none)">🔍</span>
       </div>
       
       <select
         bind:value={selectedCategory}
-        class="category-select h(48) px(20) r(24) bg(white) border(1/#e5e5e5) font(15) c(#0a0a0a) cursor(pointer) hover:border(1/#3b82f6) transition"
+        class="category-select h(32) px(12) r(16) bg(white) border(1/#e5e7eb) font(12) c(#0f172a) cursor(pointer) hover:border(1/#3b82f6) transition"
       >
         {#each categories as cat}
           <option value={cat.id}>{cat.icon} {cat.name}</option>
@@ -294,24 +406,24 @@
   </header>
   
   <!-- Content -->
-  <main class="reference-content p(32)">
-    <div class="content-wrapper w(1400) mx(auto) vbox gap(48)">
+  <main class="reference-content px(12) py(12)">
+    <div class="content-wrapper w(fill) mx(auto) vbox gap(16)">
       {#each categoryData as [categoryId, sections]}
         {#each filterSections(sections) as section}
-          <section class="reference-section vbox gap(24)">
+          <section class="reference-section vbox gap(8)">
             <div class="section-header hbox(center) gap(12)">
-              <span class="section-icon font(32)">{section.icon}</span>
-              <h2 class="font(28) bold c(#0a0a0a)">{section.title}</h2>
+              <span class="section-icon font(16)">{section.icon}</span>
+              <h2 class="font(16) bold c(#0f172a)">{section.title}</h2>
             </div>
             
-            <div class="items-grid grid(3) gap(16)">
+            <div class="items-grid grid(8) gap(6)">
               {#each section.items as item}
-                <div class="reference-card vbox gap(16) p(24) r(12) bg(white) border(1/#e5e5e5) hover:border(1/#3b82f6) hover:shadow(0/8px/24px/#0000000a) transition group">
+                <div class="reference-card vbox gap(4) p(8) r(6) bg(white) border(1/#e5e7eb) hover:border(1/#3b82f6) hover:shadow(0/2px/6px/#00000008) transition group">
                   <!-- Syntax -->
-                  <div class="card-header hbox gap(auto)">
-                    <code class="syntax font(16) bold c(#3b82f6) font-family(mono)">{item.syntax}</code>
+                  <div class="card-header hbox gap(auto) items-start">
+                    <code class="syntax font(11) bold c(#3b82f6) font-family(mono) break-all">{item.syntax}</code>
                     <button
-                      class="copy-btn opacity(0) group-hover:opacity(100) transition cursor(pointer) p(6) r(6) hover:bg(#f5f5f5)"
+                      class="copy-btn opacity(0) group-hover:opacity(100) transition cursor(pointer) p(1) r(2) hover:bg(#f1f5f9) font(10)"
                       on:click={() => copyToClipboard(item.syntax)}
                     >
                       {copiedItem === item.syntax ? '✅' : '📋'}
@@ -319,32 +431,25 @@
                   </div>
                   
                   <!-- Description -->
-                  <p class="desc font(14) c(#525252)">{item.desc}</p>
+                  <p class="desc font(10) c(#64748b) line-height(1.2)">{item.desc}</p>
                   
                   <!-- Generated CSS -->
-                  <div class="css-output vbox gap(8)">
-                    <span class="label font(12) bold c(#737373) uppercase tracking(.05em)">생성되는 CSS</span>
-                    <code class="css font(13) c(#0a0a0a) font-family(mono) bg(#f5f5f5) p(12) r(6)">
+                  <div class="css-output vbox gap(2)">
+                    <code class="css font(10) c(#475569) font-family(mono) bg(#f8fafc) p(4) r(2) line-height(1.1)">
                       {getGeneratedCSS(item.syntax)}
                     </code>
                   </div>
                   
                   <!-- Example -->
                   {#if item.example}
-                    <div class="example vbox gap(8)">
-                      <span class="label font(12) bold c(#737373) uppercase tracking(.05em)">사용 예시</span>
-                      <code class="example-code font(13) c(#059669) font-family(mono) bg(#d1fae5.2) p(12) r(6)">
-                        {item.example}
-                      </code>
-                    </div>
+                    <code class="example-code font(10) c(#059669) font-family(mono) bg(#ecfdf5.5) p(2) r(2) line-height(1.1)">
+                      {item.example}
+                    </code>
                   {/if}
                   
                   <!-- Visual Preview (for some items) -->
                   {#if item.syntax.includes('shadow') || item.syntax.includes('r(') || item.syntax.includes('bg(')}
-                    <div class="preview vbox gap(8)">
-                      <span class="label font(12) bold c(#737373) uppercase tracking(.05em)">미리보기</span>
-                      <div class="preview-box w(fill) h(60) {item.syntax} {item.syntax.includes('shadow') ? 'bg(white)' : ''}"></div>
-                    </div>
+                    <div class="preview-box w(fill) h(24) {item.syntax} {item.syntax.includes('shadow') ? 'bg(white)' : ''}"></div>
                   {/if}
                 </div>
               {/each}
@@ -372,6 +477,7 @@
   
   .reference-card {
     container-type: inline-size;
+    font-size: 0.75rem;
   }
   
   @container (max-width: 400px) {
@@ -380,7 +486,31 @@
     }
   }
   
+  @media (max-width: 1600px) {
+    .items-grid {
+      grid-template-columns: repeat(6, 1fr);
+    }
+  }
+  
   @media (max-width: 1200px) {
+    .items-grid {
+      grid-template-columns: repeat(5, 1fr);
+    }
+  }
+  
+  @media (max-width: 1000px) {
+    .items-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .items-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  @media (max-width: 500px) {
     .items-grid {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -397,19 +527,33 @@
     }
   }
   
-  /* Animation */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+  /* Dense layout optimizations */
+  .css, .example-code {
+    word-break: break-word;
+    overflow-wrap: break-word;
   }
   
-  .reference-card {
-    animation: fadeIn 0.3s ease-out;
+  .syntax {
+    max-width: 100%;
+  }
+  
+  /* Compact spacing for labels */
+  .label {
+    margin-bottom: -2px;
+  }
+  
+  /* Tighter preview boxes */
+  .preview-box {
+    min-height: 24px;
+  }
+  
+  /* Ultra compact mode */
+  .reference-card:hover {
+    transform: translateY(-1px);
+  }
+  
+  /* Remove unnecessary margins */
+  .reference-card > *:last-child {
+    margin-bottom: 0;
   }
 </style>

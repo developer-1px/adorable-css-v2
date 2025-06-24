@@ -3,6 +3,7 @@ import { sizeRules } from "./size";
 import { spacingRules } from "./spacing";
 import { gridRules } from "./grid";
 import { overflowRules } from "./overflow";
+import { insetRules } from "./inset";
 
 export const layoutRules = {
   ...displayRules,
@@ -10,4 +11,5 @@ export const layoutRules = {
   ...spacingRules,
   ...gridRules,
   ...overflowRules,
+  ...insetRules,
 };

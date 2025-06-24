@@ -1,8 +1,16 @@
 import type { CSSRule, RuleHandler } from '../types';
 import { px, makeColor } from '../../values/makeValue';
+import { isToken, getTokenVar } from '../../tokens';
 
 export const b: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
+  // b() - 1px border (default)
+  if (!args) return { border: '1px solid currentColor' };
+  
+  // b(/#color) - color only (1px default)
+  if (args.startsWith('/')) {
+    const color = args.slice(1); // Remove leading slash
+    return { border: `1px solid ${String(makeColor(color))}` };
+  }
   
   // b(1) - simple border width
   if (!args.includes('/')) {
@@ -23,9 +31,19 @@ export const r: RuleHandler = (args?: string): CSSRule => {
   // r() - fully rounded (when args is undefined or empty)
   if (!args || args === '') return { 'border-radius': '9999px' };
   
+  // Check for single token value
+  if (isToken(args, 'radius')) {
+    return { 'border-radius': getTokenVar('radius', args) };
+  }
+  
   // r(8/0/16/0) - individual corners
   if (args.includes('/')) {
-    const corners = args.split('/').map(v => String(px(v || '0')));
+    const corners = args.split('/').map(v => {
+      if (isToken(v, 'radius')) {
+        return getTokenVar('radius', v);
+      }
+      return String(px(v || '0'));
+    });
     return { 'border-radius': corners.join(' ') };
   }
   
@@ -149,7 +167,25 @@ export const border: RuleHandler = (args?: string): CSSRule => {
   }
 };
 
+// Border opacity utility
+export const borderOpacity: RuleHandler = (args?: string): CSSRule => {
+  if (!args) return {};
+  
+  // Convert percentage or decimal to opacity value
+  let opacity = args;
+  if (args.includes('%')) {
+    opacity = (parseFloat(args) / 100).toString();
+  } else if (parseFloat(args) > 1) {
+    opacity = (parseFloat(args) / 100).toString();
+  }
+  
+  return { 
+    'border-color': `color-mix(in srgb, currentColor ${(parseFloat(opacity) * 100)}%, transparent)`
+  };
+};
+
 export const borderRules = {
   b, r, border,
-  bt, br, bb, bl
+  bt, br, bb, bl,
+  'border-opacity': borderOpacity
 };

@@ -4,67 +4,112 @@
   export let change: number;
   export let trend: 'up' | 'down' | 'neutral' = 'neutral';
   export let icon: string = '';
-  export let iconColor: string = '#6366f1';
+  export let iconColor: string = 'var(--colors-primary-500)';
+  
+  // Map trend to design token colors
+  const trendStyles = {
+    up: 'bg(success-100) c(success-700) ring(1/success-200)',
+    down: 'bg(error-100) c(error-700) ring(1/error-200)',
+    neutral: 'bg(gray-100) c(gray-700) ring(1/gray-200)'
+  };
 </script>
 
-<div class="metric-card relative vbox gap(16) p(24) r(16) bg(white) border(1/#f3f4f6) hover:shadow(0/20px/25px/#00000006) hover:border(1/#e5e7eb) transition group">
-  <!-- Background decoration -->
-  <div class="decoration absolute top(0) right(0) w(120) h(120) opacity(.04)">
-    <svg viewBox="0 0 120 120" class="w(fill) h(fill)">
-      <circle cx="60" cy="60" r="50" fill="currentColor" style="color: {iconColor}" />
-      <circle cx="60" cy="60" r="30" fill="none" stroke="currentColor" stroke-width="2" opacity="0.5" />
+<div class="metric-card relative vbox gap(md) p(lg) r(xl) bg(white) ring(1/gray-200) 
+           hover:shadow(lg) hover:ring(1/gray-300) hover:translate(0/-1) 
+           transition-all duration(normal) ease(out) group cursor-pointer">
+  
+  <!-- Background decoration with improved design -->
+  <div class="decoration absolute top(-10) right(-10) w(100) h(100) opacity(xs) rotate(12) group-hover:rotate(24) group-hover:scale(110) transition-all duration(slower) ease(out)">
+    <svg viewBox="0 0 100 100" class="w(fill) h(fill)">
+      <circle cx="50" cy="50" r="40" fill="currentColor" style="color: {iconColor}" opacity="0.08" />
+      <circle cx="50" cy="50" r="25" fill="none" stroke="currentColor" stroke-width="1" opacity="0.12" style="color: {iconColor}" />
+      <circle cx="50" cy="50" r="10" fill="currentColor" opacity="0.15" style="color: {iconColor}" />
     </svg>
   </div>
   
-  <!-- Header -->
-  <div class="hbox(between+center) relative z(1)">
-    <h3 class="font(14) medium c(#6b7280)">{title}</h3>
+  <!-- Header with enhanced spacing -->
+  <div class="hbox(between+center) relative z(10)">
+    <h3 class="font(sm) medium c(gray-600) group-hover:c(gray-700) transition-colors duration(normal)">{title}</h3>
     {#if icon}
-      <div class="icon-wrapper w(40) h(40) r(10) hbox(pack) transition group-hover:scale(1.1)" style="background: {iconColor}15">
-        <span class="font(20)" style="color: {iconColor}">{icon}</span>
+      <div class="icon-wrapper w(2xl) h(2xl) r(lg) hbox(pack) shadow(xs) group-hover:shadow(md) group-hover:scale(110) transition-all duration(normal) ease(back)" 
+           style="background: {iconColor}15; border: 1px solid {iconColor}20;">
+        <span class="font(lg)" style="color: {iconColor}">{icon}</span>
       </div>
     {/if}
   </div>
   
-  <!-- Value and change -->
-  <div class="vbox gap(8) relative z(1)">
-    <p class="font(32) bold c(#111827) tracking(-0.02em)">{value}</p>
+  <!-- Value and change with enhanced typography -->
+  <div class="vbox gap(xs) relative z(10)">
+    <p class="font(4xl/-2%) bold c(gray-900) group-hover:c(gray-950) transition-colors duration(normal)">{value}</p>
     
-    <div class="hbox(center) gap(6)">
+    <div class="hbox(center) gap(xs)">
       {#if trend !== 'neutral'}
-        <div class="trend-indicator hbox(center) gap(4) px(8) py(4) r(6) {trend === 'up' ? 'bg(#d1fae5) c(#059669)' : 'bg(#fee2e2) c(#dc2626)'}">
-          <span class="trend-arrow font(12) bold">
-            {trend === 'up' ? '↑' : '↓'}
+        <div class="trend-indicator hbox(center) gap(xs) px(xs) py(xs) r(lg) {trendStyles[trend]} backdrop-blur shadow(xs)">
+          <span class="trend-arrow font(xs) bold">
+            {trend === 'up' ? '↗' : '↘'}
           </span>
-          <span class="font(12) semibold">{Math.abs(change)}%</span>
+          <span class="font(xs) semibold">{Math.abs(change)}%</span>
         </div>
       {/if}
-      <span class="font(13) c(#9ca3af)">from last period</span>
+      <span class="font(xs) c(gray-500)">from last period</span>
     </div>
   </div>
   
-  <!-- Sparkline placeholder -->
-  <div class="sparkline mt(auto) h(40) relative">
-    <svg viewBox="0 0 200 40" class="w(fill) h(fill)">
+  <!-- Enhanced sparkline with better animation -->
+  <div class="sparkline mt(auto) h(xl) relative overflow(hidden) group-hover:h(2xl) transition-all duration(normal)">
+    <svg viewBox="0 0 200 32" class="w(fill) h(fill)">
+      <!-- Gradient area under the line -->
+      <defs>
+        <linearGradient id="gradient-{title.replace(/\s+/g, '')}" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:{iconColor};stop-opacity:0.2" />
+          <stop offset="100%" style="stop-color:{iconColor};stop-opacity:0" />
+        </linearGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+          <feMerge> 
+            <feMergeNode in="coloredBlur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      
+      <!-- Area fill -->
       <path 
-        d="M0,30 L20,25 L40,27 L60,20 L80,22 L100,15 L120,18 L140,12 L160,10 L180,8 L200,5" 
+        d="M0,24 L25,20 L50,22 L75,16 L100,18 L125,12 L150,14 L175,8 L200,6 L200,32 L0,32 Z" 
+        fill="url(#gradient-{title.replace(/\s+/g, '')})"
+        class="group-hover:opacity(30) transition-opacity duration(normal)"
+      />
+      
+      <!-- Main line -->
+      <path 
+        d="M0,24 L25,20 L50,22 L75,16 L100,18 L125,12 L150,14 L175,8 L200,6" 
         fill="none" 
         stroke={iconColor}
         stroke-width="2"
-        opacity="0.3"
+        opacity="0.6"
+        class="group-hover:opacity(80) transition-opacity duration(normal)"
+        filter="url(#glow)"
       />
-      <path 
-        d="M0,30 L20,25 L40,27 L60,20 L80,22 L100,15 L120,18 L140,12 L160,10 L180,8 L200,5" 
-        fill="url(#gradient)"
-        opacity="0.1"
-      />
-      <defs>
-        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" style="stop-color:{iconColor};stop-opacity:0.3" />
-          <stop offset="100%" style="stop-color:{iconColor};stop-opacity:0" />
-        </linearGradient>
-      </defs>
+      
+      <!-- Data points -->
+      <g class="opacity(0) group-hover:opacity(100) transition-opacity duration(normal)">
+        {#each [0, 25, 50, 75, 100, 125, 150, 175, 200] as x, i}
+          <circle 
+            cx={x} 
+            cy={[24, 20, 22, 16, 18, 12, 14, 8, 6][i]} 
+            r="2" 
+            fill={iconColor}
+            class="animate-pulse"
+            style="animation-delay: {i * 0.1}s"
+          />
+        {/each}
+      </g>
     </svg>
+  </div>
+  
+  <!-- Enhanced top border indicator -->
+  <div class="border-indicator absolute top(0) left(0) right(0) h(xs) r(xl/xl/none/none) opacity(0) group-hover:opacity(100) transition-all duration(normal)" 
+       style="background: linear-gradient(90deg, transparent, {iconColor}, transparent)">
   </div>
 </div>
 
@@ -74,28 +119,47 @@
     overflow: hidden;
   }
   
-  .metric-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, transparent, var(--icon-color, #6366f1), transparent);
-    opacity: 0;
-    transition: opacity 0.3s;
+  .metric-card:hover {
+    transform: translateY(-2px);
   }
   
-  .metric-card:hover::before {
-    opacity: 0.5;
+  .metric-card:active {
+    transform: translateY(-1px);
+    transition-duration: var(--duration-fast);
   }
   
   .trend-arrow {
-    animation: bounce 2s infinite;
+    animation: trendBounce var(--duration-slower) var(--ease-bounce) infinite;
   }
   
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-2px); }
+  @keyframes trendBounce {
+    0%, 100% { 
+      transform: translateY(0) scale(1); 
+    }
+    50% { 
+      transform: translateY(-1px) scale(1.1); 
+    }
+  }
+  
+  /* Pulse animation for data points */
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+  
+  .animate-pulse {
+    animation: pulse var(--duration-slow) var(--ease-in-out) infinite;
+  }
+  
+  /* Focus styles for accessibility */
+  .metric-card:focus-visible {
+    outline: 2px solid var(--colors-primary-500);
+    outline-offset: 2px;
   }
 </style>

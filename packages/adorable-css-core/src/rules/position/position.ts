@@ -29,9 +29,28 @@ export const z: RuleHandler = (args?: string): CSSRule => {
 
 // Layer utility (Figma-style positioning)
 export const layer: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return { position: "absolute" };
+  // Default: inset(0) - cover entire parent
+  if (!args) {
+    return { 
+      position: "absolute",
+      top: "0",
+      right: "0", 
+      bottom: "0",
+      left: "0"
+    };
+  }
 
   const result: CSSRule = { position: "absolute" };
+
+  // layer(center) - center positioning
+  if (args === "center") {
+    return {
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)"
+    };
+  }
 
   // layer(top:20+left:30) - multiple positions
   if (args.includes("+")) {

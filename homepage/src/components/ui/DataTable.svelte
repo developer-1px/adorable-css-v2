@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { BarChart3 as ChartIcon } from 'lucide-svelte';
+  
   export let columns: Array<{
     key: string;
     label: string;
@@ -31,24 +33,24 @@
   }
 </script>
 
-<div class="table-container w(fill) overflow(auto) r(12) border(1/#e5e7eb) bg(white)">
+<div class="table-container w(fill) overflow(auto) r(lg) border(1/#e5e7eb) bg(white)">
   <table class="data-table w(fill)">
     <thead class="bg(#f9fafb) border-bottom(1/#e5e7eb)">
       <tr>
         {#if selectable}
-          <th class="px(16) py(12) w(48)">
+          <th class="px(md) py(sm) w(3xl)">
             <input 
               type="checkbox"
               checked={selectedRows.size === data.length && data.length > 0}
               indeterminate={selectedRows.size > 0 && selectedRows.size < data.length}
               on:change={toggleAll}
-              class="checkbox w(16) h(16) r(4) border(1/#d1d5db) cursor(pointer)"
+              class="checkbox w(md) h(md) r(xs) border(1/#d1d5db) cursor(pointer)"
             />
           </th>
         {/if}
         {#each columns as column}
           <th 
-            class="px(16) py(12) text({column.align || 'left'}) font(12) medium c(#6b7280) uppercase tracking(.05em)"
+            class="px(md) py(sm) text({column.align || 'left'}) font(xs/normal/0.05em) medium c(#6b7280) uppercase"
             style={column.width ? `width: ${column.width}` : ''}
           >
             {column.label}
@@ -64,19 +66,19 @@
             {selectedRows.has(index) ? 'bg(#eff6ff)' : ''}"
         >
           {#if selectable}
-            <td class="px(16) py(16)">
+            <td class="px(md) py(md)">
               <input 
                 type="checkbox"
                 checked={selectedRows.has(index)}
                 on:change={() => toggleRow(index)}
-                class="checkbox w(16) h(16) r(4) border(1/#d1d5db) cursor(pointer)"
+                class="checkbox w(md) h(md) r(xs) border(1/#d1d5db) cursor(pointer)"
               />
             </td>
           {/if}
           {#each columns as column}
-            <td class="px(16) py(16) text({column.align || 'left'})">
+            <td class="px(md) py(md) text({column.align || 'left'})">
               <slot name="cell" {column} {row} value={row[column.key]}>
-                <span class="font(13) c(#374151)">{row[column.key]}</span>
+                <span class="font(sm) c(#374151)">{row[column.key]}</span>
               </slot>
             </td>
           {/each}
@@ -86,9 +88,9 @@
   </table>
   
   {#if data.length === 0}
-    <div class="empty-state vbox(pack) gap(12) py(48) text(center)">
-      <div class="empty-icon font(48) c(#e5e7eb)">📊</div>
-      <p class="font(14) c(#9ca3af)">No data available</p>
+    <div class="empty-state vbox(pack) gap(sm) py(3xl) text(center)">
+      <ChartIcon size="48" class="c(#e5e7eb)" />
+      <p class="font(sm) c(#9ca3af)">No data available</p>
     </div>
   {/if}
 </div>

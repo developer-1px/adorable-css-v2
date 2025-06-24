@@ -47,7 +47,7 @@
 - `italic`, `underline`, `line-through`
 - `truncate` - Text overflow ellipsis
 - `nowrap`, `pre`, `pre-wrap`
-- `tracking(.05em)` - Letter spacing
+- `letter-spacing(.05em)` - Letter spacing
 
 ## Colors
 

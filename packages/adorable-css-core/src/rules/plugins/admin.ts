@@ -1,5 +1,6 @@
 import type { CSSRule, RuleHandler } from '../types';
 import { makeColor, px } from '../../values/makeValue';
+import { getTokenVar } from '../../tokens';
 
 // admin-panel() - 관리자 패널 스타일
 export const adminPanel: RuleHandler = (args?: string): CSSRule => {
@@ -27,9 +28,9 @@ export const adminPanel: RuleHandler = (args?: string): CSSRule => {
   
   return {
     ...selectedTheme,
-    'border-radius': '12px',
-    padding: '24px',
-    'box-shadow': '0 10px 25px rgba(0, 0, 0, 0.15)',
+    'border-radius': getTokenVar('radius', 'xl'),
+    padding: getTokenVar('spacing', 'lg'),
+    'box-shadow': getTokenVar('shadow', 'lg'),
     position: 'relative'
   };
 };
@@ -51,8 +52,8 @@ export const sidebar: RuleHandler = (args?: string): CSSRule => {
     floating: {
       background: '#1e1e2e',
       border: '1px solid #313244',
-      'border-radius': '16px',
-      'box-shadow': '0 8px 32px rgba(0, 0, 0, 0.3)'
+      'border-radius': getTokenVar('radius', '2xl'),
+      'box-shadow': getTokenVar('shadow', 'xl')
     }
   };
   
@@ -60,7 +61,7 @@ export const sidebar: RuleHandler = (args?: string): CSSRule => {
   
   return {
     ...selectedVariant,
-    padding: '24px 16px',
+    padding: `${getTokenVar('spacing', 'lg')} ${getTokenVar('spacing', 'md')}`,
     height: '100vh',
     width: '280px',
     position: 'fixed',
@@ -78,7 +79,7 @@ export const dataTable: RuleHandler = (args?: string): CSSRule => {
   const baseStyles = {
     width: '100%',
     'border-collapse': 'collapse',
-    'font-size': '14px',
+    'font-size': getTokenVar('font', 'sm'),
     'line-height': '1.5'
   };
   
@@ -94,17 +95,17 @@ export const dataTable: RuleHandler = (args?: string): CSSRule => {
       border: '1px solid #313244',
       'th, td': {
         border: '1px solid #313244',
-        padding: '12px 16px'
+        padding: `${getTokenVar('spacing', 'sm')} ${getTokenVar('spacing', 'md')}`
       }
     },
     minimal: {
       ...baseStyles,
       'th': {
         'border-bottom': '2px solid #313244',
-        padding: '16px 12px'
+        padding: `${getTokenVar('spacing', 'md')} ${getTokenVar('spacing', 'sm')}`
       },
       'td': {
-        padding: '12px',
+        padding: getTokenVar('spacing', 'sm'),
         'border-bottom': '1px solid rgba(49, 50, 68, 0.3)'
       }
     }
@@ -149,9 +150,9 @@ export const statusBadge: RuleHandler = (args?: string): CSSRule => {
   
   return {
     ...selectedStatus,
-    padding: '4px 12px',
-    'border-radius': '16px',
-    'font-size': '12px',
+    padding: `${getTokenVar('spacing', 'xs')} ${getTokenVar('spacing', 'sm')}`,
+    'border-radius': getTokenVar('radius', '2xl'),
+    'font-size': getTokenVar('font', 'xs'),
     'font-weight': '500',
     display: 'inline-flex',
     'align-items': 'center',
@@ -184,9 +185,9 @@ export const metricCard: RuleHandler = (args?: string): CSSRule => {
   
   return {
     ...selectedVariant,
-    padding: '24px',
-    'border-radius': '12px',
-    'box-shadow': '0 4px 16px rgba(0, 0, 0, 0.1)',
+    padding: getTokenVar('spacing', 'lg'),
+    'border-radius': getTokenVar('radius', 'xl'),
+    'box-shadow': getTokenVar('shadow', 'md'),
     position: 'relative'
   };
 };
@@ -215,15 +216,15 @@ export const navItem: RuleHandler = (args?: string): CSSRule => {
   
   return {
     ...selectedState,
-    padding: '12px 16px',
-    'border-radius': '8px',
-    'font-weight': '500',
-    'font-size': '14px',
+    padding: `${getTokenVar('spacing', 'sm')} ${getTokenVar('spacing', 'md')}`,
+    'border-radius': getTokenVar('radius', 'lg'),
+    'font-weight': getTokenVar('font-weight', 'medium'),
+    'font-size': getTokenVar('font', 'sm'),
     transition: 'all 0.2s ease',
     cursor: 'pointer',
     display: 'flex',
     'align-items': 'center',
-    gap: '12px',
+    gap: getTokenVar('spacing', 'sm'),
     'text-decoration': 'none'
   };
 };
@@ -267,7 +268,7 @@ export const dashboardHeader: RuleHandler = (): CSSRule => {
   return {
     background: '#1e1e2e',
     'border-bottom': '1px solid #313244',
-    padding: '16px 24px',
+    padding: `${getTokenVar('spacing', 'md')} ${getTokenVar('spacing', 'lg')}`,
     position: 'sticky',
     top: '0',
     'z-index': '100',

@@ -1,0 +1,268 @@
+<script lang="ts">
+  // Import shadcn/ui style components
+  import Button from './ui/Button.svelte';
+  import Card from './ui/Card.svelte';
+  import CardHeader from './ui/CardHeader.svelte';
+  import CardTitle from './ui/CardTitle.svelte';
+  import CardDescription from './ui/CardDescription.svelte';
+  import CardContent from './ui/CardContent.svelte';
+  import CardFooter from './ui/CardFooter.svelte';
+  import Avatar from './ui/Avatar.svelte';
+  import AvatarImage from './ui/AvatarImage.svelte';
+  import AvatarFallback from './ui/AvatarFallback.svelte';
+  import Badge from './ui/Badge.svelte';
+  import Input from './ui/Input.svelte';
+  import { Flame as FireIcon } from 'lucide-svelte';
+  
+  let searchValue = '';
+</script>
+
+<div class="showcase p(xl) vbox gap(xl) bg(--colors-gray-50) min-h(screen)">
+  <div class="vbox gap(md)">
+    <h1 class="font(4xl) bold c(--colors-gray-900)">shadcn/ui Style Component Showcase</h1>
+    <p class="font(lg) c(--colors-gray-600)">Modern, accessible, and beautifully designed components inspired by shadcn/ui</p>
+  </div>
+  
+  <!-- Button Showcase -->
+  <Card className="w(full)">
+    <CardHeader>
+      <CardTitle>Button Components</CardTitle>
+      <CardDescription>
+        Different button variants and sizes following shadcn/ui patterns
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      <div class="vbox gap(lg)">
+        <!-- Variants -->
+        <div class="vbox gap(sm)">
+          <h4 class="font(md) semibold">Variants</h4>
+          <div class="hbox gap(xs) flex-wrap">
+            <Button>Default</Button>
+            <Button variant="destructive">Destructive</Button>
+            <Button variant="outline">Outline</Button>
+            <Button variant="secondary">Secondary</Button>
+            <Button variant="ghost">Ghost</Button>
+            <Button variant="link">Link</Button>
+          </div>
+        </div>
+        
+        <!-- Sizes -->
+        <div class="vbox gap(sm)">
+          <h4 class="font(md) semibold">Sizes</h4>
+          <div class="hbox gap(xs) items(center)">
+            <Button size="sm">Small</Button>
+            <Button>Default</Button>
+            <Button size="lg">Large</Button>
+            <Button size="icon"><FireIcon size="16" /></Button>
+          </div>
+        </div>
+        
+        <!-- States -->
+        <div class="vbox gap(sm)">
+          <h4 class="font(md) semibold">States</h4>
+          <div class="hbox gap(xs)">
+            <Button loading>Loading</Button>
+            <Button disabled>Disabled</Button>
+            <Button href="#showcase">As Link</Button>
+          </div>
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+  
+  <!-- Card Showcase -->
+  <Card className="w(full)">
+    <CardHeader>
+      <CardTitle>Card Components</CardTitle>
+      <CardDescription>
+        Composable card structure with header, content, and footer
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      <div class="grid(3) gap(md)">
+        <!-- Simple Card -->
+        <Card>
+          <CardHeader>
+            <CardTitle level={4}>Simple Card</CardTitle>
+            <CardDescription>A basic card example</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p class="font(sm) c(--colors-gray-600)">This is the card content area where you can put any content.</p>
+          </CardContent>
+        </Card>
+        
+        <!-- Card with Footer -->
+        <Card>
+          <CardHeader>
+            <CardTitle level={4}>Card with Footer</CardTitle>
+            <CardDescription>Includes action buttons</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <p class="font(sm) c(--colors-gray-600)">Content with actions in the footer.</p>
+          </CardContent>
+          <CardFooter>
+            <Button size="sm" variant="outline">Cancel</Button>
+            <Button size="sm">Save</Button>
+          </CardFooter>
+        </Card>
+        
+        <!-- Card with Avatar -->
+        <Card>
+          <CardHeader>
+            <div class="hbox gap(sm) items(center)">
+              <Avatar>
+                <AvatarImage src="https://github.com/shadcn.png" alt="User" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <div class="vbox gap(xs)">
+                <CardTitle level={4}>John Doe</CardTitle>
+                <CardDescription>Software Engineer</CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <p class="font(sm) c(--colors-gray-600)">Profile card with avatar and user information.</p>
+          </CardContent>
+        </Card>
+      </div>
+    </CardContent>
+  </Card>
+  
+  <!-- Avatar Showcase -->
+  <Card className="w(full)">
+    <CardHeader>
+      <CardTitle>Avatar Components</CardTitle>
+      <CardDescription>
+        User avatars with image fallback support
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      <div class="vbox gap(md)">
+        <!-- Sizes -->
+        <div class="vbox gap(xs)">
+          <h4 class="font(md) semibold">Sizes</h4>
+          <div class="hbox gap(xs) items(center)">
+            <Avatar size="sm">
+              <AvatarFallback>SM</AvatarFallback>
+            </Avatar>
+            <Avatar>
+              <AvatarFallback>MD</AvatarFallback>
+            </Avatar>
+            <Avatar size="lg">
+              <AvatarFallback>LG</AvatarFallback>
+            </Avatar>
+            <Avatar size="xl">
+              <AvatarFallback>XL</AvatarFallback>
+            </Avatar>
+          </div>
+        </div>
+        
+        <!-- With Images -->
+        <div class="vbox gap(xs)">
+          <h4 class="font(md) semibold">With Images</h4>
+          <div class="hbox gap(xs)">
+            <Avatar>
+              <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            <Avatar>
+              <AvatarImage src="https://invalid-url.jpg" alt="broken" />
+              <AvatarFallback>FB</AvatarFallback>
+            </Avatar>
+          </div>
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+  
+  <!-- Badge Showcase -->
+  <Card className="w(full)">
+    <CardHeader>
+      <CardTitle>Badge Components</CardTitle>
+      <CardDescription>
+        Small status indicators and labels
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      <div class="vbox gap(md)">
+        <div class="vbox gap(xs)">
+          <h4 class="font(md) semibold">Variants</h4>
+          <div class="hbox gap(xs) items(center)">
+            <Badge>Default</Badge>
+            <Badge variant="secondary">Secondary</Badge>
+            <Badge variant="destructive">Destructive</Badge>
+            <Badge variant="outline">Outline</Badge>
+          </div>
+        </div>
+        
+        <div class="vbox gap(xs)">
+          <h4 class="font(md) semibold">In Context</h4>
+          <div class="hbox gap(md) items(center)">
+            <div class="hbox gap(xs) items(center)">
+              <span class="font(sm)">Status:</span>
+              <Badge variant="secondary">Active</Badge>
+            </div>
+            <div class="hbox gap(xs) items(center)">
+              <span class="font(sm)">Priority:</span>
+              <Badge variant="destructive">High</Badge>
+            </div>
+            <div class="hbox gap(xs) items(center)">
+              <span class="font(sm)">Version:</span>
+              <Badge variant="outline">v2.0.0</Badge>
+            </div>
+          </div>
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+  
+  <!-- Input Showcase -->
+  <Card className="w(full)">
+    <CardHeader>
+      <CardTitle>Input Components</CardTitle>
+      <CardDescription>
+        Form input fields with proper focus states
+      </CardDescription>
+    </CardHeader>
+    <CardContent>
+      <div class="vbox gap(md)">
+        <div class="vbox gap(xs)">
+          <h4 class="font(md) semibold">Basic Input</h4>
+          <Input 
+            bind:value={searchValue} 
+            placeholder="Type something..." 
+            className="max-w(sm)"
+          />
+          {#if searchValue}
+            <p class="font(sm) c(--colors-gray-500)">You typed: {searchValue}</p>
+          {/if}
+        </div>
+        
+        <div class="vbox gap(xs)">
+          <h4 class="font(md) semibold">Different Types</h4>
+          <div class="grid(2) gap(md) max-w(2xl)">
+            <Input type="email" placeholder="Email address" />
+            <Input type="password" placeholder="Password" />
+            <Input type="number" placeholder="Age" />
+            <Input type="search" placeholder="Search..." />
+          </div>
+        </div>
+        
+        <div class="vbox gap(xs)">
+          <h4 class="font(md) semibold">States</h4>
+          <div class="grid(2) gap(md) max-w(2xl)">
+            <Input placeholder="Normal input" />
+            <Input placeholder="Disabled input" disabled />
+            <Input placeholder="Readonly input" readonly value="Read only value" />
+          </div>
+        </div>
+      </div>
+    </CardContent>
+  </Card>
+</div>
+
+<style>
+  .showcase {
+    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+  }
+</style>

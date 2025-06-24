@@ -69,81 +69,81 @@
 
 <div class="dashboard vbox w(fill) min-h(screen) bg(#fafbfc)">
   <!-- Modern Header -->
-  <header class="header hbox(between+center) h(64) px(32) bg(white/80) backdrop(blur/12) border-bottom(1/#f0f0f2) sticky top(0) z(50)">
-    <div class="hbox(center) gap(32)">
+  <header class="header hbox(between+center) h(64) px(2xl) bg(white/80) backdrop(blur/12) border-bottom(1/#f0f0f2) sticky top(0) z(50)">
+    <div class="hbox(center) gap(2xl)">
       <!-- Logo -->
-      <div class="logo hbox(center) gap(12)">
-        <div class="logo-mark relative w(40) h(40) r(10) bg(gradient/135deg/#0a0a0a/#262626) hbox(pack) shadow(0/4px/12px/#00000015)">
-          <span class="font(20) bold c(white)">A</span>
-          <div class="logo-shine absolute inset(0) r(10) bg(gradient/135deg/white.2/transparent) opacity(0) hover:opacity(100) transition"></div>
+      <div class="logo hbox(center) gap(xs)">
+        <div class="logo-mark relative w(40) h(40) r(lg) bg(gradient/135deg/#0a0a0a/#262626) hbox(pack) shadow(md)">
+          <span class="font(xl) bold c(white)">A</span>
+          <div class="logo-shine absolute inset(0) r(lg) bg(gradient/135deg/white.2/transparent) opacity(0) hover:opacity(100) transition"></div>
         </div>
-        <div class="vbox gap(2)">
-          <h1 class="font(18) bold c(#0a0a0a)">Analytics Pro</h1>
-          <p class="font(12) c(#737373)">{currentDate}</p>
+        <div class="vbox gap(xs)">
+          <h1 class="font(lg) bold c(#0a0a0a)">Analytics Pro</h1>
+          <p class="font(xs) c(#737373)">{currentDate}</p>
         </div>
       </div>
       
       <!-- Nav -->
-      <nav class="nav hbox gap(4)">
-        <a href="#" class="nav-item px(16) py(8) r(8) c(#0a0a0a) font(14) medium hover:bg(#f5f5f5) transition relative group">
+      <nav class="nav hbox gap(xs)">
+        <a href="#" class="nav-item px(md) py(sm) r(sm) c(#0a0a0a) font(sm) medium hover:bg(#f5f5f5) transition relative group">
           Dashboard
-          <span class="nav-indicator absolute bottom(0) left(16) right(16) h(2) bg(#0a0a0a) r(1) scale-x(1)"></span>
+          <span class="nav-indicator absolute bottom(0) left(md) right(md) h(2) bg(#0a0a0a) r(none) scale-x(1)"></span>
         </a>
-        <a href="#" class="nav-item px(16) py(8) r(8) c(#737373) font(14) hover:c(#0a0a0a) hover:bg(#f5f5f5) transition">Analytics</a>
-        <a href="#" class="nav-item px(16) py(8) r(8) c(#737373) font(14) hover:c(#0a0a0a) hover:bg(#f5f5f5) transition">Products</a>
-        <a href="#" class="nav-item px(16) py(8) r(8) c(#737373) font(14) hover:c(#0a0a0a) hover:bg(#f5f5f5) transition">Customers</a>
+        <a href="#" class="nav-item px(md) py(sm) r(sm) c(#737373) font(sm) hover:c(#0a0a0a) hover:bg(#f5f5f5) transition">Analytics</a>
+        <a href="#" class="nav-item px(md) py(sm) r(sm) c(#737373) font(sm) hover:c(#0a0a0a) hover:bg(#f5f5f5) transition">Products</a>
+        <a href="#" class="nav-item px(md) py(sm) r(sm) c(#737373) font(sm) hover:c(#0a0a0a) hover:bg(#f5f5f5) transition">Customers</a>
       </nav>
     </div>
     
-    <div class="hbox(center) gap(16)">
+    <div class="hbox(center) gap(md)">
       <!-- Search -->
       <div class="search-container relative">
         <input 
           type="search"
           placeholder="Search anything..."
-          class="search-input w(280) h(40) pl(40) pr(16) r(20) bg(#f5f5f5) border(1/transparent) font(14) c(#0a0a0a) placeholder:c(#a3a3a3) focus:bg(white) focus:border(1/#e5e5e5) focus:shadow(0/0/0/4px/#00000008) transition"
+          class="search-input w(280) h(40) pl(40) pr(md) r(2xl) bg(#f5f5f5) border(1/transparent) font(sm) c(#0a0a0a) placeholder:c(#a3a3a3) focus:bg(white) focus:border(1/#e5e5e5) focus:shadow(0/0/0/4px/#00000008) transition"
         />
-        <span class="search-icon absolute left(14) y(center) c(#737373) font(16)">🔍</span>
+        <span class="search-icon absolute left(14) y(center) c(#737373) font(md)">🔍</span>
       </div>
       
       <!-- Actions -->
       <Button variant="ghost" size="sm">
-        <span class="font(16)">🔔</span>
+        <span class="font(md)">🔔</span>
       </Button>
       
       <div class="divider w(1) h(24) bg(#e5e5e5)"></div>
       
       <!-- User -->
-      <button class="user-menu hbox(center) gap(10) px(12) py(6) r(20) hover:bg(#f5f5f5) transition">
-        <div class="avatar w(32) h(32) r() bg(gradient/135deg/#6366f1/#8b5cf6) hbox(pack) shadow(inset/0/2px/4px/#ffffff40)">
-          <span class="font(14) bold c(white)">JW</span>
+      <button class="user-menu hbox(center) gap(xs) px(xs) py(xs) r(2xl) hover:bg(#f5f5f5) transition">
+        <div class="avatar w(32) h(32) r(full) bg(gradient/135deg/#6366f1/#8b5cf6) hbox(pack) shadow(sm)">
+          <span class="font(sm) bold c(white)">JW</span>
         </div>
-        <div class="vbox gap(1) text(left)">
-          <span class="font(13) semibold c(#0a0a0a)">John Walker</span>
-          <span class="font(11) c(#737373)">Pro Plan</span>
+        <div class="vbox gap(xs) text(left)">
+          <span class="font(sm) semibold c(#0a0a0a)">John Walker</span>
+          <span class="font(xs) c(#737373)">Pro Plan</span>
         </div>
-        <span class="font(12) c(#a3a3a3)">▾</span>
+        <span class="font(xs) c(#a3a3a3)">▾</span>
       </button>
     </div>
   </header>
   
   <!-- Main Content -->
-  <main class="main-content flex vbox p(32) gap(32)">
+  <main class="main-content flex vbox p(2xl) gap(2xl)">
     <!-- Page Title Section -->
-    <div class="page-header vbox gap(16)">
+    <div class="page-header vbox gap(md)">
       <div class="hbox(between+center)">
-        <div class="vbox gap(8)">
-          <h2 class="font(32) bold c(#0a0a0a) tracking(-0.02em)">Welcome back, John</h2>
-          <p class="font(16) c(#737373)">Here's what's happening with your business today.</p>
+        <div class="vbox gap(sm)">
+          <h2 class="font(5xl/-2%) bold c(#0a0a0a)">Welcome back, John</h2>
+          <p class="font(md) c(#737373)">Here's what's happening with your business today.</p>
         </div>
         
-        <div class="hbox gap(12)">
+        <div class="hbox gap(xs)">
           <Button variant="secondary">
-            <span class="font(16)">📥</span>
+            <span class="font(md)">📥</span>
             Export Report
           </Button>
           <Button variant="primary">
-            <span class="font(16)">✨</span>
+            <span class="font(md)">✨</span>
             New Dashboard
           </Button>
         </div>
@@ -152,7 +152,7 @@
     
     <!-- Metrics Grid -->
     <div class="metrics-container">
-      <div class="metrics-grid grid(4) gap(20)">
+      <div class="metrics-grid grid(4) gap(lg)">
         {#each metrics as metric}
           <MetricCard {...metric} />
         {/each}
@@ -160,40 +160,40 @@
     </div>
     
     <!-- Content Grid -->
-    <div class="content-grid grid(3) gap(24)">
+    <div class="content-grid grid(3) gap(xl)">
       <!-- Revenue Chart -->
       <Card padding="28" hover={true} glass={false}>
-        <div class="chart-section vbox gap(20) col-span(2)">
+        <div class="chart-section vbox gap(lg) col-span(2)">
           <div class="hbox(between+center)">
-            <div class="vbox gap(4)">
-              <h3 class="font(20) bold c(#0a0a0a)">Revenue Overview</h3>
-              <p class="font(14) c(#737373)">Daily revenue for the last 30 days</p>
+            <div class="vbox gap(xs)">
+              <h3 class="font(xl) bold c(#0a0a0a)">Revenue Overview</h3>
+              <p class="font(sm) c(#737373)">Daily revenue for the last 30 days</p>
             </div>
             
-            <div class="period-selector hbox gap(2) p(4) r(10) bg(#f5f5f5)">
-              <button class="period-btn px(14) py(6) r(6) font(13) medium c(#737373) hover:c(#0a0a0a) transition">Daily</button>
-              <button class="period-btn px(14) py(6) r(6) bg(white) c(#0a0a0a) font(13) medium shadow(sm)">Weekly</button>
-              <button class="period-btn px(14) py(6) r(6) font(13) medium c(#737373) hover:c(#0a0a0a) transition">Monthly</button>
+            <div class="period-selector hbox gap(xs) p(xs) r(lg) bg(#f5f5f5)">
+              <button class="period-btn px(sm) py(xs) r(sm) font(sm) medium c(#737373) hover:c(#0a0a0a) transition">Daily</button>
+              <button class="period-btn px(sm) py(xs) r(sm) bg(white) c(#0a0a0a) font(sm) medium shadow(sm)">Weekly</button>
+              <button class="period-btn px(sm) py(xs) r(sm) font(sm) medium c(#737373) hover:c(#0a0a0a) transition">Monthly</button>
             </div>
           </div>
           
           <!-- Chart Area -->
-          <div class="chart-area relative h(320) bg(#fafbfc) r(12) p(24)">
-            <div class="chart-grid absolute inset(24)">
+          <div class="chart-area relative h(320) bg(#fafbfc) r(xl) p(xl)">
+            <div class="chart-grid absolute inset(xl)">
               <!-- Grid lines -->
               {#each [0, 1, 2, 3, 4] as i}
                 <div class="grid-line absolute w(fill) h(1) bg(#e5e5e5.5)" style="bottom: {i * 25}%"></div>
               {/each}
               
               <!-- Bars -->
-              <div class="bars absolute inset-x(0) bottom(0) hbox(between) gap(4)">
+              <div class="bars absolute inset-x(0) bottom(0) hbox(between) gap(xs)">
                 {#each Array(30) as _, i}
                   <div class="bar-wrapper flex vbox(end) group">
                     <div 
-                      class="bar w(fill) bg(gradient/180deg/#3b82f6/#2563eb) r(4/4/0/0) transition hover:bg(gradient/180deg/#2563eb/#1d4ed8) relative"
+                      class="bar w(fill) bg(gradient/180deg/#3b82f6/#2563eb) r(xs/xs/none/none) transition hover:bg(gradient/180deg/#2563eb/#1d4ed8) relative"
                       style="height: {Math.random() * 80 + 20}%"
                     >
-                      <div class="bar-tooltip absolute bottom(fill) x(center) mb(8) px(12) py(6) r(6) bg(#0a0a0a) c(white) font(12) whitespace(nowrap) opacity(0) group-hover:opacity(100) transition pointer-events(none)">
+                      <div class="bar-tooltip absolute bottom(fill) x(center) mb(sm) px(xs) py(xs) r(sm) bg(#0a0a0a) c(white) font(xs) whitespace(nowrap) opacity(0) group-hover:opacity(100) transition pointer-events(none)">
                         ${(Math.random() * 5000 + 1000).toFixed(0)}
                       </div>
                     </div>
@@ -205,7 +205,7 @@
             <!-- Y-axis labels -->
             <div class="y-axis absolute left(0) top(24) bottom(24) w(20) vbox(between) text(right)">
               {#each ['$10k', '$8k', '$6k', '$4k', '$2k', '$0'] as label}
-                <span class="font(11) c(#a3a3a3)">{label}</span>
+                <span class="font(xs) c(#a3a3a3)">{label}</span>
               {/each}
             </div>
           </div>
@@ -213,24 +213,24 @@
       </Card>
       
       <!-- Activity Feed -->
-      <Card padding="24" hover={true}>
-        <div class="activity-section vbox gap(20)">
+      <Card padding="xl" hover={true}>
+        <div class="activity-section vbox gap(lg)">
           <div class="hbox(between+center)">
-            <h3 class="font(18) bold c(#0a0a0a)">Recent Activity</h3>
-            <button class="font(13) c(#3b82f6) hover:c(#2563eb) transition">View all →</button>
+            <h3 class="font(lg) bold c(#0a0a0a)">Recent Activity</h3>
+            <button class="font(sm) c(#3b82f6) hover:c(#2563eb) transition">View all →</button>
           </div>
           
-          <div class="activity-list vbox gap(12)">
+          <div class="activity-list vbox gap(xs)">
             {#each activities as activity}
-              <div class="activity-item hbox gap(12) p(12) r(10) hover:bg(#f5f5f5.5) transition">
-                <div class="activity-icon w(40) h(40) r(10) bg(#f5f5f5) hbox(pack) font(18)">
+              <div class="activity-item hbox gap(xs) p(xs) r(lg) hover:bg(#f5f5f5.5) transition">
+                <div class="activity-icon w(40) h(40) r(lg) bg(#f5f5f5) hbox(pack) font(lg)">
                   {activity.icon}
                 </div>
-                <div class="activity-content vbox gap(2) flex">
-                  <p class="font(14) medium c(#0a0a0a)">{activity.title}</p>
-                  <p class="font(13) c(#737373)">{activity.desc}</p>
+                <div class="activity-content vbox gap(xs) flex">
+                  <p class="font(sm) medium c(#0a0a0a)">{activity.title}</p>
+                  <p class="font(sm) c(#737373)">{activity.desc}</p>
                 </div>
-                <span class="activity-time font(12) c(#a3a3a3) whitespace(nowrap)">{activity.time}</span>
+                <span class="activity-time font(xs) c(#a3a3a3) whitespace(nowrap)">{activity.time}</span>
               </div>
             {/each}
           </div>
@@ -246,21 +246,21 @@
     <Card padding="0" hover={false}>
       <div class="table-section vbox">
         <!-- Table Header -->
-        <div class="table-header hbox(between+center) p(24) border-bottom(1/#f0f0f2)">
-          <div class="vbox gap(4)">
-            <h3 class="font(18) bold c(#0a0a0a)">Recent Transactions</h3>
-            <p class="font(14) c(#737373)">Your latest customer transactions</p>
+        <div class="table-header hbox(between+center) p(xl) border-bottom(1/#f0f0f2)">
+          <div class="vbox gap(xs)">
+            <h3 class="font(lg) bold c(#0a0a0a)">Recent Transactions</h3>
+            <p class="font(sm) c(#737373)">Your latest customer transactions</p>
           </div>
           
-          <div class="hbox gap(12)">
+          <div class="hbox gap(xs)">
             <div class="filter-wrapper relative">
-              <select class="filter-select h(36) pl(12) pr(32) r(8) bg(white) border(1/#e5e5e5) font(13) c(#0a0a0a) appearance(none) cursor(pointer)">
+              <select class="filter-select h(36) pl(xs) pr(2xl) r(sm) bg(white) border(1/#e5e5e5) font(sm) c(#0a0a0a) appearance(none) cursor(pointer)">
                 <option>All Status</option>
                 <option>Completed</option>
                 <option>Pending</option>
                 <option>Failed</option>
               </select>
-              <span class="absolute right(12) y(center) c(#737373) pointer-events(none)">▾</span>
+              <span class="absolute right(xs) y(center) c(#737373) pointer-events(none)">▾</span>
             </div>
             <Button variant="ghost" size="sm">
               <span>🔍</span>
@@ -274,93 +274,93 @@
           <table class="data-table w(fill)">
             <thead class="bg(#fafbfc) border-bottom(1/#f0f0f2)">
               <tr>
-                <th class="table-header px(24) py(16) text(left) font(12) semibold c(#737373) uppercase tracking(.05em)">Transaction ID</th>
-                <th class="table-header px(24) py(16) text(left) font(12) semibold c(#737373) uppercase tracking(.05em)">Customer</th>
-                <th class="table-header px(24) py(16) text(left) font(12) semibold c(#737373) uppercase tracking(.05em)">Date</th>
-                <th class="table-header px(24) py(16) text(left) font(12) semibold c(#737373) uppercase tracking(.05em)">Status</th>
-                <th class="table-header px(24) py(16) text(right) font(12) semibold c(#737373) uppercase tracking(.05em)">Amount</th>
+                <th class="table-header px(xl) py(md) text(left) font(xs/5%) semibold c(#737373) uppercase">Transaction ID</th>
+                <th class="table-header px(xl) py(md) text(left) font(xs/5%) semibold c(#737373) uppercase">Customer</th>
+                <th class="table-header px(xl) py(md) text(left) font(xs/5%) semibold c(#737373) uppercase">Date</th>
+                <th class="table-header px(xl) py(md) text(left) font(xs/5%) semibold c(#737373) uppercase">Status</th>
+                <th class="table-header px(xl) py(md) text(right) font(xs/5%) semibold c(#737373) uppercase">Amount</th>
               </tr>
             </thead>
             <tbody>
               <tr class="border-bottom(1/#f0f0f2) hover:bg(#fafbfc.5) transition">
-                <td class="px(24) py(20)">
-                  <span class="font(13) medium c(#0a0a0a)">#TRX-001234</span>
+                <td class="px(xl) py(lg)">
+                  <span class="font(sm) medium c(#0a0a0a)">#TRX-001234</span>
                 </td>
-                <td class="px(24) py(20)">
-                  <div class="hbox(center) gap(10)">
+                <td class="px(xl) py(lg)">
+                  <div class="hbox(center) gap(xs)">
                     <div class="w(32) h(32) r() bg(#e5e5e5)"></div>
-                    <div class="vbox gap(1)">
-                      <span class="font(13) medium c(#0a0a0a)">Emma Wilson</span>
-                      <span class="font(12) c(#737373)">emma@example.com</span>
+                    <div class="vbox gap(xs)">
+                      <span class="font(sm) medium c(#0a0a0a)">Emma Wilson</span>
+                      <span class="font(xs) c(#737373)">emma@example.com</span>
                     </div>
                   </div>
                 </td>
-                <td class="px(24) py(20) font(13) c(#525252)">Mar 24, 2024</td>
-                <td class="px(24) py(20)">
-                  <span class="status-badge px(10) py(4) r(12) bg(#d1fae5) c(#059669) font(12) medium">Completed</span>
+                <td class="px(xl) py(lg) font(sm) c(#525252)">Mar 24, 2024</td>
+                <td class="px(xl) py(lg)">
+                  <span class="status-badge px(xs) py(xs) r(xl) bg(#d1fae5) c(#059669) font(xs) medium">Completed</span>
                 </td>
-                <td class="px(24) py(20) text(right) font(14) semibold c(#0a0a0a)">$2,345.00</td>
+                <td class="px(xl) py(lg) text(right) font(sm) semibold c(#0a0a0a)">$2,345.00</td>
               </tr>
               
               <tr class="border-bottom(1/#f0f0f2) hover:bg(#fafbfc.5) transition">
-                <td class="px(24) py(20)">
-                  <span class="font(13) medium c(#0a0a0a)">#TRX-001233</span>
+                <td class="px(xl) py(lg)">
+                  <span class="font(sm) medium c(#0a0a0a)">#TRX-001233</span>
                 </td>
-                <td class="px(24) py(20)">
-                  <div class="hbox(center) gap(10)">
+                <td class="px(xl) py(lg)">
+                  <div class="hbox(center) gap(xs)">
                     <div class="w(32) h(32) r() bg(#e5e5e5)"></div>
-                    <div class="vbox gap(1)">
-                      <span class="font(13) medium c(#0a0a0a)">Michael Chen</span>
-                      <span class="font(12) c(#737373)">mchen@example.com</span>
+                    <div class="vbox gap(xs)">
+                      <span class="font(sm) medium c(#0a0a0a)">Michael Chen</span>
+                      <span class="font(xs) c(#737373)">mchen@example.com</span>
                     </div>
                   </div>
                 </td>
-                <td class="px(24) py(20) font(13) c(#525252)">Mar 24, 2024</td>
-                <td class="px(24) py(20)">
-                  <span class="status-badge px(10) py(4) r(12) bg(#fef3c7) c(#d97706) font(12) medium">Pending</span>
+                <td class="px(xl) py(lg) font(sm) c(#525252)">Mar 24, 2024</td>
+                <td class="px(xl) py(lg)">
+                  <span class="status-badge px(xs) py(xs) r(xl) bg(#fef3c7) c(#d97706) font(xs) medium">Pending</span>
                 </td>
-                <td class="px(24) py(20) text(right) font(14) semibold c(#0a0a0a)">$1,128.50</td>
+                <td class="px(xl) py(lg) text(right) font(sm) semibold c(#0a0a0a)">$1,128.50</td>
               </tr>
               
               <tr class="border-bottom(1/#f0f0f2) hover:bg(#fafbfc.5) transition">
-                <td class="px(24) py(20)">
-                  <span class="font(13) medium c(#0a0a0a)">#TRX-001232</span>
+                <td class="px(xl) py(lg)">
+                  <span class="font(sm) medium c(#0a0a0a)">#TRX-001232</span>
                 </td>
-                <td class="px(24) py(20)">
-                  <div class="hbox(center) gap(10)">
+                <td class="px(xl) py(lg)">
+                  <div class="hbox(center) gap(xs)">
                     <div class="w(32) h(32) r() bg(#e5e5e5)"></div>
-                    <div class="vbox gap(1)">
-                      <span class="font(13) medium c(#0a0a0a)">Sarah Johnson</span>
-                      <span class="font(12) c(#737373)">sarah.j@example.com</span>
+                    <div class="vbox gap(xs)">
+                      <span class="font(sm) medium c(#0a0a0a)">Sarah Johnson</span>
+                      <span class="font(xs) c(#737373)">sarah.j@example.com</span>
                     </div>
                   </div>
                 </td>
-                <td class="px(24) py(20) font(13) c(#525252)">Mar 23, 2024</td>
-                <td class="px(24) py(20)">
-                  <span class="status-badge px(10) py(4) r(12) bg(#fee2e2) c(#dc2626) font(12) medium">Failed</span>
+                <td class="px(xl) py(lg) font(sm) c(#525252)">Mar 23, 2024</td>
+                <td class="px(xl) py(lg)">
+                  <span class="status-badge px(xs) py(xs) r(xl) bg(#fee2e2) c(#dc2626) font(xs) medium">Failed</span>
                 </td>
-                <td class="px(24) py(20) text(right) font(14) semibold c(#0a0a0a)">$459.00</td>
+                <td class="px(xl) py(lg) text(right) font(sm) semibold c(#0a0a0a)">$459.00</td>
               </tr>
             </tbody>
           </table>
         </div>
         
         <!-- Table Footer -->
-        <div class="table-footer hbox(between+center) p(24) border-top(1/#f0f0f2)">
-          <span class="font(13) c(#737373)">Showing 1-3 of 248 transactions</span>
+        <div class="table-footer hbox(between+center) p(xl) border-top(1/#f0f0f2)">
+          <span class="font(sm) c(#737373)">Showing 1-3 of 248 transactions</span>
           
-          <div class="pagination hbox gap(8)">
-            <button class="page-btn px(12) py(6) r(6) c(#a3a3a3) font(13) disabled cursor(not-allowed)">← Previous</button>
+          <div class="pagination hbox gap(sm)">
+            <button class="page-btn px(xs) py(xs) r(sm) c(#a3a3a3) font(sm) disabled cursor(not-allowed)">← Previous</button>
             
-            <div class="page-numbers hbox gap(4)">
-              <button class="page-num w(32) h(32) r(6) bg(#0a0a0a) c(white) font(13) medium">1</button>
-              <button class="page-num w(32) h(32) r(6) c(#737373) font(13) hover:bg(#f5f5f5) transition">2</button>
-              <button class="page-num w(32) h(32) r(6) c(#737373) font(13) hover:bg(#f5f5f5) transition">3</button>
-              <span class="px(8) c(#a3a3a3)">...</span>
-              <button class="page-num w(32) h(32) r(6) c(#737373) font(13) hover:bg(#f5f5f5) transition">24</button>
+            <div class="page-numbers hbox gap(xs)">
+              <button class="page-num w(32) h(32) r(sm) bg(#0a0a0a) c(white) font(sm) medium">1</button>
+              <button class="page-num w(32) h(32) r(sm) c(#737373) font(sm) hover:bg(#f5f5f5) transition">2</button>
+              <button class="page-num w(32) h(32) r(sm) c(#737373) font(sm) hover:bg(#f5f5f5) transition">3</button>
+              <span class="px(sm) c(#a3a3a3)">...</span>
+              <button class="page-num w(32) h(32) r(sm) c(#737373) font(sm) hover:bg(#f5f5f5) transition">24</button>
             </div>
             
-            <button class="page-btn px(12) py(6) r(6) c(#0a0a0a) font(13) hover:bg(#f5f5f5) transition">Next →</button>
+            <button class="page-btn px(xs) py(xs) r(sm) c(#0a0a0a) font(sm) hover:bg(#f5f5f5) transition">Next →</button>
           </div>
         </div>
       </div>

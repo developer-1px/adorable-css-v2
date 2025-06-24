@@ -1,5 +1,6 @@
 import type { CSSRule, RuleHandler } from "../types";
 import { px } from "../../values/makeValue";
+import { isToken, getTokenVar } from "../../tokens";
 
 const makePaddingRule = (
   prefix: "" | "x" | "y" | "t" | "b" | "l" | "r"
@@ -14,7 +15,13 @@ const makePaddingRule = (
     const values = args.split("/");
     const properties: Record<string, string> = {};
 
-    const cssValues = values.map((v) => String(px(v)));
+    // Process values with token support
+    const cssValues = values.map((v) => {
+      if (isToken(v, 'spacing')) {
+        return getTokenVar('spacing', v);
+      }
+      return String(px(v));
+    });
 
     if (prefix === "") {
       if (cssValues.length === 1) return { padding: cssValues[0] };
@@ -61,7 +68,13 @@ const makeMarginRule = (
     const values = args.split("/");
     const properties: Record<string, string> = {};
 
-    const cssValues = values.map((v) => String(px(v)));
+    // Process values with token support
+    const cssValues = values.map((v) => {
+      if (isToken(v, 'spacing')) {
+        return getTokenVar('spacing', v);
+      }
+      return String(px(v));
+    });
 
     if (prefix === "") {
       if (cssValues.length === 1) return { margin: cssValues[0] };
@@ -107,6 +120,9 @@ export const mr = makeMarginRule("r");
 
 export const gap: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
+  if (isToken(args, 'spacing')) {
+    return { gap: getTokenVar('spacing', args) };
+  }
   return { gap: String(px(args)) };
 };
 

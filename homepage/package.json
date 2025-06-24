@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "adorable-css": "workspace:*",
-    "adorable-css-cdn": "workspace:*"
+    "adorable-css-cdn": "workspace:*",
+    "lucide-svelte": "^0.522.0"
   }
 }

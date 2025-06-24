@@ -36,7 +36,12 @@
       "Bash(git remote add:*)",
       "Bash(pnpm:*)",
       "Bash(true)",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "WebFetch(domain:spectrum.adobe.com)",
+      "WebFetch(domain:atlassian.design)",
+      "WebFetch(domain:designsystem.digital.gov)",
+      "WebFetch(domain:ui.shadcn.com)",
+      "Bash(sed:*)"
     ],
     "deny": []
   }
