@@ -32,8 +32,32 @@ export const clip: RuleHandler = (args?: string): CSSRule => {
   return { overflow: 'hidden' };
 };
 
+export const overflowX: RuleHandler = (args?: string): CSSRule => {
+  if (!args) return { 'overflow-x': 'auto' };
+  
+  const validValues = ['visible', 'hidden', 'scroll', 'auto', 'clip'];
+  if (validValues.includes(args)) {
+    return { 'overflow-x': args };
+  }
+  
+  return {};
+};
+
+export const overflowY: RuleHandler = (args?: string): CSSRule => {
+  if (!args) return { 'overflow-y': 'auto' };
+  
+  const validValues = ['visible', 'hidden', 'scroll', 'auto', 'clip'];
+  if (validValues.includes(args)) {
+    return { 'overflow-y': args };
+  }
+  
+  return {};
+};
+
 export const overflowRules = {
   overflow,
+  'overflow-x': overflowX,
+  'overflow-y': overflowY,
   scroll,
   clip
 };

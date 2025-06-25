@@ -1,4 +1,4 @@
-import { CSSRule, RuleHandler } from '../../types';
+import type { CSSRule, RuleHandler } from '../types';
 
 /**
  * Enhanced transform utilities that support multiple transforms

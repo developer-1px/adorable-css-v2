@@ -97,9 +97,9 @@
         title: 'Position',
         icon: '🎯',
         items: [
-          { syntax: 'absolute', desc: 'position: absolute', example: 'absolute top(0) right(0)' },
+          { syntax: 'absolute', desc: 'position: absolute', example: 'layer(top:0+right:0)' },
           { syntax: 'relative', desc: 'position: relative', example: 'relative z(10)' },
-          { syntax: 'fixed', desc: 'position: fixed', example: 'fixed bottom(20) right(20)' },
+          { syntax: 'fixed', desc: 'position: fixed', example: 'fixed' },
           { syntax: 'sticky', desc: 'position: sticky', example: 'sticky top(0)' }
         ]
       },
@@ -107,11 +107,11 @@
         title: 'Coordinates',
         icon: '📐',
         items: [
-          { syntax: 'y(center)', desc: '세로 중앙 (top 50% + translateY)', example: 'absolute y(center)' },
-          { syntax: 'x(center)', desc: '가로 중앙 (left 50% + translateX)', example: 'absolute x(center)' },
-          { syntax: 'xy(center)', desc: '정중앙', example: 'absolute xy(center)' },
-          { syntax: 'inset(0)', desc: '모든 방향 0', example: 'absolute inset(0)' },
-          { syntax: 'top(20)', desc: 'top: 20px', example: 'absolute top(20) left(20)' },
+          { syntax: 'y(center)', desc: '세로 중앙 (top 50% + translateY)', example: 'layer(center)' },
+          { syntax: 'x(center)', desc: '가로 중앙 (left 50% + translateX)', example: 'layer(center)' },
+          { syntax: 'xy(center)', desc: '정중앙', example: 'layer(center)' },
+          { syntax: 'layer(fill)', desc: '모든 방향 0 (absolute 포함)', example: 'layer(fill)' },
+          { syntax: 'top(20)', desc: 'top: 20px', example: 'layer(top:20+left:20)' },
           { syntax: 'layer(top:20+left:30)', desc: '복합 위치', example: 'layer(top:20+left:30)' }
         ]
       }
@@ -194,7 +194,7 @@
         items: [
           { syntax: 'bg(#fff)', desc: '배경색', example: 'bg(#f5f5f5)' },
           { syntax: 'bg(#000.5)', desc: '투명 배경', example: 'bg(#000.5)' },
-          { syntax: 'bg(gradient/135deg/#667eea/#764ba2)', desc: '그라디언트', example: 'bg(gradient/135deg/#667eea/#764ba2)' },
+          { syntax: 'bg(#667eea..#764ba2/135deg)', desc: '그라디언트', example: 'bg(#667eea..#764ba2/135deg)' },
           { syntax: 'bg(#667eea..#764ba2)', desc: '간단한 그라디언트', example: 'bg(#667eea..#764ba2)' }
         ]
       },

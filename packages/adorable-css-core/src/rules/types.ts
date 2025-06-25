@@ -1,5 +1,5 @@
 // CSS rule object type
-export interface CSSRule {
+export type CSSRule = {
   [property: string]: string;
 }
 

@@ -9,7 +9,7 @@ import { injectTokens } from 'adorable-css'
 // Initialize AdorableCSS v2
 AdorableCSSV2.init({ 
   debug: true,
-  watch: true 
+  watch: true
 })
 
 // Inject design tokens

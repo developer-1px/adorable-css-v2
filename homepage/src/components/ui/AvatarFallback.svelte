@@ -12,7 +12,7 @@
     xl: 'font(lg)'
   };
   
-  const baseClasses = 'flex h(full) w(full) items(center) justify(center) r(full) bg(--colors-gray-100) c(--colors-gray-600) medium uppercase';
+  const baseClasses = 'flex(pack) h(full) w(full) r(full) bg(--colors-gray-100) c(--colors-gray-600) medium uppercase';
 </script>
 
 <div class="{baseClasses} {fontSizes[avatar.size]} {className}">

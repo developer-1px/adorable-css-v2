@@ -1,4 +1,4 @@
-import { CSSRule, RuleHandler } from '../../types';
+import type { CSSRule, RuleHandler } from '../types';
 import { makeValue } from '../../values/makeValue';
 
 /**

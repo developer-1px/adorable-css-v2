@@ -19,7 +19,7 @@
            transition-all duration(normal) ease(out) group cursor-pointer">
   
   <!-- Background decoration with improved design -->
-  <div class="decoration absolute top(-10) right(-10) w(100) h(100) opacity(xs) rotate(12) group-hover:rotate(24) group-hover:scale(110) transition-all duration(slower) ease(out)">
+  <div class="decoration layer(top:-10+right:-10) w(100) h(100) opacity(xs) rotate(12) group-hover:rotate(24) group-hover:scale(110) transition-all duration(slower) ease(out)">
     <svg viewBox="0 0 100 100" class="w(fill) h(fill)">
       <circle cx="50" cy="50" r="40" fill="currentColor" style="color: {iconColor}" opacity="0.08" />
       <circle cx="50" cy="50" r="25" fill="none" stroke="currentColor" stroke-width="1" opacity="0.12" style="color: {iconColor}" />
@@ -56,7 +56,7 @@
   </div>
   
   <!-- Enhanced sparkline with better animation -->
-  <div class="sparkline mt(auto) h(xl) relative overflow(hidden) group-hover:h(2xl) transition-all duration(normal)">
+  <div class="sparkline mt(auto) h(xl) relative clip group-hover:h(2xl) transition-all duration(normal)">
     <svg viewBox="0 0 200 32" class="w(fill) h(fill)">
       <!-- Gradient area under the line -->
       <defs>
@@ -108,7 +108,7 @@
   </div>
   
   <!-- Enhanced top border indicator -->
-  <div class="border-indicator absolute top(0) left(0) right(0) h(xs) r(xl/xl/none/none) opacity(0) group-hover:opacity(100) transition-all duration(normal)" 
+  <div class="border-indicator layer(top:0+left:0+right:0) h(xs) r(xl/xl/none/none) opacity(0) group-hover:opacity(100) transition-all duration(normal)" 
        style="background: linear-gradient(90deg, transparent, {iconColor}, transparent)">
   </div>
 </div>

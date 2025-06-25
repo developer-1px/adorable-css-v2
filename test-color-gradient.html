@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Gradient Test</title>
+  <script src="./packages/adorable-css-core/dist/index.js"></script>
+  <style id="adorable-css"></style>
+</head>
+<body>
+  <div style="padding: 40px; display: flex; flex-direction: column; gap: 20px;">
+    <h1>Color Gradient Test</h1>
+    
+    <div class="bg(purple-400..pink-400/135deg)" style="width: 200px; height: 100px; border-radius: 8px;">
+      bg(purple-400..pink-400/135deg)
+    </div>
+    
+    <div class="bg(blue-500..green-500/45deg)" style="width: 200px; height: 100px; border-radius: 8px;">
+      bg(blue-500..green-500/45deg)
+    </div>
+    
+    <div class="bg(red-300..yellow-300/to-right)" style="width: 200px; height: 100px; border-radius: 8px;">
+      bg(red-300..yellow-300/to-right)
+    </div>
+  </div>
+
+  <script>
+    // Initialize AdorableCSS
+    const { parseRules, generateCSS } = window.adorableCSS;
+    
+    // Get all elements with classes
+    const elements = document.querySelectorAll('[class]');
+    const classes = new Set();
+    
+    elements.forEach(el => {
+      el.className.split(' ').forEach(cls => {
+        if (cls.trim()) classes.add(cls.trim());
+      });
+    });
+    
+    // Generate CSS
+    let css = '';
+    classes.forEach(className => {
+      const rules = parseRules(className);
+      if (rules) {
+        css += generateCSS(className, rules) + '\n';
+      }
+    });
+    
+    // Insert CSS
+    document.getElementById('adorable-css').textContent = css;
+    
+    // Log generated CSS for debugging
+    console.log('Generated CSS:', css);
+  </script>
+</body>
+</html>

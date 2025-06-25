@@ -49,7 +49,7 @@
       <div class="vbox gap(sm)">
         <h4 class="font(md) medium">Font Sizes</h4>
         {#each Object.entries(customTokens.fontSize) as [key, value]}
-          <div class="hbox gap(md) items(center)">
+          <div class="hbox(middle) gap(md)">
             <label class="w(80) font(sm)">{key}:</label>
             <input 
               type="text" 
@@ -65,7 +65,7 @@
       <div class="vbox gap(sm)">
         <h4 class="font(md) medium">Spacing</h4>
         {#each Object.entries(customTokens.spacing) as [key, value]}
-          <div class="hbox gap(md) items(center)">
+          <div class="hbox(middle) gap(md)">
             <label class="w(80) font(sm)">{key}:</label>
             <input 
               type="text" 
@@ -81,7 +81,7 @@
       <div class="vbox gap(sm)">
         <h4 class="font(md) medium">Border Radius</h4>
         {#each Object.entries(customTokens.borderRadius).slice(0, 5) as [key, value]}
-          <div class="hbox gap(md) items(center)">
+          <div class="hbox(middle) gap(md)">
             <label class="w(80) font(sm)">{key}:</label>
             <input 
               type="text" 
@@ -112,7 +112,7 @@
       <!-- Spacing Examples -->
       <div class="vbox gap(sm) p(lg) r(lg) bg(#f9fafb)">
         <h4 class="font(md) medium mb(sm)">Spacing</h4>
-        <div class="hbox gap(sm) items(center)">
+        <div class="hbox(middle) gap(sm)">
           <div class="p(xs) bg(#3b82f6) c(white) r(sm)">p(xs)</div>
           <div class="p(sm) bg(#3b82f6) c(white) r(sm)">p(sm)</div>
           <div class="p(md) bg(#3b82f6) c(white) r(sm)">p(md)</div>
@@ -123,7 +123,7 @@
       <!-- Border Radius Examples -->
       <div class="vbox gap(sm) p(lg) r(lg) bg(#f9fafb)">
         <h4 class="font(md) medium mb(sm)">Border Radius</h4>
-        <div class="hbox gap(sm) items(center)">
+        <div class="hbox(middle) gap(sm)">
           <div class="w(3xl) h(3xl) bg(#3b82f6) r(none)"></div>
           <div class="w(3xl) h(3xl) bg(#3b82f6) r(sm)"></div>
           <div class="w(3xl) h(3xl) bg(#3b82f6) r(md)"></div>
@@ -136,7 +136,7 @@
       <!-- Shadow Examples -->
       <div class="vbox gap(sm) p(lg) r(lg) bg(#f9fafb)">
         <h4 class="font(md) medium mb(sm)">Shadows</h4>
-        <div class="hbox gap(md) items(center)">
+        <div class="hbox(middle) gap(md)">
           <div class="w(4xl) h(4xl) bg(white) r(lg) shadow(sm) p(sm)">sm</div>
           <div class="w(4xl) h(4xl) bg(white) r(lg) shadow(md) p(sm)">md</div>
           <div class="w(4xl) h(4xl) bg(white) r(lg) shadow(lg) p(sm)">lg</div>

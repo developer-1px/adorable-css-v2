@@ -1,22 +1,19 @@
 <script lang="ts">
   import CodeHighlighter from './CodeHighlighter.svelte';
   
-  export let children: string = '';
   export let language: string = 'adorable';
   export let className: string = '';
   export let inline: boolean = false;
-  
-  // Support both children prop and slot content
-  let codeContent = children;
+  export let code: string = ''; // Direct code prop
 </script>
 
 {#if inline}
   <code class="inline-code {className}">
-    <CodeHighlighter code={codeContent} {language} />
+    <CodeHighlighter {code} {language} />
   </code>
 {:else}
   <div class="code-block {className}">
-    <CodeHighlighter code={codeContent} {language} />
+    <CodeHighlighter {code} {language} />
   </div>
 {/if}
 

@@ -1,5 +1,82 @@
 import type { CSSRule, KeywordRuleHandler, RuleHandler } from '../types';
 
+// Layout configuration from v1
+const LAYOUT_MAP = {
+  row: {
+    aligns: {
+      top: 'flex-start',
+      middle: 'center',
+      pack: 'center',
+      bottom: 'flex-end',
+      fill: 'stretch',
+    },
+    justify: {
+      'left': 'flex-start',
+      'left+reverse': 'flex-end',
+      'right': 'flex-end',
+      'right+reverse': 'flex-start',
+      'center': 'center',
+      'center+reverse': 'center',
+      'pack': 'center',
+      'pack+reverse': 'center',
+    },
+    defaultAlign: 'middle',
+  },
+  column: {
+    aligns: {
+      left: 'flex-start',
+      center: 'center',
+      pack: 'center',
+      right: 'flex-end',
+      fill: 'stretch',
+    },
+    justify: {
+      'top': 'flex-start',
+      'top+reverse': 'flex-end',
+      'bottom': 'flex-end',
+      'bottom+reverse': 'flex-start',
+      'middle': 'center',
+      'middle+reverse': 'center',
+      'pack': 'center',
+      'pack+reverse': 'center',
+    },
+    defaultAlign: 'fill',
+  },
+} as const;
+
+type BaseDirection = keyof typeof LAYOUT_MAP;
+
+function makeBoxAligns(direction: BaseDirection, value = ''): CSSRule {
+  const values = value.split(/[+/|]/);
+  const layout = LAYOUT_MAP[direction];
+  const hasReverse = values.includes('reverse');
+  
+  const result: CSSRule = {
+    'display': 'flex',
+    'flex-direction': hasReverse ? `${direction}-reverse` : direction,
+  };
+  
+  // Handle align-items
+  const alignValue = values.find((v) => v in layout.aligns) || layout.defaultAlign;
+  result['align-items'] = layout.aligns[alignValue as keyof typeof layout.aligns];
+  
+  // Handle justify-content
+  const justifyKey = values.find((v) => v in layout.justify) as keyof typeof layout.justify | undefined;
+  if (justifyKey) {
+    const justifyWithReverse = hasReverse ? (`${justifyKey}+reverse` as const) : justifyKey;
+    if (justifyWithReverse in layout.justify) {
+      result['justify-content'] = layout.justify[justifyWithReverse as keyof typeof layout.justify];
+    }
+  }
+  
+  // Handle wrap
+  if (values.includes('wrap')) {
+    result['flex-wrap'] = 'wrap';
+  }
+  
+  return result;
+}
+
 // Basic display utilities
 export const block: KeywordRuleHandler = () => ({ display: 'block' });
 export const inline: KeywordRuleHandler = () => ({ display: 'inline' });
@@ -7,52 +84,29 @@ export const inlineBlock: KeywordRuleHandler = () => ({ display: 'inline-block' 
 export const none: KeywordRuleHandler = () => ({ display: 'none' });
 export const grid: KeywordRuleHandler = () => ({ display: 'grid' });
 
-// Flexbox utilities with pack shorthand support
+// Flexbox utilities with v1 logic
 export const hbox: RuleHandler = (value = '') => {
-  const rules: CSSRule = { display: 'flex', 'flex-direction': 'row' };
-  if (value) {
-    if (value === 'pack') {
-      rules['justify-content'] = 'center';
-      rules['align-items'] = 'center';
-    } else {
-      const [justify, align] = value.split('+');
-      if (justify === 'center') rules['justify-content'] = 'center';
-      else if (justify === 'between') rules['justify-content'] = 'space-between';
-      else if (justify === 'around') rules['justify-content'] = 'space-around';
-      else if (justify === 'end') rules['justify-content'] = 'flex-end';
-      
-      if (align === 'center') rules['align-items'] = 'center';
-      else if (align === 'end') rules['align-items'] = 'flex-end';
-      else if (align === 'stretch') rules['align-items'] = 'stretch';
-    }
-  }
-  return rules;
+  return makeBoxAligns('row', value);
 };
 
 export const vbox: RuleHandler = (value = '') => {
-  const rules: CSSRule = { display: 'flex', 'flex-direction': 'column' };
-  if (value) {
-    if (value === 'pack') {
-      rules['justify-content'] = 'center';
-      rules['align-items'] = 'center';
-    } else {
-      const [justify, align] = value.split('+');
-      if (justify === 'center') rules['justify-content'] = 'center';
-      else if (justify === 'between') rules['justify-content'] = 'space-between';
-      else if (justify === 'around') rules['justify-content'] = 'space-around';
-      else if (justify === 'end') rules['justify-content'] = 'flex-end';
-      
-      if (align === 'center') rules['align-items'] = 'center';
-      else if (align === 'end') rules['align-items'] = 'flex-end';
-      else if (align === 'stretch') rules['align-items'] = 'stretch';
-    }
-  }
-  return rules;
+  return makeBoxAligns('column', value);
+};
+
+export const wrap: RuleHandler = (value = '') => {
+  const result = makeBoxAligns('row', value);
+  result['flex-wrap'] = 'wrap';
+  return result;
+};
+
+export const pack: KeywordRuleHandler = () => {
+  return makeBoxAligns('row', 'center+middle');
 };
 
 // Additional flex utilities
 export const inlineFlex: KeywordRuleHandler = () => ({ display: 'inline-flex' });
 export const flex: KeywordRuleHandler = () => ({ flex: '1 1 0%' });
+export const flex1: KeywordRuleHandler = () => ({ flex: '1 1 0%' });
 export const flexWrap: KeywordRuleHandler = () => ({ 'flex-wrap': 'wrap' });
 
 // Standalone flexbox alignment utilities
@@ -105,7 +159,10 @@ export const displayRules = {
   grid,
   hbox,
   vbox,
+  wrap,
+  pack,
   flex,
+  'flex-1': flex1,
   'flex-wrap': flexWrap,
   items,
   justify,

@@ -1,47 +1,185 @@
-# Svelte + TS + Vite
+# AdorableCSS v2
 
-This template should help get you started developing with Svelte and TypeScript in Vite.
+A Figma-first CSS utility framework that bridges the gap between design and code. Write CSS the way you think in Figma.
 
-## Recommended IDE Setup
+## Core Philosophy
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+AdorableCSS v2 is built on a simple principle: **Your CSS should match your design tool's mental model**. 
 
-## Need an official Svelte framework?
+```css
+/* Traditional CSS */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
-
-## Technical considerations
-
-**Why use this over SvelteKit?**
-
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
-
-This template contains as little as possible to get started with Vite + TypeScript + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
-
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
-
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
-
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
-
-**Why include `.vscode/extensions.json`?**
-
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
-
-**Why enable `allowJs` in the TS template?**
-
-While `allowJs: false` would indeed prevent the use of `.js` files in the project, it does not prevent the use of JavaScript syntax in `.svelte` files. In addition, it would force `checkJs: false`, bringing the worst of both worlds: not being able to guarantee the entire codebase is TypeScript, and also having worse typechecking for the existing JavaScript. In addition, there are valid use cases in which a mixed codebase may be relevant.
-
-**Why is HMR not preserving my local component state?**
-
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/rixo/svelte-hmr#svelte-hmr).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```ts
-// store.ts
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
+/* AdorableCSS - Think like Figma */
+<div class="vbox gap(16) p(24) w(fill) bg(primary..accent/135deg)">
 ```
+
+## Key Features
+
+### 1. Figma Auto Layout → CSS
+```html
+<!-- Figma: Auto Layout, Vertical, Gap: 16 -->
+<div class="vbox gap(16)">
+
+<!-- Figma: Auto Layout, Horizontal, Pack: Center -->
+<div class="hbox(pack)">
+
+<!-- Figma: Width: Fill, Height: Hug -->
+<div class="w(fill) h(hug)">
+```
+
+### 2. Constraint-Based Sizing
+```html
+<!-- Fixed width -->
+<div class="w(300)">
+
+<!-- Min-max constraints like Figma -->
+<div class="w(300..600)">
+
+<!-- Fill parent -->
+<div class="w(fill)">
+
+<!-- Hug content -->
+<div class="w(hug)">
+```
+
+### 3. Layer Positioning
+```html
+<!-- Figma: Absolute position with constraints -->
+<div class="layer(top:20+left:30)">
+
+<!-- Fill parent with padding -->
+<div class="layer(fill/20)">
+
+<!-- Center in parent -->
+<div class="layer(center)">
+```
+
+### 4. Visual Effects
+```html
+<!-- Gradients -->
+<div class="bg(primary..accent/135deg)">
+
+<!-- With color palette -->
+<div class="bg(purple-400..purple-600/to-br)">
+
+<!-- Shadows and effects -->
+<div class="shadow(lg) backdrop-blur(md) r(xl)">
+```
+
+### 5. Typography System
+```html
+<!-- All-in-one font utility -->
+<h1 class="font(Inter/32/1.2/medium)">
+
+<!-- Semantic headings -->
+<h1 class="heading(h1)">
+
+<!-- With color -->
+<p class="font(16) c(gray-600)">
+```
+
+## Installation
+
+```bash
+npm install adorable-css
+# or
+pnpm add adorable-css
+```
+
+## Quick Start
+
+```javascript
+// vite.config.ts
+import { adorableCSSPlugin } from 'adorable-css/vite'
+
+export default {
+  plugins: [adorableCSSPlugin()]
+}
+```
+
+## Parser Architecture
+
+AdorableCSS uses a custom parser that understands:
+- Function-style utilities: `w(300)`, `p(16/24)`
+- Range constraints: `w(100..200)`
+- Complex expressions: `layer(top:20+left:30)`
+- Pseudo-class prefixes: `hover:scale(1.05)`
+- Responsive prefixes: `md:w(full)`
+
+## Plugin System
+
+### Core Plugins
+- **Layout**: hbox, vbox, grid, layer
+- **Typography**: font, heading, text utilities
+- **Colors**: OKLCH-based color palette with themes
+- **Effects**: shadows, filters, transforms
+
+### Creating Custom Plugins
+```typescript
+export const myPlugin = {
+  rules: {
+    'glow': (value) => ({
+      'box-shadow': `0 0 ${value}px currentColor`
+    })
+  }
+}
+```
+
+## Figma Plugin
+
+Generate AdorableCSS code directly from your Figma designs:
+1. Install the Figma plugin
+2. Select any frame or component
+3. Generate production-ready code
+
+## Development
+
+```bash
+# Start development server
+pnpm dev
+
+# Build for production
+pnpm build
+
+# Type checking
+pnpm check
+```
+
+## Architecture
+
+- **Parser**: Custom tokenizer and AST generator
+- **Rule System**: Modular, extensible CSS generation
+- **Value Processing**: Smart unit conversion and calculations
+- **Build Integration**: Zero-runtime, compile-time optimization
+
+## Why AdorableCSS?
+
+1. **Design-Development Unity**: Same mental model as Figma
+2. **No Learning Curve**: If you know Figma, you know AdorableCSS
+3. **Performance**: 12KB typical production bundle
+4. **Type Safety**: Full TypeScript support with IntelliSense
+5. **Framework Agnostic**: Works with React, Vue, Svelte, or vanilla HTML
+
+## Documentation
+
+Visit [adorablecss.com](https://adorablecss.com) for:
+- Complete API reference
+- Interactive playground
+- Migration guides
+- Video tutorials
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for development setup and guidelines.
+
+## License
+
+MIT License - see [LICENSE](./LICENSE) for details.

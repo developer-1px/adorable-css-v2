@@ -11,7 +11,7 @@
   };
   
   const baseClasses = `
-    inline-flex items(center) r(full) border px(sm) py(xs) 
+    inline-flex(middle) r(full) border px(sm) py(xs) 
     font(xs) semibold transition-colors focus:outline(none) 
     focus:ring(2/--colors-primary-500) focus:ring-offset(2)
   `.replace(/\s+/g, ' ').trim();

@@ -1,4 +1,4 @@
-import { CSSRule, RuleHandler } from '../../types';
+import type { CSSRule, RuleHandler } from '../types';
 
 /**
  * Perspective utilities for 3D transforms

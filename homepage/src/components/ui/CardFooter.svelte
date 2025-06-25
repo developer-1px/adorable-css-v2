@@ -1,7 +1,7 @@
 <script lang="ts">
   export let className = '';
   
-  const baseClasses = 'hbox items(center) p(lg) pt(0)';
+  const baseClasses = 'hbox(middle) p(lg) pt(0)';
 </script>
 
 <div class="{baseClasses} {className}">

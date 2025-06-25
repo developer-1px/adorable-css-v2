@@ -1,8 +1,13 @@
+import { colorPalette } from '../plugins/colors'
+
 export const splitValues = (value: string, project = cssvar) => {
   if (value.includes('|')) return value.split('|').map(project)
   return value.split('/').map(project)
 }
 export const makeValues = (value: string, project = cssvar) => splitValues(value, project).join(' ')
+
+// Alias for backward compatibility
+export const makeValue = makeValues
 
 export const makeCommaValues = (value: string, project = cssvar) => value.split(',').map(project).join(',')
 
@@ -109,6 +114,11 @@ export const makeColor = (value = 'transparent') => {
   if (value === '-') return 'transparent'
   if (value === 'transparent') return 'transparent'
   if (value.startsWith('--')) return `var(${value})`
+
+  // Check if it's a color from the palette
+  if (colorPalette[value]) {
+    return colorPalette[value]
+  }
 
   // Handle hex colors with alpha (#fff.3, #000000.5)
   if (value.startsWith('#')) {

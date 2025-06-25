@@ -1,12 +1,65 @@
 import { font, fontFamily } from './font';
 import { c } from './color';
 import { text, textShadow } from './text';
+import { textFillColor, bgClip } from './text-fill';
 import type { RuleHandler, CSSRule } from '../types';
 import { px } from '../../values/makeValue';
+
+// Line height utilities
+const lineHeight: RuleHandler = (args?: string): CSSRule => {
+  if (!args) return {};
+  
+  const lineHeightMap: Record<string, string> = {
+    none: '1',
+    tight: '1.25',
+    snug: '1.375',
+    normal: '1.5',
+    relaxed: '1.625',
+    loose: '2'
+  };
+  
+  if (lineHeightMap[args]) {
+    return { 'line-height': lineHeightMap[args] };
+  }
+  
+  // Check if it's a number without unit (treated as unitless)
+  if (!isNaN(Number(args))) {
+    return { 'line-height': args };
+  }
+  
+  return { 'line-height': String(px(args)) };
+};
+
+// Letter spacing utilities
+const letterSpacing: RuleHandler = (args?: string): CSSRule => {
+  if (!args) return {};
+  
+  const letterSpacingMap: Record<string, string> = {
+    tighter: '-0.05em',
+    tight: '-0.025em',
+    normal: '0em',
+    wide: '0.025em',
+    wider: '0.05em',
+    widest: '0.1em'
+  };
+  
+  if (letterSpacingMap[args]) {
+    return { 'letter-spacing': letterSpacingMap[args] };
+  }
+  
+  return { 'letter-spacing': String(px(args)) };
+};
+
+// Text decoration utilities
+const underlineOffset: RuleHandler = (args?: string): CSSRule => {
+  if (!args) return {};
+  return { 'text-underline-offset': String(px(args)) };
+};
 
 export const typographyRules = {
   font, c, text, 'font-family': fontFamily, 'text-shadow': textShadow,
   'line-height': lineHeight, 'letter-spacing': letterSpacing, 'underline-offset': underlineOffset,
+  'text-fill-color': textFillColor, 'bg-clip': bgClip,
   
   // Font weights
   '100': () => ({ 'font-weight': '100' }),
@@ -47,58 +100,4 @@ export const typographyRules = {
   
   // Text overflow
   truncate: () => ({ 'overflow': 'hidden', 'text-overflow': 'ellipsis', 'white-space': 'nowrap' })
-};
-
-// Line height utilities
-export const lineHeight: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
-  
-  const lineHeightMap: Record<string, string> = {
-    none: '1',
-    tight: '1.25',
-    snug: '1.375',
-    normal: '1.5',
-    relaxed: '1.625',
-    loose: '2'
-  };
-  
-  if (lineHeightMap[args]) {
-    return { 'line-height': lineHeightMap[args] };
-  }
-  
-  return { 'line-height': String(px(args)) };
-};
-
-// Letter spacing utilities
-export const letterSpacing: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
-  
-  const letterSpacingMap: Record<string, string> = {
-    tighter: '-0.05em',
-    tight: '-0.025em',
-    normal: '0em',
-    wide: '0.025em',
-    wider: '0.05em',
-    widest: '0.1em'
-  };
-  
-  if (letterSpacingMap[args]) {
-    return { 'letter-spacing': letterSpacingMap[args] };
-  }
-  
-  return { 'letter-spacing': String(px(args)) };
-};
-
-// Text decoration utilities
-export const underlineOffset: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
-  return { 'text-underline-offset': String(px(args)) };
-};
-
-// Add to exports
-export const extendedTypographyRules = {
-  ...typographyRules,
-  'line-height': lineHeight,
-  'letter-spacing': letterSpacing,
-  'underline-offset': underlineOffset
 };

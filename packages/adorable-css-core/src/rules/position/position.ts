@@ -27,23 +27,21 @@ export const z: RuleHandler = (args?: string): CSSRule => {
   return { "z-index": args };
 };
 
-// Layer utility (Figma-style positioning)
-export const layer: RuleHandler = (args?: string): CSSRule => {
-  // Default: inset(0) - cover entire parent
-  if (!args) {
-    return { 
+// Layer utility (Figma-style positioning) - v1 spec
+export const layer: RuleHandler = (value = ""): CSSRule => {
+  // Default: layer() = layer(fill)
+  if (!value || value === "fill") {
+    return {
       position: "absolute",
       top: "0",
-      right: "0", 
+      right: "0",
       bottom: "0",
       left: "0"
     };
   }
 
-  const result: CSSRule = { position: "absolute" };
-
   // layer(center) - center positioning
-  if (args === "center") {
+  if (value === "center") {
     return {
       position: "absolute",
       top: "50%",
@@ -52,32 +50,93 @@ export const layer: RuleHandler = (args?: string): CSSRule => {
     };
   }
 
-  // layer(top:20+left:30) - multiple positions
-  if (args.includes("+")) {
-    const positions = args.split("+");
-    positions.forEach((pos) => {
-      const [side, value] = pos.split(":");
-      if (side && value) {
-        result[side] = String(px(value));
+  // Parse the value
+  const pos: Record<string, string> = { top: "0", right: "0", bottom: "0", left: "0" };
+  const outsides: string[] = [];
+  let outside = false;
+
+  value.split(/[+/]/).forEach((v) => {
+    const [direction, dirValue = "0"] = v.split(":");
+    switch (direction) {
+      case "top": {
+        pos.top = dirValue;
+        delete pos.bottom;
+        outsides.push("top");
+        return;
+      }
+      case "right": {
+        pos.right = dirValue;
+        delete pos.left;
+        outsides.push("right");
+        return;
+      }
+      case "bottom": {
+        pos.bottom = dirValue;
+        delete pos.top;
+        outsides.push("bottom");
+        return;
+      }
+      case "left": {
+        pos.left = dirValue;
+        delete pos.right;
+        outsides.push("left");
+        return;
+      }
+      case "outside": {
+        outside = true;
+        return;
+      }
+    }
+  });
+
+  if (outside) {
+    const revert = (b: string, a: string) => {
+      pos[a] = pos[b] === "0" ? "100%" : `calc(100% + ${px(pos[b])})`;
+      delete pos[b];
+    };
+
+    outsides.forEach((direction) => {
+      switch (direction) {
+        case "top":
+          return revert("top", "bottom");
+        case "right":
+          return revert("right", "left");
+        case "bottom":
+          return revert("bottom", "top");
+        case "left":
+          return revert("left", "right");
       }
     });
   }
-  // layer(top:20) - single position
-  else if (args.includes(":")) {
-    const [side, value] = args.split(":");
-    if (side && value) {
-      result[side] = String(px(value));
-    }
-  }
-  // layer(top) - edge positioning
-  else {
-    if (args === "top") result.top = "0";
-    if (args === "right") result.right = "0";
-    if (args === "bottom") result.bottom = "0";
-    if (args === "left") result.left = "0";
-  }
 
-  return result;
+  const styles: CSSRule = {
+    position: "absolute",
+  };
+
+  Object.entries(pos).forEach(([key, value]) => {
+    if (value !== undefined) {
+      styles[key] = String(px(value));
+    }
+  });
+
+  return styles;
+};
+
+// Position shorthand: (10,20) -> position: absolute; left: 10px; top: 20px;
+export const position: RuleHandler = (value?: string): CSSRule => {
+  if (!value) return {};
+  
+  // Parse (x,y) format
+  const match = value.match(/^\(([^,]+),([^)]+)\)$/);
+  if (!match) return {};
+  
+  const [, x, y] = match;
+  
+  return {
+    position: 'absolute',
+    left: String(px(x.trim())),
+    top: String(px(y.trim()))
+  };
 };
 
 export const positionRules = {
@@ -92,4 +151,5 @@ export const positionRules = {
   left,
   z,
   layer,
+  '': position, // Empty string to handle (x,y) syntax
 };

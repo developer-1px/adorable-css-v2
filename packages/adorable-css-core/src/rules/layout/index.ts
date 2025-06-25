@@ -4,6 +4,7 @@ import { spacingRules } from "./spacing";
 import { gridRules } from "./grid";
 import { overflowRules } from "./overflow";
 import { insetRules } from "./inset";
+import { scrollMt, scrollMb, scrollMl, scrollMr, scrollM } from "./scroll-margin";
 
 export const layoutRules = {
   ...displayRules,
@@ -12,4 +13,9 @@ export const layoutRules = {
   ...gridRules,
   ...overflowRules,
   ...insetRules,
+  'scroll-mt': scrollMt,
+  'scroll-mb': scrollMb,
+  'scroll-ml': scrollMl,
+  'scroll-mr': scrollMr,
+  'scroll-m': scrollM,
 };

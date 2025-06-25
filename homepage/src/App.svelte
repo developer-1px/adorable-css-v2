@@ -1,19 +1,64 @@
 <script lang="ts">
+  // Page imports - organized by folder
+  import HomePage from './pages/home/HomePage.svelte';
+  import SyntaxPage from './pages/syntax/SyntaxPage.svelte';
+  import TokensPage from './pages/tokens/TokensPage.svelte';
+  import ComponentsPage from './pages/components/ComponentsPage.svelte';
+  import ReferencePage from './pages/reference/ReferencePage.svelte';
+  import PlaygroundPage from './pages/playground/PlaygroundPage.svelte';
+  import DashboardDemo from './pages/playground/DashboardDemo.svelte';
+  
+  // Keep legacy parser for now
   import ParserVisualizer from './lib/ParserVisualizer.svelte';
-  import TestPage from './TestPage.svelte';
-  import ShowcasePage from './ShowcasePage.svelte';
-  import Showcase2 from './Showcase2.svelte';
-  import TokensDemo from './TokensDemo.svelte';
-  import ComponentShowcase from './components/ComponentShowcase.svelte';
-  import AllRulesShowcase from './components/AllRulesShowcase.svelte';
+  
   import { Github, BookOpen, Sparkles } from 'lucide-svelte';
   
-  let currentPage = 'showcase'; // 'showcase', 'parser', 'reference', or 'test'
+  // Available routes
+  type Route = 'home' | 'syntax' | 'tokens' | 'components' | 'reference' | 'playground' | 'dashboard-demo' | 'parser-old';
+  
+  let currentPage: Route = 'home';
+  
+  // Navigation configuration
+  interface NavItem {
+    route: Route;
+    label: string;
+    description?: string;
+  }
+  
+  const navigation: NavItem[] = [
+    { route: 'home', label: 'Home', description: 'AdorableCSS overview and features' },
+    { route: 'syntax', label: 'Syntax Guide', description: 'Learn the AdorableCSS syntax' },
+    { route: 'tokens', label: 'Design Tokens', description: 'Color, spacing, and typography tokens' },
+    { route: 'components', label: 'Components', description: 'UI component examples' },
+    { route: 'reference', label: 'Reference', description: 'Complete rule reference' },
+    { route: 'playground', label: 'Playground', description: 'Experiment with AdorableCSS' }
+  ];
+  
+  // Route configuration
+  const routes: Record<string, Route> = {
+    // Current routes
+    'home': 'home',
+    'syntax': 'syntax',
+    'tokens': 'tokens', 
+    'components': 'components',
+    'reference': 'reference',
+    'playground': 'playground',
+    'dashboard-demo': 'dashboard-demo',
+    'parser-old': 'parser-old',
+    
+    // Legacy route mappings for backward compatibility
+    'showcase': 'home',
+    'parser': 'syntax',
+    'showcase2': 'dashboard-demo',
+    'test': 'playground',
+    'rules': 'reference',
+    '': 'home' // Default route
+  };
   
   // Simple hash-based routing
   function updatePage() {
-    const hash = window.location.hash.slice(1) || 'showcase';
-    currentPage = hash;
+    const hash = window.location.hash.slice(1);
+    currentPage = routes[hash] || 'home';
   }
   
   // Listen for hash changes
@@ -41,36 +86,15 @@
 
       <!-- Navigation Links -->
       <div class="nav-links">
-        <button 
-          class="nav-link {currentPage === 'showcase' ? 'active' : ''}"
-          on:click={() => navigateTo('showcase')}
-        >
-          Home
-        </button>
-        <button 
-          class="nav-link {currentPage === 'parser' ? 'active' : ''}"
-          on:click={() => navigateTo('parser')}
-        >
-          Syntax Guide
-        </button>
-        <button 
-          class="nav-link {currentPage === 'tokens' ? 'active' : ''}"
-          on:click={() => navigateTo('tokens')}
-        >
-          Design Tokens
-        </button>
-        <button 
-          class="nav-link {currentPage === 'components' ? 'active' : ''}"
-          on:click={() => navigateTo('components')}
-        >
-          Components
-        </button>
-        <button 
-          class="nav-link {currentPage === 'rules' ? 'active' : ''}"
-          on:click={() => navigateTo('rules')}
-        >
-          All Rules
-        </button>
+        {#each navigation as navItem}
+          <button 
+            class="nav-link {currentPage === navItem.route ? 'active' : ''}"
+            on:click={() => navigateTo(navItem.route)}
+            title={navItem.description}
+          >
+            {navItem.label}
+          </button>
+        {/each}
       </div>
 
       <!-- Action Buttons -->
@@ -88,20 +112,22 @@
   </nav>
   
   <main class="main-content">
-    {#if currentPage === 'showcase'}
-      <ShowcasePage />
-    {:else if currentPage === 'showcase2'}
-      <Showcase2 />
-    {:else if currentPage === 'parser'}
-      <ParserVisualizer />
-    {:else if currentPage === 'test'}
-      <TestPage />
+    {#if currentPage === 'home'}
+      <HomePage />
+    {:else if currentPage === 'syntax'}
+      <SyntaxPage />
     {:else if currentPage === 'tokens'}
-      <TokensDemo />
+      <TokensPage />
     {:else if currentPage === 'components'}
-      <ComponentShowcase />
-    {:else if currentPage === 'rules'}
-      <AllRulesShowcase />
+      <ComponentsPage />
+    {:else if currentPage === 'reference'}
+      <ReferencePage />
+    {:else if currentPage === 'playground'}
+      <PlaygroundPage />
+    {:else if currentPage === 'dashboard-demo'}
+      <DashboardDemo />
+    {:else if currentPage === 'parser-old'}
+      <ParserVisualizer />
     {/if}
   </main>
 </div>

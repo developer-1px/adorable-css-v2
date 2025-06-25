@@ -7,19 +7,19 @@
 </script>
 
 <div class="showcase-container p(2xl) bg(--colors-gray-50) min-h(screen)">
-  <div class="container max-w(7xl) mx(auto) vbox gap(2xl)">
+  <div class="container  mx(auto) vbox gap(2xl)">
     <!-- Hero Section -->
     <div class="text(center) vbox gap(lg)">
       <h1 class="font(5xl/1.1/-0.02em) bold c(--colors-gray-900)">
         Refined Design Tokens
       </h1>
-      <p class="font(xl/1.6) c(--colors-gray-600) max-w(2xl) mx(auto)">
+      <p class="font(xl/1.6) c(--colors-gray-600)  mx(auto)">
         A sophisticated design system with carefully crafted values for modern interfaces
       </p>
     </div>
     
     <!-- Typography Showcase -->
-    <Card className="overflow(hidden)">
+    <Card className="clip">
       <CardHeader className="bg(--colors-gray-100) border-b(1/--colors-gray-200)">
         <CardTitle>Typography Scale</CardTitle>
       </CardHeader>
@@ -90,28 +90,28 @@
         <CardTitle>Spacing System</CardTitle>
       </CardHeader>
       <CardContent>
-        <div class="hbox gap(lg) items(end)">
-          <div class="vbox gap(xs) items(center)">
+        <div class="hbox(bottom) gap(lg)">
+          <div class="vbox(center) gap(xs)">
             <div class="w(2xl) h(xs) bg(--colors-primary-500) r(sm)"></div>
             <span class="font(xs) c(--colors-gray-500)">xs</span>
           </div>
-          <div class="vbox gap(xs) items(center)">
+          <div class="vbox(center) gap(xs)">
             <div class="w(2xl) h(sm) bg(--colors-primary-500) r(sm)"></div>
             <span class="font(xs) c(--colors-gray-500)">sm</span>
           </div>
-          <div class="vbox gap(xs) items(center)">
+          <div class="vbox(center) gap(xs)">
             <div class="w(2xl) h(md) bg(--colors-primary-500) r(sm)"></div>
             <span class="font(xs) c(--colors-gray-500)">md</span>
           </div>
-          <div class="vbox gap(xs) items(center)">
+          <div class="vbox(center) gap(xs)">
             <div class="w(2xl) h(lg) bg(--colors-primary-500) r(sm)"></div>
             <span class="font(xs) c(--colors-gray-500)">lg</span>
           </div>
-          <div class="vbox gap(xs) items(center)">
+          <div class="vbox(center) gap(xs)">
             <div class="w(2xl) h(xl) bg(--colors-primary-500) r(sm)"></div>
             <span class="font(xs) c(--colors-gray-500)">xl</span>
           </div>
-          <div class="vbox gap(xs) items(center)">
+          <div class="vbox(center) gap(xs)">
             <div class="w(2xl) h(2xl) bg(--colors-primary-500) r(sm)"></div>
             <span class="font(xs) c(--colors-gray-500)">2xl</span>
           </div>
@@ -172,8 +172,8 @@
           <div class="vbox gap(md)">
             <h3 class="font(lg) semibold">Modern Card</h3>
             <div class="p(xl) bg(--colors-white) r(xl) shadow(lg) border(1/--colors-gray-200)">
-              <div class="hbox gap(lg) items(center)">
-                <div class="w(3xl) h(3xl) r(lg) bg(gradient/135deg/--colors-primary-400/--colors-primary-600)"></div>
+              <div class="hbox(middle) gap(lg)">
+                <div class="w(3xl) h(3xl) r(lg) bg(--colors-primary-400..--colors-primary-600/135deg)"></div>
                 <div class="vbox gap(xs) flex">
                   <div class="font(lg) semibold c(--colors-gray-900)">Premium Feature</div>
                   <div class="font(sm) c(--colors-gray-600)">Experience the refined design system</div>

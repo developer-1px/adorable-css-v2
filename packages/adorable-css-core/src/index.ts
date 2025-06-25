@@ -4,6 +4,7 @@ export * from "./rules";
 export * from "./values/makeValue";
 export * from "./tokens";
 export * from "./plugins/tokens";
+export * from "./rules/plugins";
 
 // Re-export main functions for convenience
 export { parseAdorableCSS } from "./parser/parser";

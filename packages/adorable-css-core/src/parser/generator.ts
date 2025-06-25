@@ -25,7 +25,7 @@ const generateCSSFromSelector = (selector: ParsedSelector): string => {
   const result =
     selector.type === "function" && selector.args
       ? handler(selector.args.join(""))
-      : handler();
+      : handler("");
 
   return cssObjectToString(result);
 };

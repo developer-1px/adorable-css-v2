@@ -1,17 +1,17 @@
 <script lang="ts">
   // Import shadcn/ui style components
-  import Button from './ui/Button.svelte';
-  import Card from './ui/Card.svelte';
-  import CardHeader from './ui/CardHeader.svelte';
-  import CardTitle from './ui/CardTitle.svelte';
-  import CardDescription from './ui/CardDescription.svelte';
-  import CardContent from './ui/CardContent.svelte';
-  import CardFooter from './ui/CardFooter.svelte';
-  import Avatar from './ui/Avatar.svelte';
-  import AvatarImage from './ui/AvatarImage.svelte';
-  import AvatarFallback from './ui/AvatarFallback.svelte';
-  import Badge from './ui/Badge.svelte';
-  import Input from './ui/Input.svelte';
+  import Button from '../../components/ui/Button.svelte';
+  import Card from '../../components/ui/Card.svelte';
+  import CardHeader from '../../components/ui/CardHeader.svelte';
+  import CardTitle from '../../components/ui/CardTitle.svelte';
+  import CardDescription from '../../components/ui/CardDescription.svelte';
+  import CardContent from '../../components/ui/CardContent.svelte';
+  import CardFooter from '../../components/ui/CardFooter.svelte';
+  import Avatar from '../../components/ui/Avatar.svelte';
+  import AvatarImage from '../../components/ui/AvatarImage.svelte';
+  import AvatarFallback from '../../components/ui/AvatarFallback.svelte';
+  import Badge from '../../components/ui/Badge.svelte';
+  import Input from '../../components/ui/Input.svelte';
   import { Flame as FireIcon } from 'lucide-svelte';
   
   let searchValue = '';
@@ -49,7 +49,7 @@
         <!-- Sizes -->
         <div class="vbox gap(sm)">
           <h4 class="font(md) semibold">Sizes</h4>
-          <div class="hbox gap(xs) items(center)">
+          <div class="hbox(middle) gap(xs)">
             <Button size="sm">Small</Button>
             <Button>Default</Button>
             <Button size="lg">Large</Button>
@@ -109,7 +109,7 @@
         <!-- Card with Avatar -->
         <Card>
           <CardHeader>
-            <div class="hbox gap(sm) items(center)">
+            <div class="hbox(middle) gap(sm)">
               <Avatar>
                 <AvatarImage src="https://github.com/shadcn.png" alt="User" />
                 <AvatarFallback>CN</AvatarFallback>
@@ -141,7 +141,7 @@
         <!-- Sizes -->
         <div class="vbox gap(xs)">
           <h4 class="font(md) semibold">Sizes</h4>
-          <div class="hbox gap(xs) items(center)">
+          <div class="hbox(middle) gap(xs)">
             <Avatar size="sm">
               <AvatarFallback>SM</AvatarFallback>
             </Avatar>
@@ -187,7 +187,7 @@
       <div class="vbox gap(md)">
         <div class="vbox gap(xs)">
           <h4 class="font(md) semibold">Variants</h4>
-          <div class="hbox gap(xs) items(center)">
+          <div class="hbox(middle) gap(xs)">
             <Badge>Default</Badge>
             <Badge variant="secondary">Secondary</Badge>
             <Badge variant="destructive">Destructive</Badge>
@@ -197,16 +197,16 @@
         
         <div class="vbox gap(xs)">
           <h4 class="font(md) semibold">In Context</h4>
-          <div class="hbox gap(md) items(center)">
-            <div class="hbox gap(xs) items(center)">
+          <div class="hbox(middle) gap(md)">
+            <div class="hbox(middle) gap(xs)">
               <span class="font(sm)">Status:</span>
               <Badge variant="secondary">Active</Badge>
             </div>
-            <div class="hbox gap(xs) items(center)">
+            <div class="hbox(middle) gap(xs)">
               <span class="font(sm)">Priority:</span>
               <Badge variant="destructive">High</Badge>
             </div>
-            <div class="hbox gap(xs) items(center)">
+            <div class="hbox(middle) gap(xs)">
               <span class="font(sm)">Version:</span>
               <Badge variant="outline">v2.0.0</Badge>
             </div>
@@ -240,7 +240,7 @@
         
         <div class="vbox gap(xs)">
           <h4 class="font(md) semibold">Different Types</h4>
-          <div class="grid(2) gap(md) max-w(2xl)">
+          <div class="grid(2) gap(md) ">
             <Input type="email" placeholder="Email address" />
             <Input type="password" placeholder="Password" />
             <Input type="number" placeholder="Age" />
@@ -250,7 +250,7 @@
         
         <div class="vbox gap(xs)">
           <h4 class="font(md) semibold">States</h4>
-          <div class="grid(2) gap(md) max-w(2xl)">
+          <div class="grid(2) gap(md) ">
             <Input placeholder="Normal input" />
             <Input placeholder="Disabled input" disabled />
             <Input placeholder="Readonly input" readonly value="Read only value" />

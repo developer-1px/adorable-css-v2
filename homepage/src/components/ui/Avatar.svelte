@@ -11,7 +11,7 @@
     xl: 'h(4xl) w(4xl)'
   };
   
-  const baseClasses = 'relative flex shrink(0) overflow(hidden) r(full)';
+  const baseClasses = 'relative flex shrink(0) clip r(full)';
   
   // Set context for child components
   setContext('avatar', {

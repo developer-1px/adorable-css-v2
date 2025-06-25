@@ -1,12 +1,12 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import Card from './ui/Card.svelte';
-  import CardHeader from './ui/CardHeader.svelte';
-  import CardTitle from './ui/CardTitle.svelte';
-  import CardDescription from './ui/CardDescription.svelte';
-  import CardContent from './ui/CardContent.svelte';
-  import Badge from './ui/Badge.svelte';
-  import Input from './ui/Input.svelte';
+  import Card from '../../components/ui/Card.svelte';
+  import CardHeader from '../../components/ui/CardHeader.svelte';
+  import CardTitle from '../../components/ui/CardTitle.svelte';
+  import CardDescription from '../../components/ui/CardDescription.svelte';
+  import CardContent from '../../components/ui/CardContent.svelte';
+  import Badge from '../../components/ui/Badge.svelte';
+  import Input from '../../components/ui/Input.svelte';
   import { Lightbulb as Idea } from 'lucide-svelte';
   
   // Import the rules from the core package
@@ -163,7 +163,7 @@
   </div>
   
   <!-- Compact Filters -->
-  <div class="hbox gap(sm) items(center) p(md) bg(--colors-white) r(lg) border(1/--colors-gray-200)">
+  <div class="hbox(middle) gap(sm) p(md) bg(--colors-white) r(lg) border(1/--colors-gray-200)">
     <Input 
       bind:value={searchTerm} 
       placeholder="Search rules..." 
@@ -189,7 +189,7 @@
   {:else}
     {#each Object.entries(groupedRules) as [categoryKey, rules]}
       <div class="category-section">
-        <div class="hbox gap(xs) items(center) mb(sm)">
+        <div class="hbox(middle) gap(xs) mb(sm)">
           <h2 class="heading(h2) c(--colors-gray-900)">{ruleCategories[categoryKey]?.name || categoryKey}</h2>
           <Badge variant={getVariantBadge(categoryKey)} className="font(xs)">{rules.length}</Badge>
         </div>
@@ -200,7 +200,7 @@
                  on:click={() => copyToClipboard(ruleName)}
                  title="Click to copy: {ruleName} | Group: {ruleInfo?.group || ruleInfo?.category}">
               <div class="vbox gap(xs)">
-                <div class="hbox gap(xs) items(center) justify(between)">
+                <div class="hbox(middle) gap(auto)">
                   <code class="rule-name font(xs) semibold c(--colors-gray-800)">{ruleName}</code>
                   {#if ruleInfo?.isFunction}
                     <span class="font(xs) c(--colors-gray-400)">ƒ</span>
@@ -220,7 +220,7 @@
   <!-- Quick Tips -->
   <div class="p(md) r(lg) bg(--colors-blue-50) border(1/--colors-blue-200)">
     <p class="font(sm) c(--colors-blue-800)">
-      <strong class="hbox gap(xs) items(center)"><Idea size="14" /> Tip:</strong> Click any rule to copy it • Use <code class="px(xs) py(xs) r(sm) bg(--colors-blue-100)">value/value</code> for combined values • Add <code class="px(xs) py(xs) r(sm) bg(--colors-blue-100)">hover:</code> for states
+      <strong class="hbox(middle) gap(xs)"><Idea size="14" /> Tip:</strong> Click any rule to copy it • Use <code class="px(xs) py(xs) r(sm) bg(--colors-blue-100)">value/value</code> for combined values • Add <code class="px(xs) py(xs) r(sm) bg(--colors-blue-100)">hover:</code> for states
     </p>
   </div>
 </div>

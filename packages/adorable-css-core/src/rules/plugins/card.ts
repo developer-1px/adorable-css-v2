@@ -32,7 +32,7 @@ export const card: RuleHandler = (args?: string): CSSRule => {
   
   return {
     background: 'white',
-    'border-radius': px(radius),
+    'border-radius': String(px(radius)),
     'box-shadow': shadow,
     border: '1px solid rgba(0, 0, 0, 0.05)',
     overflow: 'hidden'
@@ -46,10 +46,7 @@ export const cardHover: RuleHandler = (args?: string): CSSRule => {
     ...cardStyles,
     transition: 'all 0.3s ease',
     cursor: 'pointer',
-    '&:hover': {
-      transform: 'translateY(-4px)',
-      'box-shadow': '0 12px 32px rgba(0, 0, 0, 0.15)'
-    }
+    '&:hover': '{ transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15); }'
   };
 };
 
@@ -71,7 +68,7 @@ export const cardDark: RuleHandler = (args?: string): CSSRule => {
   
   return {
     background: '#1a1a1a',
-    'border-radius': px(radius),
+    'border-radius': String(px(radius)),
     'box-shadow': shadow,
     border: '1px solid rgba(255, 255, 255, 0.1)',
     overflow: 'hidden'
@@ -102,7 +99,7 @@ export const cardMinimal: RuleHandler = (args?: string): CSSRule => {
   
   return {
     background: 'transparent',
-    'border-radius': px(radius),
+    'border-radius': String(px(radius)),
     border: '1px solid rgba(0, 0, 0, 0.1)',
     overflow: 'hidden'
   };

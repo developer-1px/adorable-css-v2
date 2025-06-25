@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import Button from './components/ui/Button.svelte';
-  import Card from './components/ui/Card.svelte';
-  import MetricCard from './components/ui/MetricCard.svelte';
+  import Button from '../../components/ui/Button.svelte';
+  import Card from '../../components/ui/Card.svelte';
+  import MetricCard from '../../components/ui/MetricCard.svelte';
   
   let mounted = false;
   let currentDate = '';
@@ -73,9 +73,9 @@
     <div class="hbox(center) gap(2xl)">
       <!-- Logo -->
       <div class="logo hbox(center) gap(xs)">
-        <div class="logo-mark relative w(40) h(40) r(lg) bg(gradient/135deg/#0a0a0a/#262626) hbox(pack) shadow(md)">
+        <div class="logo-mark relative w(40) h(40) r(lg) bg(#0a0a0a..#262626/135deg) hbox(pack) shadow(md)">
           <span class="font(xl) bold c(white)">A</span>
-          <div class="logo-shine absolute inset(0) r(lg) bg(gradient/135deg/white.2/transparent) opacity(0) hover:opacity(100) transition"></div>
+          <div class="logo-shine layer(fill) r(lg) bg(white.2..transparent/135deg) opacity(0) hover:opacity(100) transition"></div>
         </div>
         <div class="vbox gap(xs)">
           <h1 class="font(lg) bold c(#0a0a0a)">Analytics Pro</h1>
@@ -115,7 +115,7 @@
       
       <!-- User -->
       <button class="user-menu hbox(center) gap(xs) px(xs) py(xs) r(2xl) hover:bg(#f5f5f5) transition">
-        <div class="avatar w(32) h(32) r(full) bg(gradient/135deg/#6366f1/#8b5cf6) hbox(pack) shadow(sm)">
+        <div class="avatar w(32) h(32) r(full) bg(#6366f1..#8b5cf6/135deg) hbox(pack) shadow(sm)">
           <span class="font(sm) bold c(white)">JW</span>
         </div>
         <div class="vbox gap(xs) text(left)">
@@ -179,18 +179,18 @@
           
           <!-- Chart Area -->
           <div class="chart-area relative h(320) bg(#fafbfc) r(xl) p(xl)">
-            <div class="chart-grid absolute inset(xl)">
+            <div class="chart-grid layer(top:xl+right:xl+bottom:xl+left:xl)">
               <!-- Grid lines -->
               {#each [0, 1, 2, 3, 4] as i}
                 <div class="grid-line absolute w(fill) h(1) bg(#e5e5e5.5)" style="bottom: {i * 25}%"></div>
               {/each}
               
               <!-- Bars -->
-              <div class="bars absolute inset-x(0) bottom(0) hbox(between) gap(xs)">
+              <div class="bars layer(left:0+right:0+bottom:0) hbox(between) gap(xs)">
                 {#each Array(30) as _, i}
                   <div class="bar-wrapper flex vbox(end) group">
                     <div 
-                      class="bar w(fill) bg(gradient/180deg/#3b82f6/#2563eb) r(xs/xs/none/none) transition hover:bg(gradient/180deg/#2563eb/#1d4ed8) relative"
+                      class="bar w(fill) bg(#3b82f6..#2563eb/to-bottom) r(xs/xs/none/none) transition hover:bg(#2563eb..#1d4ed8/to-bottom) relative"
                       style="height: {Math.random() * 80 + 20}%"
                     >
                       <div class="bar-tooltip absolute bottom(fill) x(center) mb(sm) px(xs) py(xs) r(sm) bg(#0a0a0a) c(white) font(xs) whitespace(nowrap) opacity(0) group-hover:opacity(100) transition pointer-events(none)">

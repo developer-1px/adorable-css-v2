@@ -196,14 +196,14 @@ export const referenceData: ReferenceData = {
       },
       {
         property: "background-gradient",
-        syntax: ["bg(linear/45deg/#f00/#00f)", "bg(radial/circle/#f00/#00f)"],
+        syntax: ["bg(#f00..#00f/45deg)", "bg(#f00..#00f/radial-circle)"],
       },
       {
         property: "background-simple-gradient",
         syntax: [
           "bg(#667eea..#764ba2)",
           "bg(red..blue)",
-          "bg(gradient/135deg/#667eea/#764ba2)",
+          "bg(#667eea..#764ba2/135deg)",
         ],
       },
       { property: "background-image", syntax: ["bg('url.png')"] },
