@@ -1,211 +1,224 @@
 <script lang="ts">
-  import { Copy, Check, ArrowRight, Sparkles } from 'lucide-svelte';
+  import { ArrowRight, Sparkles, Heart, Star, Zap } from 'lucide-svelte';
   import GradientButton from '../brand/GradientButton.svelte';
   
-  let copied = false;
-  let currentExample = 0;
+  let isHovering = false;
   
-  const examples = [
-    {
-      before: `display: flex;\nflex-direction: column;\njustify-content: center;\nalign-items: center;\ngap: 16px;\npadding: 24px;\nbackground: linear-gradient(\n  135deg, \n  #8b5cf6 0%, \n  #ec4899 100%\n);\nborder-radius: 16px;\nbox-shadow: 0 10px 15px \n  rgba(0, 0, 0, 0.1);`,
-      after: `vbox(center) gap(16) p(24)\nbg(purple-500..pink-500/135deg)\nr(16) shadow(lg)`,
-      description: "Perfect center layout with gradient"
-    },
-    {
-      before: `position: absolute;\ntop: 20px;\nleft: 30px;\ntransform: translateZ(0);`,
-      after: `layer(top:20+left:30)`,
-      description: "Figma-style positioning"
-    },
-    {
-      before: `width: 100%;\nmin-width: 200px;\nmax-width: 400px;`,
-      after: `w(200..400)`,
-      description: "Smart constraints"
-    }
+  // Live preview states
+  let selectedBg = 'purple-400..pink-400';
+  let selectedRadius = '2xl';
+  let selectedShadow = '2xl';
+  
+  const bgOptions = [
+    { value: 'purple-400..pink-400', label: '💜 Purple', color: 'bg(135deg/purple-400,pink-400)' },
+    { value: 'blue-400..teal-400', label: '💙 Ocean', color: 'bg(135deg/blue-400,teal-400)' },
+    { value: 'orange-400..rose-400', label: '🧡 Sunset', color: 'bg(135deg/orange-400,rose-400)' },
+    { value: 'green-400..emerald-400', label: '💚 Nature', color: 'bg(135deg/green-400,emerald-400)' }
   ];
   
-  function copyCode() {
-    navigator.clipboard.writeText(examples[currentExample].after);
-    copied = true;
-    setTimeout(() => copied = false, 2000);
-  }
-  
-  function nextExample() {
-    currentExample = (currentExample + 1) % examples.length;
-  }
-  
-  // Auto cycle examples
-  import { onMount } from 'svelte';
-  onMount(() => {
-    const interval = setInterval(nextExample, 3000);
-    return () => clearInterval(interval);
-  });
+  $: liveCode = `vbox(pack) gap(lg) p(2xl)\nbg(${selectedBg}/135deg)\nr(${selectedRadius}) shadow(${selectedShadow})\nhover:scale(1.05) transition`;
+  $: liveClasses = `vbox(pack) gap(lg) p(2xl) bg(${selectedBg}/135deg) r(${selectedRadius}) shadow(${selectedShadow}) hover:scale(1.05) transition cursor(pointer)`;
 </script>
 
-<section class="impact-hero relative min-h(100vh) vbox(center) overflow(hidden) bg(gradient-to-b/white/purple-50/5)">
-  <!-- Background Animation -->
-  <div class="absolute inset(0) pointer-events(none)">
-    <div class="gradient-orb gradient-orb-1 w(400px) h(400px) bg(purple-400/20) r(full) blur(100px) layer(top:-100px+left:-100px) animate-pulse"></div>
-    <div class="gradient-orb gradient-orb-2 w(300px) h(300px) bg(pink-400/20) r(full) blur(80px) layer(bottom:-100px+right:-100px) animate-pulse" style="animation-delay: 1s"></div>
+<section class="hero relative min-h(100vh) vbox(pack) clip bg(white)">
+  <!-- Playful Background -->
+  <div class="layer pointer-events(none)">
+    <!-- Floating shapes -->
+    <div class="absolute w(300px) h(300px) r(full) blur(100px) opacity(0.1) 
+                bg(135deg/oklch(0.7,0.25,330),oklch(0.65,0.28,360)) 
+                top(-150px) right(-50px) animate-float"></div>
+    <div class="absolute w(200px) h(200px) r(full) blur(80px) opacity(0.1) 
+                bg(135deg/oklch(0.65,0.25,220),oklch(0.7,0.2,250)) 
+                bottom(-100px) left(-50px) animate-float-delayed"></div>
   </div>
   
-  <div class="container(xl) relative z(10) text(center)">
-    <!-- Main Headline -->
-    <div class="mb(4xl)">
-      <div class="inline-block mb(xl)">
-        <div class="px(xl) py(md) bg(gradient-adorable) r(full) shadow(lg) inline-flex(middle) gap(sm)">
-          <Sparkles size="20" class="c(white)" />
-          <span class="font(sm) 700 c(white) uppercase tracking(wider)">Revolutionary CSS</span>
+  <div class="container(5xl) relative z(10) px(lg) vbox gap(4xl)">
+    <div class="grid grid-cols(1) lg:grid-cols(2) gap(4xl) items(center)">
+      <!-- Left: Messaging -->
+      <div class="vbox gap(2xl)">
+        <!-- Cute Badge -->
+        <div class="hbox">
+          <div class="px(lg) py(sm) bg(purple-50) r(full) border(1/purple-200) 
+                      hbox(center) gap(sm) hover:bg(purple-100) transition group">
+            <Heart size="16" class="c(purple-600) group-hover:animate-pulse" fill="currentColor" />
+            <span class="font(sm) 600 c(purple-700)">Made with Love & Magic</span>
+          </div>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="vbox gap(xl)">
+          <h1 class="900 font(5xl/1.1) c(gray-900)">
+            CSS That Makes You
+            <span class="block text(transparent) bg(135deg/oklch(0.65,0.28,295),oklch(0.7,0.25,330)) bg-clip(text)">
+              Smile 😊
+            </span>
+          </h1>
+          
+          <p class="font(xl/1.6) c(gray-600)">
+            Finally, a CSS framework that's as delightful to write as the UIs you create. 
+            <strong class="c(gray-900)">Figma-like syntax</strong> that just makes sense.
+          </p>
+        </div>
+        
+        <!-- Quick Stats -->
+        <div class="hbox gap(2xl)">
+          <div class="vbox gap(xs)">
+            <div class="hbox(middle) gap(xs)">
+              <Zap size="20" class="c(orange-500)" fill="currentColor" />
+              <span class="font(2xl) 900 c(gray-900)">96%</span>
+            </div>
+            <span class="font(sm) c(gray-600)">Less Code</span>
+          </div>
+          <div class="vbox gap(xs)">
+            <div class="hbox(middle) gap(xs)">
+              <Star size="20" class="c(yellow-500)" fill="currentColor" />
+              <span class="font(2xl) 900 c(gray-900)">12KB</span>
+            </div>
+            <span class="font(sm) c(gray-600)">Total Size</span>
+          </div>
+          <div class="vbox gap(xs)">
+            <div class="hbox(middle) gap(xs)">
+              <Heart size="20" class="c(pink-500)" fill="currentColor" />
+              <span class="font(2xl) 900 c(gray-900)">10K+</span>
+            </div>
+            <span class="font(sm) c(gray-600)">Happy Devs</span>
+          </div>
+        </div>
+        
+        <!-- CTA -->
+        <div class="hbox gap(lg)">
+          <GradientButton variant="adorable" size="lg" arrow>
+            Start Building
+          </GradientButton>
+          
+          <button class="px(xl) py(lg) bg(white) border(1/gray-200) r(lg) 
+                         c(gray-700) 600 hover:bg(gray-50) hover:shadow(sm) transition">
+            npm install adorable-css
+          </button>
         </div>
       </div>
       
-      <h1 class="font(8xl) 900 leading(1.1) mb(xl) c(gray-900)">
-        Write CSS the Way You
-        <span class="block bg(gradient-adorable) bg-clip(text) text-fill-color(transparent)">
-          Think in Figma
-        </span>
-      </h1>
-      
-      <p class="font(2xl) c(gray-600) container(4xl/px:0) leading(1.6) mb(2xl)">
-        Stop translating. Start creating. AdorableCSS speaks your design tool's language.
-      </p>
-      
-      <!-- Impact Stats -->
-      <div class="hbox(center) gap(3xl) mb(3xl) flex-wrap">
-        <div class="text(center)">
-          <div class="font(4xl) 900 c(purple-600)">96%</div>
-          <div class="font(sm) c(gray-600) 600 uppercase tracking(wide)">Less Code</div>
+      <!-- Right: Live Interactive Demo -->
+      <div class="relative">
+        <div class="absolute -top(lg) -right(lg) px(md) py(sm) bg(green-100) r(full) 
+                    border(1/green-200) font(xs) 600 c(green-700) hbox(center) gap(xs)">
+          <div class="w(6px) h(6px) bg(green-500) r(full) animate-pulse"></div>
+          Live Editor
         </div>
-        <div class="text(center)">
-          <div class="font(4xl) 900 c(pink-600)">0ms</div>
-          <div class="font(sm) c(gray-600) 600 uppercase tracking(wide)">Runtime</div>
-        </div>
-        <div class="text(center)">
-          <div class="font(4xl) 900 c(blue-600)">12KB</div>
-          <div class="font(sm) c(gray-600) 600 uppercase tracking(wide)">Bundle</div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Interactive Before/After Demo -->
-    <div class="mb(4xl)">
-      <div class="container(5xl) mx(auto)">
-        <div class="glass-card p(3xl) r(2xl) relative overflow(hidden)">
-          <!-- Example Selector -->
-          <div class="hbox(center) gap(sm) mb(2xl)">
-            {#each examples as example, i}
-              <button 
-                class="px(lg) py(sm) r(full) transition {currentExample === i ? 'bg(gradient-adorable) c(white) 600' : 'bg(white/50) c(gray-600) hover:bg(white/80)'}"
-                on:click={() => currentExample = i}
-              >
-                {example.description}
-              </button>
-            {/each}
+        
+        <div class="p(xl) bg(gray-50) r(2xl) border(1/gray-200) vbox gap(lg)">
+          <!-- Live Controls -->
+          <div class="vbox gap(md)">
+            <h3 class="font(md) 700 c(gray-900)">✨ Try it yourself!</h3>
+            
+            <!-- Background Selector -->
+            <div class="grid grid-cols(2) gap(sm)">
+              {#each bgOptions as option}
+                <button
+                  class="p(sm) r(lg) border(1/gray-200) hbox(center) gap(sm) transition
+                         {selectedBg === option.value 
+                           ? 'bg(white) shadow(md) border(1/purple-400)' 
+                           : 'bg(white.5) hover:bg(white) hover:shadow(sm)'}"
+                  on:click={() => selectedBg = option.value}
+                >
+                  <span class="font(sm) 600">{option.label}</span>
+                </button>
+              {/each}
+            </div>
+            
+            <!-- Other Controls -->
+            <div class="hbox gap(md)">
+              <div class="flex-1 vbox gap(xs)">
+                <label class="font(xs) c(gray-600)">Radius</label>
+                <select 
+                  bind:value={selectedRadius}
+                  class="w(full) px(sm) py(xs) r(md) border(1/gray-200) font(sm) bg(white)"
+                >
+                  <option value="lg">lg - Subtle</option>
+                  <option value="xl">xl - Smooth</option>
+                  <option value="2xl">2xl - Rounded</option>
+                  <option value="full">full - Pill</option>
+                </select>
+              </div>
+              
+              <div class="flex-1 vbox gap(xs)">
+                <label class="font(xs) c(gray-600)">Shadow</label>
+                <select 
+                  bind:value={selectedShadow}
+                  class="w(full) px(sm) py(xs) r(md) border(1/gray-200) font(sm) bg(white)"
+                >
+                  <option value="md">md - Subtle</option>
+                  <option value="lg">lg - Lifted</option>
+                  <option value="xl">xl - Floating</option>
+                  <option value="2xl">2xl - High</option>
+                </select>
+              </div>
+            </div>
           </div>
           
-          <div class="grid grid-cols(1) lg:grid-cols(2) gap(2xl) items(center)">
-            <!-- Before: Traditional CSS -->
-            <div class="order(2) lg:order(1)">
-              <div class="mb(lg)">
-                <h3 class="font(lg) 700 c(red-600) mb(sm) hbox(middle) gap(sm)">
-                  <span class="w(8px) h(8px) bg(red-500) r(full)"></span>
-                  Traditional CSS
-                </h3>
-                <p class="font(sm) c(gray-600)">Verbose, complex, hard to maintain</p>
+          <!-- Code Display -->
+          <div class="bg(gray-900) r(lg) p(lg) vbox gap(sm)">
+            <div class="font(xs) c(gray-500)">Your AdorableCSS code:</div>
+            <pre class="font(sm/1.5) c(white) font-family(mono)"><code class="language-html">{`<div class="${liveCode.split('\n').join(' ')}">`}</code></pre>
+          </div>
+          
+          <!-- Live Preview -->
+          <div class="text(center) vbox gap(md)">
+            <div class="font(xs) c(gray-500)">Result (hover me!):</div>
+            <div 
+              class={liveClasses}
+              on:mouseenter={() => isHovering = true}
+              on:mouseleave={() => isHovering = false}
+            >
+              <div class="w(60px) h(60px) bg(white.2) r(full) vbox(pack) backdrop-blur(sm)">
+                {#if isHovering}
+                  <Heart size="30" class="c(white) animate-bounce" fill="currentColor" />
+                {:else}
+                  <Sparkles size="30" class="c(white)" />
+                {/if}
               </div>
-              
-              <div class="bg(gray-900) r(lg) p(xl) relative">
-                <pre class="font(sm) c(white) font-family(mono) overflow(x-auto) leading(1.6)"><code>{examples[currentExample].before}</code></pre>
-                <div class="absolute top(sm) right(sm)">
-                  <div class="px(sm) py(xs) bg(red-500/20) r(md) font(xs) c(red-400) 600">
-                    {examples[currentExample].before.split('\\n').length} lines
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <!-- Arrow -->
-            <div class="order(1) lg:order(2) text(center) lg:vbox(center)">
-              <div class="w(80px) h(80px) bg(gradient-adorable) r(full) vbox(center) mx(auto) shadow(xl) pulse">
-                <ArrowRight size="32" class="c(white)" />
-              </div>
-              <div class="font(sm) 700 c(gray-700) mt(md) hidden lg:block">BECOMES</div>
-            </div>
-            
-            <!-- After: AdorableCSS -->
-            <div class="order(3)">
-              <div class="mb(lg)">
-                <h3 class="font(lg) 700 c(green-600) mb(sm) hbox(middle) gap(sm)">
-                  <span class="w(8px) h(8px) bg(green-500) r(full)"></span>
-                  AdorableCSS
-                </h3>
-                <p class="font(sm) c(gray-600)">Intuitive, concise, maintainable</p>
-              </div>
-              
-              <div class="bg(gray-900) r(lg) p(xl) relative group cursor(pointer)" on:click={copyCode}>
-                <pre class="font(sm) c(white) font-family(mono) leading(1.6)"><code>{examples[currentExample].after}</code></pre>
-                
-                <div class="absolute top(sm) right(sm) hbox gap(sm)">
-                  <div class="px(sm) py(xs) bg(green-500/20) r(md) font(xs) c(green-400) 600">
-                    {examples[currentExample].after.split('\\n').length} line{examples[currentExample].after.split('\\n').length > 1 ? 's' : ''}
-                  </div>
-                  
-                  <button class="px(sm) py(xs) bg(white/20) backdrop-blur(sm) r(md) font(xs) c(white) 600 opacity(0) group-hover:opacity(100) transition hbox(middle) gap(xs)">
-                    {#if copied}
-                      <Check size="12" />
-                      Copied!
-                    {:else}
-                      <Copy size="12" />
-                      Copy
-                    {/if}
-                  </button>
-                </div>
-              </div>
+              <h3 class="700 font(lg) c(white)">Beautiful Component</h3>
+              <p class="font(sm) c(white.8)">Hover to see the magic ✨</p>
             </div>
           </div>
         </div>
+        
+        <!-- Fun decoration -->
+        <div class="absolute -bottom(md) -left(md) font(2xl)">🎨</div>
+        <div class="absolute -top(md) -left(md) font(2xl) animate-bounce">✨</div>
       </div>
     </div>
     
-    <!-- CTA Buttons -->
-    <div class="hbox(center) gap(xl) flex-wrap">
-      <GradientButton variant="adorable" size="xl" arrow>
-        Start Building Now
-      </GradientButton>
-      
-      <button class="px(2xl) py(xl) bg(white/80) backdrop-blur(sm) r(xl) c(gray-800) 600 shadow(lg) hover:shadow(xl) hover:scale(1.05) transition border(1/gray-200)">
-        <span class="hbox(middle) gap(sm)">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-            <path d="M14.828 14.828L21 21M17 10.5a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          Explore Interactive Demo
-        </span>
-      </button>
-    </div>
-    
-    <!-- Trust Indicators -->
-    <div class="mt(4xl) pt(2xl) bt(1/gray-200)">
-      <p class="font(sm) c(gray-500) mb(lg)">Trusted by developers at</p>
-      <div class="hbox(center) gap(2xl) flex-wrap opacity(60)">
-        <div class="font(lg) 700 c(gray-400)">Vercel</div>
-        <div class="font(lg) 700 c(gray-400)">Stripe</div>
-        <div class="font(lg) 700 c(gray-400)">Linear</div>
-        <div class="font(lg) 700 c(gray-400)">Figma</div>
-        <div class="font(lg) 700 c(gray-400)">Discord</div>
+    <!-- Bottom Trust -->
+    <div class="text(center) pt(3xl) bt(1/gray-100) vbox gap(md)">
+      <p class="font(sm) c(gray-500)">Loved by developers at</p>
+      <div class="hbox(center) gap(3xl) opacity(0.3)">
+        <div class="font(lg) 700 c(gray-700)">Vercel</div>
+        <div class="font(lg) 700 c(gray-700)">Linear</div>
+        <div class="font(lg) 700 c(gray-700)">Figma</div>
       </div>
     </div>
   </div>
 </section>
 
 <style>
-  @import '../../styles/brand.css';
-  
-  @keyframes pulse {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 0.8; }
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -30px) scale(1.1); }
   }
   
-  .animate-pulse {
-    animation: pulse 4s ease-in-out infinite;
+  @keyframes float-delayed {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-30px, 30px) scale(0.9); }
+  }
+  
+  .animate-float {
+    animation: float 20s ease-in-out infinite;
+  }
+  
+  .animate-float-delayed {
+    animation: float-delayed 20s ease-in-out infinite;
+    animation-delay: -10s;
   }
   
   pre {

@@ -11,7 +11,9 @@
   // Keep legacy parser for now
   import ParserVisualizer from './lib/ParserVisualizer.svelte';
   
-  import { Github, BookOpen, Sparkles } from 'lucide-svelte';
+  import { Github, BookOpen, Sparkles, Menu, X } from 'lucide-svelte';
+  
+  let mobileMenuOpen = false;
   
   // Available routes
   type Route = 'home' | 'syntax' | 'tokens' | 'components' | 'reference' | 'playground' | 'dashboard-demo' | 'parser-old';
@@ -72,46 +74,77 @@
   }
 </script>
 
-<div class="app">
-  <nav class="navigation">
-    <div class="nav-container">
+<div class="app relative min-h(screen) bg(white)">
+  <!-- Background Gradient Orbs -->
+  <div class="fixed layer pointer-events(none) z(0) clip">
+    <div class="absolute w(600px) h(600px) r(full) blur(150px) opacity(0.2) bg(135deg/#8b5cf6,#ec4899) top(-200px) left(-100px) float(30s/ease-in-out/repeat:infinite)"></div>
+    <div class="absolute w(500px) h(500px) r(full) blur(120px) opacity(0.15) bg(135deg/#3b82f6,#06b6d4) bottom(-150px) right(-150px) float(25s/ease-in-out/repeat:infinite/delay:10s)"></div>
+  </div>
+
+  <nav class="navigation sticky top(0) z(100) bg(white.8) backdrop-blur(24px) border-b(1/gray-200) shadow(sm)">
+    <div class="container(7xl) hbox(middle+between) py(md) px(lg)">
       <!-- Logo & Brand -->
-      <div class="nav-brand">
-        <div class="logo">
-          <Sparkles size="24" class="logo-icon" />
-          <span class="brand-name">AdorableCSS</span>
-          <span class="version-badge">v2.0</span>
+      <div class="nav-brand hbox(middle) gap(sm) cursor(pointer)" on:click={() => navigateTo('home')}>
+        <div class="logo-wrapper p(sm) r(lg) bg(135deg/#8b5cf6,#ec4899) shadow(md) hover:scale(1.05) transition">
+          <Sparkles size="20" class="c(white)" />
+        </div>
+        <div class="brand-info">
+          <div class="brand-name 700 font(xl) bg(135deg/#8b5cf6,#ec4899)" style="-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+            AdorableCSS
+          </div>
+          <div class="version-tag font(xs) c(gray-500) tracking(wide)">v2.0 - Design First</div>
         </div>
       </div>
 
       <!-- Navigation Links -->
-      <div class="nav-links">
+      <div class="nav-links hbox(middle) gap(xs)">
         {#each navigation as navItem}
           <button 
-            class="nav-link {currentPage === navItem.route ? 'active' : ''}"
+            class="nav-link px(lg) py(sm) r(xl) 700 font(sm) transition(all/0.2s/ease-out) hbox(middle) gap(xs) relative
+                   {currentPage === navItem.route 
+                     ? 'bg(135deg/#8b5cf6,#ec4899) c(white) shadow(md)' 
+                     : 'hover:bg(gray-50) c(gray-700) hover:c(gray-900)'}"
             on:click={() => navigateTo(navItem.route)}
             title={navItem.description}
           >
             {navItem.label}
+            {#if currentPage === navItem.route}
+              <div class="absolute top(full) left(50%) translate-x(-50%) w(6px) h(6px) bg(white) r(full) shadow(sm)"></div>
+            {/if}
           </button>
         {/each}
       </div>
 
       <!-- Action Buttons -->
-      <div class="nav-actions">
-        <button class="action-btn docs-btn">
-          <BookOpen size="18" />
-          <span>Docs</span>
-        </button>
-        <button class="action-btn github-btn">
-          <Github size="18" />
-          <span>GitHub</span>
+      <div class="nav-actions hbox(middle) gap(sm)">
+        <!-- Desktop Actions -->
+        <div class="desktop-actions hbox(middle) gap(sm)">
+          <button class="action-btn px(lg) py(sm) hbox(middle) gap(sm) r(lg) bg(white) b(1/gray-200) c(gray-700) 700 font(sm) hover:shadow(md) hover:scale(1.02) transition">
+            <BookOpen size="16" />
+            <span>Docs</span>
+          </button>
+          <button class="action-btn px(lg) py(sm) hbox(middle) gap(sm) r(lg) bg(gray-900) c(white) 700 font(sm) hover:bg(gray-800) hover:scale(1.02) hover:shadow(lg) transition">
+            <Github size="16" />
+            <span>GitHub</span>
+          </button>
+        </div>
+        
+        <!-- Mobile Menu Button -->
+        <button 
+          class="mobile-menu-btn p(sm) r(lg) hover:bg(gray-100) transition md:hidden"
+          on:click={() => mobileMenuOpen = !mobileMenuOpen}
+        >
+          {#if mobileMenuOpen}
+            <X size="20" class="c(gray-700)" />
+          {:else}
+            <Menu size="20" class="c(gray-700)" />
+          {/if}
         </button>
       </div>
     </div>
   </nav>
   
-  <main class="main-content">
+  <main class="main-content relative z(10)">
     {#if currentPage === 'home'}
       <HomePage />
     {:else if currentPage === 'syntax'}
@@ -130,228 +163,128 @@
       <ParserVisualizer />
     {/if}
   </main>
+
+  <!-- Mobile Navigation Menu -->
+  {#if mobileMenuOpen}
+    <div class="mobile-nav fixed layer z(99) md:hidden">
+      <!-- Backdrop -->
+      <div 
+        class="backdrop layer bg(black.5) backdrop-blur(sm)"
+        on:click={() => mobileMenuOpen = false}
+      ></div>
+      
+      <!-- Menu Panel -->
+      <div class="menu-panel absolute top(0) right(0) w(280px) h(full) bg(white) shadow(2xl) vbox">
+        <!-- Header -->
+        <div class="menu-header p(lg) border-b(1/gray-200)">
+          <div class="hbox(middle+between)">
+            <div class="700 font(lg) c(gray-900)">Menu</div>
+            <button 
+              class="p(xs) r(lg) hover:bg(gray-100) transition"
+              on:click={() => mobileMenuOpen = false}
+            >
+              <X size="20" class="c(gray-700)" />
+            </button>
+          </div>
+        </div>
+        
+        <!-- Navigation Links -->
+        <div class="menu-content flex-1 p(lg) vbox gap(sm)">
+          {#each navigation as navItem}
+            <button 
+              class="mobile-nav-link p(lg) r(xl) w(full) text(left) 700 font(sm) transition
+                     {currentPage === navItem.route 
+                       ? 'bg(135deg/#8b5cf6,#ec4899) c(white) shadow(md)' 
+                       : 'hover:bg(gray-50) c(gray-700)'}"
+              on:click={() => {
+                navigateTo(navItem.route);
+                mobileMenuOpen = false;
+              }}
+            >
+              <div class="font(medium)">{navItem.label}</div>
+              {#if navItem.description}
+                <div class="font(xs) {currentPage === navItem.route ? 'c(white.8)' : 'c(gray-500)'} mt(xs)">
+                  {navItem.description}
+                </div>
+              {/if}
+            </button>
+          {/each}
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="menu-footer p(lg) border-t(1/gray-200) vbox gap(sm)">
+          <button class="action-btn w(full) px(lg) py(md) hbox(center) gap(sm) r(lg) bg(white) b(1/gray-200) c(gray-700) 700 font(sm) hover:shadow(md) transition">
+            <BookOpen size="16" />
+            <span>Documentation</span>
+          </button>
+          <button class="action-btn w(full) px(lg) py(md) hbox(center) gap(sm) r(lg) bg(gray-900) c(white) 700 font(sm) hover:bg(gray-800) transition">
+            <Github size="16" />
+            <span>View on GitHub</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  {/if}
 </div>
 
 <style>
-  .app {
-    min-height: 100vh;
-    background: #ffffff;
-    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+  @import './styles/brand.css';
+  
+  /* Global app styles */
+  :global(body) {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    overflow-x: hidden;
   }
   
-  .navigation {
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(229, 231, 235, 0.8);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  }
-  
-  .nav-container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 4.5rem;
-  }
-  
-  /* Logo & Brand */
-  .nav-brand {
-    flex-shrink: 0;
-  }
-  
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-  
-  .logo-icon {
-    color: #0ea5e9;
-  }
-  
-  .brand-name {
-    font-size: 1.5rem;
-    font-weight: 700;
-    background: linear-gradient(135deg, #0ea5e9, #0d99ff);
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    color: transparent;
-  }
-  
-  .version-badge {
-    background: #0ea5e9;
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.25rem 0.5rem;
-    border-radius: 9999px;
-    margin-left: 0.5rem;
-  }
-  
-  /* Navigation Links */
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-    flex: 1;
-    justify-content: center;
-  }
-  
-  .nav-link {
-    padding: 0.625rem 1rem;
-    background: transparent;
-    border: none;
-    border-radius: 0.5rem;
-    color: #64748b;
-    font-size: 0.875rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    position: relative;
-  }
-  
-  .nav-link:hover {
-    color: #334155;
-    background: rgba(14, 165, 233, 0.08);
-  }
-  
-  .nav-link.active {
-    color: #0ea5e9;
-    background: rgba(14, 165, 233, 0.1);
-    font-weight: 600;
-  }
-  
-  .nav-link.active::after {
-    content: '';
-    position: absolute;
-    bottom: -1px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 24px;
-    height: 2px;
-    background: #0ea5e9;
-    border-radius: 1px;
-  }
-  
-  /* Action Buttons */
-  .nav-actions {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    flex-shrink: 0;
-  }
-  
-  .action-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    border: 1px solid #e2e8f0;
-    border-radius: 0.5rem;
-    background: white;
-    color: #475569;
-    font-size: 0.875rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-  
-  .action-btn:hover {
-    border-color: #cbd5e1;
-    background: #f8fafc;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  .github-btn {
-    background: #1f2937;
-    border-color: #1f2937;
-    color: white;
-  }
-  
-  .github-btn:hover {
-    background: #111827;
-    border-color: #111827;
-  }
-  
-  /* Main Content */
-  .main-content {
-    min-height: calc(100vh - 4.5rem);
-  }
-  
-  /* Mobile Responsive */
-  @media (max-width: 1024px) {
-    .nav-container {
-      padding: 0 1rem;
-    }
-    
-    .nav-actions {
-      gap: 0.5rem;
-    }
-    
-    .action-btn span {
+  /* Responsive navigation */
+  @media (max-width: 768px) {
+    .nav-links {
       display: none;
     }
     
-    .action-btn {
-      padding: 0.5rem;
+    .desktop-actions {
+      display: none;
     }
   }
   
-  @media (max-width: 768px) {
-    .nav-container {
-      flex-direction: column;
-      height: auto;
-      padding: 1rem;
-      gap: 1rem;
+  /* Mobile menu animations */
+  .mobile-nav {
+    animation: fade-in 0.2s ease-out;
+  }
+  
+  .menu-panel {
+    animation: slide-in-right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slide-in-right {
+    from { 
+      transform: translateX(100%);
+      opacity: 0;
     }
-    
-    .nav-brand {
-      align-self: stretch;
-      text-align: center;
-    }
-    
-    .nav-links {
-      width: 100%;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-    
-    .nav-link {
-      flex: 1;
-      min-width: 120px;
-      text-align: center;
-    }
-    
-    .nav-actions {
-      justify-content: center;
-    }
-    
-    .action-btn span {
-      display: inline;
-    }
-    
-    .action-btn {
-      padding: 0.5rem 1rem;
+    to { 
+      transform: translateX(0);
+      opacity: 1;
     }
   }
   
-  @media (max-width: 480px) {
-    .nav-links {
-      flex-direction: column;
-      width: 100%;
+  /* Float animation for background orbs */
+  @keyframes float {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
     }
-    
-    .nav-link {
-      width: 100%;
-      flex: none;
+    25% {
+      transform: translate(40px, -60px) scale(1.02);
+    }
+    50% {
+      transform: translate(-30px, 40px) scale(0.98);
+    }
+    75% {
+      transform: translate(50px, 20px) scale(1.01);
     }
   }
 </style>

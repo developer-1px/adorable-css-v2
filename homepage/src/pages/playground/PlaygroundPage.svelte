@@ -4,10 +4,10 @@
   import { checkFailedClasses } from 'adorable-css-cdn';
   
   let htmlInput = `<div class="container(xl) py(3xl)">
-  <div class="vbox(center) gap(2xl)">
+  <div class="vbox(pack) gap(2xl)">
     <!-- Hero Section -->
-    <div class="vbox(center) gap(lg) text(center)">
-      <h1 class="font(5xl) bold bg(#667eea..#764ba2/135deg) bg-clip(text) text-fill-color(transparent)">
+    <div class="vbox(pack) gap(lg) text(center)">
+      <h1 class="font(5xl) bold bg(135deg/#667eea,#764ba2) bg-clip(text) text-fill-color(transparent)">
         Welcome to AdorableCSS
       </h1>
       <p class="font(xl) c(gray-600) max-w(2xl) line-height(relaxed)">
@@ -18,7 +18,7 @@
     <!-- Feature Cards -->
     <div class="grid grid-cols(1) md:grid-cols(3) gap(xl) w(full)">
       <div class="bg(white) p(xl) r(2xl) shadow(lg) hover:shadow(xl) transition group">
-        <div class="w(60px) h(60px) bg(#667eea..#764ba2/135deg) r(full) hbox(pack) mb(lg) group-hover:rotate(360) transition duration(1000)">
+        <div class="w(60px) h(60px) bg(135deg/#667eea,#764ba2) r(full) hbox(pack) mb(lg) group-hover:rotate(360) transition duration(1000)">
           <span class="font(2xl)">🎨</span>
         </div>
         <h3 class="font(xl) bold mb(sm)">Beautiful Design</h3>
@@ -26,7 +26,7 @@
       </div>
       
       <div class="bg(white) p(xl) r(2xl) shadow(lg) hover:shadow(xl) transition group">
-        <div class="w(60px) h(60px) bg(#f093fb..#f5576c/135deg) r(full) hbox(pack) mb(lg) group-hover:rotate(360) transition duration(1000)">
+        <div class="w(60px) h(60px) bg(135deg/#f093fb,#f5576c) r(full) hbox(pack) mb(lg) group-hover:rotate(360) transition duration(1000)">
           <span class="font(2xl)">⚡</span>
         </div>
         <h3 class="font(xl) bold mb(sm)">Lightning Fast</h3>
@@ -34,7 +34,7 @@
       </div>
       
       <div class="bg(white) p(xl) r(2xl) shadow(lg) hover:shadow(xl) transition group">
-        <div class="w(60px) h(60px) bg(#4facfe..#00f2fe/135deg) r(full) hbox(pack) mb(lg) group-hover:rotate(360) transition duration(1000)">
+        <div class="w(60px) h(60px) bg(135deg/#4facfe,#00f2fe) r(full) hbox(pack) mb(lg) group-hover:rotate(360) transition duration(1000)">
           <span class="font(2xl)">🚀</span>
         </div>
         <h3 class="font(xl) bold mb(sm)">Developer Friendly</h3>
@@ -43,7 +43,7 @@
     </div>
 
     <!-- CTA Button -->
-    <button class="px(2xl) py(lg) bg(#667eea..#764ba2/135deg) c(white) r(full) font(lg) semibold shadow(xl) hover:shadow(2xl) hover:transform(translateY(-2px)) transition">
+    <button class="px(2xl) py(lg) bg(135deg/#667eea,#764ba2) c(white) r(full) font(lg) semibold shadow(xl) hover:shadow(2xl) hover:transform(translateY(-2px)) transition">
       Get Started →
     </button>
   </div>
@@ -65,7 +65,7 @@
     },
     {
       name: 'Login Form',
-      code: `<div class="hbox(pack) min-h(screen) bg(#667eea..#764ba2/135deg)">
+      code: `<div class="hbox(pack) min-h(screen) bg(135deg/#667eea,#764ba2)">
   <div class="glass(30/0.1/white) p(2xl) r(2xl) w(400px) shadow(2xl)">
     <h2 class="font(2xl) bold text(center) mb(xl)">Welcome Back</h2>
     
@@ -82,7 +82,7 @@
           class="w(full) px(lg) py(md) r(lg) b(1/gray-300) focus:b(2/blue-500) transition" />
       </div>
       
-      <button class="w(full) py(md) bg(#667eea..#764ba2/135deg) c(white) r(lg) medium hover:opacity(90) transition">
+      <button class="w(full) py(md) bg(135deg/#667eea,#764ba2) c(white) r(lg) medium hover:opacity(0.9) transition">
         Sign In
       </button>
       
@@ -248,14 +248,14 @@
   });
 </script>
 
-<div class="playground-page vbox min-h(screen) bg(#fafbfc..#e9ecef/to-bottom)">
+<div class="playground-page vbox min-h(screen) bg(to-bottom/#fafbfc,#e9ecef)">
   <!-- Enhanced Header -->
-  <div class="bg(#667eea..#764ba2/135deg) relative clip">
+  <div class="bg(135deg/#667eea,#764ba2) relative clip">
     <!-- Animated background patterns -->
-    <div class="layer(fill) opacity(20)">
+    <div class="layer(fill) opacity(0.2)">
       <div class="layer(top:-100+left:-100) w(300px) h(300px) bg(white) r(full) blur(100px)" style="animation: pulse 4s ease-in-out infinite;"></div>
       <div class="layer(bottom:-100+right:-100) w(400px) h(400px) bg(white) r(full) blur(120px)" style="animation: pulse 5s ease-in-out infinite reverse;"></div>
-      <div class="layer(center) w(500px) h(500px) bg(white/10) r(full) blur(150px)" style="animation: float 20s ease-in-out infinite;"></div>
+      <div class="layer(center) w(500px) h(500px) bg(white.1) r(full) blur(150px)" style="animation: float 20s ease-in-out infinite;"></div>
     </div>
     
     <div class="container(xl) py(lg) relative">
@@ -265,11 +265,11 @@
             <h1 class="font(3xl) bold c(white)">
               AdorableCSS Playground
             </h1>
-            <span class="px(md) py(xs) bg(white/20) c(white) r(full) font(xs) semibold uppercase letter-spacing(wider)">
+            <span class="px(md) py(xs) bg(white.2) c(white) r(full) font(xs) semibold uppercase letter-spacing(wider)">
               Beta
             </span>
           </div>
-          <p class="font(md) c(white/80)">
+          <p class="font(md) c(white.8)">
             Experiment with AdorableCSS v2 syntax in real-time
           </p>
         </div>
@@ -279,7 +279,7 @@
           {#each templates as template}
             <button
               on:click={() => loadTemplate(template)}
-              class="px(lg) py(sm) bg(white/10) hover:bg(white/20) c(white) r(lg) font(sm) backdrop-blur(sm) transition"
+              class="px(lg) py(sm) bg(white.1) hover:bg(white.2) c(white) r(lg) font(sm) backdrop-blur(sm) transition"
             >
               {template.name}
             </button>
@@ -310,7 +310,7 @@
         <!-- Editor Content -->
         <div class="relative h(calc(100%-4rem))">
           {#if codeLineNumbers}
-            <div class="layer(top:0+left:0+bottom:0) w(48px) bg(gray-50) br(1/gray-200) overflow-y(auto) overflow-x(hidden)">
+            <div class="layer(top+left+bottom) w(48px) bg(gray-50) br(1/gray-200) overflow-y(auto) overflow-x(hidden)">
               <pre class="p(lg) font-family(mono) font(sm) c(gray-400) line-height(relaxed) text(right)">{htmlInput.split('\n').map((_, i) => i + 1).join('\n')}</pre>
             </div>
           {/if}
@@ -333,7 +333,7 @@
           >
             <span class="relative z(10)">Preview</span>
             {#if activeTab === 'preview'}
-              <div class="layer(bottom:0+left:0+right:0) h(3px) bg(#667eea..#764ba2/to-right) r(full)"></div>
+              <div class="layer(bottom+left+right) h(3px) bg(#667eea..#764ba2/to-right) r(full)"></div>
             {/if}
           </button>
           <button
@@ -342,7 +342,7 @@
           >
             <span class="relative z(10)">Generated CSS</span>
             {#if activeTab === 'css'}
-              <div class="layer(bottom:0+left:0+right:0) h(3px) bg(#667eea..#764ba2/to-right) r(full)"></div>
+              <div class="layer(bottom+left+right) h(3px) bg(#667eea..#764ba2/to-right) r(full)"></div>
             {/if}
           </button>
           <button
@@ -351,7 +351,7 @@
           >
             <span class="relative z(10)">Stats</span>
             {#if activeTab === 'stats'}
-              <div class="layer(bottom:0+left:0+right:0) h(3px) bg(#667eea..#764ba2/to-right) r(full)"></div>
+              <div class="layer(bottom+left+right) h(3px) bg(#667eea..#764ba2/to-right) r(full)"></div>
             {/if}
           </button>
           

@@ -34,6 +34,23 @@ export const px = (value: string | number) => {
   // --css-var
   if (v.startsWith('--')) return cssvar('' + value)
 
+  // Handle numeric XL tokens (e.g., 6xl, 7xl)
+  const xlMatch = v.match(/^(\d+)xl$/);
+  if (xlMatch) {
+    const multiplier = parseInt(xlMatch[1]);
+    // Base xl = 24px, so 2xl = 32px, 3xl = 40px, 4xl = 48px, 5xl = 64px, 6xl = 96px
+    let calculatedValue: number;
+    if (multiplier <= 5) {
+      // Linear progression for 1-5: xl=24, 2xl=32, 3xl=40, 4xl=48, 5xl=64
+      const values = [0, 24, 32, 40, 48, 64];
+      calculatedValue = values[multiplier] || multiplier * 16;
+    } else {
+      // Exponential growth after 5xl
+      calculatedValue = 64 + (multiplier - 5) * 32;
+    }
+    return calculatedValue + 'px';
+  }
+
   // 1/6
   const [n, m] = v.split('/')
   if (+n > 0 && +m > 0) return makeNumber((+n / +m) * 100) + '%'
@@ -115,9 +132,24 @@ export const makeColor = (value = 'transparent') => {
   if (value === 'transparent') return 'transparent'
   if (value.startsWith('--')) return `var(${value})`
 
+  // Handle colors with alpha using dot notation (white.5, gray-100.2)
+  const [colorName, alpha] = value.split('.')
+  
   // Check if it's a color from the palette
-  if (colorPalette[value]) {
-    return colorPalette[value]
+  if (colorPalette[colorName]) {
+    const baseColor = colorPalette[colorName]
+    if (alpha) {
+      // Convert hex to rgba with alpha
+      if (baseColor.startsWith('#')) {
+        const rgb = baseColor.length === 4
+          ? baseColor.slice(1).split('').map(v => parseInt(v + v, 16))
+          : [baseColor.slice(1, 3), baseColor.slice(3, 5), baseColor.slice(5, 7)].map(v => parseInt(v, 16))
+        return `rgba(${rgb.join(',')},${alpha})`
+      }
+      // Handle other color formats if needed
+      return baseColor
+    }
+    return baseColor
   }
 
   // Handle hex colors with alpha (#fff.3, #000000.5)

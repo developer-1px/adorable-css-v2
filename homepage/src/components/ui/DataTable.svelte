@@ -50,7 +50,7 @@
         {/if}
         {#each columns as column}
           <th 
-            class="px(md) py(sm) text({column.align || 'left'}) font(xs/normal/0.05em) medium c(#6b7280) uppercase"
+            class="px(md) py(sm) text({column.align || 'left'}) 500 font(xs/normal/0.05em) c(#6b7280) uppercase"
             style={column.width ? `width: ${column.width}` : ''}
           >
             {column.label}

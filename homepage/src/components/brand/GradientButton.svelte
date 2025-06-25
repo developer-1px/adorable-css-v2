@@ -7,10 +7,10 @@
   export let onClick: (() => void) | undefined = undefined;
   
   const gradients = {
-    adorable: 'bg(purple-400..pink-400/135deg)',
-    ocean: 'bg(blue-400..teal-400/90deg)',
-    sunset: 'bg(orange-400..rose-400/45deg)',
-    forest: 'bg(green-400..emerald-400/120deg)'
+    adorable: 'bg(135deg/purple-400,pink-400)',
+    ocean: 'bg(90deg/blue-400,teal-400)',
+    sunset: 'bg(45deg/orange-400,rose-400)',
+    forest: 'bg(120deg/green-400,emerald-400)'
   };
   
   const sizes = {
@@ -24,11 +24,11 @@
   class="gradient-button group {gradients[variant]} {sizes[size]} 
          c(white) r(xl) 600 shadow(lg) 
          hover:shadow(xl) hover:scale(1.05) transition 
-         hbox(middle) gap(md) relative overflow(hidden)"
+         hbox(middle) gap(md) relative clip"
   on:click={onClick}
 >
   <!-- Shimmer Effect -->
-  <div class="absolute inset(0) bg(white/20) translate-x(-100%) group-hover:translate-x(100%) transition duration(700)"></div>
+  <div class="layer bg(white.2) translate-x(-100%) group-hover:translate-x(100%) transition duration(700)"></div>
   
   <!-- Content -->
   <span class="relative"><slot /></span>

@@ -69,13 +69,13 @@
 
 <div class="dashboard vbox w(fill) min-h(screen) bg(#fafbfc)">
   <!-- Modern Header -->
-  <header class="header hbox(between+center) h(64) px(2xl) bg(white/80) backdrop(blur/12) border-bottom(1/#f0f0f2) sticky top(0) z(50)">
+  <header class="header hbox(between+center) h(64) px(2xl) bg(white.8) backdrop(blur/12) border-bottom(1/#f0f0f2) sticky top(0) z(50)">
     <div class="hbox(center) gap(2xl)">
       <!-- Logo -->
       <div class="logo hbox(center) gap(xs)">
-        <div class="logo-mark relative w(40) h(40) r(lg) bg(#0a0a0a..#262626/135deg) hbox(pack) shadow(md)">
+        <div class="logo-mark relative w(40) h(40) r(lg) bg(135deg/#0a0a0a,#262626) hbox(pack) shadow(md)">
           <span class="font(xl) bold c(white)">A</span>
-          <div class="logo-shine layer(fill) r(lg) bg(white.2..transparent/135deg) opacity(0) hover:opacity(100) transition"></div>
+          <div class="logo-shine layer(fill) r(lg) bg(135deg/white.2,transparent) opacity(0) hover:opacity(1) transition"></div>
         </div>
         <div class="vbox gap(xs)">
           <h1 class="font(lg) bold c(#0a0a0a)">Analytics Pro</h1>
@@ -115,7 +115,7 @@
       
       <!-- User -->
       <button class="user-menu hbox(center) gap(xs) px(xs) py(xs) r(2xl) hover:bg(#f5f5f5) transition">
-        <div class="avatar w(32) h(32) r(full) bg(#6366f1..#8b5cf6/135deg) hbox(pack) shadow(sm)">
+        <div class="avatar w(32) h(32) r(full) bg(135deg/#6366f1,#8b5cf6) hbox(pack) shadow(sm)">
           <span class="font(sm) bold c(white)">JW</span>
         </div>
         <div class="vbox gap(xs) text(left)">
@@ -186,7 +186,7 @@
               {/each}
               
               <!-- Bars -->
-              <div class="bars layer(left:0+right:0+bottom:0) hbox(between) gap(xs)">
+              <div class="bars layer(left+right+bottom) hbox(between) gap(xs)">
                 {#each Array(30) as _, i}
                   <div class="bar-wrapper flex vbox(end) group">
                     <div 

@@ -14,7 +14,15 @@
       "Bash(cat:*)",
       "Bash(grep:*)",
       "Bash(pnpm check:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(sed:*)",
+      "Bash(for:*)",
+      "Bash(do)",
+      "Bash(done)",
+      "Bash(rg:*)",
+      "Bash(rm:*)",
+      "Bash(do echo \"=== $file ===\")",
+      "Bash(echo)"
     ],
     "deny": []
   }

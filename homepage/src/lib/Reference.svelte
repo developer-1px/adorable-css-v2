@@ -40,7 +40,6 @@
           { syntax: 'none', desc: 'none', example: 'none' },
           { syntax: 'hidden', desc: 'display: none', example: 'hidden' },
           { syntax: 'flex', desc: 'flex: 1', example: 'flex' },
-          { syntax: 'inline-flex', desc: 'inline-flex', example: 'inline-flex' },
           { syntax: 'table', desc: 'table', example: 'table' },
           { syntax: 'table-cell', desc: 'table-cell', example: 'table-cell' },
           { syntax: 'table-row', desc: 'table-row', example: 'table-row' }
@@ -194,7 +193,7 @@
         items: [
           { syntax: 'bg(#fff)', desc: '배경색', example: 'bg(#f5f5f5)' },
           { syntax: 'bg(#000.5)', desc: '투명 배경', example: 'bg(#000.5)' },
-          { syntax: 'bg(#667eea..#764ba2/135deg)', desc: '그라디언트', example: 'bg(#667eea..#764ba2/135deg)' },
+          { syntax: 'bg(135deg/#667eea,#764ba2)', desc: '그라디언트', example: 'bg(135deg/#667eea,#764ba2)' },
           { syntax: 'bg(#667eea..#764ba2)', desc: '간단한 그라디언트', example: 'bg(#667eea..#764ba2)' }
         ]
       },
@@ -378,7 +377,7 @@
   <!-- Header -->
   <header class="reference-header vbox gap(8) p(12) bg(white) border-bottom(1/#e5e7eb)">
     <div class="vbox gap(8) text(center)">
-      <h1 class="font(20) bold c(#0f172a) letter-spacing(-0.02em)">AdorableCSS v2 Reference</h1>
+      <h1 class="700 font(20) c(#0f172a) letter-spacing(-0.02em)">AdorableCSS v2 Reference</h1>
       <p class="font(12) c(#64748b)">모든 유틸리티 클래스와 사용법</p>
     </div>
     
@@ -413,7 +412,7 @@
           <section class="reference-section vbox gap(8)">
             <div class="section-header hbox(center) gap(12)">
               <span class="section-icon font(16)">{section.icon}</span>
-              <h2 class="font(16) bold c(#0f172a)">{section.title}</h2>
+              <h2 class="700 font(16) c(#0f172a)">{section.title}</h2>
             </div>
             
             <div class="items-grid grid(8) gap(6)">
@@ -421,9 +420,9 @@
                 <div class="reference-card vbox gap(4) p(8) r(6) bg(white) border(1/#e5e7eb) hover:border(1/#3b82f6) hover:shadow(0/2px/6px/#00000008) transition group">
                   <!-- Syntax -->
                   <div class="card-header hbox gap(auto) items-start">
-                    <code class="syntax font(11) bold c(#3b82f6) font-family(mono) break-all">{item.syntax}</code>
+                    <code class="syntax 700 font(11) c(#3b82f6) font-family(mono) break-all">{item.syntax}</code>
                     <button
-                      class="copy-btn opacity(0) group-hover:opacity(100) transition cursor(pointer) p(1) r(2) hover:bg(#f1f5f9) font(10)"
+                      class="copy-btn opacity(0) group-hover:opacity(1) transition cursor(pointer) p(1) r(2) hover:bg(#f1f5f9) font(10)"
                       on:click={() => copyToClipboard(item.syntax)}
                     >
                       {copiedItem === item.syntax ? '✅' : '📋'}

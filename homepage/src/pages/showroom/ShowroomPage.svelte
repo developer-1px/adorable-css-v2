@@ -10,7 +10,7 @@
   <header class="w(fill) py(3xl) bg(white) shadow(sm)">
     <div class="container(xl) text(center)">
       <h1 class="font(5xl) bold c(gray-900) mb(lg)">
-        <span class="bg(purple-400..pink-400/135deg) bg-clip(text) text-fill-color(transparent)">
+        <span class="bg(135deg/purple-400,pink-400) bg-clip(text) text-fill-color(transparent)">
           AdorableCSS
         </span>
         Showroom
@@ -45,17 +45,17 @@
         {#if activeCategory === 'all' || activeCategory === 'cards'}
           <div class="showcase-item">
             <div class="showcase-preview p(2xl) bg(gradient-to-br/purple-400/pink-400) r(xl) h(300px) vbox(pack)">
-              <div class="glass-card w(full) p(xl) bg(white/20) backdrop-blur(lg) r(xl) b(1/white/30) shadow(xl)">
+              <div class="glass-card w(full) p(xl) bg(white.2) backdrop-blur(lg) r(xl) b(1/white.3) shadow(xl)">
                 <div class="hbox(middle) gap(lg) mb(lg)">
-                  <div class="w(60px) h(60px) bg(white/30) r(full) vbox(pack)">
+                  <div class="w(60px) h(60px) bg(white.3) r(full) vbox(pack)">
                     <Heart size="24" class="c(white)" />
                   </div>
                   <div class="flex(1)">
                     <h3 class="font(xl) bold c(white) mb(xs)">Glass Card</h3>
-                    <p class="font(sm) c(white/80)">Stunning glassmorphism effect</p>
+                    <p class="font(sm) c(white.8)">Stunning glassmorphism effect</p>
                   </div>
                 </div>
-                <button class="w(full) py(md) bg(white/20) c(white) r(lg) font(sm) semibold hover:bg(white/30) transition">
+                <button class="w(full) py(md) bg(white.2) c(white) r(lg) font(sm) semibold hover:bg(white.3) transition">
                   Learn More
                 </button>
               </div>
@@ -72,7 +72,7 @@
           <div class="showcase-item">
             <div class="showcase-preview p(2xl) bg(white) r(xl) h(300px) vbox(pack)">
               <div class="vbox gap(lg) w(full)">
-                <button class="px(xl) py(lg) bg(purple-400..pink-400/135deg) c(white) r(lg) font(md) semibold shadow(lg) hover:shadow(2xl) hover:scale(1.05) transition">
+                <button class="px(xl) py(lg) bg(135deg/purple-400,pink-400) c(white) r(lg) font(md) semibold shadow(lg) hover:shadow(2xl) hover:scale(1.05) transition">
                   Gradient Primary
                 </button>
                 <button class="px(xl) py(lg) bg(blue-400..teal-400/to-r) c(white) r(lg) font(md) semibold shadow(lg) hover:shadow(2xl) hover:scale(1.05) transition">
@@ -116,7 +116,7 @@
           <div class="showcase-item">
             <div class="showcase-preview p(2xl) bg(gray-900) r(xl) h(300px) vbox(pack)">
               <div class="hover-card group w(full) p(xl) bg(gray-800) r(xl) cursor(pointer) hover:bg(gray-700) transition relative clip">
-                <div class="layer(top:0+left:0) w(full) h(full) bg(gradient-to-br/purple-600/pink-600) opacity(0) group-hover:opacity(20) transition"></div>
+                <div class="layer(top+left) w(full) h(full) bg(gradient-to-br/purple-600/pink-600) opacity(0) group-hover:opacity(0.2) transition"></div>
                 <div class="relative z(10)">
                   <ShoppingBag size="32" class="c(purple-400) mb(lg) group-hover:scale(1.2) transition" />
                   <h3 class="font(xl) bold c(white) mb(sm)">Hover Effects</h3>
@@ -124,7 +124,7 @@
                     Smooth animations on hover
                   </p>
                 </div>
-                <div class="layer(bottom:-100%+left:0) w(full) h(1px) bg(gradient-to-r/purple-400/pink-400) group-hover:bottom(0) transition"></div>
+                <div class="layer(bottom:-100%+left) w(full) h(1px) bg(gradient-to-r/purple-400/pink-400) group-hover:bottom(0) transition"></div>
               </div>
             </div>
             <div class="showcase-info p(lg) bg(white) r(0/0/xl/xl)">
@@ -193,10 +193,10 @@
                   <div class="layer(center) vbox(pack)">
                     <Image size="48" class="c(white)" />
                   </div>
-                  <div class="layer(bottom:0+left:0+right:0) h(50%) bg(gradient-to-t/black/transparent) opacity(60)"></div>
+                  <div class="layer(bottom+left+right) h(50%) bg(gradient-to-t/black/transparent) opacity(0.6)"></div>
                   <div class="layer(bottom:lg+left:lg) c(white)">
                     <h3 class="font(lg) bold mb(xs)">Gallery Card</h3>
-                    <p class="font(sm) opacity(90)">Beautiful image overlays</p>
+                    <p class="font(sm) opacity(0.9)">Beautiful image overlays</p>
                   </div>
                 </div>
                 <div class="p(lg)">
@@ -221,14 +221,14 @@
               <nav class="nav-modern hbox gap(xs) p(xs) bg(gray-800) r(lg)">
                 <a href="#" class="nav-item px(lg) py(md) c(gray-400) r(md) hover:bg(gray-700) hover:c(white) transition relative group">
                   <span class="relative z(10)">Home</span>
-                  <div class="layer(bottom:0+left:0+right:0) h(2px) bg(purple-500) scale-x(0) group-hover:scale-x(100) transition"></div>
+                  <div class="layer(bottom+left+right) h(2px) bg(purple-500) scale-x(0) group-hover:scale-x(100) transition"></div>
                 </a>
                 <a href="#" class="nav-item px(lg) py(md) c(white) bg(purple-600) r(md) relative">
                   <span class="relative z(10)">Products</span>
                 </a>
                 <a href="#" class="nav-item px(lg) py(md) c(gray-400) r(md) hover:bg(gray-700) hover:c(white) transition relative group">
                   <span class="relative z(10)">About</span>
-                  <div class="layer(bottom:0+left:0+right:0) h(2px) bg(purple-500) scale-x(0) group-hover:scale-x(100) transition"></div>
+                  <div class="layer(bottom+left+right) h(2px) bg(purple-500) scale-x(0) group-hover:scale-x(100) transition"></div>
                 </a>
               </nav>
             </div>

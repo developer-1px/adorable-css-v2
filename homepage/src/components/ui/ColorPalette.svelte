@@ -89,7 +89,7 @@
           {#each colors as colorName}
             {#if colorPalette[colorName]}
               <div class="color-row vbox gap(sm)">
-                <h4 class="font(md) semibold c(gray-800) capitalize">{colorName}</h4>
+                <h4 class="600 font(md) c(gray-800) capitalize">{colorName}</h4>
                 <div class="color-swatches hbox gap(xs)">
                   {#each Object.entries(colorPalette[colorName]) as [shade, colorValue]}
                     <div 
@@ -136,7 +136,7 @@
       <div class="vbox gap(lg)">
         <!-- Text Colors -->
         <div class="vbox gap(sm)">
-          <h4 class="font(md) semibold">Text Colors</h4>
+          <h4 class="600 font(md)">Text Colors</h4>
           <div class="grid(3) gap(md)">
             <div class="p(md) r(md) bg(white) border(1/gray-200)">
               <div class="c(blue-600) font(md)">c(blue-600)</div>
@@ -155,7 +155,7 @@
 
         <!-- Background Colors -->
         <div class="vbox gap(sm)">
-          <h4 class="font(md) semibold">Background Colors</h4>
+          <h4 class="600 font(md)">Background Colors</h4>
           <div class="grid(3) gap(md)">
             <div class="p(md) r(md) bg(blue-100) border(1/blue-200)">
               <div class="c(blue-800) font(md)">bg(blue-100)</div>
@@ -174,14 +174,14 @@
 
         <!-- Gradients -->
         <div class="vbox gap(sm)">
-          <h4 class="font(md) semibold">Gradient Examples</h4>
+          <h4 class="600 font(md)">Gradient Examples</h4>
           <div class="grid(2) gap(md)">
-            <div class="p(md) r(md) bg(blue-500..purple-600/45deg)">
-              <div class="c(white) font(md)">bg(blue-500..purple-600/45deg)</div>
+            <div class="p(md) r(md) bg(45deg/blue-500,purple-600)">
+              <div class="c(white) font(md)">bg(45deg/blue-500,purple-600)</div>
               <div class="font(xs) c(blue-100) font(mono) mt(xs)">Diagonal gradient</div>
             </div>
-            <div class="p(md) r(md) bg(emerald-400..teal-600/180deg)">
-              <div class="c(white) font(md)">bg(emerald-400..teal-600/180deg)</div>
+            <div class="p(md) r(md) bg(180deg/emerald-400,teal-600)">
+              <div class="c(white) font(md)">bg(180deg/emerald-400,teal-600)</div>
               <div class="font(xs) c(emerald-100) font(mono) mt(xs)">Vertical gradient</div>
             </div>
           </div>

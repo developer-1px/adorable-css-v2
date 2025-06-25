@@ -34,10 +34,10 @@
   
   // Base classes shared across all variants
   const baseClasses = `
-    inline-flex(pack) nowrap r(md) 
+    hbox(pack) nowrap r(md) 
     medium ring-offset(--colors-white) transition-colors duration(150) ease(out)
     focus-visible:outline(none) focus-visible:ring(2/--colors-primary-500) focus-visible:ring-offset(2)
-    disabled:pointer-events(none) disabled:opacity(50)
+    disabled:pointer-events(none) disabled:opacity(0.5)
     active:scale(98%) transition-transform
   `.replace(/\s+/g, ' ').trim();
   

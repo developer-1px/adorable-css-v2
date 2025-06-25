@@ -29,7 +29,7 @@
   
   <!-- Header with enhanced spacing -->
   <div class="hbox(between+center) relative z(10)">
-    <h3 class="font(sm) medium c(gray-600) group-hover:c(gray-700) transition-colors duration(normal)">{title}</h3>
+    <h3 class="500 font(sm) c(gray-600) group-hover:c(gray-700) transition-colors duration(normal)">{title}</h3>
     {#if icon}
       <div class="icon-wrapper w(2xl) h(2xl) r(lg) hbox(pack) shadow(xs) group-hover:shadow(md) group-hover:scale(1.02) transition-all duration(normal) ease(back)" 
            style="background: {iconColor}15; border: 1px solid {iconColor}20;">
@@ -40,15 +40,15 @@
   
   <!-- Value and change with enhanced typography -->
   <div class="vbox gap(xs) relative z(10)">
-    <p class="font(4xl/-2%) bold c(gray-900) group-hover:c(gray-950) transition-colors duration(normal)">{value}</p>
+    <p class="700 font(4xl/-2%) c(gray-900) group-hover:c(gray-950) transition-colors duration(normal)">{value}</p>
     
     <div class="hbox(center) gap(xs)">
       {#if trend !== 'neutral'}
         <div class="trend-indicator hbox(center) gap(xs) px(xs) py(xs) r(lg) {trendStyles[trend]} backdrop-blur shadow(xs)">
-          <span class="trend-arrow font(xs) bold">
+          <span class="trend-arrow 700 font(xs)">
             {trend === 'up' ? '↗' : '↘'}
           </span>
-          <span class="font(xs) semibold">{Math.abs(change)}%</span>
+          <span class="600 font(xs)">{Math.abs(change)}%</span>
         </div>
       {/if}
       <span class="font(xs) c(gray-500)">from last period</span>
@@ -77,7 +77,7 @@
       <path 
         d="M0,24 L25,20 L50,22 L75,16 L100,18 L125,12 L150,14 L175,8 L200,6 L200,32 L0,32 Z" 
         fill="url(#gradient-{title.replace(/\s+/g, '')})"
-        class="group-hover:opacity(30) transition-opacity duration(normal)"
+        class="group-hover:opacity(0.3) transition-opacity duration(normal)"
       />
       
       <!-- Main line -->
@@ -87,12 +87,12 @@
         stroke={iconColor}
         stroke-width="2"
         opacity="0.6"
-        class="group-hover:opacity(80) transition-opacity duration(normal)"
+        class="group-hover:opacity(0.8) transition-opacity duration(normal)"
         filter="url(#glow)"
       />
       
       <!-- Data points -->
-      <g class="opacity(0) group-hover:opacity(100) transition-opacity duration(normal)">
+      <g class="opacity(0) group-hover:opacity(1) transition-opacity duration(normal)">
         {#each [0, 25, 50, 75, 100, 125, 150, 175, 200] as x, i}
           <circle 
             cx={x} 
@@ -108,7 +108,7 @@
   </div>
   
   <!-- Enhanced top border indicator -->
-  <div class="border-indicator layer(top:0+left:0+right:0) h(xs) r(xl/xl/none/none) opacity(0) group-hover:opacity(100) transition-all duration(normal)" 
+  <div class="border-indicator layer(top+left+right) h(xs) r(xl/xl/none/none) opacity(0) group-hover:opacity(1) transition-all duration(normal)" 
        style="background: linear-gradient(90deg, transparent, {iconColor}, transparent)">
   </div>
 </div>

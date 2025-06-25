@@ -2,7 +2,7 @@
   export let className = '';
   export let level: 1 | 2 | 3 | 4 | 5 | 6 = 3;
   
-  const baseClasses = 'font(lg/1/-0.025em) semibold c(--colors-gray-900)';
+  const baseClasses = '600 font(lg/1/-0.025em) c(--colors-gray-900)';
 </script>
 
 {#if level === 1}

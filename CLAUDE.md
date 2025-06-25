@@ -107,6 +107,84 @@ if (isNaN(+part) && !part.includes('%')) {
 processors[getPropertyIndex(part)](part);
 ```
 
+### AdorableCSS Syntax Reminders
+
+**IMPORTANT: Common Syntax Patterns to Remember**
+
+1. **Container Width**: Use `container(3xl)` instead of `max-w(3xl) mx(auto)`
+   - ✅ Correct: `container(3xl)`
+   - ❌ Wrong: `max-w(3xl) mx(auto)`
+   - The `container()` utility already includes centering
+
+2. **Font Weight**: Font weight comes BEFORE the font utility
+   - ✅ Correct: `700 font(xl)`
+   - ❌ Wrong: `font(xl) bold`
+   - ❌ Wrong: `font(700)`
+
+3. **Spacing Syntax**: Use slash for multiple values
+   - ✅ Correct: `p(sm/md)`
+   - ❌ Wrong: `p(sm_md)`
+
+4. **Scale Values**: Use decimal values, not percentages
+   - ✅ Correct: `scale(1.05)`
+   - ❌ Wrong: `scale(105)`
+
+5. **Font with Line Height**: Use slash syntax, no separate leading utility
+   - ✅ Correct: `font(lg/1.6)`
+   - ❌ Wrong: `font(lg) leading(1.6)`
+   - Line height is included in the font utility
+
+6. **Spacing Between Elements**: Use gap instead of margin
+   - ✅ Correct: `vbox gap(lg)`, `hbox gap(md)`
+   - ❌ Wrong: `mb(lg)`, `mt(md)`, `mx(auto)`
+   - Use gap for spacing between elements in flex/grid layouts
+   - Margin utilities should be avoided in favor of gap
+
+7. **Vertical Centering**: Use `vbox(pack)` not `vbox(center)`
+   - ✅ Correct: `vbox(pack)`
+   - ❌ Wrong: `vbox(center)`
+   - For vertical centering in flexbox layouts
+
+8. **Inline Flex**: Don't use `inline-flex`
+   - ❌ Wrong: `inline-flex`
+   - Figma doesn't have inline-flex concept
+
+9. **Overflow Hidden**: Use `clip` not `overflow(hidden)`
+   - ✅ Correct: `clip`
+   - ❌ Wrong: `overflow(hidden)`
+   - AdorableCSS uses `clip` for overflow hidden
+
+10. **Absolute Positioning**: Use `layer` not `absolute inset(0)`
+   - ✅ Correct: `layer`
+   - ❌ Wrong: `absolute inset(0)`
+   - Use the `layer` utility for absolute positioning
+
+11. **Gradient Syntax**: Use degree/color format
+   - ✅ Correct: `bg(135deg/oklch(0.7,0.25,330),oklch(0.65,0.28,360))`
+   - ❌ Wrong: `bg(linear-gradient(135deg,oklch(0.7_0.25_330),oklch(0.65_0.28_360))`
+   - ❌ Wrong: `bg(purple-400..pink-400/135deg)`
+   - Gradients use degree/color1,color2 format
+
+12. **Opacity Values**: Use decimal (0-1) like CSS
+   - ✅ Correct: `opacity(0.25)`, `opacity(1)`, `opacity(.5)`
+   - ❌ Wrong: `opacity(25)`, `opacity(100)`
+   - Opacity uses 0-1 scale, not 0-100
+
+13. **Border Syntax**: Use bl, br, bt, bb for single borders
+   - ✅ Correct: `bl(gray-900)`, `bt(2/blue-500)`
+   - ❌ Wrong: `border-l(gray-900)`, `b-l(gray-900)`
+   - Default is 1px if no width specified: `bl(gray-900)` = 1px left border
+
+14. **Color with Alpha**: Use dot notation for alpha values
+   - ✅ Correct: `white.5`, `black.2`, `#ccc.2`, `gray-100.2`
+   - ❌ Wrong: `white/50`, `rgba(0,0,0,0.2)`, `#cccccc20`
+   - Alpha values use decimal after dot: `.5` = 50% opacity
+
+15. **Layer Positioning**: Use simplified syntax without values for 0
+   - ✅ Correct: `layer(top+left)`, `layer(top:20+left:30)`
+   - ❌ Wrong: `layer(top:0+left:0)`
+   - Omit `:0` for zero values in layer positioning
+
 ## Modern CSS Library Design Principles
 
 ### Core Design Philosophy

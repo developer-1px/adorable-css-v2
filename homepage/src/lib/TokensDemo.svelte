@@ -36,18 +36,18 @@
 
 <div class="vbox gap(xl)">
   <div class="vbox gap(md)">
-    <h2 class="font(2xl/1.2) bold">Design Tokens System</h2>
+    <h2 class="700 font(2xl/1.2)">Design Tokens System</h2>
     <p class="font(md) c(#6b7280)">Configure global design tokens for consistent styling across your application.</p>
   </div>
   
   <div class="grid(2) gap(xl)">
     <!-- Token Editor -->
     <div class="vbox gap(lg)">
-      <h3 class="font(lg) bold">Token Configuration</h3>
+      <h3 class="700 font(lg)">Token Configuration</h3>
       
       <!-- Font Sizes -->
       <div class="vbox gap(sm)">
-        <h4 class="font(md) medium">Font Sizes</h4>
+        <h4 class="500 font(md)">Font Sizes</h4>
         {#each Object.entries(customTokens.fontSize) as [key, value]}
           <div class="hbox(middle) gap(md)">
             <label class="w(80) font(sm)">{key}:</label>
@@ -63,7 +63,7 @@
       
       <!-- Spacing -->
       <div class="vbox gap(sm)">
-        <h4 class="font(md) medium">Spacing</h4>
+        <h4 class="500 font(md)">Spacing</h4>
         {#each Object.entries(customTokens.spacing) as [key, value]}
           <div class="hbox(middle) gap(md)">
             <label class="w(80) font(sm)">{key}:</label>
@@ -79,7 +79,7 @@
       
       <!-- Border Radius -->
       <div class="vbox gap(sm)">
-        <h4 class="font(md) medium">Border Radius</h4>
+        <h4 class="500 font(md)">Border Radius</h4>
         {#each Object.entries(customTokens.borderRadius).slice(0, 5) as [key, value]}
           <div class="hbox(middle) gap(md)">
             <label class="w(80) font(sm)">{key}:</label>
@@ -96,11 +96,11 @@
     
     <!-- Preview -->
     <div class="vbox gap(lg)">
-      <h3 class="font(lg) bold">Live Preview</h3>
+      <h3 class="700 font(lg)">Live Preview</h3>
       
       <!-- Typography Examples -->
       <div class="vbox gap(sm) p(lg) r(lg) bg(#f9fafb)">
-        <h4 class="font(md) medium mb(sm)">Typography</h4>
+        <h4 class="500 font(md) mb(sm)">Typography</h4>
         <p class="font(xs)">font(xs) - Extra small text</p>
         <p class="font(sm)">font(sm) - Small text</p>
         <p class="font(md)">font(md) - Medium text</p>
@@ -111,7 +111,7 @@
       
       <!-- Spacing Examples -->
       <div class="vbox gap(sm) p(lg) r(lg) bg(#f9fafb)">
-        <h4 class="font(md) medium mb(sm)">Spacing</h4>
+        <h4 class="500 font(md) mb(sm)">Spacing</h4>
         <div class="hbox(middle) gap(sm)">
           <div class="p(xs) bg(#3b82f6) c(white) r(sm)">p(xs)</div>
           <div class="p(sm) bg(#3b82f6) c(white) r(sm)">p(sm)</div>
@@ -122,7 +122,7 @@
       
       <!-- Border Radius Examples -->
       <div class="vbox gap(sm) p(lg) r(lg) bg(#f9fafb)">
-        <h4 class="font(md) medium mb(sm)">Border Radius</h4>
+        <h4 class="500 font(md) mb(sm)">Border Radius</h4>
         <div class="hbox(middle) gap(sm)">
           <div class="w(3xl) h(3xl) bg(#3b82f6) r(none)"></div>
           <div class="w(3xl) h(3xl) bg(#3b82f6) r(sm)"></div>
@@ -135,7 +135,7 @@
       
       <!-- Shadow Examples -->
       <div class="vbox gap(sm) p(lg) r(lg) bg(#f9fafb)">
-        <h4 class="font(md) medium mb(sm)">Shadows</h4>
+        <h4 class="500 font(md) mb(sm)">Shadows</h4>
         <div class="hbox(middle) gap(md)">
           <div class="w(4xl) h(4xl) bg(white) r(lg) shadow(sm) p(sm)">sm</div>
           <div class="w(4xl) h(4xl) bg(white) r(lg) shadow(md) p(sm)">md</div>

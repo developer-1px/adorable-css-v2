@@ -20,7 +20,7 @@
   <!-- Test gradient -->
   <div class="mb(2xl)">
     <h2 class="font(xl) bold mb(lg)">Gradient Test</h2>
-    <div class="h(100px) w(400px) bg(purple-400..pink-400/135deg) r(xl) shadow(lg)"></div>
+    <div class="h(100px) w(400px) bg(135deg/purple-400,pink-400) r(xl) shadow(lg)"></div>
   </div>
   
   <!-- Test individual colors -->
