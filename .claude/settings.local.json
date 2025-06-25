@@ -6,7 +6,15 @@
       "Bash(open:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "Bash(pnpm build:*)",
+      "Bash(npx tsup:*)",
+      "Bash(pnpm dev:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(grep:*)",
+      "Bash(pnpm check:*)",
+      "Bash(find:*)"
     ],
     "deny": []
   }

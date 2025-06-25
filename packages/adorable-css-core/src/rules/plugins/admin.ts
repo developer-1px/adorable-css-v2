@@ -111,7 +111,7 @@ export const dataTable: RuleHandler = (args?: string): CSSRule => {
     }
   };
   
-  return styles[style as keyof typeof styles] || styles.striped;
+  return styles[style as keyof typeof styles] || styles.striped as CSSRule;
 };
 
 // status-badge() - 상태 배지
@@ -218,7 +218,7 @@ export const navItem: RuleHandler = (args?: string): CSSRule => {
     ...selectedState,
     padding: `${getTokenVar('spacing', 'sm')} ${getTokenVar('spacing', 'md')}`,
     'border-radius': getTokenVar('radius', 'lg'),
-    'font-weight': getTokenVar('font-weight', 'medium'),
+    'font-weight': '500',
     'font-size': getTokenVar('font', 'sm'),
     transition: 'all 0.2s ease',
     cursor: 'pointer',
@@ -250,7 +250,7 @@ export const progressBar: RuleHandler = (args?: string): CSSRule => {
     'border-radius': '4px',
     overflow: 'hidden',
     position: 'relative',
-    '&::after': {
+    '::after': {
       content: '""',
       position: 'absolute',
       left: '0',

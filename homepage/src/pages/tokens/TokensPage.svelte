@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import TypographyTokens from './widgets/TypographyTokens.svelte';
   import SpacingTokens from './widgets/SpacingTokens.svelte';
-  import ColorTokens from './widgets/ColorTokens.svelte';
+  import ColorPalette from '../../components/ui/ColorPalette.svelte';
   import RadiusTokens from './widgets/RadiusTokens.svelte';
   import ShadowTokens from './widgets/ShadowTokens.svelte';
   import EffectsTokens from './widgets/EffectsTokens.svelte';
@@ -65,14 +65,14 @@
 <div class="tokens-page min-h(screen) bg(linear-gradient(135deg,#f0f9ff_0%,#e0f2fe_25%,#f3e8ff_50%,#fdf2f8_75%,#fef3c7_100%)) relative clip">
   <!-- Background Effects -->
   <div class="layer(fill) clip pointer-events(none)">
-    <div class="absolute w(700px) h(700px) r(50%) blur(100px) opacity(30) bg(linear-gradient(135deg,#3b82f6,#8b5cf6)) top(-300px) left(-300px)" style="animation: float 25s ease-in-out infinite;"></div>
-    <div class="absolute w(600px) h(600px) r(50%) blur(100px) opacity(30) bg(linear-gradient(135deg,#ec4899,#f43f5e)) bottom(-200px) right(-200px)" style="animation: float 25s ease-in-out infinite 8s;"></div>
-    <div class="absolute w(500px) h(500px) r(50%) blur(100px) opacity(30) bg(linear-gradient(135deg,#10b981,#06b6d4)) top(40%) left(60%)" style="animation: float 25s ease-in-out infinite 16s;"></div>
-    <div class="absolute w(400px) h(400px) r(50%) blur(100px) opacity(30) bg(linear-gradient(135deg,#f59e0b,#ef4444)) top(20%) right(30%)" style="animation: float 25s ease-in-out infinite 20s;"></div>
+    <div class="absolute w(700px) h(700px) r(50%) blur(100px) opacity(30) bg(linear-gradient(135deg,#3b82f6,#8b5cf6)) top(-300px) left(-300px) float(25s/ease-in-out/repeat:infinite)"></div>
+    <div class="absolute w(600px) h(600px) r(50%) blur(100px) opacity(30) bg(linear-gradient(135deg,#ec4899,#f43f5e)) bottom(-200px) right(-200px) float(25s/ease-in-out/repeat:infinite/delay:8s)"></div>
+    <div class="absolute w(500px) h(500px) r(50%) blur(100px) opacity(30) bg(linear-gradient(135deg,#10b981,#06b6d4)) top(40%) left(60%) float(25s/ease-in-out/repeat:infinite/delay:16s)"></div>
+    <div class="absolute w(400px) h(400px) r(50%) blur(100px) opacity(30) bg(linear-gradient(135deg,#f59e0b,#ef4444)) top(20%) right(30%) float(25s/ease-in-out/repeat:infinite/delay:20s)"></div>
   </div>
   
   <!-- Header -->
-  <div class="header-section py(2xl) relative z(10) opacity(0)" style="animation: fade-up 0.8s ease-out forwards;">
+  <div class="header-section py(2xl) relative z(10) fade-up(0.8s/ease-out)">
     <div class="container(2xl/px:lg)">
       <div class="vbox gap(lg) text(center)">
         <div class="hbox(pack) gap(sm)">
@@ -91,7 +91,7 @@
   </div>
   
   <!-- Fixed Navigation -->
-  <div class="sticky top(0) bg(white/80) z(sticky) shadow(md) opacity(0)" style="backdrop-filter: blur(24px); animation: fade-up 0.8s ease-out forwards 100ms;">
+  <div class="sticky top(0) bg(white/80) z(sticky) shadow(md) fade-up(0.8s/ease-out/delay:100ms)" style="backdrop-filter: blur(24px);">
     <div class="container(7xl/px:lg) py(md)">
       <div class="hbox gap(sm) overflow-x(auto)">
         {#each sections as section}
@@ -110,84 +110,38 @@
     </div>
   </div>
   
-  <!-- Main Content with TOC -->
-  <div class="container(7xl/px:lg) py(2xl) relative z(10)">
-    <div class="hbox(top) gap(2xl)">
-      <!-- Main Content -->
-      <div class="flex-1 scroll-container" bind:this={scrollContainer}>
-        <!-- Typography Section -->
-        <section id="typography" class="mb(3xl) scroll-mt(5rem) opacity(0)" style="animation: fade-up 0.8s ease-out forwards 200ms;">
-          <TypographyTokens />
-        </section>
-        
-        <!-- Spacing Section -->
-        <section id="spacing" class="mb(3xl) scroll-mt(5rem) opacity(0)" style="animation: fade-up 0.8s ease-out forwards 300ms;">
-          <SpacingTokens />
-        </section>
-        
-        <!-- Colors Section -->
-        <section id="colors" class="mb(3xl) scroll-mt(5rem) opacity(0)" style="animation: fade-up 0.8s ease-out forwards 400ms;">
-          <ColorTokens />
-        </section>
-        
-        <!-- Border Radius Section -->
-        <section id="radius" class="mb(3xl) scroll-mt(5rem) opacity(0)" style="animation: fade-up 0.8s ease-out forwards 500ms;">
-          <RadiusTokens />
-        </section>
-        
-        <!-- Shadows Section -->
-        <section id="shadows" class="mb(3xl) scroll-mt(5rem) opacity(0)" style="animation: fade-up 0.8s ease-out forwards 600ms;">
-          <ShadowTokens />
-        </section>
-        
-        <!-- Effects Section -->
-        <section id="effects" class="scroll-mt(5rem) opacity(0)" style="animation: fade-up 0.8s ease-out forwards 700ms;">
-          <EffectsTokens />
-        </section>
-      </div>
+  <!-- Main Content -->
+  <div class="container(xl) py(xl) relative z(10) mx(auto)">
+    <div class="scroll-container" bind:this={scrollContainer}>
+      <!-- Typography Section -->
+      <section id="typography" class="mb(2xl) scroll-mt(4rem) fade-up(0.8s/ease-out/delay:200ms)">
+        <TypographyTokens />
+      </section>
       
-      <!-- Table of Contents -->
-      <aside class="w(300px) sticky top(6rem) hidden lg:block opacity(0)" style="animation: fade-up 0.8s ease-out forwards 200ms;">
-        <div class="bg(white/90) r(2xl) shadow(xl) p(xl) b(1/gray-100) transition(all/0.3s/ease)" style="backdrop-filter: blur(12px);">
-          <h3 class="font(lg) bold c(gray-900) mb(lg)">On this page</h3>
-          <nav class="vbox gap(sm)">
-            {#each sections as section}
-              <button
-                class="text(left) p(md) r(lg) transition(all/0.2s/ease) hbox(middle) gap(sm) w(full)
-                       {activeSection === section.id 
-                         ? 'bg(linear-gradient(to_right,#eff6ff,#f3e8ff)) c(blue-700) font(semibold) shadow(sm)' 
-                         : 'hover:bg(gray-50) c(gray-600) hover:c(gray-900)'}"
-                on:click={() => scrollToSection(section.id)}
-              >
-                <svelte:component this={section.icon} size="16" class="shrink(0)" />
-                <span class="flex-1 font(sm)">{section.name}</span>
-                {#if activeSection === section.id}
-                  <ChevronRight size="16" class="c(blue-600)" />
-                {/if}
-              </button>
-            {/each}
-          </nav>
-          
-          <!-- Quick Stats -->
-          <div class="mt(xl) pt(xl) bt(1/gray-200)">
-            <h4 class="font(sm) font(semibold) c(gray-700) mb(md)">Quick Stats</h4>
-            <div class="vbox gap(sm) font(xs) c(gray-600)">
-              <div class="hbox gap(auto)">
-                <span>Font Sizes</span>
-                <span class="font(semibold)">12 tokens</span>
-              </div>
-              <div class="hbox gap(auto)">
-                <span>Colors</span>
-                <span class="font(semibold)">120+ tokens</span>
-              </div>
-              <div class="hbox gap(auto)">
-                <span>Spacing</span>
-                <span class="font(semibold)">16 tokens</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </aside>
+      <!-- Spacing Section -->
+      <section id="spacing" class="mb(2xl) scroll-mt(4rem) fade-up(0.8s/ease-out/delay:300ms)">
+        <SpacingTokens />
+      </section>
+      
+      <!-- Colors Section -->
+      <section id="colors" class="mb(2xl) scroll-mt(4rem) fade-up(0.8s/ease-out/delay:400ms)">
+        <ColorPalette />
+      </section>
+      
+      <!-- Border Radius Section -->
+      <section id="radius" class="mb(2xl) scroll-mt(4rem) fade-up(0.8s/ease-out/delay:500ms)">
+        <RadiusTokens />
+      </section>
+      
+      <!-- Shadows Section -->
+      <section id="shadows" class="mb(2xl) scroll-mt(4rem) fade-up(0.8s/ease-out/delay:600ms)">
+        <ShadowTokens />
+      </section>
+      
+      <!-- Effects Section -->
+      <section id="effects" class="scroll-mt(4rem) fade-up(0.8s/ease-out/delay:700ms)">
+        <EffectsTokens />
+      </section>
     </div>
   </div>
 </div>
@@ -206,17 +160,6 @@
     }
     75% {
       transform: translate(50px, 20px) scale(1.05);
-    }
-  }
-  
-  @keyframes fade-up {
-    from {
-      opacity: 0;
-      transform: translateY(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
     }
   }
   

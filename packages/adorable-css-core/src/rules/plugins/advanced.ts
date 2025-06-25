@@ -48,7 +48,7 @@ export const morphism: RuleHandler = (args?: string): CSSRule => {
   
   return {
     background: '#e0e0e0',
-    'border-radius': px(size),
+    'border-radius': `${size}px`,
     'box-shadow': `${size}px ${size}px ${size * 2}px rgba(0, 0, 0, ${intensity}), -${size}px -${size}px ${size * 2}px rgba(255, 255, 255, 0.7)`,
     border: 'none'
   };
@@ -62,7 +62,7 @@ export const morphismInset: RuleHandler = (args?: string): CSSRule => {
   
   return {
     background: '#e0e0e0',
-    'border-radius': px(size),
+    'border-radius': `${size}px`,
     'box-shadow': `inset ${size}px ${size}px ${size * 2}px rgba(0, 0, 0, ${intensity}), inset -${size}px -${size}px ${size * 2}px rgba(255, 255, 255, 0.7)`,
     border: 'none'
   };
@@ -106,7 +106,7 @@ export const stickyHeader: RuleHandler = (args?: string): CSSRule => {
   
   return {
     position: 'sticky',
-    top: offset,
+    top: `${offset}`,
     'z-index': '1000',
     'backdrop-filter': 'blur(10px)',
     background: 'rgba(255, 255, 255, 0.9)',
@@ -120,8 +120,8 @@ export const loadingSpinner: RuleHandler = (args?: string): CSSRule => {
   const color = args?.includes('/') ? makeColor(args.split('/')[1]) : '#6366f1';
   
   return {
-    width: size,
-    height: size,
+    width: `${size}`,
+    height: `${size}`,
     border: `2px solid rgba(0, 0, 0, 0.1)`,
     'border-top': `2px solid ${color}`,
     'border-radius': '50%',

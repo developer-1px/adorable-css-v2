@@ -3,6 +3,7 @@ import { getRuleHandler } from "../rules";
 import type { CSSRule, ParsedSelector } from "../rules/types";
 import { cssEscape } from "./cssEscape";
 import { px } from "../values/makeValue";
+import { getAllKeyframes } from "../rules/plugins/animations";
 
 // Convert CSS object to string
 const cssObjectToString = (obj: CSSRule): string =>
@@ -94,8 +95,26 @@ export function generateCSSFromAdorableCSS(value: string): string {
 }
 
 export function generateCSS(classList: string[]): string {
-  return classList
+  const cssRules = classList
     .map((v) => generateCSSFromAdorableCSS(v))
     .filter(css => css && css.trim() !== "")
     .join("\n");
+  
+  // Check if any animation classes are used
+  const hasAnimations = classList.some(className => 
+    className.includes('fade-') || 
+    className.includes('scale-') ||
+    className.includes('slide-') ||
+    className.includes('bounce-') ||
+    className.includes('float') ||
+    className.includes('animate(')
+  );
+  
+  // Include keyframes if animations are used
+  if (hasAnimations) {
+    const keyframes = getAllKeyframes();
+    return keyframes + "\n" + cssRules;
+  }
+  
+  return cssRules;
 }

@@ -4,12 +4,13 @@
   import CardTitle from '../components/ui/CardTitle.svelte';
   import CardContent from '../components/ui/CardContent.svelte';
   import Button from '../components/ui/Button.svelte';
+  import ColorPalette from '../components/ui/ColorPalette.svelte';
 </script>
 
-<div class="showcase-container p(2xl) bg(--colors-gray-50) min-h(screen)">
-  <div class="container  mx(auto) vbox gap(2xl)">
+<div class="showcase-container p(xl) bg(--colors-gray-50) min-h(screen)">
+  <div class="container  mx(auto) vbox gap(xl)">
     <!-- Hero Section -->
-    <div class="text(center) vbox gap(lg)">
+    <div class="text(center) vbox gap(lg) fade-up(0.8s/ease-out)">
       <h1 class="font(5xl/1.1/-0.02em) bold c(--colors-gray-900)">
         Refined Design Tokens
       </h1>
@@ -19,119 +20,69 @@
     </div>
     
     <!-- Typography Showcase -->
-    <Card className="clip">
+    <Card className="clip fade-up(0.8s/ease-out/delay:100ms)">
       <CardHeader className="bg(--colors-gray-100) border-b(1/--colors-gray-200)">
         <CardTitle>Typography Scale</CardTitle>
       </CardHeader>
-      <CardContent className="vbox gap(lg) py(xl)">
-        <div class="font(7xl/1) bold c(--colors-gray-900)">Display</div>
-        <div class="font(5xl/1.1) semibold c(--colors-gray-800)">Heading Large</div>
-        <div class="font(3xl/1.2) medium c(--colors-gray-700)">Heading Medium</div>
-        <div class="font(xl/1.4) c(--colors-gray-600)">Subheading</div>
-        <div class="font(lg/1.6) c(--colors-gray-600)">Body Large</div>
-        <div class="font(md/1.6) c(--colors-gray-600)">Body Regular</div>
-        <div class="font(sm/1.5) c(--colors-gray-500)">Caption</div>
+      <CardContent className="vbox gap(sm) py(md)">
+        <div class="font(2xl/1) bold c(--colors-gray-900) fade-up(0.6s/ease-out/delay:200ms)">2xl - Display</div>
+        <div class="font(xl/1.1) semibold c(--colors-gray-800) fade-up(0.6s/ease-out/delay:250ms)">xl - Heading Large</div>
+        <div class="font(lg/1.2) medium c(--colors-gray-700) fade-up(0.6s/ease-out/delay:300ms)">lg - Heading Medium</div>
+        <div class="font(md/1.4) c(--colors-gray-600) fade-up(0.6s/ease-out/delay:350ms)">md - Subheading</div>
+        <div class="font(sm/1.6) c(--colors-gray-600) fade-up(0.6s/ease-out/delay:400ms)">sm - Body Text</div>
+        <div class="font(xs/1.5) c(--colors-gray-500) fade-up(0.6s/ease-out/delay:450ms)">xs - Caption</div>
       </CardContent>
     </Card>
     
-    <!-- Color Palette -->
-    <div class="grid(3) gap(xl)">
-      <!-- Primary Colors -->
-      <Card>
-        <CardHeader>
-          <CardTitle>Primary Palette</CardTitle>
-        </CardHeader>
-        <CardContent className="vbox gap(sm)">
-          <div class="h(3xl) bg(--colors-primary-500) r(lg) shadow(md)"></div>
-          <div class="hbox gap(xs)">
-            <div class="flex h(2xl) bg(--colors-primary-100) r(md)"></div>
-            <div class="flex h(2xl) bg(--colors-primary-300) r(md)"></div>
-            <div class="flex h(2xl) bg(--colors-primary-700) r(md)"></div>
-            <div class="flex h(2xl) bg(--colors-primary-900) r(md)"></div>
-          </div>
-        </CardContent>
-      </Card>
-      
-      <!-- Gray Scale -->
-      <Card>
-        <CardHeader>
-          <CardTitle>Neutral Tones</CardTitle>
-        </CardHeader>
-        <CardContent className="vbox gap(sm)">
-          <div class="h(3xl) bg(--colors-gray-600) r(lg) shadow(md)"></div>
-          <div class="hbox gap(xs)">
-            <div class="flex h(2xl) bg(--colors-gray-100) r(md) border(1/--colors-gray-200)"></div>
-            <div class="flex h(2xl) bg(--colors-gray-300) r(md)"></div>
-            <div class="flex h(2xl) bg(--colors-gray-700) r(md)"></div>
-            <div class="flex h(2xl) bg(--colors-gray-900) r(md)"></div>
-          </div>
-        </CardContent>
-      </Card>
-      
-      <!-- Semantic Colors -->
-      <Card>
-        <CardHeader>
-          <CardTitle>Semantic Colors</CardTitle>
-        </CardHeader>
-        <CardContent className="vbox gap(sm)">
-          <div class="grid(2) gap(sm)">
-            <div class="h(2xl) bg(--colors-success) r(md) shadow(sm)"></div>
-            <div class="h(2xl) bg(--colors-warning) r(md) shadow(sm)"></div>
-            <div class="h(2xl) bg(--colors-error) r(md) shadow(sm)"></div>
-            <div class="h(2xl) bg(--colors-info) r(md) shadow(sm)"></div>
-          </div>
-        </CardContent>
-      </Card>
+    <!-- Advanced OKLCH Color System -->
+    <div class="fade-up(0.8s/ease-out/delay:200ms)">
+      <ColorPalette />
     </div>
     
     <!-- Spacing & Layout -->
-    <Card>
+    <Card className="fade-up(0.8s/ease-out/delay:300ms)">
       <CardHeader>
         <CardTitle>Spacing System</CardTitle>
       </CardHeader>
-      <CardContent>
-        <div class="hbox(bottom) gap(lg)">
-          <div class="vbox(center) gap(xs)">
-            <div class="w(2xl) h(xs) bg(--colors-primary-500) r(sm)"></div>
+      <CardContent className="py(md)">
+        <div class="hbox(bottom) gap(sm)">
+          <div class="vbox(center) gap(xs) scale-up(0.5s/ease-out/delay:400ms)">
+            <div class="w(lg) h(xs) bg(--colors-primary-500) r(sm)"></div>
             <span class="font(xs) c(--colors-gray-500)">xs</span>
           </div>
-          <div class="vbox(center) gap(xs)">
-            <div class="w(2xl) h(sm) bg(--colors-primary-500) r(sm)"></div>
+          <div class="vbox(center) gap(xs) scale-up(0.5s/ease-out/delay:450ms)">
+            <div class="w(lg) h(sm) bg(--colors-primary-500) r(sm)"></div>
             <span class="font(xs) c(--colors-gray-500)">sm</span>
           </div>
-          <div class="vbox(center) gap(xs)">
-            <div class="w(2xl) h(md) bg(--colors-primary-500) r(sm)"></div>
+          <div class="vbox(center) gap(xs) scale-up(0.5s/ease-out/delay:500ms)">
+            <div class="w(lg) h(md) bg(--colors-primary-500) r(sm)"></div>
             <span class="font(xs) c(--colors-gray-500)">md</span>
           </div>
-          <div class="vbox(center) gap(xs)">
-            <div class="w(2xl) h(lg) bg(--colors-primary-500) r(sm)"></div>
+          <div class="vbox(center) gap(xs) scale-up(0.5s/ease-out/delay:550ms)">
+            <div class="w(lg) h(lg) bg(--colors-primary-500) r(sm)"></div>
             <span class="font(xs) c(--colors-gray-500)">lg</span>
           </div>
-          <div class="vbox(center) gap(xs)">
-            <div class="w(2xl) h(xl) bg(--colors-primary-500) r(sm)"></div>
+          <div class="vbox(center) gap(xs) scale-up(0.5s/ease-out/delay:600ms)">
+            <div class="w(lg) h(xl) bg(--colors-primary-500) r(sm)"></div>
             <span class="font(xs) c(--colors-gray-500)">xl</span>
-          </div>
-          <div class="vbox(center) gap(xs)">
-            <div class="w(2xl) h(2xl) bg(--colors-primary-500) r(sm)"></div>
-            <span class="font(xs) c(--colors-gray-500)">2xl</span>
           </div>
         </div>
       </CardContent>
     </Card>
     
     <!-- Shadows & Effects -->
-    <div class="vbox gap(xl)">
-      <h2 class="font(2xl) semibold c(--colors-gray-900)">Elevation & Shadows</h2>
-      <div class="grid(3) gap(xl)">
-        <div class="p(xl) bg(--colors-white) r(lg) shadow(sm) vbox gap(sm)">
+    <div class="vbox gap(md) fade-up(0.8s/ease-out/delay:400ms)">
+      <h2 class="font(lg) semibold c(--colors-gray-900)">Elevation & Shadows</h2>
+      <div class="grid(3) gap(md)">
+        <div class="p(md) bg(--colors-white) r(md) shadow(sm) vbox gap(xs) fade-up(0.6s/ease-out/delay:500ms)">
           <div class="font(sm) semibold">Small Shadow</div>
           <div class="font(xs) c(--colors-gray-500)">Subtle elevation</div>
         </div>
-        <div class="p(xl) bg(--colors-white) r(lg) shadow(md) vbox gap(sm)">
+        <div class="p(md) bg(--colors-white) r(md) shadow(md) vbox gap(xs) fade-up(0.6s/ease-out/delay:600ms)">
           <div class="font(sm) semibold">Medium Shadow</div>
           <div class="font(xs) c(--colors-gray-500)">Cards & containers</div>
         </div>
-        <div class="p(xl) bg(--colors-white) r(lg) shadow(lg) vbox gap(sm)">
+        <div class="p(md) bg(--colors-white) r(md) shadow(lg) vbox gap(xs) fade-up(0.6s/ease-out/delay:700ms)">
           <div class="font(sm) semibold">Large Shadow</div>
           <div class="font(xs) c(--colors-gray-500)">Modals & dropdowns</div>
         </div>
@@ -139,46 +90,46 @@
     </div>
     
     <!-- Component Examples -->
-    <Card>
+    <Card className="fade-up(0.8s/ease-out/delay:500ms)">
       <CardHeader>
         <CardTitle>Component Examples</CardTitle>
       </CardHeader>
       <CardContent>
-        <div class="vbox gap(xl)">
+        <div class="vbox gap(lg)">
           <!-- Buttons -->
-          <div class="vbox gap(md)">
-            <h3 class="font(lg) semibold">Buttons</h3>
-            <div class="hbox gap(md) flex-wrap">
-              <Button>Primary Action</Button>
-              <Button variant="secondary">Secondary</Button>
-              <Button variant="outline">Outline</Button>
-              <Button variant="ghost">Ghost</Button>
-              <Button variant="destructive">Destructive</Button>
+          <div class="vbox gap(md) fade-up(0.6s/ease-out/delay:600ms)">
+            <h3 class="font(md) semibold">Buttons</h3>
+            <div class="hbox gap(sm) flex-wrap">
+              <div class="scale-up(0.4s/ease-out/delay:700ms)"><Button>Primary Action</Button></div>
+              <div class="scale-up(0.4s/ease-out/delay:750ms)"><Button variant="secondary">Secondary</Button></div>
+              <div class="scale-up(0.4s/ease-out/delay:800ms)"><Button variant="outline">Outline</Button></div>
+              <div class="scale-up(0.4s/ease-out/delay:850ms)"><Button variant="ghost">Ghost</Button></div>
+              <div class="scale-up(0.4s/ease-out/delay:900ms)"><Button variant="destructive">Destructive</Button></div>
             </div>
           </div>
           
           <!-- Cards with different radius -->
-          <div class="vbox gap(md)">
-            <h3 class="font(lg) semibold">Border Radius</h3>
-            <div class="grid(4) gap(md)">
-              <div class="p(lg) bg(--colors-gray-100) r(sm) text(center) font(sm)">sm</div>
-              <div class="p(lg) bg(--colors-gray-100) r(md) text(center) font(sm)">md</div>
-              <div class="p(lg) bg(--colors-gray-100) r(lg) text(center) font(sm)">lg</div>
-              <div class="p(lg) bg(--colors-gray-100) r(xl) text(center) font(sm)">xl</div>
+          <div class="vbox gap(md) fade-up(0.6s/ease-out/delay:700ms)">
+            <h3 class="font(md) semibold">Border Radius</h3>
+            <div class="grid(4) gap(sm)">
+              <div class="p(md) bg(--colors-gray-100) r(sm) text(center) font(sm) scale-up(0.4s/ease-out/delay:800ms)">sm</div>
+              <div class="p(md) bg(--colors-gray-100) r(md) text(center) font(sm) scale-up(0.4s/ease-out/delay:850ms)">md</div>
+              <div class="p(md) bg(--colors-gray-100) r(lg) text(center) font(sm) scale-up(0.4s/ease-out/delay:900ms)">lg</div>
+              <div class="p(md) bg(--colors-gray-100) r(xl) text(center) font(sm) scale-up(0.4s/ease-out/delay:950ms)">xl</div>
             </div>
           </div>
           
           <!-- Modern Card Design -->
-          <div class="vbox gap(md)">
-            <h3 class="font(lg) semibold">Modern Card</h3>
-            <div class="p(xl) bg(--colors-white) r(xl) shadow(lg) border(1/--colors-gray-200)">
-              <div class="hbox(middle) gap(lg)">
-                <div class="w(3xl) h(3xl) r(lg) bg(--colors-primary-400..--colors-primary-600/135deg)"></div>
-                <div class="vbox gap(xs) flex">
-                  <div class="font(lg) semibold c(--colors-gray-900)">Premium Feature</div>
+          <div class="vbox gap(md) fade-up(0.6s/ease-out/delay:800ms)">
+            <h3 class="font(md) semibold">Modern Card</h3>
+            <div class="p(lg) bg(--colors-white) r(lg) shadow(lg) border(1/--colors-gray-200) scale-up(0.5s/ease-out/delay:900ms)">
+              <div class="hbox(middle) gap(md)">
+                <div class="w(2xl) h(2xl) r(md) bg(--colors-primary-400..--colors-primary-600/135deg) bounce-in(0.6s/elastic/delay:1000ms)"></div>
+                <div class="vbox gap(xs) flex fade-left(0.5s/ease-out/delay:1100ms)">
+                  <div class="font(md) semibold c(--colors-gray-900)">Premium Feature</div>
                   <div class="font(sm) c(--colors-gray-600)">Experience the refined design system</div>
                 </div>
-                <Button size="sm">Try Now</Button>
+                <div class="fade-right(0.5s/ease-out/delay:1200ms)"><Button size="sm">Try Now</Button></div>
               </div>
             </div>
           </div>

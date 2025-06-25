@@ -26,15 +26,15 @@ export const font: RuleHandler = (args?: string): CSSRule => {
     if (isNaN(+part) && !part.includes('%')) {
       // Check for line-height tokens
       if (['tight', 'normal', 'relaxed', 'loose'].includes(part)) {
-        result['line-height'] = getTokenVar('line-height', part);
+        result['line-height'] = getTokenVar('lineHeight', part);
       }
       // Check for letter-spacing tokens
       else if (['tight', 'normal', 'wide'].includes(part) && !result['line-height']) {
-        result['letter-spacing'] = getTokenVar('letter-spacing', part);
+        result['letter-spacing'] = getTokenVar('letterSpacing', part);
       }
       // Check for font-weight tokens
       else if (['thin', 'light', 'normal', 'medium', 'semibold', 'bold', 'extrabold', 'black'].includes(part)) {
-        result['font-weight'] = getTokenVar('font-weight', part);
+        result['font-weight'] = getTokenVar('fontWeight', part);
       }
       // Otherwise it's a font-family
       else {

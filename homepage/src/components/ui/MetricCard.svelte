@@ -19,7 +19,7 @@
            transition-all duration(normal) ease(out) group cursor-pointer">
   
   <!-- Background decoration with improved design -->
-  <div class="decoration layer(top:-10+right:-10) w(100) h(100) opacity(xs) rotate(12) group-hover:rotate(24) group-hover:scale(110) transition-all duration(slower) ease(out)">
+  <div class="decoration layer(top:-10+right:-10) w(100) h(100) opacity(xs) rotate(12) group-hover:rotate(24) group-hover:scale(1.02) transition-all duration(slower) ease(out)">
     <svg viewBox="0 0 100 100" class="w(fill) h(fill)">
       <circle cx="50" cy="50" r="40" fill="currentColor" style="color: {iconColor}" opacity="0.08" />
       <circle cx="50" cy="50" r="25" fill="none" stroke="currentColor" stroke-width="1" opacity="0.12" style="color: {iconColor}" />
@@ -31,7 +31,7 @@
   <div class="hbox(between+center) relative z(10)">
     <h3 class="font(sm) medium c(gray-600) group-hover:c(gray-700) transition-colors duration(normal)">{title}</h3>
     {#if icon}
-      <div class="icon-wrapper w(2xl) h(2xl) r(lg) hbox(pack) shadow(xs) group-hover:shadow(md) group-hover:scale(110) transition-all duration(normal) ease(back)" 
+      <div class="icon-wrapper w(2xl) h(2xl) r(lg) hbox(pack) shadow(xs) group-hover:shadow(md) group-hover:scale(1.02) transition-all duration(normal) ease(back)" 
            style="background: {iconColor}15; border: 1px solid {iconColor}20;">
         <span class="font(lg)" style="color: {iconColor}">{icon}</span>
       </div>

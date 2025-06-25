@@ -16,7 +16,7 @@
               <code class="font(md) font(semibold)" style="background: linear-gradient(135deg,#3b82f6,#8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">shadow({key})</code>
               <div class="font(xs) c(gray-600) mt(xs) font-family(mono)">{value}</div>
             </div>
-            <div class="flex-1 p(xl) bg(white) r(xl) shadow({key}) hover:scale(102) transition">
+            <div class="flex-1 p(xl) bg(white) r(xl) shadow({key}) hover:scale(1.02) transition">
               <div class="font(sm) c(gray-800) font(semibold)">Elevation level: {key}</div>
               <div class="font(xs) c(gray-600) mt(xs)">Hover to see the effect</div>
             </div>

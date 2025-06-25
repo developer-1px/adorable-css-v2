@@ -5,7 +5,7 @@ import { positionCategoryRules } from './position';
 import { interactionRules } from './interaction';
 import { utilityRules } from './utilities';
 import { effectsRules } from './effects';
-import { glowRules, glassRules, cardRules, responsiveRules, advancedRules, adminRules, containerRules } from './plugins';
+import { glowRules, glassRules, cardRules, responsiveRules, advancedRules, adminRules, containerRules, animationRules } from './plugins';
 import { headingRules } from './plugins/heading';
 import { colorRules } from '../plugins/colors';
 
@@ -26,7 +26,8 @@ export const rules = {
   ...advancedRules,
   ...adminRules,
   ...headingRules,
-  ...containerRules
+  ...containerRules,
+  ...animationRules
 };
 
 // Grouped rules for testing/debugging
@@ -46,7 +47,8 @@ export const groupedRules = {
     advanced: advancedRules,
     admin: adminRules,
     heading: headingRules,
-    container: containerRules
+    container: containerRules,
+    animations: animationRules
   }
 };
 

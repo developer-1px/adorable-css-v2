@@ -13,9 +13,11 @@ export interface DesignTokens {
     '5xl': string;
     '6xl': string;
     '7xl': string;
+    '8xl': string;
+    '9xl': string;
   };
   spacing: {
-    // Semantic spacing tokens only
+    // Semantic spacing tokens for better control
     xs: string;
     sm: string;
     md: string;
@@ -292,19 +294,21 @@ export const defaultTokens: DesignTokens = {
     '5xl': '3.75rem',  // 60px
     '6xl': '4.5rem',   // 72px
     '7xl': '6rem',     // 96px
+    '8xl': '8rem',     // 128px
+    '9xl': '10rem',    // 160px
   },
   
-  // Spacing Scale - 4px base unit with practical increments
+  // Spacing Scale - Smaller semantic values for precise control
   spacing: {
-    xs: '0.5rem',      // 8px
-    sm: '0.75rem',     // 12px
-    md: '1rem',        // 16px
-    lg: '1.5rem',      // 24px
-    xl: '2rem',        // 32px
-    '2xl': '2.5rem',   // 40px
-    '3xl': '3rem',     // 48px
-    '4xl': '4rem',     // 64px
-    '5xl': '6rem',     // 96px
+    xs: '0.25rem',        // 4px - very tight spacing
+    sm: '0.5rem',         // 8px - tight spacing  
+    md: '0.75rem',        // 12px - default spacing
+    lg: '1rem',           // 16px - comfortable spacing
+    xl: '1.5rem',         // 24px - large spacing
+    '2xl': '2rem',        // 32px - extra large
+    '3xl': '2.5rem',      // 40px - section spacing
+    '4xl': '3rem',        // 48px - large section spacing
+    '5xl': '4rem',        // 64px - hero spacing
   },
   
   // Size Scale - for width/height utilities

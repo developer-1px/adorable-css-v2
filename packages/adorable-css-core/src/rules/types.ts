@@ -1,6 +1,6 @@
 // CSS rule object type
 export type CSSRule = {
-  [property: string]: string;
+  [property: string]: string | CSSRule;
 }
 
 // Handler function types

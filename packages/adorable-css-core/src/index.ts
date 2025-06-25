@@ -12,3 +12,9 @@ export { generateCSS, generateCSSFromAdorableCSS } from "./parser/generator";
 export { getRuleHandler, rules, groupedRules } from "./rules";
 export { defaultTokens, generateTokenCSS, isToken, getTokenVar } from "./tokens";
 export { createTokensPlugin, injectTokens, tokensPlugin } from "./plugins/tokens";
+
+// Export color palette and plugin
+export { colorPalette, themes, setTheme, getCurrentTheme, getAvailableThemes, colorsPlugin } from "./plugins/colors";
+
+// Export animation plugin
+export { animationsPlugin, animationKeyframes, getAllKeyframes } from "./rules/plugins/animations";

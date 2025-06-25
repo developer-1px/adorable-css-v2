@@ -100,7 +100,7 @@ export const containerResponsive: RuleHandler = (args?: string): CSSRule => {
   
   return {
     width: '100%',
-    'max-width': maxWidth,
+    'max-width': `${maxWidth}`,
     'margin-left': 'auto',
     'margin-right': 'auto',
     'padding-left': 'clamp(1rem, 4vw, 2rem)',
@@ -129,9 +129,7 @@ export const gridResponsive: RuleHandler = (args?: string): CSSRule => {
       display: 'grid',
       'grid-template-columns': `repeat(${mobileCols}, 1fr)`,
       gap: 'clamp(1rem, 4vw, 2rem)',
-      '@media (min-width: 768px)': {
-        'grid-template-columns': `repeat(${desktopCols}, 1fr)`
-      }
+      '@media (min-width: 768px)': `grid-template-columns: repeat(${desktopCols}, 1fr)`
     };
   }
   
