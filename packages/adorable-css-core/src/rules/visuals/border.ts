@@ -12,8 +12,13 @@ export const b: RuleHandler = (args?: string): CSSRule => {
     return { border: `1px solid ${String(makeColor(color))}` };
   }
   
-  // b(1) - simple border width
+  // b(1) - simple border width OR b(gray-200) - color
   if (!args.includes('/')) {
+    // Check if it's a color token
+    if (args.includes('-') || args.startsWith('#')) {
+      return { border: `1px solid ${String(makeColor(args))}` };
+    }
+    // Otherwise treat as width
     return { border: `${String(px(args))} solid currentColor` };
   }
   
@@ -56,6 +61,11 @@ export const bt: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
   
   if (!args.includes('/')) {
+    // Check if it's a color token
+    if (args.includes('-') || args.startsWith('#')) {
+      return { 'border-top': `1px solid ${String(makeColor(args))}` };
+    }
+    // Otherwise treat as width
     return { 'border-top': `${String(px(args))} solid currentColor` };
   }
   
@@ -71,6 +81,11 @@ export const br: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
   
   if (!args.includes('/')) {
+    // Check if it's a color token
+    if (args.includes('-') || args.startsWith('#')) {
+      return { 'border-right': `1px solid ${String(makeColor(args))}` };
+    }
+    // Otherwise treat as width
     return { 'border-right': `${String(px(args))} solid currentColor` };
   }
   
@@ -86,6 +101,11 @@ export const bb: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
   
   if (!args.includes('/')) {
+    // Check if it's a color token
+    if (args.includes('-') || args.startsWith('#')) {
+      return { 'border-bottom': `1px solid ${String(makeColor(args))}` };
+    }
+    // Otherwise treat as width
     return { 'border-bottom': `${String(px(args))} solid currentColor` };
   }
   
@@ -101,6 +121,11 @@ export const bl: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
   
   if (!args.includes('/')) {
+    // Check if it's a color token
+    if (args.includes('-') || args.startsWith('#')) {
+      return { 'border-left': `1px solid ${String(makeColor(args))}` };
+    }
+    // Otherwise treat as width
     return { 'border-left': `${String(px(args))} solid currentColor` };
   }
   

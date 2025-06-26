@@ -82,8 +82,9 @@ Generates code from Figma designs:
 ### Development Notes
 
 - No ESLint or Prettier configuration exists - follow existing code style
-- No test framework configured - manual testing required
+- Test framework: Vitest - run `pnpm test` to verify changes
 - Type checking via `pnpm check` before commits
+- **IMPORTANT**: Use `pnpm build` or `pnpm test` for testing - `pnpm dev` runs in watch mode and waits
 - The project is designed as a UnoCSS plugin for framework compatibility
 
 ### Code Convention
@@ -185,147 +186,86 @@ processors[getPropertyIndex(part)](part);
    - ❌ Wrong: `layer(top:0+left:0)`
    - Omit `:0` for zero values in layer positioning
 
-## Modern CSS Library Design Principles
+16. **No Margin in Design**: Don't use margin utilities
+   - ❌ Wrong: `mb(lg)`, `mt(md)`, `mx(auto)`
+   - ✅ Correct: Use `gap()` in flex/grid layouts
+   - Design with gap for spacing between elements
 
-### Core Design Philosophy
+17. **Flexbox Alignment**: No 'between' in hbox
+   - ❌ Wrong: `hbox(between)`, `hbox(middle+between)`
+   - ✅ Correct: `hbox gap(auto)` for space-between effect
+   - `gap(auto)` applies justify-content: space-between
 
-#### 1. **Utility-First Architecture**
-- Embrace atomic CSS principles with single-purpose classes
-- Prioritize composability over premade components
-- Keep specificity low to avoid cascade conflicts
-- Example: `bg(purple-400)` instead of `.btn-primary-background`
+## AI Learning Patterns
 
-#### 2. **Perceptually Uniform Color System (OKLCH)**
-- Use OKLCH color space for consistent visual perception
-- Lightness (L): 0-1, maintains consistent brightness across hues
-- Chroma (C): 0-0.37, controls color intensity uniformly
-- Hue (H): 0-360, circular color wheel
-- Benefits: Better gradients, predictable color mixing, improved accessibility
+### Pattern Recognition for AI
+AdorableCSS follows consistent patterns that AI can easily learn:
 
-#### 3. **Design Tokens as Foundation**
-- Define visual properties as reusable variables
-- Categories: Colors, typography, spacing, shadows, animations
-- Enable cross-platform consistency
-- Support theming and dynamic customization
-- Example: `--spacing-lg: 24px`, `--color-primary-500: oklch(0.65 0.25 295)`
+#### Layout Patterns
+```
+Figma Auto Layout → AdorableCSS
+Horizontal + Center → hbox(middle)
+Vertical + Center → vbox(pack) 
+Horizontal + Space Between → hbox gap(auto)
+Vertical + Top → vbox
+Horizontal + Right → hbox(end)
+```
 
-#### 4. **Mobile-First & Responsive Design**
-- Start with mobile breakpoints and scale up
-- Use container queries for component-based responsiveness
-- Provide intuitive responsive prefixes: `sm:`, `md:`, `lg:`, `xl:`
-- Support both min-width and max-width variants: `~sm:` for max-width
+#### Common Component Patterns
+```
+Button: btn(primary/lg) or px(xl) py(md) bg(purple-500) c(white) r(lg)
+Card: card(elevated/lg) or bg(white) r(xl) p(xl) shadow(lg)
+Heading: heading(h1/hero) or 900 font(4xl/1.1)
+Input: px(lg) py(md) border(1/gray-300) r(lg) w(full)
+Container: container(lg) or max-w(1024px) mx(auto) px(lg)
+```
 
-#### 5. **Developer Experience (DX) First**
-- Intuitive, memorable syntax that mirrors mental models
-- Excellent IDE support with autocomplete
-- Comprehensive documentation with live examples
-- Minimal configuration and setup
-- Fast build times and small bundle sizes
+#### Color Patterns
+```
+Text Colors: c(gray-900), c(white), c(purple-600)
+Background: bg(white), bg(gray-50), bg(purple-500)
+Gradients: bg(135deg/purple-500,pink-500)
+Alpha: white.5, gray-900.8, purple-500.2
+```
 
-### Technical Implementation Principles
+#### Spacing Patterns
+```
+Padding: p(md)=1rem, p(lg)=1.5rem, p(xl)=2rem
+Gap: gap(sm)=0.5rem, gap(md)=1rem, gap(lg)=1.5rem
+Margin: Use gap() instead of margin
+Width: w(full), w(300px), w(1/2)
+```
 
-#### 1. **Performance Optimization**
-- Tree-shakable architecture - only include used styles
-- Minimize runtime calculations
-- Use CSS custom properties for dynamic values
-- Leverage modern CSS features (Grid, Flexbox, Layers)
-- Aim for sub-10KB gzipped core
+#### Most Common AI-Friendly Combinations
+```html
+<!-- Hero Section -->
+<div class="min-h(100vh) vbox(pack) bg(white) text(center)">
+  <h1 class="heading(h1/hero) c(gray-900) mb(lg)">Title</h1>
+  <p class="font(xl) c(gray-600) mb(xl)">Description</p>
+  <button class="btn(primary/lg)">Action</button>
+</div>
 
-#### 2. **Modularity & Extensibility**
-- Plugin-based architecture for custom rules
-- Separate core from optional features
-- Allow partial imports: `import { colors } from 'adorable-css'`
-- Support custom themes and configurations
+<!-- Card Layout -->
+<div class="card(elevated) vbox gap(lg)">
+  <h2 class="heading(h2) c(gray-900)">Card Title</h2>
+  <p class="c(gray-600)">Card content</p>
+</div>
 
-#### 3. **Type Safety**
-- Full TypeScript support with accurate types
-- IDE autocomplete for all utilities
-- Type-safe configuration files
-- Compile-time validation where possible
+<!-- Grid Layout -->
+<div class="grid grid-cols(3) gap(lg)">
+  <div class="card(interactive)">Item 1</div>
+  <div class="card(interactive)">Item 2</div>
+  <div class="card(interactive)">Item 3</div>
+</div>
+```
 
-#### 4. **Framework Agnostic**
-- Pure CSS output compatible with any framework
-- Optional framework-specific integrations
-- Support for component libraries
-- Work in SSR and SSG environments
+### AI Training Prompt Templates
+When working with AI and AdorableCSS:
 
-### Visual Design Principles
-
-#### 1. **Consistent Spacing Scale**
-- Use mathematical ratios (1.5x, 2x, etc.)
-- Limited, memorable set of values
-- Support both fixed and fluid spacing
-- Example: 4, 8, 12, 16, 24, 32, 48, 64, 96
-
-#### 2. **Typography System**
-- Modular scale for font sizes
-- Consistent line-height ratios
-- Support for fluid typography
-- Web font optimization strategies
-
-#### 3. **Elevation & Depth**
-- Consistent shadow scale
-- Support for both drop shadows and inner shadows
-- Consider dark mode shadows
-- Layer-based z-index management
-
-#### 4. **Motion & Animation**
-- Predefined timing functions
-- Consistent duration scale
-- Respect prefers-reduced-motion
-- Performance-optimized animations
-
-### Best Practices for CSS Library Design
-
-#### 1. **Naming Conventions**
-- Be descriptive but concise
-- Use consistent patterns
-- Avoid abbreviations that aren't universal
-- Consider international developers
-
-#### 2. **Documentation Standards**
-- Start with "Getting Started" guide
-- Provide interactive examples
-- Include migration guides
-- Document browser support
-- Show real-world use cases
-
-#### 3. **Testing & Quality**
-- Visual regression testing
-- Cross-browser testing
-- Performance benchmarks
-- Accessibility audits
-- Bundle size monitoring
-
-#### 4. **Community & Ecosystem**
-- Open source with clear contribution guidelines
-- Regular release cycles
-- Responsive to issues and PRs
-- Plugin/extension ecosystem
-- Integration with popular tools
-
-### Future-Proofing Considerations
-
-#### 1. **Emerging CSS Features**
-- Container queries for component responsiveness
-- CSS Layers for cascade management
-- Subgrid for complex layouts
-- New color spaces (OKLCH, Display P3)
-- CSS Houdini for custom properties
-
-#### 2. **Accessibility First**
-- WCAG compliance built-in
-- Color contrast utilities
-- Focus management helpers
-- Screen reader utilities
-- Reduced motion support
-
-#### 3. **Sustainability**
-- Minimize HTTP requests
-- Optimize for Core Web Vitals
-- Support incremental adoption
-- Provide migration tools
-- Maintain backward compatibility
+1. **Always specify**: "Use AdorableCSS syntax, not TailwindCSS"
+2. **Provide context**: "AdorableCSS uses hbox/vbox for flex layouts"
+3. **Give examples**: "Use heading(h1/hero) for large titles"
+4. **Correct patterns**: "Use gap() instead of margin for spacing"
 
 ### AdorableCSS-Specific Principles
 

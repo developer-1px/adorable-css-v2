@@ -2,6 +2,7 @@
 // Integrates the Showroom color generator with scientific color theory
 
 import type { RuleHandler, CSSRule } from '../rules/types';
+import { makeColor } from '../values/makeValue';
 import { 
   createAdvancedColorSystem, 
   generateAdvancedColorPalette,
@@ -195,74 +196,105 @@ export const colorRules: Record<string, RuleHandler> = {
   c: (value?: string): CSSRule => {
     if (!value) return {};
     
-    // Handle gradient syntax: color1..color2/direction
-    const gradientMatch = value.match(/^(.+)\.\.(.+)\/(.+)$/);
-    if (gradientMatch) {
-      const [, color1, color2, direction] = gradientMatch;
-      
-      // Get colors from palette or use as-is
-      const startColor = colorPalette[color1] || color1;
-      const endColor = colorPalette[color2] || color2;
-      
-      return { color: `linear-gradient(${direction}, ${startColor}, ${endColor})` };
+    if (value === "current") return { color: "currentColor" };
+
+    // c(red..blue) - text gradient with .. syntax  
+    if (value.includes('..')) {
+      const [start, end] = value.split('..');
+      const startColor = colorPalette[start] || makeColor(start);
+      const endColor = colorPalette[end] || makeColor(end);
+      return {
+        background: `linear-gradient(90deg, ${startColor}, ${endColor})`,
+        "-webkit-background-clip": "text",
+        "background-clip": "text", 
+        "-webkit-text-fill-color": "transparent",
+      };
+    }
+
+    if (
+      value.startsWith("linear-gradient") ||
+      value.startsWith("radial-gradient")
+    ) {
+      return {
+        background: value.replace(/\//g, " "),
+        "-webkit-background-clip": "text",
+        "-webkit-text-fill-color": "transparent",
+      };
     }
     
+    // Check colorPalette first
     if (colorPalette[value]) {
       return { color: colorPalette[value] };
     }
     
-    // Handle opacity
-    const opacityMatch = value.match(/^(.+)\/(.+)$/);
-    if (opacityMatch) {
-      const [, colorName, opacity] = opacityMatch;
-      if (colorPalette[colorName]) {
-        const baseColor = colorPalette[colorName];
-        const alpha = opacity.includes('%') ? parseInt(opacity) / 100 : parseFloat(opacity);
-        
-        // If it's OKLCH, convert to OKLCH with alpha
-        if (baseColor.startsWith('oklch')) {
-          const oklchMatch = baseColor.match(/oklch\(([^)]+)\)/);
-          if (oklchMatch) {
-            return { color: `oklch(${oklchMatch[1]} / ${alpha})` };
-          }
-        }
-        
-        // Fallback for hex colors
-        const hexFallback = colorPalette[`${colorName}-hex`];
-        if (hexFallback) {
-          const r = parseInt(hexFallback.slice(1, 3), 16);
-          const g = parseInt(hexFallback.slice(3, 5), 16);
-          const b = parseInt(hexFallback.slice(5, 7), 16);
-          return { color: `rgba(${r}, ${g}, ${b}, ${alpha})` };
-        }
-      }
-    }
-    
-    // Fallback to original behavior for non-palette colors
-    return { color: value };
+    // Handle all colors including opacity syntax (white.8, black.2) with makeColor
+    const processedColor = makeColor(value);
+    return { color: processedColor };
   },
 
   // Background color
   bg: (value?: string): CSSRule => {
     if (!value) return {};
     
-    // Handle gradient syntax: color1..color2/direction
-    const gradientMatch = value.match(/^(.+)\.\.(.+)\/(.+)$/);
-    if (gradientMatch) {
-      const [, color1, color2, direction] = gradientMatch;
+    // Handle gradient syntax - direction first: 135deg/purple-500..pink-500
+    if (value.includes('..')) {
+      let colors: string[] = [];
+      let direction = '135deg'; // default direction
       
-      // Get colors from palette or use as-is
-      const startColor = colorPalette[color1] || `var(--color-${color1})`;
-      const endColor = colorPalette[color2] || `var(--color-${color2})`;
+      // Check if there's a direction specified with /
+      if (value.includes('/')) {
+        const parts = value.split('/');
+        
+        // Check if first part is direction (contains deg or is a keyword)
+        if (parts[0].includes('deg') || parts[0].startsWith('to-')) {
+          direction = parts[0];
+          colors = parts[1].split('..');
+        } else {
+          // Old format: colors/direction
+          colors = parts[0].split('..');
+          direction = parts[1];
+        }
+        
+        // Convert direction keywords to degrees
+        const directionMap: Record<string, string> = {
+          'to-top': 'to top',
+          'to-right': 'to right',
+          'to-bottom': 'to bottom',
+          'to-left': 'to left',
+          'to-top-right': 'to top right',
+          'to-top-left': 'to top left',
+          'to-bottom-right': 'to bottom right',
+          'to-bottom-left': 'to bottom left'
+        };
+        
+        direction = directionMap[direction] || direction;
+      } else {
+        colors = value.split('..');
+      }
       
-      return { background: `linear-gradient(${direction}, ${startColor}, ${endColor})` };
+      // Build the gradient string
+      const colorStops = colors.map(color => {
+        // Check palette first
+        if (colorPalette[color]) return colorPalette[color];
+        // Then use makeColor for basic colors like white, black
+        const processedColor = makeColor(color);
+        return processedColor;
+      }).join(', ');
+      
+      return { background: `linear-gradient(${direction}, ${colorStops})` };
+    }
+    
+    // Handle colors with opacity using dot notation (white.5, black.2)
+    if (value.includes('.')) {
+      const processedColor = makeColor(value);
+      return { background: processedColor };
     }
     
     if (colorPalette[value]) {
       return { background: colorPalette[value] };
     }
     
-    // Handle opacity
+    // Handle opacity with slash syntax (deprecated)
     const opacityMatch = value.match(/^(.+)\/(.+)$/);
     if (opacityMatch) {
       const [, colorName, opacity] = opacityMatch;
@@ -289,8 +321,9 @@ export const colorRules: Record<string, RuleHandler> = {
       }
     }
     
-    // Fallback to original behavior
-    return { background: value };
+    // Fallback to makeColor for basic colors
+    const processedColor = makeColor(value);
+    return { background: processedColor };
   },
 
   // Border color

@@ -3,102 +3,112 @@
 </script>
 
 <section class="features py(6xl) bg(gray-50)">
-  <div class="container(4xl) px(lg)">
+  <div class="container(4xl) px(lg) vbox gap(4xl)">
     <!-- Section Header -->
-    <div class="text(center) mb(4xl)">
-      <h2 class="900 font(4xl/1.2) c(gray-900) mb(lg)">
-        Three Revolutionary Concepts
+    <div class="text(center) vbox gap(lg)">
+      <h2 class="heading(h1/section) c(gray-900)">
+        Why AdorableCSS Changes Everything
       </h2>
       <p class="font(lg) c(gray-600) container(2xl)">
-        AdorableCSS rethinks how CSS should work in the modern design era
+        We solved the three biggest problems in CSS development: 
+        <strong class="c(gray-900)">complex syntax</strong>, 
+        <strong class="c(gray-900)">bad default design</strong>, and 
+        <strong class="c(gray-900)">steep learning curves</strong>.
       </p>
     </div>
     
     <!-- Features -->
     <div class="grid grid-cols(1) md:grid-cols(3) gap(2xl)">
       <!-- Figma-Native -->
-      <div class="text(center) p(2xl) bg(white) r(xl) border(1/gray-200) hover:shadow(lg) transition">
-        <div class="w(80px) h(80px) bg(purple-100) r(full) vbox(pack) mx(auto) mb(xl)">
+      <div class="card(interactive/lg) text(center) vbox gap(lg)">
+        <div class="w(80px) h(80px) bg(purple-100) r(full) vbox(pack)">
           <Layers size="40" class="c(purple-600)" />
         </div>
-        <h3 class="font(xl) 700 c(gray-900) mb(md)">Figma-Native</h3>
-        <p class="font(md) c(gray-600) mb(lg)">
-          Write CSS the way you think in Figma. No more mental translation between design and code.
-        </p>
-        <div class="bg(gray-50) r(lg) p(lg) text(left)">
-          <div class="font(sm) c(gray-500) mb(sm)">Auto Layout → Horizontal</div>
+        <div class="vbox gap(md)">
+          <h3 class="heading(h3)">Think Figma, Write Code</h3>
+          <p class="font(md) c(gray-600)">
+            <strong>Zero mental translation.</strong> If you can use Figma's Auto Layout, 
+            you already know AdorableCSS. No learning curve for designers.
+          </p>
+        </div>
+        <div class="card(flat) text(left) vbox gap(sm)">
+          <div class="font(sm) c(gray-500)">Auto Layout → Horizontal</div>
           <code class="font(sm) c(purple-600) font-family(mono)">hbox(middle+between)</code>
         </div>
       </div>
       
-      <!-- OKLCH Colors -->
-      <div class="text(center) p(2xl) bg(white) r(xl) border(1/gray-200) hover:shadow(lg) transition">
-        <div class="w(80px) h(80px) bg(pink-100) r(full) vbox(pack) mx(auto) mb(xl)">
+      <!-- Design Tokens -->
+      <div class="card(interactive/lg) text(center) vbox gap(lg)">
+        <div class="w(80px) h(80px) bg(pink-100) r(full) vbox(pack)">
           <Palette size="40" class="c(pink-600)" />
         </div>
-        <h3 class="font(xl) 700 c(gray-900) mb(md)">OKLCH Colors</h3>
-        <p class="font(md) c(gray-600) mb(lg)">
-          Perfect gradients that never go muddy. Perceptually uniform color space for beautiful results.
-        </p>
-        <div class="bg(gray-50) r(lg) p(lg) text(left)">
-          <div class="font(sm) c(gray-500) mb(sm)">Perfect gradient</div>
-          <code class="font(sm) c(pink-600) font-family(mono)">bg(135deg/purple-400,pink-400)</code>
+        <div class="vbox gap(md)">
+          <h3 class="heading(h3)">Design Tokens Made Simple</h3>
+          <p class="font(md) c(gray-600)">
+            <strong>Apple-quality defaults, your brand instantly.</strong> One CSS variable 
+            rebrands your entire app. Beautiful design that scales with your company.
+          </p>
+        </div>
+        <div class="card(flat) text(left) vbox gap(sm)">
+          <div class="font(sm) c(gray-500)">Instant rebranding</div>
+          <code class="font(sm) c(pink-600) font-family(mono)">--primary: #8b5cf6</code>
         </div>
       </div>
       
-      <!-- Zero Runtime -->
-      <div class="text(center) p(2xl) bg(white) r(xl) border(1/gray-200) hover:shadow(lg) transition">
-        <div class="w(80px) h(80px) bg(green-100) r(full) vbox(pack) mx(auto) mb(xl)">
+      <!-- Smart Design System -->
+      <div class="card(interactive/lg) text(center) vbox gap(lg)">
+        <div class="w(80px) h(80px) bg(green-100) r(full) vbox(pack)">
           <Zap size="40" class="c(green-600)" />
         </div>
-        <h3 class="font(xl) 700 c(gray-900) mb(md)">Zero Runtime</h3>
-        <p class="font(md) c(gray-600) mb(lg)">
-          Pure CSS output with no JavaScript overhead. Lightning fast performance guaranteed.
-        </p>
-        <div class="bg(gray-50) r(lg) p(lg) text(left)">
-          <div class="font(sm) c(gray-500) mb(sm)">Build time compilation</div>
-          <code class="font(sm) c(green-600) font-family(mono)">AdorableCSS → Pure CSS</code>
+        <div class="vbox gap(md)">
+          <h3 class="heading(h3)">Intelligence Built-In</h3>
+          <p class="font(md) c(gray-600)">
+            <strong>Components that adapt automatically.</strong> Spacing, colors, and proportions 
+            follow design system principles. Good design happens without thinking.
+          </p>
+        </div>
+        <div class="card(flat) text(left) vbox gap(sm)">
+          <div class="font(sm) c(gray-500)">Smart components</div>
+          <code class="font(sm) c(green-600) font-family(mono)">card() btn() heading()</code>
         </div>
       </div>
     </div>
     
     <!-- Live Example -->
     <div class="mt(4xl) text(center)">
-      <div class="container(3xl) p(2xl) bg(white) r(xl) border(1/gray-200)">
-        <h3 class="font(xl) 700 c(gray-900) mb(lg)">See It In Action</h3>
-        <div class="bg(gray-900) r(lg) p(xl) mb(lg)">
-          <pre class="font(sm/1.6) c(white) font-family(mono) text(left)"><code>{`// Traditional CSS: 15+ lines
+      <div class="card(elevated/xl) container(3xl)">
+        <h3 class="heading(h3) c(gray-900) ">The Proof: Same Beauty, 96% Less Code</h3>
+        <div class="bg(gray-900) r(lg) p(xl) ">
+          <pre class="font(sm/1.6) c(white) font-family(mono) text(left)"><code>{`// Old way: Complex CSS (15+ lines)
 .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 24px;
+  gap: 24px;
+  padding: 32px;
   background: linear-gradient(135deg, #8b5cf6, #ec4899);
   border-radius: 16px;
   box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
 }
+.container:hover { transform: scale(1.05); }
 
-// AdorableCSS: 1 line
-<div class="hbox(middle+between) gap(16) p(24) 
-           bg(135deg/purple-500,pink-500) r(16) shadow(lg)">`}</code></pre>
+// AdorableCSS: Beautiful by default (1 line)
+<div class="hbox(middle+between) gap(lg) p(2xl) 
+           bg(135deg/purple-500,pink-500) r(xl) shadow(lg) 
+           hover:scale(1.05) transition">`}</code></pre>
         </div>
-        <p class="font(md) c(gray-600)">
-          Same result, <strong class="c(gray-900)">96% less code</strong>
-        </p>
+        <div class="vbox gap(sm)">
+          <p class="font(md) c(gray-600)">
+            <strong class="c(gray-900)">Same professional result.</strong> 
+            Perfect spacing, beautiful colors, smooth interactions—all automatic.
+          </p>
+          <p class="font(sm) c(purple-600) 600">
+            💡 No design knowledge required. Just follow the syntax and get Apple-quality UI.
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<style>
-  code {
-    font-family: 'SF Mono', Monaco, 'Cascadia Code', 'Roboto Mono', Consolas, 'Courier New', monospace;
-  }
-  
-  pre {
-    margin: 0;
-    white-space: pre-wrap;
-    word-break: break-word;
-  }
-</style>

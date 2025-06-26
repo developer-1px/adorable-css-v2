@@ -22,7 +22,16 @@
       "Bash(rg:*)",
       "Bash(rm:*)",
       "Bash(do echo \"=== $file ===\")",
-      "Bash(echo)"
+      "Bash(echo)",
+      "Bash(pnpm run:*)",
+      "Bash(npm test)",
+      "Bash(npx vitest run:*)",
+      "Bash(pnpm test:*)",
+      "Bash(npx tsx:*)",
+      "Bash(npm test:*)",
+      "Bash(pnpm add:*)",
+      "Bash(mkdir:*)",
+      "Bash(touch:*)"
     ],
     "deny": []
   }

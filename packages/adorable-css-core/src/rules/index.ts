@@ -5,16 +5,15 @@ import { positionCategoryRules } from './position';
 import { interactionRules } from './interaction';
 import { utilityRules } from './utilities';
 import { effectsRules } from './effects';
-import { glowRules, glassRules, cardRules, responsiveRules, advancedRules, adminRules, containerRules, animationRules } from './plugins';
-import { headingRules } from './plugins/heading';
+import { glowRules, glassRules, cardRules, responsiveRules, advancedRules, adminRules, containerRules, animationRules, buttonRules, headingRules, uiCardRules, proseRules, mdxRules } from './plugins';
 import { colorRules } from '../plugins/colors';
 
 // Main rules registry
 export const rules = {
   ...typographyRules,
   ...layoutRules,
-  ...visualRules,
-  ...colorRules,  // colorRules의 bg가 visualRules의 bg를 덮어씀
+  ...colorRules,  
+  ...visualRules,  // visualRules의 bg가 colorRules의 bg를 덮어씀 (이게 올바른 그라디언트 지원)
   ...positionCategoryRules,
   ...interactionRules,
   ...utilityRules,
@@ -25,7 +24,11 @@ export const rules = {
   ...responsiveRules,
   ...advancedRules,
   ...adminRules,
+  ...buttonRules,
   ...headingRules,
+  ...uiCardRules,
+  ...proseRules,
+  ...mdxRules,
   ...containerRules,
   ...animationRules
 };
@@ -46,7 +49,11 @@ export const groupedRules = {
     responsive: responsiveRules,
     advanced: advancedRules,
     admin: adminRules,
+    button: buttonRules,
     heading: headingRules,
+    uiCard: uiCardRules,
+    prose: proseRules,
+    mdx: mdxRules,
     container: containerRules,
     animations: animationRules
   }

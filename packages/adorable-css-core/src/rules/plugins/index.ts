@@ -6,3 +6,8 @@ export * from './advanced';
 export * from './admin';
 export * from './animations';
 export { containerRules } from './container';
+export { buttonRules } from './ui/button';
+export { headingRules } from './ui/heading';
+export { cardRules as uiCardRules } from './ui/card';
+export { proseRules } from './ui/prose';
+export { mdxRules } from './ui/mdx';

@@ -120,6 +120,17 @@ export const mr = makeMarginRule("r");
 
 export const gap: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
+  
+  // Special case for gap(auto) - space-between behavior
+  if (args === 'auto') {
+    // Return special marker that generator will handle
+    return { 
+      gap: 'auto',
+      'justify-content': 'space-between',
+      'align-content': 'space-between'
+    };
+  }
+  
   if (isToken(args, 'spacing')) {
     return { gap: getTokenVar('spacing', args) };
   }

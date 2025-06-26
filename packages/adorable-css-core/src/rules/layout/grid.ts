@@ -6,7 +6,7 @@ const makeGridTemplateRule =
   (property: "grid-template-columns" | "grid-template-rows"): RuleHandler =>
   (value?: string): CSSRule => {
     if (!value) return {};
-    return { [property]: `repeat(${value}, 1fr)` };
+    return { [property]: `repeat(${value}, minmax(0, 1fr))` };
   };
 
 export const gridCols = makeGridTemplateRule("grid-template-columns");

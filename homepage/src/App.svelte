@@ -7,6 +7,10 @@
   import ReferencePage from './pages/reference/ReferencePage.svelte';
   import PlaygroundPage from './pages/playground/PlaygroundPage.svelte';
   import DashboardDemo from './pages/playground/DashboardDemo.svelte';
+  import TutorialsPage from './pages/tutorials/TutorialsPage.svelte';
+  import IntroTutorial from './pages/tutorials/lessons/IntroTutorial.svelte';
+  import TypographyTutorial from './pages/tutorials/lessons/TypographyTutorial.svelte';
+  import DocsPage from './pages/docs/DocsPage.svelte';
   
   // Keep legacy parser for now
   import ParserVisualizer from './lib/ParserVisualizer.svelte';
@@ -16,7 +20,7 @@
   let mobileMenuOpen = false;
   
   // Available routes
-  type Route = 'home' | 'syntax' | 'tokens' | 'components' | 'reference' | 'playground' | 'dashboard-demo' | 'parser-old';
+  type Route = 'home' | 'syntax' | 'tokens' | 'components' | 'reference' | 'playground' | 'dashboard-demo' | 'parser-old' | 'tutorials' | 'tutorials/intro' | 'tutorials/typography' | 'docs';
   
   let currentPage: Route = 'home';
   
@@ -29,6 +33,7 @@
   
   const navigation: NavItem[] = [
     { route: 'home', label: 'Home', description: 'AdorableCSS overview and features' },
+    { route: 'tutorials', label: 'Tutorials', description: 'Interactive learning' },
     { route: 'syntax', label: 'Syntax Guide', description: 'Learn the AdorableCSS syntax' },
     { route: 'tokens', label: 'Design Tokens', description: 'Color, spacing, and typography tokens' },
     { route: 'components', label: 'Components', description: 'UI component examples' },
@@ -40,6 +45,9 @@
   const routes: Record<string, Route> = {
     // Current routes
     'home': 'home',
+    'tutorials': 'tutorials',
+    'tutorials/intro': 'tutorials/intro',
+    'tutorials/typography': 'tutorials/typography',
     'syntax': 'syntax',
     'tokens': 'tokens', 
     'components': 'components',
@@ -147,6 +155,12 @@
   <main class="main-content relative z(10)">
     {#if currentPage === 'home'}
       <HomePage />
+    {:else if currentPage === 'tutorials'}
+      <TutorialsPage />
+    {:else if currentPage === 'tutorials/intro'}
+      <IntroTutorial />
+    {:else if currentPage === 'tutorials/typography'}
+      <TypographyTutorial />
     {:else if currentPage === 'syntax'}
       <SyntaxPage />
     {:else if currentPage === 'tokens'}
@@ -227,64 +241,3 @@
   {/if}
 </div>
 
-<style>
-  @import './styles/brand.css';
-  
-  /* Global app styles */
-  :global(body) {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    overflow-x: hidden;
-  }
-  
-  /* Responsive navigation */
-  @media (max-width: 768px) {
-    .nav-links {
-      display: none;
-    }
-    
-    .desktop-actions {
-      display: none;
-    }
-  }
-  
-  /* Mobile menu animations */
-  .mobile-nav {
-    animation: fade-in 0.2s ease-out;
-  }
-  
-  .menu-panel {
-    animation: slide-in-right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  @keyframes fade-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  @keyframes slide-in-right {
-    from { 
-      transform: translateX(100%);
-      opacity: 0;
-    }
-    to { 
-      transform: translateX(0);
-      opacity: 1;
-    }
-  }
-  
-  /* Float animation for background orbs */
-  @keyframes float {
-    0%, 100% {
-      transform: translate(0, 0) scale(1);
-    }
-    25% {
-      transform: translate(40px, -60px) scale(1.02);
-    }
-    50% {
-      transform: translate(-30px, 40px) scale(0.98);
-    }
-    75% {
-      transform: translate(50px, 20px) scale(1.01);
-    }
-  }
-</style>

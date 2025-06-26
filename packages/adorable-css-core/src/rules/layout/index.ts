@@ -19,3 +19,5 @@ export const layoutRules = {
   'scroll-mr': scrollMr,
   'scroll-m': scrollM,
 };
+
+console.log(sizeRules)

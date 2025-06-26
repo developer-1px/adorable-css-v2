@@ -15,15 +15,24 @@ export const bg: RuleHandler = (args?: string): CSSRule => {
     return { 'background': args };
   }
   
-  // bg(#fff..#ccc/to-bottom) or bg(#ccc..#aaa..#eee/135deg) - enhanced gradient syntax
+  // bg(#fff..#ccc/to-bottom) or bg(135deg/purple-500..pink-500) - enhanced gradient syntax
   if (args.includes('..')) {
     let colors: string[] = [];
     let direction = '135deg'; // default direction
     
-    // Check if there's a direction specified after /
+    // Check if there's a direction specified with /
     if (args.includes('/')) {
-      const [colorPart, dirPart] = args.split('/');
-      colors = colorPart.split('..');
+      const parts = args.split('/');
+      
+      // Check if first part is direction (contains deg or is a keyword)
+      if (parts[0].includes('deg') || parts[0].startsWith('to-')) {
+        direction = parts[0];
+        colors = parts[1].split('..');
+      } else {
+        // Old format: colors/direction
+        colors = parts[0].split('..');
+        direction = parts[1];
+      }
       
       // Convert direction keywords to degrees
       const directionMap: Record<string, string> = {
@@ -37,7 +46,7 @@ export const bg: RuleHandler = (args?: string): CSSRule => {
         'to-bottom-left': 'to bottom left'
       };
       
-      direction = directionMap[dirPart] || dirPart;
+      direction = directionMap[direction] || direction;
     } else {
       colors = args.split('..');
     }

@@ -1,5 +1,4 @@
 import { font, fontFamily } from './font';
-import { c } from './color';
 import { text, textShadow } from './text';
 import { textFillColor, bgClip } from './text-fill';
 import type { RuleHandler, CSSRule } from '../types';
@@ -57,7 +56,7 @@ const underlineOffset: RuleHandler = (args?: string): CSSRule => {
 };
 
 export const typographyRules = {
-  font, c, text, 'font-family': fontFamily, 'text-shadow': textShadow,
+  font, text, 'font-family': fontFamily, 'text-shadow': textShadow,
   'line-height': lineHeight, 'letter-spacing': letterSpacing, 'underline-offset': underlineOffset,
   'text-fill-color': textFillColor, 'bg-clip': bgClip,
   
