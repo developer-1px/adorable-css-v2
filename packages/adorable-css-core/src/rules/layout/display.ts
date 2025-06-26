@@ -19,6 +19,8 @@ const LAYOUT_MAP = {
       'center+reverse': 'center',
       'pack': 'center',
       'pack+reverse': 'center',
+      'between': 'space-between',
+      'between+reverse': 'space-between',
     },
     defaultAlign: 'middle',
   },

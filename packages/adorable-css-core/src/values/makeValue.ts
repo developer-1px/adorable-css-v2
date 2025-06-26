@@ -135,6 +135,25 @@ export const makeColor = (value = 'transparent') => {
   // Handle colors with alpha using dot notation (white.5, gray-100.2)
   const [colorName, alpha] = value.split('.')
   
+  // Basic color names with their hex values
+  const basicColors: Record<string, string> = {
+    white: '#ffffff',
+    black: '#000000',
+    transparent: 'transparent'
+  }
+  
+  // Check basic colors first
+  if (basicColors[colorName]) {
+    const baseColor = basicColors[colorName]
+    if (alpha && baseColor !== 'transparent') {
+      const rgb = baseColor.length === 4
+        ? baseColor.slice(1).split('').map(v => parseInt(v + v, 16))
+        : [baseColor.slice(1, 3), baseColor.slice(3, 5), baseColor.slice(5, 7)].map(v => parseInt(v, 16))
+      return `rgba(${rgb.join(',')},${alpha.includes('.') ? alpha : '0.' + alpha})`
+    }
+    return baseColor
+  }
+  
   // Check if it's a color from the palette
   if (colorPalette[colorName]) {
     const baseColor = colorPalette[colorName]
@@ -144,7 +163,7 @@ export const makeColor = (value = 'transparent') => {
         const rgb = baseColor.length === 4
           ? baseColor.slice(1).split('').map(v => parseInt(v + v, 16))
           : [baseColor.slice(1, 3), baseColor.slice(3, 5), baseColor.slice(5, 7)].map(v => parseInt(v, 16))
-        return `rgba(${rgb.join(',')},${alpha})`
+        return `rgba(${rgb.join(',')},${alpha.includes('.') ? alpha : '0.' + alpha})`
       }
       // Handle other color formats if needed
       return baseColor

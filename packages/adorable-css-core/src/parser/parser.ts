@@ -6,6 +6,7 @@ const tokenize = createTokenizer([
   ["(hexcolor)", /(#[0-9a-fA-F]{3,8}(?:\.[0-9]+)*)/],
   ["(dimension)", /((?:[0-9]*\.[0-9]+|[0-9]+)[%a-z]*)/],
   ["(string)", /('(?:[^']|\\')*'|"(?:[^"]|\\")*")/],
+  ["(color)", /([a-zA-Z]+\.[0-9]+)/], // matches white.8, black.2, etc
   ["(ident)", /(-*[_a-zA-Z\u00A0-\uFFFF][_a-zA-Z0-9\u00A0-\uFFFF-]*)/],
   ["(range)", /(\.\.\.|\.\.)/],
   ["(operator)", /(!important|::|>>|[-+~|*/%!#@?&:;.,<>=[\](){}])/],
@@ -81,6 +82,7 @@ export function parseAdorableCSS(input: string) {
       () => FunctionCall(),
       () => Range(),
       () => consume("(ident)"),
+      () => consume("(dimension)"), // 숫자만 있는 클래스도 처리
       () => consume("&")
     );
   }
@@ -251,6 +253,7 @@ export function parseAdorableCSS(input: string) {
         };
       },
       () => consume("(hexcolor)"),
+      () => consume("(color)"),
       () => consume("(string)"),
       () => consume("(ident)")
     );
