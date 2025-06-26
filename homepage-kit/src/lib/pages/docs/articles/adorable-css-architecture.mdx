@@ -1,0 +1,289 @@
+# Building AdorableCSS v2: A Technical Deep Dive
+
+<Info>
+This article explores the technical architecture behind AdorableCSS v2, a Figma-first CSS framework that revolutionizes how we think about styling on the web.
+</Info>
+
+## Introduction
+
+When I set out to build AdorableCSS v2, I had a simple goal: **make CSS feel as intuitive as Figma**. As developers, we've all experienced the cognitive disconnect between designing in Figma and implementing in CSS. AdorableCSS bridges this gap by creating a direct mapping between Figma's mental model and CSS utilities.
+
+## The Core Philosophy
+
+### 1. Figma-First Design
+
+Unlike traditional CSS frameworks that force you to think in terms of CSS properties, AdorableCSS starts with Figma concepts:
+
+```html
+<!-- Traditional CSS thinking -->
+<div class="display-flex flex-direction-column gap-16">
+
+<!-- AdorableCSS thinking -->
+<div class="vbox gap(16)">
+```
+
+This isn't just syntactic sugar—it represents a fundamental shift in how we approach styling. When a designer says "vertical auto layout with 16px gap," that's exactly what you write.
+
+### 2. Zero Runtime, Pure CSS
+
+AdorableCSS generates pure CSS at build time. There's no JavaScript runtime, no client-side parsing, just highly optimized CSS that browsers can cache efficiently.
+
+### 3. Parser-Based Architecture
+
+The framework's power comes from its custom parser that understands complex expressions:
+
+```css
+/* Simple values */
+w(300)           → width: 300px
+w(50%)           → width: 50%
+
+/* Complex expressions */
+layer(top:20+left:30)  → position: absolute; top: 20px; left: 30px
+font(Inter/16/1.5)     → font-family: Inter; font-size: 16px; line-height: 1.5
+```
+
+## Technical Architecture
+
+### Parser System
+
+The parser is the heart of AdorableCSS. It consists of three main components:
+
+#### 1. Tokenizer
+```typescript
+// Tokenizes input like "hover:md:w(300..500)"
+const tokens = tokenize(input);
+// Result: ['hover:', 'md:', 'w', '(', '300', '..', '500', ')']
+```
+
+#### 2. AST Generator
+```typescript
+// Converts tokens to an Abstract Syntax Tree
+const ast = parse(tokens);
+// Result: {
+//   prefixes: ['hover', 'md'],
+//   property: 'w',
+//   values: ['300..500']
+// }
+```
+
+#### 3. CSS Generator
+```typescript
+// Generates final CSS from AST
+const css = generate(ast);
+// Result: @media (min-width: 768px) {
+//   .hover\:md\:w\(300\.\.500\):hover {
+//     width: clamp(300px, 100%, 500px);
+//   }
+// }
+```
+
+### Rule System
+
+Rules in AdorableCSS are organized by category, each handling specific concerns:
+
+```typescript
+// Layout Rules
+export const layoutRules = {
+  hbox: (args) => ({
+    display: 'flex',
+    'flex-direction': 'row',
+    ...parseAlignment(args)
+  }),
+  vbox: (args) => ({
+    display: 'flex',
+    'flex-direction': 'column',
+    ...parseAlignment(args)
+  }),
+  gap: (value) => ({ gap: makeValue(value) })
+};
+```
+
+### Value Processing
+
+The `makeValue` system intelligently handles different value types:
+
+```typescript
+function makeValue(input: string): string {
+  // Numbers → pixels
+  if (!isNaN(+input)) return `${input}px`;
+  
+  // Fractions → percentages
+  if (input.includes('/')) {
+    const [num, den] = input.split('/');
+    return `${(+num / +den) * 100}%`;
+  }
+  
+  // CSS variables
+  if (input.startsWith('--')) return `var(${input})`;
+  
+  // Calculations
+  if (hasOperators(input)) return `calc(${input})`;
+  
+  return input;
+}
+```
+
+## Key Innovations
+
+### 1. Constraint-Based Sizing
+
+Inspired by Figma's constraints, AdorableCSS supports min/max sizing:
+
+```css
+w(300..500)  → width: clamp(300px, 100%, 500px)
+w(..500)     → max-width: 500px
+w(300..)     → min-width: 300px
+```
+
+### 2. Layer Positioning
+
+The `layer()` utility handles complex positioning scenarios:
+
+```css
+layer(top:20+left:30)       → position: absolute; top: 20px; left: 30px
+layer(center)               → position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)
+layer(top+x-center)         → position: absolute; top: 0; left: 50%; transform: translateX(-50%)
+```
+
+### 3. Responsive Prefixes
+
+AdorableCSS supports intuitive responsive design:
+
+```css
+sm:w(full)     → @media (min-width: 640px) { width: 100% }
+~md:hidden     → @media (max-width: 767px) { display: none }
+sm..md:p(16)   → @media (min-width: 640px) and (max-width: 767px) { padding: 16px }
+```
+
+## Plugin Architecture
+
+AdorableCSS is extensible through plugins. Each plugin exports rule handlers:
+
+```typescript
+// Example: Glass morphism plugin
+export const glassRules = {
+  glass: (opacity = '0.8') => ({
+    background: `rgba(255, 255, 255, ${opacity})`,
+    'backdrop-filter': 'blur(10px)',
+    border: '1px solid rgba(255, 255, 255, 0.3)'
+  })
+};
+```
+
+## Performance Optimizations
+
+### 1. Build-Time Generation
+
+All CSS is generated at build time, eliminating runtime overhead:
+
+```typescript
+// During build
+const utilities = parseClasses(html);
+const css = generateCSS(utilities);
+// Result: Optimized CSS file with only used utilities
+```
+
+### 2. Efficient Selectors
+
+AdorableCSS generates efficient, specific selectors:
+
+```css
+/* Instead of generic utilities */
+.w-300 { width: 300px }
+.w-400 { width: 400px }
+
+/* AdorableCSS generates exactly what's used */
+.w\(300\) { width: 300px }
+```
+
+### 3. Smart Caching
+
+The framework leverages browser caching by generating stable class names:
+
+```css
+/* Class names are deterministic based on input */
+hover:bg(blue-500) → always generates → .hover\:bg\(blue-500\)
+```
+
+## Integration with Build Tools
+
+AdorableCSS integrates seamlessly with modern build tools:
+
+### Vite Plugin
+```typescript
+export function adorableCSSPlugin(): Plugin {
+  return {
+    name: 'adorable-css',
+    transform(code, id) {
+      if (id.endsWith('.html') || id.endsWith('.svelte')) {
+        const utilities = extractUtilities(code);
+        const css = generateCSS(utilities);
+        return { code, map: null, css };
+      }
+    }
+  };
+}
+```
+
+### UnoCSS Preset
+```typescript
+export function adorablePreset(): Preset {
+  return {
+    name: 'adorable-css',
+    rules: Object.entries(rules).map(([name, handler]) => [
+      new RegExp(`^${name}\\((.+)\\)$`),
+      ([, args]) => handler(args)
+    ])
+  };
+}
+```
+
+## Future Directions
+
+### 1. Enhanced Figma Plugin
+
+We're working on a bidirectional Figma plugin that can:
+- Generate AdorableCSS from Figma designs
+- Update Figma from code changes
+- Maintain design tokens in sync
+
+### 2. Component Variants
+
+Inspired by Figma's component variants:
+
+```css
+btn(primary/large/disabled)  → Generates complete button styles
+card(elevated/interactive)   → Card with elevation and hover states
+```
+
+### 3. Design System Integration
+
+Deep integration with design systems:
+
+```typescript
+// tokens.ts
+export const spacing = {
+  xs: '4px',
+  sm: '8px',
+  md: '16px',
+  lg: '24px'
+};
+
+// Usage
+p(md)  → padding: 16px
+gap(lg) → gap: 24px
+```
+
+## Conclusion
+
+AdorableCSS v2 represents a paradigm shift in how we approach CSS. By starting with Figma's mental model and building a robust parser-based architecture, we've created a framework that's both powerful and intuitive.
+
+The key insight is that **the best abstractions are those that match how we already think**. Designers think in terms of Auto Layout, constraints, and layers—so should our CSS frameworks.
+
+<Warning>
+AdorableCSS is still in active development. APIs may change as we refine the framework based on community feedback.
+</Warning>
+
+---
+
+*Want to contribute or learn more? Check out the [GitHub repository](https://github.com/adorable-css/adorable-css) or join our [Discord community](https://discord.gg/adorable-css).*

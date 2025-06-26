@@ -31,7 +31,9 @@
       "Bash(npm test:*)",
       "Bash(pnpm add:*)",
       "Bash(mkdir:*)",
-      "Bash(touch:*)"
+      "Bash(touch:*)",
+      "Bash(npx sv:*)",
+      "Bash(cp:*)"
     ],
     "deny": []
   }

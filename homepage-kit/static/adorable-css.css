@@ -1,0 +1,176 @@
+/* AdorableCSS v2 - Minimal version for tutorials */
+
+/* Reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Typography */
+.font\(xs\) { font-size: 0.75rem; }
+.font\(sm\) { font-size: 0.875rem; }
+.font\(md\) { font-size: 1rem; }
+.font\(lg\) { font-size: 1.25rem; }
+.font\(xl\) { font-size: 1.5rem; }
+.font\(2xl\) { font-size: 2rem; }
+.font\(3xl\) { font-size: 2.5rem; }
+.font\(4xl\) { font-size: 3rem; }
+.font\(5xl\) { font-size: 3.75rem; }
+
+/* Font with line height */
+.font\(md\/1\.2\) { font-size: 1rem; line-height: 1.2; }
+.font\(md\/1\.5\) { font-size: 1rem; line-height: 1.5; }
+.font\(md\/2\) { font-size: 1rem; line-height: 2; }
+.font\(lg\/1\.2\) { font-size: 1.25rem; line-height: 1.2; }
+.font\(lg\/1\.5\) { font-size: 1.25rem; line-height: 1.5; }
+.font\(lg\/2\) { font-size: 1.25rem; line-height: 2; }
+.font\(lg\/1\.8\) { font-size: 1.25rem; line-height: 1.8; }
+
+/* Font weights */
+.\31 00 { font-weight: 100; }
+.\32 00 { font-weight: 200; }
+.\33 00 { font-weight: 300; }
+.\34 00 { font-weight: 400; }
+.\35 00 { font-weight: 500; }
+.\36 00 { font-weight: 600; }
+.\37 00 { font-weight: 700; }
+.\38 00 { font-weight: 800; }
+.\39 00 { font-weight: 900; }
+
+/* Text styles */
+.italic { font-style: italic; }
+.underline { text-decoration: underline; }
+.line-through { text-decoration: line-through; }
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+
+/* Layout */
+.vbox { display: flex; flex-direction: column; }
+.hbox { display: flex; flex-direction: row; }
+.grid { display: grid; }
+.grid-cols\(3\) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+/* Spacing */
+.gap\(xs\) { gap: 0.25rem; }
+.gap\(sm\) { gap: 0.5rem; }
+.gap\(md\) { gap: 0.75rem; }
+.gap\(lg\) { gap: 1rem; }
+.gap\(xl\) { gap: 1.5rem; }
+.gap\(2xl\) { gap: 2rem; }
+
+.p\(lg\) { padding: 1rem; }
+.p\(xl\) { padding: 1.5rem; }
+.p\(2xl\) { padding: 2rem; }
+
+.mb\(sm\) { margin-bottom: 0.5rem; }
+.mb\(md\) { margin-bottom: 0.75rem; }
+.mb\(lg\) { margin-bottom: 1rem; }
+.mb\(xl\) { margin-bottom: 1.5rem; }
+
+/* Colors */
+.c\(gray-600\) { color: #52525b; }
+.c\(gray-700\) { color: #3f3f46; }
+.c\(gray-800\) { color: #27272a; }
+.c\(gray-900\) { color: #18181b; }
+.c\(purple-600\) { color: #9333ea; }
+.c\(amber-700\) { color: #b45309; }
+.c\(amber-800\) { color: #92400e; }
+.c\(blue-700\) { color: #1d4ed8; }
+.c\(blue-800\) { color: #1e40af; }
+
+/* Background */
+.bg\(gray-50\) { background-color: #fafafa; }
+.bg\(white\) { background-color: #ffffff; }
+.bg\(purple-100\) { background-color: #f3e8ff; }
+.bg\(purple-50\) { background-color: #faf5ff; }
+.bg\(135deg\/purple-400\,pink-400\) { 
+  background: linear-gradient(135deg, #c084fc, #f472b6); 
+}
+
+/* Border radius */
+.r\(lg\) { border-radius: 0.75rem; }
+.r\(xl\) { border-radius: 1rem; }
+.r\(2xl\) { border-radius: 1.5rem; }
+.r\(full\) { border-radius: 9999px; }
+
+/* Box model */
+.w\(full\) { width: 100%; }
+.h\(full\) { height: 100%; }
+
+/* Flexbox */
+.flex-wrap { flex-wrap: wrap; }
+.hbox\(middle\) { display: flex; align-items: center; }
+.hbox\(center\) { display: flex; align-items: center; justify-content: center; }
+
+/* Utilities */
+.block { display: block; }
+.transition { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+.hover\:scale\(1\.05\):hover { transform: scale(1.05); }
+.cursor\(pointer\) { cursor: pointer; }
+
+/* Gradients */
+.bg\(purple-400\.\.pink-400\/135deg\) { 
+  background: linear-gradient(135deg, #c084fc, #f472b6); 
+}
+.bg\(blue-400\.\.teal-400\/135deg\) { 
+  background: linear-gradient(135deg, #60a5fa, #2dd4bf); 
+}
+.bg\(orange-400\.\.rose-400\/135deg\) { 
+  background: linear-gradient(135deg, #fb923c, #fb7185); 
+}
+.bg\(green-400\.\.emerald-400\/135deg\) { 
+  background: linear-gradient(135deg, #4ade80, #34d399); 
+}
+.bg\(gradient-to-br\/purple-500\/pink-500\) { 
+  background: linear-gradient(to bottom right, #a855f7, #ec4899); 
+}
+
+/* Shadows */
+.shadow\(sm\) { box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05); }
+.shadow\(md\) { box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
+.shadow\(lg\) { box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.05); }
+.shadow\(xl\) { box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.05); }
+.shadow\(2xl\) { box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25); }
+
+/* Special classes for demos */
+.text\(transparent\) { color: transparent; }
+.bg-clip\(text\) { -webkit-background-clip: text; background-clip: text; }
+.nowrap { white-space: nowrap; }
+
+/* Note/Tip styling */
+.note {
+  padding: 1rem;
+  background: #fef3c7;
+  border-left: 4px solid #f59e0b;
+  border-radius: 0.25rem;
+  margin: 1rem 0;
+}
+
+.tip {
+  padding: 1rem;
+  background: #dbeafe;
+  border-left: 4px solid #3b82f6;
+  border-radius: 0.25rem;
+  margin: 1rem 0;
+}
+
+code {
+  font-family: 'SF Mono', Monaco, Consolas, 'Courier New', monospace;
+  background-color: #f3f4f6;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+pre {
+  margin: 0;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
