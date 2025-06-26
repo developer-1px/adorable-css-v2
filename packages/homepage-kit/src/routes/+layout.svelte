@@ -3,8 +3,23 @@
   import { page } from '$app/stores';
   import { base } from '$app/paths';
   import { Github, BookOpen, Sparkles, Menu, X } from 'lucide-svelte';
+  import { onMount } from 'svelte';
   
   let mobileMenuOpen = false;
+  
+  // Initialize AdorableCSS CDN in browser
+  onMount(async () => {
+    if (typeof window !== 'undefined') {
+      const AdorableCSSModule = await import('adorable-css-cdn');
+      const AdorableCSSV2 = AdorableCSSModule.default;
+      
+      // Initialize with auto-detection
+      AdorableCSSV2.init({
+        watch: true,
+        debug: false
+      });
+    }
+  });
   
   // Navigation configuration
   interface NavItem {

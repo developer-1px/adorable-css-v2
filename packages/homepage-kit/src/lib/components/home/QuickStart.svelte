@@ -15,21 +15,39 @@
       </p>
     </div>
     
-    <!-- Installation Steps -->
-    <div class="grid grid-cols(1) md:grid-cols(3) gap(2xl)">
-      <!-- Step 1 -->
-      <div class="card(elevated) text(center) vbox gap(xl)">
-        <div class="w(80px) h(80px) bg(blue-100) r(full) vbox(pack) mx(auto)">
-          <Terminal size="40" class="c(blue-600)" />
+    <!-- Installation Options -->
+    <div class="vbox gap(2xl)">
+      <!-- CDN Option -->
+      <div class="card(elevated) p(2xl) text(center) vbox gap(lg)">
+        <div class="hbox(center) gap(md)">
+          <Download size="24" class="c(purple-600)" />
+          <h3 class="heading(h4)">Option 1: CDN (Quickest)</h3>
         </div>
-        <div class="vbox gap(md)">
-          <h3 class="heading(h4)">1. Install</h3>
-          <div class="bg(gray-900) r(lg) p(lg)">
-            <code class="font(sm) c(white) font-family(mono)">npm install adorable-css</code>
-          </div>
-          <p class="font(sm) c(gray-600)">Add to your project with one command</p>
+        <p class="font(sm) c(gray-600) mb(md)">Just add this script to your HTML (auto-detects and generates CSS):</p>
+        <div class="bg(gray-900) r(lg) p(lg) text(left)">
+          <code class="font(sm) c(white) font-family(mono) break(all)">
+&lt;script src="https://unpkg.com/adorable-css-cdn@latest/dist/index.global.js"&gt;&lt;/script&gt;
+          </code>
         </div>
       </div>
+      
+      <!-- NPM Installation Steps -->
+      <div class="vbox gap(md)">
+        <h3 class="heading(h4) text(center)">Option 2: NPM Package</h3>
+        <div class="grid grid-cols(1) md:grid-cols(3) gap(2xl)">
+          <!-- Step 1 -->
+          <div class="card(elevated) text(center) vbox gap(xl)">
+            <div class="w(80px) h(80px) bg(blue-100) r(full) vbox(pack) mx(auto)">
+              <Terminal size="40" class="c(blue-600)" />
+            </div>
+            <div class="vbox gap(md)">
+              <h3 class="heading(h4)">1. Install</h3>
+              <div class="bg(gray-900) r(lg) p(lg)">
+                <code class="font(sm) c(white) font-family(mono)">npm install adorable-css</code>
+              </div>
+              <p class="font(sm) c(gray-600)">Add to your project with one command</p>
+            </div>
+          </div>
       
       <!-- Step 2 -->
       <div class="card(elevated) text(center) vbox gap(xl)">
@@ -43,19 +61,21 @@
           </div>
           <p class="font(sm) c(gray-600)">Zero configuration needed</p>
         </div>
-      </div>
-      
-      <!-- Step 3 -->
-      <div class="card(elevated) text(center) vbox gap(xl)">
-        <div class="w(80px) h(80px) bg(purple-100) r(full) vbox(pack) mx(auto)">
-          <Sparkles size="40" class="c(purple-600)" />
-        </div>
-        <div class="vbox gap(md)">
-          <h3 class="heading(h4)">3. Build</h3>
-          <div class="bg(gray-900) r(lg) p(lg)">
-            <code class="font(sm) c(white) font-family(mono)">class="vbox(pack)"</code>
           </div>
-          <p class="font(sm) c(gray-600)">Start creating beautiful UIs</p>
+          
+          <!-- Step 3 -->
+          <div class="card(elevated) text(center) vbox gap(xl)">
+            <div class="w(80px) h(80px) bg(purple-100) r(full) vbox(pack) mx(auto)">
+              <Sparkles size="40" class="c(purple-600)" />
+            </div>
+            <div class="vbox gap(md)">
+              <h3 class="heading(h4)">3. Build</h3>
+              <div class="bg(gray-900) r(lg) p(lg)">
+                <code class="font(sm) c(white) font-family(mono)">class="vbox(pack)"</code>
+              </div>
+              <p class="font(sm) c(gray-600)">Start creating beautiful UIs</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

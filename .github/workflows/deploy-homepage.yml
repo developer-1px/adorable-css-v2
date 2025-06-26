@@ -37,13 +37,13 @@ jobs:
         
       - name: Build homepage
         run: |
-          cd homepage-kit
+          cd packages/homepage-kit
           pnpm run build:gh-pages
           
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./homepage-kit/build
+          path: ./packages/homepage-kit/build
 
   deploy:
     environment:

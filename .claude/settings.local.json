@@ -33,7 +33,10 @@
       "Bash(mkdir:*)",
       "Bash(touch:*)",
       "Bash(npx sv:*)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "Bash(mv:*)",
+      "Bash(pnpm --filter adorable-css build)",
+      "Bash(node:*)"
     ],
     "deny": []
   }

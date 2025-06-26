@@ -13,8 +13,8 @@ export default defineConfig({
 	],
 	resolve: {
 		alias: {
-			'adorable-css': path.resolve(__dirname, '../packages/adorable-css-core/src'),
-			'adorable-css-cdn': path.resolve(__dirname, '../packages/adorable-css-cdn/src'),
+			'adorable-css': path.resolve(__dirname, '../adorable-css-core/src'),
+			'adorable-css-cdn': path.resolve(__dirname, '../adorable-css-cdn/src'),
 			'@': path.resolve(__dirname, './src')
 		}
 	},

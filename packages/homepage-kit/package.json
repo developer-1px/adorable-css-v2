@@ -45,6 +45,7 @@
 	},
 	"dependencies": {
 		"@inlang/paraglide-js": "^2.0.0",
-		"lucide-svelte": "^0.522.0"
+		"lucide-svelte": "^0.522.0",
+		"adorable-css": "workspace:*"
 	}
 }

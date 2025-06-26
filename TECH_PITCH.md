@@ -57,7 +57,10 @@ AdorableCSS speaks Figma's language:
 
 3. **Constraint-Based Layout**
    ```html
-   layer(top:20+left:30) 
+   (20, 30) = Top 20px, Left 30px
+   (..20,10..20) = Constraint 
+   layer(top)
+   layer(top:20/left:30) 
    <!-- Position exactly like Figma constraints -->
    ```
 
