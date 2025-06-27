@@ -1,4 +1,5 @@
 import { colorPalette } from '../plugins/colors'
+import { isToken, getTokenVar } from '../tokens'
 
 export const splitValues = (value: string, project = cssvar) => {
   if (value.includes('|')) return value.split('|').map(project)
@@ -20,7 +21,35 @@ export const makeRatio = (value: string) => {
 
 export const makeNumber = (num: number) => num.toFixed(2).replace(/^0+|\.00$|0+$/g, '') || '0'
 
-export const cssvar = (value: string | number) => (String(value).startsWith('--') ? `var(${value})` : value)
+export const cssvar = (value: string | number) => {
+  const strValue = String(value);
+  
+  // CSS 변수 처리
+  if (strValue.startsWith('--')) return `var(${value})`;
+  
+  // 토큰 처리
+  // spacing tokens
+  if (isToken(strValue, 'spacing')) {
+    return `var(--spacing-${strValue})`;
+  }
+  
+  // font tokens
+  if (isToken(strValue, 'font')) {
+    return `var(--font-${strValue})`;
+  }
+  
+  // size tokens
+  if (isToken(strValue, 'size')) {
+    return `var(--size-${strValue})`;
+  }
+  
+  // color tokens
+  if (isToken(strValue, 'colors')) {
+    return `var(--colors-${strValue})`;
+  }
+  
+  return value;
+}
 
 export const cssString = (value: string | number) => (String(value).startsWith('--') ? `var(${value})` : `"${value}"`)
 
@@ -134,6 +163,34 @@ export const makeColor = (value = 'transparent') => {
 
   // Handle colors with alpha using dot notation (white.5, gray-100.2)
   const [colorName, alpha] = value.split('.')
+  
+  // Handle semantic colors (primary/100, neutral/500, text-primary, etc.)
+  const semanticColors = ['primary', 'neutral', 'text-primary', 'text-secondary', 'text-subtle', 'text-accent', 'text-inverse',
+                         'surface-base', 'surface-subtle', 'surface-accent', 'surface-inverse',
+                         'border-default', 'border-accent', 'border-subtle',
+                         'success', 'error', 'warning', 'info']
+  
+  // Check if it's a semantic color with shade (primary/100, neutral/500)
+  if (colorName.includes('/')) {
+    const [semantic, shade] = colorName.split('/')
+    if (semantic === 'primary' || semantic === 'neutral') {
+      const cssVar = `var(--${semantic}-${shade || '600'})`
+      if (alpha) {
+        // Return color with alpha using color-mix (modern browsers)
+        return `color-mix(in srgb, ${cssVar} ${alpha.includes('.') ? alpha : '0.' + alpha}, transparent)`
+      }
+      return cssVar
+    }
+  }
+  
+  // Check if it's a full semantic color name
+  if (semanticColors.includes(colorName)) {
+    const cssVar = `var(--${colorName})`
+    if (alpha) {
+      return `color-mix(in srgb, ${cssVar} ${alpha.includes('.') ? alpha : '0.' + alpha}, transparent)`
+    }
+    return cssVar
+  }
   
   // Basic color names with their hex values
   const basicColors: Record<string, string> = {

@@ -41,6 +41,56 @@ const hboxCSS = hboxHandler() // { display: 'flex' }
 const gapCSS = gapHandler('16') // { gap: '16px' }
 ```
 
+### Automatic Token Injection
+
+AdorableCSS automatically injects design tokens (spacing, colors, etc.) when imported:
+
+```typescript
+import 'adorable-css' // Tokens are auto-injected into <head>
+
+// Your CSS will have access to all design tokens
+// .p(lg) uses var(--spacing-lg) automatically
+```
+
+To disable or configure auto-injection:
+
+```typescript
+import { configureAutoInject } from 'adorable-css'
+
+// Disable auto-injection
+configureAutoInject({ enabled: false })
+
+// Use custom tokens
+configureAutoInject({
+  tokens: myCustomTokens,
+  injectTo: 'body', // or 'head' (default)
+  priority: 10 // higher priority tokens
+})
+
+// Manually inject tokens
+import { autoInjectTokens } from 'adorable-css'
+autoInjectTokens()
+```
+
+### Generate CSS with Tokens
+
+For build-time CSS generation with tokens included:
+
+```typescript
+import { generateCSSWithTokens } from 'adorable-css'
+
+// Generate CSS with tokens prepended
+const css = generateCSSWithTokens(['p(lg)', 'gap(xl)', 'r(md)'])
+// Result includes :root { --spacing-lg: 1rem; ... } + utility classes
+
+// Options
+const css = generateCSSWithTokens(classes, {
+  includeTokens: true,  // Include design tokens (default: true)
+  tokens: customTokens, // Use custom tokens (default: defaultTokens)
+  minify: true         // Minify output (default: false)
+})
+```
+
 ## Features
 
 - **Figma-first**: Designed to match Figma's mental model

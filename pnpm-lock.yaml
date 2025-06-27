@@ -88,6 +88,9 @@ importers:
       lucide-svelte:
         specifier: ^0.522.0
         version: 0.522.0(svelte@5.34.7)
+      prismjs:
+        specifier: ^1.30.0
+        version: 1.30.0
     devDependencies:
       '@eslint/compat':
         specifier: ^1.2.5

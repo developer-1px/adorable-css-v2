@@ -5,7 +5,7 @@
 <section class="features py(6xl) bg(gray-50)">
   <div class="container(4xl) px(lg) vbox gap(4xl)">
     <!-- Section Header -->
-    <div class="text(center) vbox gap(lg)">
+    <div class="vbox(center) text(center) gap(lg)">
       <h2 class="heading(h1/section) c(gray-900)">
         Why AdorableCSS Changes Everything
       </h2>
@@ -20,7 +20,7 @@
     <!-- Features -->
     <div class="grid grid-cols(1) md:grid-cols(3) gap(2xl)">
       <!-- Figma-Native -->
-      <div class="card(interactive/lg) text(center) vbox gap(lg)">
+      <div class="card(interactive/lg) vbox(center) text(center) gap(lg)">
         <div class="w(80px) h(80px) bg(purple-100) r(full) vbox(pack)">
           <Layers size="40" class="c(purple-600)" />
         </div>
@@ -38,7 +38,7 @@
       </div>
       
       <!-- Design Tokens -->
-      <div class="card(interactive/lg) text(center) vbox gap(lg)">
+      <div class="card(interactive/lg) vbox(center) text(center) gap(lg)">
         <div class="w(80px) h(80px) bg(pink-100) r(full) vbox(pack)">
           <Palette size="40" class="c(pink-600)" />
         </div>
@@ -56,7 +56,7 @@
       </div>
       
       <!-- Smart Design System -->
-      <div class="card(interactive/lg) text(center) vbox gap(lg)">
+      <div class="card(interactive/lg) vbox(center) text(center) gap(lg)">
         <div class="w(80px) h(80px) bg(green-100) r(full) vbox(pack)">
           <Zap size="40" class="c(green-600)" />
         </div>

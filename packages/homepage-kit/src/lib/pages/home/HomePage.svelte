@@ -1,7 +1,5 @@
 <script lang="ts">
   import HeroSection from '../../components/home/HeroSection.svelte';
-  import CoreConcepts from '../../components/home/CoreConcepts.svelte';
-  import BeforeAfter from '../../components/home/BeforeAfter.svelte';
   import QuickStart from '../../components/home/QuickStart.svelte';
   import { onMount } from 'svelte';
   
@@ -20,10 +18,8 @@
 
 <div class="homepage w(full) min-h(screen) relative bg(white) {mounted ? 'mounted' : ''}">
   <!-- Main Content Sections -->
-  <div class="container(md) z(10)">
+  <div class="rhythm() z(10)">
     <HeroSection />
-    <CoreConcepts />
-    <BeforeAfter />
     <QuickStart />
   </div>
   

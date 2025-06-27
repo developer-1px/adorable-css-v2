@@ -13,7 +13,7 @@
 <section class="comparison py(6xl) bg(white)">
   <div class="container(5xl) px(lg) vbox gap(4xl)">
     <!-- Section Header -->
-    <div class="text(center) vbox gap(lg)">
+    <div class="vbox(center) text(center) gap(lg)">
       <h2 class="heading(h1/section)">
         The Dramatic Difference
       </h2>
@@ -65,7 +65,7 @@
         </div>
         
         <!-- Arrow -->
-        <div class="xl:col(1) text(center) vbox(pack) gap(md)">
+        <div class="xl:col(1) vbox(center) text(center)(pack) gap(md)">
           <div class="w(80px) h(80px) bg(135deg/oklch(0.65,0.28,295),oklch(0.7,0.23,0)) 
                       r(full) vbox(pack) mx(auto) shadow(xl)">
             <ArrowRight size="32" class="c(white)" />
@@ -113,7 +113,7 @@
     
     <!-- Impact Stats -->
     <div class="grid grid-cols(1) md:grid-cols(4) gap(xl)">
-      <div class="card(outlined) text(center) vbox gap(sm) bg(purple-50) border(1/purple-200)">
+      <div class="card(outlined) vbox(center) text(center) gap(sm) bg(purple-50) border(1/purple-200)">
         <div class="font(3xl) 900 text(transparent) bg(135deg/oklch(0.65,0.28,295),oklch(0.7,0.23,0)) bg-clip(text)">
           96%
         </div>
@@ -121,19 +121,19 @@
         <div class="font(xs) c(gray-500)">18 lines → 1 line</div>
       </div>
       
-      <div class="card(outlined) text(center) vbox gap(sm) bg(green-50) border(1/green-200)">
+      <div class="card(outlined) vbox(center) text(center) gap(sm) bg(green-50) border(1/green-200)">
         <div class="font(3xl) 900 c(green-600)">10x</div>
         <div class="font(sm) c(gray-600) 600">Faster Writing</div>
         <div class="font(xs) c(gray-500)">Design to code speed</div>
       </div>
       
-      <div class="card(outlined) text(center) vbox gap(sm) bg(blue-50) border(1/blue-200)">
+      <div class="card(outlined) vbox(center) text(center) gap(sm) bg(blue-50) border(1/blue-200)">
         <div class="font(3xl) 900 c(blue-600)">100%</div>
         <div class="font(sm) c(gray-600) 600">Readable</div>
         <div class="font(xs) c(gray-500)">Self-documenting code</div>
       </div>
       
-      <div class="card(outlined) text(center) vbox gap(sm) bg(orange-50) border(1/orange-200)">
+      <div class="card(outlined) vbox(center) text(center) gap(sm) bg(orange-50) border(1/orange-200)">
         <div class="font(3xl) 900 c(orange-600)">0ms</div>
         <div class="font(sm) c(gray-600) 600">Runtime</div>
         <div class="font(xs) c(gray-500)">Pure CSS output</div>
@@ -151,7 +151,7 @@
               <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" fill="currentColor"/>
             </svg>
           </div>
-          <div class="text(center) vbox gap(sm)">
+          <div class="vbox(center) text(center) gap(sm)">
             <h4 class="heading(h5) c(white)">Beautiful Component</h4>
             <p class="font(sm) c(white.8)">Built with one line of AdorableCSS</p>
           </div>

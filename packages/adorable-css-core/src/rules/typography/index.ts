@@ -57,7 +57,7 @@ const underlineOffset: RuleHandler = (args?: string): CSSRule => {
 
 export const typographyRules = {
   font, text, 'font-family': fontFamily, 'text-shadow': textShadow,
-  'line-height': lineHeight, 'letter-spacing': letterSpacing, 'underline-offset': underlineOffset,
+  'line-height': lineHeight, 'letter-spacing': letterSpacing, tracking: letterSpacing, 'underline-offset': underlineOffset,
   'text-fill-color': textFillColor, 'bg-clip': bgClip,
   
   // Font weights

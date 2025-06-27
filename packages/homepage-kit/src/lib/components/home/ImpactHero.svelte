@@ -163,7 +163,7 @@
           </div>
           
           <!-- Live Preview -->
-          <div class="text(center) vbox gap(md)">
+          <div class="vbox(center) text(center) gap(md)">
             <div class="font(xs) c(gray-500)">Result (hover me!):</div>
             <div 
               class={liveClasses}

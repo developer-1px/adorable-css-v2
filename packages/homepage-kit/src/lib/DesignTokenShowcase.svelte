@@ -10,7 +10,7 @@
 <div class="showcase-container p(xl) bg(--colors-gray-50) min-h(screen)">
   <div class="container  mx(auto) vbox gap(xl)">
     <!-- Hero Section -->
-    <div class="text(center) vbox gap(lg) fade-up(0.8s/ease-out)">
+    <div class="vbox(center) text(center) gap(lg) fade-up(0.8s/ease-out)">
       <h1 class="700 font(5xl/1.1/-0.02em) c(--colors-gray-900)">
         Refined Design Tokens
       </h1>

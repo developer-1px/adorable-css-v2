@@ -5,7 +5,7 @@ import { positionCategoryRules } from './position';
 import { interactionRules } from './interaction';
 import { utilityRules } from './utilities';
 import { effectsRules } from './effects';
-import { glowRules, glassRules, cardRules, responsiveRules, advancedRules, adminRules, containerRules, animationRules, buttonRules, headingRules, uiCardRules, proseRules, mdxRules } from './plugins';
+import { glowRules, glassRules, cardRules, responsiveRules, advancedRules, adminRules, containerRules, animationRules, buttonRules, headingRules, headingPluginRules, uiCardRules, proseRules, mdxRules, sectionRules, designSystemRules, masterInspiredRules } from './plugins';
 import { colorRules } from '../plugins/colors';
 
 // Main rules registry
@@ -26,11 +26,15 @@ export const rules = {
   ...adminRules,
   ...buttonRules,
   ...headingRules,
+  ...headingPluginRules,
   ...uiCardRules,
   ...proseRules,
   ...mdxRules,
   ...containerRules,
-  ...animationRules
+  ...animationRules,
+  ...sectionRules,
+  ...designSystemRules,
+  ...masterInspiredRules
 };
 
 // Grouped rules for testing/debugging

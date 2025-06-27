@@ -5,87 +5,128 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ### Development
-- `pnpm dev` - Start development server at http://localhost:5173
-- `pnpm build` - Build for production
-- `pnpm preview` - Preview production build
-- `pnpm check` - Run type checking with svelte-check and TypeScript
+- `pnpm dev` - Start development servers for all packages in parallel (runs in watch mode)
+- `pnpm dev:core` - Start development for adorable-css-core only
+- `pnpm dev:homepage` - Start homepage dev server at http://localhost:5173
+- `pnpm build` - Build all packages for production
+- `pnpm build:homepage` - Build homepage only
+- `pnpm preview` - Preview production build of homepage
+- `pnpm check` - Run TypeScript type checking across all packages
+- `pnpm test` - Run all tests across the monorepo
+- `pnpm test:core` - Run tests for adorable-css-core only
+- `pnpm clean` - Clean all build artifacts and caches
+
+### Testing Individual Features
+```bash
+# Run a specific test file
+cd packages/adorable-css-core
+pnpm vitest run src/parser/parser.test.ts
+
+# Run tests in watch mode
+pnpm vitest
+
+# Run tests with UI
+pnpm test:ui
+```
 
 ### Package Management
-This project uses **pnpm** as the package manager. Always use `pnpm` instead of npm or yarn.
+This project uses **pnpm** as the package manager with workspaces. Always use `pnpm` instead of npm or yarn.
+- Minimum pnpm version: 10.0.0
+- Node version: >=18
 
 ## Architecture Overview
 
-### Project Structure
-AdorableCSS v2 is a Figma-first CSS utility framework built with:
-- **Svelte 5** + **TypeScript** + **Vite**
-- Custom CSS parser and code generator
-- Figma plugin for bidirectional design-code sync
-- UnoCSS integration for cross-framework compatibility
+### Monorepo Structure
+This is a pnpm workspace monorepo with three main packages:
 
-### Core Concepts
+1. **adorable-css-core** (`packages/adorable-css-core/`)
+   - The core CSS framework with parser, rules, and token system
+   - Entry point: `src/index.ts`
+   - Build output: CommonJS and ESM formats
 
-#### 1. Figma-First Design Philosophy
-Unlike traditional CSS frameworks, AdorableCSS v2 is designed to match Figma's mental model:
-- Direct mapping with Figma Auto Layout (`hbox`, `vbox`, `gap`)
-- Figma-style sizing (`w(hug)`, `w(fill)`, `w(200..400)`)
-- Layer-based positioning matching Figma constraints
+2. **adorable-css-cdn** (`packages/adorable-css-cdn/`)
+   - Browser-ready CDN distribution
+   - Runtime CSS generation for web applications
 
-#### 2. Parser System (`/src/myparser/`)
-The framework uses a custom parser to process AdorableCSS syntax:
-- `parser.ts` - Tokenizes and parses utility classes
-- `generator.ts` - Converts parsed AST to CSS
-- Supports prefixes for responsive design and pseudo-classes
+3. **homepage-kit** (`packages/homepage-kit/`)
+   - SvelteKit-based documentation website
+   - Uses MDX for technical documentation
+   - Deploys to GitHub Pages
 
-#### 3. Rule System (`/src/rules/`)
-CSS rules are organized by category:
-- **Layout**: `hbox/vbox` (flexbox), `gap`, sizing with constraints
-- **Typography**: Combined `font()` utility, weights, styles
-- **Position**: `layer()` utility for complex positioning
-- **Display**: All display types plus screen reader utilities
-- **Core**: Colors, backgrounds, borders, transforms, filters
+### Core Architecture (`adorable-css-core`)
 
-Key patterns:
-- Simple utilities: `absolute`, `hidden`
-- Value utilities: `w(300)`, `p(16)`
-- Complex utilities: `font(Inter/16/1.5)`, `layer(top:20+left:30)`
+#### 1. Parser System (`src/parser/`)
+The custom parser handles AdorableCSS's unique syntax:
+- `parser.ts` - Tokenizer and AST generator using parser combinators
+- `generator.ts` - CSS generation from parsed AST
+- `parser-utils.ts` - Parser combinator utilities
+- Supports complex expressions like `layer(top:20+left:30)`
 
-#### 4. Figma Plugin (`/src/figma-to-code/`)
-Generates code from Figma designs:
-- Supports both AdorableCSS and TailwindCSS output
-- Analyzes Figma nodes and converts to utility classes
-- Handles Auto Layout, constraints, and styling
+#### 2. Rule System (`src/rules/`)
+Modular rule definitions organized by category:
+- **Typography** (`typography/`): font, text, color utilities
+- **Layout** (`layout/`): flexbox (hbox/vbox), grid, spacing
+- **Position** (`position/`): absolute, relative, layer positioning
+- **Visuals** (`visuals/`): backgrounds, borders, shadows
+- **Effects** (`effects/`): transforms, filters, animations
+- **Plugins** (`plugins/`): advanced utilities and UI components
+
+#### 3. Token System (`src/tokens/`)
+Design tokens for consistent styling:
+- Spacing scale (xs through 6xl)
+- Typography scale
+- Color palette with OKLCH support
+- Semantic tokens for components
+
+#### 4. Value Processing (`src/values/makeValue.ts`)
+Intelligent value conversion:
+- Auto-adds `px` to unitless numbers
+- Handles fractions (1/2 → 50%)
+- CSS variable detection
+- Calculation wrapping
 
 ### Key Design Patterns
 
-1. **Value Processing**: The `makeValue()` system intelligently handles:
-   - Unit conversion (numbers → px)
-   - Fractions (1/2 → 50%)
-   - CSS variables (--var → var(--var))
-   - Calculations (auto calc() wrapping)
+1. **Figma-First Philosophy**
+   - `hbox`/`vbox` instead of `flex`
+   - `w(fill)`/`w(hug)` matching Figma's sizing model
+   - `layer()` for Figma-style absolute positioning
 
-2. **Prefix System**:
-   - Responsive: `sm:`, `md:`, `lg:`, `xl:` (and max-width variants `~sm:`)
-   - Pseudo-classes: `hover:`, `focus:`, `group-hover:`
-   - Combinable for complex selectors
+2. **Parser Architecture**
+   - Token-based parsing with regex patterns
+   - Recursive descent for nested expressions
+   - Support for prefixes (responsive, pseudo-classes)
 
-3. **No-Conflict Design**: Avoids conflicts with TailwindCSS:
-   - `flex` means `flex: 1` (not `display: flex`)
-   - Different naming conventions where overlap exists
+3. **Rule Definition Pattern**
+   ```typescript
+   export const ruleeName = {
+     'utility-name': (value?: string) => ({
+       'css-property': processedValue
+     })
+   }
+   ```
 
-### Important Files
+### Important File Paths
 
-- `/src/rules/rules.ts` - Main rule definitions and exports
-- `/src/myparser/parser.ts` - Core parsing logic
-- `/src/values/makeValue.ts` - Value processing utilities
-- `/src/figma-to-code/codegen/adorableCSS.ts` - Figma to AdorableCSS conversion
+**Core Framework:**
+- `packages/adorable-css-core/src/index.ts` - Main exports
+- `packages/adorable-css-core/src/parser/parser.ts` - Parser implementation
+- `packages/adorable-css-core/src/parser/generator.ts` - CSS generation
+- `packages/adorable-css-core/src/rules/index.ts` - Rule registry
+- `packages/adorable-css-core/src/tokens/index.ts` - Token definitions
+
+**Homepage:**
+- `packages/homepage-kit/src/routes/+layout.svelte` - Main layout
+- `packages/homepage-kit/src/lib/pages/` - Page components
+- `packages/homepage-kit/src/app.css` - Global styles
 
 ### Development Notes
 
 - No ESLint or Prettier configuration exists - follow existing code style
-- Test framework: Vitest - run `pnpm test` to verify changes
-- Type checking via `pnpm check` before commits
-- **IMPORTANT**: Use `pnpm build` or `pnpm test` for testing - `pnpm dev` runs in watch mode and waits
-- The project is designed as a UnoCSS plugin for framework compatibility
+- Test framework: Vitest with JSDOM environment
+- Build tool: tsup for library, Vite for homepage
+- Type checking: Run `pnpm check` before commits
+- **IMPORTANT**: Use `pnpm build` or `pnpm test` for testing - `pnpm dev` runs in watch mode
 
 ### Code Convention
 
@@ -107,6 +148,26 @@ if (isNaN(+part) && !part.includes('%')) {
 // Bad: Clever but unclear
 processors[getPropertyIndex(part)](part);
 ```
+
+### AdorableCSS Development Convention
+
+**CRITICAL: Must Follow These Rules**
+
+1. **NO Tailwind CSS**: Never use Tailwind CSS utilities
+   - ❌ Wrong: `flex flex-col items-center justify-center`
+   - ✅ Correct: `vbox(center)`
+   - Always use AdorableCSS v2 syntax exclusively
+
+2. **NO Margin Utilities**: Design without margins
+   - ❌ Wrong: `mb(lg)`, `mt(md)`, `mx(auto)`, `margin: 1rem`
+   - ✅ Correct: Use `gap()` in flex/grid layouts
+   - ✅ Correct: Use padding for spacing inside elements
+   - ✅ Correct: Use spacer elements or layout utilities for spacing
+
+3. **Always Use AdorableCSS v2**: Make conscious effort to use AdorableCSS utilities
+   - Think in AdorableCSS patterns first
+   - Use the design system utilities
+   - Follow Figma-first mental model
 
 ### AdorableCSS Syntax Reminders
 
@@ -236,9 +297,66 @@ Margin: Use gap() instead of margin
 Width: w(full), w(300px), w(1/2)
 ```
 
+#### Design System Utilities (NEW!)
+These utilities automatically ensure good design without manual spacing decisions:
+
+```
+Section Spacing:
+section() - Default section with balanced padding
+section(hero) - Full-height hero section with dramatic spacing
+section(feature) - Feature sections with generous padding
+section(compact) - Dense content sections
+section(flush) - No vertical padding
+
+Container System:
+contain() - Default responsive container (max-width: 64rem)
+contain(narrow) - Text-focused content (max-width: 48rem)
+contain(wide) - Wide layouts (max-width: 80rem)
+contain(full) - Maximum width (max-width: 96rem)
+
+Content Layout:
+content() - Basic content block with good spacing
+content(centered) - Center-aligned content
+content(hero) - Hero section content layout
+
+Spacing Utilities:
+stack() - Vertical stack with default gap
+stack(lg) - Vertical stack with large gap
+stack(2xl) - Vertical stack with extra large gap
+
+Text Flow:
+flow() - Readable text with optimal line width
+flow(narrow) - Narrow text for better readability
+flow(wide) - Wider text blocks
+```
+
 #### Most Common AI-Friendly Combinations
 ```html
-<!-- Hero Section -->
+<!-- NEW: Better Hero Section with automatic spacing -->
+<section class="section(hero) bg(white)">
+  <div class="contain(wide)">
+    <div class="content(hero)">
+      <h1 class="hero-text() c(gray-900)">Title</h1>
+      <p class="lead()">Beautiful description text</p>
+      <button class="btn(primary/lg)">Action</button>
+    </div>
+  </div>
+</section>
+
+<!-- NEW: Feature Section with perfect spacing -->
+<section class="section(feature) bg(gray-50)">
+  <div class="contain()">
+    <div class="content(centered)">
+      <h2 class="heading(h2)">Feature Title</h2>
+      <p class="flow()">Automatically readable text width</p>
+    </div>
+    <div class="feature-grid()">
+      <!-- Grid items -->
+    </div>
+  </div>
+</section>
+
+<!-- OLD: Manual spacing approach (still works) -->
 <div class="min-h(100vh) vbox(pack) bg(white) text(center)">
   <h1 class="heading(h1/hero) c(gray-900) mb(lg)">Title</h1>
   <p class="font(xl) c(gray-600) mb(xl)">Description</p>

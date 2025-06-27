@@ -4,6 +4,7 @@
   import { base } from '$app/paths';
   import { Github, BookOpen, Sparkles, Menu, X } from 'lucide-svelte';
   import { onMount } from 'svelte';
+  import Footer from '$lib/components/layout/Footer.svelte';
   
   let mobileMenuOpen = false;
   
@@ -31,11 +32,12 @@
   const navigation: NavItem[] = [
     { href: '/', label: 'Home', description: 'AdorableCSS overview and features' },
     { href: '/tutorials', label: 'Tutorials', description: 'Interactive learning' },
-    { href: '/syntax', label: 'Syntax Guide', description: 'Learn the AdorableCSS syntax' },
-    { href: '/tokens', label: 'Design Tokens', description: 'Color, spacing, and typography tokens' },
-    { href: '/components', label: 'Components', description: 'UI component examples' },
+    { href: '/design-system', label: 'Design System', description: 'Complete UI design system' },
     { href: '/reference', label: 'Reference', description: 'Complete rule reference' },
+    { href: '/tokens', label: 'Design Tokens', description: 'Color, spacing, and typography tokens' },
     { href: '/playground', label: 'Playground', description: 'Experiment with AdorableCSS' },
+    { href: '/components', label: 'Components', description: 'UI component examples' },
+    { href: '/syntax', label: 'Syntax Guide', description: 'Learn the AdorableCSS syntax' },
     { href: '/docs', label: 'Docs', description: 'Technical documentation' }
   ];
   
@@ -45,115 +47,126 @@
 <div class="app relative min-h(screen) bg(white)">
   <!-- Background Gradient Orbs -->
   <div class="fixed layer pointer-events(none) z(0) clip">
-    <div class="absolute w(600px) h(600px) r(full) blur(150px) opacity(0.2) bg(135deg/#8b5cf6,#ec4899) top(-200px) left(-100px) float(30s/ease-in-out/repeat:infinite)"></div>
-    <div class="absolute w(500px) h(500px) r(full) blur(120px) opacity(0.15) bg(135deg/#3b82f6,#06b6d4) bottom(-150px) right(-150px) float(25s/ease-in-out/repeat:infinite/delay:10s)"></div>
+    <div class="absolute w(600px) h(600px) r(full) blur(150px) opacity(0.2) bg(135deg/#8b5cf6..#ec4899) top(-200px) left(-100px) float(30s/ease-in-out/repeat:infinite)"></div>
+    <div class="absolute w(500px) h(500px) r(full) blur(120px) opacity(0.15) bg(135deg/#3b82f6..#06b6d4) bottom(-150px) right(-150px) float(25s/ease-in-out/repeat:infinite/delay:10s)"></div>
   </div>
 
-  <nav class="navigation sticky top(0) z(100) bg(white.8) backdrop-blur(24px) border-b(1/gray-200) shadow(sm)">
-    <div class="container(7xl) hbox(middle+between) py(md) px(lg)">
+  <!-- Header Navigation -->
+  <header class="sticky top(0) z(100) bg(white.95) backdrop-blur(16px) border-b(gray-200) shadow(sm)">
+    <div class="container(6xl) hbox(middle+between) py(md) px(lg)">
       <!-- Logo & Brand -->
-      <a href="{base}/" class="nav-brand hbox(middle) gap(sm) no-underline">
-        <div class="logo-wrapper p(sm) r(lg) bg(135deg/#8b5cf6,#ec4899) shadow(md) hover:scale(1.05) transition">
+      <a href="{base}/" class="brand hbox(middle) gap(md) no-underline group">
+        <div class="logo w(40px) h(40px) r(12px) bg(135deg/#8b5cf6..#ec4899) vbox(pack) shadow(md) group-hover:scale(1.05) transition">
           <Sparkles size="20" class="c(white)" />
         </div>
-        <div class="brand-info">
-          <div class="brand-name 700 font(xl) bg(135deg/#8b5cf6,#ec4899)" style="-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+        <div class="brand-text vbox">
+          <div class="brand-name 800 font(lg/1) bg(135deg/#8b5cf6..#ec4899)" style="-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
             AdorableCSS
           </div>
-          <div class="version-tag font(xs) c(gray-500) tracking(wide)">v2.0 - Design First</div>
+          <div class="version font(xs) c(gray-500) 500">v2.0 Beta</div>
         </div>
       </a>
 
-      <!-- Navigation Links -->
-      <div class="nav-links hbox(middle) gap(xs) ~md:hidden">
-        {#each navigation as navItem}
+      <!-- Main Navigation -->
+      <nav class="main-nav hbox(middle) gap(xs) ..lg:hidden">
+        {#each navigation.slice(0, 5) as navItem}
           <a 
             href="{base}{navItem.href}"
-            class="nav-link px(lg) py(sm) r(xl) 700 font(sm) transition(all/0.2s/ease-out) hbox(middle) gap(xs) relative no-underline
+            class="nav-link px(md) py(sm) r(md) 600 font(sm) transition no-underline relative
                    {currentPath === navItem.href || (navItem.href !== '/' && currentPath.startsWith(navItem.href))
-                     ? 'bg(135deg/#8b5cf6,#ec4899) c(white) shadow(md)' 
-                     : 'hover:bg(gray-50) c(gray-700) hover:c(gray-900)'}"
-            title={navItem.description}
+                     ? 'c(purple-600) bg(purple-50)' 
+                     : 'c(gray-700) hover:c(gray-900) hover:bg(gray-50)'}"
           >
             {navItem.label}
             {#if currentPath === navItem.href || (navItem.href !== '/' && currentPath.startsWith(navItem.href))}
-              <div class="absolute top(full) left(50%) translate-x(-50%) w(6px) h(6px) bg(white) r(full) shadow(sm)"></div>
+              <div class="absolute bottom(0) left(50%) translate-x(-50%) w(4px) h(4px) bg(purple-600) r(full)"></div>
             {/if}
           </a>
         {/each}
-      </div>
+      </nav>
 
-      <!-- Action Buttons -->
-      <div class="nav-actions hbox(middle) gap(sm)">
-        <!-- Desktop Actions -->
-        <div class="desktop-actions hbox(middle) gap(sm) ~md:hidden">
-          <a href="{base}/docs" class="action-btn px(lg) py(sm) hbox(middle) gap(sm) r(lg) bg(white) b(1/gray-200) c(gray-700) 700 font(sm) hover:shadow(md) hover:scale(1.02) transition no-underline">
-            <BookOpen size="16" />
-            <span>Docs</span>
-          </a>
-          <a href="https://github.com/developer-1px/adorable-css-v2" target="_blank" rel="noopener noreferrer" class="action-btn px(lg) py(sm) hbox(middle) gap(sm) r(lg) bg(gray-900) c(white) 700 font(sm) hover:bg(gray-800) hover:scale(1.02) hover:shadow(lg) transition no-underline">
+      <!-- Actions -->
+      <div class="actions hbox(middle) gap(sm)">
+        <!-- Desktop CTA -->
+        <div class="desktop-actions hbox(middle) gap(sm) ..lg:hidden">
+          <a href="https://github.com/developer-1px/adorable-css-v2" target="_blank" rel="noopener noreferrer" 
+             class="github-btn px(md) py(sm) hbox(middle) gap(sm) r(md) border(gray-300) bg(white) c(gray-700) 600 font(sm) hover:border(gray-400) hover:shadow(md) transition no-underline">
             <Github size="16" />
             <span>GitHub</span>
           </a>
+          <a href="{base}/playground" 
+             class="cta-btn px(lg) py(sm) r(md) bg(135deg/#8b5cf6..#ec4899) c(white) 600 font(sm) hover:shadow(lg) hover:scale(1.02) transition no-underline">
+            Try Playground
+          </a>
         </div>
         
-        <!-- Mobile Menu Button -->
+        <!-- Mobile Menu -->
         <button 
-          class="mobile-menu-btn p(sm) r(lg) hover:bg(gray-100) transition md:hidden"
+          class="mobile-btn p(xs) r(md) border(gray-300) bg(white) hover:bg(gray-50) transition ..lg:block"
           on:click={() => mobileMenuOpen = !mobileMenuOpen}
         >
           {#if mobileMenuOpen}
-            <X size="20" class="c(gray-700)" />
+            <X size="18" class="c(gray-700)" />
           {:else}
-            <Menu size="20" class="c(gray-700)" />
+            <Menu size="18" class="c(gray-700)" />
           {/if}
         </button>
       </div>
     </div>
-  </nav>
+  </header>
   
   <main class="main-content relative z(10)">
     <slot />
   </main>
+  
+  <!-- Footer -->
+  <Footer />
 
-  <!-- Mobile Navigation Menu -->
+  <!-- Mobile Navigation -->
   {#if mobileMenuOpen}
-    <div class="mobile-nav fixed layer z(99) md:hidden">
+    <div class="mobile-overlay fixed layer z(99) ..lg:block">
       <!-- Backdrop -->
       <div 
-        class="backdrop layer bg(black.5) backdrop-blur(sm)"
+        class="backdrop layer bg(black.4) backdrop-blur(4px)"
         on:click={() => mobileMenuOpen = false}
       ></div>
       
-      <!-- Menu Panel -->
-      <div class="menu-panel absolute top(0) right(0) w(280px) h(full) bg(white) shadow(2xl) vbox">
-        <!-- Header -->
-        <div class="menu-header p(lg) border-b(1/gray-200)">
+      <!-- Mobile Menu Panel -->
+      <div class="mobile-panel absolute top(0) right(0) w(320px) h(full) bg(white) shadow(2xl) vbox animate-slide-in-right">
+        <!-- Mobile Header -->
+        <div class="mobile-header p(md) border-b(gray-200)">
           <div class="hbox(middle+between)">
-            <div class="700 font(lg) c(gray-900)">Menu</div>
+            <div class="mobile-brand hbox(middle) gap(sm)">
+              <div class="w(32px) h(32px) r(8px) bg(135deg/#8b5cf6..#ec4899) vbox(pack)">
+                <Sparkles size="16" class="c(white)" />
+              </div>
+              <div class="700 font(lg) c(gray-900)">AdorableCSS</div>
+            </div>
             <button 
-              class="p(xs) r(lg) hover:bg(gray-100) transition"
+              class="close-btn p(sm) r(lg) hover:bg(gray-100) transition"
               on:click={() => mobileMenuOpen = false}
             >
-              <X size="20" class="c(gray-700)" />
+              <X size="20" class="c(gray-600)" />
             </button>
           </div>
         </div>
         
-        <!-- Navigation Links -->
-        <div class="menu-content flex-1 p(lg) vbox gap(sm) overflow-y(auto)">
+        <!-- Mobile Navigation -->
+        <div class="mobile-nav-content flex(1) p(md) vbox gap(xs) overflow-y(auto)">
           {#each navigation as navItem}
             <a 
               href="{base}{navItem.href}"
-              class="mobile-nav-link p(lg) r(xl) w(full) text(left) 700 font(sm) transition no-underline
+              class="mobile-nav-item p(sm) r(md) vbox gap(xs) transition no-underline
                      {currentPath === navItem.href || (navItem.href !== '/' && currentPath.startsWith(navItem.href))
-                       ? 'bg(135deg/#8b5cf6,#ec4899) c(white) shadow(md)' 
-                       : 'hover:bg(gray-50) c(gray-700)'}"
+                       ? 'bg(purple-50) border-l(purple-600)' 
+                       : 'hover:bg(gray-50) border-l(transparent)'}"
               on:click={() => mobileMenuOpen = false}
             >
-              <div class="font(medium)">{navItem.label}</div>
+              <div class="600 font(md) {currentPath === navItem.href || (navItem.href !== '/' && currentPath.startsWith(navItem.href)) ? 'c(purple-700)' : 'c(gray-900)'}">
+                {navItem.label}
+              </div>
               {#if navItem.description}
-                <div class="font(xs) {currentPath === navItem.href || (navItem.href !== '/' && currentPath.startsWith(navItem.href)) ? 'c(white.8)' : 'c(gray-500)'} mt(xs)">
+                <div class="font(sm) c(gray-600)">
                   {navItem.description}
                 </div>
               {/if}
@@ -161,15 +174,17 @@
           {/each}
         </div>
         
-        <!-- Action Buttons -->
-        <div class="menu-footer p(lg) border-t(1/gray-200) vbox gap(sm)">
-          <a href="{base}/docs" class="action-btn w(full) px(lg) py(md) hbox(center) gap(sm) r(lg) bg(white) b(1/gray-200) c(gray-700) 700 font(sm) hover:shadow(md) transition no-underline" on:click={() => mobileMenuOpen = false}>
-            <BookOpen size="16" />
-            <span>Documentation</span>
+        <!-- Mobile Actions -->
+        <div class="mobile-actions p(md) border-t(gray-200) vbox gap(sm)">
+          <a href="{base}/playground" 
+             class="w(full) px(md) py(sm) r(md) bg(135deg/#8b5cf6..#ec4899) c(white) 600 font(md) text(center) hover:shadow(lg) transition no-underline"
+             on:click={() => mobileMenuOpen = false}>
+            Try Playground
           </a>
-          <a href="https://github.com/developer-1px/adorable-css-v2" target="_blank" rel="noopener noreferrer" class="action-btn w(full) px(lg) py(md) hbox(center) gap(sm) r(lg) bg(gray-900) c(white) 700 font(sm) hover:bg(gray-800) transition no-underline">
-            <Github size="16" />
-            <span>View on GitHub</span>
+          <a href="https://github.com/developer-1px/adorable-css-v2" target="_blank" rel="noopener noreferrer" 
+             class="w(full) px(md) py(sm) r(md) border(gray-300) bg(white) c(gray-700) 600 font(md) text(center) hbox(center) gap(xs) hover:border(gray-400) transition no-underline">
+            <Github size="18" />
+            <span>GitHub</span>
           </a>
         </div>
       </div>

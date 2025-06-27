@@ -62,7 +62,7 @@
 <div class="tutorials-page min-h(100vh) bg(gray-50)">
   <div class="container(5xl) px(xl) py(4xl) vbox gap(4xl)">
     <!-- Header -->
-    <div class="text(center) vbox gap(xl)">
+    <div class="vbox(center) text(center) gap(xl)">
       <div class="inline-flex">
         <div class="px(lg) py(sm) bg(purple-100) r(full) b(purple-200) 
                     hbox(middle) gap(sm)">

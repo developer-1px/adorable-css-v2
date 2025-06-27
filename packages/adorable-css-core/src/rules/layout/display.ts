@@ -56,6 +56,10 @@ function makeBoxAligns(direction: BaseDirection, value = ''): CSSRule {
   const result: CSSRule = {
     'display': 'flex',
     'flex-direction': hasReverse ? `${direction}-reverse` : direction,
+    // Add default flex properties for child elements
+    '& > *': {
+      'flex': '0 0 auto'
+    }
   };
   
   // Handle align-items
@@ -152,12 +156,16 @@ export const grow: RuleHandler = (value?: string): CSSRule => {
   return { 'flex-grow': value };
 };
 
+// Convenience aliases
+export const hidden: KeywordRuleHandler = () => ({ display: 'none' });
+
 export const displayRules = {
   block,
   inline,
   'inline-block': inlineBlock,
   'inline-flex': inlineFlex,
   none,
+  hidden,
   grid,
   hbox,
   vbox,

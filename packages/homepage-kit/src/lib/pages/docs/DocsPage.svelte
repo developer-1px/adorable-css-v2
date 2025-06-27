@@ -2,6 +2,11 @@
   import { onMount } from 'svelte';
   import Code from '../../components/Code.svelte';
   import { ChevronRight, Book, Code2, Layers, Zap, Palette, Settings } from 'lucide-svelte';
+  import TokenSystemShowcase from '../../components/home/TokenSystemShowcase.svelte';
+  import ComponentShowcase from '../../components/home/ComponentShowcase.svelte';
+  import DesignToolsShowcase from '../../components/home/DesignToolsShowcase.svelte';
+  import CoreConcepts from '../../components/home/CoreConcepts.svelte';
+  import BeforeAfter from '../../components/home/BeforeAfter.svelte';
   
   let activeSection = 'getting-started';
   
@@ -55,6 +60,18 @@
         { id: 'setup', title: 'Plugin Setup' },
         { id: 'codegen', title: 'Code Generation' },
         { id: 'sync', title: 'Design Sync' }
+      ]
+    },
+    {
+      id: 'components',
+      title: 'Components & Examples',
+      icon: Settings,
+      items: [
+        { id: 'design-tokens', title: 'Design Tokens' },
+        { id: 'component-library', title: 'Component Library' },
+        { id: 'design-tools', title: 'Design Tools' },
+        { id: 'core-concepts', title: 'Core Concepts' },
+        { id: 'before-after', title: 'Before & After' }
       ]
     }
   ];
@@ -217,6 +234,76 @@ shadow(0/4/8/rgba(0,0,0,0.1))   // Custom shadow`} />
       </article>
     {/if}
     
+    <!-- Components & Examples -->
+    {#if activeSection === 'components'}
+      <article class="vbox gap(3xl)">
+        <section id="design-tokens">
+          <h1 class="heading(h1) c(gray-900) mb(xl)">Design Tokens</h1>
+          
+          <p class="font(lg) c(gray-600) mb(xl) leading(relaxed)">
+            AdorableCSS includes a comprehensive design token system that provides consistent spacing, 
+            colors, typography, and effects across your entire application.
+          </p>
+          
+          <div class="showcase-container">
+            <TokenSystemShowcase />
+          </div>
+        </section>
+        
+        <section id="component-library">
+          <h2 class="heading(h2) c(gray-900) mb(xl)">Component Library</h2>
+          
+          <p class="font(lg) c(gray-600) mb(xl) leading(relaxed)">
+            Explore our collection of pre-built components using AdorableCSS utilities. 
+            Each component demonstrates best practices and showcases the power of our design token system.
+          </p>
+          
+          <div class="showcase-container">
+            <ComponentShowcase />
+          </div>
+        </section>
+        
+        <section id="design-tools">
+          <h2 class="heading(h2) c(gray-900) mb(xl)">Design Tools</h2>
+          
+          <p class="font(lg) c(gray-600) mb(xl) leading(relaxed)">
+            Discover the tools and workflows that make AdorableCSS a powerful design system. 
+            From color palette generation to spacing calculators, these tools help you create cohesive designs.
+          </p>
+          
+          <div class="showcase-container">
+            <DesignToolsShowcase />
+          </div>
+        </section>
+        
+        <section id="core-concepts">
+          <h2 class="heading(h2) c(gray-900) mb(xl)">Core Concepts</h2>
+          
+          <p class="font(lg) c(gray-600) mb(xl) leading(relaxed)">
+            Understanding AdorableCSS's core concepts is essential for building maintainable and scalable designs. 
+            Learn about the principles that make our framework unique.
+          </p>
+          
+          <div class="showcase-container">
+            <CoreConcepts />
+          </div>
+        </section>
+        
+        <section id="before-after">
+          <h2 class="heading(h2) c(gray-900) mb(xl)">Before & After</h2>
+          
+          <p class="font(lg) c(gray-600) mb(xl) leading(relaxed)">
+            See the transformation from traditional CSS approaches to AdorableCSS. 
+            These examples demonstrate how our framework simplifies complex styling challenges.
+          </p>
+          
+          <div class="showcase-container">
+            <BeforeAfter />
+          </div>
+        </section>
+      </article>
+    {/if}
+    
     <!-- Add more sections as needed -->
   </main>
 </div>
@@ -252,5 +339,13 @@ shadow(0/4/8/rgba(0,0,0,0.1))   // Custom shadow`} />
   
   section {
     scroll-margin-top: 2rem;
+  }
+  
+  .showcase-container {
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 2rem;
+    background: #fafafa;
+    margin: 2rem 0;
   }
 </style>

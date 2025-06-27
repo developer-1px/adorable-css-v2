@@ -27,6 +27,10 @@ export interface DesignTokens {
     '3xl': string;
     '4xl': string;
     '5xl': string;
+    '6xl': string;
+    '7xl': string;
+    '8xl': string;
+    '9xl': string;
   };
   size: {
     // Size tokens for width/height
@@ -281,34 +285,40 @@ export interface DesignTokens {
 
 // Modern token values based on industry best practices
 export const defaultTokens: DesignTokens = {
-  // Typography Scale - Major Third (1.333 ratio) for better visual hierarchy
+  // Typography Scale - Minor Third (1.2) ratio for better web readability
+  // Based on 16px (1rem) with more conservative scaling
   font: {
-    xs: '0.75rem',     // 12px
-    sm: '0.875rem',    // 14px
-    md: '1rem',        // 16px (base)
-    lg: '1.25rem',     // 20px
-    xl: '1.5rem',      // 24px
-    '2xl': '2rem',     // 32px
-    '3xl': '2.5rem',   // 40px
-    '4xl': '3rem',     // 48px
-    '5xl': '3.75rem',  // 60px
-    '6xl': '4.5rem',   // 72px
-    '7xl': '6rem',     // 96px
-    '8xl': '8rem',     // 128px
-    '9xl': '10rem',    // 160px
+    xs: '0.75rem',     // 12px    (16 ÷ 1.333)
+    sm: '0.875rem',    // 14px    (16 × 0.875)
+    md: '1rem',        // 16px    (base - perfect for body text)
+    lg: '1.125rem',    // 18px    (16 × 1.125)
+    xl: '1.25rem',     // 20px    (16 × 1.25)
+    '2xl': '1.5rem',   // 24px    (16 × 1.5)
+    '3xl': '1.875rem', // 30px    (16 × 1.875)
+    '4xl': '2.25rem',  // 36px    (16 × 2.25)
+    '5xl': '3rem',     // 48px    (16 × 3)
+    '6xl': '3.75rem',  // 60px    (16 × 3.75)
+    '7xl': '4.5rem',   // 72px    (16 × 4.5)
+    '8xl': '6rem',     // 96px    (16 × 6)
+    '9xl': '8rem',     // 128px   (16 × 8)
   },
   
-  // Spacing Scale - Smaller semantic values for precise control
+  // Spacing Scale - Based on 4px grid system
   spacing: {
-    xs: '0.25rem',        // 4px - very tight spacing
-    sm: '0.5rem',         // 8px - tight spacing  
-    md: '0.75rem',        // 12px - default spacing
-    lg: '1rem',           // 16px - comfortable spacing
-    xl: '1.5rem',         // 24px - large spacing
-    '2xl': '2rem',        // 32px - extra large
-    '3xl': '2.5rem',      // 40px - section spacing
-    '4xl': '3rem',        // 48px - large section spacing
-    '5xl': '4rem',        // 64px - hero spacing
+    // Base 4px grid increments
+    xs: '0.25rem',        // 4px - smallest unit (1x base)
+    sm: '0.5rem',         // 8px - small spacing (2x base)
+    md: '0.75rem',        // 12px - medium spacing (3x base)
+    lg: '1rem',           // 16px - default spacing (4x base)
+    xl: '1.25rem',        // 20px - large spacing (5x base)
+    '2xl': '1.5rem',      // 24px - extra large (6x base)
+    '3xl': '2rem',        // 32px - section spacing (8x base)
+    '4xl': '2.5rem',      // 40px - subsection spacing (10x base)
+    '5xl': '3rem',        // 48px - large section (12x base)
+    '6xl': '4rem',        // 64px - hero spacing (16x base)
+    '7xl': '5rem',        // 80px - extra hero (20x base)
+    '8xl': '6rem',        // 96px - maximum spacing (24x base)
+    '9xl': '8rem'         // 128px - mega spacing (32x base)
   },
   
   // Size Scale - for width/height utilities
@@ -327,12 +337,12 @@ export const defaultTokens: DesignTokens = {
   },
   
   lineHeight: {
-    none: '1',
-    tight: '1.1',
-    snug: '1.25',
-    normal: '1.5',
-    relaxed: '1.625',
-    loose: '2',
+    none: '1',        // 100% - for titles that need tight spacing
+    tight: '1.1',     // 110% - for large headings (minimal line spacing)
+    snug: '1.2',      // 120% - for medium headings
+    normal: '1.4',    // 140% - for body text (optimal readability)
+    relaxed: '1.6',   // 160% - for comfortable reading
+    loose: '1.8',     // 180% - for maximum readability
   },
   
   letterSpacing: {
@@ -529,56 +539,63 @@ export const defaultTokens: DesignTokens = {
     bounce: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
   },
   
-  // Heading System - Type scale with appropriate margins
+  // Heading System - More reasonable sizes for web
   heading: {
     h1: {
-      fontSize: '3.75rem',      // 60px
-      lineHeight: '1.1',
-      letterSpacing: '-0.02em',
-      fontWeight: '700',
-      marginBottom: '2rem',     // 32px
-    },
-    h2: {
-      fontSize: '3rem',         // 48px
-      lineHeight: '1.2',
-      letterSpacing: '-0.015em',
-      fontWeight: '700',
+      fontSize: '2.25rem',      // 36px - Main page title
+      lineHeight: '1.1',        // tight - for maximum impact
+      letterSpacing: '-0.025em', // tight - better visual density for large text
+      fontWeight: '700',        // bold - strong hierarchy
       marginBottom: '1.5rem',   // 24px
     },
-    h3: {
-      fontSize: '2.25rem',      // 36px
-      lineHeight: '1.25',
-      letterSpacing: '-0.01em',
-      fontWeight: '600',
+    h2: {
+      fontSize: '1.875rem',     // 30px - Section titles
+      lineHeight: '1.2',        // snug
+      letterSpacing: '-0.02em',
+      fontWeight: '700',        // bold
       marginBottom: '1.25rem',  // 20px
     },
-    h4: {
-      fontSize: '1.875rem',     // 30px
-      lineHeight: '1.3',
-      letterSpacing: '-0.005em',
-      fontWeight: '600',
+    h3: {
+      fontSize: '1.5rem',       // 24px - Subsection titles
+      lineHeight: '1.25',       // snug
+      letterSpacing: '-0.015em',
+      fontWeight: '600',        // semibold
       marginBottom: '1rem',     // 16px
     },
-    h5: {
-      fontSize: '1.5rem',       // 24px
-      lineHeight: '1.35',
-      letterSpacing: '0',
-      fontWeight: '600',
+    h4: {
+      fontSize: '1.25rem',      // 20px - Content headings
+      lineHeight: '1.3',        // snug
+      letterSpacing: '-0.01em',
+      fontWeight: '600',        // semibold
       marginBottom: '0.875rem', // 14px
     },
-    h6: {
-      fontSize: '1.25rem',      // 20px
-      lineHeight: '1.4',
+    h5: {
+      fontSize: '1.125rem',     // 18px - Minor headings
+      lineHeight: '1.4',        // normal
       letterSpacing: '0',
-      fontWeight: '600',
+      fontWeight: '600',        // semibold
       marginBottom: '0.75rem',  // 12px
+    },
+    h6: {
+      fontSize: '1rem',         // 16px - Small headings
+      lineHeight: '1.4',        // normal - better readability for smaller headings
+      letterSpacing: '0',       // normal
+      fontWeight: '600',        // semibold
+      marginBottom: '0.5rem',   // 8px (spacing-sm)
     },
   },
 };
 
 // Token type guards
+// Current token context for rules to use
+let currentTokenContext: DesignTokens = defaultTokens;
+
+export function setTokenContext(tokens: DesignTokens): void {
+  currentTokenContext = tokens;
+}
+
 export function isToken(value: string, category: keyof DesignTokens): boolean {
-  const categoryTokens = defaultTokens[category];
+  const categoryTokens = currentTokenContext[category];
   
   // Handle nested objects like colors.gray
   if (typeof categoryTokens === 'object' && categoryTokens !== null) {
@@ -624,7 +641,52 @@ export function generateTokenCSS(tokens: DesignTokens = defaultTokens): string {
   
   processTokens(tokens);
   
-  return `:root {\n${cssVars.join('\n')}\n}`;
+  // Add semantic color mappings
+  const semanticMappings = `
+  /* Semantic Color System */
+  /* Primary colors (using purple as brand color) */
+  --primary-50: var(--purple-50, #faf5ff);
+  --primary-100: var(--purple-100, #f3e8ff);
+  --primary-200: var(--purple-200, #e9d5ff);
+  --primary-300: var(--purple-300, #d8b4fe);
+  --primary-400: var(--purple-400, #c084fc);
+  --primary-500: var(--purple-500, #a855f7);
+  --primary-600: var(--purple-600, #9333ea);
+  --primary-700: var(--purple-700, #7c3aed);
+  --primary-800: var(--purple-800, #6b21a8);
+  --primary-900: var(--purple-900, #581c87);
+  
+  /* Neutral colors (using gray) */
+  --neutral-50: var(--gray-50);
+  --neutral-100: var(--gray-100);
+  --neutral-200: var(--gray-200);
+  --neutral-300: var(--gray-300);
+  --neutral-400: var(--gray-400);
+  --neutral-500: var(--gray-500);
+  --neutral-600: var(--gray-600);
+  --neutral-700: var(--gray-700);
+  --neutral-800: var(--gray-800);
+  --neutral-900: var(--gray-900);
+  
+  /* Surface colors */
+  --surface-base: var(--white);
+  --surface-subtle: var(--gray-50);
+  --surface-accent: var(--purple-50);
+  --surface-inverse: var(--gray-900);
+  
+  /* Text colors */
+  --text-primary: var(--gray-900);
+  --text-secondary: var(--gray-600);
+  --text-subtle: var(--gray-500);
+  --text-accent: var(--purple-600);
+  --text-inverse: var(--white);
+  
+  /* Border colors */
+  --border-default: var(--gray-200);
+  --border-accent: var(--purple-200);
+  --border-subtle: var(--gray-100);`;
+  
+  return `:root {\n${cssVars.join('\n')}\n${semanticMappings}\n}`;
 }
 
 // Inject design tokens into the document

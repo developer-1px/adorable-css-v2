@@ -36,7 +36,10 @@
       "Bash(cp:*)",
       "Bash(mv:*)",
       "Bash(pnpm --filter adorable-css build)",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "WebFetch(domain:velog.io)",
+      "Bash(pnpm vitest run:*)",
+      "WebFetch(domain:css.master.co)"
     ],
     "deny": []
   }

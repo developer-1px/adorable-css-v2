@@ -33,9 +33,9 @@ describe('Token System', () => {
     it('should generate CSS variables', () => {
       const css = generateTokenCSS(defaultTokens);
       expect(css).toContain(':root {');
-      expect(css).toContain('--radius-sm: 0.125rem;');
-      expect(css).toContain('--font-lg: 1.125rem;');
-      expect(css).toContain('--spacing-md: 1rem;');
+      expect(css).toContain('--radius-sm: 0.25rem;');
+      expect(css).toContain('--font-lg: 1.25rem;');
+      expect(css).toContain('--spacing-md: 0.75rem;');
     });
   });
 

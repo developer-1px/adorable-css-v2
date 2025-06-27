@@ -169,8 +169,13 @@ export const border: RuleHandler = (args?: string): CSSRule => {
     }
   }
   
-  // Regular border: border(1/solid/#333) or border(1/#333)
+  // Regular border: border(1/solid/#333) or border(1/#333) or border(gray-300)
   if (!args.includes('/')) {
+    // Check if it's a color token first
+    if (args.includes('-') || args.startsWith('#')) {
+      return { border: `1px solid ${String(makeColor(args))}` };
+    }
+    // Otherwise treat as width
     return { border: `${String(px(args))} solid currentColor` };
   }
   
@@ -209,8 +214,22 @@ export const borderOpacity: RuleHandler = (args?: string): CSSRule => {
   };
 };
 
+// New border-* aliases for better readability
+export const borderTop: RuleHandler = bt;
+export const borderRight: RuleHandler = br;
+export const borderBottom: RuleHandler = bb;
+export const borderLeft: RuleHandler = bl;
+
 export const borderRules = {
   b, r, border,
   bt, br, bb, bl,
+  'border-top': borderTop,
+  'border-right': borderRight,
+  'border-bottom': borderBottom,
+  'border-left': borderLeft,
+  'border-b': borderBottom,
+  'border-t': borderTop,
+  'border-l': borderLeft,
+  'border-r': borderRight,
   'border-opacity': borderOpacity
 };

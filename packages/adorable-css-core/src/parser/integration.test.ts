@@ -252,11 +252,11 @@ describe("AdorableCSS Integration Tests", () => {
         ".w\\(300\\){width:300px}"
       );
       expect(generateCSSFromAdorableCSS("shadow(lg)")).toBe(
-        ".shadow\\(lg\\){box-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)}"
+        ".shadow\\(lg\\){box-shadow:var(--shadow-lg)}"
       );
       expect(generateCSSFromAdorableCSS("grid")).toBe(".grid{display:grid}");
       expect(generateCSSFromAdorableCSS("grid-cols(3)")).toBe(
-        ".grid-cols\\(3\\){grid-template-columns:repeat(3, 1fr)}"
+        ".grid-cols\\(3\\){grid-template-columns:repeat(3, minmax(0, 1fr))}"
       );
       expect(generateCSSFromAdorableCSS("absolute")).toBe(
         ".absolute{position:absolute}"
