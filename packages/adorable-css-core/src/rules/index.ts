@@ -1,12 +1,12 @@
-import { typographyRules } from './typography';
+import { typographyRules } from './style';
 import { layoutRules } from './layout';
-import { visualRules } from './visuals';
+import { visualRules } from './style';
 import { positionCategoryRules } from './position';
 import { interactionRules } from './interaction';
 import { utilityRules } from './utilities';
 import { effectsRules } from './effects';
-import { glowRules, glassRules, cardRules, responsiveRules, advancedRules, adminRules, containerRules, animationRules, buttonRules, headingRules, headingPluginRules, uiCardRules, proseRules, mdxRules, sectionRules, designSystemRules, masterInspiredRules } from './plugins';
-import { colorRules } from '../plugins/colors';
+import { glowRules, glassRules, cardRules, responsiveRules, advancedRules, adminRules, containerRules, animationRules, buttonRules, headingRules, uiCardRules, proseRules, mdxRules, sectionRules, designSystemRules, masterInspiredRules } from '../extensions';
+import { colorRules } from '../design-system/colors/colors';
 
 // Main rules registry
 export const rules = {
@@ -26,7 +26,6 @@ export const rules = {
   ...adminRules,
   ...buttonRules,
   ...headingRules,
-  ...headingPluginRules,
   ...uiCardRules,
   ...proseRules,
   ...mdxRules,

@@ -1,23 +1,22 @@
 // AdorableCSS Core - Main entry point
 
 // Auto-inject tokens on import (can be disabled via configureAutoInject)
-import "./core/auto-inject";
+import "./core/runtime/auto-inject";
 
-export * from "./parser";
+export * from "./core/parser";
 export * from "./rules";
-export * from "./values/makeValue";
-export * from "./tokens";
-export * from "./plugins/tokens";
-export * from "./rules/plugins";
-export * from "./core/auto-inject";
+export * from "./core/values/makeValue";
+export * from "./design-system/tokens/index";
+export * from "./extensions";
+export * from "./core/runtime/auto-inject";
 
 // Re-export main functions for convenience
-export { parseAdorableCSS } from "./parser/parser";
-export { generateCSS, generateCSSFromAdorableCSS, generateCSSWithTokens } from "./parser/generator";
-export type { GenerateCSSOptions } from "./parser/generator";
+export { parseAdorableCSS } from "./core/parser/parser";
+export { generateCSS, generateCSSFromAdorableCSS, generateCSSWithTokens } from "./core/parser/generator";
+export type { GenerateCSSOptions } from "./core/parser/generator";
 export { getRuleHandler, rules, groupedRules } from "./rules";
-export { defaultTokens, generateTokenCSS, isToken, getTokenVar } from "./tokens";
-export { createTokensPlugin, injectTokens, tokensPlugin } from "./plugins/tokens";
+export { defaultTokens, generateTokenCSS, isToken, getTokenVar } from "./design-system/tokens/index";
+export { createTokensPlugin, injectTokens, tokensPlugin } from "./design-system/tokens";
 
 // Export auto-injection utilities
 export { 
@@ -25,10 +24,10 @@ export {
   configureAutoInject, 
   isTokensInjected, 
   getAutoInjectConfig 
-} from "./core/auto-inject";
+} from "./core/runtime/auto-inject";
 
 // Export color palette and plugin
-export { colorPalette, themes, setTheme, getCurrentTheme, getAvailableThemes, colorsPlugin } from "./plugins/colors";
+export { colorPalette, themes, setTheme, getCurrentTheme, getAvailableThemes, colorsPlugin } from "./design-system/colors/colors";
 
 // Export animation plugin
-export { animationsPlugin, animationKeyframes, getAllKeyframes } from "./rules/plugins/animations";
+export { animationsPlugin, animationKeyframes, getAllKeyframes } from "./extensions/animations/animations";

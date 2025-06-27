@@ -1,6 +1,6 @@
 import type { CSSRule, RuleHandler } from "../types";
-import { px } from "../../values/makeValue";
-import { isToken, getTokenVar } from "../../tokens";
+import { px } from '../../core/values/makeValue';
+import { isToken, getTokenVar } from '../../design-system/tokens/index';
 
 const makePaddingRule = (
   prefix: "" | "x" | "y" | "t" | "b" | "l" | "r"

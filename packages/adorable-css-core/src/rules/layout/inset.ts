@@ -1,5 +1,5 @@
 import type { CSSRule, RuleHandler } from '../types';
-import { makeValue } from '../../values/makeValue';
+import { makeValue } from '../../core/values/makeValue';
 
 /**
  * Inset utilities - shorthand for top, right, bottom, left

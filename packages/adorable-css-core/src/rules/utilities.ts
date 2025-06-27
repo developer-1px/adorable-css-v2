@@ -1,7 +1,7 @@
 import type { CSSRule, KeywordRuleHandler } from './types';
-import { transitionRules } from './utilities/transitions';
-import { focusRules } from './utilities/focus';
-import { transformRules } from './utilities/transforms';
+import { transitionRules } from './interaction/transitions';
+import { focusRules } from './interaction/focus';
+import { transformRules } from './effects/transforms';
 
 // Additional utilities
 export const fit: KeywordRuleHandler = () => ({ 

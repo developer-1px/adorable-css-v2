@@ -1,5 +1,5 @@
 import type { CSSRule, RuleHandler, KeywordRuleHandler } from "../types";
-import { px } from "../../values/makeValue";
+import { px } from '../../core/values/makeValue';
 
 // Position types
 export const staticPosition: KeywordRuleHandler = () => ({
