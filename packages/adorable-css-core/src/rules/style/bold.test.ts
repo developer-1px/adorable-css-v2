@@ -29,10 +29,13 @@ describe('bold', () => {
     expect(bold('50')).toEqual({});
     expect(bold('1000')).toEqual({});
     expect(bold('invalid')).toEqual({});
-    expect(bold('')).toEqual({});
+  });
+  
+  it('should return bold (700) for empty string', () => {
+    expect(bold('')).toEqual({ 'font-weight': '700' });
   });
 
-  it('should return empty object when no value provided', () => {
-    expect(bold()).toEqual({});
+  it('should return bold (700) when no value provided', () => {
+    expect(bold()).toEqual({ 'font-weight': '700' });
   });
 });

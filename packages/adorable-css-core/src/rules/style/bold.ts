@@ -2,7 +2,10 @@ import type { CSSRule, RuleHandler } from '../types';
 import { isToken, getTokenVar } from '../../design-system/tokens/index';
 
 export const bold: RuleHandler = (value?: string): CSSRule => {
-  if (!value) return {};
+  // If no value provided, default to bold (700)
+  if (!value) {
+    return { 'font-weight': '700' };
+  }
   
   // Check if it's a font-weight token (thin, light, normal, medium, semi, bold, extrabold, black)
   if (isToken(value, 'fontWeight')) {

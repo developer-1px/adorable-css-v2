@@ -8,12 +8,14 @@ import { font } from "./font";
 import { text } from "./text";
 import { c } from "./color";
 import { bold } from "./bold";
+import { typographyUtilityRules } from "./typography-utils";
 
 export const typographyRules = {
   font,
   text,
   c,
   bold,
+  ...typographyUtilityRules,
 };
 
 export const visualRules = {

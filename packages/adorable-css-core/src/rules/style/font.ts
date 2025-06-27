@@ -16,38 +16,44 @@ export const font: RuleHandler = (args?: string): CSSRule => {
   parts.forEach((part, index) => {
     if (!part || part === '-') return;
     
-    // Check if it's a font size token
-    if (index === 0 && isToken(part, 'font')) {
-      result['font-size'] = getTokenVar('font', part);
+    // First part - font size (token or value)
+    if (index === 0) {
+      if (isToken(part, 'font')) {
+        result['font-size'] = getTokenVar('font', part);
+      } else if (+part || part.includes('px') || part.includes('rem') || part.includes('em')) {
+        result['font-size'] = String(px(part));
+      }
       return;
     }
     
-    // font-family (string, not number)
-    if (isNaN(+part) && !part.includes('%')) {
-      // Check for line-height tokens
+    // Second part - line height (number or token)
+    if (index === 1) {
       if (['tight', 'normal', 'relaxed', 'loose'].includes(part)) {
         result['line-height'] = getTokenVar('lineHeight', part);
+      } else if (+part) {
+        result['line-height'] = String(+part < 4 ? makeNumber(+part) : px(part));
       }
-      // Check for letter-spacing tokens
-      else if (['tight', 'normal', 'wide'].includes(part) && !result['line-height']) {
+      return;
+    }
+    
+    // Third part - letter spacing (percentage, value, or token)
+    if (index === 2) {
+      if (part.includes('%')) {
+        result['letter-spacing'] = String(percentToEm(part));
+      } else if (['tight', 'normal', 'wide'].includes(part)) {
         result['letter-spacing'] = getTokenVar('letterSpacing', part);
+      } else if (+part || part.includes('px') || part.includes('rem') || part.includes('em')) {
+        result['letter-spacing'] = String(px(part));
+      } else {
+        // Font family name
+        result['font-family'] = part;
       }
-      // Otherwise it's a font-family
-      else {
-        result['font-family'] = String(cssvar(part));
-      }
+      return;
     }
-    // font-size (first number or has px/rem/em)
-    else if ((index === 0 || !result['font-size']) && (+part || part.includes('px') || part.includes('rem') || part.includes('em'))) {
-      result['font-size'] = String(px(part));
-    }
-    // line-height (second number)
-    else if (!result['line-height'] && +part) {
-      result['line-height'] = String(+part < 4 ? makeNumber(+part) : px(part));
-    }
-    // letter-spacing (has % or third number)
-    else if (part.includes('%')) {
-      result['letter-spacing'] = String(px(percentToEm(part)));
+    
+    // Fourth part and beyond - font family
+    if (index >= 3) {
+      result['font-family'] = part;
     }
   });
   
