@@ -1,4 +1,4 @@
-import type { RuleHandler, CSSRule } from '../../types';
+import type { RuleHandler, CSSRule } from '../../rules/types';
 
 // card - Modern card component
 export const card: RuleHandler = (args?: string): CSSRule => {

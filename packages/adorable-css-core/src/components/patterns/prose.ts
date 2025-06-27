@@ -1,4 +1,4 @@
-import type { CSSRule, RuleHandler } from '../../types';
+import type { CSSRule, RuleHandler } from '../../rules/types';
 
 // Apple-inspired typography styles for markdown content
 const proseStyles: Record<string, CSSRule> = {

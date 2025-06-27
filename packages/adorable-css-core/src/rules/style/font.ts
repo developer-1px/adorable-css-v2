@@ -32,10 +32,6 @@ export const font: RuleHandler = (args?: string): CSSRule => {
       else if (['tight', 'normal', 'wide'].includes(part) && !result['line-height']) {
         result['letter-spacing'] = getTokenVar('letterSpacing', part);
       }
-      // Check for font-weight tokens
-      else if (['thin', 'light', 'normal', 'medium', 'semibold', 'bold', 'extrabold', 'black'].includes(part)) {
-        result['font-weight'] = getTokenVar('fontWeight', part);
-      }
       // Otherwise it's a font-family
       else {
         result['font-family'] = String(cssvar(part));
@@ -52,10 +48,6 @@ export const font: RuleHandler = (args?: string): CSSRule => {
     // letter-spacing (has % or third number)
     else if (part.includes('%')) {
       result['letter-spacing'] = String(px(percentToEm(part)));
-    }
-    // font-weight (number 100-900)
-    else if (+part >= 100 && +part <= 900) {
-      result['font-weight'] = part;
     }
   });
   

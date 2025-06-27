@@ -1,7 +1,7 @@
 // Advanced OKLCH Color System - Based on the Showroom implementation
 // Provides scientific color generation with theme adjustments
 
-import type { CSSRule, RuleHandler } from '../rules/types';
+import type { CSSRule, RuleHandler } from '../../rules/types';
 
 // OKLCH Color Space
 export interface OKLCH {

@@ -7,11 +7,13 @@ import { animationRules } from "./animation";
 import { font } from "./font";
 import { text } from "./text";
 import { c } from "./color";
+import { bold } from "./bold";
 
 export const typographyRules = {
   font,
   text,
   c,
+  bold,
 };
 
 export const visualRules = {

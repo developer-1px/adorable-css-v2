@@ -149,7 +149,7 @@ export const rotateZ: RuleHandler = (args?: string): CSSRule => {
 
 export const perspective: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
-  return { 'perspective': px(args) };
+  return { 'perspective': String(px(args)) };
 };
 
 // Transform origin
@@ -215,8 +215,8 @@ export const maskSize: RuleHandler = (args?: string): CSSRule => {
   
   // Handle custom sizes
   return {
-    '-webkit-mask-size': px(args),
-    'mask-size': px(args)
+    '-webkit-mask-size': String(px(args)),
+    'mask-size': String(px(args))
   };
 };
 

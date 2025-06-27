@@ -1,4 +1,4 @@
-import type { RuleHandler, CSSRule } from '../../types';
+import type { RuleHandler, CSSRule } from '../../rules/types';
 
 // Button variants - Apple-inspired design system
 const buttonVariants: Record<string, CSSRule> = {

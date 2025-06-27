@@ -1,4 +1,4 @@
-import type { CSSRule, RuleHandler } from '../../types';
+import type { CSSRule, RuleHandler } from '../../rules/types';
 
 // interactive - 인터랙티브 요소 기본 스타일 (버튼, 링크, 카드 등)
 export const interactive: RuleHandler = (args?: string): CSSRule => {

@@ -68,7 +68,7 @@ export interface DesignTokens {
     light: string;
     normal: string;
     medium: string;
-    semibold: string;
+    semi: string;
     bold: string;
     extrabold: string;
     black: string;
@@ -360,7 +360,7 @@ export const defaultTokens: DesignTokens = {
     light: '300',
     normal: '400',
     medium: '500',
-    semibold: '600',
+    semi: '600',
     bold: '700',
     extrabold: '800',
     black: '900',
@@ -559,28 +559,28 @@ export const defaultTokens: DesignTokens = {
       fontSize: '1.5rem',       // 24px - Subsection titles
       lineHeight: '1.25',       // snug
       letterSpacing: '-0.015em',
-      fontWeight: '600',        // semibold
+      fontWeight: '600',        // semi
       marginBottom: '1rem',     // 16px
     },
     h4: {
       fontSize: '1.25rem',      // 20px - Content headings
       lineHeight: '1.3',        // snug
       letterSpacing: '-0.01em',
-      fontWeight: '600',        // semibold
+      fontWeight: '600',        // semi
       marginBottom: '0.875rem', // 14px
     },
     h5: {
       fontSize: '1.125rem',     // 18px - Minor headings
       lineHeight: '1.4',        // normal
       letterSpacing: '0',
-      fontWeight: '600',        // semibold
+      fontWeight: '600',        // semi
       marginBottom: '0.75rem',  // 12px
     },
     h6: {
       fontSize: '1rem',         // 16px - Small headings
       lineHeight: '1.4',        // normal - better readability for smaller headings
       letterSpacing: '0',       // normal
-      fontWeight: '600',        // semibold
+      fontWeight: '600',        // semi
       marginBottom: '0.5rem',   // 8px (spacing-sm)
     },
   },

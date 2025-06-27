@@ -1,5 +1,5 @@
 import { parseAdorableCSS } from "./parser";
-import { getRuleHandler } from "../../rules";
+import { getRuleHandler, getPriorityRuleHandler, getRuleWithPriority } from "../../rules";
 import type { CSSRule, ParsedSelector } from "../../rules/types";
 import { cssEscape } from "./cssEscape";
 import { px } from '../values/makeValue';
@@ -51,15 +51,23 @@ const createParsedSelector = (node: any): ParsedSelector => ({
   args: node.args?.map((arg: any) => arg.image),
 });
 
-// Generate CSS from parsed selector
-const generateCSSFromSelector = (selector: ParsedSelector, parentSelector?: string): { mainCSS: string; nestedCSS: string[] } => {
-  const handler = getRuleHandler(selector.name);
+// Generate CSS from parsed selector with priority awareness
+const generateCSSFromSelector = (selector: ParsedSelector, parentSelector?: string): { mainCSS: string; nestedCSS: string[]; priority?: number } => {
+  // First try priority-aware handler
+  let handler = getPriorityRuleHandler(selector.name);
+  let ruleInfo = getRuleWithPriority(selector.name);
+  
+  // Fall back to legacy handler if not found in priority registry
+  if (!handler) {
+    handler = getRuleHandler(selector.name);
+  }
+  
   if (!handler) {
     // Log warning for missing rule handler
     console.warn(`⚠️  AdorableCSS: Rule handler not found for "${selector.name}"`);
     console.warn(`   Parsed successfully but no implementation exists.`);
     console.warn(`   Consider adding this rule to the rule handlers.`);
-    return { mainCSS: "", nestedCSS: [] };
+    return { mainCSS: "", nestedCSS: [], priority: 0 };
   }
 
   const result =
@@ -67,14 +75,19 @@ const generateCSSFromSelector = (selector: ParsedSelector, parentSelector?: stri
       ? handler(selector.args.join(""))
       : handler("");
 
-  return cssObjectToString(result, parentSelector);
+  const cssResult = cssObjectToString(result, parentSelector);
+  
+  return { 
+    ...cssResult, 
+    priority: ruleInfo?.priority || 0 
+  };
 };
 
 // Handle pseudo-class selector
 const handlePseudoClass = (
   v: any,
   rawSelector: string
-): { selector: string; cssResult: { mainCSS: string; nestedCSS: string[] } } => {
+): { selector: string; cssResult: { mainCSS: string; nestedCSS: string[]; priority?: number } } => {
   const combinator = v.combinators[0];
   const pseudoClass = v.selector.image;
   const targetSelector = combinator.selector;
@@ -87,14 +100,15 @@ const handlePseudoClass = (
 };
 
 // Handle regular selector
-const handleRegularSelector = (v: any, parentSelector?: string): { mainCSS: string; nestedCSS: string[] } => {
+const handleRegularSelector = (v: any, parentSelector?: string): { mainCSS: string; nestedCSS: string[]; priority?: number } => {
   const selector = v.selector;
   if (selector.type === "position") {
-    return cssObjectToString({
+    const positionResult = cssObjectToString({
       position: "absolute",
       left: String(px(selector.x.image)),
       top: String(px(selector.y.image)),
     }, parentSelector);
+    return { ...positionResult, priority: 200 }; // Layout priority
   }
   return generateCSSFromSelector(createParsedSelector(selector), parentSelector);
 };
@@ -112,7 +126,7 @@ export function generateCSSFromAdorableCSS(value: string): string {
     const rawSelector = "." + cssEscape(value);
     let actualSelector = rawSelector;
 
-    const allCSSResults: { mainCSS: string; nestedCSS: string[] }[] = [];
+    const allCSSResults: { mainCSS: string; nestedCSS: string[]; priority?: number }[] = [];
     let hasValidRules = false;
 
     result.value.forEach((v: any) => {
@@ -132,7 +146,10 @@ export function generateCSSFromAdorableCSS(value: string): string {
       }
     });
 
-    // Combine all main CSS properties
+    // Sort CSS results by priority (low to high) for proper CSS cascading
+    allCSSResults.sort((a, b) => (a.priority || 0) - (b.priority || 0));
+
+    // Combine all main CSS properties in priority order
     const mainCSSParts = allCSSResults.map(r => r.mainCSS).filter(Boolean);
     const mainCSS = mainCSSParts.join(";");
     
@@ -151,12 +168,23 @@ export function generateCSSFromAdorableCSS(value: string): string {
       return "";
     }
     
-    // Build final CSS
+    // Build final CSS with specificity boosting for high-priority rules
     const cssParts: string[] = [];
+    
+    // Check if we have high-priority rules that need specificity boost
+    const hasHighPriorityRules = allCSSResults.some(r => (r.priority || 0) >= 300);
     
     // Add main rule if there are properties
     if (mainCSS) {
-      cssParts.push(`${actualSelector}{${mainCSS}}`);
+      let finalSelector = actualSelector;
+      
+      // Boost specificity for high-priority rules to ensure they override component rules
+      if (hasHighPriorityRules) {
+        // Double the class selector to increase specificity without !important
+        finalSelector = actualSelector + actualSelector.replace(/^\./, '.');
+      }
+      
+      cssParts.push(`${finalSelector}{${mainCSS}}`);
     }
     
     // Add nested rules

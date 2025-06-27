@@ -1,4 +1,4 @@
-import type { RuleHandler, CSSRule } from '../../types';
+import type { RuleHandler, CSSRule } from '../../rules/types';
 
 // heading - Apple-quality semantic heading component
 export const heading: RuleHandler = (args?: string): CSSRule => {

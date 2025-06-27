@@ -1,4 +1,4 @@
-import type { CSSRule, RuleHandler } from '../../types';
+import type { CSSRule, RuleHandler } from '../../rules/types';
 
 // MDX-specific components and enhanced markdown styling
 const mdxStyles: Record<string, CSSRule> = {

@@ -1,4 +1,4 @@
-import type { RuleHandler, CSSRule } from '../../types';
+import type { RuleHandler, CSSRule } from '../../rules/types';
 
 // Section utilities for consistent spacing and layout
 
