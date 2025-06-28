@@ -55,7 +55,7 @@ function makeBoxAligns(direction: BaseDirection, value = ''): CSSRule {
   
   const result: CSSRule = {
     'display': 'flex',
-    'flex-direction': hasReverse ? `${direction}-reverse` : direction,
+    'flex-flow': hasReverse ? `${direction}-reverse` : direction,
     // Add default flex properties for child elements
     'where(&>*)': {
       'flex': '0 0 auto'
@@ -111,8 +111,10 @@ export const pack: KeywordRuleHandler = () => {
 
 // Additional flex utilities
 export const inlineFlex: KeywordRuleHandler = () => ({ display: 'inline-flex' });
-export const flex: KeywordRuleHandler = () => ({ flex: '1 1 0%' });
-export const flex1: KeywordRuleHandler = () => ({ flex: '1 1 0%' });
+export const flex: RuleHandler = (value?: string): CSSRule => {
+  if (!value) return { flex: '1 1 0%' };
+  return { flex: value };
+};
 export const flexWrap: KeywordRuleHandler = () => ({ 'flex-wrap': 'wrap' });
 
 // Standalone flexbox alignment utilities
@@ -172,7 +174,6 @@ export const displayRules = {
   wrap,
   pack,
   flex,
-  'flex-1': flex1,
   'flex-wrap': flexWrap,
   items,
   justify,

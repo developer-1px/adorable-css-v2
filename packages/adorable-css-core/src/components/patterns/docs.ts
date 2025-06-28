@@ -117,14 +117,12 @@ export const docsTableString: StringRuleHandler = (args?: string): string | (str
   
   const variants: Record<string, (string | CSSRule)[]> = {
     default: [
-      'w(full) border(1/gray-200) r(xl) overflow(hidden) bg(white) shadow(sm)',
+      'w(full) border(1/gray-200) r(xl) overflow(hidden) bg(white) font(sm)',
       {
-        'width': '100%',
         'border-collapse': 'collapse',
         'table-layout': 'fixed',
         'background': 'linear-gradient(180deg, #ffffff 0%, #fafbfc 100%)',
         'border': '1px solid #e5e7eb',
-        'box-shadow': '0 4px 6px -1px rgb(0 0 0 / 0.1)'
       }
     ]
   };

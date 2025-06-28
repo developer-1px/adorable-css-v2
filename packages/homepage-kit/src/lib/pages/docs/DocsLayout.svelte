@@ -102,7 +102,7 @@
   </aside>
   
   <!-- Main content -->
-  <main class="flex-1 w(full) max-w(1200) mx(auto) p(xl)">
+  <main class="flex(1) w(full) max-w(1200) mx(auto) p(xl)">
     <article class="mdx(article) prose max-w(none)">
       {@render children()}
     </article>

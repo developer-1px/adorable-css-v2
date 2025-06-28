@@ -290,7 +290,7 @@
   </div>
 
   <!-- Main Editor Area -->
-  <div class="flex-1 container(full/px:0)">
+  <div class="flex(1) container(full/px:0)">
     <div class="grid grid-cols(1) lg:grid-cols(2) h(full)">
       <!-- Left Panel - Code Editor -->
       <div class="relative bg(white) br(1/gray-200)">

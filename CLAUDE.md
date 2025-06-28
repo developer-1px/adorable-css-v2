@@ -168,6 +168,10 @@ pnpm clean           # Clean all build artifacts and caches
 - Order should be: `font() bold() c()` - e.g., `font(xl) bold c(gray-900)`
 - font() supports: `font(size)`, `font(size/line-height)`, `font(size/line-height/letter-spacing)`
 - Letter-spacing supports percentages: `font(lg/1.5/-1%)` = `font-size: lg, line-height: 1.5, letter-spacing: -0.01em`
+- **text() dual purpose**: 
+  - Font size tokens: `text(xs)`, `text(sm)`, `text(lg)`, `text(2xl)` → `font-size: var(--font-*)`
+  - Text alignment: `text(center)`, `text(left)`, `text(right)` → `text-align: *`
+  - Can combine: `text(lg) text(center)` or use with font: `font(xl/1.5) text(center)`
 
 ### Layout Patterns
 - **Figma Auto Layout**: `hbox()` (horizontal), `vbox()` (vertical)

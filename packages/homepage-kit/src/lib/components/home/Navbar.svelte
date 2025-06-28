@@ -10,6 +10,7 @@
     { href: '/', label: 'Home' },
     { href: '/docs', label: 'Docs' },
     { href: '/components', label: 'Components' },
+    { href: '/rules', label: 'Rules' },
     { href: '/playground', label: 'Playground' }
   ];
 </script>

@@ -49,7 +49,11 @@
       "Bash(pnpm typecheck:*)",
       "Bash(npm run build:*)",
       "Bash(do [ -f \"$file\" ])",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(npm run test:*)",
+      "Bash(pnpm --filter homepage-kit dev)",
+      "WebFetch(domain:localhost)",
+      "Bash(pnpm --filter homepage-kit build)"
     ],
     "deny": []
   }

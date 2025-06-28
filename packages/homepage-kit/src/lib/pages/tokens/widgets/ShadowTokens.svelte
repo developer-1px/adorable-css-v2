@@ -16,7 +16,7 @@
               <code class="600 font(md) c(135deg/#3b82f6..#8b5cf6)">shadow({key})</code>
               <div class="font(xs) c(gray-600) mt(xs) font-family(mono)">{value}</div>
             </div>
-            <div class="flex-1 p(xl) bg(white) r(xl) shadow({key}) hover:scale(1.02) transition">
+            <div class="flex(1) p(xl) bg(white) r(xl) shadow({key}) hover:scale(1.02) transition">
               <div class="600 font(sm) c(gray-800)">Elevation level: {key}</div>
               <div class="font(xs) c(gray-600) mt(xs)">Hover to see the effect</div>
             </div>

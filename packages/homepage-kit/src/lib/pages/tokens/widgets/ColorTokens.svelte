@@ -76,7 +76,7 @@
             <div class="hbox gap(1) overflow-x(auto)">
               {#each shades as shade}
                 {#if colorGroups.palette[colorName][shade]}
-                  <div class="flex-1 min-w(60px) group">
+                  <div class="flex(1) min-w(60px) group">
                     <div 
                       class="h(16) r(md) shadow(sm) hover:shadow(lg) hover:scale(1.05) transition cursor-pointer b(1/gray-200)" 
                       style="background: {colorGroups.palette[colorName][shade]}"
@@ -106,7 +106,7 @@
               <div class="hbox gap(1) overflow-x(auto)">
                 {#each shades as shade}
                   {#if colorGroups.palette[colorName][shade]}
-                    <div class="flex-1 min-w(60px) group">
+                    <div class="flex(1) min-w(60px) group">
                       <div 
                         class="h(16) r(md) shadow(sm) hover:shadow(lg) hover:scale(1.05) transition cursor-pointer" 
                         style="background: {colorGroups.palette[colorName][shade]}"

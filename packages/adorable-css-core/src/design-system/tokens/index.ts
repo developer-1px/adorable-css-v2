@@ -14,17 +14,17 @@ export interface SemanticColorConfig {
 }
 
 // Default semantic color mapping using AdorableCSS syntax
-// Monochrome design with gray primary and brand accent
+// Using our color palette for semantic meanings - all based on 500 level
 export const semanticColors: SemanticColorConfig = {
-  primary: "gray-900",       // Primary text/UI color - monochrome approach
-  secondary: "gray-700",     // Secondary text - for supporting content
-  accent: "gray-600",        // Accent color - for interactive elements
-  mute: "gray-500",          // Muted elements - for captions/labels
-  brand: "violet..pink",     // Brand gradient - only colorful element
-  success: "gray-700",       // Keep monochrome
-  warning: "gray-700",       // Keep monochrome
-  error: "gray-700",         // Keep monochrome
-  info: "gray-600"           // Keep monochrome
+  primary: "purple-500",     // Primary brand color - purple family
+  secondary: "gray-500",     // Secondary - neutral gray family
+  accent: "pink-500",        // Accent color - pink family
+  mute: "gray-500",          // Muted elements - gray family
+  brand: "purple-500..pink-500",  // Brand gradient - purple to pink
+  success: "green-500",      // Success states - green family
+  warning: "amber-500",      // Warning states - amber family
+  error: "red-500",          // Error states - red family
+  info: "blue-500"           // Info states - blue family
 };
 
 // CONSISTENCY ENFORCING TEXT HIERARCHY - USE THESE ONLY
@@ -559,18 +559,18 @@ export const defaultTokens: DesignTokens = {
   },
   
   colors: {
-    // Core semantic colors - will be resolved from semanticColors config
-    primary: '#18181b',    // Gray-900 - monochrome primary
-    secondary: '#64748b',  // Default fallback
-    accent: '#0d99ff',     // Default fallback
-    mute: '#71717a',       // Default fallback
-    brand: '#8b5cf6',      // Default fallback
-    'brand-start': '#8b5cf6', // Brand gradient start
-    'brand-end': '#ec4899',   // Brand gradient end
-    success: '#10b981',    // Default fallback
-    warning: '#f59e0b',    // Default fallback
-    error: '#ef4444',      // Default fallback
-    info: '#06b6d4',       // Default fallback
+    // Core semantic colors - these will be dynamically resolved from semanticColors config
+    primary: '',       // Will be resolved to purple-600
+    secondary: '',     // Will be resolved to gray-600
+    accent: '',        // Will be resolved to pink-500
+    mute: '',          // Will be resolved to gray-400
+    brand: '',         // Will be resolved to purple-500
+    'brand-start': '', // Will be resolved from brand gradient
+    'brand-end': '',   // Will be resolved from brand gradient
+    success: '',       // Will be resolved to green-600
+    warning: '',       // Will be resolved to amber-600
+    error: '',         // Will be resolved to red-600
+    info: '',          // Will be resolved to blue-600
     
     // Basic colors
     white: '#ffffff',
@@ -874,12 +874,33 @@ export function buildSemanticColors(config: SemanticColorConfig = semanticColors
     const resolved = resolveSemanticColor(value);
     
     if (resolved.type === 'gradient') {
-      result[key] = resolved.start || '#8b5cf6';  // fallback for gradient start
-      result[`${key}-start`] = resolved.start || '#8b5cf6';
-      result[`${key}-end`] = resolved.end || '#ec4899';
+      result[key] = resolved.start || '';  // No hardcoded fallback
+      result[`${key}-start`] = resolved.start || '';
+      result[`${key}-end`] = resolved.end || '';
       result[`${key}-gradient`] = resolved.value;
     } else {
+      // Set the base color (500 level)
       result[key] = resolved.value;
+      
+      // For non-gradient colors, also create color family variations
+      // Extract the base color name (e.g., "purple" from "purple-500")
+      const colorMatch = value.match(/^(\w+)-500$/);
+      if (colorMatch) {
+        const baseColorName = colorMatch[1];
+        
+        // Generate all shades for this semantic color
+        const shades = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950'];
+        for (const shade of shades) {
+          const shadeKey = `${key}-${shade}`;
+          const paletteKey = `${baseColorName}-${shade}`;
+          
+          // Try to resolve from palette
+          const shadeValue = colorPalette[paletteKey];
+          if (shadeValue) {
+            result[shadeKey] = shadeValue;
+          }
+        }
+      }
     }
   }
   

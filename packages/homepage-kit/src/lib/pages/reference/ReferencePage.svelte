@@ -167,7 +167,7 @@
     <Input 
       bind:value={searchTerm} 
       placeholder="Search rules..." 
-      className="flex-1 max-w(sm)"
+      className="flex(1) max-w(sm)"
     />
     <select 
       bind:value={selectedCategory} 
