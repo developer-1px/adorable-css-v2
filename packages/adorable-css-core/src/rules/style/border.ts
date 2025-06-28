@@ -25,6 +25,7 @@ export const b: RuleHandler = (args?: string): CSSRule => {
   // b(1/#000/solid) - width/color/style
   const parts = args.split('/');
   const width = parts[0] ? String(px(parts[0])) : '1px';
+  // Handle color with opacity (e.g., white.1)
   const color = parts[1] ? String(makeColor(parts[1])) : 'currentColor';
   const style = parts[2] || 'solid';
   
@@ -33,8 +34,8 @@ export const b: RuleHandler = (args?: string): CSSRule => {
 
 // Border radius
 export const r: RuleHandler = (args?: string): CSSRule => {
-  // r() - fully rounded (when args is undefined or empty)
-  if (!args || args === '') return { 'border-radius': '9999px' };
+  // r() - default to medium radius (when args is undefined or empty)
+  if (!args || args === '') return { 'border-radius': getTokenVar('radius', 'md') };
   
   // Check for single token value
   if (isToken(args, 'radius')) {
@@ -197,22 +198,6 @@ export const border: RuleHandler = (args?: string): CSSRule => {
   }
 };
 
-// Border opacity utility
-export const borderOpacity: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
-  
-  // Convert percentage or decimal to opacity value
-  let opacity = args;
-  if (args.includes('%')) {
-    opacity = (parseFloat(args) / 100).toString();
-  } else if (parseFloat(args) > 1) {
-    opacity = (parseFloat(args) / 100).toString();
-  }
-  
-  return { 
-    'border-color': `color-mix(in srgb, currentColor ${(parseFloat(opacity) * 100)}%, transparent)`
-  };
-};
 
 // New border-* aliases for better readability
 export const borderTop: RuleHandler = bt;
@@ -231,5 +216,5 @@ export const borderRules = {
   'border-t': borderTop,
   'border-l': borderLeft,
   'border-r': borderRight,
-  'border-opacity': borderOpacity
+  'rounded': r  // Add rounded alias for better readability
 };

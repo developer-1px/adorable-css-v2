@@ -1,210 +1,91 @@
-import type { RuleHandler, CSSRule } from '../../rules/types';
+import type { StringRuleHandler } from '../../rules/types';
 
 // Section utilities for consistent spacing and layout
 
-// section - Section with automatic spacing
-export const section: RuleHandler = (args?: string): CSSRule => {
-  const variant = args || 'default';
+// String-based section components (new approach)
+export const sectionString: StringRuleHandler = (args?: string): string => {
+  if (!args) {
+    // Default section - relative, full width, responsive padding
+    return 'relative w(100%) py(clamp-section-default)';
+  }
   
-  // Base styles for all sections
-  const baseStyles: CSSRule = {
-    'position': 'relative',
-    'width': '100%'
+  const sectionVariants: Record<string, string> = {
+    large: 'relative w(100%) py(clamp-section-large)',
+    compact: 'relative w(100%) py(clamp-section-compact)', 
+    feature: 'relative w(100%) pt(clamp-feature-top) pb(clamp-feature-bottom)',
+    flush: 'relative w(100%) p(0)',
+    gallery: 'relative w(100%) py(clamp-section-default) clip'
   };
   
-  // Variant-specific styles
-  const variantStyles: Record<string, CSSRule> = {
-    hero: {
-      'padding-top': 'var(--spacing-5xl, 3rem)',
-      'padding-bottom': 'var(--spacing-5xl, 3rem)',
-      'min-height': '100vh',
-      'display': 'flex',
-      'align-items': 'center'
-    },
-    feature: {
-      'padding-top': 'var(--spacing-4xl, 2.5rem)',
-      'padding-bottom': 'var(--spacing-4xl, 2.5rem)'
-    },
-    compact: {
-      'padding-top': 'var(--spacing-2xl, 1.5rem)',
-      'padding-bottom': 'var(--spacing-2xl, 1.5rem)'
-    },
-    flush: {
-      'padding-top': '0',
-      'padding-bottom': '0'
-    },
-    default: {
-      'padding-top': 'var(--spacing-3xl, 2rem)',
-      'padding-bottom': 'var(--spacing-3xl, 2rem)'
-    }
-  };
-  
-  return {
-    ...baseStyles,
-    ...(variantStyles[variant] || variantStyles.default)
-  };
+  return sectionVariants[args] || 'relative w(100%) py(clamp-section-default)';
 };
 
-// contain - Container with built-in responsive behavior
-export const contain: RuleHandler = (args?: string): CSSRule => {
+export const containString: StringRuleHandler = (args?: string): string => {
   const variant = args || 'default';
   
-  // Base container styles
-  const baseStyles: CSSRule = {
-    'width': '100%',
-    'margin-left': 'auto',
-    'margin-right': 'auto',
-    'padding-left': 'max(var(--spacing-md), 5vw)',
-    'padding-right': 'max(var(--spacing-md), 5vw)'
+  const containVariants: Record<string, string> = {
+    narrow: 'w(100%) max-w(48rem) mx(auto) px(responsive-padding)',
+    wide: 'w(100%) max-w(80rem) mx(auto) px(responsive-padding)',
+    full: 'w(100%) max-w(96rem) mx(auto) px(responsive-padding)',
+    default: 'w(100%) max-w(64rem) mx(auto) px(responsive-padding)'
   };
   
-  // Max-width variants
-  const variantStyles: Record<string, CSSRule> = {
-    narrow: {
-      'max-width': '48rem' // 768px - for text-heavy content
-    },
-    wide: {
-      'max-width': '80rem' // 1280px - for feature sections
-    },
-    full: {
-      'max-width': '96rem' // 1536px - for full-width layouts
-    },
-    default: {
-      'max-width': '64rem' // 1024px - default container
-    }
-  };
-  
-  return {
-    ...baseStyles,
-    ...(variantStyles[variant] || variantStyles.default)
-  };
+  return containVariants[variant] || containVariants.default;
 };
 
-// content - Content block utility for automatic text hierarchy
-export const content: RuleHandler = (args?: string): CSSRule => {
+export const contentString: StringRuleHandler = (args?: string): string => {
   const variant = args || 'default';
   
-  // Base content styles
-  const baseStyles: CSSRule = {
-    'display': 'flex',
-    'flex-direction': 'column'
+  const contentVariants: Record<string, string> = {
+    centered: 'vbox items(center) text(center) gap(xl)',
+    hero: 'vbox items(center) text(center) gap(2xl) max-w(48rem) mx(auto)',
+    default: 'vbox gap(lg)'
   };
   
-  // Variant styles
-  const variantStyles: Record<string, CSSRule> = {
-    centered: {
-      'align-items': 'center',
-      'text-align': 'center',
-      'gap': 'var(--spacing-xl)'
-    },
-    hero: {
-      'align-items': 'center',
-      'text-align': 'center',
-      'gap': 'var(--spacing-2xl)',
-      'max-width': '48rem',
-      'margin': '0 auto'
-    },
-    default: {
-      'gap': 'var(--spacing-lg)'
-    }
-  };
-  
-  return {
-    ...baseStyles,
-    ...(variantStyles[variant] || variantStyles.default)
-  };
+  return contentVariants[variant] || contentVariants.default;
 };
 
-// stack - Stack utility for automatic spacing between elements
-export const stack: RuleHandler = (args?: string): CSSRule => {
+export const stackString: StringRuleHandler = (args?: string): string => {
   const gap = args || 'lg';
-  
-  return {
-    'display': 'flex',
-    'flex-direction': 'column',
-    'gap': `var(--spacing-${gap})`,
-    'width': '100%'
-  };
+  return `vbox gap(${gap}) w(100%)`;
 };
 
-// flow - Flow utility for better text readability
-export const flow: RuleHandler = (args?: string): CSSRule => {
+export const flowString: StringRuleHandler = (args?: string): string => {
   const variant = args || 'default';
   
-  // Base flow styles for readable text
-  const baseStyles: CSSRule = {
-    'line-height': '1.7',
-    'color': 'var(--gray-700)'
+  const flowVariants: Record<string, string> = {
+    narrow: 'leading(1.7) c(gray-700) max-w(65ch)',
+    wide: 'leading(1.7) c(gray-700) max-w(80ch)',
+    default: 'leading(1.7) c(gray-700) max-w(70ch)'
   };
   
-  // Variant styles
-  const variantStyles: Record<string, CSSRule> = {
-    narrow: {
-      'max-width': '65ch' // Optimal reading width
-    },
-    wide: {
-      'max-width': '80ch'
-    },
-    default: {
-      'max-width': '70ch'
-    }
-  };
-  
-  return {
-    ...baseStyles,
-    ...(variantStyles[variant] || variantStyles.default)
-  };
+  return flowVariants[variant] || flowVariants.default;
 };
 
-// rhythm - Rhythm utility for consistent spacing between sections
-export const rhythm: RuleHandler = (args?: string): CSSRule => {
+export const rhythmString: StringRuleHandler = (args?: string): string => {
   const variant = args || 'default';
   
-  // Base rhythm styles
-  const baseStyles: CSSRule = {
-    'display': 'flex',
-    'flex-direction': 'column'
+  const rhythmVariants: Record<string, string> = {
+    tight: 'vbox gap(2xl)',
+    loose: 'vbox gap(5xl)',
+    varied: 'vbox gap(3xl)',
+    default: 'vbox gap(4xl)'
   };
   
-  // Variant styles
-  const variantStyles: Record<string, CSSRule> = {
-    tight: {
-      'gap': 'var(--spacing-2xl)'
-    },
-    loose: {
-      'gap': 'var(--spacing-5xl)'
-    },
-    varied: {
-      'gap': 'var(--spacing-3xl)'
-    },
-    default: {
-      'gap': 'var(--spacing-4xl)'
-    }
-  };
-  
-  return {
-    ...baseStyles,
-    ...(variantStyles[variant] || variantStyles.default)
-  };
+  return rhythmVariants[variant] || rhythmVariants.default;
 };
 
-// lead - Lead text for introductory paragraphs
-export const lead: RuleHandler = (): CSSRule => {
-  return {
-    'font-size': 'var(--font-lg)',
-    'line-height': '1.7',
-    'color': 'var(--gray-600)',
-    'max-width': '65ch',
-    'margin': '0 auto'
-  };
+export const leadString: StringRuleHandler = (): string => {
+  return 'font(lg) leading(1.7) c(gray-600) max-w(65ch) mx(auto)';
 };
 
+// Export string-based rules
 export const sectionRules = {
-  section,
-  contain,
-  content,
-  stack,
-  flow,
-  rhythm,
-  lead
+  'section': sectionString,
+  'contain': containString,
+  'content': contentString,
+  'stack': stackString,
+  'flow': flowString,
+  'rhythm': rhythmString,
+  'lead': leadString
 };

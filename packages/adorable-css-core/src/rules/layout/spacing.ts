@@ -1,12 +1,22 @@
 import type { CSSRule, RuleHandler } from "../types";
-import { px } from '../../core/values/makeValue';
+import { px, pxWithClamp } from '../../core/values/makeValue';
 import { isToken, getTokenVar } from '../../design-system/tokens/index';
 
 const makePaddingRule = (
   prefix: "" | "x" | "y" | "t" | "b" | "l" | "r"
 ): RuleHandler => {
   return (args?: string): CSSRule => {
-    if (!args) return {};
+    if (!args) {
+      // Default to md spacing
+      const defaultValue = getTokenVar('spacing', 'md');
+      if (prefix === "") return { padding: defaultValue };
+      if (prefix === "x") return { "padding-left": defaultValue, "padding-right": defaultValue };
+      if (prefix === "y") return { "padding-top": defaultValue, "padding-bottom": defaultValue };
+      if (prefix === "t") return { "padding-top": defaultValue };
+      if (prefix === "b") return { "padding-bottom": defaultValue };
+      if (prefix === "l") return { "padding-left": defaultValue };
+      if (prefix === "r") return { "padding-right": defaultValue };
+    }
     if (args === "hug")
       return prefix === "x"
         ? { "padding-left": "0.6em", "padding-right": "0.6em" }
@@ -15,12 +25,13 @@ const makePaddingRule = (
     const values = args.split("/");
     const properties: Record<string, string> = {};
 
-    // Process values with token support
+    // Process values with token and clamp support
     const cssValues = values.map((v) => {
       if (isToken(v, 'spacing')) {
         return getTokenVar('spacing', v);
       }
-      return String(px(v));
+      // Use pxWithClamp to support clamp() and range syntax
+      return String(pxWithClamp(v));
     });
 
     if (prefix === "") {
@@ -63,17 +74,28 @@ const makeMarginRule = (
   prefix: "" | "x" | "y" | "t" | "b" | "l" | "r"
 ): RuleHandler => {
   return (args?: string): CSSRule => {
-    if (!args) return {};
+    if (!args) {
+      // Default to md spacing
+      const defaultValue = getTokenVar('spacing', 'md');
+      if (prefix === "") return { margin: defaultValue };
+      if (prefix === "x") return { "margin-left": defaultValue, "margin-right": defaultValue };
+      if (prefix === "y") return { "margin-top": defaultValue, "margin-bottom": defaultValue };
+      if (prefix === "t") return { "margin-top": defaultValue };
+      if (prefix === "b") return { "margin-bottom": defaultValue };
+      if (prefix === "l") return { "margin-left": defaultValue };
+      if (prefix === "r") return { "margin-right": defaultValue };
+    }
 
     const values = args.split("/");
     const properties: Record<string, string> = {};
 
-    // Process values with token support
+    // Process values with token and clamp support
     const cssValues = values.map((v) => {
       if (isToken(v, 'spacing')) {
         return getTokenVar('spacing', v);
       }
-      return String(px(v));
+      // Use pxWithClamp to support clamp() and range syntax
+      return String(pxWithClamp(v));
     });
 
     if (prefix === "") {
@@ -119,7 +141,7 @@ export const ml = makeMarginRule("l");
 export const mr = makeMarginRule("r");
 
 export const gap: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
+  if (!args) return { gap: getTokenVar('spacing', 'md') }; // Default to md spacing
   
   // Special case for gap(auto) - space-between behavior
   if (args === 'auto') {

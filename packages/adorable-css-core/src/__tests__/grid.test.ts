@@ -1,0 +1,43 @@
+import { describe, expect, test } from 'vitest';
+import { grid } from '../rules/layout/grid';
+
+describe('grid rule', () => {
+  test('grid() returns display grid', () => {
+    expect(grid()).toEqual({ display: 'grid' });
+  });
+
+  test('grid(2) returns 2 column grid', () => {
+    expect(grid('2')).toEqual({
+      display: 'grid',
+      'grid-template-columns': 'repeat(2, minmax(0, 1fr))'
+    });
+  });
+
+  test('grid(3) returns 3 column grid', () => {
+    expect(grid('3')).toEqual({
+      display: 'grid',
+      'grid-template-columns': 'repeat(3, minmax(0, 1fr))'
+    });
+  });
+
+  test('grid(4) returns 4 column grid', () => {
+    expect(grid('4')).toEqual({
+      display: 'grid',
+      'grid-template-columns': 'repeat(4, minmax(0, 1fr))'
+    });
+  });
+
+  test('grid with custom template', () => {
+    expect(grid('200px 1fr 200px')).toEqual({
+      display: 'grid',
+      'grid-template-columns': '200px 1fr 200px'
+    });
+  });
+
+  test('grid(auto-fit) returns auto-fit', () => {
+    expect(grid('auto-fit')).toEqual({
+      display: 'grid',
+      'grid-template-columns': 'auto-fit'
+    });
+  });
+});

@@ -57,7 +57,7 @@ function makeBoxAligns(direction: BaseDirection, value = ''): CSSRule {
     'display': 'flex',
     'flex-direction': hasReverse ? `${direction}-reverse` : direction,
     // Add default flex properties for child elements
-    '& > *': {
+    'where(&>*)': {
       'flex': '0 0 auto'
     }
   };

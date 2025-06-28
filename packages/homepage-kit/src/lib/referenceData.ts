@@ -16,10 +16,10 @@ export const referenceData: ReferenceData = {
     Font: [
       { property: "font-family", syntax: ["font(Inter)"] },
       { property: "font-size", syntax: ["font(16)", "font(1rem)"] },
-      { property: "font-weight", syntax: ["font(bold)", "font(500)"] },
+      { property: "font-weight", syntax: ["600", "700", "bold"] },
       {
         property: "font-combined",
-        syntax: ["font(16/24)", "font(16/24/-2%)", "font(Inter/16/24/-2%/500)"],
+        syntax: ["font(16/24)", "font(16/24/-2%)", "500 font(Inter/16/24/-2%)"],
       },
     ],
     "Font Family Presets": [

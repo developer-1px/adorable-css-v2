@@ -221,7 +221,7 @@
 - `hidden` - display: none
 - `block`, `inline`, `inline-block`
 - `flex`, `inline-flex` - Display flex
-- `flex-1` - flex: 1 1 0%
+- `flex(1)` - flex: 1 1 0%
 - `grid`, `inline-grid` - Display grid
 
 ### Visibility

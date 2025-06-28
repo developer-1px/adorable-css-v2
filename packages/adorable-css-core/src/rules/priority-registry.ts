@@ -1,4 +1,13 @@
-import type { RuleHandler, KeywordRuleHandler, RuleDefinition, RulePriority } from './types';
+import type { 
+  RuleHandler, 
+  KeywordRuleHandler, 
+  StringRuleHandler, 
+  KeywordStringRuleHandler, 
+  RuleDefinition, 
+  StringRuleDefinition,
+  AnyRuleDefinition
+} from './types';
+import { RulePriority } from './types';
 
 /**
  * Priority-aware rule registry for CSS specificity management
@@ -6,6 +15,7 @@ import type { RuleHandler, KeywordRuleHandler, RuleDefinition, RulePriority } fr
  */
 export class PriorityRuleRegistry {
   private rules: Map<string, RuleDefinition> = new Map();
+  private stringRules: Map<string, StringRuleDefinition> = new Map();
 
   /**
    * Register a rule with its priority level
@@ -28,17 +38,74 @@ export class PriorityRuleRegistry {
   }
 
   /**
-   * Get rule handler by name
+   * Register a string rule with its priority level
+   */
+  registerString(name: string, handler: StringRuleHandler | KeywordStringRuleHandler, priority: RulePriority, description?: string): void;
+  registerString(name: string, definition: StringRuleDefinition): void;
+  registerString(name: string, handlerOrDefinition: StringRuleHandler | KeywordStringRuleHandler | StringRuleDefinition, priority?: RulePriority, description?: string): void {
+    if (typeof handlerOrDefinition === 'object' && 'handler' in handlerOrDefinition) {
+      // Object form: registerString(name, { handler, priority, description })
+      this.stringRules.set(name, handlerOrDefinition);
+    } else {
+      // Function form: registerString(name, handler, priority, description)
+      this.stringRules.set(name, {
+        handler: handlerOrDefinition as StringRuleHandler | KeywordStringRuleHandler,
+        priority: priority!,
+        description,
+        isStringRule: true
+      });
+    }
+  }
+
+  /**
+   * Register multiple string rules with the same priority
+   */
+  registerStringBulk(rules: Record<string, StringRuleHandler | KeywordStringRuleHandler>, priority: RulePriority): void {
+    Object.entries(rules).forEach(([name, handler]) => {
+      this.registerString(name, handler, priority);
+    });
+  }
+
+  /**
+   * Get rule handler by name (CSS object rules only)
    */
   getHandler(name: string): RuleHandler | KeywordRuleHandler | undefined {
     return this.rules.get(name)?.handler;
   }
 
   /**
-   * Get rule definition with priority
+   * Get string rule handler by name
+   */
+  getStringHandler(name: string): StringRuleHandler | KeywordStringRuleHandler | undefined {
+    return this.stringRules.get(name)?.handler;
+  }
+
+  /**
+   * Get any rule handler (string or CSS object)
+   */
+  getAnyHandler(name: string): RuleHandler | KeywordRuleHandler | StringRuleHandler | KeywordStringRuleHandler | undefined {
+    return this.getStringHandler(name) || this.getHandler(name);
+  }
+
+  /**
+   * Get rule definition with priority (CSS object rules only)
    */
   getRule(name: string): RuleDefinition | undefined {
     return this.rules.get(name);
+  }
+
+  /**
+   * Get string rule definition with priority
+   */
+  getStringRule(name: string): StringRuleDefinition | undefined {
+    return this.stringRules.get(name);
+  }
+
+  /**
+   * Get any rule definition (string or CSS object)
+   */
+  getAnyRule(name: string): AnyRuleDefinition | undefined {
+    return this.getStringRule(name) || this.getRule(name);
   }
 
   /**
@@ -59,17 +126,45 @@ export class PriorityRuleRegistry {
   }
 
   /**
-   * Check if a rule exists
+   * Check if a rule exists (CSS object rules)
    */
   has(name: string): boolean {
     return this.rules.has(name);
   }
 
   /**
-   * Get all rule names
+   * Check if a string rule exists
+   */
+  hasString(name: string): boolean {
+    return this.stringRules.has(name);
+  }
+
+  /**
+   * Check if any rule exists (string or CSS object)
+   */
+  hasAny(name: string): boolean {
+    return this.hasString(name) || this.has(name);
+  }
+
+  /**
+   * Get all rule names (CSS object rules only)
    */
   getAllRuleNames(): string[] {
     return Array.from(this.rules.keys());
+  }
+
+  /**
+   * Get all string rule names
+   */
+  getAllStringRuleNames(): string[] {
+    return Array.from(this.stringRules.keys());
+  }
+
+  /**
+   * Get all rule names (string and CSS object rules)
+   */
+  getAllAnyRuleNames(): string[] {
+    return [...this.getAllStringRuleNames(), ...this.getAllRuleNames()];
   }
 
   /**

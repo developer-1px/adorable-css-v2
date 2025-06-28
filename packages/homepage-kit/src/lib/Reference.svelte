@@ -49,13 +49,13 @@
         title: 'Flexbox',
         icon: '📦',
         items: [
-          { syntax: 'hbox', desc: 'flex 가로', example: 'hbox gap(16)' },
-          { syntax: 'vbox', desc: 'flex 세로', example: 'vbox gap(20)' },
+          { syntax: 'hbox', desc: 'flex 가로', example: 'hbox gap(lg)' },
+          { syntax: 'vbox', desc: 'flex 세로', example: 'vbox gap(xl)' },
           { syntax: 'hbox(pack)', desc: '정중앙', example: 'hbox(pack)' },
           { syntax: 'hbox(center)', desc: 'align center', example: 'hbox(center)' },
           { syntax: 'hbox(end)', desc: 'justify end', example: 'hbox(end)' },
           { syntax: 'hbox(end+center)', desc: '복합 정렬', example: 'hbox(end+center)' },
-          { syntax: 'gap(16)', desc: '간격', example: 'gap(16)' },
+          { syntax: 'gap(lg)', desc: '간격', example: 'gap(lg)' },
           { syntax: 'gap(auto)', desc: '자동 간격', example: 'gap(auto)' },
           { syntax: 'flex', desc: 'flex: 1', example: 'flex' },
           { syntax: 'wrap', desc: 'flex-wrap', example: 'hbox wrap' },
@@ -193,7 +193,7 @@
         items: [
           { syntax: 'bg(#fff)', desc: '배경색', example: 'bg(#f5f5f5)' },
           { syntax: 'bg(#000.5)', desc: '투명 배경', example: 'bg(#000.5)' },
-          { syntax: 'bg(135deg/#667eea,#764ba2)', desc: '그라디언트', example: 'bg(135deg/#667eea,#764ba2)' },
+          { syntax: 'bg(135deg/#667eea..#764ba2)', desc: '그라디언트', example: 'bg(135deg/#667eea..#764ba2)' },
           { syntax: 'bg(#667eea..#764ba2)', desc: '간단한 그라디언트', example: 'bg(#667eea..#764ba2)' }
         ]
       },
@@ -375,14 +375,14 @@
 
 <div class="reference-container vbox w(fill) min-h(screen) bg(#f8fafc)">
   <!-- Header -->
-  <header class="reference-header vbox gap(8) p(12) bg(white) border-bottom(1/#e5e7eb)">
-    <div class="vbox gap(8) text(center)">
+  <header class="reference-header vbox gap(sm) p(12) bg(white) border-bottom(1/#e5e7eb)">
+    <div class="vbox gap(sm) text(center)">
       <h1 class="700 font(20) c(#0f172a) letter-spacing(-0.02em)">AdorableCSS v2 Reference</h1>
       <p class="font(12) c(#64748b)">모든 유틸리티 클래스와 사용법</p>
     </div>
     
     <!-- Controls -->
-    <div class="controls hbox gap(8) w(500) mx(auto)">
+    <div class="controls hbox gap(sm) w(500) mx(auto)">
       <div class="search-wrapper relative flex">
         <input
           type="search"
@@ -406,18 +406,18 @@
   
   <!-- Content -->
   <main class="reference-content px(12) py(12)">
-    <div class="content-wrapper w(fill) mx(auto) vbox gap(16)">
+    <div class="content-wrapper w(fill) mx(auto) vbox gap(lg)">
       {#each categoryData as [categoryId, sections]}
         {#each filterSections(sections) as section}
-          <section class="reference-section vbox gap(8)">
-            <div class="section-header hbox(center) gap(12)">
+          <section class="reference-section vbox gap(sm)">
+            <div class="section-header hbox(center) gap(md)">
               <span class="section-icon font(16)">{section.icon}</span>
               <h2 class="700 font(16) c(#0f172a)">{section.title}</h2>
             </div>
             
-            <div class="items-grid grid(8) gap(6)">
+            <div class="items-grid grid(8) gap(sm)">
               {#each section.items as item}
-                <div class="reference-card vbox gap(4) p(8) r(6) bg(white) border(1/#e5e7eb) hover:border(1/#3b82f6) hover:shadow(0/2px/6px/#00000008) transition group">
+                <div class="reference-card vbox gap(xs) p(8) r(6) bg(white) border(1/#e5e7eb) hover:border(1/#3b82f6) hover:shadow(0/2px/6px/#00000008) transition group">
                   <!-- Syntax -->
                   <div class="card-header hbox gap(auto) items-start">
                     <code class="syntax 700 font(11) c(#3b82f6) font-family(mono) break-all">{item.syntax}</code>
@@ -433,7 +433,7 @@
                   <p class="desc font(10) c(#64748b) line-height(1.2)">{item.desc}</p>
                   
                   <!-- Generated CSS -->
-                  <div class="css-output vbox gap(2)">
+                  <div class="css-output vbox gap(xs)">
                     <code class="css font(10) c(#475569) font-family(mono) bg(#f8fafc) p(4) r(2) line-height(1.1)">
                       {getGeneratedCSS(item.syntax)}
                     </code>

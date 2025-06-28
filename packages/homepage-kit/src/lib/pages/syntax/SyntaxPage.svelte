@@ -33,7 +33,7 @@ const grammarTokens = [
 ];
 </script>
 
-<div class="syntax-page min-h(screen) bg(135deg/#f0f9ff,#e0f2fe,#f0f9ff) relative clip">
+<div class="syntax-page min-h(screen) bg(135deg/#f0f9ff..#e0f2fe..#f0f9ff) relative clip">
   <!-- Background Effects -->
   <div class="layer(fill) clip">
     <div class="gradient-orb gradient-orb-1"></div>
@@ -45,10 +45,10 @@ const grammarTokens = [
     <!-- Page Header -->
     <header class="mb(2xl) text(center) animate-fade-up">
       <div class="mb(md)">
-        <h1 class="font(4xl) bold bg(135deg/#3b82f6,#8b5cf6) bg-clip(text) text-fill-color(transparent)">Syntax Guide</h1>
+        <h1 class="bold font(4xl) c(135deg/#3b82f6..#8b5cf6)">Syntax Guide</h1>
         <div class="hbox(pack) gap(sm) mt(sm)">
-          <span class="px(md) py(xs) bg(blue-500.1) c(blue-600) r(full) font(xs) bold">AdorableCSS v2</span>
-          <span class="px(md) py(xs) bg(purple-500.1) c(purple-600) r(full) font(xs) bold">Parser Reference</span>
+          <span class="px(md) py(xs) bg(blue-500.1) c(blue-600) r(full) bold font(xs)">AdorableCSS v2</span>
+          <span class="px(md) py(xs) bg(purple-500.1) c(purple-600) r(full) bold font(xs)">Parser Reference</span>
         </div>
       </div>
       <p class="font(lg) c(gray-600) container(md/px:0) leading(relaxed)">
@@ -58,46 +58,46 @@ const grammarTokens = [
 
     <!-- Table of Contents -->
     <nav class="toc mb(2xl) animate-fade-up animation-delay-100">
-      <h2 class="font(lg) bold c(gray-800) mb(md) text(center)">Quick Navigation</h2>
+      <h2 class="bold font(lg) c(gray-800) mb(md) text(center)">Quick Navigation</h2>
       <div class="hbox(pack) gap(xs) flex-wrap">
         <a href="#live-example" class="toc-item group">
           <div class="p(sm) bg(white) r(lg) shadow(sm) hover:shadow(md) transition b(1/gray-100) text(center) min-w(120px)">
-            <div class="w(32px) h(32px) mx(auto) mb(xs) r(md) bg(blue-100..blue-200/to-br) hbox(pack)">
+            <div class="32x32 mx(auto) mb(xs) r(md) bg(blue-100..blue-200/to-br) hbox(pack)">
               <Terminal size={16} class="c(blue-600)" />
             </div>
-            <h3 class="font(xs) bold c(gray-800) group-hover:c(blue-600) transition">Live Demo</h3>
+            <h3 class="bold font(xs) c(gray-800) group-hover:c(blue-600) transition">Live Demo</h3>
           </div>
         </a>
         <a href="#quick-ref" class="toc-item group">
           <div class="p(sm) bg(white) r(lg) shadow(sm) hover:shadow(md) transition b(1/gray-100) text(center) min-w(120px)">
-            <div class="w(32px) h(32px) mx(auto) mb(xs) r(md) bg(purple-100..purple-200/to-br) hbox(pack)">
+            <div class="32x32 mx(auto) mb(xs) r(md) bg(purple-100..purple-200/to-br) hbox(pack)">
               <Zap size={16} class="c(purple-600)" />
             </div>
-            <h3 class="font(xs) bold c(gray-800) group-hover:c(purple-600) transition">Quick Ref</h3>
+            <h3 class="bold font(xs) c(gray-800) group-hover:c(purple-600) transition">Quick Ref</h3>
           </div>
         </a>
         <a href="#core-concepts" class="toc-item group">
           <div class="p(sm) bg(white) r(lg) shadow(sm) hover:shadow(md) transition b(1/gray-100) text(center) min-w(120px)">
-            <div class="w(32px) h(32px) mx(auto) mb(xs) r(md) bg(green-100..green-200/to-br) hbox(pack)">
+            <div class="32x32 mx(auto) mb(xs) r(md) bg(green-100..green-200/to-br) hbox(pack)">
               <BookOpen size={16} class="c(green-600)" />
             </div>
-            <h3 class="font(xs) bold c(gray-800) group-hover:c(green-600) transition">Concepts</h3>
+            <h3 class="bold font(xs) c(gray-800) group-hover:c(green-600) transition">Concepts</h3>
           </div>
         </a>
         <a href="#patterns" class="toc-item group">
           <div class="p(sm) bg(white) r(lg) shadow(sm) hover:shadow(md) transition b(1/gray-100) text(center) min-w(120px)">
-            <div class="w(32px) h(32px) mx(auto) mb(xs) r(md) bg(orange-100..orange-200/to-br) hbox(pack)">
+            <div class="32x32 mx(auto) mb(xs) r(md) bg(orange-100..orange-200/to-br) hbox(pack)">
               <Code2 size={16} class="c(orange-600)" />
             </div>
-            <h3 class="font(xs) bold c(gray-800) group-hover:c(orange-600) transition">Patterns</h3>
+            <h3 class="bold font(xs) c(gray-800) group-hover:c(orange-600) transition">Patterns</h3>
           </div>
         </a>
         <a href="#grammar" class="toc-item group">
           <div class="p(sm) bg(white) r(lg) shadow(sm) hover:shadow(md) transition b(1/gray-100) text(center) min-w(120px)">
-            <div class="w(32px) h(32px) mx(auto) mb(xs) r(md) bg(pink-100..pink-200/to-br) hbox(pack)">
+            <div class="32x32 mx(auto) mb(xs) r(md) bg(pink-100..pink-200/to-br) hbox(pack)">
               <FileText size={16} class="c(pink-600)" />
             </div>
-            <h3 class="font(xs) bold c(gray-800) group-hover:c(pink-600) transition">Grammar</h3>
+            <h3 class="bold font(xs) c(gray-800) group-hover:c(pink-600) transition">Grammar</h3>
           </div>
         </a>
       </div>
@@ -112,7 +112,7 @@ const grammarTokens = [
               <Terminal size={24} class="c(white)" />
             </div>
           </div>
-          <h2 class="font(xl) bold c(gray-900) text(center)">Try It Live</h2>
+          <h2 class="bold font(xl) c(gray-900) text(center)">Try It Live</h2>
           <p class="font(sm) c(gray-600) text(center) mt(xs)">See AdorableCSS transform your utilities into CSS in real-time</p>
         </div>
 
@@ -142,23 +142,23 @@ const grammarTokens = [
               <Zap size={24} class="c(white)" />
             </div>
           </div>
-          <h2 class="font(xl) bold c(gray-900) text(center)">Quick Reference</h2>
+          <h2 class="bold font(xl) c(gray-900) text(center)">Quick Reference</h2>
           <p class="font(sm) c(gray-600) text(center) mt(xs)">Essential syntax patterns at a glance</p>
         </div>
         <div class="overflow(auto) r(lg) b(1/gray-200) shadow(inner)">
           <table class="w(full) font(sm)">
             <thead>
             <tr class="bg(purple-50..blue-50/to-r) bb(2/purple-200)">
-              <th class="text(left) p(md) font(semibold) c(gray-800)">Pattern</th>
-              <th class="text(left) p(md) font(semibold) c(gray-800)">Description</th>
-              <th class="text(left) p(md) font(semibold) c(gray-800)">Example</th>
-              <th class="text(left) p(md) font(semibold) c(gray-800)">CSS Output</th>
+              <th class="text(left) p(md) 600 c(gray-800)">Pattern</th>
+              <th class="text(left) p(md) 600 c(gray-800)">Description</th>
+              <th class="text(left) p(md) 600 c(gray-800)">Example</th>
+              <th class="text(left) p(md) 600 c(gray-800)">CSS Output</th>
             </tr>
             </thead>
             <tbody>
             {#each syntaxReference as item, i}
               <tr class="bb(1/gray-200) hover:bg(blue-50.5) transition {i % 2 === 0 ? 'bg(gray-50.3)' : ''}">
-                <td class="p(md) font-family(mono) font(semibold) bg(135deg/#3b82f6,#8b5cf6) bg-clip(text) text-fill-color(transparent)">{item.pattern}</td>
+                <td class="p(md) font-family(mono) 600 c(135deg/#3b82f6..#8b5cf6)">{item.pattern}</td>
                 <td class="p(md) c(gray-700)">{item.desc}</td>
                 <td class="p(md)">
                   <code class="px(sm) py(xs) font-family(mono) c(blue-700) bg(blue-100) r(md) font(sm)">{item.example}</code>
@@ -181,7 +181,7 @@ const grammarTokens = [
               <BookOpen size={24} class="c(white)" />
             </div>
           </div>
-          <h2 class="font(xl) bold c(gray-900) text(center)">Core Concepts</h2>
+          <h2 class="bold font(xl) c(gray-900) text(center)">Core Concepts</h2>
           <p class="font(sm) c(gray-600) text(center) mt(xs)">Fundamental principles of AdorableCSS syntax</p>
         </div>
 
@@ -191,7 +191,7 @@ const grammarTokens = [
             <div class="w(36px) h(36px) r(md) bg(blue-500.2) hbox(pack)">
               <Code2 size={18} class="c(blue-600)" />
             </div>
-            <h3 class="font(md) bold c(gray-800)">1. Basic Syntax</h3>
+            <h3 class="bold font(md) c(gray-800)">1. Basic Syntax</h3>
           </div>
           <p class="font(sm) c(gray-600) mb(md)">
             AdorableCSS uses a function-like syntax where properties accept values in parentheses.
@@ -200,17 +200,17 @@ const grammarTokens = [
             <table class="w(full) font(sm) mt(md)">
               <tbody>
               <tr class="bb(1/blue-100) hover:bg(blue-50) transition">
-                <td class="p(md) font-family(mono) font(semibold) c(blue-600) w(150px)">w(300)</td>
+                <td class="p(md) font-family(mono) 600 c(blue-600) w(150px)">w(300)</td>
                 <td class="p(md) c(blue-400)">→</td>
                 <td class="p(md) font-family(mono) c(gray-700)">width: 300px</td>
               </tr>
               <tr class="bb(1/blue-100) hover:bg(blue-50) transition">
-                <td class="p(md) font-family(mono) font(semibold) c(blue-600)">bg(primary)</td>
+                <td class="p(md) font-family(mono) 600 c(blue-600)">bg(primary)</td>
                 <td class="p(md) c(blue-400)">→</td>
                 <td class="p(md) font-family(mono) c(gray-700)">background: var(--primary)</td>
               </tr>
               <tr class="bb(1/blue-100) hover:bg(blue-50) transition">
-                <td class="p(md) font-family(mono) font(semibold) c(blue-600)">hidden</td>
+                <td class="p(md) font-family(mono) 600 c(blue-600)">hidden</td>
                 <td class="p(md) c(blue-400)">→</td>
                 <td class="p(md) font-family(mono) c(gray-700)">display: none</td>
               </tr>
@@ -225,7 +225,7 @@ const grammarTokens = [
             <div class="w(36px) h(36px) r(md) bg(purple-500.2) hbox(pack)">
               <Zap size={18} class="c(purple-600)" />
             </div>
-            <h3 class="font(md) bold c(gray-800)">2. Multiple Values</h3>
+            <h3 class="bold font(md) c(gray-800)">2. Multiple Values</h3>
           </div>
           <p class="font(sm) c(gray-600) mb(md)">
             Use <code class="px(xs) py(1px) bg(gray-100) r(xs) font-family(mono)">/</code> to separate multiple values (replaces CSS spaces).
@@ -252,7 +252,7 @@ const grammarTokens = [
             <div class="w(36px) h(36px) r(md) bg(orange-500.2) hbox(pack)">
               <Terminal size={18} class="c(orange-600)" />
             </div>
-            <h3 class="font(md) bold c(gray-800)">3. Prefixes & Modifiers</h3>
+            <h3 class="bold font(md) c(gray-800)">3. Prefixes & Modifiers</h3>
           </div>
           <p class="font(sm) c(gray-600) mb(md)">
             Prefixes enable responsive design and state-based styling.
@@ -260,14 +260,14 @@ const grammarTokens = [
           <table class="w(full) font(sm) mt(md)">
             <thead>
             <tr class="bb(1/gray-300)">
-              <th class="text(left) p(sm) font(semibold) c(gray-700)">Type</th>
-              <th class="text(left) p(sm) font(semibold) c(gray-700)">Examples</th>
-              <th class="text(left) p(sm) font(semibold) c(gray-700)">Description</th>
+              <th class="text(left) p(sm) 600 c(gray-700)">Type</th>
+              <th class="text(left) p(sm) 600 c(gray-700)">Examples</th>
+              <th class="text(left) p(sm) 600 c(gray-700)">Description</th>
             </tr>
             </thead>
             <tbody>
             <tr class="bb(1/gray-200)">
-              <td class="p(sm) font(semibold) c(gray-700)">Responsive</td>
+              <td class="p(sm) 600 c(gray-700)">Responsive</td>
               <td class="p(sm) font-family(mono)">
                 <code class="c(purple-600)">sm:</code>hidden<br/>
                 <code class="c(purple-600)">md:</code>grid<br/>
@@ -276,7 +276,7 @@ const grammarTokens = [
               <td class="p(sm) c(gray-600)">Breakpoint prefixes for responsive design</td>
             </tr>
             <tr class="bb(1/gray-200)">
-              <td class="p(sm) font(semibold) c(gray-700)">States</td>
+              <td class="p(sm) 600 c(gray-700)">States</td>
               <td class="p(sm) font-family(mono)">
                 <code class="c(orange-600)">hover:</code>bg(primary)<br/>
                 <code class="c(orange-600)">focus:</code>ring(2)<br/>
@@ -294,7 +294,7 @@ const grammarTokens = [
             <div class="w(36px) h(36px) r(md) bg(green-500.2) hbox(pack)">
               <BookOpen size={18} class="c(green-600)" />
             </div>
-            <h3 class="font(md) bold c(gray-800)">4. Figma-style Layout</h3>
+            <h3 class="bold font(md) c(gray-800)">4. Figma-style Layout</h3>
           </div>
           <p class="font(sm) c(gray-600) mb(md)">
             Layout utilities match Figma's Auto Layout mental model.
@@ -302,9 +302,9 @@ const grammarTokens = [
           <table class="w(full) font(sm) mt(md)">
             <thead>
             <tr class="bb(1/gray-300)">
-              <th class="text(left) p(sm) font(semibold) c(gray-700)">Utility</th>
-              <th class="text(left) p(sm) font(semibold) c(gray-700)">Description</th>
-              <th class="text(left) p(sm) font(semibold) c(gray-700)">CSS Output</th>
+              <th class="text(left) p(sm) 600 c(gray-700)">Utility</th>
+              <th class="text(left) p(sm) 600 c(gray-700)">Description</th>
+              <th class="text(left) p(sm) 600 c(gray-700)">CSS Output</th>
             </tr>
             </thead>
             <tbody>
@@ -319,7 +319,7 @@ const grammarTokens = [
               <td class="p(sm) font-family(mono) c(gray-600) font(xs)">display: flex; flex-direction: column</td>
             </tr>
             <tr class="bb(1/gray-200)">
-              <td class="p(sm) font-family(mono) c(blue-700) bg(blue-50) r(sm)">gap(16)</td>
+              <td class="p(sm) font-family(mono) c(blue-700) bg(blue-50) r(sm)">gap(lg)</td>
               <td class="p(sm) c(gray-600)">Spacing between items</td>
               <td class="p(sm) font-family(mono) c(gray-600) font(xs)">gap: 16px</td>
             </tr>
@@ -338,7 +338,7 @@ const grammarTokens = [
               <Code2 size={24} class="c(white)" />
             </div>
           </div>
-          <h2 class="font(xl) bold c(gray-900) text(center)">Common Patterns</h2>
+          <h2 class="bold font(xl) c(gray-900) text(center)">Common Patterns</h2>
           <p class="font(sm) c(gray-600) text(center) mt(xs)">Real-world examples you can use immediately</p>
         </div>
         <div class="grid grid-cols(1) gap(md)">
@@ -347,7 +347,7 @@ const grammarTokens = [
               <div class="w(32px) h(32px) r(md) bg(blue-500.2) hbox(pack)">
                 <Code2 size={16} class="c(blue-600)" />
               </div>
-              <h3 class="font(sm) bold c(gray-800)">Card Component</h3>
+              <h3 class="bold font(sm) c(gray-800)">Card Component</h3>
             </div>
             <code class="block p(md) bg(gray-900) c(gray-100) r(lg) font(xs) font-family(mono) shadow(inner)">
               bg(white) r(lg) p(xl) shadow(sm) hover:shadow(lg) transition
@@ -358,10 +358,10 @@ const grammarTokens = [
               <div class="w(32px) h(32px) r(md) bg(green-500.2) hbox(pack)">
                 <Zap size={16} class="c(green-600)" />
               </div>
-              <h3 class="font(sm) bold c(gray-800)">Button</h3>
+              <h3 class="bold font(sm) c(gray-800)">Button</h3>
             </div>
             <code class="block p(md) bg(gray-900) c(gray-100) r(lg) font(xs) font-family(mono) shadow(inner)">
-              hbox(pack) px(lg) py(md) bg(primary) c(white) r(md) font(sm) bold hover:bg(primary-600) transition
+              hbox(pack) px(lg) py(md) bg(primary) c(white) r(md) bold font(sm) hover:bg(primary-600) transition
             </code>
           </div>
           <div class="pattern-item p(lg) bg(purple-50..pink-50/to-br) r(xl) b(1/purple-100) hover:shadow(lg) transition">
@@ -369,7 +369,7 @@ const grammarTokens = [
               <div class="w(32px) h(32px) r(md) bg(purple-500.2) hbox(pack)">
                 <Terminal size={16} class="c(purple-600)" />
               </div>
-              <h3 class="font(sm) bold c(gray-800)">Responsive Grid</h3>
+              <h3 class="bold font(sm) c(gray-800)">Responsive Grid</h3>
             </div>
             <code class="block p(md) bg(gray-900) c(gray-100) r(lg) font(xs) font-family(mono) shadow(inner)">
               grid grid-cols(1) sm:grid-cols(2) lg:grid-cols(3) gap(lg)
@@ -388,7 +388,7 @@ const grammarTokens = [
               <FileText size={24} class="c(white)" />
             </div>
           </div>
-          <h2 class="font(xl) bold c(gray-900) text(center)">Grammar Reference</h2>
+          <h2 class="bold font(xl) c(gray-900) text(center)">Grammar Reference</h2>
           <p class="font(sm) c(gray-600) text(center) mt(xs)">Complete formal specification of AdorableCSS syntax</p>
         </div>
 
@@ -398,22 +398,22 @@ const grammarTokens = [
             <div class="w(36px) h(36px) r(md) bg(gray-500.2) hbox(pack)">
               <FileText size={18} class="c(gray-600)" />
             </div>
-            <h3 class="font(md) bold c(gray-800)">Token Types</h3>
+            <h3 class="bold font(md) c(gray-800)">Token Types</h3>
           </div>
           <div class="overflow(auto) r(lg) bg(white) shadow(sm) b(1/gray-300)">
             <table class="w(full) font(xs)">
               <thead>
               <tr class="bg(gray-100..gray-200/to-r) bb(2/gray-300)">
-                <th class="text(left) p(md) font(semibold) c(gray-800)">Token</th>
-                <th class="text(left) p(md) font(semibold) c(gray-800)">Pattern</th>
-                <th class="text(left) p(md) font(semibold) c(gray-800)">Description</th>
-                <th class="text(left) p(md) font(semibold) c(gray-800)">Examples</th>
+                <th class="text(left) p(md) 600 c(gray-800)">Token</th>
+                <th class="text(left) p(md) 600 c(gray-800)">Pattern</th>
+                <th class="text(left) p(md) 600 c(gray-800)">Description</th>
+                <th class="text(left) p(md) 600 c(gray-800)">Examples</th>
               </tr>
               </thead>
               <tbody>
               {#each grammarTokens as token, i}
                 <tr class="bb(1/gray-200) hover:bg(gray-100) transition {i % 2 === 0 ? 'bg(gray-50.5)' : ''}">
-                  <td class="p(md) font-family(mono) font(semibold) bg(135deg/#3b82f6,#8b5cf6) bg-clip(text) text-fill-color(transparent)">{token.name}</td>
+                  <td class="p(md) font-family(mono) 600 c(135deg/#3b82f6..#8b5cf6)">{token.name}</td>
                   <td class="p(md) font-family(mono) c(gray-700) bg(gray-100) r(sm)">{token.pattern}</td>
                   <td class="p(md) c(gray-700)">{token.desc}</td>
                   <td class="p(md)">
@@ -430,7 +430,7 @@ const grammarTokens = [
 
         <!-- BNF Grammar -->
         <div>
-          <h3 class="font(md) bold c(gray-800) mb(sm)">Formal Grammar (BNF)</h3>
+          <h3 class="bold font(md) c(gray-800) mb(sm)">Formal Grammar (BNF)</h3>
           <pre class="p(lg) bg(gray-900..gray-800/to-br) c(gray-100) r(lg) font(xs) font-family(mono) overflow(auto) shadow(inner) b(1/gray-700)">{`selector     ::= [combinator] simpleSelector [important] [combinators]*
 simpleSelector ::= ident | function | position | range | literal
 function     ::= ident '(' [args] ')'

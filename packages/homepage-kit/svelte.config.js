@@ -4,6 +4,7 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import rehypeHighlight from 'rehype-highlight';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -14,7 +15,11 @@ const config = {
 		mdsvex({
 			extensions: ['.svx', '.md', '.mdx'],
 			remarkPlugins: [remarkGfm],
-			rehypePlugins: [rehypeSlug, rehypeAutolinkHeadings]
+			rehypePlugins: [
+				rehypeSlug, 
+				rehypeAutolinkHeadings,
+				rehypeHighlight
+			]
 		})
 	],
 	kit: {

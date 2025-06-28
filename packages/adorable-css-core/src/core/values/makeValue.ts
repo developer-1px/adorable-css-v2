@@ -228,6 +228,14 @@ export const makeColor = (value = 'transparent') => {
     return baseColor
   }
 
+  // Handle color tokens with alpha (purple-500.5 -> rgba)
+  if (colorName.match(/^[a-z]+-\d+$/) && alpha) {
+    // Try to find the color in CSS variables or palette
+    const cssVar = `var(--${colorName})`
+    // Use modern CSS color-mix for alpha blending
+    return `color-mix(in srgb, ${cssVar} ${alpha.includes('.') ? parseFloat(alpha) * 100 : parseFloat(alpha) * 10}%, transparent)`
+  }
+
   // Handle hex colors with alpha (#fff.3, #000000.5)
   if (value.startsWith('#')) {
     return makeHEX(value)
@@ -241,6 +249,11 @@ export const makeColor = (value = 'transparent') => {
     }
     // RGB, RGBA
     return makeRGB(value)
+  }
+
+  // Fallback: Try to resolve as CSS variable (for color tokens like red-500, gray-100)
+  if (colorName.match(/^[a-z]+-\d+$/)) {
+    return `var(--${colorName})`
   }
 
   return value
@@ -351,4 +364,103 @@ export const makePosition2 = (x: string, y: string) => {
     ...makePosition2Y(y),
     ...transform,
   }
+}
+
+// Clamp function support
+export const makeClamp = (value: string) => {
+  // Handle explicit clamp syntax: clamp(min,preferred,max)
+  if (value.startsWith('clamp(') && value.endsWith(')')) {
+    const clampContent = value.slice(6, -1); // Remove 'clamp(' and ')'
+    const parts = clampContent.split(',').map(part => part.trim());
+    
+    if (parts.length === 3) {
+      const [min, preferred, max] = parts.map(part => {
+        // Apply appropriate value transformation
+        if (part.match(/^\d+(\.\d+)?(px|rem|em|vh|vw|%)$/)) return part;
+        if (part.match(/^\d+xl$/)) return px(part);
+        if (isToken(part, 'spacing') || isToken(part, 'font') || isToken(part, 'size')) return cssvar(part);
+        return px(part);
+      });
+      return `clamp(${min}, ${preferred}, ${max})`;
+    }
+  }
+  
+  return value;
+}
+
+// Range syntax support for clamp generation
+export const makeRangeClamp = (value: string) => {
+  // Handle triple range syntax: xl..8vh..sm (min..preferred..max)
+  const tripleRangeMatch = value.match(/^([^.]+)\.\.([^.]+)\.\.([^.]+)$/);
+  if (tripleRangeMatch) {
+    const [, min, preferred, max] = tripleRangeMatch;
+    return makeClamp(`clamp(${min},${preferred},${max})`);
+  }
+  
+  // Handle double range syntax: xl..30px (min..max with smart preferred)
+  const doubleRangeMatch = value.match(/^([^.]+)\.\.([^.]+)$/);
+  if (doubleRangeMatch) {
+    const [, min, max] = doubleRangeMatch;
+    
+    // Smart preferred value generation
+    let preferred: string;
+    
+    // If both are size tokens, use viewport-based interpolation
+    if (isToken(min, 'font') && max.match(/^\d+px$/)) {
+      preferred = '4vw'; // Default viewport-based scaling
+    } else if (isToken(min, 'spacing') && max.match(/^\d+px$/)) {
+      preferred = '8vw'; // Larger viewport scaling for spacing
+    } else if (min.match(/^\d+xl$/) && max.match(/^\d+px$/)) {
+      preferred = '5vw'; // For xl tokens to px
+    } else {
+      // Fallback: try to interpolate between min and max
+      const minPx = parseFloat(String(px(min)).replace('px', '')) || 16;
+      const maxPx = parseFloat(String(px(max)).replace('px', '')) || 32;
+      const avgPx = (minPx + maxPx) / 2;
+      preferred = `${avgPx * 0.25}vw`; // Use 25% of average as vw
+    }
+    
+    return makeClamp(`clamp(${min},${preferred},${max})`);
+  }
+  
+  return value;
+}
+
+// Enhanced px function with clamp and range support
+export const pxWithClamp = (value: string | number) => {
+  if (value === undefined || value === null) throw new Error('pxWithClamp: value is undefined')
+  if (value === 0 || value === '0') return 0
+
+  const v = String(value)
+
+  // Check for clamp syntax first
+  if (v.includes('clamp(')) {
+    return makeClamp(v);
+  }
+  
+  // Check for range syntax
+  if (v.includes('..')) {
+    return makeRangeClamp(v);
+  }
+  
+  // Fall back to regular px processing
+  return px(v);
+}
+
+// Enhanced cssvar with clamp support
+export const cssvarWithClamp = (value: string | number) => {
+  const strValue = String(value);
+  
+  // Handle clamp syntax
+  if (strValue.includes('clamp(')) {
+    return makeClamp(strValue);
+  }
+  
+  // Handle range syntax
+  if (strValue.includes('..')) {
+    return makeRangeClamp(strValue);
+  }
+  
+  // Fall back to regular cssvar processing
+  return cssvar(strValue);
 }

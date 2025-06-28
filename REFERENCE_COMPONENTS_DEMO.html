@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdorableCSS Reference Components Demo</title>
+    <script src="./packages/adorable-css-core/dist/index.js"></script>
+    <style>
+        body { font-family: system-ui, sans-serif; margin: 0; padding: 0; }
+    </style>
+</head>
+<body>
+    <!-- Page Header Example -->
+    <section class="contain(wide) py(3xl)">
+        <div class="page-header">
+            <h1 class="heading(h1)">AdorableCSS Rules Reference</h1>
+            <p class="heading(lead)">Complete documentation for all AdorableCSS rules, utilities, and components</p>
+        </div>
+        
+        <!-- Layout Rules Category -->
+        <div class="category-section">
+            <div class="category-header(accent)">
+                <h2 class="heading(h2)">Layout Rules</h2>
+                <div class="info-card(neutral) ml(auto) max-w(200)">
+                    <strong>23 rules</strong> available
+                </div>
+            </div>
+            
+            <div class="rules-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rule</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                            <th>CSS Output</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code class="code-block(inline)">w(100)</code></td>
+                            <td>Sets width to 100px</td>
+                            <td><div class="w(100) h(20) bg(blue-200) rounded(sm)"></div></td>
+                            <td><code class="code-block(inline)">width: 100px</code></td>
+                        </tr>
+                        <tr>
+                            <td><code class="code-block(inline)">hbox</code></td>
+                            <td>Creates horizontal flexbox layout</td>
+                            <td>
+                                <div class="hbox gap(sm) w(200)">
+                                    <div class="bg(red-200) p(xs) rounded(sm) text(center)">A</div>
+                                    <div class="bg(green-200) p(xs) rounded(sm) text(center)">B</div>
+                                    <div class="bg(blue-200) p(xs) rounded(sm) text(center)">C</div>
+                                </div>
+                            </td>
+                            <td><code class="code-block(inline)">display: flex; flex-direction: row</code></td>
+                        </tr>
+                        <tr>
+                            <td><code class="code-block(inline)">vbox</code></td>
+                            <td>Creates vertical flexbox layout</td>
+                            <td>
+                                <div class="vbox gap(xs) w(60)">
+                                    <div class="bg(purple-200) p(xs) rounded(sm) text(center)">1</div>
+                                    <div class="bg(orange-200) p(xs) rounded(sm) text(center)">2</div>
+                                    <div class="bg(teal-200) p(xs) rounded(sm) text(center)">3</div>
+                                </div>
+                            </td>
+                            <td><code class="code-block(inline)">display: flex; flex-direction: column</code></td>
+                        </tr>
+                        <tr>
+                            <td><code class="code-block(inline)">grid(3)</code></td>
+                            <td>Creates 3-column grid layout</td>
+                            <td>
+                                <div class="grid(3) gap(xs) w(180)">
+                                    <div class="bg(indigo-200) p(xs) rounded(sm) text(center)">1</div>
+                                    <div class="bg(pink-200) p(xs) rounded(sm) text(center)">2</div>
+                                    <div class="bg(cyan-200) p(xs) rounded(sm) text(center)">3</div>
+                                    <div class="bg(lime-200) p(xs) rounded(sm) text(center)">4</div>
+                                    <div class="bg(amber-200) p(xs) rounded(sm) text(center)">5</div>
+                                    <div class="bg(rose-200) p(xs) rounded(sm) text(center)">6</div>
+                                </div>
+                            </td>
+                            <td><code class="code-block(inline)">display: grid; grid-template-columns: repeat(3, 1fr)</code></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="info-card">
+                <strong>💡 Tip:</strong> Layout rules are the foundation of AdorableCSS. Use <code class="code-block(inline)">hbox</code>, <code class="code-block(inline)">vbox</code>, and <code class="code-block(inline)">grid()</code> to create flexible layouts that work across all screen sizes.
+            </div>
+        </div>
+        
+        <!-- Styling Rules Category -->
+        <div class="category-section">
+            <div class="category-header(accent)">
+                <h2 class="heading(h2)">Styling Rules</h2>
+                <div class="info-card(neutral) ml(auto) max-w(200)">
+                    <strong>18 rules</strong> available
+                </div>
+            </div>
+            
+            <div class="rules-table(minimal)">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rule</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code class="code-block(inline)">c(blue-500)</code></td>
+                            <td>Sets text color</td>
+                            <td><span class="c(blue-500) bold">Blue text example</span></td>
+                        </tr>
+                        <tr>
+                            <td><code class="code-block(inline)">bg(gradient)</code></td>
+                            <td>Sets background gradient</td>
+                            <td><div class="bg(purple-500..pink-500/135deg) p(md) rounded(lg) c(white) text(center) bold">Gradient Background</div></td>
+                        </tr>
+                        <tr>
+                            <td><code class="code-block(inline)">border(2/red-400)</code></td>
+                            <td>Sets border width and color</td>
+                            <td><div class="border(2/red-400) p(md) rounded(md) text(center)">Bordered element</div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Interactive Example -->
+        <div class="category-section">
+            <div class="category-header">
+                <h2 class="heading(h2)">Interactive Example</h2>
+            </div>
+            
+            <div class="rule-example">
+                <div class="example-preview">
+                    <div class="card(interactive) max-w(400)">
+                        <div class="vbox gap(lg)">
+                            <div class="hbox items(center) gap(md)">
+                                <div class="w(60) h(60) bg(violet-500) rounded(full) flex items(center) justify(center)">
+                                    <span class="c(white) bold text(xl)">AC</span>
+                                </div>
+                                <div class="vbox gap(xs)">
+                                    <h3 class="heading(h4) mb(0)">AdorableCSS Card</h3>
+                                    <p class="c(gray-600) mb(0)">Interactive card component</p>
+                                </div>
+                            </div>
+                            <p class="leading(relaxed) c(gray-700)">
+                                This card demonstrates multiple AdorableCSS rules working together: layout (vbox, hbox), spacing (gap, p), colors (bg, c), and typography (heading, leading).
+                            </p>
+                            <div class="hbox gap(sm)">
+                                <button class="button(primary/sm)">Primary</button>
+                                <button class="button(ghost/sm)">Secondary</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="example-code">
+                    <code class="code-block(light)">
+&lt;div class="card(interactive) max-w(400)"&gt;
+  &lt;div class="vbox gap(lg)"&gt;
+    &lt;div class="hbox items(center) gap(md)"&gt;
+      &lt;div class="w(60) h(60) bg(violet-500) rounded(full) flex items(center) justify(center)"&gt;
+        &lt;span class="c(white) bold text(xl)"&gt;AC&lt;/span&gt;
+      &lt;/div&gt;
+      &lt;div class="vbox gap(xs)"&gt;
+        &lt;h3 class="heading(h4) mb(0)"&gt;AdorableCSS Card&lt;/h3&gt;
+        &lt;p class="c(gray-600) mb(0)"&gt;Interactive card component&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;p class="leading(relaxed) c(gray-700)"&gt;
+      This card demonstrates multiple AdorableCSS rules...
+    &lt;/p&gt;
+    &lt;div class="hbox gap(sm)"&gt;
+      &lt;button class="button(primary/sm)"&gt;Primary&lt;/button&gt;
+      &lt;button class="button(ghost/sm)"&gt;Secondary&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+                    </code>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Warning Example -->
+        <div class="info-card(warning)">
+            <strong>⚠️ Important:</strong> Remember that AdorableCSS uses <strong>dot notation</strong> for opacity: <code class="code-block(inline)">bg(white.5)</code> instead of <code class="code-block(inline)">bg(white/50)</code>. The slash is reserved for gradients like <code class="code-block(inline)">bg(purple-500..pink-500/135deg)</code>.
+        </div>
+        
+        <!-- Success Example -->
+        <div class="info-card(success)">
+            <strong>✅ Best Practice:</strong> Use semantic color names like <code class="code-block(inline)">c(primary)</code> and <code class="code-block(inline)">bg(accent)</code> for better maintainability. AdorableCSS provides a comprehensive design token system.
+        </div>
+        
+        <!-- Error Example -->
+        <div class="info-card(error)">
+            <strong>❌ Common Mistake:</strong> Don't use margins for layout. AdorableCSS follows the Figma mental model where margin doesn't exist. Use <code class="code-block(inline)">gap()</code>, <code class="code-block(inline)">p()</code>, and <code class="code-block(inline)">mx(auto)</code> instead.
+        </div>
+    </section>
+    
+    <script>
+        // Auto-inject CSS and report success
+        window.AdorableCSS.injectCSS();
+        console.log('✅ AdorableCSS reference components demo loaded successfully!');
+        console.log('📚 New components available:');
+        console.log('   - page-header, page-header(compact), page-header(hero)');
+        console.log('   - category-section, category-section(compact), category-section(card)');
+        console.log('   - category-header, category-header(minimal), category-header(accent)');
+        console.log('   - rules-table, rules-table(minimal), rules-table(striped)');
+        console.log('   - code-block, code-block(inline), code-block(light), code-block(terminal)');
+        console.log('   - info-card, info-card(warning), info-card(success), info-card(error), info-card(neutral)');
+        console.log('   - rule-example, rule-example(inline), rule-example(grid)');
+    </script>
+</body>
+</html>

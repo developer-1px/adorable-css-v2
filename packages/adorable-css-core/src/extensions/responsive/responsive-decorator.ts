@@ -1,5 +1,7 @@
 // Responsive Decorator Pattern for AdorableCSS
-import type { CSSRule } from '../rules/types';
+import type { CSSRule } from '../../rules/types';
+import { StateSelector, StateDecorator, isStateClass, extractStateBaseClass, createStateCSS } from './state-decorator';
+import type { StatePattern } from './state-decorator';
 
 // Responsive breakpoint definitions
 export const BREAKPOINTS = {
@@ -165,3 +167,7 @@ export function debugResponsivePattern(className: string): void {
     console.log(`❌ No responsive pattern found in "${className}"`);
   }
 }
+
+// Export state decorator functions
+export { StateSelector, StateDecorator, isStateClass, extractStateBaseClass, createStateCSS };
+export type { StatePattern };

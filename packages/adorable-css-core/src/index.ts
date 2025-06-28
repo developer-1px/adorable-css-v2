@@ -27,7 +27,7 @@ export {
 } from "./core/runtime/auto-inject";
 
 // Export color palette and plugin
-export { colorPalette, themes, setTheme, getCurrentTheme, getAvailableThemes, colorsPlugin } from "./design-system/colors/colors";
+export { colorPalette, themes, setTheme, getCurrentTheme, getAvailableThemes, colorsPlugin, configureSemanticColors } from "./design-system/colors/colors";
 
 // Export animation plugin
 export { animationsPlugin, animationKeyframes, getAllKeyframes } from "./extensions/animations/animations";

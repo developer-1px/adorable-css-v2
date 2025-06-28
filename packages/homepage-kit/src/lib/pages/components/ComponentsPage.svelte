@@ -19,7 +19,7 @@
 
 <div class="showcase p(xl) vbox gap(xl) bg(--colors-gray-50) min-h(screen)">
   <div class="vbox gap(md)">
-    <h1 class="font(4xl) bold c(--colors-gray-900)">shadcn/ui Style Component Showcase</h1>
+    <h1 class="bold font(4xl) c(--colors-gray-900)">shadcn/ui Style Component Showcase</h1>
     <p class="font(lg) c(--colors-gray-600)">Modern, accessible, and beautifully designed components inspired by shadcn/ui</p>
   </div>
   
@@ -35,7 +35,7 @@
       <div class="vbox gap(lg)">
         <!-- Variants -->
         <div class="vbox gap(sm)">
-          <h4 class="font(md) semibold">Variants</h4>
+          <h4 class="font(md) bold(semi)">Variants</h4>
           <div class="hbox gap(xs) flex-wrap">
             <Button>Default</Button>
             <Button variant="destructive">Destructive</Button>
@@ -48,7 +48,7 @@
         
         <!-- Sizes -->
         <div class="vbox gap(sm)">
-          <h4 class="font(md) semibold">Sizes</h4>
+          <h4 class="font(md) bold(semi)">Sizes</h4>
           <div class="hbox(middle) gap(xs)">
             <Button size="sm">Small</Button>
             <Button>Default</Button>
@@ -59,7 +59,7 @@
         
         <!-- States -->
         <div class="vbox gap(sm)">
-          <h4 class="font(md) semibold">States</h4>
+          <h4 class="font(md) bold(semi)">States</h4>
           <div class="hbox gap(xs)">
             <Button loading>Loading</Button>
             <Button disabled>Disabled</Button>
@@ -140,7 +140,7 @@
       <div class="vbox gap(md)">
         <!-- Sizes -->
         <div class="vbox gap(xs)">
-          <h4 class="font(md) semibold">Sizes</h4>
+          <h4 class="font(md) bold(semi)">Sizes</h4>
           <div class="hbox(middle) gap(xs)">
             <Avatar size="sm">
               <AvatarFallback>SM</AvatarFallback>
@@ -159,7 +159,7 @@
         
         <!-- With Images -->
         <div class="vbox gap(xs)">
-          <h4 class="font(md) semibold">With Images</h4>
+          <h4 class="font(md) bold(semi)">With Images</h4>
           <div class="hbox gap(xs)">
             <Avatar>
               <AvatarImage src="https://github.com/shadcn.png" alt="shadcn" />
@@ -186,7 +186,7 @@
     <CardContent>
       <div class="vbox gap(md)">
         <div class="vbox gap(xs)">
-          <h4 class="font(md) semibold">Variants</h4>
+          <h4 class="font(md) bold(semi)">Variants</h4>
           <div class="hbox(middle) gap(xs)">
             <Badge>Default</Badge>
             <Badge variant="secondary">Secondary</Badge>
@@ -196,7 +196,7 @@
         </div>
         
         <div class="vbox gap(xs)">
-          <h4 class="font(md) semibold">In Context</h4>
+          <h4 class="font(md) bold(semi)">In Context</h4>
           <div class="hbox(middle) gap(md)">
             <div class="hbox(middle) gap(xs)">
               <span class="font(sm)">Status:</span>
@@ -227,7 +227,7 @@
     <CardContent>
       <div class="vbox gap(md)">
         <div class="vbox gap(xs)">
-          <h4 class="font(md) semibold">Basic Input</h4>
+          <h4 class="font(md) bold(semi)">Basic Input</h4>
           <Input 
             bind:value={searchValue} 
             placeholder="Type something..." 
@@ -239,7 +239,7 @@
         </div>
         
         <div class="vbox gap(xs)">
-          <h4 class="font(md) semibold">Different Types</h4>
+          <h4 class="font(md) bold(semi)">Different Types</h4>
           <div class="grid(2) gap(md) ">
             <Input type="email" placeholder="Email address" />
             <Input type="password" placeholder="Password" />
@@ -249,7 +249,7 @@
         </div>
         
         <div class="vbox gap(xs)">
-          <h4 class="font(md) semibold">States</h4>
+          <h4 class="font(md) bold(semi)">States</h4>
           <div class="grid(2) gap(md) ">
             <Input placeholder="Normal input" />
             <Input placeholder="Disabled input" disabled />

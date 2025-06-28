@@ -5,21 +5,34 @@ import { positionCategoryRules } from './position';
 import { interactionRules } from './interaction';
 import { utilityRules } from './utilities';
 import { effectsRules } from './effects';
-import { glowRules, glassRules, cardRules, responsiveRules, advancedRules, adminRules, containerRules, animationRules, buttonRules, headingRules, uiCardRules, proseRules, mdxRules, sectionRules, designSystemRules, masterInspiredRules } from '../extensions';
+import { glowRules, glassRules, figmaComponents, responsiveRules, containerRules, animationRules, proseRules, mdxRules } from '../extensions';
+import { heroRules } from '../components/patterns/hero';
+import { sectionRules } from '../components/patterns/section';
+import { referenceRules } from '../components/patterns/reference';
+import { docsRules } from '../components/patterns/docs';
+import { buttonRules } from '../components/primitives/button';
+import { headingRules } from '../components/primitives/heading';
+import { cardRules } from '../components/primitives/card';
+import { inputRules } from '../components/primitives/input';
 import { colorRules } from '../design-system/colors/colors';
 import { priorityRegistry } from './priority-registry';
 import { RulePriority } from './types';
 
 // Register rules with their appropriate priority levels
 // COMPONENT level (Priority 100) - broad component rules
-priorityRegistry.registerBulk(cardRules, RulePriority.COMPONENT);
-priorityRegistry.registerBulk(buttonRules, RulePriority.COMPONENT);
-priorityRegistry.registerBulk(headingRules, RulePriority.COMPONENT);
-priorityRegistry.registerBulk(uiCardRules, RulePriority.COMPONENT);
 priorityRegistry.registerBulk(proseRules, RulePriority.COMPONENT);
 priorityRegistry.registerBulk(mdxRules, RulePriority.COMPONENT);
-priorityRegistry.registerBulk(sectionRules, RulePriority.COMPONENT);
-priorityRegistry.registerBulk(designSystemRules, RulePriority.COMPONENT);
+priorityRegistry.registerBulk(figmaComponents, RulePriority.COMPONENT);
+
+// String-based component rules (now the primary rules)
+priorityRegistry.registerStringBulk(heroRules, RulePriority.COMPONENT);
+priorityRegistry.registerStringBulk(sectionRules, RulePriority.COMPONENT);
+priorityRegistry.registerStringBulk(referenceRules, RulePriority.COMPONENT);
+priorityRegistry.registerStringBulk(docsRules, RulePriority.COMPONENT);
+priorityRegistry.registerStringBulk(buttonRules, RulePriority.COMPONENT);
+priorityRegistry.registerStringBulk(headingRules, RulePriority.COMPONENT);
+priorityRegistry.registerStringBulk(cardRules, RulePriority.COMPONENT);
+priorityRegistry.registerStringBulk(inputRules, RulePriority.COMPONENT);
 
 // LAYOUT level (Priority 200) - layout system rules
 priorityRegistry.registerBulk(layoutRules, RulePriority.LAYOUT);
@@ -35,13 +48,10 @@ priorityRegistry.registerBulk(effectsRules, RulePriority.UTILITY);
 priorityRegistry.registerBulk(glowRules, RulePriority.UTILITY);
 priorityRegistry.registerBulk(glassRules, RulePriority.UTILITY);
 priorityRegistry.registerBulk(animationRules.rules, RulePriority.UTILITY);
-priorityRegistry.registerBulk(masterInspiredRules, RulePriority.UTILITY);
 priorityRegistry.registerBulk(interactionRules, RulePriority.UTILITY);
 
 // STATE/RESPONSIVE level (Priority 400-500) - handled by responsive decorator
 priorityRegistry.registerBulk(responsiveRules, RulePriority.STATE);
-priorityRegistry.registerBulk(advancedRules, RulePriority.STATE);
-priorityRegistry.registerBulk(adminRules, RulePriority.STATE);
 
 // Legacy rules registry for backward compatibility
 export const rules = {
@@ -55,20 +65,12 @@ export const rules = {
   ...effectsRules,
   ...glowRules,
   ...glassRules,
-  ...cardRules,
   ...responsiveRules,
-  ...advancedRules,
-  ...adminRules,
-  ...buttonRules,
-  ...headingRules,
-  ...uiCardRules,
   ...proseRules,
   ...mdxRules,
   ...containerRules,
   ...animationRules.rules,
-  ...sectionRules,
-  ...designSystemRules,
-  ...masterInspiredRules
+  ...figmaComponents
 };
 
 // Grouped rules for testing/debugging
@@ -83,17 +85,12 @@ export const groupedRules = {
   plugins: {
     glow: glowRules,
     glass: glassRules,
-    card: cardRules,
     responsive: responsiveRules,
-    advanced: advancedRules,
-    admin: adminRules,
-    button: buttonRules,
-    heading: headingRules,
-    uiCard: uiCardRules,
     prose: proseRules,
     mdx: mdxRules,
     container: containerRules,
-    animations: animationRules.rules
+    animations: animationRules.rules,
+    figma: figmaComponents
   }
 };
 
@@ -111,3 +108,6 @@ export function getPriorityRuleHandler(name: string) {
 export function getRuleWithPriority(name: string) {
   return priorityRegistry.getRule(name);
 }
+
+// Export priority registry for debugging
+export { priorityRegistry };

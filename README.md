@@ -29,7 +29,7 @@ AdorableCSS v2 is built on a simple principle: **Your CSS should match your desi
 <div class="vbox gap(16)">
 
 <!-- Figma: Auto Layout, Horizontal, Pack: Center -->
-<div class="hbox(pack)">
+<div class="pack">
 
 <!-- Figma: Width: Fill, Height: Hug -->
 <div class="w(fill) h(hug)">
@@ -48,6 +48,24 @@ AdorableCSS v2 is built on a simple principle: **Your CSS should match your desi
 
 <!-- Hug content -->
 <div class="w(hug)">
+```
+
+### 2.5. Smart Containers
+```html
+<!-- Smart Container: 64x64 = dimensions + auto-centering + image optimization -->
+<div class="64x64">
+  <img src="avatar.jpg" alt="Profile">
+</div>
+
+<!-- Different from basic dimensions -->
+<div class="w(64) h(64)">    <!-- Basic dimensions only -->
+<div class="64x64">         <!-- Smart container with layout + image optimization -->
+
+<!-- Perfect for profiles, icons, thumbnails -->
+<div class="48x48">⚙️</div>     <!-- Icon button -->
+<div class="120x80">            <!-- Thumbnail -->
+  <img src="thumbnail.jpg">
+</div>
 ```
 
 ### 3. Layer Positioning
@@ -170,10 +188,20 @@ pnpm check
 
 ## Documentation
 
+### 📚 Core Documentation
+- **[Documentation Index](./docs/INDEX.md)** - 전체 문서 구조와 가이드
+- **[API Reference](./docs/REFERENCE.md)** - 완전한 유틸리티 클래스 레퍼런스
+- **[Product Strategy](./docs/PRODUCT_STRATEGY.md)** - 제품 비전과 로드맵
+
+### 🎯 Key Documents
+- **[Core Concepts](./docs/technical/CORE_CONCEPTS_VISUAL.md)** - Figma-first 핵심 개념
+- **[Brand Design](./docs/brand/BRAND_DESIGN_CONCEPT.md)** - 브랜드 철학과 디자인 언어
+- **[Syntax Updates](./docs/technical/SYNTAX_UPDATES.md)** - 최신 문법 변경사항
+
+### 🌐 Online Resources
 Visit [adorablecss.com](https://adorablecss.com) for:
-- Complete API reference
 - Interactive playground
-- Migration guides
+- Migration guides  
 - Video tutorials
 
 ## Contributing

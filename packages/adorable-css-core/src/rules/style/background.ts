@@ -2,13 +2,18 @@ import type { CSSRule, RuleHandler } from '../types';
 import { makeColor } from '../../core/values/makeValue';
 
 export const bg: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
+  if (!args) return { 'background-color': 'var(--gray-900)' }; // Default to gray-900 for code blocks
   
   // bg(transparent)
   if (args === 'transparent') return { 'background-color': 'transparent' };
   
   // bg(current)
   if (args === 'current') return { 'background-color': 'currentColor' };
+  
+  // bg(brand) - brand gradient shortcut
+  if (args === 'brand' || args === 'gradient-brand') {
+    return { 'background': 'linear-gradient(135deg, var(--brand-start, #8b5cf6), var(--brand-end, #ec4899))' };
+  }
   
   // bg(linear-gradient(...)) - full gradient syntax
   if (args.startsWith('linear-gradient(') || args.startsWith('radial-gradient(') || args.startsWith('conic-gradient(')) {
@@ -72,24 +77,6 @@ export const bg: RuleHandler = (args?: string): CSSRule => {
   return { 'background-color': String(makeColor(args)) };
 };
 
-// Background opacity utility
-export const bgOpacity: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return {};
-  
-  // Convert percentage or decimal to opacity value
-  let opacity = args;
-  if (args.includes('%')) {
-    opacity = (parseFloat(args) / 100).toString();
-  } else if (parseFloat(args) > 1) {
-    opacity = (parseFloat(args) / 100).toString();
-  }
-  
-  return { 
-    opacity: opacity
-  };
-};
-
 export const backgroundRules = {
-  bg,
-  'bg-opacity': bgOpacity
+  bg
 };

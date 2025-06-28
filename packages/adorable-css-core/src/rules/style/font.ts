@@ -1,5 +1,5 @@
 import type { CSSRule, RuleHandler } from '../types';
-import { px, percentToEm, makeNumber, cssvar } from '../../core/values/makeValue';
+import { px, percentToEm, makeNumber, cssvar, makeClamp, makeRangeClamp, pxWithClamp } from '../../core/values/makeValue';
 import { isToken, getTokenVar } from '../../design-system/tokens/index';
 
 export const font: RuleHandler = (args?: string): CSSRule => {
@@ -18,10 +18,29 @@ export const font: RuleHandler = (args?: string): CSSRule => {
     
     // First part - font size (token or value)
     if (index === 0) {
+      // Handle explicit clamp syntax: font(clamp(sm,4vw,lg))
+      if (part.includes('clamp(')) {
+        result['font-size'] = makeClamp(part);
+        return;
+      }
+      
+      // Handle triple range syntax: font(sm..4vw..lg) 
+      if (part.split('..').length === 3) {
+        result['font-size'] = makeRangeClamp(part);
+        return;
+      }
+      
+      // Handle double range syntax: font(sm..lg) or font(14px..32px)
+      if (part.includes('..')) {
+        result['font-size'] = makeRangeClamp(part);
+        return;
+      }
+      
+      // Handle single value with clamp support
       if (isToken(part, 'font')) {
         result['font-size'] = getTokenVar('font', part);
-      } else if (+part || part.includes('px') || part.includes('rem') || part.includes('em')) {
-        result['font-size'] = String(px(part));
+      } else {
+        result['font-size'] = String(pxWithClamp(part));
       }
       return;
     }

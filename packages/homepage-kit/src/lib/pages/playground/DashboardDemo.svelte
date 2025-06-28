@@ -73,12 +73,12 @@
     <div class="hbox(center) gap(2xl)">
       <!-- Logo -->
       <div class="logo hbox(center) gap(xs)">
-        <div class="logo-mark relative w(40) h(40) r(lg) bg(135deg/#0a0a0a,#262626) hbox(pack) shadow(md)">
-          <span class="font(xl) bold c(white)">A</span>
-          <div class="logo-shine layer(fill) r(lg) bg(135deg/white.2,transparent) opacity(0) hover:opacity(1) transition"></div>
+        <div class="logo-mark relative 40x40 r(lg) bg(135deg/#0a0a0a..#262626) shadow(md)">
+          <span class="bold font(xl) c(white)">A</span>
+          <div class="logo-shine layer(fill) r(lg) bg(135deg/white.2..transparent) opacity(0) hover:opacity(1) transition"></div>
         </div>
         <div class="vbox gap(xs)">
-          <h1 class="font(lg) bold c(#0a0a0a)">Analytics Pro</h1>
+          <h1 class="bold font(lg) c(#0a0a0a)">Analytics Pro</h1>
           <p class="font(xs) c(#737373)">{currentDate}</p>
         </div>
       </div>
@@ -111,12 +111,12 @@
         <span class="font(md)">🔔</span>
       </Button>
       
-      <div class="divider w(1) h(24) bg(#e5e5e5)"></div>
+      <div class="divider 1x24 bg(#e5e5e5)"></div>
       
       <!-- User -->
       <button class="user-menu hbox(center) gap(xs) px(xs) py(xs) r(2xl) hover:bg(#f5f5f5) transition">
-        <div class="avatar w(32) h(32) r(full) bg(135deg/#6366f1,#8b5cf6) hbox(pack) shadow(sm)">
-          <span class="font(sm) bold c(white)">JW</span>
+        <div class="avatar 32x32 r(full) bg(135deg/#6366f1..#8b5cf6) shadow(sm)">
+          <span class="bold font(sm) c(white)">JW</span>
         </div>
         <div class="vbox gap(xs) text(left)">
           <span class="font(sm) semibold c(#0a0a0a)">John Walker</span>
@@ -133,7 +133,7 @@
     <div class="page-header vbox gap(md)">
       <div class="hbox(between+center)">
         <div class="vbox gap(sm)">
-          <h2 class="font(5xl/-2%) bold c(#0a0a0a)">Welcome back, John</h2>
+          <h2 class="bold font(5xl/-2%) c(#0a0a0a)">Welcome back, John</h2>
           <p class="font(md) c(#737373)">Here's what's happening with your business today.</p>
         </div>
         
@@ -166,7 +166,7 @@
         <div class="chart-section vbox gap(lg) col-span(2)">
           <div class="hbox(between+center)">
             <div class="vbox gap(xs)">
-              <h3 class="font(xl) bold c(#0a0a0a)">Revenue Overview</h3>
+              <h3 class="bold font(xl) c(#0a0a0a)">Revenue Overview</h3>
               <p class="font(sm) c(#737373)">Daily revenue for the last 30 days</p>
             </div>
             
@@ -193,7 +193,7 @@
                       class="bar w(fill) bg(#3b82f6..#2563eb/to-bottom) r(xs/xs/none/none) transition hover:bg(#2563eb..#1d4ed8/to-bottom) relative"
                       style="height: {Math.random() * 80 + 20}%"
                     >
-                      <div class="bar-tooltip absolute bottom(fill) x(center) mb(sm) px(xs) py(xs) r(sm) bg(#0a0a0a) c(white) font(xs) whitespace(nowrap) opacity(0) group-hover:opacity(100) transition pointer-events(none)">
+                      <div class="bar-tooltip absolute bottom(fill) x(center) mb(sm) px(xs) py(xs) r(sm) bg(#0a0a0a) c(white) font(xs) whitespace(nowrap) opacity(0) group-hover:opacity(1) transition pointer-events(none)">
                         ${(Math.random() * 5000 + 1000).toFixed(0)}
                       </div>
                     </div>
@@ -216,14 +216,14 @@
       <Card padding="xl" hover={true}>
         <div class="activity-section vbox gap(lg)">
           <div class="hbox(between+center)">
-            <h3 class="font(lg) bold c(#0a0a0a)">Recent Activity</h3>
+            <h3 class="bold font(lg) c(#0a0a0a)">Recent Activity</h3>
             <button class="font(sm) c(#3b82f6) hover:c(#2563eb) transition">View all →</button>
           </div>
           
           <div class="activity-list vbox gap(xs)">
             {#each activities as activity}
               <div class="activity-item hbox gap(xs) p(xs) r(lg) hover:bg(#f5f5f5.5) transition">
-                <div class="activity-icon w(40) h(40) r(lg) bg(#f5f5f5) hbox(pack) font(lg)">
+                <div class="activity-icon 40x40 r(lg) bg(#f5f5f5) font(lg)">
                   {activity.icon}
                 </div>
                 <div class="activity-content vbox gap(xs) flex">
@@ -248,7 +248,7 @@
         <!-- Table Header -->
         <div class="table-header hbox(between+center) p(xl) border-bottom(1/#f0f0f2)">
           <div class="vbox gap(xs)">
-            <h3 class="font(lg) bold c(#0a0a0a)">Recent Transactions</h3>
+            <h3 class="bold font(lg) c(#0a0a0a)">Recent Transactions</h3>
             <p class="font(sm) c(#737373)">Your latest customer transactions</p>
           </div>
           
@@ -288,7 +288,7 @@
                 </td>
                 <td class="px(xl) py(lg)">
                   <div class="hbox(center) gap(xs)">
-                    <div class="w(32) h(32) r() bg(#e5e5e5)"></div>
+                    <div class="32x32 r() bg(#e5e5e5)"></div>
                     <div class="vbox gap(xs)">
                       <span class="font(sm) medium c(#0a0a0a)">Emma Wilson</span>
                       <span class="font(xs) c(#737373)">emma@example.com</span>
@@ -308,7 +308,7 @@
                 </td>
                 <td class="px(xl) py(lg)">
                   <div class="hbox(center) gap(xs)">
-                    <div class="w(32) h(32) r() bg(#e5e5e5)"></div>
+                    <div class="32x32 r() bg(#e5e5e5)"></div>
                     <div class="vbox gap(xs)">
                       <span class="font(sm) medium c(#0a0a0a)">Michael Chen</span>
                       <span class="font(xs) c(#737373)">mchen@example.com</span>
@@ -328,7 +328,7 @@
                 </td>
                 <td class="px(xl) py(lg)">
                   <div class="hbox(center) gap(xs)">
-                    <div class="w(32) h(32) r() bg(#e5e5e5)"></div>
+                    <div class="32x32 r() bg(#e5e5e5)"></div>
                     <div class="vbox gap(xs)">
                       <span class="font(sm) medium c(#0a0a0a)">Sarah Johnson</span>
                       <span class="font(xs) c(#737373)">sarah.j@example.com</span>
@@ -353,11 +353,11 @@
             <button class="page-btn px(xs) py(xs) r(sm) c(#a3a3a3) font(sm) disabled cursor(not-allowed)">← Previous</button>
             
             <div class="page-numbers hbox gap(xs)">
-              <button class="page-num w(32) h(32) r(sm) bg(#0a0a0a) c(white) font(sm) medium">1</button>
-              <button class="page-num w(32) h(32) r(sm) c(#737373) font(sm) hover:bg(#f5f5f5) transition">2</button>
-              <button class="page-num w(32) h(32) r(sm) c(#737373) font(sm) hover:bg(#f5f5f5) transition">3</button>
+              <button class="page-num 32x32 r(sm) bg(#0a0a0a) c(white) font(sm) medium">1</button>
+              <button class="page-num 32x32 r(sm) c(#737373) font(sm) hover:bg(#f5f5f5) transition">2</button>
+              <button class="page-num 32x32 r(sm) c(#737373) font(sm) hover:bg(#f5f5f5) transition">3</button>
               <span class="px(sm) c(#a3a3a3)">...</span>
-              <button class="page-num w(32) h(32) r(sm) c(#737373) font(sm) hover:bg(#f5f5f5) transition">24</button>
+              <button class="page-num 32x32 r(sm) c(#737373) font(sm) hover:bg(#f5f5f5) transition">24</button>
             </div>
             
             <button class="page-btn px(xs) py(xs) r(sm) c(#0a0a0a) font(sm) hover:bg(#f5f5f5) transition">Next →</button>

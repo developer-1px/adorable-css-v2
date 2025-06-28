@@ -305,20 +305,11 @@ export function createAdvancedColorRules(
 ): Record<string, RuleHandler> {
   const rules: Record<string, RuleHandler> = {};
   
-  // Text color rules
-  Object.entries(palette).forEach(([colorName, colorValue]) => {
-    rules[colorName] = () => ({ color: colorValue });
-  });
-  
-  // Background color rules
-  Object.entries(palette).forEach(([colorName, colorValue]) => {
-    rules[`bg-${colorName}`] = () => ({ 'background-color': colorValue });
-  });
-  
-  // Border color rules
-  Object.entries(palette).forEach(([colorName, colorValue]) => {
-    rules[`border-${colorName}`] = () => ({ 'border-color': colorValue });
-  });
+  // Note: Direct color name rules removed - AdorableCSS v2 uses function syntax
+  // Instead of 'amber-100' → use c(amber-100)
+  // Instead of 'bg-blue-500' → use bg(blue-500)  
+  // Instead of 'border-gray-200' → use border(gray-200)
+  // The color palette is still available to c(), bg(), and border() handlers
   
   // Dynamic OKLCH color rule
   rules['oklch'] = (args?: string): CSSRule => {
@@ -334,22 +325,6 @@ export function createAdvancedColorRules(
     
     return {
       color: oklchToString({ l, c, h })
-    };
-  };
-  
-  // Background OKLCH rule
-  rules['bg-oklch'] = (args?: string): CSSRule => {
-    if (!args) return {};
-    
-    const match = args.match(/([0-9.]+)%?\s*[\/,]\s*([0-9.]+)\s*[\/,]\s*([0-9.]+)/);
-    if (!match) return {};
-    
-    const l = parseFloat(match[1]) / 100;
-    const c = parseFloat(match[2]);
-    const h = parseFloat(match[3]);
-    
-    return {
-      'background-color': oklchToString({ l, c, h })
     };
   };
   

@@ -62,13 +62,13 @@
   });
 </script>
 
-<div class="tokens-page min-h(screen) bg(135deg/#f0f9ff_0%,#e0f2fe_25%,#f3e8ff_50%,#fdf2f8_75%,#fef3c7_100%) relative clip">
+<div class="tokens-page min-h(screen) bg(135deg/#f0f9ff_0%..#e0f2fe_25%..#f3e8ff_50%..#fdf2f8_75%..#fef3c7_100%) relative clip">
   <!-- Background Effects -->
   <div class="layer(fill) clip pointer-events(none)">
-    <div class="absolute w(700px) h(700px) r(50%) blur(100px) opacity(0.3) bg(135deg/#3b82f6,#8b5cf6) top(-300px) left(-300px) float(25s/ease-in-out/repeat:infinite)"></div>
-    <div class="absolute w(600px) h(600px) r(50%) blur(100px) opacity(0.3) bg(135deg/#ec4899,#f43f5e) bottom(-200px) right(-200px) float(25s/ease-in-out/repeat:infinite/delay:8s)"></div>
-    <div class="absolute w(500px) h(500px) r(50%) blur(100px) opacity(0.3) bg(135deg/#10b981,#06b6d4) top(40%) left(60%) float(25s/ease-in-out/repeat:infinite/delay:16s)"></div>
-    <div class="absolute w(400px) h(400px) r(50%) blur(100px) opacity(0.3) bg(135deg/#f59e0b,#ef4444) top(20%) right(30%) float(25s/ease-in-out/repeat:infinite/delay:20s)"></div>
+    <div class="absolute w(700px) h(700px) r(50%) blur(100px) opacity(0.3) bg(135deg/#3b82f6..#8b5cf6) top(-300px) left(-300px) float(25s/ease-in-out/repeat:infinite)"></div>
+    <div class="absolute w(600px) h(600px) r(50%) blur(100px) opacity(0.3) bg(135deg/#ec4899..#f43f5e) bottom(-200px) right(-200px) float(25s/ease-in-out/repeat:infinite/delay:8s)"></div>
+    <div class="absolute w(500px) h(500px) r(50%) blur(100px) opacity(0.3) bg(135deg/#10b981..#06b6d4) top(40%) left(60%) float(25s/ease-in-out/repeat:infinite/delay:16s)"></div>
+    <div class="absolute w(400px) h(400px) r(50%) blur(100px) opacity(0.3) bg(135deg/#f59e0b..#ef4444) top(20%) right(30%) float(25s/ease-in-out/repeat:infinite/delay:20s)"></div>
   </div>
   
   <!-- Header -->
@@ -79,7 +79,7 @@
           <span class="px(md) py(xs) bg(purple-500.1) c(purple-600) r(full) 700 font(xs)" style="backdrop-filter: blur(4px);">Design System</span>
           <span class="px(md) py(xs) bg(blue-500.1) c(blue-600) r(full) 700 font(xs)" style="backdrop-filter: blur(4px);">v2.0</span>
         </div>
-        <h1 class="700 font(5xl/1.1/-0.02em) bg(135deg/#3b82f6,#8b5cf6)" style="-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+        <h1 class="700 font(5xl/1.1/-0.02em) c(135deg/#3b82f6..#8b5cf6)">
           Design Tokens
         </h1>
         <p class="font(xl/1.6) c(gray-700) container(3xl/px:0)">
@@ -98,7 +98,7 @@
           <button
             class="px(lg) py(sm) r(xl) 500 font(sm) nowrap transition(all/0.2s/ease-out) hbox(middle) gap(xs)
                    {activeSection === section.id 
-                     ? 'bg(to-right/#3b82f6,#a855f7) c(white) shadow(md)' 
+                     ? 'bg(to-right/#3b82f6..#a855f7) c(white) shadow(md)' 
                      : 'bg(white) hover:bg(gray-50) c(gray-700) b(1/gray-200) hover:shadow(sm)'}"
             on:click={() => scrollToSection(section.id)}
           >

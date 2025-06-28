@@ -10,25 +10,37 @@
       title: 'Getting Started',
       items: [
         { name: 'Introduction', href: '/docs' },
-        { name: 'Installation', href: '/docs/installation' },
+        { name: 'Installation', href: '/docs/getting-started' },
         { name: 'Quick Start', href: '/docs/quick-start' }
       ]
     },
     {
-      title: 'Core Concepts',
+      title: 'Core Features',
       items: [
-        { name: 'Architecture', href: '/docs/architecture' },
-        { name: 'Figma-First Design', href: '/docs/figma-first' },
-        { name: 'Parser System', href: '/docs/parser' },
-        { name: 'Rule System', href: '/docs/rules' }
+        { name: 'Smart Containers', href: '/docs/smart-containers' },
+        { name: 'Layout System', href: '/docs/layout-system' },
+        { name: 'Design Tokens', href: '/docs/design-tokens' },
+        { name: 'Typography', href: '/docs/typography' },
+        { name: 'Colors & Theming', href: '/docs/colors' },
+        { name: '색상 시스템 가이드', href: '/docs/color-system' }
       ]
     },
     {
-      title: 'Technical Articles',
+      title: 'Advanced',
       items: [
-        { name: 'Building a CSS Framework', href: '/docs/articles/building-css-framework' },
-        { name: 'Parser Deep Dive', href: '/docs/articles/parser-deep-dive' },
-        { name: 'Figma Integration', href: '/docs/articles/figma-integration' }
+        { name: 'Parser System', href: '/docs/parser' },
+        { name: 'Custom Rules', href: '/docs/custom-rules' },
+        { name: 'Figma Plugin', href: '/docs/figma-plugin' },
+        { name: 'Performance', href: '/docs/performance' }
+      ]
+    },
+    {
+      title: 'Examples',
+      items: [
+        { name: 'Component Library', href: '/docs/examples/components' },
+        { name: 'Dashboard Layout', href: '/docs/examples/dashboard' },
+        { name: 'E-commerce', href: '/docs/examples/ecommerce' },
+        { name: 'Landing Page', href: '/docs/examples/landing' }
       ]
     }
   ];
@@ -64,7 +76,7 @@
     <div class="vbox gap(xs)">
       <a href="/" class="hbox(middle) gap(sm) c(gray-900) hover:c(purple-600) transition">
         <span class="700 font(lg)">AdorableCSS</span>
-        <span class="bg(purple-100) c(purple-600) px(sm) py(xs) r(full) font(xs) 600">v2</span>
+        <span class="bg(purple-100) c(purple-600) px(sm) py(xs) r(full) 600 font(xs)">v2</span>
       </a>
     </div>
     
@@ -118,26 +130,3 @@
   {/if}
 </div>
 
-<style>
-  :global(.mdx-article) {
-    @apply mdx(article);
-  }
-  
-  :global(.mdx-article pre) {
-    margin: 2rem 0;
-  }
-  
-  :global(.mdx-article .mdx-info),
-  :global(.mdx-article .mdx-warning),
-  :global(.mdx-article .mdx-error) {
-    margin: 1.5rem 0;
-  }
-  
-  :global(.mdx-article h2) {
-    scroll-margin-top: 5rem;
-  }
-  
-  :global(.mdx-article h3) {
-    scroll-margin-top: 5rem;
-  }
-</style>

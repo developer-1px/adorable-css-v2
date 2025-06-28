@@ -46,7 +46,9 @@
 	"dependencies": {
 		"@inlang/paraglide-js": "^2.0.0",
 		"adorable-css": "workspace:*",
+		"highlight.js": "^11.11.1",
 		"lucide-svelte": "^0.522.0",
-		"prismjs": "^1.30.0"
+		"prismjs": "^1.30.0",
+		"rehype-highlight": "^7.0.2"
 	}
 }

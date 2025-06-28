@@ -15,8 +15,8 @@
   
   let codeElement: HTMLElement;
   
-  // Ensure code is always a string
-  $: codeString = String(code || '');
+  // Ensure code is always a string and trimmed
+  $: codeString = String(code || '').trim();
   
   // Custom AdorableCSS grammar for Prism
   const adorableCSSGrammar = {

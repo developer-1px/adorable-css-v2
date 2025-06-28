@@ -4,6 +4,7 @@ import { createParser, createTokenizer } from "./parser-utils";
 const tokenize = createTokenizer([
   ["(ws)", /(\s+)/],
   ["(hexcolor)", /(#[0-9a-fA-F]{3,8}(?:\.[0-9]+)*)/],
+  ["(dimension-pair)", /((?:[0-9]*\.[0-9]+|[0-9]+)[%a-z]*x(?:[0-9]*\.[0-9]+|[0-9]+)[%a-z]*)/], // matches 64x64, 100%x50px, etc
   ["(dimension)", /((?:[0-9]*\.[0-9]+|[0-9]+)[%a-z]*)/],
   ["(string)", /('(?:[^']|\\')*'|"(?:[^"]|\\")*")/],
   ["(color)", /([a-zA-Z]+\.[0-9]+)/], // matches white.8, black.2, etc
@@ -82,6 +83,7 @@ export function parseAdorableCSS(input: string) {
       () => FunctionCall(),
       () => Range(),
       () => consume("(ident)"),
+      () => consume("(dimension-pair)"), // dimension pairs like 64x64
       () => consume("(dimension)"), // 숫자만 있는 클래스도 처리
       () => consume("&")
     );
@@ -134,6 +136,23 @@ export function parseAdorableCSS(input: string) {
 
   function Range(): any {
     return options(
+      // Triple range: 10..5vw..20 (min..preferred..max)
+      () => {
+        const min = Term();
+        const range1 = consume("(range)").image;
+        const preferred = Term();
+        const range2 = consume("(range)").image;
+        const max = Term();
+        return {
+          type: "triple-range",
+          min,
+          preferred,
+          max,
+          range: range1 + range2,
+          image: `${min.image}${range1}${preferred.image}${range2}${max.image}`,
+        };
+      },
+
       // 10..20
       () => {
         const min = Term();
@@ -252,6 +271,7 @@ export function parseAdorableCSS(input: string) {
           image: minus ? `-${dimension.image}` : dimension.image,
         };
       },
+      () => consume("(dimension-pair)"),
       () => consume("(hexcolor)"),
       () => consume("(color)"),
       () => consume("(string)"),

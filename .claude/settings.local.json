@@ -39,7 +39,17 @@
       "Bash(node:*)",
       "WebFetch(domain:velog.io)",
       "Bash(pnpm vitest run:*)",
-      "WebFetch(domain:css.master.co)"
+      "WebFetch(domain:css.master.co)",
+      "Bash(tree:*)",
+      "Bash(timeout 10s pnpm dev --port 5173 --host)",
+      "Bash(curl:*)",
+      "Bash(echo:*)",
+      "WebFetch(domain:www.apple.com)",
+      "WebFetch(domain:developer.apple.com)",
+      "Bash(pnpm typecheck:*)",
+      "Bash(npm run build:*)",
+      "Bash(do [ -f \"$file\" ])",
+      "Bash(git checkout:*)"
     ],
     "deny": []
   }

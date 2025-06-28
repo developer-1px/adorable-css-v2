@@ -286,30 +286,13 @@ export function generateColorCSS(
 // Enhanced color palette for AdorableCSS
 export const oklchColorPalette = generateOklchColorPalette();
 
-// Export individual colors for backwards compatibility
-export const colorRules: Record<string, RuleHandler> = {};
+// Note: Direct color rules removed - AdorableCSS v2 uses function syntax
+// Instead of 'red-500' → use c(red-500) 
+// Instead of 'bg-blue-500' → use bg(blue-500)
+// The OKLCH color palette is still available to c() and bg() handlers
 
-// Generate color rules for each color and shade
-Object.entries(oklchColorPalette).forEach(([colorName, shades]) => {
-  Object.entries(shades).forEach(([shade, color]) => {
-    const key = `${colorName}-${shade}`;
-    colorRules[key] = () => ({ color });
-  });
-});
-
-// Background color rules
-const bgColorRules: Record<string, RuleHandler> = {};
-Object.entries(oklchColorPalette).forEach(([colorName, shades]) => {
-  Object.entries(shades).forEach(([shade, color]) => {
-    const key = `bg-${colorName}-${shade}`;
-    bgColorRules[key] = () => ({ 'background-color': color });
-  });
-});
-
-// Advanced color utilities
+// Advanced color utilities (only dynamic OKLCH generation)
 export const advancedColorRules = {
-  ...colorRules,
-  ...bgColorRules,
   
   // Dynamic color generation
   'oklch': (args?: string): CSSRule => {
@@ -325,22 +308,6 @@ export const advancedColorRules = {
     
     return {
       color: oklchToString({ l, c, h })
-    };
-  },
-  
-  // Background OKLCH
-  'bg-oklch': (args?: string): CSSRule => {
-    if (!args) return {};
-    
-    const match = args.match(/([0-9.]+)%?\s*[\/,]\s*([0-9.]+)\s*[\/,]\s*([0-9.]+)/);
-    if (!match) return {};
-    
-    const l = parseFloat(match[1]) / 100;
-    const c = parseFloat(match[2]);
-    const h = parseFloat(match[3]);
-    
-    return {
-      'background-color': oklchToString({ l, c, h })
     };
   }
 };

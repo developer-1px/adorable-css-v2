@@ -8,14 +8,17 @@
     'blue-500': colorPalette['blue-500']
   });
   
-  // Get color groups from OKLCH palette
+  // Get color groups from OKLCH palette (rainbow order)
   function getColorGroups() {
     const groups = {
+      red: ['red', 'rose'],
+      orange: ['orange', 'amber'],
+      yellow: ['yellow', 'lime'],
+      green: ['green', 'emerald', 'teal'],
+      blue: ['cyan', 'sky', 'blue'],
+      indigo: ['indigo'],
+      purple: ['violet', 'purple', 'fuchsia', 'pink'],
       neutral: ['gray', 'slate', 'zinc', 'neutral', 'stone'],
-      warm: ['red', 'orange', 'amber', 'yellow'],
-      green: ['lime', 'green', 'emerald', 'teal'],
-      blue: ['cyan', 'sky', 'blue', 'indigo'],
-      purple: ['violet', 'purple', 'fuchsia', 'pink', 'rose'],
       palette: {}
     };
     
@@ -47,14 +50,14 @@
     <div class="mb(2xl)">
       <h4 class="700 font(lg) c(gray-800) mb(lg)">Gradient Examples</h4>
       <div class="grid grid-cols(1) md:grid-cols(3) gap(lg)">
-        <div class="h(24) r(xl) bg(135deg/blue-400,purple-400) hbox(center+center) c(white) 700 font(md) shadow(lg)">
+        <div class="h(24) r(xl) bg(135deg/red-400..orange-400) hbox(center+center) c(white) 700 font(md) shadow(lg)">
+          red-400..orange-400
+        </div>
+        <div class="h(24) r(xl) bg(90deg/yellow-400..green-400) hbox(center+center) c(white) 700 font(md) shadow(lg)">
+          yellow-400..green-400  
+        </div>
+        <div class="h(24) r(xl) bg(45deg/blue-400..purple-400) hbox(center+center) c(white) 700 font(md) shadow(lg)">
           blue-400..purple-400
-        </div>
-        <div class="h(24) r(xl) bg(90deg/pink-300,orange-400) hbox(center+center) c(white) 700 font(md) shadow(lg)">
-          pink-300..orange-400  
-        </div>
-        <div class="h(24) r(xl) bg(45deg/green-400,teal-500) hbox(center+center) c(white) 700 font(md) shadow(lg)">
-          green-400..teal-500
         </div>
       </div>
     </div>
@@ -91,7 +94,7 @@
   </div>
 
   <!-- Color Groups -->
-  {#each [['Warm Colors', colorGroups.warm], ['Green Colors', colorGroups.green], ['Blue Colors', colorGroups.blue], ['Purple Colors', colorGroups.purple]] as [groupName, colors]}
+  {#each [['Red Colors', colorGroups.red], ['Orange Colors', colorGroups.orange], ['Yellow Colors', colorGroups.yellow], ['Green Colors', colorGroups.green], ['Blue Colors', colorGroups.blue], ['Indigo Colors', colorGroups.indigo], ['Purple Colors', colorGroups.purple]] as [groupName, colors]}
     <div class="section-card bg(white.9) backdrop-blur(md) r(2xl) shadow(xl) p(xl) b(1/gray-100) mb(2xl)">
       <h3 class="700 font(xl) c(gray-900) mb(lg)">{groupName}</h3>
       

@@ -1,5 +1,6 @@
 import type { CSSRule, RuleHandler, KeywordRuleHandler } from "../types";
 import { px } from '../../core/values/makeValue';
+import { isToken, getTokenVar } from '../../design-system/tokens/index';
 
 // Position types
 export const staticPosition: KeywordRuleHandler = () => ({
@@ -12,8 +13,25 @@ export const sticky: KeywordRuleHandler = () => ({ position: "sticky" });
 
 const makePositionRule =
   (property: "top" | "right" | "bottom" | "left"): RuleHandler =>
-  (value?: string): CSSRule =>
-    value ? { [property]: String(px(value)) } : {};
+  (value?: string): CSSRule => {
+    if (!value) return {};
+    
+    // Handle negative values
+    const isNegative = value.startsWith('-');
+    const absValue = isNegative ? value.substring(1) : value;
+    
+    // Check for spacing tokens (xs, sm, md, lg, xl, etc.)
+    if (isToken(absValue, 'spacing')) {
+      const tokenVar = getTokenVar('spacing', absValue);
+      return { [property]: isNegative ? `calc(-1 * ${tokenVar})` : tokenVar };
+    }
+    
+    // Handle specific values
+    if (value === 'auto') return { [property]: 'auto' };
+    
+    // Default to px conversion
+    return { [property]: String(px(value)) };
+  };
 
 export const top = makePositionRule("top");
 export const right = makePositionRule("right");
@@ -115,7 +133,14 @@ export const layer: RuleHandler = (value = ""): CSSRule => {
 
   Object.entries(pos).forEach(([key, value]) => {
     if (value !== undefined) {
-      styles[key] = String(px(value));
+      // Check for spacing tokens
+      if (isToken(value, 'spacing')) {
+        styles[key] = getTokenVar('spacing', value);
+      } else if (value === 'auto') {
+        styles[key] = 'auto';
+      } else {
+        styles[key] = String(px(value));
+      }
     }
   });
 
@@ -131,11 +156,33 @@ export const position: RuleHandler = (value?: string): CSSRule => {
   if (!match) return {};
   
   const [, x, y] = match;
+  const xTrimmed = x.trim();
+  const yTrimmed = y.trim();
+  
+  // Process X coordinate
+  let leftValue: string;
+  if (isToken(xTrimmed, 'spacing')) {
+    leftValue = getTokenVar('spacing', xTrimmed);
+  } else if (xTrimmed === 'auto') {
+    leftValue = 'auto';
+  } else {
+    leftValue = String(px(xTrimmed));
+  }
+  
+  // Process Y coordinate
+  let topValue: string;
+  if (isToken(yTrimmed, 'spacing')) {
+    topValue = getTokenVar('spacing', yTrimmed);
+  } else if (yTrimmed === 'auto') {
+    topValue = 'auto';
+  } else {
+    topValue = String(px(yTrimmed));
+  }
   
   return {
     position: 'absolute',
-    left: String(px(x.trim())),
-    top: String(px(y.trim()))
+    left: leftValue,
+    top: topValue
   };
 };
 

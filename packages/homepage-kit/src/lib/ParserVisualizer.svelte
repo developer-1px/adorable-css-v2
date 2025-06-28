@@ -96,7 +96,7 @@
     <!-- Minimal header -->
     <header class="text(center) mb(3xl)">
       <div class="inline-block">
-        <h1 class="font(3xl) bold c(gray-900) letter-spacing(-0.02em) mb(sm)">
+        <h1 class="bold font(3xl) c(gray-900) letter-spacing(-0.02em) mb(sm)">
           AdorableCSS Parser
         </h1>
         <p class="font(md) c(gray-600)">
@@ -114,7 +114,7 @@
           <div class="flex vbox gap(lg)">
             <div class="hbox(middle) gap(sm) mb(sm)">
               <Zap size={20} class="c(primary)" />
-              <label class="font(sm) bold c(gray-700) uppercase letter-spacing(0.05em)">
+              <label class="bold font(sm) c(gray-700) uppercase letter-spacing(0.05em)">
                 AdorableCSS Input
               </label>
             </div>
@@ -150,7 +150,7 @@
           <!-- Output side -->
           <div class="flex vbox gap(lg)">
             <div class="hbox(middle) gap(auto) mb(sm)">
-              <span class="font(sm) bold c(gray-700) uppercase letter-spacing(0.05em)">
+              <span class="bold font(sm) c(gray-700) uppercase letter-spacing(0.05em)">
                 Generated CSS
               </span>
               <button
@@ -179,14 +179,14 @@
       
       <!-- Compact examples grid -->
       <div class="examples-section">
-        <h2 class="font(lg) bold c(gray-900) mb(lg) text(center)">
+        <h2 class="bold font(lg) c(gray-900) mb(lg) text(center)">
           Quick Examples
         </h2>
         
         <div class="examples-grid grid grid-cols(4) gap(md)">
           {#each exampleCategories as category}
             <div class="category-group">
-              <h3 class="font(xs) bold c(gray-500) uppercase letter-spacing(0.1em) mb(sm) hbox(middle) gap(xs)">
+              <h3 class="bold font(xs) c(gray-500) uppercase letter-spacing(0.1em) mb(sm) hbox(middle) gap(xs)">
                 <span>{category.icon}</span>
                 {category.name}
               </h3>
@@ -210,14 +210,14 @@
       
       <!-- Syntax cheatsheet -->
       <div class="cheatsheet mt(3xl) p(2xl) bg(gray-50) r(2xl)">
-        <h3 class="font(lg) bold c(gray-900) mb(lg) text(center) hbox(pack) gap(sm)">
+        <h3 class="bold font(lg) c(gray-900) mb(lg) text(center) hbox(pack) gap(sm)">
           <Sparkles size={20} class="c(accent)" />
           Syntax Patterns
         </h3>
         
         <div class="patterns-grid grid grid-cols(3) gap(lg)">
           <div class="pattern-card bg(white) p(lg) r(lg) b(1/gray-200)">
-            <h4 class="font(sm) bold c(primary) mb(sm)">Basic Utilities</h4>
+            <h4 class="bold font(sm) c(primary) mb(sm)">Basic Utilities</h4>
             <div class="vbox gap(xs)">
               <div class="hbox(middle) gap(sm)">
                 <Code code="w(100px)" inline={true} />
@@ -235,7 +235,7 @@
           </div>
           
           <div class="pattern-card bg(white) p(lg) r(lg) b(1/gray-200)">
-            <h4 class="font(sm) bold c(accent) mb(sm)">Advanced Syntax</h4>
+            <h4 class="bold font(sm) c(accent) mb(sm)">Advanced Syntax</h4>
             <div class="vbox gap(xs)">
               <div class="hbox(middle) gap(sm)">
                 <Code code="w(100..200)" inline={true} />
@@ -253,7 +253,7 @@
           </div>
           
           <div class="pattern-card bg(white) p(lg) r(lg) b(1/gray-200)">
-            <h4 class="font(sm) bold c(success) mb(sm)">Complex Values</h4>
+            <h4 class="bold font(sm) c(success) mb(sm)">Complex Values</h4>
             <div class="vbox gap(xs)">
               <div class="hbox(middle) gap(sm)">
                 <Code code="bg(#fff..#000)" inline={true} />

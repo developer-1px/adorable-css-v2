@@ -1,7 +1,90 @@
 // Modern Design Token System for AdorableCSS v2
 
+// Semantic color configuration
+export interface SemanticColorConfig {
+  primary?: string;      // e.g. "blue-500" or "#0ea5e9"
+  secondary?: string;    // e.g. "gray-500"
+  accent?: string;       // e.g. "sky-500"
+  mute?: string;         // e.g. "gray-400"
+  brand?: string;        // e.g. "#8b5cf6..#ec4899" for gradient
+  success?: string;      // e.g. "green-500"
+  warning?: string;      // e.g. "amber-500"
+  error?: string;        // e.g. "red-500"
+  info?: string;         // e.g. "cyan-500"
+}
+
+// Default semantic color mapping using AdorableCSS syntax
+// Monochrome design with gray primary and brand accent
+export const semanticColors: SemanticColorConfig = {
+  primary: "gray-900",       // Primary text/UI color - monochrome approach
+  secondary: "gray-700",     // Secondary text - for supporting content
+  accent: "gray-600",        // Accent color - for interactive elements
+  mute: "gray-500",          // Muted elements - for captions/labels
+  brand: "violet..pink",     // Brand gradient - only colorful element
+  success: "gray-700",       // Keep monochrome
+  warning: "gray-700",       // Keep monochrome
+  error: "gray-700",         // Keep monochrome
+  info: "gray-600"           // Keep monochrome
+};
+
+// CONSISTENCY ENFORCING TEXT HIERARCHY - USE THESE ONLY
+export const textHierarchy = {
+  'text-primary': 'gray-900',    // Main headings, important text
+  'text-secondary': 'gray-700',  // Subheadings, secondary content  
+  'text-tertiary': 'gray-600',   // Body text, descriptions
+  'text-subtle': 'gray-500',     // Captions, labels, placeholders
+  'text-brand': 'brand'          // Brand colored text (sparingly)
+} as const;
+
+// CONSISTENCY ENFORCING BACKGROUND HIERARCHY - USE THESE ONLY
+export const backgroundHierarchy = {
+  'bg-primary': 'white',         // Main content areas
+  'bg-secondary': 'gray-50',     // Alternate sections
+  'bg-tertiary': 'gray-100',     // Cards, elevated content
+  'bg-subtle': 'gray-200',       // Borders, dividers
+  'bg-brand': 'brand'            // Brand backgrounds (sparingly)
+} as const;
+
+// CONSISTENCY ENFORCING TYPOGRAPHY SCALE - USE THESE ONLY
+// Semantic font sizes with clear purpose
+export const typographyScale = {
+  'text-xs': 'xs',      // 12px - labels, captions, fine print
+  'text-sm': 'sm',      // 14px - small body text, secondary content
+  'text-md': 'md',      // 16px - primary body text (default)
+  'text-lg': 'lg',      // 18px - large body text, small headings
+  'text-xl': 'xl',      // 20px - subheadings
+  'text-2xl': '2xl',    // 24px - section headings  
+  'text-3xl': '3xl',    // 30px - page headings
+  'text-4xl': '4xl',    // 36px - hero headings
+  'text-5xl': '5xl',    // 48px - large hero
+  'text-6xl': '6xl'     // 60px - display text
+} as const;
+
+// CONSISTENCY ENFORCING FONT WEIGHTS - USE THESE ONLY
+export const fontWeights = {
+  'weight-normal': 'normal',  // 400 - body text
+  'weight-medium': 'medium',  // 500 - emphasized text
+  'weight-semi': 'semi',      // 600 - subheadings
+  'weight-bold': 'bold',      // 700 - headings
+  'weight-black': 'black'     // 900 - hero text
+} as const;
+
+// CONSISTENCY ENFORCING SPACING SCALE - USE THESE ONLY
+export const spacingScale = {
+  'space-xs': 'xs',      // 4px - tight spacing
+  'space-sm': 'sm',      // 8px - small gaps
+  'space-md': 'md',      // 12px - standard spacing
+  'space-lg': 'lg',      // 16px - comfortable spacing
+  'space-xl': 'xl',      // 20px - large spacing
+  'space-2xl': '2xl',    // 24px - section spacing
+  'space-3xl': '3xl',    // 32px - large section spacing
+  'space-4xl': '4xl'     // 48px - page-level spacing
+} as const;
+
 export interface DesignTokens {
   font: {
+    '3xs': string;
+    '2xs': string;
     xs: string;
     sm: string;
     md: string;
@@ -33,7 +116,9 @@ export interface DesignTokens {
     '9xl': string;
   };
   size: {
-    // Size tokens for width/height
+    // Comprehensive size tokens (TailwindCSS compatible)
+    '3xs': string;
+    '2xs': string;
     xs: string;
     sm: string;
     md: string;
@@ -45,6 +130,16 @@ export interface DesignTokens {
     '5xl': string;
     '6xl': string;
     '7xl': string;
+    '8xl': string;
+    '9xl': string;
+    
+    // Special sizes
+    'auto': string;
+    'full': string;
+    'screen': string;
+    'min': string;
+    'max': string;
+    'fit': string;
   };
   lineHeight: {
     none: string;
@@ -100,6 +195,10 @@ export interface DesignTokens {
     primary: string;
     secondary: string;
     accent: string;
+    mute: string;
+    brand: string;
+    'brand-start': string;
+    'brand-end': string;
     success: string;
     warning: string;
     error: string;
@@ -188,6 +287,58 @@ export interface DesignTokens {
     'info-800': string;
     'info-900': string;
     'info-950': string;
+    
+    // Blue colors
+    'blue-50': string;
+    'blue-100': string;
+    'blue-200': string;
+    'blue-300': string;
+    'blue-400': string;
+    'blue-500': string;
+    'blue-600': string;
+    'blue-700': string;
+    'blue-800': string;
+    'blue-900': string;
+    'blue-950': string;
+    
+    // Green colors
+    'green-50': string;
+    'green-100': string;
+    'green-200': string;
+    'green-300': string;
+    'green-400': string;
+    'green-500': string;
+    'green-600': string;
+    'green-700': string;
+    'green-800': string;
+    'green-900': string;
+    'green-950': string;
+    
+    // Amber colors
+    'amber-50': string;
+    'amber-100': string;
+    'amber-200': string;
+    'amber-300': string;
+    'amber-400': string;
+    'amber-500': string;
+    'amber-600': string;
+    'amber-700': string;
+    'amber-800': string;
+    'amber-900': string;
+    'amber-950': string;
+    
+    // Red colors
+    'red-50': string;
+    'red-100': string;
+    'red-200': string;
+    'red-300': string;
+    'red-400': string;
+    'red-500': string;
+    'red-600': string;
+    'red-700': string;
+    'red-800': string;
+    'red-900': string;
+    'red-950': string;
   };
   opacity: {
     '0': string;
@@ -288,6 +439,8 @@ export const defaultTokens: DesignTokens = {
   // Typography Scale - Minor Third (1.2) ratio for better web readability
   // Based on 16px (1rem) with more conservative scaling
   font: {
+    '3xs': '0.5rem',   // 8px     (16 × 0.5)
+    '2xs': '0.625rem', // 10px    (16 × 0.625)
     xs: '0.75rem',     // 12px    (16 ÷ 1.333)
     sm: '0.875rem',    // 14px    (16 × 0.875)
     md: '1rem',        // 16px    (base - perfect for body text)
@@ -321,19 +474,32 @@ export const defaultTokens: DesignTokens = {
     '9xl': '8rem'         // 128px - mega spacing (32x base)
   },
   
-  // Size Scale - for width/height utilities
+  // Size Scale - for width/height utilities (matches container breakpoint system)
   size: {
-    xs: '0.5rem',      // 8px
-    sm: '0.75rem',     // 12px
-    md: '1rem',        // 16px
-    lg: '1.5rem',      // 24px
-    xl: '2rem',        // 32px
-    '2xl': '2.5rem',   // 40px
-    '3xl': '3rem',     // 48px
-    '4xl': '4rem',     // 64px
-    '5xl': '5rem',     // 80px
-    '6xl': '6rem',     // 96px
-    '7xl': '8rem',     // 128px
+    // Small sizes
+    '3xs': '16rem',     // 256px - very small content
+    '2xs': '20rem',     // 320px - mobile content
+    xs: '30rem',        // 480px - small tablet
+    sm: '40rem',        // 640px - tablet
+    md: '48rem',        // 768px - small desktop
+    lg: '64rem',        // 1024px - desktop
+    xl: '80rem',        // 1280px - large desktop
+    '2xl': '96rem',     // 1536px - extra large
+    '3xl': '120rem',    // 1920px - ultra wide
+    '4xl': '160rem',    // 2560px - 4K
+    '5xl': '200rem',    // 3200px - 5K
+    '6xl': '240rem',    // 3840px - 6K
+    '7xl': '280rem',    // 4480px - 7K
+    '8xl': '320rem',    // 5120px - 8K
+    '9xl': '400rem',    // 6400px - 9K
+    
+    // Special values
+    'auto': 'auto',
+    'full': '100%',
+    'screen': '100vw',  // for width, becomes 100vh for height
+    'min': 'min-content',
+    'max': 'max-content',
+    'fit': 'fit-content',
   },
   
   lineHeight: {
@@ -393,14 +559,18 @@ export const defaultTokens: DesignTokens = {
   },
   
   colors: {
-    // Core semantic colors - AdorableCSS brand
-    primary: '#0ea5e9',    // Brand blue
-    secondary: '#64748b',  // Balanced slate  
-    accent: '#0d99ff',     // Figma blue accent
-    success: '#10b981',    // Emerald green
-    warning: '#f59e0b',    // Amber
-    error: '#ef4444',      // Red
-    info: '#06b6d4',       // Cyan
+    // Core semantic colors - will be resolved from semanticColors config
+    primary: '#18181b',    // Gray-900 - monochrome primary
+    secondary: '#64748b',  // Default fallback
+    accent: '#0d99ff',     // Default fallback
+    mute: '#71717a',       // Default fallback
+    brand: '#8b5cf6',      // Default fallback
+    'brand-start': '#8b5cf6', // Brand gradient start
+    'brand-end': '#ec4899',   // Brand gradient end
+    success: '#10b981',    // Default fallback
+    warning: '#f59e0b',    // Default fallback
+    error: '#ef4444',      // Default fallback
+    info: '#06b6d4',       // Default fallback
     
     // Basic colors
     white: '#ffffff',
@@ -421,33 +591,72 @@ export const defaultTokens: DesignTokens = {
       '950': '#09090b',
     },
     
-    // Primary brand colors (Refined Blue)
-    'primary-50': '#f0f9ff',
-    'primary-100': '#e0f2fe',
-    'primary-200': '#bae6fd',
-    'primary-300': '#7dd3fc',
-    'primary-400': '#38bdf8',
-    'primary-500': '#0ea5e9',
-    'primary-600': '#0284c7',
-    'primary-700': '#0369a1',
-    'primary-800': '#075985',
-    'primary-900': '#0c4a6e',
-    'primary-950': '#082f49',
+    // Blue colors (Primary brand color)
+    'blue-50': '#eff6ff',
+    'blue-100': '#dbeafe', 
+    'blue-200': '#bfdbfe',
+    'blue-300': '#93c5fd',
+    'blue-400': '#60a5fa',
+    'blue-500': '#3b82f6',
+    'blue-600': '#2563eb',
+    'blue-700': '#1d4ed8',
+    'blue-800': '#1e40af',
+    'blue-900': '#1e3a8a',
+    'blue-950': '#172554',
     
-    // Success colors (Emerald)
-    'success-50': '#ecfdf5',
-    'success-100': '#d1fae5',
-    'success-200': '#a7f3d0',
-    'success-300': '#6ee7b7',
-    'success-400': '#34d399',
-    'success-500': '#10b981',
-    'success-600': '#059669',
-    'success-700': '#047857',
-    'success-800': '#065f46',
-    'success-900': '#064e3b',
-    'success-950': '#022c22',
+    // Primary brand colors (using blue scale)
+    'primary-50': '#eff6ff',
+    'primary-100': '#dbeafe',
+    'primary-200': '#bfdbfe',
+    'primary-300': '#93c5fd',
+    'primary-400': '#60a5fa',
+    'primary-500': '#3b82f6',
+    'primary-600': '#2563eb',
+    'primary-700': '#1d4ed8',
+    'primary-800': '#1e40af',
+    'primary-900': '#1e3a8a',
+    'primary-950': '#172554',
     
-    // Warning colors (Amber)
+    // Green colors
+    'green-50': '#f0fdf4',
+    'green-100': '#dcfce7',
+    'green-200': '#bbf7d0',
+    'green-300': '#86efac',
+    'green-400': '#4ade80',
+    'green-500': '#22c55e',
+    'green-600': '#16a34a',
+    'green-700': '#15803d',
+    'green-800': '#166534',
+    'green-900': '#14532d',
+    'green-950': '#052e16',
+    
+    // Success colors (using green scale)
+    'success-50': '#f0fdf4',
+    'success-100': '#dcfce7',
+    'success-200': '#bbf7d0',
+    'success-300': '#86efac',
+    'success-400': '#4ade80',
+    'success-500': '#22c55e',
+    'success-600': '#16a34a',
+    'success-700': '#15803d',
+    'success-800': '#166534',
+    'success-900': '#14532d',
+    'success-950': '#052e16',
+    
+    // Amber colors
+    'amber-50': '#fffbeb',
+    'amber-100': '#fef3c7',
+    'amber-200': '#fde68a',
+    'amber-300': '#fcd34d',
+    'amber-400': '#fbbf24',
+    'amber-500': '#f59e0b',
+    'amber-600': '#d97706',
+    'amber-700': '#b45309',
+    'amber-800': '#92400e',
+    'amber-900': '#78350f',
+    'amber-950': '#451a03',
+    
+    // Warning colors (using amber scale)
     'warning-50': '#fffbeb',
     'warning-100': '#fef3c7',
     'warning-200': '#fde68a',
@@ -460,7 +669,20 @@ export const defaultTokens: DesignTokens = {
     'warning-900': '#78350f',
     'warning-950': '#451a03',
     
-    // Error colors (Red)
+    // Red colors
+    'red-50': '#fef2f2',
+    'red-100': '#fee2e2',
+    'red-200': '#fecaca',
+    'red-300': '#fca5a5',
+    'red-400': '#f87171',
+    'red-500': '#ef4444',
+    'red-600': '#dc2626',
+    'red-700': '#b91c1c',
+    'red-800': '#991b1b',
+    'red-900': '#7f1d1d',
+    'red-950': '#450a0a',
+    
+    // Error colors (using red scale)
     'error-50': '#fef2f2',
     'error-100': '#fee2e2',
     'error-200': '#fecaca',
@@ -586,6 +808,84 @@ export const defaultTokens: DesignTokens = {
   },
 };
 
+// Color palette for resolving semantic colors
+// This will be populated by the color system
+export let colorPalette: Record<string, string> = {};
+
+// Set color palette (called by color system)
+export function setColorPalette(palette: Record<string, string>): void {
+  colorPalette = palette;
+}
+
+// Resolve semantic color value from configuration
+export function resolveSemanticColor(value: string): { type: 'solid' | 'gradient', value: string, start?: string, end?: string } {
+  // Check if it's a gradient (contains ..)
+  if (value.includes('..')) {
+    const [start, end] = value.split('..');
+    return {
+      type: 'gradient',
+      value: `linear-gradient(135deg, ${resolveColorValue(start)}, ${resolveColorValue(end)})`,
+      start: resolveColorValue(start),
+      end: resolveColorValue(end)
+    };
+  }
+  
+  // Otherwise it's a solid color
+  return {
+    type: 'solid',
+    value: resolveColorValue(value)
+  };
+}
+
+// Resolve a single color value (from palette or hex)
+function resolveColorValue(value: string): string {
+  // If it's a hex color, return as-is
+  if (value.startsWith('#')) {
+    return value;
+  }
+  
+  // Check if it's in the color palette
+  if (colorPalette[value]) {
+    return colorPalette[value];
+  }
+  
+  // If it's a color with a number (like blue-500), try to find it
+  // This handles cases where colorPalette might use different naming
+  const colorMatch = value.match(/^(\w+)-(\d+)$/);
+  if (colorMatch) {
+    const [, colorName, shade] = colorMatch;
+    const paletteKey = `${colorName}-${shade}`;
+    if (colorPalette[paletteKey]) {
+      return colorPalette[paletteKey];
+    }
+  }
+  
+  // Fallback to the value itself
+  return value;
+}
+
+// Build semantic colors from configuration
+export function buildSemanticColors(config: SemanticColorConfig = semanticColors): Record<string, any> {
+  const result: Record<string, any> = {};
+  
+  for (const [key, value] of Object.entries(config)) {
+    if (!value) continue;
+    
+    const resolved = resolveSemanticColor(value);
+    
+    if (resolved.type === 'gradient') {
+      result[key] = resolved.start || '#8b5cf6';  // fallback for gradient start
+      result[`${key}-start`] = resolved.start || '#8b5cf6';
+      result[`${key}-end`] = resolved.end || '#ec4899';
+      result[`${key}-gradient`] = resolved.value;
+    } else {
+      result[key] = resolved.value;
+    }
+  }
+  
+  return result;
+}
+
 // Token type guards
 // Current token context for rules to use
 let currentTokenContext: DesignTokens = defaultTokens;
@@ -684,7 +984,12 @@ export function generateTokenCSS(tokens: DesignTokens = defaultTokens): string {
   /* Border colors */
   --border-default: var(--gray-200);
   --border-accent: var(--purple-200);
-  --border-subtle: var(--gray-100);`;
+  --border-subtle: var(--gray-100);
+  
+  /* Brand gradient */
+  --brand-gradient: linear-gradient(135deg, var(--brand-start), var(--brand-end));
+  --brand-gradient-hover: linear-gradient(135deg, #7c3aed, #db2777);
+  --brand-gradient-text: linear-gradient(90deg, var(--brand-start), var(--brand-end));`;
   
   return `:root {\n${cssVars.join('\n')}\n${semanticMappings}\n}`;
 }
@@ -703,3 +1008,5 @@ export function injectTokens(tokens: DesignTokens = defaultTokens): void {
   style.textContent = generateTokenCSS(tokens);
   document.head.appendChild(style);
 }
+
+// Note: Semantic color functions are already exported above

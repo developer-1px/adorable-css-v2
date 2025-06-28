@@ -16,12 +16,32 @@ export enum RulePriority {
 export type RuleHandler = (args?: string) => CSSRule;
 export type KeywordRuleHandler = () => CSSRule;
 
+// String-based rule handlers (returns AdorableCSS classes instead of CSS objects)
+// Can now return mixed AdorableCSS classes + raw CSS objects
+export type StringRuleHandler = (args?: string) => string | (string | CSSRule)[];
+export type KeywordStringRuleHandler = () => string | (string | CSSRule)[];
+
+// Union types for hybrid support
+export type HybridRuleHandler = RuleHandler | StringRuleHandler;
+export type HybridKeywordRuleHandler = KeywordRuleHandler | KeywordStringRuleHandler;
+
 // Rule definition with priority metadata
 export interface RuleDefinition {
   handler: RuleHandler | KeywordRuleHandler;
   priority: RulePriority;
   description?: string;
 }
+
+// String rule definition
+export interface StringRuleDefinition {
+  handler: StringRuleHandler | KeywordStringRuleHandler;
+  priority: RulePriority;
+  description?: string;
+  isStringRule: true; // Type discriminator
+}
+
+// Union type for both rule types
+export type AnyRuleDefinition = RuleDefinition | StringRuleDefinition;
 
 // Selector information from parser
 export interface ParsedSelector {

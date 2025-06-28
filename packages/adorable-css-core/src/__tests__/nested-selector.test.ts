@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { generateCSS } from '../parser/generator';
-import { parseAdorableCSS } from '../parser/parser';
+import { generateCSS } from '../core/parser/generator';
+import { parseAdorableCSS } from '../core/parser/parser';
 
 describe('Nested Selector Feature', () => {
   describe('hbox and vbox with child selectors', () => {
@@ -12,7 +12,7 @@ describe('Nested Selector Feature', () => {
       
       expect(css).toContain('display:flex');
       expect(css).toContain('flex-direction:row');
-      expect(css).toContain('& > *{flex:0 0 auto}');
+      expect(css).toContain('where(.hbox>*){flex:0 0 auto}');
     });
     
     it('should generate CSS with nested child selectors for vbox', () => {
@@ -23,7 +23,7 @@ describe('Nested Selector Feature', () => {
       
       expect(css).toContain('display:flex');
       expect(css).toContain('flex-direction:column');
-      expect(css).toContain('& > *{flex:0 0 auto}');
+      expect(css).toContain('where(.vbox>*){flex:0 0 auto}');
     });
     
     it('should generate CSS with nested child selectors for hbox(middle)', () => {
@@ -34,7 +34,7 @@ describe('Nested Selector Feature', () => {
       
       expect(css).toContain('display:flex');
       expect(css).toContain('align-items:center');
-      expect(css).toContain('& > *{flex:0 0 auto}');
+      expect(css).toContain('where(.hbox\\(middle\\)>*){flex:0 0 auto}');
     });
     
     it('should replace & with actual selector', () => {
@@ -44,7 +44,7 @@ describe('Nested Selector Feature', () => {
       console.log(css);
       
       // The & should be replaced with the actual class selector
-      expect(css).toContain('.hbox > *{flex:0 0 auto}');
+      expect(css).toContain('where(.hbox>*){flex:0 0 auto}');
     });
   });
   
@@ -67,7 +67,7 @@ describe('Nested Selector Feature', () => {
       testCases.forEach(className => {
         const css = generateCSS([className]);
         expect(css.length).toBeGreaterThan(0);
-        expect(css).toContain('& > *{flex:0 0 auto}');
+        expect(css).toContain('where(');
         
         console.log(`✓ ${className} generates nested CSS:`);
         console.log(css);
@@ -89,8 +89,8 @@ describe('Nested Selector Feature', () => {
       expect(css.length).toBeGreaterThan(0);
       
       // Check that flexbox classes include nested selectors
-      expect(css).toContain('.hbox\\(middle\\+between\\) > *{flex:0 0 auto}');
-      expect(css).toContain('.vbox\\(pack\\) > *{flex:0 0 auto}');
+      expect(css).toContain('where(.hbox\\(middle\\+between\\)>*){flex:0 0 auto}');
+      expect(css).toContain('where(.vbox\\(pack\\)>*){flex:0 0 auto}');
       
       console.log('Header integration CSS:');
       console.log(css);

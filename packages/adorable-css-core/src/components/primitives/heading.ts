@@ -1,117 +1,207 @@
-import type { RuleHandler, CSSRule } from '../../rules/types';
+import type { StringRuleHandler, CSSRule } from '../../rules/types';
 
-// heading - Apple-quality semantic heading component
-export const heading: RuleHandler = (args?: string): CSSRule => {
+// String-based heading components (shadcn/ui inspired)
+export const headingString: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
   if (!args) {
-    // Default h2 heading - Apple typography
-    return {
-      'font-size': '28px',
-      'font-weight': '700',
-      'line-height': '1.2',
-      'letter-spacing': '-0.01em',
-      'margin': '0',
-      'color': '#1D1D1F',
-      'font-family': '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif'
-    };
+    // Default heading - h2 with shadcn/ui typography
+    return [
+      'scroll-m(20) pb(2) font(3xl) bold(semi) tracking(tight) c(gray-900)',
+      {
+        'transition': 'color 0.2s ease',
+        '&:first-child': {
+          'margin-top': '0'
+        }
+      }
+    ];
   }
 
   const parts = args.split('/');
   const level = parts[0] || 'h2';
   const variant = parts[1] || 'default';
   
-  // Base heading styles - Apple typography principles
-  const baseStyles: CSSRule = {
-    'margin': '0',
-    'color': '#1D1D1F',
-    'font-weight': '700',
-    'font-family': '-apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif'
+  // Shadcn/ui heading scales with mixed format
+  const headingScales: Record<string, (string | CSSRule)[]> = {
+    // H1 - Page titles (48px base -> 60px large screens)
+    h1: [
+      'scroll-m(20) font(5xl) bold(bold) c(gray-900)',
+      {
+        'line-height': '1.1',
+        'letter-spacing': '-0.025em',
+        '@media (min-width: 640px)': {
+          'font-size': '3.75rem' // 60px on larger screens
+        }
+      }
+    ],
+    
+    // H2 - Section headings (36px)
+    h2: [
+      'scroll-m(20) pb(2) font(4xl) bold(semi) c(gray-900)',
+      {
+        'border-bottom': '1px solid var(--gray-200)',
+        'transition': 'color 0.2s ease',
+        'letter-spacing': '-0.02em',
+        '&:first-child': {
+          'margin-top': '0'
+        }
+      }
+    ],
+    
+    // H3 - Subsection headings (30px)
+    h3: [
+      'scroll-m(20) font(3xl) bold(semi) c(gray-900)',
+      {
+        'margin-top': '2rem',
+        'letter-spacing': '-0.015em',
+        '&:first-child': {
+          'margin-top': '0'
+        }
+      }
+    ],
+    
+    // H4 - Component headings (24px)
+    h4: [
+      'scroll-m(20) font(2xl) bold(medium) c(gray-900)',
+      {
+        'margin-top': '1.5rem',
+        'letter-spacing': '-0.01em',
+        '&:first-child': {
+          'margin-top': '0'
+        }
+      }
+    ],
+    
+    // H5 - Small headings (20px)
+    h5: [
+      'scroll-m(20) font(xl) bold(medium) c(gray-900)',
+      {
+        'margin-top': '1rem',
+        'letter-spacing': '-0.005em',
+        '&:first-child': {
+          'margin-top': '0'
+        }
+      }
+    ],
+    
+    // H6 - Smallest headings (18px)
+    h6: [
+      'scroll-m(20) font(lg) bold(medium) c(gray-900)',
+      {
+        'margin-top': '1rem',
+        'letter-spacing': '0',
+        '&:first-child': {
+          'margin-top': '0'
+        }
+      }
+    ],
+    
+    // Special display heading (72px -> 96px)
+    display: [
+      'font(clamp(4rem,8vw,6rem)) bold(black) c(gray-900)',
+      {
+        'line-height': '0.95',
+        'margin-bottom': '1.5rem',
+        'letter-spacing': '-0.04em'
+      }
+    ],
+    
+    // Hero heading (60px -> 80px)
+    hero: [
+      'font(clamp(3.75rem,7vw,5rem)) bold(bold) c(gray-900)',
+      {
+        'line-height': '1',
+        'margin-bottom': '1.5rem',
+        'letter-spacing': '-0.035em'
+      }
+    ],
+    
+    // Page heading (48px)
+    page: [
+      'font(5xl) bold(bold) c(gray-900)',
+      {
+        'line-height': '1.1',
+        'margin-bottom': '0.5rem',
+        'letter-spacing': '-0.025em'
+      }
+    ],
+    
+    // Caption heading (14px)
+    caption: [
+      'font(sm) bold(medium) c(gray-600)',
+      {
+        'text-transform': 'uppercase',
+        'letter-spacing': '0.05em',
+        'margin-bottom': '0.5rem'
+      }
+    ]
   };
-
-  // Level-specific styles - Apple's type scale
-  const levelStyles: Record<string, CSSRule> = {
-    h1: {
-      'font-size': '48px',
-      'line-height': '1.1',
-      'font-weight': '800',
-      'letter-spacing': '-0.025em'
-    },
-    h2: {
-      'font-size': '36px',
-      'line-height': '1.15',
-      'font-weight': '700',
-      'letter-spacing': '-0.02em'
-    },
-    h3: {
-      'font-size': '28px',
-      'line-height': '1.2',
-      'font-weight': '700',
-      'letter-spacing': '-0.01em'
-    },
-    h4: {
-      'font-size': '22px',
-      'line-height': '1.25',
-      'font-weight': '600',
-      'letter-spacing': '-0.005em'
-    },
-    h5: {
-      'font-size': '19px',
-      'line-height': '1.3',
-      'font-weight': '600'
-    },
-    h6: {
-      'font-size': '17px',
-      'line-height': '1.35',
-      'font-weight': '600'
-    }
+  
+  // Variant styles
+  const variantStyles: Record<string, (string | CSSRule)[]> = {
+    default: [
+      '',
+      {}
+    ],
+    
+    // Muted variant
+    muted: [
+      'c(gray-600)',
+      {}
+    ],
+    
+    // Gradient variant
+    gradient: [
+      '',
+      {
+        'background': 'linear-gradient(135deg, var(--brand-start), var(--brand-end))',
+        'background-clip': 'text',
+        '-webkit-background-clip': 'text',
+        '-webkit-text-fill-color': 'transparent',
+        'color': 'transparent'
+      }
+    ],
+    
+    // Lead variant (for lead paragraphs)
+    lead: [
+      'font(xl) c(gray-600) leading(relaxed)',
+      {
+        'font-weight': '400'
+      }
+    ],
+    
+    // Small variant
+    small: [
+      'font(sm) c(gray-600) bold(medium)',
+      {
+        'text-transform': 'uppercase',
+        'letter-spacing': '0.05em'
+      }
+    ],
+    
+    // Large variant  
+    large: [
+      'font(lg) c(gray-900)',
+      {
+        'font-weight': '400',
+        'line-height': '1.5'
+      }
+    ]
   };
-
-  // Variant styles - Apple-inspired contexts
-  const variantStyles: Record<string, CSSRule> = {
-    default: {},
-    
-    hero: {
-      'font-size': '72px',
-      'line-height': '1.05',
-      'font-weight': '800',
-      'letter-spacing': '-0.03em'
-    },
-    
-    display: {
-      'font-size': '96px',
-      'line-height': '1',
-      'font-weight': '900',
-      'letter-spacing': '-0.035em'
-    },
-    
-    subtitle: {
-      'font-weight': '400',
-      'color': '#86868B',
-      'font-size': '21px',
-      'line-height': '1.4'
-    },
-    
-    gradient: {
-      'background': 'linear-gradient(135deg, #007AFF, #5856D6)',
-      '-webkit-background-clip': 'text',
-      '-webkit-text-fill-color': 'transparent',
-      'background-clip': 'text'
-    },
-    
-    section: {
-      'font-size': '40px',
-      'line-height': '1.1',
-      'font-weight': '700',
-      'letter-spacing': '-0.015em'
-    }
-  };
-
-  return {
-    ...baseStyles,
-    ...(levelStyles[level] || levelStyles.h2),
-    ...(variantStyles[variant] || {})
-  };
+  
+  const scale = headingScales[level] || headingScales.h2;
+  const variantData = variantStyles[variant] || variantStyles.default;
+  
+  // Merge scale and variant
+  if (variantData[0]) {
+    return [
+      scale[0] + ' ' + variantData[0],
+      { ...scale[1], ...variantData[1] }
+    ];
+  }
+  
+  return scale;
 };
 
+// Export string-based rules
 export const headingRules = {
-  heading
+  'heading': headingString
 };

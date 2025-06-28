@@ -1,0 +1,116 @@
+# Getting Started with AdorableCSS
+
+Welcome to AdorableCSS v2! This guide will help you get up and running with our Figma-first CSS framework.
+
+## Installation
+
+AdorableCSS can be installed via npm or pnpm. We recommend using it with Vite for the best development experience.
+
+### Package Installation
+
+```bash
+npm install adorable-css
+# or
+pnpm add adorable-css
+```
+
+### Vite Configuration
+
+```typescript
+// vite.config.ts
+import { adorableCSSPlugin } from 'adorable-css/vite'
+
+export default {
+  plugins: [adorableCSSPlugin()]
+}
+```
+
+### CDN Usage
+
+For quick prototyping, you can use our CDN:
+
+```html
+<script src="https://unpkg.com/adorable-css@latest/dist/cdn.min.js"></script>
+```
+
+## Your First Component
+
+Once installed, you can start using AdorableCSS utilities in your HTML:
+
+```html
+<div class="vbox gap(lg) p(xl) bg(white) r(xl) shadow(lg)">
+  <h2 class="heading(h2) c(primary)">Hello World</h2>
+  <p class="font(md) c(gray-600)">
+    Welcome to AdorableCSS! This card uses our utilities to create
+    a beautiful, responsive design with minimal code.
+  </p>
+  <button class="px(lg) py(md) bg(primary) c(white) r(lg) hover:shadow(lg) transition">
+    Get Started
+  </button>
+</div>
+```
+
+## Smart Containers
+
+One of our newest features is Smart Containers - a powerful shorthand for creating perfect container elements:
+
+```html
+<!-- Traditional approach -->
+<div class="w(64) h(64) display(flex) align-items(center) justify-content(center)">
+  <img src="avatar.jpg" style="object-fit: cover;" />
+</div>
+
+<!-- Smart Container approach -->
+<div class="64x64">
+  <img src="avatar.jpg" />
+</div>
+```
+
+Smart Containers automatically include:
+- **Auto-centering**: Built-in flex layout with center alignment
+- **Image optimization**: Child images get `object-fit: cover` automatically
+- **Content protection**: `overflow: hidden` prevents layout breaks
+- **Positioning ready**: `position: relative` for absolute children
+
+## Core Principles
+
+AdorableCSS is built on three core principles:
+
+### 1. Figma-First Design
+Every utility maps directly to Figma's mental model. If you know Figma, you already know AdorableCSS.
+
+```html
+<!-- Figma: Auto Layout, Vertical, Gap: 16 -->
+<div class="vbox gap(lg)">
+  <!-- Content here -->
+</div>
+
+<!-- Figma: Fill container -->
+<div class="w(fill)">Content</div>
+```
+
+### 2. Declarative Syntax
+Write what you mean. `vbox gap(lg)` is clearer than memorizing flexbox properties.
+
+```html
+<!-- Clear intent -->
+<div class="hbox(between) gap(md)">
+  <span>Label</span>
+  <button>Action</button>
+</div>
+```
+
+### 3. Zero Runtime
+All utilities compile to pure CSS. No JavaScript, no runtime overhead, just fast, cached stylesheets.
+
+## Next Steps
+
+Now that you have AdorableCSS installed, explore these topics:
+
+- [Syntax Reference](/docs/syntax) - Learn the complete syntax
+- [Layout System](/docs/layout) - Master our Figma-inspired layout utilities
+- [Design Tokens](/docs/tokens) - Understand our design token system
+- [Smart Containers](/docs/smart-containers) - Dive deeper into container utilities
+- [Examples](/docs/examples) - See real-world examples
+
+Ready to build something amazing? Let's go! 🚀

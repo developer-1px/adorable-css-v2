@@ -9,8 +9,8 @@
   <!-- Header -->
   <header class="w(fill) py(3xl) bg(white) shadow(sm)">
     <div class="container(xl) text(center)">
-      <h1 class="font(5xl) bold c(gray-900) mb(lg)">
-        <span class="bg(135deg/purple-400,pink-400) bg-clip(text) text-fill-color(transparent)">
+      <h1 class="bold font(5xl) c(gray-900) mb(lg)">
+        <span class="bg(135deg/purple-400..pink-400) bg-clip(text) text-fill-color(transparent)">
           AdorableCSS
         </span>
         Showroom
@@ -51,7 +51,7 @@
                     <Heart size="24" class="c(white)" />
                   </div>
                   <div class="flex(1)">
-                    <h3 class="font(xl) bold c(white) mb(xs)">Glass Card</h3>
+                    <h3 class="bold font(xl) c(white) mb(xs)">Glass Card</h3>
                     <p class="font(sm) c(white.8)">Stunning glassmorphism effect</p>
                   </div>
                 </div>
@@ -61,7 +61,7 @@
               </div>
             </div>
             <div class="showcase-info p(lg) bg(white) r(0/0/xl/xl)">
-              <h4 class="font(md) bold c(gray-900) mb(sm)">Glassmorphism Card</h4>
+              <h4 class="bold font(md) c(gray-900) mb(sm)">Glassmorphism Card</h4>
               <p class="font(sm) c(gray-600)">backdrop-blur + transparent bg</p>
             </div>
           </div>
@@ -72,7 +72,7 @@
           <div class="showcase-item">
             <div class="showcase-preview p(2xl) bg(white) r(xl) h(300px) vbox(pack)">
               <div class="vbox gap(lg) w(full)">
-                <button class="px(xl) py(lg) bg(135deg/purple-400,pink-400) c(white) r(lg) font(md) semibold shadow(lg) hover:shadow(2xl) hover:scale(1.05) transition">
+                <button class="px(xl) py(lg) bg(135deg/purple-400..pink-400) c(white) r(lg) font(md) semibold shadow(lg) hover:shadow(2xl) hover:scale(1.05) transition">
                   Gradient Primary
                 </button>
                 <button class="px(xl) py(lg) bg(blue-400..teal-400/to-r) c(white) r(lg) font(md) semibold shadow(lg) hover:shadow(2xl) hover:scale(1.05) transition">
@@ -84,7 +84,7 @@
               </div>
             </div>
             <div class="showcase-info p(lg) bg(white) r(0/0/xl/xl)">
-              <h4 class="font(md) bold c(gray-900) mb(sm)">Gradient Buttons</h4>
+              <h4 class="bold font(md) c(gray-900) mb(sm)">Gradient Buttons</h4>
               <p class="font(sm) c(gray-600)">Beautiful gradient effects</p>
             </div>
           </div>
@@ -99,13 +99,13 @@
                   <div class="w(60px) h(60px) bg(gray-100) r(xl) vbox(pack) shadow(inset/4px/4px/8px/rgba(0,0,0,0.1),inset/-4px/-4px/8px/white)">
                     <Star size="24" class="c(yellow-500)" />
                   </div>
-                  <h3 class="font(xl) bold c(gray-800)">Neumorphism</h3>
+                  <h3 class="bold font(xl) c(gray-800)">Neumorphism</h3>
                   <p class="font(sm) c(gray-600)">Soft UI design trend with depth</p>
                 </div>
               </div>
             </div>
             <div class="showcase-info p(lg) bg(white) r(0/0/xl/xl)">
-              <h4 class="font(md) bold c(gray-900) mb(sm)">Neumorphic Card</h4>
+              <h4 class="bold font(md) c(gray-900) mb(sm)">Neumorphic Card</h4>
               <p class="font(sm) c(gray-600)">Soft shadows & inset effects</p>
             </div>
           </div>
@@ -119,7 +119,7 @@
                 <div class="layer(top+left) w(full) h(full) bg(gradient-to-br/purple-600/pink-600) opacity(0) group-hover:opacity(0.2) transition"></div>
                 <div class="relative z(10)">
                   <ShoppingBag size="32" class="c(purple-400) mb(lg) group-hover:scale(1.2) transition" />
-                  <h3 class="font(xl) bold c(white) mb(sm)">Hover Effects</h3>
+                  <h3 class="bold font(xl) c(white) mb(sm)">Hover Effects</h3>
                   <p class="font(sm) c(gray-400) group-hover:c(gray-300) transition">
                     Smooth animations on hover
                   </p>
@@ -128,7 +128,7 @@
               </div>
             </div>
             <div class="showcase-info p(lg) bg(white) r(0/0/xl/xl)">
-              <h4 class="font(md) bold c(gray-900) mb(sm)">Animated Hover Card</h4>
+              <h4 class="bold font(md) c(gray-900) mb(sm)">Animated Hover Card</h4>
               <p class="font(sm) c(gray-600)">Group hover + transitions</p>
             </div>
           </div>
@@ -154,7 +154,7 @@
               </div>
             </div>
             <div class="showcase-info p(lg) bg(white) r(0/0/xl/xl)">
-              <h4 class="font(md) bold c(gray-900) mb(sm)">Floating Label Input</h4>
+              <h4 class="bold font(md) c(gray-900) mb(sm)">Floating Label Input</h4>
               <p class="font(sm) c(gray-600)">Modern form inputs</p>
             </div>
           </div>
@@ -168,7 +168,7 @@
                 <!-- Front -->
                 <div class="layer(fill) bg(gradient-to-br/purple-500/pink-500) r(xl) vbox(pack) backface(hidden)">
                   <Play size="48" class="c(white) mb(lg)" />
-                  <h3 class="font(xl) bold c(white)">3D Flip Card</h3>
+                  <h3 class="bold font(xl) c(white)">3D Flip Card</h3>
                 </div>
                 <!-- Back -->
                 <div class="layer(fill) bg(gradient-to-br/blue-500/teal-500) r(xl) vbox(pack) backface(hidden) rotate-y(180deg)">

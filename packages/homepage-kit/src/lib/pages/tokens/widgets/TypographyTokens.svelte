@@ -11,10 +11,10 @@
     
     <div class="vbox gap(md)">
       {#each Object.entries(defaultTokens.font).slice(0,6) as [key, value]}
-        <div class="token-row p(md) bg(to-right/rgb(249,250,251),transparent) hover:bg(to-right/rgb(239,246,255),transparent) r(xl) transition group">
+        <div class="token-row p(md) bg(to-right/rgb(249,250,251)..transparent) hover:bg(to-right/rgb(239,246,255)..transparent) r(xl) transition group">
           <div class="hbox(middle) gap(md)">
             <div class="token-info min-w(3xl)">
-              <code class="font(sm) font(semibold)" style="background: linear-gradient(135deg,#3b82f6,#8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+              <code class="600 font(sm) c(135deg/#3b82f6..#8b5cf6)">
                 font({key})
               </code>
               <div class="font(xs) c(gray-600) mt(xs) font-family(mono)">{value}</div>
@@ -35,9 +35,9 @@
     
     <div class="grid grid-cols(1) md:grid-cols(2) gap(md)">
       {#each Object.entries(defaultTokens.lineHeight) as [key, value]}
-        <div class="token-item p(md) bg(to-br/rgb(250,245,255),rgb(253,242,248)) r(xl) b(1/purple-100) hover:shadow(lg) transition group">
+        <div class="token-item p(md) bg(to-br/rgb(250,245,255)..rgb(253,242,248)) r(xl) b(1/purple-100) hover:shadow(lg) transition group">
           <div class="hbox(middle) gap(sm) mb(sm)">
-            <code class="font(sm) font(semibold)" style="background: linear-gradient(135deg,#3b82f6,#8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">line-height({key})</code>
+            <code class="600 font(sm) c(135deg/#3b82f6..#8b5cf6)">line-height({key})</code>
             <span class="px(sm) py(xs) bg(white.8) r(full) font(xs) c(purple-700) b(1/purple-200)">{value}</span>
           </div>
           <p class="font(sm) c(gray-700) group-hover:c(gray-900) transition" style="line-height: {value}">
@@ -58,7 +58,7 @@
       {#each Object.entries(defaultTokens.letterSpacing) as [key, value]}
         <div class="token-row p(md)">
           <div class="hbox(middle) gap(md) mb(sm)">
-            <code class="font(sm) font(semibold)" style="background: linear-gradient(135deg,#3b82f6,#8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">letter-spacing({key})</code>
+            <code class="600 font(sm) c(135deg/#3b82f6..#8b5cf6)">letter-spacing({key})</code>
             <span class="px(sm) py(xs) bg(white.8) r(full) font(xs) c(orange-700) b(1/orange-200)">{value}</span>
           </div>
           <p class="font(lg) c(gray-800) group-hover:scale(1.02) transition transform-origin(left)" style="letter-spacing: {value}">
@@ -76,9 +76,9 @@
     
     <div class="grid grid-cols(3) md:grid-cols(5) gap(md)">
       {#each Object.entries(defaultTokens.fontWeight) as [key, value], i}
-        <div class="token-item p(md) bg(to-br/rgb(239,246,255),rgb(236,254,255)) r(xl) text(center) b(1/blue-100) hover:shadow(lg) hover:scale(1.05) transition group">
-          <div class="font(3xl) mb(sm) group-hover:scale(1.02) transition" style="background: linear-gradient(135deg,#3b82f6,#8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; font-weight: {value}">Aa</div>
-          <code class="font(sm) font(semibold) c(blue-700)">{key}</code>
+        <div class="token-item p(md) bg(to-br/rgb(239,246,255)..rgb(236,254,255)) r(xl) text(center) b(1/blue-100) hover:shadow(lg) hover:scale(1.05) transition group">
+          <div class="font(3xl) mb(sm) group-hover:scale(1.02) transition c(135deg/#3b82f6..#8b5cf6)" style="font-weight: {value}">Aa</div>
+          <code class="600 font(sm) c(blue-700)">{key}</code>
           <div class="font(xs) c(gray-600) font-family(mono)">{value}</div>
         </div>
       {/each}

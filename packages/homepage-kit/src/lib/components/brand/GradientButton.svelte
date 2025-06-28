@@ -7,10 +7,10 @@
   export let onClick: (() => void) | undefined = undefined;
   
   const gradients = {
-    adorable: 'bg(135deg/purple-400,pink-400)',
-    ocean: 'bg(90deg/blue-400,teal-400)',
-    sunset: 'bg(45deg/orange-400,rose-400)',
-    forest: 'bg(120deg/green-400,emerald-400)'
+    adorable: 'bg(brand)',
+    ocean: 'bg(90deg/blue-400..teal-400)',
+    sunset: 'bg(45deg/orange-400..rose-400)',
+    forest: 'bg(120deg/green-400..emerald-400)'
   };
   
   const sizes = {

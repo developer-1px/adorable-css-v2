@@ -6,7 +6,6 @@ const proseStyles: Record<string, CSSRule> = {
     'color': '#1D1D1F',
     'line-height': '1.75',
     'font-size': '17px',
-    'max-width': '65ch'
   },
   
   // Headings with Apple's typographic scale
@@ -86,16 +85,17 @@ const proseStyles: Record<string, CSSRule> = {
     'color': '#86868B'
   },
   
-  // Code blocks with modern styling
+  // Code blocks with syntax highlighting support
   pre: {
-    'background': '#F5F5F7',
-    'border': '1px solid rgba(0, 0, 0, 0.08)',
+    'background': '#0d1117',
+    'border': '1px solid rgba(255, 255, 255, 0.1)',
     'border-radius': '12px',
     'padding': '24px',
     'overflow-x': 'auto',
     'margin': '32px 0',
     'font-size': '14px',
-    'line-height': '1.6'
+    'line-height': '1.6',
+    'color': '#f0f6fc'
   },
   
   code: {
@@ -103,13 +103,15 @@ const proseStyles: Record<string, CSSRule> = {
     'font-size': '0.85em',
     'background': 'rgba(0, 0, 0, 0.04)',
     'padding': '3px 6px',
-    'border-radius': '4px'
+    'border-radius': '4px',
+    'color': '#c9d1d9'
   },
   
   'pre code': {
     'background': 'none',
     'padding': '0',
-    'font-size': 'inherit'
+    'font-size': 'inherit',
+    'color': 'inherit'
   },
   
   // Blockquotes

@@ -7,7 +7,7 @@
   <div class="vbox(pack) gap(2xl)">
     <!-- Hero Section -->
     <div class="vbox(pack) gap(lg) text(center)">
-      <h1 class="font(5xl) bold bg(135deg/#667eea,#764ba2) bg-clip(text) text-fill-color(transparent)">
+      <h1 class="font(5xl) bold bg(135deg/#667eea..#764ba2) bg-clip(text) text-fill-color(transparent)">
         Welcome to AdorableCSS
       </h1>
       <p class="font(xl) c(gray-600) max-w(2xl) line-height(relaxed)">
@@ -18,7 +18,7 @@
     <!-- Feature Cards -->
     <div class="grid grid-cols(1) md:grid-cols(3) gap(xl) w(full)">
       <div class="bg(white) p(xl) r(2xl) shadow(lg) hover:shadow(xl) transition group">
-        <div class="w(60px) h(60px) bg(135deg/#667eea,#764ba2) r(full) hbox(pack) mb(lg) group-hover:rotate(360) transition duration(1000)">
+        <div class="w(60px) h(60px) bg(135deg/#667eea..#764ba2) r(full) hbox(pack) mb(lg) group-hover:rotate(360) transition duration(1000)">
           <span class="font(2xl)">🎨</span>
         </div>
         <h3 class="font(xl) bold mb(sm)">Beautiful Design</h3>
@@ -26,7 +26,7 @@
       </div>
       
       <div class="bg(white) p(xl) r(2xl) shadow(lg) hover:shadow(xl) transition group">
-        <div class="w(60px) h(60px) bg(135deg/#f093fb,#f5576c) r(full) hbox(pack) mb(lg) group-hover:rotate(360) transition duration(1000)">
+        <div class="w(60px) h(60px) bg(135deg/#f093fb..#f5576c) r(full) hbox(pack) mb(lg) group-hover:rotate(360) transition duration(1000)">
           <span class="font(2xl)">⚡</span>
         </div>
         <h3 class="font(xl) bold mb(sm)">Lightning Fast</h3>
@@ -34,7 +34,7 @@
       </div>
       
       <div class="bg(white) p(xl) r(2xl) shadow(lg) hover:shadow(xl) transition group">
-        <div class="w(60px) h(60px) bg(135deg/#4facfe,#00f2fe) r(full) hbox(pack) mb(lg) group-hover:rotate(360) transition duration(1000)">
+        <div class="w(60px) h(60px) bg(135deg/#4facfe..#00f2fe) r(full) hbox(pack) mb(lg) group-hover:rotate(360) transition duration(1000)">
           <span class="font(2xl)">🚀</span>
         </div>
         <h3 class="font(xl) bold mb(sm)">Developer Friendly</h3>
@@ -43,7 +43,7 @@
     </div>
 
     <!-- CTA Button -->
-    <button class="px(2xl) py(lg) bg(135deg/#667eea,#764ba2) c(white) r(full) font(lg) semibold shadow(xl) hover:shadow(2xl) hover:transform(translateY(-2px)) transition">
+    <button class="px(2xl) py(lg) bg(135deg/#667eea..#764ba2) c(white) r(full) font(lg) bold(semi) shadow(xl) hover:shadow(2xl) hover:transform(translateY(-2px)) transition">
       Get Started →
     </button>
   </div>
@@ -65,7 +65,7 @@
     },
     {
       name: 'Login Form',
-      code: `<div class="hbox(pack) min-h(screen) bg(135deg/#667eea,#764ba2)">
+      code: `<div class="hbox(pack) min-h(screen) bg(135deg/#667eea..#764ba2)">
   <div class="glass(30/0.1/white) p(2xl) r(2xl) w(400px) shadow(2xl)">
     <h2 class="font(2xl) bold text(center) mb(xl)">Welcome Back</h2>
     
@@ -82,7 +82,7 @@
           class="w(full) px(lg) py(md) r(lg) b(1/gray-300) focus:b(2/blue-500) transition" />
       </div>
       
-      <button class="w(full) py(md) bg(135deg/#667eea,#764ba2) c(white) r(lg) medium hover:opacity(0.9) transition">
+      <button class="w(full) py(md) bg(135deg/#667eea..#764ba2) c(white) r(lg) medium hover:opacity(0.9) transition">
         Sign In
       </button>
       
@@ -106,7 +106,7 @@
         <div class="hbox(middle) gap(auto)">
           <div>
             <p class="font(sm) c(gray-600) mb(xs)">Total Revenue</p>
-            <p class="font(2xl) bold">$45,231</p>
+            <p class="bold font(2xl)">$45,231</p>
             <p class="font(sm) c(green-600) mt(xs)">↑ 12% from last month</p>
           </div>
           <div class="w(48px) h(48px) bg(blue-100) r(full) hbox(pack)">
@@ -119,7 +119,7 @@
         <div class="hbox(middle) gap(auto)">
           <div>
             <p class="font(sm) c(gray-600) mb(xs)">Active Users</p>
-            <p class="font(2xl) bold">2,345</p>
+            <p class="bold font(2xl)">2,345</p>
             <p class="font(sm) c(green-600) mt(xs)">↑ 8% from last week</p>
           </div>
           <div class="w(48px) h(48px) bg(green-100) r(full) hbox(pack)">
@@ -132,7 +132,7 @@
         <div class="hbox(middle) gap(auto)">
           <div>
             <p class="font(sm) c(gray-600) mb(xs)">Conversion Rate</p>
-            <p class="font(2xl) bold">3.24%</p>
+            <p class="bold font(2xl)">3.24%</p>
             <p class="font(sm) c(red-600) mt(xs)">↓ 2% from last week</p>
           </div>
           <div class="w(48px) h(48px) bg(purple-100) r(full) hbox(pack)">
@@ -145,7 +145,7 @@
         <div class="hbox(middle) gap(auto)">
           <div>
             <p class="font(sm) c(gray-600) mb(xs)">Satisfaction</p>
-            <p class="font(2xl) bold">98.5%</p>
+            <p class="bold font(2xl)">98.5%</p>
             <p class="font(sm) c(green-600) mt(xs)">↑ 5% from last month</p>
           </div>
           <div class="w(48px) h(48px) bg(yellow-100) r(full) hbox(pack)">
@@ -248,9 +248,9 @@
   });
 </script>
 
-<div class="playground-page vbox min-h(screen) bg(to-bottom/#fafbfc,#e9ecef)">
+<div class="playground-page vbox min-h(screen) bg(to-bottom/#fafbfc..#e9ecef)">
   <!-- Enhanced Header -->
-  <div class="bg(135deg/#667eea,#764ba2) relative clip">
+  <div class="bg(135deg/#667eea..#764ba2) relative clip">
     <!-- Animated background patterns -->
     <div class="layer(fill) opacity(0.2)">
       <div class="layer(top:-100+left:-100) w(300px) h(300px) bg(white) r(full) blur(100px)" style="animation: pulse 4s ease-in-out infinite;"></div>

@@ -1,18 +1,8 @@
 import type { RuleHandler, CSSRule } from '../../rules/types';
+import { isToken, getTokenVar } from '../../design-system/tokens/index';
 
-const sizeMap: Record<string, string> = {
-  xs: '480px',
-  sm: '640px',
-  md: '768px',
-  lg: '1024px',
-  xl: '1280px',
-  '2xl': '1536px',
-  '3xl': '1920px',
-  '4xl': '2560px',
-  '5xl': '3200px',
-  '6xl': '3840px',
-  '7xl': '4480px',
-  full: '100%',
+// Legacy container sizes (for backward compatibility)
+const legacySizeMap: Record<string, string> = {
   narrow: '600px',
   wide: '1600px'
 };
@@ -27,17 +17,25 @@ const paddingMap: Record<string, string> = {
   '2xl': '3rem'
 };
 
-// container - Basic container
+// container - Apple-inspired responsive container
 export const container: RuleHandler = (args?: string): CSSRule => {
   if (!args) {
-    // Level 1: Basic container
+    // Default container with responsive padding
     return {
       'width': '100%',
-      'max-width': 'var(--container-xl, 1280px)',
+      'max-width': '980px',  // Apple's default content width
       'margin-left': 'auto',
       'margin-right': 'auto',
-      'padding-left': 'var(--container-px-responsive, 1rem)',
-      'padding-right': 'var(--container-px-responsive, 1rem)'
+      'padding-left': 'max(22px, env(safe-area-inset-left))',
+      'padding-right': 'max(22px, env(safe-area-inset-right))',
+      '@media (min-width: 735px)': {
+        'padding-left': '24px',
+        'padding-right': '24px'
+      },
+      '@media (min-width: 1069px)': {
+        'padding-left': '32px',
+        'padding-right': '32px'
+      }
     };
   }
 
@@ -46,21 +44,43 @@ export const container: RuleHandler = (args?: string): CSSRule => {
   const size = parts[0];
   const paddingPart = parts[1];
 
-  // Base container styles
+  // Apple-inspired container sizes
+  const containerSizes: Record<string, string> = {
+    'compact': '692px',    // Compact reading width
+    'default': '980px',    // Standard content
+    'wide': '1190px',      // Wide content
+    'full': '100%',        // Full width
+    // Legacy support
+    'narrow': '600px',
+    'wide-legacy': '1600px'
+  };
+
+  // Base container styles with responsive padding
   const styles: CSSRule = {
     'width': '100%',
     'margin-left': 'auto',
-    'margin-right': 'auto'
+    'margin-right': 'auto',
+    'padding-left': 'max(22px, env(safe-area-inset-left))',
+    'padding-right': 'max(22px, env(safe-area-inset-right))',
+    '@media (min-width: 735px)': {
+      'padding-left': '24px',
+      'padding-right': '24px'
+    },
+    '@media (min-width: 1069px)': {
+      'padding-left': '32px',
+      'padding-right': '32px'
+    }
   };
 
   // Set max-width based on size
-  if (size === 'full') {
-    styles['max-width'] = '100%';
-  } else if (sizeMap[size]) {
-    styles['max-width'] = `var(--container-${size}, ${sizeMap[size]})`;
+  if (containerSizes[size]) {
+    styles['max-width'] = containerSizes[size];
+  } else if (isToken(size, 'size')) {
+    // Use size tokens
+    styles['max-width'] = getTokenVar('size', size);
   } else {
-    // Default to xl if size not recognized
-    styles['max-width'] = 'var(--container-xl, 1280px)';
+    // Default to standard width
+    styles['max-width'] = '980px';
   }
 
   // Handle padding

@@ -12,6 +12,7 @@ import {
   type ColorThemeOptions,
   type OKLCH
 } from './advanced-colors';
+import { setColorPalette, buildSemanticColors, semanticColors, type SemanticColorConfig } from '../tokens/index';
 
 // Export the advanced color system types
 export type { ColorThemeOptions, OKLCH };
@@ -85,12 +86,24 @@ export const themes: Record<string, ColorTheme> = {
 // Current active theme and color system
 let currentTheme: ColorTheme = themes.default;
 let colorSystem = createAdvancedColorSystem(currentTheme.options);
-
-
+let currentSemanticConfig: SemanticColorConfig = semanticColors;
 
 // Generate color palette using the advanced system
 export function generateColorPalette(): Record<string, string> {
-  return colorSystem.flatPalette;
+  // Get base palette
+  const basePalette = colorSystem.flatPalette;
+  
+  // Update token system with palette
+  setColorPalette(basePalette);
+  
+  // Build semantic colors
+  const semanticPalette = buildSemanticColors(currentSemanticConfig);
+  
+  // Merge palettes
+  return {
+    ...basePalette,
+    ...semanticPalette
+  };
 }
 
 /**
@@ -100,13 +113,24 @@ export function setTheme(themeName: string): Record<string, string> {
   if (themes[themeName]) {
     currentTheme = themes[themeName];
     colorSystem = createAdvancedColorSystem(currentTheme.options);
-    colorPalette = colorSystem.flatPalette;
+    
+    // Regenerate palette with semantic colors
+    colorPalette = generateColorPalette();
     
     // Update color rules
     Object.assign(colorRules, colorSystem.colorRules);
     
     return colorPalette;
   }
+  return colorPalette;
+}
+
+/**
+ * Configure semantic colors
+ */
+export function configureSemanticColors(config: SemanticColorConfig): Record<string, string> {
+  currentSemanticConfig = { ...semanticColors, ...config };
+  colorPalette = generateColorPalette();
   return colorPalette;
 }
 
@@ -186,7 +210,7 @@ export function getNestedColorPalette(): Record<string, Record<string, string>> 
 }
 
 // Generate initial palette with advanced system
-export let colorPalette = colorSystem.flatPalette;
+export let colorPalette = generateColorPalette();
 
 // Enhanced color rule handlers using the advanced system
 export const colorRules: Record<string, RuleHandler> = {
@@ -197,6 +221,16 @@ export const colorRules: Record<string, RuleHandler> = {
     if (!value) return {};
     
     if (value === "current") return { color: "currentColor" };
+    
+    // Handle special brand gradient for text
+    if (value === 'brand' || value === 'gradient-brand') {
+      return {
+        background: colorPalette['brand-gradient-text'] || 'linear-gradient(90deg, #8b5cf6, #ec4899)',
+        "-webkit-background-clip": "text",
+        "background-clip": "text", 
+        "-webkit-text-fill-color": "transparent",
+      };
+    }
 
     // c(135deg/color1..color2..color3) - full gradient syntax matching bg() utility  
     if (value.includes('/') && value.includes('..')) {
@@ -275,6 +309,11 @@ export const colorRules: Record<string, RuleHandler> = {
   // Background color
   bg: (value?: string): CSSRule => {
     if (!value) return {};
+    
+    // Handle special brand gradient
+    if (value === 'brand' || value === 'gradient-brand') {
+      return { background: colorPalette['brand-gradient'] || 'linear-gradient(135deg, #8b5cf6, #ec4899)' };
+    }
     
     // Handle gradient syntax - direction first: 135deg/purple-500..pink-500
     if (value.includes('..')) {
@@ -628,6 +667,7 @@ export const colorsPlugin = {
   adjustCurrentTheme,
   generateColorVariables,
   getNestedColorPalette,
+  configureSemanticColors,
   
   // Advanced utilities
   applyThemeAdjustments,
