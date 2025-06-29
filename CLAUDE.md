@@ -73,6 +73,7 @@ packages/adorable-css-core/src/
 Rules are registered with priorities to ensure proper cascade order:
 ```typescript
 enum RulePriority {
+  RESET = 0,          // CSS resets and normalizations
   COMPONENT = 100,    // Pre-built components (card, btn, heading)
   LAYOUT = 200,       // Layout utilities (hbox, vbox, grid)
   UTILITY = 300,      // General utilities (c, bg, p, m)
@@ -81,16 +82,25 @@ enum RulePriority {
 }
 ```
 
+#### Parser Architecture
+The parser uses a custom tokenizer that processes AdorableCSS syntax:
+1. **Tokenization**: Splits input into tokens (function names, values, operators)
+2. **AST Generation**: Builds abstract syntax tree from tokens
+3. **CSS Generation**: Transforms AST into CSS using rule handlers
+4. **Value Processing**: Smart unit conversion and calculations
+
 #### Plugin Architecture
 - Rules can be regular CSS objects or string rules (AdorableCSS classes)
 - Support for hybrid rules that return both CSS and class names
 - Extensible system for custom rules, keyframes, and tokens
+- Auto-injection system for design tokens on import
 
 #### Smart Parsing
 - Handles complex expressions like `layer(top:20+left:30)`
 - Supports pseudo-class prefixes: `hover:scale(1.05)`, `focus:c(blue-500)`
 - Responsive prefixes: `md:w(full)`, `lg:grid(3)`
 - Gradient syntax: `bg(purple-500..pink-500/135deg)` or `bg(primary..accent/to-br)`
+- Arithmetic operations in position values: `(100%-xs,top+20)`
 
 ## Commands
 
@@ -122,10 +132,13 @@ pnpm check          # Run TypeScript type checking
 ```bash
 # Run a specific test file
 cd packages/adorable-css-core
-pnpm vitest run src/parser/parser.test.ts
+pnpm vitest run src/__tests__/rules.test.ts
 
 # Run tests in watch mode for development
 pnpm vitest
+
+# Run tests with UI browser
+pnpm test:ui
 ```
 
 ### Homepage-Specific Commands
@@ -135,7 +148,14 @@ pnpm lint            # Run ESLint checks
 pnpm format          # Format code with Prettier
 pnpm check:watch     # Run svelte-check in watch mode
 pnpm build:gh-pages  # Build for GitHub Pages deployment
+pnpm deploy:gh-pages # Build and prepare for GitHub Pages with CNAME
 ```
+
+### Homepage Development Notes
+- The homepage uses SvelteKit 5 with MDX support via mdsvex
+- Base path is configured for GitHub Pages (`/adorable-css-v2` in production)
+- MDX files can be imported directly as Svelte components
+- Vite aliases: `adorable-css` → core package, `@` → src directory
 
 ### Release Management
 ```bash
@@ -175,13 +195,17 @@ pnpm clean           # Clean all build artifacts and caches
 
 ### Layout Patterns
 - **Figma Auto Layout**: `hbox()` (horizontal), `vbox()` (vertical)
-- **Sizing**: `w(fill)`, `w(hug)`, `w(300)`, `w(300..600)` (min-max)
-- **Smart Containers**: `64x64` creates a centered container with image optimization
+- **Container sizing**: `w(lg)`, `max-w(4xl)`, `w(prose)` - Uses container tokens for content widths
+- **Size utility**: `size(64)` (square), `size(16:9)` (aspect ratio), `size(320x200)` (dimensions), `size(text)` (max-content)
 - **Layer positioning**: `layer(center)`, `layer(top:20+left:30)`, `layer(fill/20)`
+- **Position coordinates**: `(center,center)`, `(left+20,top)`, `(100%-xs,bottom-sm)` - Intuitive positioning with arithmetic
 
 ### Gradient Syntax
 - Use `..` separator (NOT comma): `bg(purple-500..pink-500/135deg)`
-- Direction support: `/135deg`, `/to-br`, `/to-right`
+- Direction support: degrees (`/135deg`), keywords (`/to-tr`, `/to-bottom-right`)
+- Short directions: `to-tr` (top-right), `to-bl` (bottom-left), `to-tl`, `to-br`
+- Full directions: `to-top-right`, `to-bottom-left`, etc.
+- Text gradients: `c(to-tr/purple-500..pink-500)` for gradient text
 
 ## Development Guidelines
 
@@ -199,12 +223,59 @@ pnpm clean           # Clean all build artifacts and caches
 - **Framework**: Vitest with jsdom environment
 - **Test Files**: Co-located with source (`*.test.ts`) or in `__tests__/`
 - **Coverage**: V8 provider with reports
+- **Test patterns**: Test files should follow naming convention `*.test.ts` or `*.spec.ts`
+- **Run specific test**: `pnpm vitest run src/__tests__/specific-test.test.ts`
 
 ### Build Tools
 - **Library Build**: tsup with CJS/ESM outputs
 - **Documentation Site**: Vite + SvelteKit 5
 - **TypeScript**: v5.8.3 with ES2020 target
 - **Package Manager**: pnpm@10.8.0 (locked version)
+- **MDX Support**: mdsvex for .svx, .md, .mdx files with syntax highlighting
+
+## Core APIs
+
+### Main Functions
+```typescript
+// Parse AdorableCSS syntax to AST
+parseAdorableCSS(input: string): AdorableNode[]
+
+// Generate CSS from class names
+generateCSS(classNames: string[]): string
+
+// Generate CSS with options
+generateCSSFromAdorableCSS(classes: string[], options?: GenerateCSSOptions): string
+
+// Get rule handler by name
+getRuleHandler(name: string): RuleHandler | undefined
+```
+
+### Token System
+```typescript
+// Auto-inject design tokens (happens on import by default)
+autoInjectTokens(): void
+
+// Configure auto-injection
+configureAutoInject(config: { enabled: boolean }): void
+
+// Check if tokens are injected
+isTokensInjected(): boolean
+
+// Generate token CSS
+generateTokenCSS(): string
+```
+
+### Color System
+```typescript
+// Set theme
+setTheme(themeName: string): void
+
+// Get current theme
+getCurrentTheme(): string
+
+// Configure semantic colors
+configureSemanticColors(config: Record<string, string>): void
+```
 
 ## Extension System
 Create custom plugins by adding to `extensions/`:
@@ -224,3 +295,4 @@ export const myExtension = {
 - **Development Communication**: 항상 중간중간이라도 뭔가 보여줄 수 있는걸 먼저해줘
 - **Page Design Commitment**: 지금부터 홈페이지의 모든 페이지 디자인은 adorable-css-v2 component만으로 만들거야.
 - 언제나 내가 볼수 있는걸 먼저 세팅하고 조금씩 점진적으로 내가 볼 수 있도록 해줘 한번에 다 만들려고 하지 말고
+- 좋아 그전에 헷갈리지 않게 pages에서 쓰는건 pages로 공통으로 쓰는거 lib에 

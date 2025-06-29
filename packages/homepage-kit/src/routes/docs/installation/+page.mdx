@@ -1,0 +1,205 @@
+# Installation
+
+Get AdorableCSS up and running in your project in minutes.
+
+## Package Manager Installation
+
+### npm
+```bash
+npm install adorable-css
+```
+
+### yarn
+```bash
+yarn add adorable-css
+```
+
+### pnpm
+```bash
+pnpm add adorable-css
+```
+
+## CDN Usage
+
+For quick prototyping or simple projects, use our CDN:
+
+```html
+<!-- Latest version -->
+<script src="https://unpkg.com/adorable-css@latest/dist/adorable.min.js"></script>
+
+<!-- Specific version -->
+<script src="https://unpkg.com/adorable-css@2.0.0/dist/adorable.min.js"></script>
+```
+
+## Framework Integration
+
+### Vanilla HTML
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://unpkg.com/adorable-css@latest/dist/adorable.min.js"></script>
+</head>
+<body>
+  <div class="hbox gap(4) p(6)">
+    <div class="size(64) bg(purple-500) r(lg)"></div>
+    <p class="font(lg) c(gray-700)">Hello AdorableCSS!</p>
+  </div>
+</body>
+</html>
+```
+
+### React/Next.js
+
+```javascript
+// Import in your main app file
+import 'adorable-css';
+
+function App() {
+  return (
+    <div className="vbox gap(6) p(8)">
+      <h1 className="font(2xl) bold c(gray-900)">My App</h1>
+      <button className="button(primary)">Get Started</button>
+    </div>
+  );
+}
+```
+
+### Vue/Nuxt
+
+```javascript
+// nuxt.config.js or main.js
+import 'adorable-css';
+
+// In your Vue component
+<template>
+  <div class="card p(6)">
+    <h2 class="font(xl) bold mb(4)">{{ title }}</h2>
+    <p class="c(gray-600)">{{ description }}</p>
+  </div>
+</template>
+```
+
+### SvelteKit
+
+```javascript
+// app.html or main layout
+import 'adorable-css';
+
+// In your Svelte component
+<div class="hbox(middle) gap(4) p(6)">
+  <div class="size(48) bg(gradient/purple..pink) r(full)"></div>
+  <h3 class="font(lg) bold">Welcome to SvelteKit</h3>
+</div>
+```
+
+## Configuration
+
+### Basic Configuration
+
+Create an `adorable.config.js` file in your project root:
+
+```javascript
+export default {
+  // Auto-inject design tokens
+  autoInject: true,
+  
+  // Theme configuration
+  theme: 'light', // 'light' | 'dark' | 'auto'
+  
+  // Custom prefix for classes
+  prefix: '', // e.g., 'tw-' would make classes like 'tw-hbox'
+  
+  // Custom design tokens
+  tokens: {
+    colors: {
+      primary: '#8b5cf6',
+      secondary: '#ec4899'
+    },
+    spacing: {
+      xs: '0.5rem',
+      sm: '1rem'
+    }
+  }
+};
+```
+
+### Advanced Configuration
+
+```javascript
+export default {
+  // Disable auto-injection
+  autoInject: false,
+  
+  // Custom CSS injection point
+  injectTo: 'head', // 'head' | 'body' | custom selector
+  
+  // Plugin configuration
+  plugins: [
+    // Add custom plugins
+  ],
+  
+  // Development options
+  dev: {
+    // Show warnings for unknown classes
+    warnings: true,
+    
+    // Enable debug mode
+    debug: false
+  }
+};
+```
+
+## Environment Setup
+
+### TypeScript Support
+
+AdorableCSS includes full TypeScript definitions. No additional setup required!
+
+```typescript
+// Types are automatically available
+const className: string = 'hbox gap(4) p(6)';
+```
+
+### Build Tools
+
+#### Vite
+```javascript
+// vite.config.js
+import { defineConfig } from 'vite';
+
+export default defineConfig({
+  // AdorableCSS works out of the box with Vite
+  // No additional configuration needed
+});
+```
+
+#### Webpack
+```javascript
+// webpack.config.js
+module.exports = {
+  // AdorableCSS CSS is automatically injected
+  // No additional loaders required
+};
+```
+
+## Verification
+
+Test your installation with this simple example:
+
+```html
+<div class="card p(6) m(4) shadow(md)">
+  <h3 class="font(lg) bold c(gray-900) mb(2)">Installation Complete!</h3>
+  <p class="c(gray-600)">AdorableCSS is working correctly.</p>
+  <button class="button(primary) mt(4)">Continue Setup</button>
+</div>
+```
+
+If you see a styled card with proper spacing and colors, you're ready to go!
+
+## Next Steps
+
+- [Quick Start Guide](/docs/quick-start) - Build your first component
+- [Core Concepts](/docs/core-concepts) - Understand the Figma-first approach
+- [Layout System](/docs/layout-system) - Master hbox, vbox, and grid

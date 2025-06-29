@@ -52,17 +52,17 @@ AdorableCSS v2 is built on a simple principle: **Your CSS should match your desi
 
 ### 2.5. Smart Containers
 ```html
-<!-- Smart Container: 64x64 = dimensions + auto-centering + image optimization -->
-<div class="64x64">
+<!-- Smart Container: size(64) = dimensions + auto-centering + image optimization -->
+<div class="size(64)">
   <img src="avatar.jpg" alt="Profile">
 </div>
 
 <!-- Different from basic dimensions -->
 <div class="w(64) h(64)">    <!-- Basic dimensions only -->
-<div class="64x64">         <!-- Smart container with layout + image optimization -->
+<div class="size(64)">         <!-- Smart container with layout + image optimization -->
 
 <!-- Perfect for profiles, icons, thumbnails -->
-<div class="48x48">⚙️</div>     <!-- Icon button -->
+<div class="size(48)">⚙️</div>     <!-- Icon button -->
 <div class="120x80">            <!-- Thumbnail -->
   <img src="thumbnail.jpg">
 </div>

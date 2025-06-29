@@ -1,5 +1,5 @@
 <script>
-  import PlaygroundPage from '$lib/pages/playground/PlaygroundPage.svelte';
+  import PlaygroundPage from '@/pages/playground/PlaygroundPage.svelte';
 </script>
 
 <PlaygroundPage />

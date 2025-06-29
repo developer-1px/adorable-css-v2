@@ -100,10 +100,10 @@
                       title="Click to copy: {colorValue}"
                     >
                       <div 
-                        class="1536x1536 r(md) shadow(sm) border(1/white)"
+                        class="size(40) r(md) shadow(sm) border(1/white)"
                         style="background-color: {colorValue}"
                       ></div>
-                      <div class="absolute top(100%) left(50%) translate(-50%_xs) text(center) w(max-content)">
+                      <div class="absolute (center,100%+xs) text(center) w(max-content)">
                         <div class="font(xs) c(gray-600) bg(white) p(xs) r(sm) shadow(sm) border(1/gray-200)">
                           {shade}
                         </div>

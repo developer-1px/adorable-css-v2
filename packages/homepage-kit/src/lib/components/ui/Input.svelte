@@ -15,12 +15,12 @@
   const dispatch = createEventDispatcher();
   
   const baseClasses = `
-    flex h(2xl) w(full) r(md) border(1/--colors-gray-300) bg(--colors-white) px(sm) py(xs) 
-    font(sm) ring-offset(--colors-white) file:border(0) file:bg(transparent) 
-    file:font(sm) file:medium placeholder:c(--colors-gray-500) 
-    focus-visible:outline(none) focus-visible:ring(2/--colors-primary-500) focus-visible:ring-offset(2) 
-    disabled:cursor(not-allowed) disabled:opacity(0.5) disabled:bg(--colors-gray-50)
-    hover:border(1/--colors-gray-400) transition-colors duration(150)
+    flex h(40) w(full) r(md) border(1/gray-300) bg(white) px(sm) py(xs) 
+    font(sm) file:border(0) file:bg(transparent) 
+    file:font(sm) file:medium placeholder:c(gray-500) 
+    focus-visible:outline(none) focus-visible:ring(2/blue-500) focus-visible:ring-offset(2) 
+    disabled:cursor(not-allowed) disabled:opacity(0.5) disabled:bg(gray-50)
+    hover:border(1/gray-400) transition-colors duration(150)
   `.replace(/\s+/g, ' ').trim();
   
   function handleInput(event: Event) {

@@ -1,0 +1,272 @@
+/**
+ * Documentation configuration
+ * This file defines the structure and order of documentation
+ */
+
+export interface DocSection {
+	title: string;
+	items: DocItem[];
+}
+
+export interface DocItem {
+	title: string;
+	href: string;
+	description?: string;
+	badge?: 'new' | 'beta' | 'deprecated';
+	external?: boolean; // For external markdown files
+	source?: string; // Path to external markdown file
+}
+
+export const docsConfig: DocSection[] = [
+	{
+		title: 'Getting Started',
+		items: [
+			{
+				title: 'Introduction',
+				href: '/docs/introduction',
+				description: 'Learn about AdorableCSS and its philosophy',
+				source: '/docs/mdx/introduction.mdx'
+			},
+			{
+				title: 'Getting Started',
+				href: '/docs/getting-started',
+				description: 'Complete guide to installation, configuration, and basic usage',
+				source: '/docs/mdx/getting-started.mdx'
+			},
+			{
+				title: 'Quick Start',
+				href: '/docs/quick-start',
+				description: 'Build your first component with AdorableCSS',
+				source: '/docs/mdx/quick-start.mdx'
+			},
+			{
+				title: 'Theming & Customization',
+				href: '/docs/theming',
+				description: 'Customize tokens for colors, spacing, and fonts.',
+				source: '/docs/mdx/theming.mdx',
+				badge: 'new'
+			}
+		]
+	},
+	{
+		title: 'Layout System',
+		items: [
+			{
+				title: 'Layout Fundamentals',
+				href: '/docs/layout-system',
+				description: 'Master AdorableCSS layout utilities and concepts',
+				source: '/docs/mdx/layout-system.mdx'
+			},
+			{
+				title: 'Responsive Design',
+				href: '/docs/responsive-design',
+				description: 'Create adaptive layouts with intuitive breakpoint prefixes.',
+				source: '/docs/mdx/responsive-design.mdx',
+				badge: 'new'
+			},
+			{
+				title: 'Figma Integration',
+				href: '/docs/figma-integration',
+				description: '디자인과 코드의 완벽한 연결, Auto Layout 매핑, 워크플로우 혁신',
+				source: '/docs/mdx/figma-auto-layout-mapping.mdx',
+				badge: 'new'
+			},
+			{
+				title: 'Size 유틸리티',
+				href: '/docs/smart-containers',
+				description: 'size() 유틸리티를 사용한 효율적인 크기 설정',
+				source: '/docs/mdx/smart-containers.mdx'
+			},
+			{
+				title: 'Layer 포지셔닝',
+				href: '/docs/layer-positioning',
+				description: 'Figma 스타일 절대 위치 지정 시스템',
+				source: '/docs/mdx/layer-positioning-system.mdx',
+				badge: 'new'
+			},
+			{
+				title: 'Position Coordinates',
+				href: '/docs/position-coordinates',
+				description: 'Intuitive coordinate-based positioning system',
+				source: '/docs/mdx/position-coordinates.mdx'
+			}
+		]
+	},
+	{
+		title: 'Design System',
+		items: [
+			{
+				title: 'Color System Overview',
+				href: '/docs/color-system',
+				description: 'AdorableCSS 색상 시스템 완벽 가이드',
+				source: '/docs/mdx/color-system.mdx'
+			},
+			{
+				title: 'OKLCH 색상 시스템',
+				href: '/docs/oklch-colors',
+				description: '과학적 색상 혁신과 지각적으로 균일한 색상 공간',
+				source: '/docs/mdx/oklch-color-system.mdx',
+				badge: 'new'
+			},
+			{
+				title: 'Dot Notation 투명도',
+				href: '/docs/dot-notation-transparency',
+				description: '직관적 점 표기법 투명도 시스템',
+				source: '/docs/mdx/dot-notation-transparency.mdx',
+				badge: 'new'
+			},
+			{
+				title: '고급 그라디언트',
+				href: '/docs/advanced-gradients',
+				description: '완벽한 그라디언트 파서와 방향 우선 문법',
+				source: '/docs/mdx/advanced-gradients.mdx',
+				badge: 'new'
+			},
+			{
+				title: 'Container Tokens',
+				href: '/docs/container-tokens',
+				description: 'Token system for container widths and heights',
+				source: '/docs/mdx/container-tokens.mdx'
+			}
+		]
+	},
+	{
+		title: 'Components',
+		items: [
+			{
+				title: 'Component System',
+				href: '/docs/component-system',
+				description: '함수형 컴포넌트 시스템과 shadcn/ui 스타일 구현',
+				source: '/docs/mdx/component-system.mdx',
+				badge: 'new'
+			},
+			{
+				title: 'Component Reference',
+				href: '/docs/components',
+				description: '전체 컴포넌트 API 레퍼런스와 사용법',
+				source: '/docs/mdx/components.mdx'
+			}
+		]
+	},
+	{
+		title: 'Technical Deep Dive',
+		items: [
+			{
+				title: 'Parser System',
+				href: '/docs/parser-system',
+				description: 'Building a CSS parser from scratch',
+				source: '/docs/mdx/parser-system.mdx'
+			},
+			{
+				title: 'Architecture',
+				href: '/docs/architecture',
+				description: 'AdorableCSS v2 기술 아키텍처 심층 분석',
+				source: '/docs/mdx/architecture.mdx'
+			},
+			{
+				title: 'CSS 우선순위 아키텍처',
+				href: '/docs/css-priority-architecture',
+				description: '완벽한 계층형 CSS 시스템',
+				source: '/docs/mdx/css-priority-architecture.mdx',
+				badge: 'new'
+			},
+			{
+				title: 'State Management',
+				href: '/docs/state-management',
+				description: 'Handle interactive states like hover, focus, and group-hover.',
+				source: '/docs/mdx/state-management.mdx',
+				badge: 'new'
+			},
+			{
+				title: '스마트 값 변환',
+				href: '/docs/smart-value-transformation',
+				description: '직관적 값을 완벽한 CSS로 변환하는 시스템',
+				source: '/docs/mdx/smart-value-transformation.mdx',
+				badge: 'new'
+			},
+			{
+				title: 'Rules System',
+				href: '/docs/rules-system',
+				description: 'CSS 규칙의 체계적 관리와 5단계 우선순위 시스템',
+				source: '/docs/mdx/rules-system.mdx',
+				badge: 'new'
+			},
+			{
+				title: 'Technical Innovation Guide',
+				href: '/docs/technical-innovation-guide',
+				description: 'AdorableCSS v2의 7가지 핵심 기술 혁신과 구현 철학',
+				source: '/docs/mdx/technical-innovation-guide.mdx',
+				badge: 'new'
+			}
+		]
+	},
+	{
+		title: 'API Reference',
+		items: [
+			{
+				title: 'Syntax Guide',
+				href: '/docs/syntax',
+				description: 'Complete syntax reference',
+				source: '/docs/technical/SYNTAX_UPDATES.md'
+			},
+			{
+				title: 'All Rules',
+				href: '/docs/rules',
+				description: 'Browse all available utilities',
+				source: '/docs/RULES.md'
+			},
+			{
+				title: 'JavaScript API',
+				href: '/docs/api/javascript',
+				description: 'Using AdorableCSS programmatically',
+				source: '/docs/REFERENCE.md'
+			},
+			{
+				title: 'Color Specification',
+				href: '/docs/color-spec',
+				description: 'How to use colors and opacity',
+				source: '/docs/technical/COLOR_SPECIFICATION.md'
+			}
+		]
+	},
+	{
+		title: 'Migration',
+		items: [
+			{
+				title: 'From Tailwind',
+				href: '/docs/migration/tailwind',
+				description: 'Migrating from Tailwind CSS',
+				source: '/docs/packages/homepage-kit/TAILWIND_CONVERSION_REPORT.md'
+			}
+		]
+	}
+];
+
+// Helper function to get all doc items flat
+export function getAllDocItems(): (DocItem & { section: string })[] {
+	return docsConfig.flatMap((section) =>
+		section.items.map((item) => ({ ...item, section: section.title }))
+	);
+}
+
+// Helper function to find doc by href
+export function findDocByHref(href: string): (DocItem & { section: string }) | undefined {
+	return getAllDocItems().find((item) => item.href === href);
+}
+
+// Helper function to get prev/next navigation
+export function getDocNavigation(currentHref: string) {
+	const allDocs = getAllDocItems();
+	const currentIndex = allDocs.findIndex((doc) => doc.href === currentHref);
+
+	return {
+		prev: currentIndex > 0 ? allDocs[currentIndex - 1] : null,
+		next: currentIndex < allDocs.length - 1 ? allDocs[currentIndex + 1] : null
+	};
+}
+
+// Helper function to get the first doc item
+export function getFirstDocItem(): DocItem | null {
+	const firstSection = docsConfig[0];
+	return firstSection?.items[0] || null;
+}

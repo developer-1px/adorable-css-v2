@@ -12,6 +12,7 @@ const navItems = [
   {href: '/rules', label: 'Rules'},
   {href: '/tokens', label: 'Tokens'},
   {href: '/components', label: 'Components'},
+  {href: '/showcase', label: 'Showcase'},
   {href: '/playground', label: 'Playground'}
 ]
 </script>
@@ -20,7 +21,7 @@ const navItems = [
   <div class="hbox(between) h(64) px(24)">
     <!-- Logo -->
     <a href="/" class="hbox(middle) gap(12) c(gray-900) hover:c(purple-600) transition">
-      <div class="32x32 r(lg) bg(purple-500..pink-500/135deg) shadow(sm)"></div>
+      <div class="size(32) r(lg) bg(purple-500..pink-500/135deg) shadow(sm)"></div>
       <span class="font(xl) bold">AdorableCSS</span>
     </a>
 

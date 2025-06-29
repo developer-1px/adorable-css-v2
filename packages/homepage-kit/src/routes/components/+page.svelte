@@ -1,500 +1,437 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import { Copy, Check, ChevronRight, ChevronDown } from 'lucide-svelte';
+  import { Copy, Check, Palette, Layout, Type, Sparkles, Box, Layers } from 'lucide-svelte';
+  import DocsSidebar from '$lib/components/docs/DocsSidebar.svelte';
   
-  let copiedId: string | null = null;
-  let selectedComponent: any = null;
-  let selectedExample: any = null;
-  let expandedCategories: Record<string, boolean> = {};
+  let copiedCode = '';
   
-  function copyCode(code: string, id: string) {
+  function copyCode(code: string) {
     navigator.clipboard.writeText(code);
-    copiedId = id;
-    setTimeout(() => copiedId = null, 2000);
+    copiedCode = code;
+    setTimeout(() => copiedCode = '', 2000);
   }
-  
-  function selectExample(component: any, example: any) {
-    selectedComponent = component;
-    selectedExample = example;
+
+  function scrollToSection(id: string) {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   }
-  
-  function toggleCategory(categoryTitle: string) {
-    expandedCategories[categoryTitle] = !expandedCategories[categoryTitle];
-  }
-  
-  // Component categories with examples
+
+  // Sidebar navigation items
+  $: sidebarItems = componentCategories.map(category => ({
+    title: category.title,
+    icon: category.icon,
+    color: category.color,
+    onClick: () => scrollToSection(category.title.toLowerCase()),
+    active: false
+  }));
+
   const componentCategories = [
     {
       title: 'Primitives',
       description: 'Basic building blocks for your UI',
+      icon: Box,
+      color: 'blue',
       components: [
         {
-          name: 'Buttons',
-          id: 'buttons',
+          name: 'btn()',
+          description: 'shadcn/ui inspired button component with variants and sizes',
           examples: [
-            {
-              id: 'button-variants',
-              title: 'Button Variants',
-              description: 'Different button styles for various use cases',
-              code: `<div class="vbox gap(16)">
-  <div class="hbox gap(12)">
-    <button class="btn">Default</button>
-    <button class="btn(secondary)">Secondary</button>
-    <button class="btn(destructive)">Destructive</button>
-  </div>
-  <div class="hbox gap(12)">
-    <button class="btn(outline)">Outline</button>
-    <button class="btn(ghost)">Ghost</button>
-    <a href="#" class="btn(link)">Link Button</a>
-  </div>
-</div>`
-            },
-            {
-              id: 'button-sizes',
-              title: 'Button Sizes',
-              description: 'Small, default, and large button sizes',
-              code: `<div class="hbox gap(12) items(end)">
-  <button class="btn(primary/sm)">Small</button>
-  <button class="btn(primary)">Default</button>
-  <button class="btn(primary/lg)">Large</button>
-</div>`
-            },
-            {
-              id: 'icon-buttons',
-              title: 'Icon Buttons',
-              description: 'Icon-only buttons in different sizes',
-              code: `<div class="hbox gap(16)">
-  <button class="icon-btn(sm)">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm5 11h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/>
-    </svg>
-  </button>
-  <button class="icon-btn">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
-    </svg>
-  </button>
-  <button class="icon-btn(lg)">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
-    </svg>
-  </button>
-</div>`
-            }
+            { code: 'btn', label: 'Default button' },
+            { code: 'btn(primary)', label: 'Primary variant' },
+            { code: 'btn(secondary/sm)', label: 'Secondary small' },
+            { code: 'btn(outline/lg)', label: 'Large outline' },
+            { code: 'btn(ghost)', label: 'Ghost button' },
+            { code: 'btn(destructive)', label: 'Destructive action' }
           ]
         },
         {
-          name: 'Cards',
-          id: 'cards',
+          name: 'card()',
+          description: 'Flexible card container with multiple variants and interactive states',
           examples: [
-            {
-              id: 'card-variants',
-              title: 'Card Variants',
-              description: 'Different card styles for content containers',
-              code: `<div class="vbox gap(16)">
-  <div class="card">
-    <h3 class="font(lg) bold mb(8)">Default Card</h3>
-    <p class="c(gray-600)">This is a basic card component with default styling.</p>
-  </div>
-  
-  <div class="card(elevated)">
-    <h3 class="font(lg) bold mb(8)">Elevated Card</h3>
-    <p class="c(gray-600)">This card has a stronger shadow for more emphasis.</p>
-  </div>
-  
-  <div class="card(outline)">
-    <h3 class="font(lg) bold mb(8)">Outline Card</h3>
-    <p class="c(gray-600)">This card uses a border instead of a shadow.</p>
-  </div>
-</div>`
-            },
-            {
-              id: 'interactive-card',
-              title: 'Interactive Card',
-              description: 'Card with hover effects',
-              code: `<div class="card(interactive) cursor(pointer)">
-  <h3 class="font(lg) bold mb(8)">Interactive Card</h3>
-  <p class="c(gray-600)">Hover over this card to see the interactive effect.</p>
-</div>`
-            }
+            { code: 'card', label: 'Default card' },
+            { code: 'card(elevated)', label: 'Elevated shadow' },
+            { code: 'card(outline)', label: 'Outline variant' },
+            { code: 'card(interactive)', label: 'Interactive hover' },
+            { code: 'card(glass)', label: 'Glass effect' },
+            { code: 'card(gradient/lg)', label: 'Large gradient' }
           ]
         },
         {
-          name: 'Headings',
-          id: 'headings',
+          name: 'badge()',
+          description: 'Small status indicators and labels',
           examples: [
-            {
-              id: 'heading-hierarchy',
-              title: 'Heading Hierarchy',
-              description: 'All heading levels from h1 to h6',
-              code: `<h1 class="heading(h1)">Heading 1</h1>
-<h2 class="heading(h2)">Heading 2</h2>
-<h3 class="heading(h3)">Heading 3</h3>
-<h4 class="heading(h4)">Heading 4</h4>
-<h5 class="heading(h5)">Heading 5</h5>
-<h6 class="heading(h6)">Heading 6</h6>`
-            },
-            {
-              id: 'special-headings',
-              title: 'Special Headings',
-              description: 'Display and hero heading styles',
-              code: `<h1 class="heading(display)">Display Heading</h1>
-<h1 class="heading(hero)">Hero Heading</h1>`
-            }
+            { code: 'badge', label: 'Default badge' },
+            { code: 'badge(primary)', label: 'Primary variant' },
+            { code: 'badge(success/sm)', label: 'Small success' },
+            { code: 'badge(warning)', label: 'Warning state' },
+            { code: 'badge(outline)', label: 'Outline style' },
+            { code: 'badge(accent/lg)', label: 'Large accent' }
           ]
         },
         {
-          name: 'Form Elements',
-          id: 'forms',
+          name: 'icon-box()',
+          description: 'Perfect containers for icons in cards and features',
           examples: [
-            {
-              id: 'input-fields',
-              title: 'Input Fields',
-              description: 'Text input fields in various states',
-              code: `<div class="vbox gap(12)">
-  <input type="text" class="input" placeholder="Default input">
-  <input type="text" class="input(sm)" placeholder="Small input">
-  <input type="text" class="input(lg)" placeholder="Large input">
-  <input type="text" class="input(error)" placeholder="Error state">
-  <input type="text" class="input(success)" placeholder="Success state">
-</div>`
-            },
-            {
-              id: 'textareas',
-              title: 'Textareas',
-              description: 'Multi-line text input areas',
-              code: `<div class="vbox gap(12)">
-  <textarea class="textarea" placeholder="Default textarea"></textarea>
-  <textarea class="textarea(sm)" placeholder="Small textarea" rows="2"></textarea>
-  <textarea class="textarea(lg)" placeholder="Large textarea" rows="4"></textarea>
-</div>`
-            }
+            { code: 'icon-box', label: 'Default (48px)' },
+            { code: 'icon-box(sm)', label: 'Small (32px)' },
+            { code: 'icon-box(md)', label: 'Medium (40px)' },
+            { code: 'icon-box(lg)', label: 'Large (48px)' },
+            { code: 'icon-box(xl)', label: 'Extra large (56px)' },
+            { code: 'icon-box(64)', label: 'Custom size (64px)' }
+          ]
+        },
+        {
+          name: 'input()',
+          description: 'Form input components with various states',
+          examples: [
+            { code: 'input', label: 'Default input' },
+            { code: 'input(ghost)', label: 'Ghost variant' },
+            { code: 'input(underlined)', label: 'Underlined style' },
+            { code: 'input(error)', label: 'Error state' },
+            { code: 'textarea', label: 'Text area' },
+            { code: 'textarea(lg)', label: 'Large textarea' }
           ]
         }
       ]
     },
     {
-      title: 'Patterns',
-      description: 'Complex layout components',
+      title: 'Typography',
+      description: 'Semantic heading and text components',
+      icon: Type,
+      color: 'purple',
       components: [
         {
-          name: 'Hero Sections',
-          id: 'hero',
+          name: 'heading()',
+          description: 'Semantic headings with multiple levels and variants',
           examples: [
-            {
-              id: 'hero-minimal',
-              title: 'Minimal Hero',
-              description: 'Clean and simple hero section',
-              code: `<section class="hero(minimal)">
-  <div class="hero-content">
-    <h1 class="heading(hero) mb(16)">Minimal Hero</h1>
-    <p class="font(lg) c(gray-600)">Clean and simple hero section</p>
-  </div>
-</section>`
-            },
-            {
-              id: 'hero-gradient',
-              title: 'Gradient Hero',
-              description: 'Hero with gradient background and pattern',
-              code: `<section class="hero(gradient)">
-  <div class="hero-bg(dots)"></div>
-  <div class="hero-content">
-    <h1 class="heading(hero) mb(16)">Gradient Hero</h1>
-    <p class="font(lg) c(gray-600)">Hero with gradient background</p>
-  </div>
-</section>`
-            },
-            {
-              id: 'hero-dark',
-              title: 'Dark Hero',
-              description: 'Dark themed hero section',
-              code: `<section class="hero(dark)">
-  <div class="hero-content">
-    <h1 class="heading(hero) mb(16)">Dark Hero</h1>
-    <p class="font(lg) c(gray-300)">Perfect for dark themes</p>
-  </div>
-</section>`
-            }
+            { code: 'heading(h1)', label: 'Main heading' },
+            { code: 'heading(h2)', label: 'Section heading' },
+            { code: 'heading(display)', label: 'Display heading' },
+            { code: 'heading(hero)', label: 'Hero heading' },
+            { code: 'heading(caption)', label: 'Caption text' },
+            { code: 'heading(h3/muted)', label: 'Muted heading' }
           ]
         },
         {
-          name: 'Containers',
-          id: 'containers',
+          name: 'prose()',
+          description: 'Rich typography for articles and documentation',
           examples: [
-            {
-              id: 'container-sizes',
-              title: 'Container Sizes',
-              description: 'Different max-width container options',
-              code: `<div class="container(sm) bg(gray-100) p(24) mb(16)">
-  <p class="text(center)">Small Container (640px)</p>
-</div>
-
-<div class="container bg(gray-100) p(24) mb(16)">
-  <p class="text(center)">Default Container (980px)</p>
-</div>
-
-<div class="container(lg) bg(gray-100) p(24) mb(16)">
-  <p class="text(center)">Large Container (1280px)</p>
-</div>
-
-<div class="container(narrow) bg(gray-100) p(24)">
-  <p class="text(center)">Narrow Container</p>
-</div>`
-            }
-          ]
-        },
-        {
-          name: 'Sections',
-          id: 'sections',
-          examples: [
-            {
-              id: 'section-types',
-              title: 'Section Types',
-              description: 'Different section layouts',
-              code: `<section class="section">
-  <div class="container">
-    <h2 class="heading(h2) mb(16)">Default Section</h2>
-    <p>Standard section with responsive padding</p>
-  </div>
-</section>
-
-<section class="section(feature) bg(gray-50)">
-  <div class="container">
-    <h2 class="heading(h2) mb(16)">Feature Section</h2>
-    <p>Highlighted section for features</p>
-  </div>
-</section>`
-            }
-          ]
-        },
-        {
-          name: 'Prose',
-          id: 'prose',
-          examples: [
-            {
-              id: 'prose-content',
-              title: 'Prose Content',
-              description: 'Styled content for articles and documentation',
-              code: `<article class="prose">
-  <h1>The Power of AdorableCSS</h1>
-  <p>AdorableCSS brings the intuitive design language of Figma directly to your CSS workflow. With our framework, you can build beautiful interfaces using the same mental model you use when designing.</p>
-  <h2>Key Features</h2>
-  <ul>
-    <li>Figma-inspired syntax</li>
-    <li>Built-in design system</li>
-    <li>Zero runtime overhead</li>
-  </ul>
-  <p>Start building today with <code>npm install adorable-css</code></p>
-</article>`
-            }
+            { code: 'prose', label: 'Default prose' },
+            { code: 'prose(compact)', label: 'Compact spacing' },
+            { code: 'prose(large)', label: 'Large text' },
+            { code: 'prose(serif)', label: 'Serif typography' },
+            { code: 'prose(dark)', label: 'Dark theme' },
+            { code: 'prose(wide)', label: 'Wide content' }
           ]
         }
       ]
     },
     {
-      title: 'Features',
-      description: 'Special effects and enhancements',
+      title: 'Layout',
+      description: 'Container and section components',
+      icon: Layout,
+      color: 'green',
       components: [
         {
-          name: 'Glass Effects',
-          id: 'glass',
+          name: 'container()',
+          description: 'Apple-inspired responsive containers',
           examples: [
-            {
-              id: 'glass-morphism',
-              title: 'Glass Morphism',
-              description: 'Frosted glass effect variations',
-              code: `<div class="grid(3) gap(24)">
-  <div class="glass p(24) text(center)">
-    <h3 class="font(lg) bold mb(8)">Default Glass</h3>
-    <p class="c(gray-700)">Subtle glass effect</p>
-  </div>
-  
-  <div class="glass(md) p(24) text(center)">
-    <h3 class="font(lg) bold mb(8)">Medium Glass</h3>
-    <p class="c(gray-700)">More prominent blur</p>
-  </div>
-  
-  <div class="glass(dark) p(24) text(center)">
-    <h3 class="font(lg) bold mb(8) c(white)">Dark Glass</h3>
-    <p class="c(gray-300)">For dark backgrounds</p>
-  </div>
-</div>`,
-              wrapperClass: 'bg(purple-500..pink-500/135deg) p(48)'
-            }
+            { code: 'container', label: 'Default (980px)' },
+            { code: 'container(compact)', label: 'Compact (692px)' },
+            { code: 'container(wide)', label: 'Wide (1190px)' },
+            { code: 'container(full)', label: 'Full width' }
           ]
         },
         {
-          name: 'Glow Effects',
-          id: 'glow',
+          name: 'section()',
+          description: 'Page sections with proper spacing and variants',
           examples: [
-            {
-              id: 'glow-variations',
-              title: 'Glow Variations',
-              description: 'Colorful glow effects for buttons',
-              code: `<div class="grid(4) gap(24)">
-  <button class="btn glow">Default Glow</button>
-  <button class="btn(secondary) glow(purple)">Purple Glow</button>
-  <button class="btn(outline) glow(blue)">Blue Glow</button>
-  <button class="btn(ghost) glow(green)">Green Glow</button>
-</div>`,
-              wrapperClass: 'bg(gray-900) p(48)'
-            }
+            { code: 'section', label: 'Default section' },
+            { code: 'section(large)', label: 'Large spacing' },
+            { code: 'section(feature)', label: 'Feature section' },
+            { code: 'section(flush)', label: 'No padding' },
+            { code: 'section(gallery)', label: 'Gallery layout' }
           ]
         },
         {
-          name: 'Figma Components',
-          id: 'figma',
+          name: 'hero()',
+          description: 'Hero sections with backgrounds and animations',
           examples: [
-            {
-              id: 'figma-style',
-              title: 'Figma-style Components',
-              description: 'Components that mimic Figma\'s interface',
-              code: `<div class="figma-frame">
-  <div class="figma-auto-layout gap(16)">
-    <div class="figma-component">
-      <span class="font(sm) bold">Component Instance</span>
-    </div>
-    <div class="figma-component">
-      <span class="font(sm) bold">Another Instance</span>
-    </div>
-  </div>
-</div>`
-            }
+            { code: 'hero', label: 'Default hero' },
+            { code: 'hero(gradient)', label: 'Gradient background' },
+            { code: 'hero(minimal)', label: 'Minimal style' },
+            { code: 'hero(dark)', label: 'Dark theme' },
+            { code: 'hero(split)', label: 'Split layout' }
+          ]
+        },
+        {
+          name: 'feature-card()',
+          description: 'Feature showcase cards with hover effects',
+          examples: [
+            { code: 'feature-card', label: 'Default feature card' },
+            { code: 'feature-card-gradient', label: 'Gradient variant' },
+            { code: 'feature-card-gradient(purple-500..pink-500)', label: 'Custom gradient' },
+            { code: 'feature-card-gradient(blue-500..cyan-500)', label: 'Blue gradient' }
+          ]
+        }
+      ]
+    },
+    {
+      title: 'Effects',
+      description: 'Special visual effects and interactions',
+      icon: Sparkles,
+      color: 'orange',
+      components: [
+        {
+          name: 'glass()',
+          description: 'Glassmorphism effects with blur and transparency',
+          examples: [
+            { code: 'glass', label: 'Default glass' },
+            { code: 'glass(md)', label: 'Medium blur' },
+            { code: 'glass(dark)', label: 'Dark glass' },
+            { code: 'glass-card', label: 'Glass card' },
+            { code: 'glass-nav', label: 'Glass navigation' }
+          ]
+        },
+        {
+          name: 'glow()',
+          description: 'Glow effects for emphasis and interaction',
+          examples: [
+            { code: 'glow', label: 'Default glow' },
+            { code: 'glow(blue)', label: 'Blue glow' },
+            { code: 'glow(purple/lg)', label: 'Large purple' },
+            { code: 'glow-pulse', label: 'Pulsing glow' },
+            { code: 'glow-ring', label: 'Ring glow' }
+          ]
+        },
+        {
+          name: 'interactive()',
+          description: 'Interactive states and hover effects',
+          examples: [
+            { code: 'interactive(1)', label: 'Subtle (level 1)' },
+            { code: 'interactive(3)', label: 'Medium (level 3)' },
+            { code: 'interactive(5)', label: 'Dramatic (level 5)' },
+            { code: 'hoverable(lift)', label: 'Lift on hover' },
+            { code: 'pressable', label: 'Press state' }
+          ]
+        }
+      ]
+    },
+    {
+      title: 'Documentation',
+      description: 'Components for building documentation sites',
+      icon: Layers,
+      color: 'indigo',
+      components: [
+        {
+          name: 'docs()',
+          description: 'Complete documentation layout system',
+          examples: [
+            { code: 'docs', label: 'Docs layout' },
+            { code: 'docs-section', label: 'Content section' },
+            { code: 'docs-card', label: 'Info card' },
+            { code: 'docs-callout', label: 'Callout box' },
+            { code: 'docs-code', label: 'Code block' }
+          ]
+        },
+        {
+          name: 'code-block()',
+          description: 'Syntax highlighted code blocks',
+          examples: [
+            { code: 'code-block', label: 'Default block' },
+            { code: 'code-block(dark)', label: 'Dark theme' },
+            { code: 'code-block(light)', label: 'Light theme' },
+            { code: 'code-block(branded)', label: 'Branded style' },
+            { code: 'inline-code', label: 'Inline code' }
           ]
         }
       ]
     }
   ];
-  
-  // Initialize with first example
-  onMount(() => {
-    // Expand all categories by default
-    componentCategories.forEach(category => {
-      expandedCategories[category.title] = true;
-    });
-    
-    // Select first example
-    if (componentCategories[0]?.components[0]?.examples[0]) {
-      selectExample(
-        componentCategories[0].components[0],
-        componentCategories[0].components[0].examples[0]
-      );
-    }
-  });
 </script>
 
 <div class="min-h(screen) bg(gray-50)">
-  <div class="hbox(top) h(screen)">
-    <!-- Sidebar -->
-    <aside class="w(320) bg(white) border-r(1/gray-200) overflow-y(auto)">
-      <div class="sticky top(0) z(10) bg(white) border-b(1/gray-200) p(24)">
-        <h1 class="font(2xl) bold c(gray-900)">Components</h1>
-        <p class="font(sm) c(gray-600) mt(8)">Ready-to-use AdorableCSS components</p>
+  <!-- Header -->
+  <header class="bg(white) border-b(1/gray-200) sticky top(0) z(50)">
+    <div class="container(7xl) mx(auto) px(xl) py(lg)">
+      <div class="hbox(between/middle)">
+        <div>
+          <h1 class="heading(h1) c(gray-900) mb(xs)">Components</h1>
+          <p class="c(gray-600)">Built-in AdorableCSS component utilities</p>
+        </div>
+        <div class="hbox gap(sm)">
+          <div class="badge(outline) hbox(middle) gap(xs)">
+            <Palette size="14" />
+            <span class="font(xs)">Design System</span>
+          </div>
+        </div>
       </div>
-      
-      <nav class="p(16)">
+    </div>
+  </header>
+
+  <div class="container(7xl) mx(auto) px(xl) py(2xl)">
+    <div class="hbox(top) gap(2xl)">
+      <!-- Sidebar Navigation -->
+      <DocsSidebar title="Components" items={sidebarItems} />
+
+      <!-- Main Content -->
+      <main class="flex(1) min-w(0)">
         {#each componentCategories as category}
-          <div class="mb(16)">
+          <section id={category.title.toLowerCase()} class="mb(4xl)">
             <!-- Category Header -->
-            <button
-              class="hbox(between) w(full) p(8) hover:bg(gray-50) r(lg) transition"
-              on:click={() => toggleCategory(category.title)}
-            >
-              <span class="font(sm) bold c(gray-900)">{category.title}</span>
-              {#if expandedCategories[category.title]}
-                <ChevronDown size="16" class="c(gray-400)" />
-              {:else}
-                <ChevronRight size="16" class="c(gray-400)" />
-              {/if}
-            </button>
-            
-            <!-- Components List -->
-            {#if expandedCategories[category.title]}
-              <div class="mt(8) ml(8)">
-                {#each category.components as component}
-                  <div class="mb(12)">
-                    <h3 class="font(xs) bold uppercase c(gray-500) mb(4) px(8)">{component.name}</h3>
-                    <ul>
-                      {#each component.examples as example}
-                        <li>
-                          <button
-                            class="w(full) text(left) px(8) py(6) r(md) hover:bg(gray-100) transition"
-                            class:bg(purple-50)={selectedExample?.id === example.id}
-                            class:c(purple-600)={selectedExample?.id === example.id}
-                            on:click={() => selectExample(component, example)}
-                          >
-                            <span class="font(sm)">{example.title}</span>
-                          </button>
-                        </li>
-                      {/each}
-                    </ul>
+            <div class="mb(2xl)">
+              <div class="hbox(middle) gap(sm) mb(md)">
+                <svelte:component this={category.icon} size="24" class="c({category.color}-500)" />
+                <h2 class="heading(h2) c(gray-900)">{category.title}</h2>
+              </div>
+              <p class="c(gray-600) text(lg)">{category.description}</p>
+            </div>
+
+            <!-- Components in Category -->
+            <div class="vbox gap(2xl)">
+              {#each category.components as component}
+                <div class="bg(white) r(xl) border(1/gray-200) overflow(hidden)">
+                  <div class="p(xl) border-b(1/gray-100)">
+                    <h3 class="heading(h3) c(gray-900) mb(sm) font(mono)">{component.name}</h3>
+                    <p class="c(gray-600)">{component.description}</p>
                   </div>
-                {/each}
-              </div>
-            {/if}
-          </div>
+                  
+                  <div class="p(xl)">
+                    <!-- Preview Section -->
+                    <div class="mb(2xl)">
+                      <h4 class="font(sm) bold uppercase c(gray-500) mb(lg) tracking(0.1em)">Preview</h4>
+                      <div class="p(2xl) bg(gray-50) r(lg) border(1/gray-200)">
+                        <div class="hbox(center/middle) gap(lg) flex-wrap">
+                          {#each component.examples.slice(0, 4) as example}
+                            <div class="{example.code}">
+                              {#if component.name === 'btn()'}
+                                {example.label}
+                              {:else if component.name === 'badge()'}
+                                {example.label}
+                              {:else if component.name === 'icon-box()'}
+                                <div class="{example.code} bg(purple-500.1) c(purple-500)">
+                                  <Sparkles size="24" />
+                                </div>
+                              {:else if component.name === 'heading()'}
+                                {example.label}
+                              {:else if component.name === 'input()'}
+                                <input class="{example.code}" placeholder="{example.label}" />
+                              {:else if component.name === 'card()'}
+                                <div class="{example.code} w(200px) p(md)">
+                                  <h4 class="font(sm) bold mb(xs)">Card Title</h4>
+                                  <p class="font(xs) c(gray-600)">{example.label}</p>
+                                </div>
+                              {:else if component.name === 'container()'}
+                                <div class="{example.code} bg(white) border(1/gray-300) p(sm)">
+                                  <div class="text(center) font(xs) c(gray-600)">{example.label}</div>
+                                </div>
+                              {:else if component.name === 'section()'}
+                                <div class="{example.code} bg(white) border(1/gray-300) w(180px)">
+                                  <div class="text(center) font(xs) c(gray-600)">{example.label}</div>
+                                </div>
+                              {:else if component.name === 'hero()'}
+                                <div class="{example.code} w(200px) h(80px) hbox(center/middle) bg(gradient-to-r/blue-500..purple-600) c(white)">
+                                  <div class="text(center) font(xs)">{example.label}</div>
+                                </div>
+                              {:else if component.name === 'prose()'}
+                                <div class="{example.code} w(250px)">
+                                  <h4>Sample Prose</h4>
+                                  <p>This is {example.label} with typography styling.</p>
+                                </div>
+                              {:else if component.name.includes('glass')}
+                                <div class="relative w(150px) h(80px) bg(to-br/purple-500..blue-500) r(lg) overflow(hidden)">
+                                  <div class="{example.code} absolute inset(md) hbox(center/middle) c(white) font(xs)">
+                                    {example.label}
+                                  </div>
+                                </div>
+                              {:else if component.name.includes('glow')}
+                                <div class="bg(gray-900) p(lg) r(lg)">
+                                  <div class="{example.code} btn bg(purple-600) c(white) px(md) py(sm) r(md)">
+                                    {example.label}
+                                  </div>
+                                </div>
+                              {:else if component.name.includes('interactive')}
+                                <div class="{example.code} btn bg(blue-600) c(white) px(md) py(sm) r(md)">
+                                  {example.label}
+                                </div>
+                              {:else if component.name.includes('docs')}
+                                <div class="{example.code} bg(white) border(1/gray-200) p(md) r(md) w(180px)">
+                                  <div class="font(xs) c(gray-600)">{example.label}</div>
+                                </div>
+                              {:else if component.name === 'feature-card()'}
+                                <div class="{example.code} w(220px)">
+                                  <div class="icon-box bg(purple-500.1) c(purple-500)">
+                                    <Sparkles size="24" />
+                                  </div>
+                                  <h4 class="font(md) bold {example.code.includes('gradient') ? 'c(white)' : 'c(gray-900)'}">Feature</h4>
+                                  <p class="font(sm) {example.code.includes('gradient') ? 'c(white.9)' : 'c(gray-600)'}">Amazing feature description</p>
+                                </div>
+                              {:else if component.name.includes('code-block')}
+                                {#if example.code === 'inline-code'}
+                                  <span class="{example.code}">const code = true</span>
+                                {:else}
+                                  <div class="{example.code} w(280px)">
+                                    <code>console.log('{example.label}')</code>
+                                  </div>
+                                {/if}
+                              {:else}
+                                <div class="{example.code} bg(white) border(1/gray-200) p(md) r(md)">
+                                  <div class="font(xs) c(gray-600)">{example.label}</div>
+                                </div>
+                              {/if}
+                            </div>
+                          {/each}
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Examples Section -->
+                    <div>
+                      <h4 class="font(sm) bold uppercase c(gray-500) mb(lg) tracking(0.1em)">Examples</h4>
+                      <div class="grid(3) gap(lg)">
+                        {#each component.examples as example}
+                          <div class="group relative">
+                            <button
+                              class="w(full) text(left) p(md) r(lg) border(1/gray-200) hover:border({category.color}-200) hover:bg({category.color}-50) transition-all"
+                              on:click={() => copyCode(example.code)}
+                            >
+                              <div class="font(mono/sm) c(gray-900) mb(xs)">{example.code}</div>
+                              <div class="font(xs) c(gray-500)">{example.label}</div>
+                              
+                              <div class="absolute top(xs) right(xs) opacity(0) group-hover:opacity(100) transition">
+                                {#if copiedCode === example.code}
+                                  <div class="p(xs) r(md) bg(green-100) c(green-700) hbox(middle) gap(xs)">
+                                    <Check size="12" />
+                                    <span class="font(xs)">Copied!</span>
+                                  </div>
+                                {:else}
+                                  <div class="p(xs) r(md) bg(white) shadow(sm) border(1/gray-200) hbox(middle) gap(xs)">
+                                    <Copy size="12" />
+                                    <span class="font(xs)">Copy</span>
+                                  </div>
+                                {/if}
+                              </div>
+                            </button>
+                          </div>
+                        {/each}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {/each}
+            </div>
+          </section>
         {/each}
-      </nav>
-    </aside>
-    
-    <!-- Main Content -->
-    <main class="flex(1) overflow-y(auto)">
-      {#if selectedExample}
-        <div class="p(48)">
-          <!-- Example Header -->
-          <div class="mb(32)">
-            <h2 class="font(3xl) bold c(gray-900) mb(8)">{selectedExample.title}</h2>
-            <p class="font(lg) c(gray-600)">{selectedExample.description}</p>
-          </div>
-          
-          <!-- Preview Section -->
-          <div class="mb(32)">
-            <h3 class="font(sm) bold uppercase c(gray-500) mb(16)">Preview</h3>
-            <div class="r(lg) border(1/gray-200) overflow(hidden)">
-              <div class="{selectedExample.wrapperClass || 'bg(white) p(32)'}">
-                {@html `<div class="preview-content">${selectedExample.code}</div>`}
-              </div>
-            </div>
-          </div>
-          
-          <!-- Code Section -->
-          <div>
-            <div class="hbox(between) mb(16)">
-              <h3 class="font(sm) bold uppercase c(gray-500)">Code</h3>
-              <button
-                class="hbox(middle) gap(8) px(12) py(6) r(md) bg(gray-100) hover:bg(gray-200) transition"
-                on:click={() => copyCode(selectedExample.code, selectedExample.id)}
-              >
-                {#if copiedId === selectedExample.id}
-                  <Check size="16" />
-                  <span class="font(sm)">Copied!</span>
-                {:else}
-                  <Copy size="16" />
-                  <span class="font(sm)">Copy</span>
-                {/if}
-              </button>
-            </div>
-            
-            <div class="r(lg) bg(gray-900) p(24) overflow-x(auto)">
-              <pre class="font(mono/sm) c(gray-300)"><code>{selectedExample.code}</code></pre>
-            </div>
-          </div>
-          
-          <!-- Usage Notes -->
-          <div class="mt(48) p(24) r(lg) bg(blue-50) border(1/blue-200)">
-            <h4 class="font(sm) bold c(blue-900) mb(8)">Usage Notes</h4>
-            <ul class="vbox gap(8)">
-              <li class="font(sm) c(blue-800)">• All components use AdorableCSS v2 syntax</li>
-              <li class="font(sm) c(blue-800)">• Components are fully customizable with utility classes</li>
-              <li class="font(sm) c(blue-800)">• Copy the code and adapt it to your needs</li>
-            </ul>
+
+        <!-- Usage Guide -->
+        <div class="mt(4xl) p(xl) r(xl) bg(blue-50) border(1/blue-200)">
+          <h3 class="heading(h3) c(blue-900) mb(md)">Usage Guide</h3>
+          <div class="vbox gap(md)">
+            <p class="c(blue-800)">• All components use AdorableCSS v2 syntax with parentheses notation</p>
+            <p class="c(blue-800)">• Most components support variants using slash notation: <code class="font(mono) bg(white) px(xs) py(1) r(sm)">component(variant/size)</code></p>
+            <p class="c(blue-800)">• Components integrate seamlessly with utility classes for customization</p>
+            <p class="c(blue-800)">• Use these components as starting points and enhance with utility classes</p>
           </div>
         </div>
-      {:else}
-        <div class="vbox(center) h(full)">
-          <p class="font(lg) c(gray-500)">Select a component to preview</p>
-        </div>
-      {/if}
-    </main>
+      </main>
+    </div>
   </div>
 </div>

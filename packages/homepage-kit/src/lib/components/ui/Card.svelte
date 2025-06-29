@@ -2,24 +2,18 @@
   import { setContext } from 'svelte';
   
   // Card root component props
+  export let variant: 'default' | 'gradient' | 'ghost' = 'default';
   export let className = '';
   
-  const baseClasses = 'r(lg) border(1/--colors-gray-200) bg(--colors-white) c(--colors-gray-950) shadow(sm)';
+  // Use AdorableCSS card component
+  $: cardClass = variant === 'gradient' ? 'card-gradient' : variant === 'ghost' ? 'card-ghost' : 'card';
   
   // Set context for child components to access card styling
   setContext('card', {
-    variant: 'default'
+    variant
   });
 </script>
 
-<div class="{baseClasses} {className}">
+<div class="{cardClass} {className}">
   <slot />
 </div>
-
-<style>
-  /* Card hover effect */
-  div:hover {
-    box-shadow: var(--shadow-md);
-    transition: box-shadow var(--duration-normal) var(--ease-out);
-  }
-</style>

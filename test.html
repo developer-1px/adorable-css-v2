@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="business">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foundation - Design System</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap');
+
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* 미니멀한 커스텀 애니메이션 */
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .float {
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes gradient {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      background-size: 200% 200%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradient 3s ease infinite;
+    }
+  </style>
+</head>
+<body>
+<!-- 네비게이션 - daisyUI navbar -->
+<div class="navbar bg-base-200 sticky top-0 z-50 backdrop-blur-md bg-opacity-90">
+  <div class="navbar-start">
+    <div class="dropdown">
+      <label tabindex="0" class="btn btn-ghost lg:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+        </svg>
+      </label>
+      <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+        <li><a href="#colors">Colors</a></li>
+        <li><a href="#typography">Typography</a></li>
+        <li><a href="#spacing">Spacing</a></li>
+        <li><a href="#motion">Motion</a></li>
+      </ul>
+    </div>
+    <a class="btn btn-ghost text-xl font-bold">
+      <span class="text-primary">Foundation</span>
+    </a>
+  </div>
+  <div class="navbar-center hidden lg:flex">
+    <ul class="menu menu-horizontal px-1">
+      <li><a href="#colors">Colors</a></li>
+      <li><a href="#typography">Typography</a></li>
+      <li><a href="#spacing">Spacing</a></li>
+      <li><a href="#motion">Motion</a></li>
+    </ul>
+  </div>
+  <div class="navbar-end">
+    <label class="swap swap-rotate mr-2">
+      <input type="checkbox" class="theme-controller" value="cupcake" />
+      <svg class="swap-off fill-current w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/>
+      </svg>
+      <svg class="swap-on fill-current w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/>
+      </svg>
+    </label>
+    <button class="btn btn-primary btn-sm">Get Started</button>
+  </div>
+</div>
+
+<!-- Hero 섹션 - daisyUI hero -->
+<div class="hero min-h-screen bg-base-200">
+  <div class="hero-content flex-col lg:flex-row-reverse">
+    <div class="text-center lg:text-left lg:ml-8">
+      <div class="badge badge-primary badge-outline mb-4">Design System</div>
+      <h1 class="text-5xl lg:text-7xl font-black">
+        Design
+        <span class="block gradient-text">Foundation</span>
+      </h1>
+      <p class="py-6 text-lg">
+        모든 것이 시작되는 곳. 색상, 타이포그래피, 공간, 그리고 움직임의 조화로운 시스템.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <button class="btn btn-primary">
+          시작하기
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </button>
+        <button class="btn btn-ghost">문서 보기</button>
+      </div>
+    </div>
+    <div class="card w-full max-w-sm shadow-2xl bg-base-100 float">
+      <div class="card-body">
+        <div class="stats stats-vertical shadow">
+          <div class="stat">
+            <div class="stat-figure text-primary">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+              </svg>
+            </div>
+            <div class="stat-title">Colors</div>
+            <div class="stat-value">32</div>
+            <div class="stat-desc">테마 지원</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-figure text-secondary">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <div class="stat-title">Typography</div>
+            <div class="stat-value">9</div>
+            <div class="stat-desc">스케일</div>
+          </div>
+
+          <div class="stat">
+            <div class="stat-figure text-accent">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-8 h-8 stroke-current">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <div class="stat-title">Motion</div>
+            <div class="stat-value">12</div>
+            <div class="stat-desc">애니메이션</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 색상 시스템 - daisyUI cards, badges -->
+<section id="colors" class="py-20 px-4 bg-base-100">
+  <div class="container mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4">Color System</h2>
+      <p class="text-lg opacity-70">감정을 전달하는 색상의 언어</p>
+    </div>
+
+    <!-- 탭으로 색상 카테고리 구분 -->
+    <div role="tablist" class="tabs tabs-boxed justify-center mb-8">
+      <input type="radio" name="color_tabs" role="tab" class="tab" aria-label="Primary" checked />
+      <div role="tabpanel" class="tab-content mt-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="card bg-primary text-primary-content">
+            <div class="card-body">
+              <h3 class="card-title">Primary</h3>
+              <p class="font-mono opacity-80">#570df8</p>
+              <div class="card-actions justify-end">
+                <div class="badge badge-outline">Main</div>
+                <div class="badge badge-outline">Brand</div>
+              </div>
+            </div>
+          </div>
+          <div class="card bg-secondary text-secondary-content">
+            <div class="card-body">
+              <h3 class="card-title">Secondary</h3>
+              <p class="font-mono opacity-80">#f000b8</p>
+              <div class="card-actions justify-end">
+                <div class="badge badge-outline">Support</div>
+              </div>
+            </div>
+          </div>
+          <div class="card bg-accent text-accent-content">
+            <div class="card-body">
+              <h3 class="card-title">Accent</h3>
+              <p class="font-mono opacity-80">#37cdbe</p>
+              <div class="card-actions justify-end">
+                <div class="badge badge-outline">Highlight</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <input type="radio" name="color_tabs" role="tab" class="tab" aria-label="Neutral" />
+      <div role="tabpanel" class="tab-content mt-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+              <h3 class="card-title">Base 100</h3>
+              <p class="font-mono opacity-60">Default background</p>
+              <progress class="progress progress-primary w-full" value="100" max="100"></progress>
+            </div>
+          </div>
+          <div class="card bg-base-200">
+            <div class="card-body">
+              <h3 class="card-title">Base 200</h3>
+              <p class="font-mono opacity-60">Secondary background</p>
+              <progress class="progress progress-secondary w-full" value="66" max="100"></progress>
+            </div>
+          </div>
+          <div class="card bg-base-300">
+            <div class="card-body">
+              <h3 class="card-title">Base 300</h3>
+              <p class="font-mono opacity-60">Tertiary background</p>
+              <progress class="progress progress-accent w-full" value="33" max="100"></progress>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <input type="radio" name="color_tabs" role="tab" class="tab" aria-label="Semantic" />
+      <div role="tabpanel" class="tab-content mt-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="card bg-success text-success-content">
+            <div class="card-body">
+              <h3 class="card-title">Success</h3>
+              <div class="alert alert-success mt-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>완료!</span>
+              </div>
+            </div>
+          </div>
+          <div class="card bg-warning text-warning-content">
+            <div class="card-body">
+              <h3 class="card-title">Warning</h3>
+              <div class="alert alert-warning mt-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                </svg>
+                <span>주의!</span>
+              </div>
+            </div>
+          </div>
+          <div class="card bg-error text-error-content">
+            <div class="card-body">
+              <h3 class="card-title">Error</h3>
+              <div class="alert alert-error mt-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>오류!</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 색상 믹서 - mockup -->
+    <div class="mockup-window border bg-base-300 mt-12">
+      <div class="flex justify-center px-4 py-8 bg-base-200">
+        <div class="flex items-center gap-4">
+          <div class="radial-progress text-primary" style="--value:70">70%</div>
+          <span class="text-2xl">+</span>
+          <div class="radial-progress text-secondary" style="--value:30">30%</div>
+          <span class="text-2xl">=</span>
+          <div class="radial-progress bg-gradient-to-r from-primary to-secondary text-white" style="--value:100">Mix</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 타이포그래피 - mockup-code, prose -->
+<section id="typography" class="py-20 px-4 bg-base-200">
+  <div class="container mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4">Typography</h2>
+      <p class="text-lg opacity-70">명확하고 일관된 텍스트 시스템</p>
+    </div>
+
+    <div class="grid lg:grid-cols-2 gap-8">
+      <!-- Type Scale -->
+      <div>
+        <div class="mockup-browser border bg-base-300">
+          <div class="mockup-browser-toolbar">
+            <div class="input">https://design.foundation/typography</div>
+          </div>
+          <div class="px-8 py-8 bg-base-100">
+            <div class="prose max-w-none">
+              <h1>Heading 1</h1>
+              <h2>Heading 2</h2>
+              <h3>Heading 3</h3>
+              <h4>Heading 4</h4>
+              <p>Body text lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p class="text-sm">Small text for captions and labels</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Font Weights -->
+      <div>
+        <div class="card bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h3 class="card-title mb-4">Font Weights</h3>
+            <div class="space-y-3">
+              <p class="text-2xl font-light">Light (300)</p>
+              <p class="text-2xl font-normal">Regular (400)</p>
+              <p class="text-2xl font-medium">Medium (500)</p>
+              <p class="text-2xl font-semibold">Semibold (600)</p>
+              <p class="text-2xl font-bold">Bold (700)</p>
+              <p class="text-2xl font-black">Black (900)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Line Height 예시 -->
+        <div class="mockup-code mt-6">
+          <pre data-prefix="1"><code>line-height: 1; /* tight */</code></pre>
+          <pre data-prefix="2"><code>line-height: 1.5; /* normal */</code></pre>
+          <pre data-prefix="3" class="bg-warning text-warning-content"><code>line-height: 1.75; /* relaxed */</code></pre>
+          <pre data-prefix="4"><code>line-height: 2; /* loose */</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 간격 시스템 - steps, mockup -->
+<section id="spacing" class="py-20 px-4 bg-base-100">
+  <div class="container mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4">Spacing System</h2>
+      <p class="text-lg opacity-70">8px 기반의 일관된 간격 시스템</p>
+    </div>
+
+    <!-- Steps로 간격 시각화 -->
+    <ul class="steps steps-vertical lg:steps-horizontal w-full mb-12">
+      <li class="step step-primary">
+        <div class="text-center mt-2">
+          <div class="badge badge-primary">0.5</div>
+          <p class="text-xs">2px</p>
+        </div>
+      </li>
+      <li class="step step-primary">
+        <div class="text-center mt-2">
+          <div class="badge badge-primary">1</div>
+          <p class="text-xs">4px</p>
+        </div>
+      </li>
+      <li class="step step-primary">
+        <div class="text-center mt-2">
+          <div class="badge badge-primary">2</div>
+          <p class="text-xs">8px</p>
+        </div>
+      </li>
+      <li class="step step-primary">
+        <div class="text-center mt-2">
+          <div class="badge badge-primary">4</div>
+          <p class="text-xs">16px</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="text-center mt-2">
+          <div class="badge">8</div>
+          <p class="text-xs">32px</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="text-center mt-2">
+          <div class="badge">12</div>
+          <p class="text-xs">48px</p>
+        </div>
+      </li>
+      <li class="step">
+        <div class="text-center mt-2">
+          <div class="badge">16</div>
+          <p class="text-xs">64px</p>
+        </div>
+      </li>
+    </ul>
+
+    <!-- 간격 예시 -->
+    <div class="grid lg:grid-cols-3 gap-8">
+      <div class="mockup-window border bg-base-300">
+        <div class="px-4 py-8 bg-base-200">
+          <h4 class="font-semibold mb-4">Padding</h4>
+          <div class="space-y-2">
+            <div class="bg-primary text-primary-content p-2 rounded">p-2</div>
+            <div class="bg-primary text-primary-content p-4 rounded">p-4</div>
+            <div class="bg-primary text-primary-content p-8 rounded">p-8</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mockup-window border bg-base-300">
+        <div class="px-4 py-8 bg-base-200">
+          <h4 class="font-semibold mb-4">Margin</h4>
+          <div class="bg-base-100 p-4 rounded">
+            <div class="bg-secondary text-secondary-content p-2 rounded">Base</div>
+            <div class="bg-secondary text-secondary-content p-2 rounded mt-2">mt-2</div>
+            <div class="bg-secondary text-secondary-content p-2 rounded mt-4">mt-4</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mockup-window border bg-base-300">
+        <div class="px-4 py-8 bg-base-200">
+          <h4 class="font-semibold mb-4">Gap</h4>
+          <div class="flex gap-2">
+            <div class="badge badge-accent badge-lg">1</div>
+            <div class="badge badge-accent badge-lg">2</div>
+            <div class="badge badge-accent badge-lg">3</div>
+          </div>
+          <p class="text-xs mt-2 opacity-60">gap-2 (8px)</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 모션 - carousel, loading -->
+<section id="motion" class="py-20 px-4 bg-base-200">
+  <div class="container mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-4xl font-bold mb-4">Motion & Animation</h2>
+      <p class="text-lg opacity-70">생동감 있는 인터랙션</p>
+    </div>
+
+    <!-- Carousel로 애니메이션 쇼케이스 -->
+    <div class="carousel carousel-center w-full p-4 space-x-4 bg-base-300 rounded-box">
+      <div class="carousel-item">
+        <div class="card w-96 bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h3 class="card-title">Loading States</h3>
+            <div class="flex flex-col gap-4">
+              <progress class="progress progress-primary w-full"></progress>
+              <span class="loading loading-spinner loading-lg text-secondary"></span>
+              <span class="loading loading-dots loading-lg text-accent"></span>
+              <span class="loading loading-ring loading-lg text-info"></span>
+              <span class="loading loading-ball loading-lg text-success"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="card w-96 bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h3 class="card-title">Transitions</h3>
+            <div class="space-y-4">
+              <button class="btn btn-primary hover:scale-110 transition-transform">Scale</button>
+              <button class="btn btn-secondary hover:rotate-3 transition-transform">Rotate</button>
+              <button class="btn btn-accent hover:translate-x-2 transition-transform">Translate</button>
+              <div class="skeleton w-full h-8"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="card w-96 bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h3 class="card-title">Swap Animations</h3>
+            <label class="swap swap-flip text-5xl">
+              <input type="checkbox" />
+              <div class="swap-on">😇</div>
+              <div class="swap-off">😈</div>
+            </label>
+            <label class="swap swap-rotate mt-4">
+              <input type="checkbox" />
+              <svg class="swap-off fill-current w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/>
+              </svg>
+              <svg class="swap-on fill-current w-10 h-10" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/>
+              </svg>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <div class="card w-96 bg-base-100 shadow-xl">
+          <div class="card-body">
+            <h3 class="card-title">Tooltips & Dropdowns</h3>
+            <div class="space-y-4">
+              <div class="tooltip" data-tip="Hello!">
+                <button class="btn">Hover me</button>
+              </div>
+              <div class="dropdown">
+                <label tabindex="0" class="btn m-1">Click me</label>
+                <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+                  <li><a>Animation 1</a></li>
+                  <li><a>Animation 2</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Timeline으로 애니메이션 순서 표현 -->
+    <div class="mt-12">
+      <ul class="timeline timeline-vertical lg:timeline-horizontal">
+        <li>
+          <div class="timeline-start">0ms</div>
+          <div class="timeline-middle">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="timeline-end timeline-box">시작</div>
+          <hr class="bg-primary"/>
+        </li>
+        <li>
+          <hr class="bg-primary"/>
+          <div class="timeline-start">150ms</div>
+          <div class="timeline-middle">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="timeline-end timeline-box">전환</div>
+          <hr/>
+        </li>
+        <li>
+          <hr/>
+          <div class="timeline-start">300ms</div>
+          <div class="timeline-middle">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd" />
+            </svg>
+          </div>
+          <div class="timeline-end timeline-box">완료</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="hero min-h-[50vh] bg-base-100">
+  <div class="hero-content text-center">
+    <div class="max-w-md">
+      <h2 class="text-4xl font-bold mb-8">Ready to build?</h2>
+      <div class="join mb-8">
+        <input class="input input-bordered join-item" placeholder="npm install daisyui" readonly/>
+        <button class="btn btn-primary join-item">Copy</button>
+      </div>
+      <div class="flex gap-4 justify-center">
+        <a class="btn btn-outline">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+          </svg>
+          GitHub
+        </a>
+        <a class="btn btn-ghost">Documentation</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer footer-center p-10 bg-base-200 text-base-content rounded">
+  <div class="grid grid-flow-col gap-4">
+    <a class="link link-hover">About</a>
+    <a class="link link-hover">Contact</a>
+    <a class="link link-hover">Components</a>
+    <a class="link link-hover">Themes</a>
+  </div>
+  <div>
+    <p>Copyright © 2024 - Design System Foundation</p>
+  </div>
+</footer>
+
+<script>
+// 테마 전환
+const themeToggle = document.querySelector('.theme-controller');
+const themes = ['business', 'cupcake', 'retro', 'cyberpunk', 'valentine', 'aqua'];
+let currentThemeIndex = 0;
+
+themeToggle.addEventListener('change', (e) => {
+  currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+  document.documentElement.setAttribute('data-theme', themes[currentThemeIndex]);
+});
+
+// 부드러운 스크롤
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+});
+
+// Copy 버튼
+document.querySelector('.join-item.btn').addEventListener('click', function() {
+  const input = document.querySelector('.input');
+  navigator.clipboard.writeText('npm install daisyui');
+  this.textContent = 'Copied!';
+  setTimeout(() => {
+    this.textContent = 'Copy';
+  }, 2000);
+});
+</script>
+</body>
+</html>

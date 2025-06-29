@@ -4,16 +4,16 @@
   
   // shadcn/ui Badge variants using CVA pattern
   const badgeVariants = {
-    default: 'border(1/transparent) bg(--colors-primary-600) c(--colors-primary-50) hover:bg(--colors-primary-700)',
-    secondary: 'border(1/transparent) bg(--colors-gray-100) c(--colors-gray-900) hover:bg(--colors-gray-200)',
-    destructive: 'border(1/transparent) bg(--colors-error-600) c(--colors-error-50) hover:bg(--colors-error-700)',
-    outline: 'border(1/--colors-gray-200) c(--colors-gray-950) bg(transparent)'
+    default: 'border(1/transparent) bg(blue-600) c(white) hover:bg(blue-700)',
+    secondary: 'border(1/transparent) bg(gray-100) c(gray-900) hover:bg(gray-200)',
+    destructive: 'border(1/transparent) bg(red-600) c(white) hover:bg(red-700)',
+    outline: 'border(1/gray-200) c(gray-950) bg(transparent)'
   };
   
   const baseClasses = `
     hbox(middle) r(full) border px(sm) py(xs) 
     600 font(xs) transition-colors focus:outline(none) 
-    focus:ring(2/--colors-primary-500) focus:ring-offset(2)
+    focus:ring(2/blue-500) focus:ring-offset(2)
   `.replace(/\s+/g, ' ').trim();
   
   $: variantClass = badgeVariants[variant];

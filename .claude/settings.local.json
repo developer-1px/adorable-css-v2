@@ -53,7 +53,15 @@
       "Bash(npm run test:*)",
       "Bash(pnpm --filter homepage-kit dev)",
       "WebFetch(domain:localhost)",
-      "Bash(pnpm --filter homepage-kit build)"
+      "Bash(pnpm --filter homepage-kit build)",
+      "Bash(pnpm remove:*)",
+      "WebFetch(domain:atlassian.design)",
+      "Bash(pkill:*)",
+      "Bash(pnpm preview:*)",
+      "Bash(pnpm ls:*)",
+      "Bash(pnpm --filter adorable-css-cdn build)",
+      "Bash(pnpm install:*)",
+      "Bash(pnpm --filter homepage-kit dev:build)"
     ],
     "deny": []
   }

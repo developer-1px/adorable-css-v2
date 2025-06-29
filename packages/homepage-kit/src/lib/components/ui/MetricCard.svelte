@@ -4,7 +4,7 @@
   export let change: number;
   export let trend: 'up' | 'down' | 'neutral' = 'neutral';
   export let icon: string = '';
-  export let iconColor: string = 'var(--colors-primary-500)';
+  export let iconColor: string = '#3b82f6';
   
   // Map trend to design token colors
   const trendStyles = {
@@ -19,7 +19,7 @@
            transition-all duration(normal) ease(out) group cursor-pointer">
   
   <!-- Background decoration with improved design -->
-  <div class="decoration layer(top:-10+right:-10) 100x100 opacity(xs) rotate(12) group-hover:rotate(24) group-hover:scale(1.02) transition-all duration(slower) ease(out)">
+  <div class="decoration layer(top:-10+right:-10) size(100) opacity(xs) rotate(12) group-hover:rotate(24) group-hover:scale(1.02) transition-all duration(slower) ease(out)">
     <svg viewBox="0 0 100 100" class="w(fill) h(fill)">
       <circle cx="50" cy="50" r="40" fill="currentColor" style="color: {iconColor}" opacity="0.08" />
       <circle cx="50" cy="50" r="25" fill="none" stroke="currentColor" stroke-width="1" opacity="0.12" style="color: {iconColor}" />
@@ -31,7 +31,7 @@
   <div class="hbox(between+center) relative z(10)">
     <h3 class="500 font(sm) c(gray-600) group-hover:c(gray-700) transition-colors duration(normal)">{title}</h3>
     {#if icon}
-      <div class="icon-wrapper 40x40 r(lg) shadow(xs) group-hover:shadow(md) group-hover:scale(1.02) transition-all duration(normal) ease(back)" 
+      <div class="icon-wrapper size(40) r(lg) shadow(xs) group-hover:shadow(md) group-hover:scale(1.02) transition-all duration(normal) ease(back)" 
            style="background: {iconColor}15; border: 1px solid {iconColor}20;">
         <span class="font(lg)" style="color: {iconColor}">{icon}</span>
       </div>
@@ -56,7 +56,7 @@
   </div>
   
   <!-- Enhanced sparkline with better animation -->
-  <div class="sparkline mt(auto) h(xl) relative clip group-hover:h(2xl) transition-all duration(normal)">
+  <div class="sparkline mt(auto) h(32) relative clip group-hover:h(48) transition-all duration(normal)">
     <svg viewBox="0 0 200 32" class="w(fill) h(fill)">
       <!-- Gradient area under the line -->
       <defs>

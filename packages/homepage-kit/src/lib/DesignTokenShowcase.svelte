@@ -47,23 +47,23 @@
       <CardContent className="py(md)">
         <div class="hbox(bottom) gap(sm)">
           <div class="vbox(pack) gap(xs) scale-up(0.5s/ease-out/delay:400ms)">
-            <div class="w(lg) h(xs) bg(--colors-primary-500) r(sm)"></div>
+            <div class="w(64) h(16) bg(--colors-primary-500) r(sm)"></div>
             <span class="font(xs) c(--colors-gray-500)">xs</span>
           </div>
           <div class="vbox(pack) gap(xs) scale-up(0.5s/ease-out/delay:450ms)">
-            <div class="w(lg) h(sm) bg(--colors-primary-500) r(sm)"></div>
+            <div class="w(64) h(32) bg(--colors-primary-500) r(sm)"></div>
             <span class="font(xs) c(--colors-gray-500)">sm</span>
           </div>
           <div class="vbox(pack) gap(xs) scale-up(0.5s/ease-out/delay:500ms)">
-            <div class="w(lg) h(md) bg(--colors-primary-500) r(sm)"></div>
+            <div class="w(64) h(48) bg(--colors-primary-500) r(sm)"></div>
             <span class="font(xs) c(--colors-gray-500)">md</span>
           </div>
           <div class="vbox(pack) gap(xs) scale-up(0.5s/ease-out/delay:550ms)">
-            <div class="w(lg) h(lg) bg(--colors-primary-500) r(sm)"></div>
+            <div class="w(64) h(64) bg(--colors-primary-500) r(sm)"></div>
             <span class="font(xs) c(--colors-gray-500)">lg</span>
           </div>
           <div class="vbox(pack) gap(xs) scale-up(0.5s/ease-out/delay:600ms)">
-            <div class="w(lg) h(xl) bg(--colors-primary-500) r(sm)"></div>
+            <div class="w(64) h(80) bg(--colors-primary-500) r(sm)"></div>
             <span class="font(xs) c(--colors-gray-500)">xl</span>
           </div>
         </div>
@@ -124,7 +124,7 @@
             <h3 class="600 font(md)">Modern Card</h3>
             <div class="p(lg) bg(--colors-white) r(lg) shadow(lg) border(1/--colors-gray-200) scale-up(0.5s/ease-out/delay:900ms)">
               <div class="hbox(middle) gap(md)">
-                <div class="1536x1536 r(md) bg(135deg/--colors-primary-400..--colors-primary-600) bounce-in(0.6s/elastic/delay:1000ms)"></div>
+                <div class="size(40) r(md) bg(135deg/--colors-primary-400..--colors-primary-600) bounce-in(0.6s/elastic/delay:1000ms)"></div>
                 <div class="vbox gap(xs) flex fade-left(0.5s/ease-out/delay:1100ms)">
                   <div class="600 font(md) c(--colors-gray-900)">Premium Feature</div>
                   <div class="font(sm) c(--colors-gray-600)">Experience the refined design system</div>
