@@ -5,10 +5,10 @@
   export let size: 'sm' | 'md' | 'lg' | 'xl' = 'md';
   
   const sizeClasses = {
-    sm: 'h(xl) w(xl)',
-    md: 'h(2xl) w(2xl)', 
-    lg: 'h(3xl) w(3xl)',
-    xl: 'h(4xl) w(4xl)'
+    sm: '1280x1280',
+    md: '1536x1536', 
+    lg: '1920x1920',
+    xl: '2560x2560'
   };
   
   const baseClasses = 'relative flex shrink(0) clip r(full)';

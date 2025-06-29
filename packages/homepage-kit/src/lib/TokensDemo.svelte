@@ -124,12 +124,12 @@
       <div class="vbox gap(sm) p(lg) r(lg) bg(#f9fafb)">
         <h4 class="500 font(md) mb(sm)">Border Radius</h4>
         <div class="hbox(middle) gap(sm)">
-          <div class="w(3xl) h(3xl) bg(#3b82f6) r(none)"></div>
-          <div class="w(3xl) h(3xl) bg(#3b82f6) r(sm)"></div>
-          <div class="w(3xl) h(3xl) bg(#3b82f6) r(md)"></div>
-          <div class="w(3xl) h(3xl) bg(#3b82f6) r(lg)"></div>
-          <div class="w(3xl) h(3xl) bg(#3b82f6) r(xl)"></div>
-          <div class="w(3xl) h(3xl) bg(#3b82f6) r(full)"></div>
+          <div class="1920x1920 bg(#3b82f6) r(none)"></div>
+          <div class="1920x1920 bg(#3b82f6) r(sm)"></div>
+          <div class="1920x1920 bg(#3b82f6) r(md)"></div>
+          <div class="1920x1920 bg(#3b82f6) r(lg)"></div>
+          <div class="1920x1920 bg(#3b82f6) r(xl)"></div>
+          <div class="1920x1920 bg(#3b82f6) r(full)"></div>
         </div>
       </div>
       
@@ -137,10 +137,10 @@
       <div class="vbox gap(sm) p(lg) r(lg) bg(#f9fafb)">
         <h4 class="500 font(md) mb(sm)">Shadows</h4>
         <div class="hbox(middle) gap(md)">
-          <div class="w(4xl) h(4xl) bg(white) r(lg) shadow(sm) p(sm)">sm</div>
-          <div class="w(4xl) h(4xl) bg(white) r(lg) shadow(md) p(sm)">md</div>
-          <div class="w(4xl) h(4xl) bg(white) r(lg) shadow(lg) p(sm)">lg</div>
-          <div class="w(4xl) h(4xl) bg(white) r(lg) shadow(xl) p(sm)">xl</div>
+          <div class="2560x2560 bg(white) r(lg) shadow(sm) p(sm)">sm</div>
+          <div class="2560x2560 bg(white) r(lg) shadow(md) p(sm)">md</div>
+          <div class="2560x2560 bg(white) r(lg) shadow(lg) p(sm)">lg</div>
+          <div class="2560x2560 bg(white) r(lg) shadow(xl) p(sm)">xl</div>
         </div>
       </div>
     </div>

@@ -1,14 +1,14 @@
 <script lang="ts">
   import { Copy, Check, ChevronDown, ChevronRight } from 'lucide-svelte';
   import { generateCSS, priorityRegistry } from 'adorable-css';
-  import type { RuleGroup, RuleInfo } from 'adorable-css';
+  import type { RuleInfo } from 'adorable-css';
   
   let copiedRule = '';
-  let expandedGroups: Record<string, boolean> = {};
-  let expandedSubgroups: Record<string, boolean> = {};
   let liveInput = '';
   let liveCSS = '';
   let liveError = '';
+  let expandedGroups: Record<string, boolean> = {};
+  let expandedSubgroups: Record<string, boolean> = {};
   
   function copyToClipboard(text: string) {
     navigator.clipboard.writeText(text);
@@ -24,11 +24,30 @@
     expandedSubgroups[subgroupKey] = !expandedSubgroups[subgroupKey];
   }
   
-  // Get all groups and rules
-  $: allGroups = priorityRegistry?.getAllGroups?.() || [];
+  function scrollToSection(sectionId: string) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
+  
+  // Get all rules and maintain RULE_GROUPS order
   $: allRules = priorityRegistry?.getAllRulesInfo?.() || [];
   
-  // Group all rules by group and subgroup
+  // Define the order from RULE_GROUPS in rule-definitions.ts
+  const groupOrder = [
+    'Position',
+    'Auto Layout', 
+    'Visual',
+    'Text',
+    'CSS',
+    'Interaction',
+    'Utilities',
+    'Responsive',
+    'Components'
+  ];
+  
+  // Group rules by their metadata, preserving RULE_GROUPS order
   $: groupedRules = allRules.reduce((acc: Record<string, Record<string, RuleInfo[]>>, rule: RuleInfo) => {
     const group = rule.metadata?.group || 'Ungrouped';
     const subgroup = rule.metadata?.subgroup || 'General';
@@ -40,9 +59,14 @@
     return acc;
   }, {} as Record<string, Record<string, RuleInfo[]>>);
   
-  // Use natural order from groupedRules
-  $: orderedGroups = Object.entries(groupedRules);
-
+  // Sort groups according to RULE_GROUPS order
+  $: orderedGroups = groupOrder
+    .filter(groupName => groupedRules[groupName])
+    .map(groupName => [groupName, groupedRules[groupName]] as [string, Record<string, RuleInfo[]>])
+    .concat(
+      Object.entries(groupedRules)
+        .filter(([groupName]) => !groupOrder.includes(groupName))
+    );
   
   function testRule(rule: RuleInfo): string {
     try {
@@ -67,22 +91,6 @@
     } catch (error) {
       return `Error: ${(error as Error).message}`;
     }
-  }
-  
-  function getRulePriorityBadge(priority: string | number): string {
-    if (priority === 100) return 'badge(primary/sm)';   // Component
-    if (priority === 200) return 'badge(info/sm)';      // Layout  
-    if (priority === 300) return 'badge(success/sm)';   // Utility
-    if (priority === 400) return 'badge(warning/sm)';   // State
-    return 'badge(sm)';                                  // Other
-  }
-  
-  function getPriorityName(priority: string | number): string {
-    if (priority === 100) return 'Component';
-    if (priority === 200) return 'Layout';
-    if (priority === 300) return 'Utility';
-    if (priority === 400) return 'State';
-    return String(priority);
   }
   
   function generateLiveCSS() {
@@ -110,7 +118,7 @@
     }
   }
 </script>
-채ㅡ
+
 <div class="docs-page">
   <!-- Main Layout -->
   <div class="hbox(top) max-w(7xl) mx(auto)">
@@ -119,7 +127,7 @@
       <div class="sticky top(0)">
         <h3 class="text(xs) font(mono) uppercase tracking(wider) c(gray-500) mb(8) px(4)">RULE GROUPS</h3>
         <ul class="vbox gap(16)">
-          {#each orderedGroups as [groupName, subgroups], index}
+          {#each orderedGroups as [groupName, subgroups]}
             <li>
               <button
                 class="w(full) text(left) px(4) py(2) text(lg) bold transition hover:c(gray-900) {expandedGroups[groupName] !== false ? 'c(gray-900)' : 'c(gray-600)'}"
@@ -139,8 +147,8 @@
                     {@const subgroupKey = `${groupName}-${subgroupName}`}
                     <li>
                       <button
-                        class="w(full) text(left) px(4) pl(8) py(1.5) text(sm) transition hover:c(gray-900) {expandedSubgroups[subgroupKey] !== false ? 'c(gray-900) bold' : 'c(gray-500)'}"
-                        on:click={() => toggleSubgroup(subgroupKey)}
+                        class="w(full) text(left) px(4) pl(8) py(1.5) text(sm) transition hover:c(gray-900) {expandedSubgroups[subgroupKey] !== false ? 'c(gray-900)' : 'c(gray-500)'}"
+                        on:click={() => scrollToSection(`${groupName}-${subgroupName}`)}
                       >
                         <div class="hbox(between)">
                           <span>· {subgroupName}</span>
@@ -161,45 +169,45 @@
     
     <!-- Main Content -->
     <main class="flex(1) px(6)">
-      <!-- Live CSS Tester -->
-      <section class="mb(8) p(6) bg(white) border(1/gray-200) r(lg)">
-        <h3 class="text(lg) bold c(gray-900) mb(4)">Live CSS Tester</h3>
-        <div class="vbox gap(4)">
-          <div class="hbox gap(4)">
-            <input
-              bind:value={liveInput}
-              placeholder="Enter AdorableCSS classes... (e.g., w(300) p(lg) c(blue-500))"
-              class="flex(1) px(3) py(2) border(1/gray-300) r(md) text(sm) font(mono)"
-              on:input={generateLiveCSS}
-            />
-            <button
-              class="px(4) py(2) bg(blue-500) c(white) r(md) text(sm) hover:bg(blue-600) transition"
-              on:click={() => copyToClipboard(liveCSS)}
-              title="Copy CSS output"
-            >
-              Copy CSS
-            </button>
-          </div>
-          {#if liveCSS}
-            <div class="vbox gap(2)">
-              <h4 class="text(sm) bold c(gray-700)">Generated CSS:</h4>
-              <pre class="p(4) bg(gray-50) border(1/gray-200) r(md) text(xs) font(mono) overflow-x(auto) max-h(300) overflow-y(auto)">{liveCSS}</pre>
-            </div>
-          {/if}
-          {#if liveError}
-            <div class="p(3) bg(red-50) border(1/red-200) r(md)">
-              <p class="text(sm) c(red-700)">Error: {liveError}</p>
-            </div>
-          {/if}
+    <!-- Live CSS Tester -->
+    <section class="mb(8) p(6) bg(white) border(1/gray-200) r(lg)">
+      <h3 class="text(lg) bold c(gray-900) mb(4)">Live CSS Tester</h3>
+      <div class="vbox gap(4)">
+        <div class="hbox gap(4)">
+          <input
+            bind:value={liveInput}
+            placeholder="Enter AdorableCSS classes... (e.g., w(300) p(lg) c(blue-500))"
+            class="flex(1) px(3) py(2) border(1/gray-300) r(md) text(sm) font(mono)"
+            on:input={generateLiveCSS}
+          />
+          <button
+            class="px(4) py(2) bg(blue-500) c(white) r(md) text(sm) hover:bg(blue-600) transition"
+            on:click={() => copyToClipboard(liveCSS)}
+            title="Copy CSS output"
+          >
+            Copy CSS
+          </button>
         </div>
-      </section>
+        {#if liveCSS}
+          <div class="vbox gap(2)">
+            <h4 class="text(sm) bold c(gray-700)">Generated CSS:</h4>
+            <pre class="p(4) bg(gray-50) border(1/gray-200) r(md) text(xs) font(mono) overflow-x(auto) max-h(300) overflow-y(auto)">{liveCSS}</pre>
+          </div>
+        {/if}
+        {#if liveError}
+          <div class="p(3) bg(red-50) border(1/red-200) r(md)">
+            <p class="text(sm) c(red-700)">Error: {liveError}</p>
+          </div>
+        {/if}
+      </div>
+    </section>
 
       {#if Object.keys(groupedRules).length === 0}
       <!-- Empty State -->
       <div class="text(center) py(16)">
         <div class="text(6xl) mb(4)">🔍</div>
         <h3 class="text(xl) bold c(gray-900) mb(2)">No rules found</h3>
-        <p class="text(gray-600)">Try adjusting your search query or filters</p>
+        <p class="text(gray-600)">No rules are currently loaded</p>
       </div>
     {:else}
       <!-- Table View by Group -->
@@ -227,7 +235,7 @@
                     class="hbox(middle) gap(2) w(full) text(left) cursor(pointer)"
                     on:click={() => toggleGroup(groupName)}
                   >
-                    {#if expandedGroups[groupName]}
+                    {#if expandedGroups[groupName] !== false}
                       <ChevronDown size="20" class="c(gray-600)" />
                     {:else}
                       <ChevronRight size="20" class="c(gray-600)" />
@@ -250,13 +258,13 @@
                     </tr>
                   {/if}
                   <!-- Subgroup Header Row -->
-                  <tr>
+                  <tr id="{groupName}-{subgroupName}">
                     <td colspan="3" class="px(0) pt(6) pb(3)">
                       <button 
                         class="hbox(middle) gap(2) w(full) text(left) cursor(pointer) pl(6)"
                         on:click={() => toggleSubgroup(subgroupKey)}
                       >
-                        {#if expandedSubgroups[subgroupKey]}
+                        {#if expandedSubgroups[subgroupKey] !== false}
                           <ChevronDown size="16" class="c(gray-500)" />
                         {:else}
                           <ChevronRight size="16" class="c(gray-500)" />
@@ -290,9 +298,7 @@
                         
                         <!-- Priority -->
                         <td class="p(3)">
-                          <span class="{getRulePriorityBadge(rule.priority)}">
-                            {getPriorityName(rule.priority)}
-                          </span>
+                          <span class="text(sm) font(mono) c(gray-700)">{rule.priority}</span>
                         </td>
                         
                         <!-- CSS Output -->
@@ -309,7 +315,7 @@
         </table>
       </div>
       {/if}
-      
+    
       <!-- Debug Info -->
       <section class="mt(16) p(6) bg(gray-50) r(lg)">
         <h3 class="text(lg) bold c(gray-900) mb(4)">Debug Information</h3>
@@ -317,17 +323,14 @@
           <div>
             <strong>Priority Registry:</strong> {priorityRegistry ? 'Available' : 'Not Available'}
           </div>
-          {#if priorityRegistry}
-            <div>
-              <strong>Registry Methods:</strong> 
-              {Object.getOwnPropertyNames(Object.getPrototypeOf(priorityRegistry)).filter(name => name !== 'constructor').slice(0, 8).join(', ')}...
-            </div>
-          {/if}
           <div>
-            <strong>Total Groups:</strong> {allGroups.length}
+            <strong>Total Rules:</strong> {allRules.length}
           </div>
           <div>
             <strong>Rules with Metadata:</strong> {allRules.filter(r => r.metadata).length} / {allRules.length}
+          </div>
+          <div>
+            <strong>Group Order:</strong> {groupOrder.join(', ')}
           </div>
         </div>
       </section>

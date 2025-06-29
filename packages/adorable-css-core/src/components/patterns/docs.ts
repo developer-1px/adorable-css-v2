@@ -1,421 +1,243 @@
 import type { StringRuleHandler, CSSRule } from '../../rules/types';
 
-// Modern technical documentation components
+// Modern technical documentation components using AdorableCSS string composition
 
-// Page container - Modern tech blog style
-export const docsPageString: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
+// Main docs container - 3-column layout wrapper
+const docsMain: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
   const variant = args || 'default';
   
-  const variants: Record<string, (string | CSSRule)[]> = {
-    default: [
-      'min-h(screen) bg(gray-50)',
-      {
-        'font-family': '"Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-        'line-height': '1.6',
-        'color': '#1f2937',
-        'font-feature-settings': '"rlig" 1, "calt" 1, "ss01" 1',
-        '-webkit-font-smoothing': 'antialiased',
-        '-moz-osx-font-smoothing': 'grayscale',
-        'text-rendering': 'optimizeLegibility'
-      }
-    ]
+  const variants: Record<string, string>  = {
+    default: 'min-h(screen) bg(white) hbox(top)'
   };
   
   return variants[variant] || variants.default;
 };
 
-// Hero section - Modern tech blog hero
-export const docsHeroString: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
+// Navigation sidebar
+const docsNav: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
   const variant = args || 'default';
   
-  const variants: Record<string, (string | CSSRule)[]> = {
-    default: [
-      'py(24) px(8) bg(white) border-b(1/gray-200)',
-      {
-        'max-width': '1200px',
-        'margin': '0 auto',
-        'background': 'linear-gradient(135deg, #ffffff 0%, #f8fafc 100%)',
-        'border-bottom': '1px solid #e5e7eb',
-        'box-shadow': '0 1px 3px 0 rgb(0 0 0 / 0.1)'
-      }
-    ]
-  };
-  
-  return variants[variant] || variants.default;
-};
-
-// Content section - Modern blog section style
-export const docsSectionString: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
-  const variant = args || 'default';
-  
-  const variants: Record<string, (string | CSSRule)[]> = {
-    default: [
-      'max-w(6xl) mx(auto) px(8) py(16) bg(white) my(8) r(xl) shadow(sm)',
-      {
-        'width': '100%',
-        'border': '1px solid #f3f4f6'
-      }
-    ]
-  };
-  
-  return variants[variant] || variants.default;
-};
-
-// Section title - Modern tech blog heading
-export const docsSectionTitleString: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
-  const variant = args || 'default';
-  
-  const variants: Record<string, (string | CSSRule)[]> = {
-    default: [
-      'text(4xl) bold c(gray-900) mb(16) pb(8)',
-      {
-        'font-weight': '800',
-        'letter-spacing': '-0.04em',
-        'line-height': '1.1',
-        'position': 'relative',
-        'background': 'linear-gradient(135deg, #1f2937 0%, #4b5563 100%)',
-        '-webkit-background-clip': 'text',
-        '-webkit-text-fill-color': 'transparent',
-        'background-clip': 'text',
-        
-        '&::after': {
-          'content': '""',
-          'position': 'absolute',
-          'bottom': '0',
-          'left': '0',
-          'width': '60px',
-          'height': '4px',
-          'background': 'linear-gradient(90deg, #3b82f6, #1d4ed8)',
-          'border-radius': '2px'
-        }
-      }
-    ]
-  };
-  
-  return variants[variant] || variants.default;
-};
-
-// Utility item - Better spacing and code presentation
-export const docsItemString: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
-  const variant = args || 'default';
-  
-  const variants: Record<string, (string | CSSRule)[]> = {
-    default: [
-      'mb(8) overflow(hidden) r(lg) border(1/gray-200) bg(white)',
-      {
-        'box-shadow': '0 1px 3px 0 rgb(0 0 0 / 0.1)'
-      }
-    ]
-  };
-  
-  return variants[variant] || variants.default;
-};
-
-// Table for rules documentation - Modern tech blog table
-export const docsTableString: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
-  const variant = args || 'default';
-  
-  const variants: Record<string, (string | CSSRule)[]> = {
-    default: [
-      'w(full) border(1/gray-200) r(xl) overflow(hidden) bg(white) font(sm)',
-      {
-        'border-collapse': 'collapse',
-        'table-layout': 'fixed',
-        'background': 'linear-gradient(180deg, #ffffff 0%, #fafbfc 100%)',
-        'border': '1px solid #e5e7eb',
-      }
-    ]
-  };
-  
-  return variants[variant] || variants.default;
-};
-
-// Table header - Modern tech blog table header
-export const docsTableHeaderString: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
-  const variant = args || 'default';
-  
-  const variants: Record<string, (string | CSSRule)[]> = {
-    default: [
-      'px(8) py(5) text(left) text(sm) bold c(gray-800)',
-      {
-        'font-weight': '700',
-        'text-transform': 'uppercase',
-        'letter-spacing': '0.1em',
-        'background': 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)',
-        'border-bottom': '2px solid #cbd5e1',
-        'position': 'relative',
-        
-        '&::after': {
-          'content': '""',
-          'position': 'absolute',
-          'bottom': '0',
-          'left': '0',
-          'right': '0',
-          'height': '1px',
-          'background': 'linear-gradient(90deg, transparent 0%, #3b82f6 50%, transparent 100%)'
-        }
-      }
-    ]
-  };
-  
-  return variants[variant] || variants.default;
-};
-
-// Table row - Modern tech blog table row with enhanced hover
-export const docsTableRowString: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
-  const variant = args || 'default';
-  
-  const variants: Record<string, (string | CSSRule)[]> = {
-    default: [
-      'border-b(1/gray-100)',
-      {
-        'transition': 'all 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
-        'position': 'relative',
-        
-        '&:hover': {
-          'background': 'linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%)',
-          'transform': 'translateY(-1px)',
-          'box-shadow': '0 4px 12px rgb(0 0 0 / 0.05)'
-        },
-        
-        '&:last-child': {
-          'border-bottom': 'none'
-        },
-        
-        '&::before': {
-          'content': '""',
-          'position': 'absolute',
-          'left': '0',
-          'top': '0',
-          'bottom': '0',
-          'width': '3px',
-          'background': 'linear-gradient(180deg, #3b82f6, #1d4ed8)',
-          'opacity': '0',
-          'transition': 'opacity 0.2s ease'
-        },
-        
-        '&:hover::before': {
-          'opacity': '1'
-        }
-      }
-    ]
-  };
-  
-  return variants[variant] || variants.default;
-};
-
-// Class name cell
-export const docsTableCellClassString: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
-  const variant = args || 'default';
-  
-  const variants: Record<string, (string | CSSRule)[]> = {
-    default: [
-      'w(40%) border-r(1/gray-200) p(0)',
-      {
-        'vertical-align': 'top'
-      }
-    ]
-  };
-  
-  return variants[variant] || variants.default;
-};
-
-// CSS output cell
-export const docsTableCellCSSString: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
-  const variant = args || 'default';
-  
-  const variants: Record<string, (string | CSSRule)[]> = {
-    default: [
-      'w(60%) p(4)',
-      {
-        'vertical-align': 'top'
-      }
-    ]
-  };
-  
-  return variants[variant] || variants.default;
-};
-
-// Navigation sidebar - Modern tech blog nav
-export const docsNavString: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
-  const variant = args || 'default';
-  
-  const variants: Record<string, (string | CSSRule)[]> = {
-    default: [
-      'w(320px) flex(0_0_auto) border-r(1/gray-200) bg(white) h(100vh) overflow-y(auto)',
-      {
-        'position': 'sticky',
-        'top': '0',
-        'background': 'linear-gradient(180deg, #ffffff 0%, #f9fafb 100%)',
-        'border-right': '1px solid #e5e7eb',
-        'box-shadow': 'inset -1px 0 0 0 #f3f4f6'
-      }
-    ]
+  const variants: Record<string, string> = {
+    default: 'w(280) h(screen) sticky top(0) border-r(1/gray-200) bg(gray-50) overflow-y(auto)',
+    compact: 'w(240) h(screen) sticky top(0) border-r(1/gray-200) bg(gray-50) overflow-y(auto)'
   };
   
   return variants[variant] || variants.default;
 };
 
 // Main content area
-export const docsMainString: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
+const docsContent: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
   const variant = args || 'default';
   
-  const variants: Record<string, (string | CSSRule)[]> = {
-    default: [
-      'flex(1) max-w(4xl) px(6)',
-      {
-        'min-width': '0'
-      }
-    ]
+  const variants: Record<string, string> = {
+    default: 'flex(1) max-w(4xl) mx(auto) px(8) py(12)',
+    wide: 'flex(1) max-w(6xl) mx(auto) px(8) py(12)'
   };
   
   return variants[variant] || variants.default;
 };
 
-// Table of Contents (right sidebar) - Modern tech blog TOC
-export const docsTocString: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
+// Table of Contents (right sidebar)
+const docsToc: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
   const variant = args || 'default';
   
-  const variants: Record<string, (string | CSSRule)[]> = {
-    default: [
-      'w(280px) flex(0_0_auto) border-l(1/gray-200) bg(white)',
-      {
-        'position': 'sticky',
-        'top': '0',
-        'height': '100vh',
-        'overflow-y': 'auto',
-        'background': 'linear-gradient(180deg, #ffffff 0%, #f9fafb 100%)',
-        'border-left': '1px solid #e5e7eb',
-        'box-shadow': 'inset 1px 0 0 0 #f3f4f6'
-      }
-    ]
+  const variants: Record<string, string> = {
+    default: 'w(250) h(screen) sticky top(0) border-l(1/gray-200) bg(white) overflow-y(auto) px(4) py(8)',
+    hidden: 'hidden'
   };
   
   return variants[variant] || variants.default;
 };
 
-// Code block with syntax highlighting feel
-export const docsCodeString: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
+// Section wrapper - using existing section component style
+const docsSection: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
   const variant = args || 'default';
   
-  const variants: Record<string, (string | CSSRule)[]> = {
-    default: [
-      'relative rounded(md) bg(muted) px(3) py(2) font(mono) text(sm)',
-      {
-        'position': 'relative',
-        'border-radius': '0.375rem',
-        'background': 'hsl(var(--muted))',
-        'padding': '0.5rem 0.75rem',
-        'font-family': 'ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-        'font-size': '0.875rem',
-        'font-weight': '600',
-        'color': 'hsl(var(--foreground))'
-      }
-    ],
-    
-    inline: [
-      'relative rounded(sm) bg(muted) px(1.5) py(0.5) font(mono) text(sm)',
-      {
-        'position': 'relative',
-        'border-radius': '0.25rem',
-        'background': 'hsl(var(--muted))',
-        'padding': '0.125rem 0.375rem',
-        'font-family': 'ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-        'font-size': '0.875rem',
-        'font-weight': '600',
-        'color': 'hsl(var(--foreground))'
-      }
-    ],
-    
-    block: [
-      'relative overflow-x(auto) rounded(lg) border bg(muted/50) p(4) font(mono) text(sm)',
-      {
-        'position': 'relative',
-        'overflow-x': 'auto',
-        'border-radius': '0.5rem',
-        'border': '1px solid hsl(var(--border))',
-        'background': 'hsl(var(--muted) / 0.5)',
-        'padding': '1rem',
-        'font-family': 'ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace',
-        'font-size': '0.875rem',
-        'line-height': '1.7',
-        'color': 'hsl(var(--foreground))'
-      }
-    ]
+  const variants: Record<string, string> = {
+    default: 'section mb(12)',
+    hero: 'section hero py(20) mb(16)',
+    compact: 'section mb(8)'
   };
   
   return variants[variant] || variants.default;
 };
 
-// Card component for info boxes - extends basic card
-export const docsCardString: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
+// Heading - using existing heading component
+const docsHeading: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
+  const level = args || 'h2';
+  
+  const variants: Record<string, string> = {
+    h1: 'heading(h1) mb(8)',
+    h2: 'heading(h2) mt(12) mb(6)',
+    h3: 'heading(h3) mt(8) mb(4)',
+    h4: 'heading(h4) mt(6) mb(3)'
+  };
+  
+  return variants[level] || variants.h2;
+};
+
+// Prose content - using existing prose component
+const docsProse: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
   const variant = args || 'default';
   
-  const variants: Record<string, (string | CSSRule)[]> = {
-    default: [
-      'card p(xl)',
-      {}
-    ],
-    
-    warning: [
-      'card bg(amber-50) border(1/amber-200) c(amber-900) p(xl)',
-      {}
-    ],
-    
-    success: [
-      'card bg(green-50) border(1/green-200) c(green-900) p(xl)', 
-      {}
-    ],
-    
-    info: [
-      'card bg(blue-50) border(1/blue-200) c(blue-900) p(xl)',
-      {}
-    ]
+  const variants: Record<string, string> = {
+    default: 'prose',
+    lg: 'prose(lg)',
+    sm: 'prose(sm)'
   };
   
   return variants[variant] || variants.default;
 };
 
-// Button for interactive elements - extends basic button
-export const docsButtonString: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
+// Card - using existing card component
+const docsCard: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
   const variant = args || 'default';
   
-  const variants: Record<string, (string | CSSRule)[]> = {
-    default: [
-      'button',
-      {}
-    ],
-    
-    secondary: [
-      'button(secondary)',
-      {}
-    ],
-    
-    ghost: [
-      'button(ghost)',
-      {}
-    ]
+  const variants: Record<string, string> = {
+    default: 'card',
+    warning: 'card bg(amber-50) border(amber-200) c(amber-900)',
+    info: 'card bg(blue-50) border(blue-200) c(blue-900)',
+    success: 'card bg(green-50) border(green-200) c(green-900)',
+    error: 'card bg(red-50) border(red-200) c(red-900)'
   };
   
   return variants[variant] || variants.default;
 };
 
-// Export string-based rules
+// Button - using existing button component
+const docsButton: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
+  const variant = args || 'default';
+  
+  const variants: Record<string, string> = {
+    default: 'button',
+    primary: 'button(primary)',
+    secondary: 'button(secondary)',
+    ghost: 'button(ghost)',
+    link: 'button(link)'
+  };
+  
+  return variants[variant] || variants.default;
+};
+
+// Badge - using existing badge component
+const docsBadge: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
+  const variant = args || 'default';
+  
+  const variants: Record<string, string> = {
+    default: 'badge',
+    sm: 'badge(sm)',
+    lg: 'badge(lg)',
+    primary: 'badge(primary)',
+    secondary: 'badge(secondary)',
+    success: 'badge(success)',
+    warning: 'badge(warning)',
+    error: 'badge(error)'
+  };
+  
+  return variants[variant] || variants.default;
+};
+
+// Code block - inline or block code
+const docsCode: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
+  const variant = args || 'inline';
+  
+  const variants: Record<string, string> = {
+    inline: 'font(mono) text(sm) bg(gray-100) px(1.5) py(0.5) r(sm)',
+    block: 'block font(mono) text(sm) bg(gray-900) c(gray-100) p(4) r(md) overflow-x(auto)',
+    terminal: 'block font(mono) text(sm) bg(black) c(green-400) p(4) r(md) overflow-x(auto)'
+  };
+  
+  return variants[variant] || variants.inline;
+};
+
+// Breadcrumb navigation
+const docsBreadcrumb: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
+  const variant = args || 'default';
+  
+  const variants: Record<string, string> = {
+    default: 'hbox(middle) gap(2) text(sm) c(gray-600) mb(6)',
+    separator: 'c(gray-400)'
+  };
+  
+  return variants[variant] || variants.default;
+};
+
+// Search bar
+const docsSearch: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
+  const variant = args || 'default';
+  
+  const variants: Record<string, string> = {
+    default: 'input w(full) max-w(md)',
+    compact: 'input(sm) w(full) max-w(sm)'
+  };
+  
+  return variants[variant] || variants.default;
+};
+
+// Pagination - previous/next navigation
+const docsPagination: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
+  const variant = args || 'default';
+  
+  const variants: Record<string, string> = {
+    default: 'hbox(between) mt(16) pt(8) border-t(1/gray-200)',
+    item: 'button(ghost) hbox(middle) gap(2)'
+  };
+  
+  return variants[variant] || variants.default;
+};
+
+// Table - simple docs table
+const docsTable: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
+  const variant = args || 'default';
+  
+  const variants: Record<string, string> = {
+    default: 'w(full) border(1/gray-200) r(lg) overflow(hidden) bg(white)',
+    striped: 'w(full) border(1/gray-200) r(lg) overflow(hidden) bg(white)'
+  };
+  
+  return variants[variant] || variants.default;
+};
+
+// Callout/Alert box
+const docsCallout: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
+  const variant = args || 'info';
+  
+  const variants: Record<string, string> = {
+    info: 'card bg(blue-50) border-l(4/blue-500) c(blue-900) pl(6)',
+    warning: 'card bg(amber-50) border-l(4/amber-500) c(amber-900) pl(6)',
+    error: 'card bg(red-50) border-l(4/red-500) c(red-900) pl(6)',
+    success: 'card bg(green-50) border-l(4/green-500) c(green-900) pl(6)',
+    tip: 'card bg(purple-50) border-l(4/purple-500) c(purple-900) pl(6)'
+  };
+  
+  return variants[variant] || variants.info;
+};
+
+// Export docs rules with both kebab-case and dot notation support
 export const docsRules = {
-  'docs-page': docsPageString,
-  'docs-hero': docsHeroString,
-  'docs-section': docsSectionString,
-  'docs-section-title': docsSectionTitleString,
-  'docs-item': docsItemString,
-  'docs-table': docsTableString,
-  'docs-table-header': docsTableHeaderString,
-  'docs-table-row': docsTableRowString,
-  'docs-table-cell-class': docsTableCellClassString,
-  'docs-table-cell-css': docsTableCellCSSString,
-  'docs-nav': docsNavString,
-  'docs-main': docsMainString,
-  'docs-toc': docsTocString,
-  'docs-code': docsCodeString,
-  'docs-card': docsCardString,
-  'docs-button': docsButtonString
+  // Main layout
+  'docs': docsMain,
+  'docs-nav': docsNav,
+  'docs-main': docsContent,
+  'docs-content': docsContent,
+  'docs-toc': docsToc,
+  'docs-sidebar': docsNav,
+  
+  // Content components
+  'docs-section': docsSection,
+  'docs-heading': docsHeading,
+  'docs-prose': docsProse,
+  
+  // UI components
+  'docs-card': docsCard,
+  'docs-button': docsButton,
+  'docs-badge': docsBadge,
+  'docs-code': docsCode,
+  'docs-table': docsTable,
+  'docs-callout': docsCallout,
+  
+  // Navigation components
+  'docs-breadcrumb': docsBreadcrumb,
+  'docs-search': docsSearch,
+  'docs-pagination': docsPagination
 };

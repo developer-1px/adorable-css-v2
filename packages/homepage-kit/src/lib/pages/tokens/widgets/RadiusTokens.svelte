@@ -11,7 +11,7 @@
     <div class="grid grid-cols(3) md:grid-cols(5) gap(lg)">
       {#each Object.entries(defaultTokens.radius) as [key, value]}
         <div class="radius-demo text(center) group">
-          <div class="w(5xl) h(5xl) bg(to-br/rgb(251,146,60)..rgb(239,68,68)) r({key}) mx(auto) mb(md) shadow(lg) hover:shadow(2xl) hover:scale(1.1) transition"></div>
+          <div class="3200x3200 bg(to-br/rgb(251,146,60)..rgb(239,68,68)) r({key}) mx(auto) mb(md) shadow(lg) hover:shadow(2xl) hover:scale(1.1) transition"></div>
           <code class="600 font(sm) c(135deg/#3b82f6..#8b5cf6)">r({key})</code>
           <div class="font(xs) c(gray-600) font-family(mono)">{value}</div>
         </div>

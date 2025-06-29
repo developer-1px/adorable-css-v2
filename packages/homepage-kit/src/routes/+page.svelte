@@ -113,7 +113,7 @@
       <!-- Traditional CSS -->
       <div class="vbox gap(16)">
         <div class="hbox(middle) gap(8)">
-          <div class="w(8) h(8) r(full) bg(gray-400)"></div>
+          <div class="8x8 r(full) bg(gray-400)"></div>
           <h3 class="font(lg) bold c(gray-700)">Traditional CSS</h3>
         </div>
         <div class="r(lg) bg(gray-900) p(24) overflow(hidden)">
@@ -144,7 +144,7 @@
       <!-- AdorableCSS -->
       <div class="vbox gap(16)">
         <div class="hbox(middle) gap(8)">
-          <div class="w(8) h(8) r(full) bg(purple-500)"></div>
+          <div class="8x8 r(full) bg(purple-500)"></div>
           <h3 class="font(lg) bold c(gray-900)">AdorableCSS</h3>
         </div>
         <div class="r(lg) bg(white) border(2/purple-500) p(24) overflow(hidden)">

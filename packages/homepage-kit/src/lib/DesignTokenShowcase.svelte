@@ -124,7 +124,7 @@
             <h3 class="600 font(md)">Modern Card</h3>
             <div class="p(lg) bg(--colors-white) r(lg) shadow(lg) border(1/--colors-gray-200) scale-up(0.5s/ease-out/delay:900ms)">
               <div class="hbox(middle) gap(md)">
-                <div class="w(2xl) h(2xl) r(md) bg(135deg/--colors-primary-400..--colors-primary-600) bounce-in(0.6s/elastic/delay:1000ms)"></div>
+                <div class="1536x1536 r(md) bg(135deg/--colors-primary-400..--colors-primary-600) bounce-in(0.6s/elastic/delay:1000ms)"></div>
                 <div class="vbox gap(xs) flex fade-left(0.5s/ease-out/delay:1100ms)">
                   <div class="600 font(md) c(--colors-gray-900)">Premium Feature</div>
                   <div class="font(sm) c(--colors-gray-600)">Experience the refined design system</div>

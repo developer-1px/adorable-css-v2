@@ -80,8 +80,9 @@ export interface RuleDefinitions {
  * 2. Auto Layout (Layout & Spacing)
  * 3. Fill & Stroke (Colors & Backgrounds) 
  * 4. Text (Typography)
- * 5. Effects (Shadows & Transforms)
- * 6. Additional utilities
+ * 5. CSS (Properties not in Figma)
+ * 6. Interaction (States & Animation)
+ * 7. Additional utilities
  */
 export const RULE_GROUPS: RuleDefinitions = {
   // 🔗 1. POSITION - Figma's Position (X, Y) - FIRST!
@@ -146,15 +147,14 @@ export const RULE_GROUPS: RuleDefinitions = {
         name: 'Gap',
         rules: {
           gap: spacingRules.gap,
-          space: displayRules.space,
         },
         metadata: { 
           subgroup: 'Gap',
           figmaEquivalent: 'Gap'
         }
       },
-      spacing: {
-        name: 'Spacing',
+      padding: {
+        name: 'Padding',
         rules: {
           p: spacingRules.p,
           px: spacingRules.px,
@@ -163,17 +163,10 @@ export const RULE_GROUPS: RuleDefinitions = {
           pb: spacingRules.pb,
           pl: spacingRules.pl,
           pr: spacingRules.pr,
-          m: spacingRules.m,
-          mx: spacingRules.mx,
-          my: spacingRules.my,
-          mt: spacingRules.mt,
-          mb: spacingRules.mb,
-          ml: spacingRules.ml,
-          mr: spacingRules.mr,
         },
         metadata: { 
-          subgroup: 'Spacing',
-          figmaEquivalent: 'Padding & Margin'
+          subgroup: 'Padding',
+          figmaEquivalent: 'Padding'
         }
       },
     }
@@ -206,10 +199,6 @@ export const RULE_GROUPS: RuleDefinitions = {
           bb: visualRules.bb,
           bl: visualRules.bl,
           r: visualRules.r,
-          rt: visualRules.rt,
-          rr: visualRules.rr,
-          rb: visualRules.rb,
-          rl: visualRules.rl,
         },
         metadata: { 
           subgroup: 'Borders & Radius',
@@ -219,9 +208,7 @@ export const RULE_GROUPS: RuleDefinitions = {
       effects: {
         name: 'Effects',
         rules: {
-          shadow: visualRules.shadow,
-          insetShadow: visualRules.insetShadow,
-          opacity: visualRules.opacity,
+          ...visualRules,
           ...effectsRules,
         },
         metadata: { 
@@ -231,14 +218,7 @@ export const RULE_GROUPS: RuleDefinitions = {
       },
       background: {
         name: 'Background',
-        rules: {
-          bgSize: visualRules.bgSize,
-          bgPosition: visualRules.bgPosition,
-          bgRepeat: visualRules.bgRepeat,
-          bgAttachment: visualRules.bgAttachment,
-          bgClip: visualRules.bgClip,
-          bgOrigin: visualRules.bgOrigin,
-        },
+        rules: {},
         metadata: { 
           subgroup: 'Background'
         }
@@ -268,26 +248,64 @@ export const RULE_GROUPS: RuleDefinitions = {
   },
 
   css: {
-    name: 'Interaction',
+    name: 'CSS',
     priority: RulePriority.UTILITY,
+    metadata: {
+      group: 'CSS',
+      description: 'CSS-specific properties not in Figma'
+    },
     subgroups: {
-      css: {
-        name: 'CSS',
+      margin: {
+        name: 'Margin',
         rules: {
-          // Display
+          m: spacingRules.m,
+          mx: spacingRules.mx,
+          my: spacingRules.my,
+          mt: spacingRules.mt,
+          mb: spacingRules.mb,
+          ml: spacingRules.ml,
+          mr: spacingRules.mr,
+        },
+        metadata: {
+          subgroup: 'Margin',
+          figmaEquivalent: 'Not available in Figma'
+        }
+      },
+      display: {
+        name: 'Display',
+        rules: {
           block: displayRules.block,
           inline: displayRules.inline,
           'inline-block': displayRules['inline-block'],
           'inline-flex': displayRules['inline-flex'],
           none: displayRules.none,
           hidden: displayRules.hidden,
-          // Grid (functional grid with grid(number) support)
-          ...gridRules,
-          // Overflow
-          ...overflowRules,
-          // Inset
+        },
+        metadata: {
+          subgroup: 'Display',
+          figmaEquivalent: 'Advanced CSS Properties'
+        }
+      },
+      grid: {
+        name: 'Grid',
+        rules: gridRules,
+        metadata: {
+          subgroup: 'Grid',
+          figmaEquivalent: 'CSS Grid'
+        }
+      },
+      overflow: {
+        name: 'Overflow',
+        rules: overflowRules,
+        metadata: {
+          subgroup: 'Overflow',
+          figmaEquivalent: 'Scroll behavior'
+        }
+      },
+      positioning: {
+        name: 'Positioning',
+        rules: {
           ...insetRules,
-          // Scroll Margin
           'scroll-mt': scrollMt,
           'scroll-mb': scrollMb,
           'scroll-ml': scrollMl,
@@ -295,8 +313,8 @@ export const RULE_GROUPS: RuleDefinitions = {
           'scroll-m': scrollM,
         },
         metadata: {
-          subgroup: 'CSS',
-          figmaEquivalent: 'Advanced CSS Properties'
+          subgroup: 'Positioning',
+          figmaEquivalent: 'Advanced positioning'
         }
       },
       container: {
@@ -377,27 +395,16 @@ export const RULE_GROUPS: RuleDefinitions = {
     }
   },
 
-  // Components Group - String-based rules (MOVED TO END)
+  // Components Group - CSS-based component rules
   components: {
     name: 'Components',
     priority: RulePriority.COMPONENT,
-    type: 'string',
     metadata: {
       group: 'Components',
       figmaSection: 'Components',
       description: 'Pre-built component patterns'
     },
     subgroups: {
-      primitives: {
-        name: 'Primitives',
-        rules: {
-          // Note: These are string rules, will be handled differently
-        },
-        metadata: { 
-          subgroup: 'Primitives',
-          figmaEquivalent: 'Component Set'
-        }
-      },
       patterns: {
         name: 'Patterns',
         rules: {
@@ -406,17 +413,19 @@ export const RULE_GROUPS: RuleDefinitions = {
           ...figmaComponents,
         },
         metadata: { 
-          subgroup: 'Patterns'
+          subgroup: 'Patterns',
+          figmaEquivalent: 'Component Patterns'
         }
       },
-      extensions: {
-        name: 'Extensions',
+      features: {
+        name: 'Features',
         rules: {
           ...glowRules,
           ...glassRules,
         },
         metadata: { 
-          subgroup: 'Extensions'
+          subgroup: 'Features',
+          figmaEquivalent: 'Visual Effects'
         }
       }
     }
@@ -443,8 +452,6 @@ export function flattenRuleGroups(groups: RuleDefinitions): Record<string, RuleH
   const flatRules: Record<string, RuleHandler | KeywordRuleHandler> = {};
   
   Object.values(groups).forEach(group => {
-    if (group.type === 'string') return; // Skip string rules for now
-    
     Object.values(group.subgroups).forEach(subgroup => {
       Object.assign(flatRules, subgroup.rules);
     });

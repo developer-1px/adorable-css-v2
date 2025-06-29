@@ -25,7 +25,7 @@
   
   <!-- Floating Action Button with Tooltip -->
   <button 
-    class="fixed bottom(2xl) right(2xl) w(60px) h(60px) r(full) 
+    class="fixed bottom(2xl) right(2xl) 60x60 r(full) 
            bg(135deg/#8b5cf6..#ec4899) shadow(xl)
            hover:shadow(2xl) hover:scale(1.1) transition 
            vbox(pack) z(100) group cursor(pointer)"

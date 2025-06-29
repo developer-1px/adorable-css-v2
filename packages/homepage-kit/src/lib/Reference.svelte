@@ -204,7 +204,7 @@
           { syntax: 'border(1/#e5e5e5)', desc: '테두리', example: 'border(1/#e5e5e5)' },
           { syntax: 'border-top(1/#000)', desc: '상단 테두리', example: 'border-top(1/#e5e5e5)' },
           { syntax: 'r(8)', desc: '둥근 모서리', example: 'r(8)' },
-          { syntax: 'r()', desc: '원형 (50%)', example: 'w(40) h(40) r()' },
+          { syntax: 'r()', desc: '원형 (50%)', example: '40x40 r()' },
           { syntax: 'r(8/8/0/0)', desc: '개별 모서리', example: 'r(8/8/0/0)' }
         ]
       },

@@ -24,7 +24,7 @@
       default: 'h(2xl) px(md) py(xs) font(sm)',
       sm: 'h(2xl) px(sm) py(xs) font(sm) r(md)',
       lg: 'h(3xl) px(xl) py(sm) font(md)',
-      icon: 'h(2xl) w(2xl) p(0)'
+      icon: '1536x1536 p(0)'
     }
   };
   
@@ -57,7 +57,7 @@
     tabindex="0"
   >
     {#if loading}
-      <div class="loading-spinner w(md) h(md) mr(xs) border(2/currentColor) border-t(2/transparent) r(full) animate(spin)"></div>
+      <div class="loading-spinner 768x768 mr(xs) border(2/currentColor) border-t(2/transparent) r(full) animate(spin)"></div>
     {/if}
     <slot />
   </a>
@@ -69,7 +69,7 @@
     on:click={handleClick}
   >
     {#if loading}
-      <div class="loading-spinner w(md) h(md) mr(xs) border(2/currentColor) border-t(2/transparent) r(full) animate(spin)"></div>
+      <div class="loading-spinner 768x768 mr(xs) border(2/currentColor) border-t(2/transparent) r(full) animate(spin)"></div>
     {/if}
     <slot />
   </button>

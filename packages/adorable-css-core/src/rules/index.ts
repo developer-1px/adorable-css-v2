@@ -10,8 +10,6 @@ import type { EnhancedRuleDefinition } from './types';
 
 // Register all rules with metadata from central definitions
 Object.entries(RULE_GROUPS).forEach(([groupKey, group]) => {
-  if (group.type === 'string') return; // Handle string rules separately
-  
   Object.entries(group.subgroups).forEach(([subgroupKey, subgroup]) => {
     Object.entries(subgroup.rules).forEach(([ruleName, handler]) => {
       // Generate metadata for each rule

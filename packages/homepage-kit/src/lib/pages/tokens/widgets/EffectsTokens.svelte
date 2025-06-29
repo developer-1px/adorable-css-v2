@@ -16,7 +16,7 @@
         <div class="grid grid-cols(2) md:grid-cols(3) gap(md)">
           {#each Object.entries(defaultTokens.duration) as [key, value]}
             <div class="duration-item p(lg) bg(to-br/rgb(236,254,255)..rgb(239,246,255))) r(xl) b(1/cyan-100) hbox(middle) gap(md) hover:shadow(lg) transition group">
-              <div class="w(3xl) h(3xl) bg(to-br/rgb(6,182,212)..rgb(59,130,246))) r(lg) shadow(md) animate(pulse/{value}/ease-in-out/infinite)"></div>
+              <div class="1920x1920 bg(to-br/rgb(6,182,212)..rgb(59,130,246))) r(lg) shadow(md) animate(pulse/{value}/ease-in-out/infinite)"></div>
               <div>
                 <code class="600 font(sm) c(135deg/#3b82f6..#8b5cf6)">duration({key})</code>
                 <div class="font(xs) c(gray-600) font-family(mono)">{value}</div>

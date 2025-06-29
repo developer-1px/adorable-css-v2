@@ -14,7 +14,7 @@
       >
         <span class="font(sm) c(gray-500)">이전</span>
         <div class="hbox gap(sm) items(center)">
-          <svg class="w(20) h(20) c(gray-400) group-hover:translate-x(-4) transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="20x20 c(gray-400) group-hover:translate-x(-4) transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
           </svg>
           <span class="font(lg) bold c(gray-900) group-hover:c(primary) transition">
@@ -36,7 +36,7 @@
           <span class="font(lg) bold c(gray-900) group-hover:c(primary) transition">
             {navigation.next.title}
           </span>
-          <svg class="w(20) h(20) c(gray-400) group-hover:translate-x(4) transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="20x20 c(gray-400) group-hover:translate-x(4) transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
           </svg>
         </div>

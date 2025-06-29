@@ -19,7 +19,7 @@
             <div class="spacing-visual flex(middle) gap(md)">
               <div class="h(2xl) bg(to-right/rgb(34,197,94)..rgb(20,184,166))) r(sm) shadow(sm) group-hover:shadow(md) transition" style="width: {value}"></div>
               <div class="p({key}) bg(to-br/rgb(220,252,231)..rgb(204,251,241))) b(1/green-300) r(lg) group-hover:shadow(md) transition">
-                <div class="bg(to-br/rgb(34,197,94)..rgb(20,184,166))) w(2xl) h(lg) r(sm)"></div>
+                <div class="bg(to-br/rgb(34,197,94)..rgb(20,184,166))) 1536x1024 r(sm)"></div>
               </div>
             </div>
           </div>

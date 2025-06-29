@@ -44,7 +44,7 @@
               checked={selectedRows.size === data.length && data.length > 0}
               indeterminate={selectedRows.size > 0 && selectedRows.size < data.length}
               on:change={toggleAll}
-              class="checkbox w(md) h(md) r(xs) border(1/#d1d5db) cursor(pointer)"
+              class="checkbox 768x768 r(xs) border(1/#d1d5db) cursor(pointer)"
             />
           </th>
         {/if}
@@ -71,7 +71,7 @@
                 type="checkbox"
                 checked={selectedRows.has(index)}
                 on:change={() => toggleRow(index)}
-                class="checkbox w(md) h(md) r(xs) border(1/#d1d5db) cursor(pointer)"
+                class="checkbox 768x768 r(xs) border(1/#d1d5db) cursor(pointer)"
               />
             </td>
           {/if}
