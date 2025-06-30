@@ -183,7 +183,7 @@ export const card: StringRuleHandler = (args = ''): (string | CSSRule)[] => {
 
 <!-- 특수 용도 제목 -->
 <h1 class="heading(hero)">Hero Landing Title</h1>
-<h1 class="heading(display)">Display Typography</h1>
+<h1 class="display(lg)">Display Typography</h1>
 <h2 class="heading(page)">Page Header</h2>
 
 <!-- 그래디언트 텍스트 -->

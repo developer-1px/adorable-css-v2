@@ -51,7 +51,7 @@
       <div class="p(md) r(full) bg(to-br/orange-100..amber-100) border(1px/orange-200)">
         <Circle size="24" class="c(orange-600)" />
       </div>
-      <h2 class="heading(display) c(to-r/orange-600..amber-600)">Border Radius</h2>
+      <h2 class="display(lg) c(to-r/orange-600..amber-600)">Border Radius</h2>
     </div>
     <p class="text(xl) c(gray-600) max-w(3xl) mx(auto) leading(relaxed)">
       Thoughtful corner radius that brings softness and personality to every interface element

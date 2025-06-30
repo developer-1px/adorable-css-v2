@@ -137,17 +137,6 @@ export const figureString = defineComponent({
   }
 });
 
-// Caption component
-export const captionString = defineComponent({
-  base: 'font(sm) c(gray-600)',
-  variants: {
-    default: '',
-    italic: 'italic',
-    bold: 'bold(medium) c(gray-700)',
-    muted: 'c(gray-500)'
-  }
-});
-
 // Keyboard component
 export const kbdString = defineComponent({
   base: 'font(mono) font(xs) px(xs) py(0.5) bg(gray-100) border(gray-300) r(sm) shadow(sm) inline-block',
@@ -171,6 +160,5 @@ export const typographyHelperRules = {
   'divider': dividerString,
   'image': imageString,
   'figure': figureString,
-  'caption': captionString,
   'kbd': kbdString
 };

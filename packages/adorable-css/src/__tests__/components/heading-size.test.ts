@@ -16,7 +16,7 @@ describe('heading component size variants', () => {
 
   it('should apply display size', () => {
     const result = headingString('display');
-    console.log('heading(display):', result);
+    console.log('display(lg):', result);
     expect(result).toContain('font(..6xl/1/-4%)');
     expect(result).not.toContain('font(3xl/1.3/-1.5%)'); // should not have default
   });

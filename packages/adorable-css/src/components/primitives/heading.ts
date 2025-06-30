@@ -13,16 +13,7 @@ export const headingDefinition: ComponentDefinition = {
     h4: 'font(..2xl/1.4/-1%) bold(semi) mt(xl) mb(sm)',
     h5: 'font(..xl/1.5) bold(medium) mt(lg) mb(xs)',
     h6: 'font(..lg/1.6) bold(medium) mt(md) mb(xs) uppercase',
-    
-    // Display variations
-    display: 'font(..6xl/1/-4%) bold(black) mb(2xl)',
-    hero: 'font(..5xl/1/-3.5%) bold(black) mb(xl)',
-    page: 'font(..5xl/1.1/-2.5%) bold(black) mb(md)',
-    
-    // Utility headings
-    caption: 'font(sm/1.5/wider) bold(medium) c(gray-600) uppercase mb(sm)',
-    eyebrow: 'font(xs/1.5/widest) bold(semi) c(gray-500) uppercase mb(xs)',
-    
+
     default: 'font(3xl/1.3/-1.5%) bold(semi) pb(md)' // Default to h3 style
   },
   

@@ -20,7 +20,7 @@
   <div class="text(center)">
     <div class="hbox(center) gap(sm) mb(xl)">
       <Sun size="24" class="c(indigo-600)" />
-      <h2 class="heading(display) c(gray-900)">Shadows & Elevation</h2>
+      <h2 class="display(lg) c(gray-900)">Shadows & Elevation</h2>
     </div>
     <p class="text(lg) c(gray-600) max-w(2xl) mx(auto)">
       A refined shadow system that creates depth and hierarchy. 

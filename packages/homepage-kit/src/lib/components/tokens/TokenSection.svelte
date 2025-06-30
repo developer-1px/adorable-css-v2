@@ -25,7 +25,7 @@
       {:else}
         <svelte:component this={icon} size="24" class="c({iconColor})" />
       {/if}
-      <h2 class="heading(display) {gradient ? `c(to-r/${iconColor}..${iconColor.replace('indigo', 'purple')})` : 'c(gray-900)'}">{title}</h2>
+      <h2 class="display(lg) {gradient ? `c(to-r/${iconColor}..${iconColor.replace('indigo', 'purple')})` : 'c(gray-900)'}">{title}</h2>
     </div>
     
     <p class="text(lg) c(gray-600) max-w(2xl) mx(auto) {gradient ? 'leading(relaxed)' : ''}">

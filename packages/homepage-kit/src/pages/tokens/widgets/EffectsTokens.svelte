@@ -58,7 +58,7 @@
       <div class="p(md) r(full) bg(to-br/cyan-100..blue-100) border(1px/cyan-200)">
         <Sparkles size="24" class="c(cyan-600)" />
       </div>
-      <h2 class="heading(display) c(to-r/cyan-600..blue-600)">Effects & Animation</h2>
+      <h2 class="display(lg) c(to-r/cyan-600..blue-600)">Effects & Animation</h2>
     </div>
     <p class="text(xl) c(gray-600) max-w(3xl) mx(auto) leading(relaxed)">
       Carefully crafted timing and easing that brings interfaces to life with purposeful motion

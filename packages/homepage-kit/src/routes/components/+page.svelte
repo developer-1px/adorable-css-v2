@@ -104,7 +104,7 @@
           examples: [
             { code: 'heading(h1)', label: 'Main heading' },
             { code: 'heading(h2)', label: 'Section heading' },
-            { code: 'heading(display)', label: 'Display heading' },
+            { code: 'display(lg)', label: 'Display heading' },
             { code: 'heading(hero)', label: 'Hero heading' },
             { code: 'heading(caption)', label: 'Caption text' },
             { code: 'heading(h3/muted)', label: 'Muted heading' }

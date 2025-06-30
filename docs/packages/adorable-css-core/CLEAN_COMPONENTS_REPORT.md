@@ -69,7 +69,7 @@ Components can return either:
 <!-- Clean AdorableCSS syntax -->
 <div class="hero(gradient)">
   <div class="hero-content">
-    <h1 class="heading(display)">Clean Components</h1>
+    <h1 class="display(lg)">Clean Components</h1>
     <button class="btn(primary)">Get Started</button>
   </div>
 </div>

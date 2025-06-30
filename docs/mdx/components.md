@@ -247,7 +247,7 @@ Semantic heading component with consistent typography.
 <h3 class="heading(h3)">Subsection Heading</h3>
 
 <!-- Special heading styles -->
-<h1 class="heading(display)">Hero Display Title</h1>
+<h1 class="display(lg)">Hero Display Title</h1>
 <p class="heading(lead)">Lead paragraph text</p>
 <p class="heading(subtitle)">Subtitle text</p>
 ```

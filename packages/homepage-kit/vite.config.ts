@@ -5,7 +5,12 @@ import path from 'path';
 
 export default defineConfig({
 	plugins: [
-		sveltekit(),
+		sveltekit({
+			// Enable experimental inspector
+			experimental: {
+				inspector: true
+			}
+		}),
 		paraglideVitePlugin({
 			project: './project.inlang',
 			outdir: './src/lib/paraglide'
@@ -16,6 +21,14 @@ export default defineConfig({
 			'adorable-css': path.resolve(__dirname, '../adorable-css/src'),
 			'adorable-css-cdn': path.resolve(__dirname, '../adorable-css-cdn/src'),
 			'@': path.resolve(__dirname, './src')
+		}
+	},
+	// Enable debug mode
+	logLevel: 'info',
+	server: {
+		// Enable HMR debug
+		hmr: {
+			overlay: true
 		}
 	},
 	test: {

@@ -22,7 +22,7 @@
   <!-- Header -->
   <header class="pt(4xl) pb(2xl) px(2xl) bg(white) border-b(1/gray-200)">
     <div class="max-w(full)">
-      <h1 class="heading(display) text(center) mb(lg)">
+      <h1 class="display(lg) text(center) mb(lg)">
         Component Showcase
       </h1>
       <p class="text(xl) text(center) c(gray-600) max-w(3xl) mx(auto)">

@@ -10,19 +10,19 @@
       icon: 'Type',
       description: '6-role typography system'
     },
-    { 
-      name: 'Spacing', 
-      path: '/tokens/spacing',
-      icon: 'Space',
-      description: 'Consistent spacing scale'
-    },
-    { 
+    {
       name: 'Colors', 
       path: '/tokens/colors',
       icon: 'Palette',
       description: 'OKLCH color system'
     },
-    { 
+    {
+      name: 'Spacing',
+      path: '/tokens/spacing',
+      icon: 'Space',
+      description: 'Consistent spacing scale'
+    },
+    {
       name: 'Radius', 
       path: '/tokens/radius',
       icon: 'RoundedCorner',
@@ -34,13 +34,7 @@
       icon: 'Shadow',
       description: 'Box shadow presets'
     },
-    { 
-      name: 'Elevation', 
-      path: '/tokens/elevation',
-      icon: 'Layers',
-      description: 'Material elevation system'
-    },
-    { 
+    {
       name: 'Effects', 
       path: '/tokens/effects',
       icon: 'Sparkles',
@@ -74,7 +68,7 @@
             class="
               px(lg) py(md) r(lg) whitespace(nowrap) transition-all
               {$page.url.pathname === item.path 
-                ? 'bg(purple-600) c(white) shadow(lg)' 
+                ? 'bg(purple-50) c(white) shadow(lg)'
                 : 'hover:bg(gray-100) c(gray-700) hover:c(gray-900)'
               }
             "

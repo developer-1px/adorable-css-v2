@@ -343,58 +343,6 @@
     </div>
   </div>
 
-  <!-- Typography Composition Examples -->
-  <div class="bg(gray-900) r(2xl) p(3xl) c(white)">
-    <h2 class="heading(h1) c(white) mb(xl) text(center)">Typography in Action</h2>
-    <p class="body(lg) c(gray-300) text(center) max-w(3xl) mx(auto) mb(3xl)">
-      See how different typography roles work together to create beautiful, functional interfaces
-    </p>
-    
-    <div class="grid(3) gap(xl)">
-      <!-- Card Example -->
-      <div class="bg(white) r(xl) p(xl) c(gray-900)">
-        <div class="caption(xs) uppercase c(purple-600) mb(sm)">Article</div>
-        <h3 class="title(card) mb(sm)">Getting Started with AdorableCSS</h3>
-        <p class="body(sm) c(gray-700) mb(md)">
-          Learn the fundamentals of our intuitive CSS framework and start building beautiful interfaces in minutes.
-        </p>
-        <div class="hbox(between)">
-          <span class="caption(base)">5 min read</span>
-          <span class="label(button) c(purple-600)">Read More →</span>
-        </div>
-      </div>
-
-      <!-- Form Example -->
-      <div class="bg(white) r(xl) p(xl) c(gray-900)">
-        <h3 class="title(modal) mb(lg)">Create Account</h3>
-        <div class="vbox gap(md)">
-          <div>
-            <label class="label(input) required">Email Address</label>
-            <div class="mt(xs) p(md) r(lg) border(1/gray-300) body(base) c(gray-500)">
-              name@example.com
-            </div>
-            <p class="caption(form) help mt(xs)">We'll never share your email</p>
-          </div>
-          <button class="p(md) r(lg) bg(indigo-600) c(white) label(button) hover:bg(indigo-700) transition">
-            Continue
-          </button>
-        </div>
-      </div>
-
-      <!-- Feature Card -->
-      <div class="bg(white) r(xl) p(xl) c(gray-900)">
-        <div class="badge(xs/success) inline-block mb(md)">NEW</div>
-        <h3 class="title(lg) mb(sm)">Dark Mode Support</h3>
-        <p class="body(base) c(gray-700) mb(md)">
-          Built-in dark mode with automatic theme detection and smooth transitions.
-        </p>
-        <div class="caption(hint) italic">
-          Available in v2.0+
-        </div>
-      </div>
-    </div>
-  </div>
-
   <!-- Typography Utilities -->
   <div class="grid(1) gap(xl)">
     <!-- Bold Utility -->
@@ -450,6 +398,58 @@
           <p class="body(sm) c(white.9)">
             Use responsive prefixes: <code class="bg(white.2) px(xs) r(sm)">display(base) md:display(lg)</code>
           </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Typography Composition Examples -->
+  <div class="bg(gray-900) r(2xl) p(3xl) c(white)">
+    <h2 class="heading(h1) c(white) mb(xl) text(center)">Typography in Action</h2>
+    <p class="body(lg) c(gray-300) text(center) max-w(3xl) mx(auto) mb(3xl)">
+      See how different typography roles work together to create beautiful, functional interfaces
+    </p>
+
+    <div class="grid(3) gap(xl)">
+      <!-- Card Example -->
+      <div class="bg(white) r(xl) p(xl) c(gray-900)">
+        <div class="caption(xs) uppercase c(purple-600) mb(sm)">Article</div>
+        <h3 class="title(card) mb(sm)">Getting Started with AdorableCSS</h3>
+        <p class="body(sm) c(gray-700) mb(md)">
+          Learn the fundamentals of our intuitive CSS framework and start building beautiful interfaces in minutes.
+        </p>
+        <div class="hbox(between)">
+          <span class="caption(base)">5 min read</span>
+          <span class="label(button) c(purple-600)">Read More →</span>
+        </div>
+      </div>
+
+      <!-- Form Example -->
+      <div class="bg(white) r(xl) p(xl) c(gray-900)">
+        <h3 class="title(modal) mb(lg)">Create Account</h3>
+        <div class="vbox gap(md)">
+          <div>
+            <label class="label(input) required">Email Address</label>
+            <div class="mt(xs) p(md) r(lg) border(1/gray-300) body(base) c(gray-500)">
+              name@example.com
+            </div>
+            <p class="caption(form) help mt(xs)">We'll never share your email</p>
+          </div>
+          <button class="p(md) r(lg) bg(indigo-600) c(white) label(button) hover:bg(indigo-700) transition">
+            Continue
+          </button>
+        </div>
+      </div>
+
+      <!-- Feature Card -->
+      <div class="bg(white) r(xl) p(xl) c(gray-900)">
+        <div class="badge(xs/success) inline-block mb(md)">NEW</div>
+        <h3 class="title(lg) mb(sm)">Dark Mode Support</h3>
+        <p class="body(base) c(gray-700) mb(md)">
+          Built-in dark mode with automatic theme detection and smooth transitions.
+        </p>
+        <div class="caption(hint) italic">
+          Available in v2.0+
         </div>
       </div>
     </div>
