@@ -193,7 +193,7 @@ export interface DesignTokens {
     medium: string;
     semi: string;
     bold: string;
-    extrabold: string;
+    extra: string;
     black: string;
   };
   radius: {
@@ -216,7 +216,6 @@ export interface DesignTokens {
     lg: string;
     xl: string;
     '2xl': string;
-    inner: string;
   };
   colors: {
     // Core semantic colors
@@ -457,7 +456,7 @@ export const defaultTokens: DesignTokens = {
     medium: '500',
     semi: '600',
     bold: '700',
-    extrabold: '800',
+    extra: '800',
     black: '900',
   },
   

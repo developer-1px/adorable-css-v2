@@ -4,35 +4,14 @@
   
   const shadows = Object.entries(defaultTokens.shadow).map(([key, value]) => ({ key, value }));
   
-  // Component showcase items
-  const componentShowcase = [
-    {
-      title: 'Card Variants',
-      items: [
-        { name: 'Default', class: 'card()', content: 'Default card with subtle shadow' },
-        { name: 'Elevated', class: 'card(elevated)', content: 'Elevated card for emphasis' },
-        { name: 'Interactive', class: 'card(interactive)', content: 'Hover me for interaction' },
-        { name: 'Glass', class: 'card(glass)', content: 'Glass morphism effect' }
-      ]
-    },
-    {
-      title: 'Button Styles',
-      items: [
-        { name: 'Primary', class: 'btn(primary)', content: 'Primary Action' },
-        { name: 'Secondary', class: 'btn(secondary)', content: 'Secondary' },
-        { name: 'Ghost', class: 'btn(ghost)', content: 'Ghost Button' },
-        { name: 'Danger', class: 'btn(danger)', content: 'Delete' }
-      ]
-    },
-    {
-      title: 'Badge Variants',
-      items: [
-        { name: 'Default', class: 'badge()', content: 'Default' },
-        { name: 'Primary', class: 'badge(primary)', content: 'Primary' },
-        { name: 'Success', class: 'badge(success)', content: 'Success' },
-        { name: 'Warning', class: 'badge(warning)', content: 'Warning' }
-      ]
-    }
+  // Elevation levels for integrated display
+  const elevationLevels = [
+    { level: 'xs', dp: '1dp', description: 'Subtle elevation for UI elements' },
+    { level: 'sm', dp: '2dp', description: 'Small elevation for cards and buttons' },
+    { level: 'md', dp: '4dp', description: 'Medium elevation for raised components' },
+    { level: 'lg', dp: '8dp', description: 'Large elevation for dropdowns and tooltips' },
+    { level: 'xl', dp: '16dp', description: 'Extra large elevation for modals' },
+    { level: '2xl', dp: '24dp', description: 'Maximum elevation for overlays' }
   ];
 </script>
 
@@ -152,72 +131,138 @@
     </div>
   </div>
 
-  <!-- Component Showcase -->
-  <div class="vbox gap(3xl)">
-    <div class="text(center)">
-      <h3 class="heading(h1) c(gray-900) mb(sm)">Components in Action</h3>
-      <p class="text(lg) c(gray-600)">See how our design tokens come together in real components</p>
+  <!-- Elevation System -->
+  <div class="bg(white) r(2xl) shadow(xl) shadow(gray-200.5) p(2xl) overflow(hidden)">
+    <div class="hbox(between/middle) mb(3xl)">
+      <div>
+        <h3 class="heading(h2) c(gray-900) mb(xs)">Elevation System</h3>
+        <p class="text(sm) c(gray-600)">Material-inspired elevation using shadow tokens</p>
+      </div>
+      <Layers size="20" class="c(gray-400)" />
     </div>
     
-    {#each componentShowcase as section}
-      <div class="bg(white) r(2xl) shadow(xl) shadow(gray-200.5) p(2xl)">
-        <h4 class="heading(h3) c(gray-900) mb(2xl)">{section.title}</h4>
-        
-        <div class="grid(2) md:grid(4) gap(xl) items(center)">
-          {#each section.items as item}
-            <div class="vbox(center) gap(lg)">
-              {#if section.title === 'Card Variants'}
-                <div class="{item.class} w(full) min-h(120px) hbox(center/middle)">
-                  <p class="text(sm) c(gray-700)">{item.content}</p>
-                </div>
-              {:else if section.title === 'Button Styles'}
-                <button class="{item.class}">
-                  {item.content}
-                </button>
-              {:else if section.title === 'Badge Variants'}
-                <span class="{item.class}">
-                  {item.content}
-                </span>
-              {/if}
-              <code class="text(xs) c(gray-600)">{item.class}</code>
+    <!-- Elevation Scale Grid -->
+    <div class="grid(3) gap(xl) mb(3xl)">
+      {#each elevationLevels as elevation}
+        <div class="group relative">
+          <div class="bg(white) h(120px) shadow({elevation.level}) 
+                      hover:shadow(2xl) transition-all duration-300 
+                      hover:translate-y(-4px) cursor-pointer
+                      border(1px/gray-100) r(xl) p(xl)
+                      hbox(center/middle)">
+            <div class="vbox(center) text(center)">
+              <div class="font(2xl) bold c(indigo-600) mb(xs)">
+                {elevation.dp}
+              </div>
+              <code class="text(xs) px(sm) py(xs) r(md) bg(indigo-50) c(indigo-700) inline-block mb(sm)">
+                shadow({elevation.level})
+              </code>
+              <p class="text(2xs) c(gray-600)">{elevation.description}</p>
             </div>
-          {/each}
+          </div>
+        </div>
+      {/each}
+    </div>
+    
+    <!-- Combined Shadow & Elevation Demo -->
+    <div class="pt(3xl) border-t(1px/gray-200)">
+      <h4 class="font(lg) bold c(gray-800) mb(xl) text(center)">Shadow & Elevation Combinations</h4>
+      <div class="grid(4) gap(lg)">
+        <div class="text(center)">
+          <div class="size(80px) r(lg) bg(white) shadow(sm) shadow(gray-300.5) hbox(center/middle) mx(auto) mb(md)">
+            <span class="text(lg) font(bold) c(gray-700)">Soft</span>
+          </div>
+          <code class="text(xs) c(gray-600)">shadow(sm) shadow(gray-300.5)</code>
+        </div>
+        <div class="text(center)">
+          <div class="size(80px) r(lg) bg(white) shadow(md) shadow(indigo-200.3) hbox(center/middle) mx(auto) mb(md)">
+            <span class="text(lg) font(bold) c(indigo-700)">Color</span>
+          </div>
+          <code class="text(xs) c(gray-600)">shadow(md) shadow(indigo-200.3)</code>
+        </div>
+        <div class="text(center)">
+          <div class="size(80px) r(lg) bg(gradient(white..gray-50)) shadow(lg) hbox(center/middle) mx(auto) mb(md)">
+            <span class="text(lg) font(bold) c(gray-700)">Raised</span>
+          </div>
+          <code class="text(xs) c(gray-600)">shadow(lg)</code>
+        </div>
+        <div class="text(center)">
+          <div class="size(80px) r(lg) bg(white) shadow(2xl) shadow(purple-200.4) hbox(center/middle) mx(auto) mb(md)">
+            <span class="text(lg) font(bold) c(purple-700)">Drama</span>
+          </div>
+          <code class="text(xs) c(gray-600)">shadow(2xl) shadow(purple-200.4)</code>
         </div>
       </div>
-    {/each}
+    </div>
   </div>
 
-  <!-- Elevation Guidelines -->
+  <!-- Design Guidelines -->
   <div class="bg(gray-900) r(2xl) p(3xl) c(white)">
-    <h3 class="heading(h1) mb(2xl) text(center)">Elevation Guidelines</h3>
-    <div class="grid(4) gap(2xl) max-w(5xl) mx(auto)">
-      <div class="text(center)">
-        <div class="size(80px) r(full) bg(white.1) hbox(center/middle) mx(auto) mb(lg) shadow(sm)">
-          <span class="text(2xl) font(bold)">0dp</span>
+    <h3 class="heading(h1) mb(2xl) text(center)">Shadow Design Guidelines</h3>
+    <div class="vbox gap(2xl) max-w(4xl) mx(auto)">
+      <!-- Material Design Elevation Reference -->
+      <div class="bg(white.05) r(xl) p(xl) backdrop-blur(sm)">
+        <h4 class="font(xl) bold mb(lg) c(white)">Material Design Elevation</h4>
+        <div class="grid(6) gap(lg) text(center)">
+          <div>
+            <div class="badge(sm/primary) mb(sm)">0dp</div>
+            <p class="text(xs) opacity(0.8)">Surface</p>
+          </div>
+          <div>
+            <div class="badge(sm/primary) mb(sm)">1dp</div>
+            <p class="text(xs) opacity(0.8)">Card</p>
+          </div>
+          <div>
+            <div class="badge(sm/primary) mb(sm)">2dp</div>
+            <p class="text(xs) opacity(0.8)">Button</p>
+          </div>
+          <div>
+            <div class="badge(sm/primary) mb(sm)">4dp</div>
+            <p class="text(xs) opacity(0.8)">App Bar</p>
+          </div>
+          <div>
+            <div class="badge(sm/primary) mb(sm)">8dp</div>
+            <p class="text(xs) opacity(0.8)">Menu</p>
+          </div>
+          <div>
+            <div class="badge(sm/primary) mb(sm)">24dp</div>
+            <p class="text(xs) opacity(0.8)">Dialog</p>
+          </div>
         </div>
-        <h4 class="font(lg) bold mb(sm)">Surface</h4>
-        <p class="text(sm) opacity(0.8)">Cards, sheets</p>
       </div>
-      <div class="text(center)">
-        <div class="size(80px) r(full) bg(white.15) hbox(center/middle) mx(auto) mb(lg) shadow(md)">
-          <span class="text(2xl) font(bold)">2dp</span>
+      
+      <!-- Usage Tips -->
+      <div class="grid(2) gap(xl)">
+        <div class="bg(white.1) r(lg) p(lg) backdrop-blur(sm)">
+          <h5 class="font(lg) bold mb(md)">🎨 Color Shadows</h5>
+          <p class="text(sm) opacity(0.9) mb(md)">
+            Add color to shadows for more vibrant, modern designs
+          </p>
+          <code class="text(xs) bg(white.1) px(sm) py(xs) r(md) block">
+            shadow(xl) shadow(purple-200.4)
+          </code>
         </div>
-        <h4 class="font(lg) bold mb(sm)">Raised</h4>
-        <p class="text(sm) opacity(0.8)">Buttons, chips</p>
+        
+        <div class="bg(white.1) r(lg) p(lg) backdrop-blur(sm)">
+          <h5 class="font(lg) bold mb(md)">🚀 Interactive States</h5>
+          <p class="text(sm) opacity(0.9) mb(md)">
+            Use shadow transitions for hover and active states
+          </p>
+          <code class="text(xs) bg(white.1) px(sm) py(xs) r(md) block">
+            shadow(sm) hover:shadow(xl)
+          </code>
+        </div>
       </div>
-      <div class="text(center)">
-        <div class="size(80px) r(full) bg(white.2) hbox(center/middle) mx(auto) mb(lg) shadow(lg)">
-          <span class="text(2xl) font(bold)">8dp</span>
-        </div>
-        <h4 class="font(lg) bold mb(sm)">Overlay</h4>
-        <p class="text(sm) opacity(0.8)">Dropdowns, tooltips</p>
-      </div>
-      <div class="text(center)">
-        <div class="size(80px) r(full) bg(white.25) hbox(center/middle) mx(auto) mb(lg) shadow(2xl)">
-          <span class="text(2xl) font(bold)">24dp</span>
-        </div>
-        <h4 class="font(lg) bold mb(sm)">Modal</h4>
-        <p class="text(sm) opacity(0.8)">Dialogs, sheets</p>
+      
+      <!-- Best Practices -->
+      <div class="bg(gradient(to-r/purple-600..pink-600)) r(lg) p(lg)">
+        <h5 class="font(lg) bold mb(md)">✨ Best Practices</h5>
+        <ul class="vbox gap(sm) text(sm)">
+          <li class="opacity(0.9)">• Use consistent elevation across similar components</li>
+          <li class="opacity(0.9)">• Higher elevation = more importance or temporary state</li>
+          <li class="opacity(0.9)">• Combine shadows with transforms for realistic depth</li>
+          <li class="opacity(0.9)">• Consider using colored shadows for brand expression</li>
+        </ul>
       </div>
     </div>
   </div>

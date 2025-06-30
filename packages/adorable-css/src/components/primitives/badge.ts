@@ -3,7 +3,7 @@ import type { ComponentDefinition } from '../defineComponent-unified';
 
 // Badge component definition
 export const badgeDefinition: ComponentDefinition = {
-  base: 'inline-flex items(center) justify(center) bold(medium) r(full) transition',
+  base: 'inline-flex pack bold(medium) r(sm) py(2) transition',
   
   sizes: {
     sm: 'px(sm) text(xs)',

@@ -109,7 +109,7 @@ export const dividerString = defineComponent({
     default: '',
     dashed: 'h(auto) border-t(dashed) border-t(gray-300) bg(transparent)',
     dotted: 'h(auto) border-t(dotted) border-t(gray-300) bg(transparent)',
-    gradient: 'h(2) bg(gradient(to-r/gray-200..transparent..gray-200))',
+    gradient: 'h(2) bg(to-r/gray-200..transparent..gray-200)',
     fade: 'bg(radial-gradient(ellipse_at_center,gray-300_0%,transparent_70%))'
   }
 });

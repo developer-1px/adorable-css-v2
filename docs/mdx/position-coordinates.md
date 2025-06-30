@@ -238,7 +238,7 @@ All spacing and size tokens work seamlessly with position coordinates:
 <Playground>
   <div class="relative w(full) max-w(400)">
     <img src="https://picsum.photos/400/300" class="w(full) r(lg)" alt="Demo" />
-    <div class="absolute (0,bottom) w(full) bg(gradient(to-top/transparent..black.8)) p(md) r(0/0/lg/lg)">
+    <div class="absolute (0,bottom) w(full) bg(to-top/transparent..black.8) p(md) r(0/0/lg/lg)">
       <h4 class="c(white) font(lg) bold">Beautiful Sunset</h4>
       <p class="c(white.8) text(sm)">Captured at golden hour</p>
     </div>

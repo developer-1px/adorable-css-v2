@@ -105,7 +105,7 @@
   <!-- Role-Based Typography System -->
   <div class="vbox gap(3xl)">
     <!-- Display Role -->
-    <div class="bg(gradient(135deg/purple-50..pink-50)) r(2xl) p(3xl) border(2/purple-200)">
+    <div class="bg(135deg/purple-50..pink-50) r(2xl) p(3xl) border(2/purple-200)">
       <div class="hbox(between/start) mb(2xl)">
         <div>
           <div class="hbox(start) gap(sm) mb(md)">
@@ -146,7 +146,7 @@
     </div>
 
     <!-- Heading Role -->
-    <div class="bg(gradient(135deg/indigo-50..blue-50)) r(2xl) p(3xl) border(2/indigo-200)">
+    <div class="bg(135deg/indigo-50..blue-50) r(2xl) p(3xl) border(2/indigo-200)">
       <div class="hbox(between/start) mb(2xl)">
         <div>
           <div class="hbox(start) gap(sm) mb(md)">
@@ -187,7 +187,7 @@
     </div>
 
     <!-- Title Role -->
-    <div class="bg(gradient(135deg/cyan-50..sky-50)) r(2xl) p(3xl) border(2/cyan-200)">
+    <div class="bg(135deg/cyan-50..sky-50) r(2xl) p(3xl) border(2/cyan-200)">
       <div class="hbox(between/start) mb(2xl)">
         <div>
           <div class="hbox(start) gap(sm) mb(md)">
@@ -227,7 +227,7 @@
     </div>
 
     <!-- Body Role -->
-    <div class="bg(gradient(135deg/green-50..emerald-50)) r(2xl) p(3xl) border(2/green-200)">
+    <div class="bg(135deg/green-50..emerald-50) r(2xl) p(3xl) border(2/green-200)">
       <div class="hbox(between/start) mb(2xl)">
         <div>
           <div class="hbox(start) gap(sm) mb(md)">
@@ -268,7 +268,7 @@
     </div>
 
     <!-- Label Role -->
-    <div class="bg(gradient(135deg/amber-50..yellow-50)) r(2xl) p(3xl) border(2/amber-200)">
+    <div class="bg(135deg/amber-50..yellow-50) r(2xl) p(3xl) border(2/amber-200)">
       <div class="hbox(between/start) mb(2xl)">
         <div>
           <div class="hbox(start) gap(sm) mb(md)">
@@ -303,7 +303,7 @@
     </div>
 
     <!-- Caption Role -->
-    <div class="bg(gradient(135deg/gray-50..slate-50)) r(2xl) p(3xl) border(2/gray-300)">
+    <div class="bg(135deg/gray-50..slate-50) r(2xl) p(3xl) border(2/gray-300)">
       <div class="hbox(between/start) mb(2xl)">
         <div>
           <div class="hbox(start) gap(sm) mb(md)">
@@ -396,7 +396,7 @@
   </div>
 
   <!-- Typography Utilities -->
-  <div class="grid(2) gap(xl)">
+  <div class="grid(1) gap(xl)">
     <!-- Bold Utility -->
     <div class="bg(white) r(2xl) p(2xl) shadow(xl) shadow(gray-200.5)">
       <div class="hbox(start) gap(sm) mb(xl)">
@@ -408,28 +408,26 @@
         Fine-tune font weights independently of typography roles
       </p>
       
-      <div class="vbox gap(md)">
+      <div class="hbox gap(md) overflow-x(auto) pb(md)">
         {#each boldWeights as weight}
           <div 
-            class="group p(md) r(lg) hover:bg(gray-50) transition cursor-pointer"
+            class="group p(lg) r(lg) hover:bg(gray-50) transition cursor-pointer bg(gray-50) hover:bg(gray-100) min-w(140px) text(center)"
             on:click={() => copyCode(`bold(${weight.name})`)}
           >
-            <div class="hbox(between) mb(xs)">
-              <code class="badge(xs/muted)">
-                bold({weight.name})
-              </code>
-              <span class="caption(xs) c(gray-500)">{weight.value}</span>
+            <div class="body(lg) bold({weight.name}) c(gray-800) mb(md)">
+              Aa
             </div>
-            <div class="body(base) bold({weight.name}) c(gray-800)">
-              {weight.example}
-            </div>
+            <code class="badge(xs/muted) block mb(xs)">
+              bold({weight.name})
+            </code>
+            <span class="caption(xs) c(gray-500) block">{weight.value}</span>
           </div>
         {/each}
       </div>
     </div>
 
     <!-- Typography Tips -->
-    <div class="bg(gradient(to-br/purple-600..pink-600)) r(2xl) p(2xl) c(white)">
+    <div class="bg(black) r(2xl) p(2xl) c(white)">
       <h3 class="heading(h3) c(white) mb(xl)">Pro Tips</h3>
       
       <div class="vbox gap(lg)">

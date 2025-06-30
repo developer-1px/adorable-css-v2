@@ -45,7 +45,7 @@ export const headingDefinition: ComponentDefinition = {
     mono: 'font(mono)',
     
     // Special variants
-    underline: 'relative after:content("") after:absolute after:bottom(0) after:left(0) after:w(full) after:h(3) after:bg(gradient(to-r/purple-400..pink-400)) after:r(full)',
+    underline: 'relative after:content("") after:absolute after:bottom(0) after:left(0) after:w(full) after:h(3) after:bg(to-r/purple-400..pink-400) after:r(full)',
     shadow: 'text-shadow(lg)',
     outline: 'text-stroke(2) text-stroke(gray-900) c(transparent)'
   },
