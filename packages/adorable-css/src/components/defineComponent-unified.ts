@@ -1,4 +1,6 @@
-import type { StringRuleHandler } from '../rules/types';
+import type { StringRuleHandler, CSSRule, RuleHandler, KeywordRuleHandler } from '../rules/types';
+import { parseAdorableCSS } from '../core/parser/parser';
+import { priorityRegistry } from '../rules/priority-registry';
 
 /**
  * Component definition structure supporting all features
@@ -28,6 +30,13 @@ export interface ComponentDefinition {
     disabled?: string;
     [key: string]: string | undefined;
   };
+  
+  // Nested selectors (e.g., 'h1': 'font(5xl) bold(850)')
+  // Automatically converted to '& h1' unless already prefixed with &
+  selectors?: Record<string, string>;
+  
+  // Variant-specific selector overrides
+  variantSelectors?: Record<string, Record<string, string>>;
   
   // Responsive variants
   responsive?: {
@@ -140,6 +149,104 @@ export function getComponentDefinition(
  * // Use pattern matching for flexible styling
  * ```
  */
+/**
+ * Helper to process selector
+ * Automatically adds '&' prefix if not present (except for class selectors starting with '.')
+ */
+function processSelector(selector: string): string {
+  // Already has & prefix, use as is
+  if (selector.startsWith('&')) {
+    return selector;
+  }
+  
+  // Add space before selector for descendant combinator
+  return `& ${selector}`;
+}
+
+/**
+ * Convert AdorableCSS classes to actual CSS object
+ * @param adorableCSS - The AdorableCSS string to convert
+ * @param visited - Set of visited components to prevent recursion
+ */
+function adorableCSSToCSS(adorableCSS: string, visited: Set<string> = new Set()): CSSRule {
+  if (!adorableCSS) return {};
+  
+  // Split classes and process each one
+  const classes = adorableCSS.trim().split(/\s+/);
+  const cssObject: CSSRule = {};
+  
+  for (const className of classes) {
+    if (!className) continue;
+    
+    try {
+      const parsed = parseAdorableCSS(className);
+      if (parsed.value.length > 0) {
+        const selector = parsed.value[0].selector;
+        const selectorName = selector.name || selector.image;
+        const selectorArgs = selector.args?.map((arg: any) => arg.image).join('');
+        
+        // Check for circular dependency
+        const componentKey = `${selectorName}(${selectorArgs || ''})`;
+        if (visited.has(componentKey)) {
+          console.warn(`⚠️  AdorableCSS: Circular dependency detected for component "${componentKey}"`);
+          continue;
+        }
+        
+        // First check if it's a string rule (component)
+        if (priorityRegistry.hasString(selectorName)) {
+          const stringRule = priorityRegistry.getStringRule(selectorName);
+          if (stringRule) {
+            // Add to visited set before calling handler
+            visited.add(componentKey);
+            
+            const handler = stringRule.handler;
+            const result = typeof handler === 'function' 
+              ? (selectorArgs !== undefined ? handler(selectorArgs) : handler())
+              : '';
+            
+            // Handle different result types
+            if (typeof result === 'string') {
+              // This is a string rule returning more AdorableCSS classes
+              const nestedCSS = adorableCSSToCSS(result, new Set(visited));
+              Object.assign(cssObject, nestedCSS);
+            } else if (Array.isArray(result)) {
+              // Handle array results [string, CSSRule] from components
+              const [classString] = result;
+              if (classString && typeof classString === 'string') {
+                const nestedCSS = adorableCSSToCSS(classString, new Set(visited));
+                Object.assign(cssObject, nestedCSS);
+              }
+              // Note: We ignore the nested rules here as they're for selectors,
+              // not for the current element
+            }
+            
+            // Remove from visited set after processing
+            visited.delete(componentKey);
+          }
+        } else {
+          // Try regular CSS rule handler
+          const rule = priorityRegistry.getRule(selectorName);
+          if (rule) {
+            const handler = rule.handler;
+            const result = typeof handler === 'function'
+              ? (selectorArgs !== undefined ? (handler as RuleHandler)(selectorArgs) : (handler as KeywordRuleHandler)())
+              : {};
+            
+            if (result && typeof result === 'object' && !Array.isArray(result)) {
+              // Regular CSS object
+              Object.assign(cssObject, result);
+            }
+          }
+        }
+      }
+    } catch (e) {
+      console.warn(`Failed to process AdorableCSS class "${className}":`, e);
+    }
+  }
+  
+  return cssObject;
+}
+
 export function defineComponent(
   definition: ComponentDefinition,
   options: ComponentOptions = {}
@@ -151,7 +258,7 @@ export function defineComponent(
     parseArgs = (args) => parseComponentArgs(args, sizeOptions, defaultSize, defaultVariant)
   } = options;
 
-  const handler: StringRuleHandler & { _definition?: ComponentDefinition } = (args?: string): string => {
+  const handler: StringRuleHandler & { _definition?: ComponentDefinition } = (args?: string): string | (string | CSSRule)[] => {
     const { variant, size } = parseArgs(args || '');
     const classes: string[] = [];
     
@@ -211,6 +318,43 @@ export function defineComponent(
           classes.push(stateClasses);
         }
       });
+    }
+    
+    // Handle selectors if present
+    if (definition.selectors || definition.variantSelectors?.[variant]) {
+      const cssRule: CSSRule = {};
+      
+      // Add base selectors
+      if (definition.selectors) {
+        const visited = new Set<string>();
+        Object.entries(definition.selectors).forEach(([selector, adorableCSS]) => {
+          const processedSelector = processSelector(selector);
+          const cssObject = adorableCSSToCSS(adorableCSS, visited);
+          if (Object.keys(cssObject).length > 0) {
+            cssRule[processedSelector] = cssObject;
+          }
+        });
+      }
+      
+      // Add variant-specific selector overrides
+      if (definition.variantSelectors?.[variant]) {
+        const visited = new Set<string>();
+        Object.entries(definition.variantSelectors[variant]).forEach(([selector, adorableCSS]) => {
+          const processedSelector = processSelector(selector);
+          const cssObject = adorableCSSToCSS(adorableCSS, visited);
+          if (Object.keys(cssObject).length > 0) {
+            // If selector already exists, merge the properties
+            if (cssRule[processedSelector]) {
+              Object.assign(cssRule[processedSelector] as CSSRule, cssObject);
+            } else {
+              cssRule[processedSelector] = cssObject;
+            }
+          }
+        });
+      }
+      
+      // Return array with classes and CSS rule
+      return [classes.filter(Boolean).join(' ').trim(), cssRule];
     }
     
     return classes.filter(Boolean).join(' ').trim();

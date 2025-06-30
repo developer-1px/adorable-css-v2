@@ -1,7 +1,7 @@
-import type { CSSRule, KeywordRuleHandler } from './types';
-import { transitionRules } from './interaction/transitions';
-import { focusRules } from './interaction/focus';
-import { transformRules } from './effects/transforms';
+import type { CSSRule, KeywordRuleHandler } from '../types';
+import { transitionRules } from '../interaction/transitions';
+import { focusRules } from '../interaction/focus';
+import { transformRules } from '../effects/transforms';
 
 export const pointer: KeywordRuleHandler = () => ({
   cursor: 'pointer' 

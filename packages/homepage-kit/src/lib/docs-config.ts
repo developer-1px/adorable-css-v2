@@ -25,25 +25,39 @@ export const docsConfig: DocSection[] = [
 				title: 'Introduction',
 				href: '/docs/introduction',
 				description: 'Learn about AdorableCSS and its philosophy',
-				source: '/docs/mdx/introduction.mdx'
+				source: '/docs/mdx/introduction.md'
 			},
 			{
 				title: 'Getting Started',
 				href: '/docs/getting-started',
 				description: 'Complete guide to installation, configuration, and basic usage',
-				source: '/docs/mdx/getting-started.mdx'
+				source: '/docs/mdx/getting-started.md'
 			},
 			{
 				title: 'Quick Start',
 				href: '/docs/quick-start',
 				description: 'Build your first component with AdorableCSS',
-				source: '/docs/mdx/quick-start.mdx'
+				source: '/docs/mdx/quick-start.md'
+			},
+			{
+				title: 'Syntax Philosophy',
+				href: '/docs/syntax-philosophy',
+				description: '문법의 철학과 체계 - 배경, 의도, 원칙을 중심으로',
+				source: '/docs/syntax-philosophy.md',
+				badge: 'new'
+			},
+			{
+				title: 'Syntax Guide',
+				href: '/docs/syntax-guide',
+				description: 'AdorableCSS 문법을 처음부터 자세히 배워보세요',
+				source: '/docs/syntax-guide.md',
+				badge: 'essential'
 			},
 			{
 				title: 'Theming & Customization',
 				href: '/docs/theming',
 				description: 'Customize tokens for colors, spacing, and fonts.',
-				source: '/docs/mdx/theming.mdx',
+				source: '/docs/mdx/theming.md',
 				badge: 'new'
 			}
 		]
@@ -55,40 +69,40 @@ export const docsConfig: DocSection[] = [
 				title: 'Layout Fundamentals',
 				href: '/docs/layout-system',
 				description: 'Master AdorableCSS layout utilities and concepts',
-				source: '/docs/mdx/layout-system.mdx'
+				source: '/docs/mdx/layout-system.md'
 			},
 			{
 				title: 'Responsive Design',
 				href: '/docs/responsive-design',
 				description: 'Create adaptive layouts with intuitive breakpoint prefixes.',
-				source: '/docs/mdx/responsive-design.mdx',
+				source: '/docs/mdx/responsive-design.md',
 				badge: 'new'
 			},
 			{
 				title: 'Figma Integration',
 				href: '/docs/figma-integration',
 				description: '디자인과 코드의 완벽한 연결, Auto Layout 매핑, 워크플로우 혁신',
-				source: '/docs/mdx/figma-auto-layout-mapping.mdx',
+				source: '/docs/mdx/figma-auto-layout-mapping.md',
 				badge: 'new'
 			},
 			{
 				title: 'Size 유틸리티',
 				href: '/docs/smart-containers',
 				description: 'size() 유틸리티를 사용한 효율적인 크기 설정',
-				source: '/docs/mdx/smart-containers.mdx'
+				source: '/docs/mdx/smart-containers.md'
 			},
 			{
 				title: 'Layer 포지셔닝',
 				href: '/docs/layer-positioning',
 				description: 'Figma 스타일 절대 위치 지정 시스템',
-				source: '/docs/mdx/layer-positioning-system.mdx',
+				source: '/docs/mdx/layer-positioning-system.md',
 				badge: 'new'
 			},
 			{
 				title: 'Position Coordinates',
 				href: '/docs/position-coordinates',
 				description: 'Intuitive coordinate-based positioning system',
-				source: '/docs/mdx/position-coordinates.mdx'
+				source: '/docs/mdx/position-coordinates.md'
 			}
 		]
 	},
@@ -99,34 +113,34 @@ export const docsConfig: DocSection[] = [
 				title: 'Color System Overview',
 				href: '/docs/color-system',
 				description: 'AdorableCSS 색상 시스템 완벽 가이드',
-				source: '/docs/mdx/color-system.mdx'
+				source: '/docs/mdx/color-system.md'
 			},
 			{
 				title: 'OKLCH 색상 시스템',
 				href: '/docs/oklch-colors',
 				description: '과학적 색상 혁신과 지각적으로 균일한 색상 공간',
-				source: '/docs/mdx/oklch-color-system.mdx',
+				source: '/docs/mdx/oklch-color-system.md',
 				badge: 'new'
 			},
 			{
 				title: 'Dot Notation 투명도',
 				href: '/docs/dot-notation-transparency',
 				description: '직관적 점 표기법 투명도 시스템',
-				source: '/docs/mdx/dot-notation-transparency.mdx',
+				source: '/docs/mdx/dot-notation-transparency.md',
 				badge: 'new'
 			},
 			{
 				title: '고급 그라디언트',
 				href: '/docs/advanced-gradients',
 				description: '완벽한 그라디언트 파서와 방향 우선 문법',
-				source: '/docs/mdx/advanced-gradients.mdx',
+				source: '/docs/mdx/advanced-gradients.md',
 				badge: 'new'
 			},
 			{
 				title: 'Container Tokens',
 				href: '/docs/container-tokens',
 				description: 'Token system for container widths and heights',
-				source: '/docs/mdx/container-tokens.mdx'
+				source: '/docs/mdx/container-tokens.md'
 			}
 		]
 	},
@@ -137,14 +151,14 @@ export const docsConfig: DocSection[] = [
 				title: 'Component System',
 				href: '/docs/component-system',
 				description: '함수형 컴포넌트 시스템과 shadcn/ui 스타일 구현',
-				source: '/docs/mdx/component-system.mdx',
+				source: '/docs/mdx/component-system.md',
 				badge: 'new'
 			},
 			{
 				title: 'Component Reference',
 				href: '/docs/components',
 				description: '전체 컴포넌트 API 레퍼런스와 사용법',
-				source: '/docs/mdx/components.mdx'
+				source: '/docs/mdx/components.md'
 			}
 		]
 	},
@@ -155,47 +169,47 @@ export const docsConfig: DocSection[] = [
 				title: 'Parser System',
 				href: '/docs/parser-system',
 				description: 'Building a CSS parser from scratch',
-				source: '/docs/mdx/parser-system.mdx'
+				source: '/docs/mdx/parser-system.md'
 			},
 			{
 				title: 'Architecture',
 				href: '/docs/architecture',
 				description: 'AdorableCSS v2 기술 아키텍처 심층 분석',
-				source: '/docs/mdx/architecture.mdx'
+				source: '/docs/mdx/architecture.md'
 			},
 			{
 				title: 'CSS 우선순위 아키텍처',
 				href: '/docs/css-priority-architecture',
 				description: '완벽한 계층형 CSS 시스템',
-				source: '/docs/mdx/css-priority-architecture.mdx',
+				source: '/docs/mdx/css-priority-architecture.md',
 				badge: 'new'
 			},
 			{
 				title: 'State Management',
 				href: '/docs/state-management',
 				description: 'Handle interactive states like hover, focus, and group-hover.',
-				source: '/docs/mdx/state-management.mdx',
+				source: '/docs/mdx/state-management.md',
 				badge: 'new'
 			},
 			{
 				title: '스마트 값 변환',
 				href: '/docs/smart-value-transformation',
 				description: '직관적 값을 완벽한 CSS로 변환하는 시스템',
-				source: '/docs/mdx/smart-value-transformation.mdx',
+				source: '/docs/mdx/smart-value-transformation.md',
 				badge: 'new'
 			},
 			{
 				title: 'Rules System',
 				href: '/docs/rules-system',
 				description: 'CSS 규칙의 체계적 관리와 5단계 우선순위 시스템',
-				source: '/docs/mdx/rules-system.mdx',
+				source: '/docs/mdx/rules-system.md',
 				badge: 'new'
 			},
 			{
 				title: 'Technical Innovation Guide',
 				href: '/docs/technical-innovation-guide',
 				description: 'AdorableCSS v2의 7가지 핵심 기술 혁신과 구현 철학',
-				source: '/docs/mdx/technical-innovation-guide.mdx',
+				source: '/docs/mdx/technical-innovation-guide.md',
 				badge: 'new'
 			}
 		]

@@ -61,7 +61,9 @@
       "Bash(pnpm ls:*)",
       "Bash(pnpm --filter adorable-css-cdn build)",
       "Bash(pnpm install:*)",
-      "Bash(pnpm --filter homepage-kit dev:build)"
+      "Bash(pnpm --filter homepage-kit dev:build)",
+      "Bash(pnpm list:*)",
+      "Bash(do mv \"$f\" \"$f%.mdx.md\")"
     ],
     "deny": []
   }

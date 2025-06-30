@@ -1,3 +1,10 @@
+---
+title: Introduction to AdorableCSS
+description: Welcome to AdorableCSS v2 - a Figma-first CSS framework that bridges the gap between design and development
+order: 1
+category: Getting Started
+---
+
 # Introduction to AdorableCSS
 
 Welcome to AdorableCSS v2 - a Figma-first CSS framework that bridges the gap between design and development.
@@ -5,6 +12,13 @@ Welcome to AdorableCSS v2 - a Figma-first CSS framework that bridges the gap bet
 ## What is AdorableCSS?
 
 AdorableCSS is a modern CSS framework that uses **native CSS values** and **Figma-inspired naming conventions** to create a seamless workflow between designers and developers.
+
+```css
+/* AdorableCSS Example */
+hbox gap(lg) p(xl) bg(white) r(xl) shadow(lg)
+vbox gap(md) w(full)
+size(64) r(full) bg(purple-500)
+```
 
 ### Key Features
 

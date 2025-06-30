@@ -216,7 +216,7 @@
   <div class="hbox">
     <!-- Sidebar Navigation -->
     <aside class="w(280px) h(screen-64px) sticky top(64px) border-r(1/gray-200) bg(white) 
-                   hidden lg:block overflow-y(auto)">
+                   hidden lg:block scroll(y)">
       <nav class="p(lg)">
         <ul class="vbox gap(xs)">
           {#each navigation as section}
@@ -273,7 +273,7 @@
         transition:fade={{ duration: 200 }}
       >
         <aside 
-          class="w(280px) h(full) bg(white) overflow-y(auto)"
+          class="w(280px) h(full) bg(white) scroll(y)"
           on:click|stopPropagation
           transition:fly={{ x: -280, duration: 300 }}
         >

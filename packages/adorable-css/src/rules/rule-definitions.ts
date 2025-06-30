@@ -21,7 +21,7 @@ import { colorRules } from '../design-system/colors/colors';
 
 import { positionCategoryRules } from './position';
 import { interactionRules } from './interaction';
-import { utilityRules } from './utilities';
+import { utilityRules } from './utilities/utilities';
 import { effectsRules } from './effects';
 
 // Extensions
@@ -42,12 +42,18 @@ import { referenceRules } from '../components/patterns/reference';
 import { docsRules } from '../components/patterns/docs';
 import { buttonRules } from '../components/primitives/button';
 import { headingRules } from '../components/primitives/heading';
+import { displayTextRules } from '../components/primitives/display';
+import { titleRules } from '../components/primitives/title';
+import { bodyRules } from '../components/primitives/body';
+import { labelRules } from '../components/primitives/label';
+import { captionRules } from '../components/primitives/caption';
 import { cardRules } from '../components/primitives/card';
 import { inputRules } from '../components/primitives/input';
 import { badgeRules } from '../components/primitives/badge';
 import { iconBoxRules } from '../components/primitives/icon-box';
 import { codeBlockRules } from '../components/primitives/code-block';
 import { featureCardRules } from '../components/patterns/feature-card';
+import { typographyHelperRules } from '../components/patterns/typography-helpers';
 
 // Type definitions for rule groups
 export interface RuleSubgroup {
@@ -433,6 +439,9 @@ export const RULE_GROUPS: RuleDefinitions = {
   }
 };
 
+// Import prose component
+import { prose } from '../components/patterns/prose';
+
 // String-based component rules (handled separately due to different type)
 export const STRING_RULE_GROUPS = {
   hero: { rules: heroRules, priority: RulePriority.COMPONENT },
@@ -441,12 +450,19 @@ export const STRING_RULE_GROUPS = {
   docs: { rules: docsRules, priority: RulePriority.COMPONENT },
   button: { rules: buttonRules, priority: RulePriority.COMPONENT },
   heading: { rules: headingRules, priority: RulePriority.COMPONENT },
+  display: { rules: displayTextRules, priority: RulePriority.COMPONENT },
+  title: { rules: titleRules, priority: RulePriority.COMPONENT },
+  body: { rules: bodyRules, priority: RulePriority.COMPONENT },
+  label: { rules: labelRules, priority: RulePriority.COMPONENT },
+  caption: { rules: captionRules, priority: RulePriority.COMPONENT },
   card: { rules: cardRules, priority: RulePriority.COMPONENT },
   input: { rules: inputRules, priority: RulePriority.COMPONENT },
   badge: { rules: badgeRules, priority: RulePriority.COMPONENT },
   iconBox: { rules: iconBoxRules, priority: RulePriority.COMPONENT },
   codeBlock: { rules: codeBlockRules, priority: RulePriority.COMPONENT },
   featureCard: { rules: featureCardRules, priority: RulePriority.COMPONENT },
+  typographyHelpers: { rules: typographyHelperRules, priority: RulePriority.COMPONENT },
+  prose: { rules: { prose }, priority: RulePriority.COMPONENT },
 };
 
 /**

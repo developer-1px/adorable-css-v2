@@ -7,7 +7,7 @@
     default: 'border(1/transparent) bg(blue-600) c(white) hover:bg(blue-700)',
     secondary: 'border(1/transparent) bg(gray-100) c(gray-900) hover:bg(gray-200)',
     destructive: 'border(1/transparent) bg(red-600) c(white) hover:bg(red-700)',
-    outline: 'border(1/gray-200) c(gray-950) bg(transparent)'
+    outline: 'border(1/gray-200) c(gray-900) bg(transparent)'
   };
   
   const baseClasses = `

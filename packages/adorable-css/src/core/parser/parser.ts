@@ -83,8 +83,6 @@ export function parseAdorableCSS(input: string) {
       () => FunctionCall(),
       () => Range(),
       () => consume("(ident)"),
-      () => consume("(dimension-pair)"), // dimension pairs like 64x64
-      () => consume("(dimension)"), // 숫자만 있는 클래스도 처리
       () => consume("&")
     );
   }

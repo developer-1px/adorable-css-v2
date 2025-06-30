@@ -14,12 +14,12 @@ export const b: RuleHandler = (args?: string): CSSRule => {
   
   // b(1) - simple border width OR b(gray-200) - color
   if (!args.includes('/')) {
-    // Check if it's a color token
-    if (args.includes('-') || args.startsWith('#')) {
-      return { border: `1px solid ${String(makeColor(args))}` };
+    // Check if it's a number (width)
+    if (/^\d+(\.\d+)?$/.test(args)) {
+      return { border: `${String(px(args))} solid currentColor` };
     }
-    // Otherwise treat as width
-    return { border: `${String(px(args))} solid currentColor` };
+    // Otherwise treat as color
+    return { border: `1px solid ${String(makeColor(args))}` };
   }
   
   // b(1/#000/solid) - width/color/style
@@ -62,12 +62,12 @@ export const bt: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
   
   if (!args.includes('/')) {
-    // Check if it's a color token
-    if (args.includes('-') || args.startsWith('#')) {
-      return { 'border-top': `1px solid ${String(makeColor(args))}` };
+    // Check if it's a number (width)
+    if (/^\d+(\.\d+)?$/.test(args)) {
+      return { 'border-top': `${String(px(args))} solid currentColor` };
     }
-    // Otherwise treat as width
-    return { 'border-top': `${String(px(args))} solid currentColor` };
+    // Otherwise treat as color
+    return { 'border-top': `1px solid ${String(makeColor(args))}` };
   }
   
   const parts = args.split('/');
@@ -82,12 +82,12 @@ export const br: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
   
   if (!args.includes('/')) {
-    // Check if it's a color token
-    if (args.includes('-') || args.startsWith('#')) {
-      return { 'border-right': `1px solid ${String(makeColor(args))}` };
+    // Check if it's a number (width)
+    if (/^\d+(\.\d+)?$/.test(args)) {
+      return { 'border-right': `${String(px(args))} solid currentColor` };
     }
-    // Otherwise treat as width
-    return { 'border-right': `${String(px(args))} solid currentColor` };
+    // Otherwise treat as color
+    return { 'border-right': `1px solid ${String(makeColor(args))}` };
   }
   
   const parts = args.split('/');
@@ -102,12 +102,12 @@ export const bb: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
   
   if (!args.includes('/')) {
-    // Check if it's a color token
-    if (args.includes('-') || args.startsWith('#')) {
-      return { 'border-bottom': `1px solid ${String(makeColor(args))}` };
+    // Check if it's a number (width)
+    if (/^\d+(\.\d+)?$/.test(args)) {
+      return { 'border-bottom': `${String(px(args))} solid currentColor` };
     }
-    // Otherwise treat as width
-    return { 'border-bottom': `${String(px(args))} solid currentColor` };
+    // Otherwise treat as color
+    return { 'border-bottom': `1px solid ${String(makeColor(args))}` };
   }
   
   const parts = args.split('/');
@@ -122,12 +122,12 @@ export const bl: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
   
   if (!args.includes('/')) {
-    // Check if it's a color token
-    if (args.includes('-') || args.startsWith('#')) {
-      return { 'border-left': `1px solid ${String(makeColor(args))}` };
+    // Check if it's a number (width)
+    if (/^\d+(\.\d+)?$/.test(args)) {
+      return { 'border-left': `${String(px(args))} solid currentColor` };
     }
-    // Otherwise treat as width
-    return { 'border-left': `${String(px(args))} solid currentColor` };
+    // Otherwise treat as color
+    return { 'border-left': `1px solid ${String(makeColor(args))}` };
   }
   
   const parts = args.split('/');
@@ -172,12 +172,12 @@ export const border: RuleHandler = (args?: string): CSSRule => {
   
   // Regular border: border(1/solid/#333) or border(1/#333) or border(gray-300)
   if (!args.includes('/')) {
-    // Check if it's a color token first
-    if (args.includes('-') || args.startsWith('#')) {
-      return { border: `1px solid ${String(makeColor(args))}` };
+    // Check if it's a number (width)
+    if (/^\d+(\.\d+)?$/.test(args)) {
+      return { border: `${String(px(args))} solid currentColor` };
     }
-    // Otherwise treat as width
-    return { border: `${String(px(args))} solid currentColor` };
+    // Otherwise treat as color
+    return { border: `1px solid ${String(makeColor(args))}` };
   }
   
   const width = parts[0] ? String(px(parts[0])) : '1px';

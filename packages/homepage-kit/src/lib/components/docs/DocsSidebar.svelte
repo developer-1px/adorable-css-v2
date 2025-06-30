@@ -67,7 +67,7 @@
       </div>
     
     {:else if variant === 'sections'}
-      <div class="px(md) py(lg) overflow-y(auto) flex(1)">
+      <div class="px(md) py(lg) scroll(y) flex(1)">
         {#each items as section}
           <div class="mb(lg)">
             <h3 class="px(sm) font(xs) bold uppercase tracking(wider) c(gray-500) mb(sm)">{section.title}</h3>

@@ -166,7 +166,7 @@
               </button>
             </div>
             
-            <div class="output-box bg(gray-900) r(lg) p(lg) min-h(120px) overflow-y(auto)">
+            <div class="output-box bg(gray-900) r(lg) p(lg) min-h(120px) scroll(y)">
               {#if css}
                 <CodeHighlighter code={css} language="css" />
               {:else}

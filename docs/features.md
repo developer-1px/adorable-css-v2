@@ -65,6 +65,21 @@ gap(md)           /* Spacing between items */
 - Design token customization
 - Framework-agnostic core
 
+### ⚡ Importance (!) Feature
+Fine-grained specificity control without !important:
+
+```css
+/* Single ! adds one [class] selector */
+p(16)!    → [class].p\(16\)\!     /* specificity: 0-1-1 */
+
+/* Double !! adds two [class] selectors */
+p(16)!!   → [class][class].p\(16\)\!\!  /* specificity: 0-2-1 */
+
+/* Works with all features */
+hover:bg(blue)!    → [class].hover\:bg\(blue\)\!:hover
+md:w(full)!        → @media (min-width: 768px) { [class].md\:w\(full\)\! }
+```
+
 ## Recent Updates
 
 ### v2.0.0-beta (Current)
@@ -73,6 +88,8 @@ gap(md)           /* Spacing between items */
 - ✅ OKLCH color system integration
 - ✅ Improved TypeScript support
 - ✅ Monorepo architecture
+- ✅ Importance (!) feature for specificity control
+- ✅ Border color with default 1px width
 
 ### Coming Soon
 - 🔜 Range/clamp syntax for responsive constraints

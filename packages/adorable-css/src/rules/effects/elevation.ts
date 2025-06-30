@@ -1,86 +1,67 @@
 import type { CSSRule, RuleHandler } from '../types';
 
 /**
- * Elevation shadows inspired by Material Design
- * Combines key light (directional) and ambient light (soft) shadows
- * for realistic depth perception
+ * Elevation shadows with algorithmic generation
+ * Uses mathematical formulas to create consistent, scalable elevation effects
  */
-
-interface ElevationLevel {
-  keyX: number;        // Key shadow offset X
-  keyY: number;        // Key shadow offset Y  
-  keyBlur: number;     // Key shadow blur
-  keyOpacity: number;  // Key shadow opacity
-  ambientY: number;    // Ambient shadow offset Y
-  ambientBlur: number; // Ambient shadow blur
-  ambientOpacity: number; // Ambient shadow opacity
-}
 
 /**
- * Material Design elevation levels
- * Each level combines two shadows: key light and ambient light
+ * Calculate elevation properties using formulas
+ * This creates a more natural and consistent progression
  */
-const elevationLevels: Record<number, ElevationLevel> = {
-  0: {
-    keyX: 0, keyY: 0, keyBlur: 0, keyOpacity: 0,
-    ambientY: 0, ambientBlur: 0, ambientOpacity: 0
-  },
-  1: {
-    keyX: 0, keyY: 1, keyBlur: 3, keyOpacity: 0.12,
-    ambientY: 1, ambientBlur: 2, ambientOpacity: 0.24
-  },
-  2: {
-    keyX: 0, keyY: 1, keyBlur: 5, keyOpacity: 0.14,
-    ambientY: 2, ambientBlur: 4, ambientOpacity: 0.12
-  },
-  3: {
-    keyX: 0, keyY: 1, keyBlur: 8, keyOpacity: 0.15,
-    ambientY: 3, ambientBlur: 6, ambientOpacity: 0.10
-  },
-  4: {
-    keyX: 0, keyY: 2, keyBlur: 4, keyOpacity: 0.14,
-    ambientY: 4, ambientBlur: 8, ambientOpacity: 0.12
-  },
-  6: {
-    keyX: 0, keyY: 3, keyBlur: 5, keyOpacity: 0.16,
-    ambientY: 6, ambientBlur: 10, ambientOpacity: 0.14
-  },
-  8: {
-    keyX: 0, keyY: 5, keyBlur: 5, keyOpacity: 0.18,
-    ambientY: 8, ambientBlur: 16, ambientOpacity: 0.15
-  },
-  9: {
-    keyX: 0, keyY: 5, keyBlur: 6, keyOpacity: 0.20,
-    ambientY: 9, ambientBlur: 18, ambientOpacity: 0.16
-  },
-  12: {
-    keyX: 0, keyY: 7, keyBlur: 8, keyOpacity: 0.22,
-    ambientY: 12, ambientBlur: 24, ambientOpacity: 0.18
-  },
-  16: {
-    keyX: 0, keyY: 9, keyBlur: 11, keyOpacity: 0.24,
-    ambientY: 16, ambientBlur: 32, ambientOpacity: 0.20
-  },
-  20: {
-    keyX: 0, keyY: 11, keyBlur: 15, keyOpacity: 0.26,
-    ambientY: 20, ambientBlur: 40, ambientOpacity: 0.22
-  },
-  24: {
-    keyX: 0, keyY: 13, keyBlur: 19, keyOpacity: 0.28,
-    ambientY: 24, ambientBlur: 48, ambientOpacity: 0.24
+function calculateElevation(level: number) {
+  if (level === 0) {
+    return {
+      keyY: 0,
+      keyBlur: 0,
+      keyOpacity: 0,
+      ambientY: 0,
+      ambientBlur: 0,
+      ambientOpacity: 0
+    };
   }
-};
+
+  // Logarithmic progression for more natural shadow growth
+  const logLevel = Math.log(level + 1);
+  
+  // Key shadow (sharp, directional light)
+  // Y offset grows slower at first, then faster
+  const keyY = Math.round(level * 0.5 + logLevel * 0.5);
+  // Blur increases with level but not linearly
+  const keyBlur = Math.round(level * 0.3 + logLevel * 2);
+  // Opacity stays subtle, increases very slowly
+  const keyOpacity = Math.min(0.05 + level * 0.005, 0.15);
+  
+  // Ambient shadow (soft, diffused light)
+  // Y offset matches the level directly
+  const ambientY = level;
+  // Blur is much larger for soft effect
+  const ambientBlur = level * 2;
+  // Opacity decreases as blur increases to maintain subtlety
+  const ambientOpacity = Math.max(0.12 - level * 0.004, 0.04);
+  
+  return {
+    keyY,
+    keyBlur,
+    keyOpacity: Math.round(keyOpacity * 1000) / 1000, // Round to 3 decimals
+    ambientY,
+    ambientBlur,
+    ambientOpacity: Math.round(ambientOpacity * 1000) / 1000
+  };
+}
 
 /**
  * Generate elevation shadow CSS
  */
-function generateElevationShadow(level: ElevationLevel): string {
-  if (level.keyOpacity === 0 && level.ambientOpacity === 0) {
+function generateElevationShadow(level: number): string {
+  const elevation = calculateElevation(level);
+  
+  if (elevation.keyOpacity === 0 && elevation.ambientOpacity === 0) {
     return 'none';
   }
 
-  const keyShadow = `${level.keyX}px ${level.keyY}px ${level.keyBlur}px rgba(0, 0, 0, ${level.keyOpacity})`;
-  const ambientShadow = `0 ${level.ambientY}px ${level.ambientBlur}px rgba(0, 0, 0, ${level.ambientOpacity})`;
+  const keyShadow = `0 ${elevation.keyY}px ${elevation.keyBlur}px rgba(0, 0, 0, ${elevation.keyOpacity})`;
+  const ambientShadow = `0 ${elevation.ambientY}px ${elevation.ambientBlur}px rgba(0, 0, 0, ${elevation.ambientOpacity})`;
   
   return `${keyShadow}, ${ambientShadow}`;
 }
@@ -90,7 +71,7 @@ function generateElevationShadow(level: ElevationLevel): string {
  */
 export const elevation: RuleHandler = (args?: string): CSSRule => {
   if (!args) {
-    return { boxShadow: 'none' };
+    return { 'box-shadow': 'none' };
   }
   
   // Parse elevation level
@@ -99,27 +80,18 @@ export const elevation: RuleHandler = (args?: string): CSSRule => {
   // Validate level
   if (isNaN(level) || level < 0) {
     console.warn(`Invalid elevation level: ${args}. Using elevation(0).`);
-    return { boxShadow: 'none' };
+    return { 'box-shadow': 'none' };
   }
   
-  // Find the closest defined elevation level
-  const availableLevels = Object.keys(elevationLevels).map(Number).sort((a, b) => a - b);
-  let targetLevel = level;
+  // Cap at reasonable maximum (e.g., 24)
+  const cappedLevel = Math.min(level, 24);
   
-  if (!elevationLevels[level]) {
-    // Find closest level
-    targetLevel = availableLevels.reduce((closest, current) => {
-      return Math.abs(current - level) < Math.abs(closest - level) ? current : closest;
-    });
-  }
-  
-  const elevationConfig = elevationLevels[targetLevel];
-  const boxShadow = generateElevationShadow(elevationConfig);
+  const boxShadow = generateElevationShadow(cappedLevel);
   
   return {
-    boxShadow
+    'box-shadow': boxShadow
   };
 };
 
 // Export for use in other modules
-export { elevationLevels, generateElevationShadow };
+export { calculateElevation, generateElevationShadow };

@@ -1,27 +1,11 @@
-import { mdsvex } from 'mdsvex';
 import adapter from '@sveltejs/adapter-static';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
-import remarkGfm from 'remark-gfm';
-import rehypeSlug from 'rehype-slug';
-import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypeHighlight from 'rehype-highlight';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	// Consult https://svelte.dev/docs/kit/integrations
 	// for more information about preprocessors
-	preprocess: [
-		vitePreprocess(), 
-		mdsvex({
-			extensions: ['.svx', '.md', '.mdx'],
-			remarkPlugins: [remarkGfm],
-			rehypePlugins: [
-				rehypeSlug, 
-				rehypeAutolinkHeadings,
-				rehypeHighlight
-			]
-		})
-	],
+	preprocess: vitePreprocess(),
 	kit: {
 		adapter: adapter({
 			// GitHub Pages를 위한 설정
@@ -36,7 +20,7 @@ const config = {
 			base: process.env.NODE_ENV === 'production' ? '/adorable-css-v2' : ''
 		}
 	},
-	extensions: ['.svelte', '.svx', '.mdx']
+	extensions: ['.svelte']
 };
 
 export default config;

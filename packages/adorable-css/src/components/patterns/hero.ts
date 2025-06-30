@@ -76,7 +76,7 @@ export const heroString: StringRuleHandler = (args?: string): string | (string |
     
     // Dark hero - shadcn style dark mode
     dark: [
-      'vbox(center) min-h(100vh) relative clip bg(gray-950) c(white) px(24) py(32)',
+      'vbox(center) min-h(100vh) relative clip bg(gray-900) c(white) px(24) py(32)',
       {
         'background': 'radial-gradient(circle at 25% 0%, #1a1a2e 0%, #09090b 50%)',
         '&::before': {

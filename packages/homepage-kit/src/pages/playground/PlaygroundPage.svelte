@@ -322,7 +322,7 @@
         <!-- Editor Content -->
         <div class="relative h(calc(100%-4rem))">
           {#if codeLineNumbers}
-            <div class="layer(top+left+bottom) w(48px) bg(gray-50) br(1/gray-200) overflow-y(auto) overflow-x(hidden)">
+            <div class="layer(top+left+bottom) w(48px) bg(gray-50) br(1/gray-200) scroll(y) overflow-x(hidden)">
               <pre class="p(lg) font-family(mono) font(sm) c(gray-400) line-height(relaxed) text(right)">{htmlInput.split('\n').map((_, i) => i + 1).join('\n')}</pre>
             </div>
           {/if}
@@ -389,11 +389,11 @@
               style="background: white;"
             ></iframe>
           {:else if activeTab === 'css'}
-            <div class="h(full) overflow-y(auto) bg(gray-50)">
+            <div class="h(full) scroll(y) bg(gray-50)">
               <pre class="p(xl) font-family(mono) font(sm) c(gray-800) line-height(relaxed) whitespace(pre-wrap) word-break(break-all)">{formatCSS(generatedCSS)}</pre>
             </div>
           {:else if activeTab === 'stats' && stats}
-            <div class="p(xl) overflow-y(auto) h(full)">
+            <div class="p(xl) scroll(y) h(full)">
               <div class="vbox gap(xl)">
                 <div class="grid grid-cols(3) gap(lg)">
                   <div class="bg(purple-50) p(lg) r(lg) text(center)">

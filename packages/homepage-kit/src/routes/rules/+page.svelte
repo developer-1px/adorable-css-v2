@@ -191,7 +191,7 @@
         {#if liveCSS}
           <div class="vbox gap(2)">
             <h4 class="text(sm) bold c(gray-700)">Generated CSS:</h4>
-            <pre class="p(4) bg(gray-50) border(1/gray-200) r(md) text(xs) font(mono) overflow-x(auto) max-h(300) overflow-y(auto)">{liveCSS}</pre>
+            <pre class="p(4) bg(gray-50) border(1/gray-200) r(md) text(xs) font(mono) overflow-x(auto) max-h(300) scroll(y)">{liveCSS}</pre>
           </div>
         {/if}
         {#if liveError}

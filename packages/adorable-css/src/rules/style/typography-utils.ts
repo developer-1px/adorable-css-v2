@@ -1,4 +1,6 @@
 import type { CSSRule, RuleHandler } from '../types';
+import { isToken, getTokenVar } from '../../design-system/tokens/index';
+import { px } from '../../core/values/makeValue';
 
 // Font style utilities
 export const italic: RuleHandler = (): CSSRule => ({
@@ -65,6 +67,56 @@ export const capitalize: RuleHandler = (): CSSRule => ({
   'text-transform': 'capitalize'
 });
 
+// Line height handler
+export const lh: RuleHandler = (args?: string): CSSRule => {
+  if (!args) return {};
+  
+  // Handle numeric values (e.g., lh(1.5), lh(2))
+  if (/^\d*\.?\d+$/.test(args)) {
+    return { 'line-height': args };
+  }
+  
+  // Handle token values
+  if (isToken(args, 'lineHeight')) {
+    return { 'line-height': getTokenVar('lineHeight', args) };
+  }
+  
+  // Handle px values
+  if (args.includes('px')) {
+    return { 'line-height': args };
+  }
+  
+  // Default to the value as-is
+  return { 'line-height': args };
+};
+
+// Text rendering optimization
+export const textRendering: RuleHandler = (args?: string): CSSRule => {
+  const validValues = ['auto', 'optimizeSpeed', 'optimizeLegibility', 'geometricPrecision'];
+  if (!args || !validValues.includes(args)) {
+    return { 'text-rendering': 'optimizeLegibility' };
+  }
+  return { 'text-rendering': args };
+};
+
+// Webkit font smoothing
+export const webkitFontSmoothing: RuleHandler = (args?: string): CSSRule => {
+  const validValues = ['auto', 'none', 'antialiased', 'subpixel-antialiased'];
+  if (!args || !validValues.includes(args)) {
+    return { '-webkit-font-smoothing': 'antialiased' };
+  }
+  return { '-webkit-font-smoothing': args };
+};
+
+// Mozilla font smoothing
+export const mozFontSmoothing: RuleHandler = (args?: string): CSSRule => {
+  const validValues = ['auto', 'grayscale'];
+  if (!args || !validValues.includes(args)) {
+    return { '-moz-osx-font-smoothing': 'grayscale' };
+  }
+  return { '-moz-osx-font-smoothing': args };
+};
+
 // Export all typography utilities
 export const typographyUtilityRules = {
   italic,
@@ -83,4 +135,8 @@ export const typographyUtilityRules = {
   lowercase,
   uppercase,
   capitalize,
+  lh,
+  'text-rendering': textRendering,
+  '-webkit-font-smoothing': webkitFontSmoothing,
+  '-moz-osx-font-smoothing': mozFontSmoothing,
 };

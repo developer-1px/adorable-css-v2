@@ -141,6 +141,64 @@ export const animationKeyframes = {
         transform: translate(50px, 20px) scale(1.01);
       }
     }
+  `,
+  'float-slow': `
+    @keyframes float-slow {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+      }
+      33% {
+        transform: translate(30px, -30px) scale(1.05);
+      }
+      66% {
+        transform: translate(-20px, 20px) scale(0.95);
+      }
+    }
+  `,
+  'float-reverse': `
+    @keyframes float-reverse {
+      0%, 100% {
+        transform: translate(0, 0) scale(1);
+      }
+      33% {
+        transform: translate(-30px, 30px) scale(0.95);
+      }
+      66% {
+        transform: translate(20px, -20px) scale(1.05);
+      }
+    }
+  `,
+  'pulse': `
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+  `,
+  'slide-in': `
+    @keyframes slide-in {
+      from {
+        width: 0;
+      }
+      to {
+        width: 100%;
+      }
+    }
+  `,
+  'fade-in-up': `
+    @keyframes fade-in-up {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   `
 };
 
@@ -310,9 +368,45 @@ export const animationRules: Record<string, RuleHandler> = {
   
   // Continuous animations
   'float': (value?: string): CSSRule => {
-    const parsed = parseAnimationValue(value || '25s_ease-in-out_infinite');
+    const parsed = parseAnimationValue(value || '25s/ease-in-out/repeat:infinite');
     return {
       animation: `float ${parsed.duration} ${parsed.easing} ${parsed.delay} ${parsed.iteration} ${parsed.direction} ${parsed.fillMode}`
+    };
+  },
+  
+  'float-slow': (value?: string): CSSRule => {
+    const parsed = parseAnimationValue(value || '40s/ease-in-out/repeat:infinite');
+    return {
+      animation: `float-slow ${parsed.duration} ${parsed.easing} ${parsed.delay} ${parsed.iteration} ${parsed.direction} ${parsed.fillMode}`
+    };
+  },
+  
+  'float-reverse': (value?: string): CSSRule => {
+    const parsed = parseAnimationValue(value || '35s/ease-in-out/repeat:infinite');
+    return {
+      animation: `float-reverse ${parsed.duration} ${parsed.easing} ${parsed.delay} ${parsed.iteration} ${parsed.direction} ${parsed.fillMode}`
+    };
+  },
+  
+  'pulse': (value?: string): CSSRule => {
+    const parsed = parseAnimationValue(value || '2s/ease-in-out/repeat:infinite');
+    return {
+      animation: `pulse ${parsed.duration} ${parsed.easing} ${parsed.delay} ${parsed.iteration} ${parsed.direction} ${parsed.fillMode}`
+    };
+  },
+  
+  'slide-in': (value?: string): CSSRule => {
+    const parsed = parseAnimationValue(value || '0.3s/ease-out');
+    return {
+      animation: `slide-in ${parsed.duration} ${parsed.easing} ${parsed.delay} ${parsed.iteration} ${parsed.direction} ${parsed.fillMode}`
+    };
+  },
+  
+  'fade-in-up': (value?: string): CSSRule => {
+    const parsed = parseAnimationValue(value || '0.6s/ease-out');
+    return {
+      opacity: '0',
+      animation: `fade-in-up ${parsed.duration} ${parsed.easing} ${parsed.delay} ${parsed.iteration} ${parsed.direction} ${parsed.fillMode}`
     };
   },
   
@@ -340,6 +434,15 @@ export const animationRules: Record<string, RuleHandler> = {
     }
     
     return {};
+  },
+  
+  // Animation delay utility
+  'animate-delay': (value?: string): CSSRule => {
+    if (!value) return {};
+    const delay = value.match(/^\d+$/) ? `${value}ms` : value;
+    return {
+      'animation-delay': delay
+    };
   }
 };
 

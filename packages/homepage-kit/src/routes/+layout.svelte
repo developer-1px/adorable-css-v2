@@ -23,9 +23,9 @@
   $: currentPath = $page.url.pathname;
 </script>
 
-<div class="min-h(screen) vbox">
-  <Navbar />
-  
+<Navbar />
+
+<div class="min-h(screen) vbox pt(100)">
   <main class="flex(1)">
     <slot />
   </main>

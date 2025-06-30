@@ -1,221 +1,468 @@
 <script lang="ts">
-  import { defaultTokens } from 'adorable-css';
-  import { Type, Hash, AlignLeft, Minus, Heading1 } from 'lucide-svelte';
+  import { Type, Hash, AlignLeft, Minus, Heading1, Type as TypeIcon, FileText, Tag, MessageSquare, Info } from 'lucide-svelte';
   
-  // Heading component variants
+  // Display component variants - for maximum visual impact
+  const displayVariants = [
+    { name: 'xs', example: 'Display XS', description: 'Smaller display text', usage: 'Section headers' },
+    { name: 'sm', example: 'Display Small', description: 'Small display size', usage: 'Feature titles' },
+    { name: 'base', example: 'Display Base', description: 'Standard display size', usage: 'Page headers' },
+    { name: 'lg', example: 'Display Large', description: 'Large display text', usage: 'Hero sections' },
+    { name: 'xl', example: 'Display XL', description: 'Extra large display', usage: 'Landing pages' },
+    { name: '2xl', example: 'Display 2XL', description: 'Double XL display', usage: 'Marketing headers' },
+    { name: 'hero', example: 'Hero Display', description: 'Hero section display', usage: 'Main hero text' },
+    { name: 'banner', example: 'Banner', description: 'Banner display text', usage: 'Promotional banners' },
+  ];
+
+  // Heading component variants - for document structure
   const headingVariants = [
-    { name: 'hero', example: 'Hero', description: 'Ultra-large hero text for landing pages' },
-    { name: 'display', example: 'Display', description: 'Large display headlines' },
-    { name: 'h1', example: 'Heading 1', description: 'Primary page titles' },
-    { name: 'h2', example: 'Heading 2', description: 'Section headers' },
-    { name: 'h3', example: 'Heading 3', description: 'Subsection titles' },
-    { name: 'h4', example: 'Heading 4', description: 'Component titles' },
-    { name: 'h5', example: 'Heading 5', description: 'Small headings' },
-    { name: 'h6', example: 'Heading 6', description: 'Caption headers' }
+    { name: 'h1', example: 'Heading Level 1', description: 'Primary page title', usage: 'Page titles' },
+    { name: 'h2', example: 'Heading Level 2', description: 'Section headers', usage: 'Major sections' },
+    { name: 'h3', example: 'Heading Level 3', description: 'Subsection titles', usage: 'Subsections' },
+    { name: 'h4', example: 'Heading Level 4', description: 'Component headers', usage: 'Components' },
+    { name: 'h5', example: 'Heading Level 5', description: 'Small headings', usage: 'Minor sections' },
+    { name: 'h6', example: 'Heading Level 6', description: 'Tiny headings', usage: 'Fine details' },
   ];
+
+  // Title component variants - for component identification
+  const titleVariants = [
+    { name: 'xs', example: 'Extra Small Title', description: 'Tiny component titles', usage: 'Badges, tags' },
+    { name: 'sm', example: 'Small Title', description: 'Small component titles', usage: 'List items' },
+    { name: 'base', example: 'Base Title', description: 'Standard titles', usage: 'Cards, sections' },
+    { name: 'lg', example: 'Large Title', description: 'Large component titles', usage: 'Feature cards' },
+    { name: 'card', example: 'Card Title Example', description: 'Card component titles', usage: 'Card headers' },
+    { name: 'modal', example: 'Modal Title', description: 'Modal dialog titles', usage: 'Dialog headers' },
+    { name: 'section', example: 'Section Title', description: 'Section component titles', usage: 'Section headers' },
+  ];
+
+  // Body component variants - for readable content
+  const bodyVariants = [
+    { name: 'xs', example: 'Extra small body text for fine print and disclaimers', description: 'Tiny text', usage: 'Legal text' },
+    { name: 'sm', example: 'Small body text for secondary content and descriptions', description: 'Small content', usage: 'Descriptions' },
+    { name: 'base', example: 'Base body text is optimized for readability with comfortable line height', description: 'Standard text', usage: 'Main content' },
+    { name: 'lg', example: 'Large body text for emphasized paragraphs and introductions', description: 'Large text', usage: 'Lead paragraphs' },
+    { name: 'article', example: 'Article body text with optimal reading width and line height for long-form content', description: 'Article optimized', usage: 'Blog posts' },
+    { name: 'prose', example: 'Prose variant provides the best reading experience for extended text with enhanced typography', description: 'Enhanced prose', usage: 'Documentation' },
+  ];
+
+  // Label component variants - for functional UI text
+  const labelVariants = [
+    { name: 'xs', example: 'Extra Small Label', description: 'Tiny labels', usage: 'Compact UI' },
+    { name: 'sm', example: 'Small Label', description: 'Small labels', usage: 'Dense forms' },
+    { name: 'base', example: 'Base Label', description: 'Standard labels', usage: 'Form fields' },
+    { name: 'button', example: 'Button Label', description: 'Button text', usage: 'Buttons' },
+    { name: 'input', example: 'Input Label', description: 'Form field labels', usage: 'Input fields' },
+    { name: 'tab', example: 'Tab Label', description: 'Tab navigation', usage: 'Tab bars' },
+    { name: 'badge', example: 'BADGE', description: 'Badge text', usage: 'Status badges' },
+  ];
+
+  // Caption component variants - for supplementary information
+  const captionVariants = [
+    { name: 'xs', example: 'Extra small caption text', description: 'Tiny captions', usage: 'Timestamps' },
+    { name: 'sm', example: 'Small caption for additional context', description: 'Small captions', usage: 'Helper text' },
+    { name: 'base', example: 'Base caption provides supplementary information', description: 'Standard captions', usage: 'Image captions' },
+    { name: 'figure', example: 'Figure 1: Example caption for images and diagrams', description: 'Figure captions', usage: 'Media captions' },
+    { name: 'form', example: 'Password must be at least 8 characters', description: 'Form helper text', usage: 'Input hints' },
+    { name: 'hint', example: 'Hint: Try using keyboard shortcuts', description: 'Hint text', usage: 'UI hints' },
+  ];
+
+  // Component color variants
+  const colorVariants = ['default', 'muted', 'primary', 'success', 'warning', 'danger', 'gradient'];
   
-  // Text utility variants
-  const textVariants = [
-    { name: 'xs', example: 'Extra small text for captions and metadata', size: '0.75rem' },
-    { name: 'sm', example: 'Small text for secondary information', size: '0.875rem' },
-    { name: 'base', example: 'Base text size for body content and paragraphs', size: '1rem' },
-    { name: 'lg', example: 'Large text for emphasis and lead paragraphs', size: '1.125rem' },
-    { name: 'xl', example: 'Extra large text for standout content', size: '1.25rem' },
-    { name: '2xl', example: 'Double extra large for headlines', size: '1.5rem' },
-    { name: '3xl', example: 'Triple extra large for major headings', size: '1.875rem' }
+  // Bold utility weights
+  const boldWeights = [
+    { name: 'thin', value: '100', example: 'Thin weight text' },
+    { name: 'light', value: '300', example: 'Light weight text' },
+    { name: 'normal', value: '400', example: 'Normal weight text' },
+    { name: 'medium', value: '500', example: 'Medium weight text' },
+    { name: 'semi', value: '600', example: 'Semibold weight text' },
+    { name: 'bold', value: '700', example: 'Bold weight text' },
+    { name: 'extra', value: '800', example: 'Extra bold text' },
+    { name: 'black', value: '900', example: 'Black weight text' },
   ];
+
+  let copiedCode = '';
   
-  // Essential font weights only
-  const essentialWeights = [
-    { name: 'normal', value: '400', description: 'Regular text' },
-    { name: 'medium', value: '500', description: 'Medium emphasis' },
-    { name: 'semibold', value: '600', description: 'Strong emphasis' },
-    { name: 'bold', value: '700', description: 'Bold headings' }
-  ];
+  function copyCode(code: string) {
+    navigator.clipboard.writeText(code);
+    copiedCode = code;
+    setTimeout(() => copiedCode = '', 2000);
+  }
 </script>
 
 <div class="vbox gap(4xl)">
   <!-- Section Header -->
   <div class="text(center)">
     <div class="hbox(center) gap(sm) mb(xl)">
-      <Type size="24" class="c(indigo-600)" />
-      <h2 class="heading(display) c(gray-900)">Typography</h2>
+      <Type size="32" class="c(purple-600)" />
+      <h1 class="display(lg) gradient">Typography System</h1>
     </div>
-    <p class="text(lg) c(gray-600) max-w(2xl) mx(auto)">
-      A carefully crafted type system that scales beautifully from mobile to desktop, 
-      ensuring perfect readability at every size
+    <p class="body(lg) c(gray-600) max-w(3xl) mx(auto)">
+      A comprehensive 6-role typography system designed for clarity, hierarchy, and beautiful reading experiences. 
+      Each role serves a specific purpose in your design system.
     </p>
   </div>
 
-  <!-- Heading Components -->
-  <div class="bg(white) r(2xl) shadow(xl) shadow(gray-200.5) overflow(hidden)">
-    <div class="p(2xl) border-b(1px/gray-100)">
-      <div class="hbox(between/middle) mb(xl)">
+  <!-- Role-Based Typography System -->
+  <div class="vbox gap(3xl)">
+    <!-- Display Role -->
+    <div class="bg(gradient(135deg/purple-50..pink-50)) r(2xl) p(3xl) border(2/purple-200)">
+      <div class="hbox(between/start) mb(2xl)">
         <div>
-          <h3 class="heading(h2) c(gray-900) mb(xs)">Heading Components</h3>
-          <p class="text(sm) c(gray-600)">Semantic heading utilities with perfect typography scaling</p>
-        </div>
-        <Heading1 size="20" class="c(gray-400)" />
-      </div>
-      
-      <div class="vbox gap(lg)">
-        {#each headingVariants as { name, example, description }}
-          <div class="group p(xl) r(xl) bg(gray-50) hover:bg(indigo-50) transition-all hover:shadow(lg) hover:shadow(indigo-100.5)">
-            <div class="hbox(between/middle) gap(2xl)">
-              <div class="min-w(180px)">
-                <code class="text(xs) px(sm) py(xs) r(md) bg(indigo-600) c(white) inline-block mb(xs)">
-                  heading({name})
-                </code>
-                <div class="text(xs) c(gray-500)">{description}</div>
-              </div>
-              <div class="flex(1) min-w(0) text(left)">
-                <div class="heading({name}) c(gray-900) group-hover:c(indigo-900) transition">
-                  {example}
-                </div>
-              </div>
+          <div class="hbox(start) gap(sm) mb(md)">
+            <div class="p(sm) r(lg) bg(purple-600) c(white)">
+              <TypeIcon size="20" />
             </div>
+            <h2 class="heading(h2) c(purple-900)">Display</h2>
           </div>
-        {/each}
-      </div>
-    </div>
-  </div>
-  
-  <!-- Text Utilities -->
-  <div class="bg(white) r(2xl) shadow(xl) shadow(gray-200.5) overflow(hidden)">
-    <div class="p(2xl)">
-      <div class="hbox(between/middle) mb(xl)">
-        <div>
-          <h3 class="heading(h2) c(gray-900) mb(xs)">Text Utilities</h3>
-          <p class="text(sm) c(gray-600)">Flexible text sizing for content and UI elements</p>
+          <p class="body(base) c(purple-700) max-w(2xl)">
+            Maximum visual impact for hero sections, landing pages, and marketing materials. 
+            Features tight line-height and negative letter-spacing for dramatic effect.
+          </p>
         </div>
-        <Hash size="20" class="c(gray-400)" />
+        <code class="caption(base) bg(purple-100) px(md) py(sm) r(lg) font(mono) c(purple-800)">
+          display(size)
+        </code>
       </div>
       
-      <div class="vbox gap(lg)">
-        {#each textVariants as { name, example, size }}
-          <div class="group p(lg) r(lg) bg(gray-50) hover:bg(purple-50) transition-all hover:shadow(md)">
-            <div class="hbox(between/middle) gap(xl)">
-              <div class="min-w(120px)">
-                <code class="text(xs) px(sm) py(xs) r(md) bg(purple-600) c(white) inline-block mb(xs)">
-                  text({name})
-                </code>
-                <div class="text(xs) c(gray-500) font(mono)">{size}</div>
-              </div>
-              <div class="flex(1) min-w(0)">
-                <div class="text({name}) c(gray-800) group-hover:c(purple-900) transition">
-                  {example}
-                </div>
-              </div>
-            </div>
-          </div>
-        {/each}
-      </div>
-    </div>
-  </div>
-
-  <!-- Typography Features Grid -->
-  <div class="grid(3) gap(xl)">
-    <!-- Bold Utility -->
-    <div class="bg(white) r(2xl) p(xl) shadow(lg) shadow(gray-200.5)">
-      <div class="hbox(start) gap(sm) mb(lg)">
-        <AlignLeft size="16" class="c(indigo-600)" />
-        <h4 class="heading(h4) c(gray-900)">Bold Utility</h4>
-      </div>
-      
-      <div class="vbox gap(md)">
-        {#each essentialWeights as { name, value, description }}
-          <div class="group p(sm) r(lg) hover:bg(gray-50) transition">
-            <div class="hbox(between) mb(xs)">
-              <code class="text(xs) px(xs) py(xs) r(sm) bg(gray-100) c(gray-700)">
-                bold({name})
+      <div class="vbox gap(xl)">
+        {#each displayVariants as variant}
+          <div 
+            class="group p(xl) r(xl) bg(white) hover:shadow(2xl) transition-all cursor-pointer border(1/purple-100) hover:border(purple-300)"
+            on:click={() => copyCode(`display(${variant.name})`)}
+          >
+            <div class="hbox(between) mb(sm)">
+              <code class="badge(sm/primary)">
+                display({variant.name})
               </code>
-              <span class="text(xs) c(gray-500)">{value}</span>
+              <span class="caption(xs) c(purple-600)">{variant.usage}</span>
             </div>
-            <div class="text(sm) bold({name}) c(gray-800)">
-              {description}
+            <div class="display({variant.name}) c(gray-900) mb(sm)">
+              {variant.example}
+            </div>
+            <p class="caption(base) c(gray-600)">{variant.description}</p>
+          </div>
+        {/each}
+      </div>
+    </div>
+
+    <!-- Heading Role -->
+    <div class="bg(gradient(135deg/indigo-50..blue-50)) r(2xl) p(3xl) border(2/indigo-200)">
+      <div class="hbox(between/start) mb(2xl)">
+        <div>
+          <div class="hbox(start) gap(sm) mb(md)">
+            <div class="p(sm) r(lg) bg(indigo-600) c(white)">
+              <Heading1 size="20" />
+            </div>
+            <h2 class="heading(h2) c(indigo-900)">Heading</h2>
+          </div>
+          <p class="body(base) c(indigo-700) max-w(2xl)">
+            Semantic HTML headings for document structure and SEO. 
+            Provides clear visual hierarchy with balanced typography.
+          </p>
+        </div>
+        <code class="caption(base) bg(indigo-100) px(md) py(sm) r(lg) font(mono) c(indigo-800)">
+          heading(level)
+        </code>
+      </div>
+      
+      <div class="vbox gap(lg)">
+        {#each headingVariants as variant}
+          <div 
+            class="group p(xl) r(xl) bg(white) hover:shadow(xl) transition-all cursor-pointer border(1/indigo-100) hover:border(indigo-300)"
+            on:click={() => copyCode(`heading(${variant.name})`)}
+          >
+            <div class="hbox(between) mb(md)">
+              <code class="badge(sm/primary)">
+                heading({variant.name})
+              </code>
+              <span class="caption(xs) c(indigo-600)">{variant.usage}</span>
+            </div>
+            <div class="heading({variant.name}) c(gray-900) mb(sm)">
+              {variant.example}
+            </div>
+            <p class="caption(base) c(gray-600)">{variant.description}</p>
+          </div>
+        {/each}
+      </div>
+    </div>
+
+    <!-- Title Role -->
+    <div class="bg(gradient(135deg/cyan-50..sky-50)) r(2xl) p(3xl) border(2/cyan-200)">
+      <div class="hbox(between/start) mb(2xl)">
+        <div>
+          <div class="hbox(start) gap(sm) mb(md)">
+            <div class="p(sm) r(lg) bg(cyan-600) c(white)">
+              <Tag size="20" />
+            </div>
+            <h2 class="heading(h2) c(cyan-900)">Title</h2>
+          </div>
+          <p class="body(base) c(cyan-700) max-w(2xl)">
+            Component identifiers for cards, modals, and UI elements. 
+            Balanced weight and spacing for clear labeling without dominating.
+          </p>
+        </div>
+        <code class="caption(base) bg(cyan-100) px(md) py(sm) r(lg) font(mono) c(cyan-800)">
+          title(size)
+        </code>
+      </div>
+      
+      <div class="grid(3) gap(lg)">
+        {#each titleVariants as variant}
+          <div 
+            class="group p(lg) r(xl) bg(white) hover:shadow(lg) transition-all cursor-pointer border(1/cyan-100) hover:border(cyan-300)"
+            on:click={() => copyCode(`title(${variant.name})`)}
+          >
+            <div class="hbox(between) mb(sm)">
+              <code class="badge(xs/primary)">
+                title({variant.name})
+              </code>
+            </div>
+            <h3 class="title({variant.name}) c(gray-900) mb(xs) truncate">
+              {variant.example}
+            </h3>
+            <p class="caption(xs) c(gray-600)">{variant.usage}</p>
+          </div>
+        {/each}
+      </div>
+    </div>
+
+    <!-- Body Role -->
+    <div class="bg(gradient(135deg/green-50..emerald-50)) r(2xl) p(3xl) border(2/green-200)">
+      <div class="hbox(between/start) mb(2xl)">
+        <div>
+          <div class="hbox(start) gap(sm) mb(md)">
+            <div class="p(sm) r(lg) bg(green-600) c(white)">
+              <FileText size="20" />
+            </div>
+            <h2 class="heading(h2) c(green-900)">Body</h2>
+          </div>
+          <p class="body(base) c(green-700) max-w(2xl)">
+            Optimized for readability with generous line-height and comfortable spacing. 
+            The workhorse of content presentation.
+          </p>
+        </div>
+        <code class="caption(base) bg(green-100) px(md) py(sm) r(lg) font(mono) c(green-800)">
+          body(size)
+        </code>
+      </div>
+      
+      <div class="vbox gap(lg)">
+        {#each bodyVariants as variant}
+          <div 
+            class="group p(xl) r(xl) bg(white) hover:shadow(lg) transition-all cursor-pointer border(1/green-100) hover:border(green-300)"
+            on:click={() => copyCode(`body(${variant.name})`)}
+          >
+            <div class="hbox(between) mb(md)">
+              <code class="badge(sm/success)">
+                body({variant.name})
+              </code>
+              <span class="caption(xs) c(green-600)">{variant.usage}</span>
+            </div>
+            <p class="body({variant.name}) c(gray-800)">
+              {variant.example}
+            </p>
+            <p class="caption(sm) c(gray-600) mt(sm)">{variant.description}</p>
+          </div>
+        {/each}
+      </div>
+    </div>
+
+    <!-- Label Role -->
+    <div class="bg(gradient(135deg/amber-50..yellow-50)) r(2xl) p(3xl) border(2/amber-200)">
+      <div class="hbox(between/start) mb(2xl)">
+        <div>
+          <div class="hbox(start) gap(sm) mb(md)">
+            <div class="p(sm) r(lg) bg(amber-600) c(white)">
+              <Tag size="20" />
+            </div>
+            <h2 class="heading(h2) c(amber-900)">Label</h2>
+          </div>
+          <p class="body(base) c(amber-700) max-w(2xl)">
+            Functional UI text for buttons, forms, and interactive elements. 
+            Clear and concise with enhanced weight for small sizes.
+          </p>
+        </div>
+        <code class="caption(base) bg(amber-100) px(md) py(sm) r(lg) font(mono) c(amber-800)">
+          label(size)
+        </code>
+      </div>
+      
+      <div class="grid(3) gap(lg)">
+        {#each labelVariants as variant}
+          <div 
+            class="group p(lg) r(xl) bg(white) hover:shadow(lg) transition-all cursor-pointer border(1/amber-100) hover:border(amber-300)"
+            on:click={() => copyCode(`label(${variant.name})`)}
+          >
+            <div class="label({variant.name}) c(gray-900) mb(xs) block">
+              {variant.example}
+            </div>
+            <p class="caption(xs) c(gray-600)">{variant.usage}</p>
+          </div>
+        {/each}
+      </div>
+    </div>
+
+    <!-- Caption Role -->
+    <div class="bg(gradient(135deg/gray-50..slate-50)) r(2xl) p(3xl) border(2/gray-300)">
+      <div class="hbox(between/start) mb(2xl)">
+        <div>
+          <div class="hbox(start) gap(sm) mb(md)">
+            <div class="p(sm) r(lg) bg(gray-600) c(white)">
+              <Info size="20" />
+            </div>
+            <h2 class="heading(h2) c(gray-900)">Caption</h2>
+          </div>
+          <p class="body(base) c(gray-700) max-w(2xl)">
+            Supplementary information that doesn't compete for attention. 
+            Intentionally subdued color and weight for supporting content.
+          </p>
+        </div>
+        <code class="caption(base) bg(gray-200) px(md) py(sm) r(lg) font(mono) c(gray-800)">
+          caption(size)
+        </code>
+      </div>
+      
+      <div class="grid(2) gap(lg)">
+        {#each captionVariants as variant}
+          <div 
+            class="group p(lg) r(xl) bg(white) hover:shadow(md) transition-all cursor-pointer border(1/gray-200) hover:border(gray-400)"
+            on:click={() => copyCode(`caption(${variant.name})`)}
+          >
+            <div class="hbox(between) mb(sm)">
+              <code class="badge(xs/muted)">
+                caption({variant.name})
+              </code>
+              <span class="caption(xs) c(gray-500)">{variant.usage}</span>
+            </div>
+            <p class="caption({variant.name})">
+              {variant.example}
+            </p>
+          </div>
+        {/each}
+      </div>
+    </div>
+  </div>
+
+  <!-- Typography Composition Examples -->
+  <div class="bg(gray-900) r(2xl) p(3xl) c(white)">
+    <h2 class="heading(h1) c(white) mb(xl) text(center)">Typography in Action</h2>
+    <p class="body(lg) c(gray-300) text(center) max-w(3xl) mx(auto) mb(3xl)">
+      See how different typography roles work together to create beautiful, functional interfaces
+    </p>
+    
+    <div class="grid(3) gap(xl)">
+      <!-- Card Example -->
+      <div class="bg(white) r(xl) p(xl) c(gray-900)">
+        <div class="caption(xs) uppercase c(purple-600) mb(sm)">Article</div>
+        <h3 class="title(card) mb(sm)">Getting Started with AdorableCSS</h3>
+        <p class="body(sm) c(gray-700) mb(md)">
+          Learn the fundamentals of our intuitive CSS framework and start building beautiful interfaces in minutes.
+        </p>
+        <div class="hbox(between)">
+          <span class="caption(base)">5 min read</span>
+          <span class="label(button) c(purple-600)">Read More →</span>
+        </div>
+      </div>
+
+      <!-- Form Example -->
+      <div class="bg(white) r(xl) p(xl) c(gray-900)">
+        <h3 class="title(modal) mb(lg)">Create Account</h3>
+        <div class="vbox gap(md)">
+          <div>
+            <label class="label(input) required">Email Address</label>
+            <div class="mt(xs) p(md) r(lg) border(1/gray-300) body(base) c(gray-500)">
+              name@example.com
+            </div>
+            <p class="caption(form) help mt(xs)">We'll never share your email</p>
+          </div>
+          <button class="p(md) r(lg) bg(indigo-600) c(white) label(button) hover:bg(indigo-700) transition">
+            Continue
+          </button>
+        </div>
+      </div>
+
+      <!-- Feature Card -->
+      <div class="bg(white) r(xl) p(xl) c(gray-900)">
+        <div class="badge(xs/success) inline-block mb(md)">NEW</div>
+        <h3 class="title(lg) mb(sm)">Dark Mode Support</h3>
+        <p class="body(base) c(gray-700) mb(md)">
+          Built-in dark mode with automatic theme detection and smooth transitions.
+        </p>
+        <div class="caption(hint) italic">
+          Available in v2.0+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Typography Utilities -->
+  <div class="grid(2) gap(xl)">
+    <!-- Bold Utility -->
+    <div class="bg(white) r(2xl) p(2xl) shadow(xl) shadow(gray-200.5)">
+      <div class="hbox(start) gap(sm) mb(xl)">
+        <AlignLeft size="20" class="c(indigo-600)" />
+        <h3 class="heading(h3) c(gray-900)">Bold Utility</h3>
+      </div>
+      
+      <p class="body(base) c(gray-600) mb(xl)">
+        Fine-tune font weights independently of typography roles
+      </p>
+      
+      <div class="vbox gap(md)">
+        {#each boldWeights as weight}
+          <div 
+            class="group p(md) r(lg) hover:bg(gray-50) transition cursor-pointer"
+            on:click={() => copyCode(`bold(${weight.name})`)}
+          >
+            <div class="hbox(between) mb(xs)">
+              <code class="badge(xs/muted)">
+                bold({weight.name})
+              </code>
+              <span class="caption(xs) c(gray-500)">{weight.value}</span>
+            </div>
+            <div class="body(base) bold({weight.name}) c(gray-800)">
+              {weight.example}
             </div>
           </div>
         {/each}
       </div>
     </div>
-    
-    <!-- Text Alignment -->
-    <div class="bg(white) r(2xl) p(xl) shadow(lg) shadow(gray-200.5)">
-      <div class="hbox(start) gap(sm) mb(lg)">
-        <Minus size="16" class="c(purple-600)" />
-        <h4 class="heading(h4) c(gray-900)">Text Alignment</h4>
-      </div>
-      
-      <div class="vbox gap(md)">
-        <div class="group p(sm) r(lg) hover:bg(gray-50) transition">
-          <code class="text(xs) px(xs) py(xs) r(sm) bg(purple-100) c(purple-700) mb(xs) inline-block">
-            text(left)
-          </code>
-          <div class="text(sm) text(left) c(gray-700)">Left aligned text</div>
-        </div>
-        <div class="group p(sm) r(lg) hover:bg(gray-50) transition">
-          <code class="text(xs) px(xs) py(xs) r(sm) bg(purple-100) c(purple-700) mb(xs) inline-block">
-            text(center)
-          </code>
-          <div class="text(sm) text(center) c(gray-700)">Center aligned text</div>
-        </div>
-        <div class="group p(sm) r(lg) hover:bg(gray-50) transition">
-          <code class="text(xs) px(xs) py(xs) r(sm) bg(purple-100) c(purple-700) mb(xs) inline-block">
-            text(right)
-          </code>
-          <div class="text(sm) text(right) c(gray-700)">Right aligned text</div>
-        </div>
-      </div>
-    </div>
-    
+
     <!-- Typography Tips -->
-    <div class="bg(to-br/indigo-50..purple-50) r(2xl) p(xl) border(1px/indigo-200)">
-      <h4 class="heading(h4) c(indigo-900) mb(lg)">Typography Tips</h4>
-      <div class="vbox gap(sm) text(sm) c(indigo-800)">
-        <p>• Use <code class="bg(indigo-100) px(xs) r(sm)">heading()</code> for semantic structure</p>
-        <p>• Combine <code class="bg(indigo-100) px(xs) r(sm)">text()</code> with <code class="bg(indigo-100) px(xs) r(sm)">bold()</code> for emphasis</p>
-        <p>• <code class="bg(indigo-100) px(xs) r(sm)">text()</code> handles both sizing and alignment</p>
-        <p>• Perfect for both content and UI typography</p>
-      </div>
-    </div>
-  </div>
-
-
-  <!-- Typography in Action -->
-  <div class="bg(135deg/indigo-600..purple-600) r(2xl) p(3xl) text(center) c(white)">
-    <h3 class="heading(h1) mb(2xl)">Typography Showcase</h3>
-    
-    <!-- Heading Hierarchy Demo -->
-    <div class="bg(white.1) r(xl) p(2xl) mb(2xl) backdrop-blur(sm)">
-      <div class="vbox gap(md) text(left) max-w(3xl) mx(auto)">
-        <div class="heading(hero) c(white)">Hero Heading</div>
-        <div class="heading(display) c(white.9)">Display Title</div>
-        <div class="heading(h1) c(white.8)">Primary Heading</div>
-        <div class="heading(h2) c(white.7)">Section Heading</div>
-        <div class="text(lg) c(white.8) mt(md)">Large body text for lead paragraphs and important content that needs emphasis.</div>
-        <div class="text(base) c(white.7)">Regular body text for main content, perfectly sized for comfortable reading across all devices.</div>
-        <div class="text(sm) c(white.6)">Small text for secondary information and supporting details.</div>
-      </div>
-    </div>
-    
-    <!-- Interactive Demo -->
-    <div class="grid(2) gap(xl) max-w(4xl) mx(auto)">
-      <div class="bg(white.1) r(xl) p(xl) backdrop-blur(sm)">
-        <h4 class="heading(h3) mb(lg) c(white)">Content Typography</h4>
-        <div class="vbox gap(sm) text(left)">
-          <div class="heading(h4) bold c(white)">Article Title</div>
-          <div class="text(base) c(white.8)">Beautiful typography makes content more readable and engaging for your users.</div>
+    <div class="bg(gradient(to-br/purple-600..pink-600)) r(2xl) p(2xl) c(white)">
+      <h3 class="heading(h3) c(white) mb(xl)">Pro Tips</h3>
+      
+      <div class="vbox gap(lg)">
+        <div class="p(lg) bg(white.1) r(lg) backdrop-blur(sm)">
+          <h4 class="title(sm) c(white) mb(sm)">Semantic HTML</h4>
+          <p class="body(sm) c(white.9)">
+            Always use the appropriate HTML element. <code class="bg(white.2) px(xs) r(sm)">heading(h1)</code> should be used with <code class="bg(white.2) px(xs) r(sm)">&lt;h1&gt;</code> tags.
+          </p>
         </div>
-      </div>
-      <div class="bg(white.1) r(xl) p(xl) backdrop-blur(sm)">
-        <h4 class="heading(h3) mb(lg) c(white)">UI Typography</h4>
-        <div class="vbox gap(sm) text(left)">
-          <div class="text(sm) bold(medium) c(white)">Form Label</div>
-          <div class="text(xs) c(white.7)">Helper text for forms and interfaces</div>
+        
+        <div class="p(lg) bg(white.1) r(lg) backdrop-blur(sm)">
+          <h4 class="title(sm) c(white) mb(sm)">Combine Utilities</h4>
+          <p class="body(sm) c(white.9)">
+            Mix typography roles with other utilities: <code class="bg(white.2) px(xs) r(sm)">display(hero) gradient hover:glow</code>
+          </p>
+        </div>
+        
+        <div class="p(lg) bg(white.1) r(lg) backdrop-blur(sm)">
+          <h4 class="title(sm) c(white) mb(sm)">Responsive Typography</h4>
+          <p class="body(sm) c(white.9)">
+            Use responsive prefixes: <code class="bg(white.2) px(xs) r(sm)">display(base) md:display(lg)</code>
+          </p>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Copy Feedback -->
+  {#if copiedCode}
+    <div class="fixed bottom(20) right(20) bg(green-600) c(white) px(lg) py(md) r(lg) shadow(xl) animate(fade-in-up)">
+      Copied: {copiedCode}
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -230,35 +477,7 @@
     }
   }
   
-  @keyframes pulse {
-    0%, 100% {
-      opacity: 0.3;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.5;
-      transform: scale(1.05);
-    }
-  }
-  
   :global(.animate\(fade-in-up\)) {
-    animation: fade-in-up 0.8s ease-out;
-  }
-  
-  :global(.animate\(pulse\)) {
-    animation: pulse ease-in-out infinite;
-  }
-  
-  /* Enhanced interactive states */
-  .group:hover .heading\(hero\),
-  .group:hover .heading\(display\) {
-    transform: scale(1.02);
-    transition: transform 0.3s ease;
-  }
-  
-  /* Smooth copy feedback */
-  button:active {
-    transform: scale(0.95);
-    transition: transform 0.1s ease;
+    animation: fade-in-up 0.3s ease-out;
   }
 </style>

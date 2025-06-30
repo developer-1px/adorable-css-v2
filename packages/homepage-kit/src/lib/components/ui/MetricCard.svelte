@@ -40,7 +40,7 @@
   
   <!-- Value and change with enhanced typography -->
   <div class="vbox gap(xs) relative z(10)">
-    <p class="700 font(4xl/-2%) c(gray-900) group-hover:c(gray-950) transition-colors duration(normal)">{value}</p>
+    <p class="700 font(4xl/-2%) c(gray-900) group-hover:c(gray-900) transition-colors duration(normal)">{value}</p>
     
     <div class="hbox(center) gap(xs)">
       {#if trend !== 'neutral'}

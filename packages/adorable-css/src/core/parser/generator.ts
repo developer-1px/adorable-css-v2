@@ -72,7 +72,8 @@ const createParsedSelector = (node: any): ParsedSelector => ({
 const resolveStringRule = (
   ruleName: string, 
   args?: string, 
-  visited: Set<string> = new Set()
+  visited: Set<string> = new Set(),
+  parentSelector?: string
 ): { mainCSS: string; nestedCSS: string[]; priority?: number } => {
   // Check for circular dependencies
   const ruleKey = `${ruleName}(${args || ''})`;
@@ -139,7 +140,7 @@ const resolveStringRule = (
         }
       } else if (typeof item === 'object' && item !== null) {
         // Raw CSS object - convert directly
-        const cssResult = cssObjectToString(item as CSSRule);
+        const cssResult = cssObjectToString(item as CSSRule, parentSelector);
         allCSSResults.push({ 
           ...cssResult, 
           priority: stringRule.priority 
@@ -203,7 +204,7 @@ const generateCSSFromSelector = (selector: ParsedSelector, parentSelector?: stri
     const args = selector.type === "function" && selector.args 
       ? selector.args.join("") 
       : undefined;
-    return resolveStringRule(selector.name, args);
+    return resolveStringRule(selector.name, args, new Set(), parentSelector);
   }
   
   // Try priority-aware CSS object handler
@@ -291,8 +292,18 @@ export function generateCSSFromAdorableCSS(value: string): string {
   
   try {
     const result = parseAdorableCSS(value);
+    
+    // Check for importance marks at the end of the value
+    const importanceMatch = value.match(/(!+)$/);
+    const importanceLevel = importanceMatch ? importanceMatch[1].length : 0;
+    
     const rawSelector = "." + cssEscape(value);
     let actualSelector = rawSelector;
+    
+    // Simply add [class] at the beginning based on importance level
+    if (importanceLevel > 0) {
+      actualSelector = '[class]'.repeat(importanceLevel) + rawSelector;
+    }
 
     const allCSSResults: { mainCSS: string; nestedCSS: string[]; priority?: number }[] = [];
     let hasValidRules = false;
@@ -300,7 +311,12 @@ export function generateCSSFromAdorableCSS(value: string): string {
     result.value.forEach((v: any) => {
       if (v.combinators?.length > 0 && v.combinators[0].combinator === ":") {
         const { selector, cssResult } = handlePseudoClass(v, rawSelector);
-        actualSelector = selector;
+        // For pseudo-classes, add [class] at the beginning
+        if (importanceLevel > 0) {
+          actualSelector = '[class]'.repeat(importanceLevel) + selector;
+        } else {
+          actualSelector = selector;
+        }
         allCSSResults.push(cssResult);
         if (cssResult.mainCSS || cssResult.nestedCSS.length > 0) {
           hasValidRules = true;
@@ -345,7 +361,7 @@ export function generateCSSFromAdorableCSS(value: string): string {
       let finalSelector = actualSelector;
       
       // Boost specificity for high-priority rules to ensure they override component rules
-      if (hasHighPriorityRules) {
+      if (hasHighPriorityRules && importanceLevel === 0) {
         // Double the class selector to increase specificity without !important
         finalSelector = actualSelector + actualSelector.replace(/^\./, '.');
       }
@@ -366,6 +382,10 @@ export function generateCSSFromAdorableCSS(value: string): string {
 
 // Generate state CSS using decorator pattern
 function generateStateCSS(stateClassName: string): string {
+  // Check for importance marks at the end
+  const importanceMatch = stateClassName.match(/(!+)$/);
+  const importanceLevel = importanceMatch ? importanceMatch[1].length : 0;
+  
   const pattern = StateSelector.analyze(stateClassName);
   if (!pattern) {
     console.warn(`⚠️  AdorableCSS: Invalid state pattern "${stateClassName}"`);
@@ -405,17 +425,31 @@ function generateStateCSS(stateClassName: string): string {
     }
   });
   
-  const stateCSS = createStateCSS(cssRule, pattern, baseClassSelector);
+  // Use full class selector with importance
+  const fullClassSelector = "." + cssEscape(stateClassName);
+  const stateCSS = createStateCSS(cssRule, pattern, fullClassSelector);
   
   // Convert the state CSS object to string
   const result = cssObjectToString(stateCSS);
   
   // For state CSS, the result is in nestedCSS, not mainCSS
-  return result.nestedCSS.length > 0 ? result.nestedCSS[0] : '';
+  let stateCSSString = result.nestedCSS.length > 0 ? result.nestedCSS[0] : '';
+  
+  // Add [class] for importance
+  if (importanceLevel > 0 && stateCSSString) {
+    // Add [class] at the beginning of the selector
+    stateCSSString = stateCSSString.replace(/^(\.[^{]+)(\{)/, `${`[class]`.repeat(importanceLevel)}$1$2`);
+  }
+  
+  return stateCSSString;
 }
 
 // Generate responsive CSS using decorator pattern
 function generateResponsiveCSS(responsiveClassName: string): string {
+  // Check for importance marks at the end
+  const importanceMatch = responsiveClassName.match(/(!+)$/);
+  const importanceLevel = importanceMatch ? importanceMatch[1].length : 0;
+  
   const pattern = ResponsiveSelector.analyze(responsiveClassName);
   if (!pattern) {
     console.warn(`⚠️  AdorableCSS: Invalid responsive pattern "${responsiveClassName}"`);
@@ -460,7 +494,13 @@ function generateResponsiveCSS(responsiveClassName: string): string {
     ? `@media (max-width: ${breakpointPx})`
     : `@media (min-width: ${breakpointPx})`;
 
-  return `${mediaQuery}{${responsiveSelector}{${cssProperties}}}`;
+  // Add [class] for importance
+  let finalSelector = responsiveSelector;
+  if (importanceLevel > 0) {
+    finalSelector = '[class]'.repeat(importanceLevel) + responsiveSelector;
+  }
+
+  return `${mediaQuery}{${finalSelector}{${cssProperties}}}`;
 }
 
 export function generateCSS(classList: string[]): string {

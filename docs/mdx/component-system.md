@@ -78,7 +78,7 @@ export const btn: StringRuleHandler = (args = ''): (string | CSSRule)[] => {
       'color': 'var(--gray-50)',
       '&:hover': { 'background': 'var(--gray-800)' },
       '&:focus-visible': { 
-        'outline': '2px solid var(--gray-950)',
+        'outline': '2px solid var(--gray-900)',
         'outline-offset': '2px'
       }
     },

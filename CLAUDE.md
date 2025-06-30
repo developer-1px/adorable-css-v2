@@ -152,9 +152,9 @@ pnpm deploy:gh-pages # Build and prepare for GitHub Pages with CNAME
 ```
 
 ### Homepage Development Notes
-- The homepage uses SvelteKit 5 with MDX support via mdsvex
+- The homepage uses SvelteKit 5 with markdown-it for markdown processing
 - Base path is configured for GitHub Pages (`/adorable-css-v2` in production)
-- MDX files can be imported directly as Svelte components
+- Markdown files are processed with syntax highlighting via highlight.js
 - Vite aliases: `adorable-css` → core package, `@` → src directory
 
 ### Release Management
@@ -231,7 +231,7 @@ pnpm clean           # Clean all build artifacts and caches
 - **Documentation Site**: Vite + SvelteKit 5
 - **TypeScript**: v5.8.3 with ES2020 target
 - **Package Manager**: pnpm@10.8.0 (locked version)
-- **MDX Support**: mdsvex for .svx, .md, .mdx files with syntax highlighting
+- **Markdown Support**: markdown-it for .md files with highlight.js syntax highlighting
 
 ## Core APIs
 

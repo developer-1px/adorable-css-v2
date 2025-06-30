@@ -1,6 +1,6 @@
 import type { CSSRule, RuleHandler } from '../types';
 import { px, percentToEm, makeNumber, cssvar, makeClamp, makeRangeClamp, pxWithClamp } from '../../core/values/makeValue';
-import { isToken, getTokenVar } from '../../design-system/tokens/index';
+import { isToken, getTokenVar, defaultTokens } from '../../design-system/tokens/index';
 
 export const font: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
@@ -12,8 +12,10 @@ export const font: RuleHandler = (args?: string): CSSRule => {
   }
   
   // Check if it's a single token value (e.g., font(sm), font(lg))
-  if (isToken(args, 'font')) {
-    return { 'font-size': getTokenVar('font', args) };
+  // Handle 'base' as alias for 'md'
+  const tokenName = args === 'base' ? 'md' : args;
+  if (isToken(tokenName, 'font')) {
+    return { 'font-size': getTokenVar('font', tokenName) };
   }
   
   const parts = args.split('/');
@@ -28,6 +30,64 @@ export const font: RuleHandler = (args?: string): CSSRule => {
       if (fontFamilyKeywords.includes(part)) {
         const familyResult = fontFamily(part);
         Object.assign(result, familyResult);
+        return;
+      }
+      
+      // Handle fluid syntax: font(..5xl) - scale up to 5xl
+      if (part.startsWith('..') && part.length > 2) {
+        let maxToken = part.slice(2);
+        // Handle 'base' as alias for 'md'
+        if (maxToken === 'base') maxToken = 'md';
+        if (isToken(maxToken, 'font')) {
+          // Get the actual token value to calculate min and vw
+          const tokenValue = defaultTokens.font[maxToken as keyof typeof defaultTokens.font];
+          const maxValue = parseFloat(tokenValue);
+          if (!isNaN(maxValue)) {
+            const minValue = Number((maxValue * 0.8).toFixed(3));
+            const vwValue = Number((maxValue * 1.6).toFixed(2));
+            result['font-size'] = `clamp(${minValue}rem, ${vwValue}vw, var(--font-${maxToken}))`;
+          } else {
+            // Fallback if we can't parse the token value
+            result['font-size'] = `clamp(0.8rem, 2vw, var(--font-${maxToken}))`;
+          }
+        } else {
+          // For non-token values
+          const maxValue = parseFloat(part.slice(2));
+          if (!isNaN(maxValue)) {
+            const minValue = Number((maxValue * 0.8).toFixed(3));
+            const vwValue = Number((maxValue * 1.6).toFixed(2));
+            result['font-size'] = `clamp(${minValue}rem, ${vwValue}vw, ${maxValue}rem)`;
+          }
+        }
+        return;
+      }
+      
+      // Handle fluid syntax: font(3xl..) - scale from 3xl up
+      if (part.endsWith('..') && part.length > 2) {
+        let minToken = part.slice(0, -2);
+        // Handle 'base' as alias for 'md'
+        if (minToken === 'base') minToken = 'md';
+        if (isToken(minToken, 'font')) {
+          // Get the actual token value to calculate max and vw
+          const tokenValue = defaultTokens.font[minToken as keyof typeof defaultTokens.font];
+          const minValue = parseFloat(tokenValue);
+          if (!isNaN(minValue)) {
+            const maxValue = Number((minValue * 1.5).toFixed(3));
+            const vwValue = Number((maxValue * 1.2).toFixed(2));
+            result['font-size'] = `clamp(var(--font-${minToken}), ${vwValue}vw, ${maxValue}rem)`;
+          } else {
+            // Fallback if we can't parse the token value
+            result['font-size'] = `clamp(var(--font-${minToken}), 2vw, 2rem)`;
+          }
+        } else {
+          // For non-token values
+          const minValue = parseFloat(part.slice(0, -2));
+          if (!isNaN(minValue)) {
+            const maxValue = Number((minValue * 1.5).toFixed(3));
+            const vwValue = Number((maxValue * 1.2).toFixed(2));
+            result['font-size'] = `clamp(${minValue}rem, ${vwValue}vw, ${maxValue}rem)`;
+          }
+        }
         return;
       }
       
