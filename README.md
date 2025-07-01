@@ -1,265 +1,318 @@
 # AdorableCSS v2
 
-> 🚀 The Next Evolution of Utility-First CSS Framework
-> 
-> **Built with [Claude Code](https://claude.ai/code)** 🤖
+**Figma와 코드의 완벽한 동기화를 위한 차세대 CSS 프레임워크**
 
-[![npm version](https://img.shields.io/npm/v/adorable-css.svg)](https://www.npmjs.com/package/adorable-css)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-## 🎯 왜 v2를 만들었나요?
-
-AdorableCSS v1이 혁신적인 함수형 문법과 직관적인 API로 많은 사랑을 받았지만, 1년간의 실제 사용 경험을 통해 더 나은 프레임워크를 만들 수 있다는 확신을 얻었습니다.
-
-### v1의 한계
-- 복잡한 상태 관리와 우선순위 시스템
-- 제한적인 컴포넌트 지원
-- 일관성 없는 색상 시스템
-- 확장성의 한계
-
-### v2의 혁신
-- 🎨 **6-Role Typography System** - 목적에 맞는 타이포그래피 체계
-- 🌈 **OKLCH Color System** - 지각적으로 균일한 색상 공간
-- 🧩 **Component-First Architecture** - 재사용 가능한 컴포넌트 시스템
-- ⚡️ **Enhanced Parser** - 더 강력하고 유연한 파서
-- 🎯 **Figma Integration** - 디자인 도구와의 완벽한 연동
-
-## ✨ What's New in v2
-
-### 1. **Typography Revolution**
-```html
-<!-- v1: 단순한 유틸리티 -->
-<h1 class="font(32) bold">Title</h1>
-
-<!-- v2: 역할 기반 타이포그래피 -->
-<h1 class="display(hero) gradient">Hero Title</h1>
-<h2 class="heading(h2)">Section Title</h2>
-<h3 class="title(card)">Card Title</h3>
-<p class="body(prose)">Long readable content...</p>
-<label class="label(input) required">Email</label>
-<span class="caption(form) error">Invalid email</span>
-```
-
-### 2. **OKLCH Color System**
-```css
-/* v1: 기본 색상 */
-c(blue) bg(red/50%)
-
-/* v2: OKLCH 기반 정확한 색상 */
-c(blue-500) bg(purple-500.8)
-bg(135deg/purple-500..pink-500)
-c(oklch(70%_0.25_270))
-```
-
-### 3. **Component System**
-```html
-<!-- v2: 내장 컴포넌트 -->
-<button class="btn(lg/primary)">Click me</button>
-<div class="card(elevated) hover:glow">
-  <h3 class="card-title">Product</h3>
+<div align="center">
+  <img src="https://raw.githubusercontent.com/adorablecss/adorable-css/main/logo.svg" alt="AdorableCSS Logo" width="200" />
+  
+  [![npm version](https://img.shields.io/npm/v/adorable-css.svg)](https://www.npmjs.com/package/adorable-css)
+  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+  [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 </div>
-<span class="badge(sm/success)">NEW</span>
-```
 
-### 4. **Enhanced Layout System**
-```css
-/* Figma-inspired layout */
-hbox(center) vbox(between)
-layer(center) layer(top:20+left:30)
-size(16:9) size(320x200)
+## 🎯 AdorableCSS란?
 
-/* New position syntax */
-absolute(center,center)
-fixed(right-20,top-20)
-```
+AdorableCSS는 **Figma-First CSS**를 지향하는 CSS 프레임워크입니다. Figma 디자인과 웹 코드 간의 완벽한 양방향 동기화와 디자인 시스템의 일관성을 코드 레벨에서 보장합니다.
 
-### 5. **Smart Value System**
-```css
-/* Mathematical expressions */
-w(100%-20) h(100vh-header)
-p(xs+4) m(lg*2)
-
-/* Fluid typography */
-font(sm..lg) font(1rem..2rem)
-
-/* Container queries */
-@container:w(full) @sm:p(20)
-```
-
-### 6. **CSS Priority Architecture**
-```css
-/* Importance levels */
-p(20)!   /* [class] selector */
-p(20)!!  /* [class][class] selector */
-p(20)!!! /* [class][class][class] selector */
-```
-
-## Core Philosophy
-
-AdorableCSS v2 is built on a simple principle: **Your CSS should match your design tool's mental model**. 
+### 핵심 철학
 
 ```css
-/* Traditional CSS */
-.card {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 24px;
-  width: 100%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-}
+/* 🎨 Figma에서 디자인한 그대로 */
+hbox(center) gap(16) p(24) r(12) bg(white) shadow(md)
 
-/* AdorableCSS - Think like Figma */
-<div class="vbox gap(16) p(24) w(fill) bg(purple-500..pink-500/135deg)">
+/* 🔄 코드에서 수정하면 Figma에 반영 */
+/* 🚀 디자인 토큰 자동 동기화 */
 ```
 
-## 🚀 Quick Start
+## ✨ 왜 AdorableCSS인가?
+
+### 1. **Figma 네이티브 문법**
+```css
+/* Figma Auto Layout 그대로 */
+hbox(between+middle)  /* 수평 정렬, 양끝 정렬 + 중앙 정렬 */
+vbox(center+fill)     /* 수직 정렬, 중앙 정렬 + 전체 너비 */
+
+/* Figma 크기 옵션 그대로 */
+w(fill)   /* Fill container */
+w(hug)    /* Hug contents */
+w(320)    /* Fixed width */
+```
+
+### 2. **포괄적인 디자인 토큰 시스템**
+```css
+/* 15개 토큰 카테고리 - 모든 디자인 결정을 커버 */
+p(lg)        → 16px    /* spacing 토큰 */
+size(lg)     → 48px    /* size 토큰 */
+w(lg)        → 512px   /* width 토큰 */
+shadow(lg)   → 깊은 그림자
+r(lg)        → 12px 라운드
+```
+
+### 3. **타입 세이프 & 자동 완성**
+```typescript
+// TypeScript 완벽 지원
+<div className={css`
+  ${hbox('center')}     // ✅ 자동 완성
+  ${p('lg')}            // ✅ 타입 체크
+  ${bg('primary')}      // ✅ 토큰 검증
+`} />
+```
+
+### 4. **제로 런타임 오버헤드**
+- 빌드 타임에 순수 CSS로 변환
+- 불필요한 JavaScript 없음
+- 초경량 번들 사이즈
+
+## 🚀 빠른 시작
+
+### 설치
 
 ```bash
-# Install
-npm install adorable-css@next
+# npm
+npm install adorable-css
 
-# Or use CDN
-<script src="https://unpkg.com/adorable-css@next"></script>
+# yarn  
+yarn add adorable-css
+
+# pnpm
+pnpm add adorable-css
 ```
 
+### 기본 사용법
+
 ```html
-<!-- Modern Component Example -->
-<div class="vbox gap(xl) p(2xl) bg(white) r(2xl) shadow(xl)">
-  <h2 class="display(sm) gradient">Welcome to v2</h2>
-  <p class="body(lg) c(gray-700) max-w(prose)">
-    Experience the next generation of utility-first CSS
-  </p>
-  <button class="btn(lg/primary) hover:scale(105) active:scale(95)">
-    Get Started →
-  </button>
+<!-- CDN -->
+<link rel="stylesheet" href="https://unpkg.com/adorable-css/dist/adorable.css">
+
+<!-- HTML에서 바로 사용 -->
+<div class="hbox(center) gap(16) p(24) r(12) bg(white) shadow(md)">
+  <img class="size(48) r(full)" src="avatar.jpg" />
+  <div class="vbox gap(4)">
+    <h3 class="font(title/lg) c(gray-900)">김철수</h3>
+    <p class="font(body/sm) c(gray-600)">프론트엔드 개발자</p>
+  </div>
 </div>
 ```
 
-## 📚 Core Concepts
+### React/Next.js
 
-### Design Principles
-1. **Predictability** - 예측 가능한 문법
-2. **Composability** - 자유로운 조합
-3. **Performance** - 최적화된 번들
-4. **Developer Experience** - 뛰어난 개발 경험
+```jsx
+import 'adorable-css'
 
-### Architecture
+function Card({ title, description }) {
+  return (
+    <div className="vbox w(fill) p(xl) r(lg) bg(white) shadow(md) gap(lg)">
+      <h3 className="font(title/lg) c(gray-900)">{title}</h3>
+      <p className="font(body/base) c(gray-600)">{description}</p>
+      <button className="hbox(center) h(md) px(lg) r(md) bg(primary) c(white) hover:bg(primary-600)">
+        자세히 보기
+      </button>
+    </div>
+  )
+}
 ```
-adorable-css-v2/
-├── packages/
-│   ├── adorable-css/          # Core framework
-│   ├── adorable-css-cdn/      # Browser distribution
-│   └── homepage-kit/          # Documentation site
-├── docs/                      # Documentation
-└── examples/                  # Example projects
+
+## 📚 핵심 기능
+
+### 레이아웃 - Figma Auto Layout
+
+```css
+/* Flexbox 레이아웃 */
+hbox              /* 수평 배치 */
+vbox              /* 수직 배치 */
+hbox(center)      /* 중앙 정렬 */
+vbox(between)     /* 양끝 정렬 */
+
+/* 간격 */
+gap(16)           /* 아이템 간격 */
+gap(16/24)        /* 행/열 간격 다르게 */
 ```
 
-## 🤝 Built with Claude Code
+### 크기 - Figma 크기 모드
 
-이 프로젝트는 [Claude Code](https://claude.ai/code)와 함께 개발되었습니다. AI와 인간이 협업하여 만든 차세대 CSS 프레임워크입니다.
+```css
+/* 너비 */
+w(fill)           /* 컨테이너 채우기 */
+w(hug)            /* 콘텐츠에 맞추기 */
+w(320)            /* 고정 너비 */
+w(sm)             /* 토큰 사용 */
 
-### Development Process
-- 📝 요구사항 정의와 설계 논의
-- 🤖 Claude Code의 구현 제안
-- 👨‍💻 개발자의 피드백과 개선
-- 🔄 반복적인 개선 과정
-- ✅ 실시간 테스트와 검증
+/* 제약 조건 */
+w(320..)          /* 최소 너비 */
+w(..768)          /* 최대 너비 */
+w(320..768)       /* 최소-최대 */
+```
 
-## 🛠️ Migration from v1
+### 타이포그래피 - 역할 기반 시스템
+
+```css
+/* 6가지 타이포그래피 역할 */
+font(display/lg)  /* 디스플레이 텍스트 */
+font(heading/h2)  /* 제목 */
+font(title/lg)    /* UI 타이틀 */
+font(body/base)   /* 본문 */
+font(label/sm)    /* 레이블 */
+font(caption/xs)  /* 캡션 */
+
+/* 통합 문법 */
+font(lg/1.5/-2%)  /* 크기/행간/자간 */
+```
+
+### 색상 - OKLCH 기반
+
+```css
+/* 색상 팔레트 */
+c(gray-900)       /* 텍스트 색상 */
+bg(primary)       /* 배경색 */
+border(gray-200)  /* 테두리 색상 */
+
+/* 투명도 */
+c(black.5)        /* 50% 투명도 */
+bg(white.8)       /* 80% 투명도 */
+
+/* 그라디언트 */
+bg(primary..accent/45deg)
+```
+
+### 효과
+
+```css
+/* 그림자 */
+shadow(sm)        /* 작은 그림자 */
+shadow(md)        /* 중간 그림자 */
+shadow(lg)        /* 큰 그림자 */
+
+/* 라운드 */
+r(8)              /* 8px 라운드 */
+r(lg)             /* 토큰 사용 */
+r(full)           /* 완전히 둥글게 */
+
+/* 기타 효과 */
+blur(8)           /* 블러 효과 */
+opacity(50)       /* 투명도 */
+```
+
+### 반응형 디자인
+
+```css
+/* 브레이크포인트 접두사 */
+md:w(768)         /* 태블릿 이상 */
+lg:grid(3)        /* 데스크톱 이상 */
+xl:p(48)          /* 와이드 스크린 */
+
+/* 모바일 우선 */
+w(full) md:w(768) lg:w(1024)
+```
+
+### 상태 관리
+
+```css
+/* 의사 클래스 */
+hover:bg(gray-100)
+focus:ring(2/primary)
+active:scale(0.95)
+
+/* 다크 모드 */
+dark:bg(gray-900)
+dark:c(white)
+```
+
+## 🎨 실제 사용 예제
+
+### 카드 컴포넌트
+
+```html
+<article class="vbox w(fill) bg(white) r(xl) shadow(lg) overflow(hidden)">
+  <img class="w(fill) h(200) object(cover)" src="..." />
+  <div class="vbox p(xl) gap(md)">
+    <h3 class="font(title/lg) c(gray-900)">카드 제목</h3>
+    <p class="font(body/base) c(gray-600) line-clamp(3)">
+      카드 설명 텍스트가 들어갑니다...
+    </p>
+    <button class="hbox(center) w(fit) px(lg) py(sm) r(md) bg(primary) c(white) hover:bg(primary-600) transition">
+      더보기
+    </button>
+  </div>
+</article>
+```
+
+### 네비게이션 바
+
+```html
+<nav class="hbox(between+middle) w(fill) h(64) px(xl) bg(white) shadow(sm)">
+  <a class="font(title/lg) c(gray-900) bold">로고</a>
+  <ul class="hbox gap(xl) hidden md:flex">
+    <li><a class="c(gray-600) hover:c(primary) transition">홈</a></li>
+    <li><a class="c(gray-600) hover:c(primary) transition">소개</a></li>
+    <li><a class="c(gray-600) hover:c(primary) transition">문의</a></li>
+  </ul>
+  <button class="size(40) r(md) bg(primary) c(white)">
+    시작하기
+  </button>
+</nav>
+```
+
+## 🛠 고급 기능
+
+### 커스텀 토큰 정의
 
 ```javascript
-// v1 → v2 Migration Guide
-const migrations = {
-  // Typography
-  'font(32) bold': 'heading(h1)',
-  'text(16)': 'body(base)',
-  
-  // Colors
-  'c(blue)': 'c(blue-500)',
-  'bg(red/50%)': 'bg(red-500.5)',
-  
-  // Layout
-  'flex': 'hbox()',
-  'flex-col': 'vbox()',
-}
+import { defineTokens } from 'adorable-css'
+
+defineTokens({
+  colors: {
+    brand: '#FF6B6B',
+    'brand-dark': '#FF5252'
+  },
+  spacing: {
+    'section': '80px'
+  }
+})
 ```
 
-자세한 마이그레이션 가이드는 [문서](https://adorablecss.github.io/v2/migration)를 참조하세요.
+### 플러그인 시스템
 
-## 📚 Documentation
+```javascript
+import { addPlugin } from 'adorable-css'
 
-### Core Documentation
-- **[Documentation Index](./docs/INDEX.md)** - 전체 문서 구조와 가이드
-- **[API Reference](./docs/REFERENCE.md)** - 완전한 유틸리티 클래스 레퍼런스
-- **[Product Strategy](./docs/PRODUCT_STRATEGY.md)** - 제품 비전과 로드맵
-
-### Key Documents
-- **[Core Concepts](./docs/technical/CORE_CONCEPTS_VISUAL.md)** - Figma-first 핵심 개념
-- **[Brand Design](./docs/brand/BRAND_DESIGN_CONCEPT.md)** - 브랜드 철학과 디자인 언어
-- **[Syntax Updates](./docs/technical/SYNTAX_UPDATES.md)** - 최신 문법 변경사항
-
-### Online Resources
-Visit [adorablecss.com](https://adorablecss.com) for:
-- Interactive playground
-- Migration guides  
-- Video tutorials
-
-## Development
-
-```bash
-# Clone repository
-git clone https://github.com/developer-1px/adorable-css-v2
-
-# Install dependencies (pnpm required)
-pnpm install
-
-# Start development
-pnpm dev:homepage
-
-# Run tests
-pnpm test
-
-# Build for production
-pnpm build
+addPlugin({
+  name: 'glassmorphism',
+  rules: {
+    glass: (value) => ({
+      background: 'rgba(255, 255, 255, 0.1)',
+      backdropFilter: 'blur(10px)',
+      border: '1px solid rgba(255, 255, 255, 0.2)'
+    })
+  }
+})
 ```
 
-## Why AdorableCSS v2?
+## 📖 전체 문서
 
-1. **Design-Development Unity**: Same mental model as Figma
-2. **No Learning Curve**: If you know Figma, you know AdorableCSS
-3. **Performance**: 12KB typical production bundle
-4. **Type Safety**: Full TypeScript support with IntelliSense
-5. **Framework Agnostic**: Works with React, Vue, Svelte, or vanilla HTML
+상세한 문서는 [adorablecss.com](https://adorablecss.com)에서 확인하세요:
 
-## 🌟 Showcase
+- [시작하기](https://adorablecss.com/docs/getting-started)
+- [레이아웃 시스템](https://adorablecss.com/docs/layout)
+- [타이포그래피](https://adorablecss.com/docs/typography)
+- [디자인 토큰](https://adorablecss.com/docs/tokens)
+- [Figma 플러그인](https://adorablecss.com/docs/figma-plugin)
 
-v2를 사용하는 프로젝트들:
-- 🎨 Design System Templates
-- 📱 Mobile-First Components
-- 🖥️ Dashboard Layouts
-- 🛍️ E-commerce UI Kit
+## 🤝 기여하기
 
-## 🤝 Contributing
+AdorableCSS는 오픈소스 프로젝트입니다. 기여를 환영합니다!
 
-AdorableCSS v2는 오픈소스 프로젝트입니다. 기여를 환영합니다!
+1. 이슈를 생성하여 아이디어를 공유하세요
+2. PR을 제출하여 개선사항을 제안하세요
+3. 문서 개선에 참여하세요
+4. 버그를 발견하면 제보해주세요
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for development setup and guidelines.
+## 📄 라이선스
 
-## 📄 License
-
-MIT License - see [LICENSE](LICENSE) for details.
-
-## 🔗 Links
-
-- [Documentation](https://adorablecss.github.io/v2)
-- [Playground](https://adorablecss.github.io/v2/playground)
-- [GitHub](https://github.com/developer-1px/adorable-css-v2)
-- [v1 Repository](https://github.com/developer-1px/adorable-css)
+MIT License - 자유롭게 사용하세요!
 
 ---
 
 <div align="center">
-  <p>Made with ❤️ by <a href="https://github.com/developer-1px">developer-1px</a></p>
-  <p>🤖 Powered by <a href="https://claude.ai/code">Claude Code</a></p>
+  <strong>Figma와 코드의 간극을 없애는 AdorableCSS v2</strong><br>
+  디자인 시스템의 새로운 패러다임을 경험하세요
 </div>
