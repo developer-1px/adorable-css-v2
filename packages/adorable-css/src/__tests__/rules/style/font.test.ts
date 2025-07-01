@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { font } from './font';
+import { font } from '../../../rules/style/font';
 
 describe('font', () => {
   it('should handle font size only', () => {

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { bold } from './bold';
+import { bold } from '../../../rules/style/bold';
 
 describe('bold', () => {
   it('should handle numeric font weights', () => {

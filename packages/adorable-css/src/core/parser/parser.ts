@@ -1,5 +1,6 @@
 // 파서 함수
 import { createParser, createTokenizer } from "./parser-utils";
+import { createMemo } from "../utils/memo";
 
 const tokenize = createTokenizer([
   ["(ws)", /(\s+)/],
@@ -7,21 +8,14 @@ const tokenize = createTokenizer([
   ["(dimension-pair)", /((?:[0-9]*\.[0-9]+|[0-9]+)[%a-z]*x(?:[0-9]*\.[0-9]+|[0-9]+)[%a-z]*)/], // matches 64x64, 100%x50px, etc
   ["(dimension)", /((?:[0-9]*\.[0-9]+|[0-9]+)[%a-z]*)/],
   ["(string)", /('(?:[^']|\\')*'|"(?:[^"]|\\")*")/],
-  ["(color)", /([a-zA-Z]+\.[0-9]+)/], // matches white.8, black.2, etc
+  ["(color-opacity)", /([a-zA-Z]+(?:-[0-9]+)*\.[0-9]+)/], // matches white.8, yellow-200.5
   ["(ident)", /(-*[_a-zA-Z\u00A0-\uFFFF][_a-zA-Z0-9\u00A0-\uFFFF-]*)/],
   ["(range)", /(\.\.\.|\.\.)/],
   ["(operator)", /(!important|::|>>|[-+~|*/%!#@?&:;.,<>=[\](){}])/],
   ["(unknown)", /./],
 ]);
 
-// Simple cache for parser
-const parserCache = new Map<string, any>();
-
-export function parseAdorableCSS(input: string) {
-  // Check cache first
-  if (parserCache.has(input)) {
-    return parserCache.get(input);
-  }
+function _parseAdorableCSS(input: string) {
   const tokens = tokenize(input);
 
   const { options, consume, many, many1, many_sep, many1_sep, optional, eof } =
@@ -265,6 +259,14 @@ export function parseAdorableCSS(input: string) {
     };
   }
 
+  function ColorValue(): any {
+    return options(
+      () => consume("(hexcolor)"),      // #fff, #000000
+      () => consume("(color-opacity)"), // white.8, yellow-200.5
+      () => consume("(ident)")          // blue-500, primary, etc
+    );
+  }
+
   function Term(): any {
     return options(
       () => CSSFunc(),
@@ -277,10 +279,8 @@ export function parseAdorableCSS(input: string) {
         };
       },
       () => consume("(dimension-pair)"),
-      () => consume("(hexcolor)"),
-      () => consume("(color)"),
-      () => consume("(string)"),
-      () => consume("(ident)")
+      () => ColorValue(),  // All color-related parsing in one place
+      () => consume("(string)")
     );
   }
 
@@ -354,20 +354,11 @@ export function parseAdorableCSS(input: string) {
   try {
     const r = SelectorList();
     eof(r);
-    
-    // Cache the result
-    parserCache.set(input, r);
-    
-    // Limit cache size to prevent memory issues
-    if (parserCache.size > 5000) {
-      const firstKey = parserCache.keys().next().value;
-      if (firstKey) {
-        parserCache.delete(firstKey);
-      }
-    }
-    
     return r;
   } catch (e) {
     throw e;
   }
 }
+
+// Export memoized version
+export const parseAdorableCSS = createMemo(_parseAdorableCSS);

@@ -1,182 +1,66 @@
 import type { CSSRule, KeywordRuleHandler, RuleHandler } from '../types';
 
-// Layout configuration from v1
-const LAYOUT_MAP = {
-  row: {
-    aligns: {
-      top: 'flex-start',
-      middle: 'center',
-      pack: 'center',
-      bottom: 'flex-end',
-      fill: 'stretch',
-    },
-    justify: {
-      'left': 'flex-start',
-      'left+reverse': 'flex-end',
-      'right': 'flex-end',
-      'right+reverse': 'flex-start',
-      'center': 'center',
-      'center+reverse': 'center',
-      'pack': 'center',
-      'pack+reverse': 'center',
-      'between': 'space-between',
-      'between+reverse': 'space-between',
-    },
-    defaultAlign: 'middle',
-  },
-  column: {
-    aligns: {
-      left: 'flex-start',
-      center: 'center',
-      pack: 'center',
-      right: 'flex-end',
-      fill: 'stretch',
-    },
-    justify: {
-      'top': 'flex-start',
-      'top+reverse': 'flex-end',
-      'bottom': 'flex-end',
-      'bottom+reverse': 'flex-start',
-      'middle': 'center',
-      'middle+reverse': 'center',
-      'pack': 'center',
-      'pack+reverse': 'center',
-    },
-    defaultAlign: 'fill',
-  },
-} as const;
-
-type BaseDirection = keyof typeof LAYOUT_MAP;
-
-function makeBoxAligns(direction: BaseDirection, value = ''): CSSRule {
-  const values = value.split(/[+/|]/);
-  const layout = LAYOUT_MAP[direction];
-  const hasReverse = values.includes('reverse');
-  
-  const result: CSSRule = {
-    'display': 'flex',
-    'flex-flow': hasReverse ? `${direction}-reverse` : direction,
-    // Add default flex properties for child elements
-    'where(&>*)': {
-      'flex': '0 0 auto'
-    }
-  };
-  
-  // Handle align-items
-  const alignValue = values.find((v) => v in layout.aligns) || layout.defaultAlign;
-  result['align-items'] = layout.aligns[alignValue as keyof typeof layout.aligns];
-  
-  // Handle justify-content
-  const justifyKey = values.find((v) => v in layout.justify) as keyof typeof layout.justify | undefined;
-  if (justifyKey) {
-    const justifyWithReverse = hasReverse ? (`${justifyKey}+reverse` as const) : justifyKey;
-    if (justifyWithReverse in layout.justify) {
-      result['justify-content'] = layout.justify[justifyWithReverse as keyof typeof layout.justify];
-    }
-  }
-  
-  // Handle wrap
-  if (values.includes('wrap')) {
-    result['flex-wrap'] = 'wrap';
-  }
-  
-  return result;
-}
-
-// Basic display utilities
+// Simple display utilities
 export const block: KeywordRuleHandler = () => ({ display: 'block' });
 export const inline: KeywordRuleHandler = () => ({ display: 'inline' });
 export const inlineBlock: KeywordRuleHandler = () => ({ display: 'inline-block' });
+export const inlineFlex: KeywordRuleHandler = () => ({ display: 'inline-flex' });
 export const none: KeywordRuleHandler = () => ({ display: 'none' });
+export const hidden = none;
 export const grid: KeywordRuleHandler = () => ({ display: 'grid' });
 
-// Flexbox utilities with v1 logic
-export const hbox: RuleHandler = (value = '') => {
-  return makeBoxAligns('row', value);
+// Flexbox utilities
+const flexbox = (dir: string, align?: string, justify?: string): CSSRule => ({
+  display: 'flex',
+  'flex-direction': dir,
+  ...(align && { 'align-items': align }),
+  ...(justify && { 'justify-content': justify })
+});
+
+const parseAlign = (v: string) => ({ 
+  top: 'flex-start', middle: 'center', bottom: 'flex-end', fill: 'stretch',
+  left: 'flex-start', center: 'center', right: 'flex-end'
+}[v] || v);
+
+const parseJustify = (v: string) => ({
+  left: 'flex-start', right: 'flex-end', center: 'center',
+  between: 'space-between', around: 'space-around', evenly: 'space-evenly'
+}[v] || v);
+
+export const hbox: RuleHandler = (v = '') => {
+  const vals = v.split(/[+/]/);
+  const align = vals.find(x => ['top', 'middle', 'bottom', 'fill'].includes(x));
+  const justify = vals.find(x => ['left', 'right', 'center', 'between', 'around', 'evenly'].includes(x));
+  return {
+    ...flexbox('row', align ? parseAlign(align) : 'center', justify ? parseJustify(justify) : undefined),
+    ...(vals.includes('wrap') && { 'flex-wrap': 'wrap' }),
+    ...(vals.includes('reverse') && { 'flex-direction': 'row-reverse' })
+  };
 };
 
-export const vbox: RuleHandler = (value = '') => {
-  return makeBoxAligns('column', value);
+export const vbox: RuleHandler = (v = '') => {
+  const vals = v.split(/[+/]/);
+  const align = vals.find(x => ['left', 'center', 'right', 'fill'].includes(x));
+  const justify = vals.find(x => ['top', 'middle', 'bottom'].includes(x));
+  return {
+    ...flexbox('column', align ? parseAlign(align) : 'stretch', justify ? parseAlign(justify) : undefined),
+    ...(vals.includes('wrap') && { 'flex-wrap': 'wrap' }),
+    ...(vals.includes('reverse') && { 'flex-direction': 'column-reverse' })
+  };
 };
 
-export const wrap: RuleHandler = (value = '') => {
-  const result = makeBoxAligns('row', value);
-  result['flex-wrap'] = 'wrap';
-  return result;
-};
+export const wrap = hbox;
+export const pack: KeywordRuleHandler = () => flexbox('row', 'center', 'center');
 
-export const pack: KeywordRuleHandler = () => {
-  return makeBoxAligns('row', 'center+middle');
-};
-
-// Additional flex utilities
-export const inlineFlex: KeywordRuleHandler = () => ({ display: 'inline-flex' });
-export const flex: RuleHandler = (value?: string): CSSRule => {
-  if (!value) return { flex: '1 1 0%' };
-  return { flex: value };
-};
+export const flex: RuleHandler = (v?: string): CSSRule => v ? { flex: v } : { flex: '1 1 0%' };
 export const flexWrap: KeywordRuleHandler = () => ({ 'flex-wrap': 'wrap' });
-
-// Standalone flexbox alignment utilities
-export const items: RuleHandler = (value?: string): CSSRule => {
-  if (!value) return {};
-  
-  const alignMap: Record<string, string> = {
-    start: 'flex-start',
-    end: 'flex-end',
-    center: 'center',
-    baseline: 'baseline',
-    stretch: 'stretch'
-  };
-  
-  return { 'align-items': alignMap[value] || value };
-};
-
-export const justify: RuleHandler = (value?: string): CSSRule => {
-  if (!value) return {};
-  
-  const justifyMap: Record<string, string> = {
-    start: 'flex-start',
-    end: 'flex-end',
-    center: 'center',
-    between: 'space-between',
-    around: 'space-around',
-    evenly: 'space-evenly'
-  };
-  
-  return { 'justify-content': justifyMap[value] || value };
-};
-
-// Flex grow/shrink
-export const shrink: RuleHandler = (value?: string): CSSRule => {
-  if (!value) return {};
-  return { 'flex-shrink': value };
-};
-
-export const grow: RuleHandler = (value?: string): CSSRule => {
-  if (!value) return {};
-  return { 'flex-grow': value };
-};
-
-// Convenience aliases
-export const hidden: KeywordRuleHandler = () => ({ display: 'none' });
+export const items: RuleHandler = (v?: string): CSSRule => v ? { 'align-items': parseAlign(v) } : {};
+export const justify: RuleHandler = (v?: string): CSSRule => v ? { 'justify-content': parseJustify(v) } : {};
+export const shrink: RuleHandler = (v?: string): CSSRule => v ? { 'flex-shrink': v } : {};
+export const grow: RuleHandler = (v?: string): CSSRule => v ? { 'flex-grow': v } : {};
 
 export const displayRules = {
-  block,
-  inline,
-  'inline-block': inlineBlock,
-  'inline-flex': inlineFlex,
-  none,
-  hidden,
-  grid,
-  hbox,
-  vbox,
-  wrap,
-  pack,
-  flex,
-  'flex-wrap': flexWrap,
-  items,
-  justify,
-  shrink,
-  grow
+  block, inline, 'inline-block': inlineBlock, 'inline-flex': inlineFlex,
+  none, hidden, grid, hbox, vbox, wrap, pack,
+  flex, 'flex-wrap': flexWrap, items, justify, shrink, grow
 };

@@ -14,15 +14,11 @@ import {
 import { generateTokenCSS, defaultTokens, setTokenContext } from '../../design-system/tokens/index';
 import type { DesignTokens } from '../../design-system/tokens/index';
 import { createParsedSelector } from '../generators/ast-helpers';
-import { CacheManager } from '../generators/cache-manager';
-import { CSSMinifier } from '../generators/css-minifier';
 import { AnimationHandler } from '../generators/animation-handler';
 import { cssObjectToString } from '../generators/css-object-generator';
 import { createMediaQuery } from '../generators/breakpoints';
 import { extractImportanceLevel, addImportanceToSelector } from '../generators/importance-utils';
-
-// Cache for CSS generation
-const cssGeneratorCache = new CacheManager<string, string>(10000);
+import { createMemo } from '../utils/memo';
 
 // Extract CSS properties from generated CSS string
 export const extractCSSProperties = (baseCSS: string, className: string): string | null => {
@@ -309,20 +305,8 @@ function _generateCSSFromAdorableCSS(value: string): string {
   }
 }
 
-// Export with simple caching
-export function generateCSSFromAdorableCSS(value: string): string {
-  // Check cache first
-  if (cssGeneratorCache.has(value)) {
-    return cssGeneratorCache.get(value)!;
-  }
-  
-  const result = _generateCSSFromAdorableCSS(value);
-  
-  // Cache the result (size limiting is handled by CacheManager)
-  cssGeneratorCache.set(value, result);
-  
-  return result;
-}
+// Export memoized version
+export const generateCSSFromAdorableCSS = createMemo(_generateCSSFromAdorableCSS);
 
 // Generate state CSS using decorator pattern
 function generateStateCSS(stateClassName: string): string {
@@ -417,7 +401,7 @@ function _generateCSS(classList: string[]): string {
   return AnimationHandler.prependKeyframesIfNeeded(cssRules, uniqueClasses);
 }
 
-// Export generateCSS
+// Export directly (array input, not suitable for simple memo)
 export const generateCSS = _generateCSS;
 
 /**
@@ -426,7 +410,6 @@ export const generateCSS = _generateCSS;
 export interface GenerateCSSOptions {
   includeTokens?: boolean;
   tokens?: DesignTokens;
-  minify?: boolean;
 }
 
 /**
@@ -438,8 +421,7 @@ export function generateCSSWithTokens(
 ): string {
   const { 
     includeTokens = true, 
-    tokens = defaultTokens,
-    minify = false 
+    tokens = defaultTokens
   } = options;
   
   // Set token context for rule handlers
@@ -459,12 +441,7 @@ export function generateCSSWithTokens(
   // Prepend tokens if requested
   if (includeTokens) {
     const tokenCSS = generateTokenCSS(tokens);
-    css = tokenCSS + (minify ? '' : '\n\n') + css;
-  }
-  
-  // Minify if requested
-  if (minify) {
-    css = CSSMinifier.minify(css);
+    css = tokenCSS + '\n\n' + css;
   }
   
   return css;

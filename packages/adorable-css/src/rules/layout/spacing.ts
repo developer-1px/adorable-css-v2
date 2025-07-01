@@ -1,178 +1,60 @@
 import type { CSSRule, RuleHandler } from "../types";
-import { px, pxWithClamp } from '../../core/values/makeValue';
+import { px as toPx, pxWithClamp } from '../../core/values/makeValue';
 import { isToken, getTokenVar } from '../../design-system/tokens/index';
 
-const makePaddingRule = (
-  prefix: "" | "x" | "y" | "t" | "b" | "l" | "r"
-): RuleHandler => {
-  return (args?: string): CSSRule => {
-    if (!args) {
-      // Default to md spacing
-      const defaultValue = getTokenVar('spacing', 'md');
-      if (prefix === "") return { padding: defaultValue };
-      if (prefix === "x") return { "padding-left": defaultValue, "padding-right": defaultValue };
-      if (prefix === "y") return { "padding-top": defaultValue, "padding-bottom": defaultValue };
-      if (prefix === "t") return { "padding-top": defaultValue };
-      if (prefix === "b") return { "padding-bottom": defaultValue };
-      if (prefix === "l") return { "padding-left": defaultValue };
-      if (prefix === "r") return { "padding-right": defaultValue };
-    }
-    if (args === "hug")
-      return prefix === "x"
-        ? { "padding-left": "0.6em", "padding-right": "0.6em" }
-        : { "padding-top": "0.2em", "padding-bottom": "0.2em" };
+type Prefix = "" | "x" | "y" | "t" | "b" | "l" | "r";
 
-    const values = args.split("/");
-    const properties: Record<string, string> = {};
-
-    // Process values with token and clamp support
-    const cssValues = values.map((v) => {
-      if (isToken(v, 'spacing')) {
-        return getTokenVar('spacing', v);
-      }
-      // Use pxWithClamp to support clamp() and range syntax
-      return String(pxWithClamp(v));
-    });
-
-    if (prefix === "") {
-      if (cssValues.length === 1) return { padding: cssValues[0] };
-      if (cssValues.length === 2)
-        return {
-          "padding-top": cssValues[0],
-          "padding-right": cssValues[1],
-          "padding-bottom": cssValues[0],
-          "padding-left": cssValues[1],
-        };
-      if (cssValues.length === 4)
-        return {
-          "padding-top": cssValues[0],
-          "padding-right": cssValues[1],
-          "padding-bottom": cssValues[2],
-          "padding-left": cssValues[3],
-        };
-    }
-    if (prefix === "x") {
-      properties["padding-left"] = cssValues[0];
-      properties["padding-right"] = cssValues[0];
-    }
-    if (prefix === "y") {
-      properties["padding-top"] = cssValues[0];
-      properties["padding-bottom"] = cssValues[0];
-    }
-    if (prefix === "t") properties["padding-top"] = cssValues[0];
-    if (prefix === "b") properties["padding-bottom"] = cssValues[0];
-    if (prefix === "l") properties["padding-left"] = cssValues[0];
-    if (prefix === "r") properties["padding-right"] = cssValues[0];
-
-    return properties;
-  };
+const makeSpacingRule = (type: 'padding' | 'margin', prefix: Prefix): RuleHandler => (args?: string): CSSRule => {
+  const prop = type;
+  const def = getTokenVar('spacing', 'md');
+  
+  if (!args) {
+    if (prefix === "") return { [prop]: def };
+    if (prefix === "x") return { [`${prop}-left`]: def, [`${prop}-right`]: def };
+    if (prefix === "y") return { [`${prop}-top`]: def, [`${prop}-bottom`]: def };
+    return { [`${prop}-${prefix === "t" ? "top" : prefix === "b" ? "bottom" : prefix === "l" ? "left" : "right"}`]: def };
+  }
+  
+  if (type === 'padding' && args === 'hug') {
+    return prefix === "x" ? { "padding-left": "0.6em", "padding-right": "0.6em" } : { "padding-top": "0.2em", "padding-bottom": "0.2em" };
+  }
+  
+  const vals = args.split("/").map(v => isToken(v, 'spacing') ? getTokenVar('spacing', v) : String(pxWithClamp(v)));
+  
+  if (prefix === "") {
+    if (vals.length === 1) return { [prop]: vals[0] };
+    if (vals.length === 2) return { [`${prop}-top`]: vals[0], [`${prop}-right`]: vals[1], [`${prop}-bottom`]: vals[0], [`${prop}-left`]: vals[1] };
+    if (vals.length === 4) return { [`${prop}-top`]: vals[0], [`${prop}-right`]: vals[1], [`${prop}-bottom`]: vals[2], [`${prop}-left`]: vals[3] };
+  }
+  
+  if (prefix === "x") return { [`${prop}-left`]: vals[0], [`${prop}-right`]: vals[0] };
+  if (prefix === "y") return { [`${prop}-top`]: vals[0], [`${prop}-bottom`]: vals[0] };
+  return { [`${prop}-${prefix === "t" ? "top" : prefix === "b" ? "bottom" : prefix === "l" ? "left" : "right"}`]: vals[0] };
 };
 
-export const p = makePaddingRule("");
+// Padding
+export const p = makeSpacingRule('padding', '');
+export const px = makeSpacingRule('padding', 'x');
+export const py = makeSpacingRule('padding', 'y');
+export const pt = makeSpacingRule('padding', 't');
+export const pb = makeSpacingRule('padding', 'b');
+export const pl = makeSpacingRule('padding', 'l');
+export const pr = makeSpacingRule('padding', 'r');
 
-const makeMarginRule = (
-  prefix: "" | "x" | "y" | "t" | "b" | "l" | "r"
-): RuleHandler => {
-  return (args?: string): CSSRule => {
-    if (!args) {
-      // Default to md spacing
-      const defaultValue = getTokenVar('spacing', 'md');
-      if (prefix === "") return { margin: defaultValue };
-      if (prefix === "x") return { "margin-left": defaultValue, "margin-right": defaultValue };
-      if (prefix === "y") return { "margin-top": defaultValue, "margin-bottom": defaultValue };
-      if (prefix === "t") return { "margin-top": defaultValue };
-      if (prefix === "b") return { "margin-bottom": defaultValue };
-      if (prefix === "l") return { "margin-left": defaultValue };
-      if (prefix === "r") return { "margin-right": defaultValue };
-    }
+// Margin
+export const m = makeSpacingRule('margin', '');
+export const mx = makeSpacingRule('margin', 'x');
+export const my = makeSpacingRule('margin', 'y');
+export const mt = makeSpacingRule('margin', 't');
+export const mb = makeSpacingRule('margin', 'b');
+export const ml = makeSpacingRule('margin', 'l');
+export const mr = makeSpacingRule('margin', 'r');
 
-    const values = args.split("/");
-    const properties: Record<string, string> = {};
-
-    // Process values with token and clamp support
-    const cssValues = values.map((v) => {
-      if (isToken(v, 'spacing')) {
-        return getTokenVar('spacing', v);
-      }
-      // Use pxWithClamp to support clamp() and range syntax
-      return String(pxWithClamp(v));
-    });
-
-    if (prefix === "") {
-      if (cssValues.length === 1) return { margin: cssValues[0] };
-      if (cssValues.length === 2)
-        return {
-          "margin-top": cssValues[0],
-          "margin-right": cssValues[1],
-          "margin-bottom": cssValues[0],
-          "margin-left": cssValues[1],
-        };
-      if (cssValues.length === 4)
-        return {
-          "margin-top": cssValues[0],
-          "margin-right": cssValues[1],
-          "margin-bottom": cssValues[2],
-          "margin-left": cssValues[3],
-        };
-    }
-    if (prefix === "x") {
-      properties["margin-left"] = cssValues[0];
-      properties["margin-right"] = cssValues[0];
-    }
-    if (prefix === "y") {
-      properties["margin-top"] = cssValues[0];
-      properties["margin-bottom"] = cssValues[0];
-    }
-    if (prefix === "t") properties["margin-top"] = cssValues[0];
-    if (prefix === "b") properties["margin-bottom"] = cssValues[0];
-    if (prefix === "l") properties["margin-left"] = cssValues[0];
-    if (prefix === "r") properties["margin-right"] = cssValues[0];
-
-    return properties;
-  };
-};
-
-export const m = makeMarginRule("");
-export const mx = makeMarginRule("x");
-export const my = makeMarginRule("y");
-export const mt = makeMarginRule("t");
-export const mb = makeMarginRule("b");
-export const ml = makeMarginRule("l");
-export const mr = makeMarginRule("r");
-
+// Gap
 export const gap: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return { gap: getTokenVar('spacing', 'md') }; // Default to md spacing
-  
-  // Special case for gap(auto) - space-between behavior
-  if (args === 'auto') {
-    // Return special marker that generator will handle
-    return { 
-      gap: 'auto',
-      'justify-content': 'space-between',
-      'align-content': 'space-between'
-    };
-  }
-  
-  if (isToken(args, 'spacing')) {
-    return { gap: getTokenVar('spacing', args) };
-  }
-  return { gap: String(px(args)) };
+  if (!args) return { gap: getTokenVar('spacing', 'md') };
+  if (args === 'auto') return { gap: 'auto', 'justify-content': 'space-between', 'align-content': 'space-between' };
+  return { gap: isToken(args, 'spacing') ? getTokenVar('spacing', args) : String(toPx(args)) };
 };
 
-export const spacingRules = {
-  p,
-  px: makePaddingRule("x"),
-  py: makePaddingRule("y"),
-  pt: makePaddingRule("t"),
-  pb: makePaddingRule("b"),
-  pl: makePaddingRule("l"),
-  pr: makePaddingRule("r"),
-  gap,
-  m,
-  mx,
-  my,
-  mt,
-  mb,
-  ml,
-  mr,
-};
+export const spacingRules = { p, px, py, pt, pb, pl, pr, gap, m, mx, my, mt, mb, ml, mr };

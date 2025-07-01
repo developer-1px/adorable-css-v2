@@ -1,6 +1,6 @@
 import type { CSSRule, RuleHandler } from '../types';
 import { isToken, getTokenVar } from '../../design-system/tokens/index';
-import { px } from '../../core/values/makeValue';
+import { px, makeColor } from '../../core/values/makeValue';
 
 // Font style utilities
 export const italic: RuleHandler = (): CSSRule => ({
@@ -22,6 +22,19 @@ export const lineThrough: RuleHandler = (): CSSRule => ({
 
 // Aliases for line-through
 export const strike = lineThrough;
+
+// Decoration handler - decoration(underline), decoration(purple-600.3)
+export const decoration: RuleHandler = (args?: string): CSSRule => {
+  if (!args) return { 'text-decoration': 'underline' };
+  
+  // Handle decoration styles
+  if (args === 'underline' || args === 'overline' || args === 'line-through' || args === 'none') {
+    return { 'text-decoration': args };
+  }
+  
+  // Handle color values - decoration(purple-600.3)
+  return { 'text-decoration-color': String(makeColor(args)) };
+};
 
 // Font family utilities
 export const sansSerif: RuleHandler = (): CSSRule => ({
@@ -96,6 +109,7 @@ export const typographyUtilityRules = {
   underline,
   'line-through': lineThrough,
   strike,
+  decoration,
   'sans-serif': sansSerif,
   serif,
   monospace,

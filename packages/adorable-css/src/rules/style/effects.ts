@@ -1,45 +1,20 @@
 import type { CSSRule, RuleHandler } from "../types";
 import { px } from '../../core/values/makeValue';
 
-export const opacity: RuleHandler = (value?: string): CSSRule => {
-  if (!value) return {};
-  return { opacity: value };
+const filter = (n: string, unit?: boolean): RuleHandler => (v?: string): CSSRule => 
+  ({ filter: `${n}(${v ? (unit ? px(v) : v) : ''})` });
+
+export const opacity: RuleHandler = (v?: string): CSSRule => v ? { opacity: v } : {};
+export const blur = filter('blur', true);
+export const brightness = filter('brightness');
+export const contrast = filter('contrast');
+export const saturate = filter('saturate');
+export const sepia = filter('sepia');
+
+export const backdrop: RuleHandler = (v?: string): CSSRule => {
+  if (!v) return {};
+  const [type, val] = v.split('/');
+  return { 'backdrop-filter': type === 'blur' && val ? `blur(${px(val)})` : v };
 };
 
-const makeFilterRule =
-  (
-    name: "blur" | "brightness" | "contrast" | "saturate" | "sepia"
-  ): RuleHandler =>
-  (value?: string): CSSRule => {
-    if (!value) return { filter: `${name}()` };
-    const cssValue = name === "blur" ? px(value) : value;
-    return { filter: `${name}(${cssValue})` };
-  };
-
-export const blur = makeFilterRule("blur");
-export const brightness = makeFilterRule("brightness");
-export const contrast = makeFilterRule("contrast");
-export const saturate = makeFilterRule("saturate");
-export const sepia = makeFilterRule("sepia");
-
-// Backdrop filter
-export const backdrop: RuleHandler = (value?: string): CSSRule => {
-  if (!value) return {};
-  
-  if (value.startsWith('blur/')) {
-    const blurValue = value.split('/')[1];
-    return { 'backdrop-filter': `blur(${px(blurValue)})` };
-  }
-  
-  return { 'backdrop-filter': value };
-};
-
-export const effectRules = {
-  opacity,
-  blur,
-  brightness,
-  contrast,
-  saturate,
-  sepia,
-  backdrop,
-};
+export const effectRules = { opacity, blur, brightness, contrast, saturate, sepia, backdrop };
