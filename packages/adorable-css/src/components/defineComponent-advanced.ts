@@ -1,5 +1,16 @@
 import type { StringRuleHandler } from '../rules/types';
-import { defineSimpleComponent, type ComponentVariant, type ComponentOptions } from './defineComponent';
+import { defineComponent as defineBaseComponent } from './defineComponent-unified';
+
+export interface ComponentVariant {
+  base: string;
+  sizes?: Record<string, string>;
+  variants?: Record<string, string>;
+}
+
+export interface ComponentOptions {
+  defaultSize?: string;
+  defaultVariant?: string;
+}
 
 /**
  * Advanced component definition with state variants and responsive support
@@ -148,14 +159,14 @@ export function defineThemedComponent(
   options: ComponentOptions = {}
 ): StringRuleHandler {
   return (args?: string): string => {
-    const lightResult = defineSimpleComponent(themes.light, options)(args);
+    const lightResult = defineBaseComponent(themes.light, options)(args);
     const lightClasses = typeof lightResult === 'string' ? lightResult : '';
     
     if (!themes.dark) {
       return lightClasses;
     }
     
-    const darkResult = defineSimpleComponent(themes.dark, options)(args);
+    const darkResult = defineBaseComponent(themes.dark, options)(args);
     const darkClasses = typeof darkResult === 'string' ? darkResult : '';
     
     // Prefix dark classes with dark:

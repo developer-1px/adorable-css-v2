@@ -42,3 +42,7 @@ export class CSSObjectGenerator {
 
 // Singleton instance
 export const cssObjectGenerator = new CSSObjectGenerator();
+
+// Export as standalone function for compatibility
+export const cssObjectToString = (obj: CSSRule, parentSelector?: string) => 
+  cssObjectGenerator.generate(obj, parentSelector);

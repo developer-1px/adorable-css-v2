@@ -3,7 +3,7 @@ import { defineComponent, defineThemedComponent } from '../components/defineComp
 
 describe('defineComponent', () => {
   it('should apply base classes', () => {
-    const component = defineAdvancedComponent({
+    const component = defineComponent({
       base: 'inline-flex items(center) gap(8)'
     });
     
@@ -12,7 +12,7 @@ describe('defineComponent', () => {
   });
 
   it('should combine base, size, and variant', () => {
-    const component = defineAdvancedComponent({
+    const component = defineComponent({
       base: 'inline-flex items(center)',
       sizes: {
         sm: 'h(32) px(12)',
@@ -30,7 +30,7 @@ describe('defineComponent', () => {
   });
 
   it('should apply compound variants', () => {
-    const component = defineAdvancedComponent({
+    const component = defineComponent({
       base: 'btn',
       sizes: {
         sm: 'text(sm)',
@@ -54,7 +54,7 @@ describe('defineComponent', () => {
   });
 
   it('should apply compound variants with array matches', () => {
-    const component = defineAdvancedComponent({
+    const component = defineComponent({
       base: 'btn',
       sizes: {
         sm: 'px(2)',
@@ -80,7 +80,7 @@ describe('defineComponent', () => {
   });
 
   it('should apply state classes', () => {
-    const component = defineAdvancedComponent({
+    const component = defineComponent({
       base: 'btn',
       variants: {
         primary: 'bg(blue-600)'
@@ -97,7 +97,7 @@ describe('defineComponent', () => {
   });
 
   it('should handle default size and variant', () => {
-    const component = defineAdvancedComponent({
+    const component = defineComponent({
       base: 'btn',
       sizes: {
         default: 'h(40) px(16)'
@@ -112,7 +112,7 @@ describe('defineComponent', () => {
   });
 
   it('should handle compound variants with no size restriction', () => {
-    const component = defineAdvancedComponent({
+    const component = defineComponent({
       base: 'link',
       sizes: {
         sm: 'text(sm)',

@@ -7,14 +7,19 @@ export const headingDefinition: ComponentDefinition = {
   
   sizes: {
     // VitePress-inspired typography without margins
-    h1: 'font(3xl/tight/-2%) bold',
+    h1: 'font(..5xl/1.1/-3%) bold',
     h2: 'font(2xl/tight/-1%) bold',
     h3: 'font(xl/snug) bold(semi)',
     h4: 'font(lg/relaxed) bold(semi)',
     h5: 'font(md/relaxed) bold(semi)',
     h6: 'font(sm/relaxed/widest) bold(semi) uppercase',
 
-    default: 'font(lg/snug) bold(semi)' // Default to h3 style
+    // Display sizes
+    display: 'font(..6xl/1/-4%) bold',
+    hero: 'font(..5xl/1/-3.5%) bold',
+    caption: 'font(sm/1.5/wider) bold(semi)',
+
+    default: 'font(3xl/1.3/-1.5%) bold(semi)' // Default to h1-like style
   },
   
   variants: {

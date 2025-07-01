@@ -51,10 +51,9 @@ describe('Auto-inject Tokens', () => {
   });
 
   it('should use custom tokens', () => {
+    // Create custom tokens with a custom spacing value
     const customTokens = {
-      ...defaultTokens,
       spacing: {
-        ...defaultTokens.spacing,
         custom: '999px'
       }
     };

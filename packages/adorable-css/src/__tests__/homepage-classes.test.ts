@@ -232,9 +232,9 @@ describe('Homepage Classes Test - 실제 사용된 클래스들 검증', () => {
       expect(css).toContain('text-align:center')
     })
 
-    it('should generate 700 - 폰트 굵기', () => {
-      const css = generateCSS(['700'])
-      console.log('Generated CSS for 700:', css)
+    it('should generate bold(700) - 폰트 굵기', () => {
+      const css = generateCSS(['bold(700)'])
+      console.log('Generated CSS for bold(700):', css)
       expect(css).toContain('font-weight:700')
     })
 

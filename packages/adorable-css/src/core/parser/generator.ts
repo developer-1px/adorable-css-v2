@@ -4,7 +4,6 @@ import { priorityRegistry } from "../../rules/priority-registry";
 import type { CSSRule, ParsedSelector, StringRuleDefinition } from "../../rules/types";
 import { cssEscape, cleanDuplicateSelectors } from "./cssEscape";
 import { px } from '../values/makeValue';
-import { getAllKeyframes } from "../../extensions/animations/animations";
 import { 
   ResponsiveSelector, 
   ResponsiveDecoratorFactory, 
@@ -21,37 +20,45 @@ import { generateTokenCSS, defaultTokens, setTokenContext } from '../../design-s
 import type { DesignTokens } from '../../design-system/tokens/index';
 import { createParsedSelector } from '../generators/ast-helpers';
 import { CacheManager } from '../generators/cache-manager';
+import { CSSMinifier } from '../generators/css-minifier';
+import { AnimationHandler } from '../generators/animation-handler';
+import { cssObjectToString } from '../generators/css-object-generator';
+import { createMediaQuery } from '../generators/breakpoints';
 
 // Cache for CSS generation
 const cssGeneratorCache = new CacheManager<string, string>(10000);
 
-// Convert CSS object to string (supports nested selectors)
-const cssObjectToString = (obj: CSSRule, parentSelector?: string): { mainCSS: string; nestedCSS: string[] } => {
-    const properties: string[] = [];
-    const nestedRules: string[] = [];
+// Process AdorableCSS classes from string rule
+const processClassesFromStringRule = (
+  classes: string[],
+  ruleName: string,
+  visited: Set<string>,
+  allCSSResults: { mainCSS: string; nestedCSS: string[]; priority?: number }[]
+): void => {
+  for (const className of classes) {
+    if (!className) continue;
     
-    Object.entries(obj || {}).forEach(([key, value]) => {
-      // Skip undefined values
-      if (value === undefined) return;
-      
-      if (typeof value === 'object' && value !== null) {
-        // Nested rule (selector)
-        const nestedCSS = cssObjectToString(value as CSSRule, parentSelector);
-        if (nestedCSS.mainCSS) {
-          const fullSelector = parentSelector ? key.replace('&', parentSelector) : key;
-          nestedRules.push(`${fullSelector}{${nestedCSS.mainCSS}}`);
+    try {
+      const parsed = parseAdorableCSS(className);
+      if (parsed.value.length > 0) {
+        const selector = parsed.value[0].selector;
+        const selectorName = selector.name || selector.image;
+        const selectorArgs = selector.args?.map((arg: any) => arg.image).join('');
+        
+        // If it's a string rule, resolve recursively
+        if (priorityRegistry.hasString(selectorName)) {
+          const recursiveResult = resolveStringRule(selectorName, selectorArgs, new Set(visited));
+          allCSSResults.push(recursiveResult);
+        } else {
+          // Otherwise, generate CSS normally
+          const cssResult = generateCSSFromSelector(createParsedSelector(selector));
+          allCSSResults.push(cssResult);
         }
-        nestedRules.push(...nestedCSS.nestedCSS);
-      } else {
-        // Regular CSS property
-        properties.push(`${key}:${value}`);
       }
-    });
-    
-    return {
-      mainCSS: properties.join(";"),
-      nestedCSS: nestedRules
-    };
+    } catch (e) {
+      console.warn(`⚠️  AdorableCSS: Error parsing class "${className}" from string rule "${ruleName}":`, e);
+    }
+  }
 };
 
 
@@ -101,30 +108,7 @@ const resolveStringRule = (
         if (!item.trim()) continue;
         
         const classes = item.trim().split(/\s+/);
-        for (const className of classes) {
-          if (!className) continue;
-          
-          try {
-            const parsed = parseAdorableCSS(className);
-            if (parsed.value.length > 0) {
-              const selector = parsed.value[0].selector;
-              const selectorName = selector.name || selector.image;
-              const selectorArgs = selector.args?.map((arg: any) => arg.image).join('');
-              
-              // If it's a string rule, resolve recursively
-              if (priorityRegistry.hasString(selectorName)) {
-                const recursiveResult = resolveStringRule(selectorName, selectorArgs, new Set(visited));
-                allCSSResults.push(recursiveResult);
-              } else {
-                // Otherwise, generate CSS normally
-                const cssResult = generateCSSFromSelector(createParsedSelector(selector));
-                allCSSResults.push(cssResult);
-              }
-            }
-          } catch (e) {
-            console.warn(`⚠️  AdorableCSS: Error parsing class "${className}" from string rule "${ruleName}":`, e);
-          }
-        }
+        processClassesFromStringRule(classes, ruleName, visited, allCSSResults);
       } else if (typeof item === 'object' && item !== null) {
         // Raw CSS object - convert directly
         const cssResult = cssObjectToString(item as CSSRule, parentSelector);
@@ -146,31 +130,7 @@ const resolveStringRule = (
     const classes = adorableCSSString.trim().split(/\s+/);
     
     // Resolve each class recursively
-    for (const className of classes) {
-      if (!className) continue;
-      
-      // Check if this is another string rule
-      try {
-        const parsed = parseAdorableCSS(className);
-        if (parsed.value.length > 0) {
-          const selector = parsed.value[0].selector;
-          const selectorName = selector.name || selector.image;
-          const selectorArgs = selector.args?.map((arg: any) => arg.image).join('');
-          
-          // If it's a string rule, resolve recursively
-          if (priorityRegistry.hasString(selectorName)) {
-            const recursiveResult = resolveStringRule(selectorName, selectorArgs, new Set(visited));
-            allCSSResults.push(recursiveResult);
-          } else {
-            // Otherwise, generate CSS normally
-            const cssResult = generateCSSFromSelector(createParsedSelector(selector));
-            allCSSResults.push(cssResult);
-          }
-        }
-      } catch (e) {
-        console.warn(`⚠️  AdorableCSS: Error parsing class "${className}" from string rule "${ruleName}":`, e);
-      }
-    }
+    processClassesFromStringRule(classes, ruleName, visited, allCSSResults);
   }
   
   // Combine results, preserving the original string rule's priority as base
@@ -484,18 +444,8 @@ function generateResponsiveCSS(responsiveClassName: string): string {
   const breakpointValue = ResponsiveSelector.analyze(responsiveClassName)?.breakpoint;
   if (!breakpointValue) return "";
   
-  const breakpoints = {
-    sm: '640px', md: '768px', lg: '1024px', xl: '1280px', 
-    '2xl': '1536px', '3xl': '1920px', '4xl': '2560px', 
-    '5xl': '3200px', '6xl': '3840px', '7xl': '4096px'
-  } as const;
-  
-  const breakpointPx = breakpoints[breakpointValue as keyof typeof breakpoints];
-  if (!breakpointPx) return "";
-
-  const mediaQuery = pattern.isMaxWidth 
-    ? `@media (max-width: ${breakpointPx})`
-    : `@media (min-width: ${breakpointPx})`;
+  const mediaQuery = createMediaQuery(breakpointValue, pattern.isMaxWidth);
+  if (!mediaQuery) return "";
 
   // Add [class] for importance
   let finalSelector = responsiveSelector;
@@ -519,23 +469,8 @@ function _generateCSS(classList: string[]): string {
   const uniqueCssRules = [...new Set(cssRulesArray)];
   const cssRules = cleanDuplicateSelectors(uniqueCssRules.join("\n"));
   
-  // Check if any animation classes are used
-  const hasAnimations = uniqueClasses.some(className => 
-    className.includes('fade-') || 
-    className.includes('scale-') ||
-    className.includes('slide-') ||
-    className.includes('bounce-') ||
-    className.includes('float') ||
-    className.includes('animate(')
-  );
-  
   // Include keyframes if animations are used
-  if (hasAnimations) {
-    const keyframes = getAllKeyframes();
-    return keyframes + "\n" + cssRules;
-  }
-  
-  return cssRules;
+  return AnimationHandler.prependKeyframesIfNeeded(cssRules, uniqueClasses);
 }
 
 // Export generateCSS
@@ -585,12 +520,7 @@ export function generateCSSWithTokens(
   
   // Minify if requested
   if (minify) {
-    css = css
-      .replace(/\s*{\s*/g, '{')
-      .replace(/;\s*/g, ';')
-      .replace(/\s*}\s*/g, '}')
-      .replace(/:\s*/g, ':')
-      .replace(/\n/g, '');
+    css = CSSMinifier.minify(css);
   }
   
   return css;
