@@ -90,6 +90,7 @@ export const lh: RuleHandler = (args?: string): CSSRule => {
   return { 'line-height': args };
 };
 
+
 // Text rendering optimization
 export const textRendering: RuleHandler = (args?: string): CSSRule => {
   const validValues = ['auto', 'optimizeSpeed', 'optimizeLegibility', 'geometricPrecision'];

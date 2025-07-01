@@ -79,6 +79,26 @@
     { name: 'extra', value: '800', example: 'Extra bold text' },
     { name: 'black', value: '900', example: 'Black weight text' },
   ];
+  
+  // Line height tokens
+  const lineHeightTokens = [
+    { name: 'none', value: '1', usage: 'Headings', example: 'Tight line height for display text' },
+    { name: 'tight', value: '1.25', usage: 'Display text', example: 'Slightly tighter line height' },
+    { name: 'snug', value: '1.375', usage: 'Titles', example: 'Comfortable title spacing' },
+    { name: 'normal', value: '1.5', usage: 'Body text', example: 'Default readable line height' },
+    { name: 'relaxed', value: '1.625', usage: 'Comfortable reading', example: 'More spacious line height' },
+    { name: 'loose', value: '2', usage: 'Spacious', example: 'Extra space between lines' },
+  ];
+  
+  // Letter spacing tokens
+  const letterSpacingTokens = [
+    { name: 'tighter', value: '-0.05em', usage: 'Very tight', example: 'Tightly packed letters' },
+    { name: 'tight', value: '-0.025em', usage: 'Tight', example: 'Slightly tight spacing' },
+    { name: 'normal', value: '0', usage: 'Default', example: 'Normal letter spacing' },
+    { name: 'wide', value: '0.025em', usage: 'Wide', example: 'Slightly wider spacing' },
+    { name: 'wider', value: '0.05em', usage: 'Wider', example: 'More space between letters' },
+    { name: 'widest', value: '0.1em', usage: 'Widest', example: 'Maximum letter spacing' },
+  ];
 
   let copiedCode = '';
   
@@ -369,6 +389,74 @@
               bold({weight.name})
             </code>
             <span class="caption(xs) c(gray-500) block">{weight.value}</span>
+          </div>
+        {/each}
+      </div>
+    </div>
+
+    <!-- Line Height Tokens -->
+    <div class="bg(white) r(2xl) p(2xl) shadow(xl) shadow(gray-200.5)">
+      <div class="hbox(start) gap(sm) mb(xl)">
+        <Minus size="20" class="c(cyan-600)" />
+        <h3 class="heading(h3) c(gray-900)">Line Height</h3>
+      </div>
+      
+      <p class="body(base) c(gray-600) mb(xl)">
+        Control the vertical spacing between lines of text using the integrated font() syntax
+      </p>
+      
+      <div class="grid(2) lg:grid(3) gap(lg)">
+        {#each lineHeightTokens as token}
+          <div 
+            class="group p(lg) r(lg) bg(gray-50) hover:bg(gray-100) transition cursor-pointer"
+            on:click={() => copyCode(`font(base/${token.name})`)}
+          >
+            <div class="mb(md)">
+              <p class="font(base/{token.name}) c(gray-800)">
+                {token.example}
+              </p>
+            </div>
+            <code class="badge(xs/muted) block mb(xs)">
+              font(base/{token.name})
+            </code>
+            <div class="hbox(between) gap(sm)">
+              <span class="caption(xs) c(gray-500)">{token.value}</span>
+              <span class="caption(xs) c(gray-500)">{token.usage}</span>
+            </div>
+          </div>
+        {/each}
+      </div>
+    </div>
+
+    <!-- Letter Spacing Tokens -->
+    <div class="bg(white) r(2xl) p(2xl) shadow(xl) shadow(gray-200.5)">
+      <div class="hbox(start) gap(sm) mb(xl)">
+        <AlignLeft size="20" class="c(purple-600)" />
+        <h3 class="heading(h3) c(gray-900)">Letter Spacing</h3>
+      </div>
+      
+      <p class="body(base) c(gray-600) mb(xl)">
+        Adjust the horizontal spacing between characters using the integrated font() syntax
+      </p>
+      
+      <div class="grid(2) lg:grid(3) gap(lg)">
+        {#each letterSpacingTokens as token}
+          <div 
+            class="group p(lg) r(lg) bg(gray-50) hover:bg(gray-100) transition cursor-pointer"
+            on:click={() => copyCode(`font(lg/1.5/${token.name})`)}
+          >
+            <div class="mb(md) text(center)">
+              <p class="font(lg/1.5/{token.name}) c(gray-800)">
+                Typography
+              </p>
+            </div>
+            <code class="badge(xs/muted) block mb(xs) text(center)">
+              font(lg/1.5/{token.name})
+            </code>
+            <div class="hbox(between) gap(sm)">
+              <span class="caption(xs) c(gray-500)">{token.value}</span>
+              <span class="caption(xs) c(gray-500)">{token.usage}</span>
+            </div>
           </div>
         {/each}
       </div>

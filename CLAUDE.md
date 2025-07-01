@@ -106,8 +106,8 @@ The parser uses a custom tokenizer that processes AdorableCSS syntax:
 
 ### Critical Development Warning
 ⚠️ **DO NOT USE `pnpm dev`** - It can hang. Use specific dev commands instead:
-- `pnpm dev:core` - Develop adorable-css-core only
-- `pnpm dev:homepage` - Start homepage dev server at http://localhost:5173
+- **DO USE** `pnpm test` - Run Test
+- **DO USE** `pnpm build` - Build test for type checking
 
 ### Build & Test
 ```bash
@@ -290,9 +290,30 @@ export const myExtension = {
 }
 ```
 
-## Important Memories
+## Important Memories햣 
 - **TailwindCSS Memory**: tailwindCSS와 제발 헷갈리지마 우리는 adorable-css-v2를 만들고 있어
 - **Development Communication**: 항상 중간중간이라도 뭔가 보여줄 수 있는걸 먼저해줘
 - **Page Design Commitment**: 지금부터 홈페이지의 모든 페이지 디자인은 adorable-css-v2 component만으로 만들거야.
 - 언제나 내가 볼수 있는걸 먼저 세팅하고 조금씩 점진적으로 내가 볼 수 있도록 해줘 한번에 다 만들려고 하지 말고
+
+## ⚠️ 절대 금지 사항 ⚠️
+### Tailwind CSS 스타일 절대 사용 금지
+- **NEVER USE**: `leading-*` (e.g., leading-tight, leading-normal) ❌
+- **NEVER USE**: `tracking-*` (e.g., tracking-wide, tracking-tight) ❌
+- **NEVER USE**: `text-*` for sizes (e.g., text-lg, text-2xl) ❌
+- **우리는 AdorableCSS입니다!** CSS native 속성명을 사용하세요!
+
+### 올바른 AdorableCSS 방식
+```css
+/* Typography는 font() 통합 문법 사용 ✅ */
+font(lg/1.5/-2%)     → font-size + line-height + letter-spacing
+
+/* 개별 속성이 꼭 필요한 경우 풀네임 사용 ✅ */
+line-height(1.5)     → line-height: 1.5
+letter-spacing(-0.02em) → letter-spacing: -0.02em
+
+/* Tailwind 스타일 절대 금지 ❌ */
+leading(tight)       → 이런거 만들지 마세요!
+tracking(wide)       → 이것도 만들지 마세요!
+```
 - 좋아 그전에 헷갈리지 않게 pages에서 쓰는건 pages로 공통으로 쓰는거 lib에 

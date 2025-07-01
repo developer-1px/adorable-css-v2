@@ -52,6 +52,8 @@ import { inputRules } from '../components/primitives/input';
 import { badgeRules } from '../components/primitives/badge';
 import { iconBoxRules } from '../components/primitives/icon-box';
 import { codeBlockRules } from '../components/primitives/code-block';
+import { menuRules } from '../components/primitives/menu';
+import { menuItemRules } from '../components/primitives/menu-item';
 import { featureCardRules } from '../components/patterns/feature-card';
 import { typographyHelperRules } from '../components/patterns/typography-helpers';
 
@@ -460,6 +462,8 @@ export const STRING_RULE_GROUPS = {
   badge: { rules: badgeRules, priority: RulePriority.COMPONENT },
   iconBox: { rules: iconBoxRules, priority: RulePriority.COMPONENT },
   codeBlock: { rules: codeBlockRules, priority: RulePriority.COMPONENT },
+  menu: { rules: menuRules, priority: RulePriority.COMPONENT },
+  menuItem: { rules: menuItemRules, priority: RulePriority.COMPONENT },
   featureCard: { rules: featureCardRules, priority: RulePriority.COMPONENT },
   typographyHelpers: { rules: typographyHelperRules, priority: RulePriority.COMPONENT },
   prose: { rules: { prose }, priority: RulePriority.COMPONENT },

@@ -54,7 +54,7 @@
 
 <div class="min-h(100vh) bg(white)">
   <!-- Navigation Sidebar -->
-  <nav class="fixed top(0) left(0) w(240px) h(100vh) bg(gray-50) border-r(1/gray-200) overflow-y(auto) z(40)">
+  <nav class="fixed top(0) left(0) w(240px) h(100vh) bg(gray-50) border-r(1/gray-200) scroll(y) z(40)">
     <!-- Navigation Header -->
     <div class="p(20) border-b(1/gray-200)">
       <h2 class="title(base)">Documentation</h2>
@@ -71,21 +71,18 @@
               <li>
                 <a 
                   href={item.href}
-                  class="group relative block px(12) py(8) r(8) body(sm) hover:bg(white) transition-all
-                         {$page.url.pathname === item.href ? 'bg(white) c(purple-700) bold shadow(sm)' : ''}"
+                  class="{$page.url.pathname === item.href ? 'menu(active)' : 'menu'}"
                 >
-                  <span class="hbox(middle) gap(8)">
-                    {#if $page.url.pathname === item.href}
-                      <span class="absolute left(0) top(50%) translate-y(-50%) w(3px) h(16px) bg(purple-500) r(r-full)"></span>
-                    {/if}
-                    <ChevronRight size="14" class="c(gray-400) transition transform {$page.url.pathname === item.href ? 'rotate(90deg) c(purple-500)' : ''}" />
-                    <span>{item.title}</span>
-                    {#if item.badge}
-                      <span class="ml(auto) badge(xs/{item.badge === 'new' ? 'success' : item.badge === 'beta' ? 'warning' : 'muted'})">
-                        {item.badge}
-                      </span>
-                    {/if}
-                  </span>
+                  {#if $page.url.pathname === item.href}
+                    <span class="absolute left(0) top(50%) translate-y(-50%) w(3px) h(16px) bg(purple-500) r(r-full)"></span>
+                  {/if}
+                  <ChevronRight size="14" class="c(gray-400) transition transform {$page.url.pathname === item.href ? 'rotate(90deg) c(purple-500)' : ''}" />
+                  <span>{item.title}</span>
+                  {#if item.badge}
+                    <span class="ml(auto) badge(xs/{item.badge === 'new' ? 'success' : item.badge === 'beta' ? 'warning' : 'muted'})">
+                      {item.badge}
+                    </span>
+                  {/if}
                 </a>
               </li>
             {/each}
@@ -152,8 +149,7 @@
           {#each tocItems as item}
             <a 
               href="#{item.id}" 
-              class="caption(xs) hover:c(purple-600) transition-all block
-                     {activeSection === item.id ? 'c(purple-600) bold pl(8) border-l(2/purple-500)' : ''}
+              class="{activeSection === item.id ? 'menu-item(active)' : 'menu-item'}
                      {item.level === 2 ? 'ml(12)' : ''}
                      {item.level === 3 ? 'ml(24)' : ''}"
               on:click={(e) => scrollToSection(e, item.id)}

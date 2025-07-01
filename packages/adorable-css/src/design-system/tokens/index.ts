@@ -216,6 +216,7 @@ export interface DesignTokens {
     lg: string;
     xl: string;
     '2xl': string;
+    inner: string;
   };
   colors: {
     // Core semantic colors
