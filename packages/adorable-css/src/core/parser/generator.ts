@@ -19,9 +19,11 @@ import {
 } from "../../extensions/responsive/responsive-decorator";
 import { generateTokenCSS, defaultTokens, setTokenContext } from '../../design-system/tokens/index';
 import type { DesignTokens } from '../../design-system/tokens/index';
+import { createParsedSelector } from '../generators/ast-helpers';
+import { CacheManager } from '../generators/cache-manager';
 
-// Simple cache for CSS generation
-const cssGeneratorCache = new Map<string, string>();
+// Cache for CSS generation
+const cssGeneratorCache = new CacheManager<string, string>(10000);
 
 // Convert CSS object to string (supports nested selectors)
 const cssObjectToString = (obj: CSSRule, parentSelector?: string): { mainCSS: string; nestedCSS: string[] } => {
@@ -52,24 +54,6 @@ const cssObjectToString = (obj: CSSRule, parentSelector?: string): { mainCSS: st
     };
 };
 
-// Create ParsedSelector from AST node
-const createParsedSelector = (node: any): ParsedSelector => ({
-  type: node.name ? "function" : "keyword",
-  name: node.name || node.image,
-  args: node.args?.map((arg: any) => {
-    // Handle triple-range syntax: convert to string format handlers expect
-    if (arg.type === 'triple-range') {
-      return `${arg.min.image}..${arg.preferred.image}..${arg.max.image}`;
-    }
-    // Handle double-range syntax
-    if (arg.type === 'range') {
-      const minPart = arg.min ? arg.min.image : '';
-      const maxPart = arg.max ? arg.max.image : '';
-      return `${minPart}..${maxPart}`;
-    }
-    return arg.image;
-  }),
-});
 
 // Resolve string rules recursively with cycle detection
 const resolveStringRule = (
@@ -393,16 +377,8 @@ export function generateCSSFromAdorableCSS(value: string): string {
   
   const result = _generateCSSFromAdorableCSS(value);
   
-  // Cache the result
+  // Cache the result (size limiting is handled by CacheManager)
   cssGeneratorCache.set(value, result);
-  
-  // Limit cache size
-  if (cssGeneratorCache.size > 10000) {
-    const firstKey = cssGeneratorCache.keys().next().value;
-    if (firstKey) {
-      cssGeneratorCache.delete(firstKey);
-    }
-  }
   
   return result;
 }
