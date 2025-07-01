@@ -14,7 +14,14 @@ const tokenize = createTokenizer([
   ["(unknown)", /./],
 ]);
 
+// Simple cache for parser
+const parserCache = new Map<string, any>();
+
 export function parseAdorableCSS(input: string) {
+  // Check cache first
+  if (parserCache.has(input)) {
+    return parserCache.get(input);
+  }
   const tokens = tokenize(input);
 
   const { options, consume, many, many1, many_sep, many1_sep, optional, eof } =
@@ -347,6 +354,18 @@ export function parseAdorableCSS(input: string) {
   try {
     const r = SelectorList();
     eof(r);
+    
+    // Cache the result
+    parserCache.set(input, r);
+    
+    // Limit cache size to prevent memory issues
+    if (parserCache.size > 5000) {
+      const firstKey = parserCache.keys().next().value;
+      if (firstKey) {
+        parserCache.delete(firstKey);
+      }
+    }
+    
     return r;
   } catch (e) {
     throw e;

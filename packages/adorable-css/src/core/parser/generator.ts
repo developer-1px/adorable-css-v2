@@ -20,33 +20,36 @@ import {
 import { generateTokenCSS, defaultTokens, setTokenContext } from '../../design-system/tokens/index';
 import type { DesignTokens } from '../../design-system/tokens/index';
 
+// Simple cache for CSS generation
+const cssGeneratorCache = new Map<string, string>();
+
 // Convert CSS object to string (supports nested selectors)
 const cssObjectToString = (obj: CSSRule, parentSelector?: string): { mainCSS: string; nestedCSS: string[] } => {
-  const properties: string[] = [];
-  const nestedRules: string[] = [];
-  
-  Object.entries(obj || {}).forEach(([key, value]) => {
-    // Skip undefined values
-    if (value === undefined) return;
+    const properties: string[] = [];
+    const nestedRules: string[] = [];
     
-    if (typeof value === 'object' && value !== null) {
-      // Nested rule (selector)
-      const nestedCSS = cssObjectToString(value as CSSRule);
-      if (nestedCSS.mainCSS) {
-        const fullSelector = parentSelector ? key.replace('&', parentSelector) : key;
-        nestedRules.push(`${fullSelector}{${nestedCSS.mainCSS}}`);
+    Object.entries(obj || {}).forEach(([key, value]) => {
+      // Skip undefined values
+      if (value === undefined) return;
+      
+      if (typeof value === 'object' && value !== null) {
+        // Nested rule (selector)
+        const nestedCSS = cssObjectToString(value as CSSRule, parentSelector);
+        if (nestedCSS.mainCSS) {
+          const fullSelector = parentSelector ? key.replace('&', parentSelector) : key;
+          nestedRules.push(`${fullSelector}{${nestedCSS.mainCSS}}`);
+        }
+        nestedRules.push(...nestedCSS.nestedCSS);
+      } else {
+        // Regular CSS property
+        properties.push(`${key}:${value}`);
       }
-      nestedRules.push(...nestedCSS.nestedCSS);
-    } else {
-      // Regular CSS property
-      properties.push(`${key}:${value}`);
-    }
-  });
-  
-  return {
-    mainCSS: properties.join(";"),
-    nestedCSS: nestedRules
-  };
+    });
+    
+    return {
+      mainCSS: properties.join(";"),
+      nestedCSS: nestedRules
+    };
 };
 
 // Create ParsedSelector from AST node
@@ -199,40 +202,40 @@ const resolveStringRule = (
 
 // Generate CSS from parsed selector with priority awareness
 const generateCSSFromSelector = (selector: ParsedSelector, parentSelector?: string): { mainCSS: string; nestedCSS: string[]; priority?: number } => {
-  // First check if this is a string rule
-  if (priorityRegistry.hasString(selector.name)) {
-    const args = selector.type === "function" && selector.args 
-      ? selector.args.join("") 
-      : undefined;
-    return resolveStringRule(selector.name, args, new Set(), parentSelector);
-  }
-  
-  // Try priority-aware CSS object handler
-  let handler = getPriorityRuleHandler(selector.name);
-  let ruleInfo = getRuleWithPriority(selector.name);
-  
-  // Fall back to legacy handler if not found in priority registry
-  if (!handler) {
-    handler = getRuleHandler(selector.name);
-  }
-  
-  if (!handler) {
-    // Log warning for missing rule handler
-    console.warn(`⚠️  AdorableCSS: Rule handler not found for "${selector.name}"`);
-    return { mainCSS: "", nestedCSS: [], priority: 0 };
-  }
+    // First check if this is a string rule
+    if (priorityRegistry.hasString(selector.name)) {
+      const args = selector.type === "function" && selector.args 
+        ? selector.args.join("") 
+        : undefined;
+      return resolveStringRule(selector.name, args, new Set(), parentSelector);
+    }
+    
+    // Try priority-aware CSS object handler
+    let handler = getPriorityRuleHandler(selector.name);
+    let ruleInfo = getRuleWithPriority(selector.name);
+    
+    // Fall back to legacy handler if not found in priority registry
+    if (!handler) {
+      handler = getRuleHandler(selector.name);
+    }
+    
+    if (!handler) {
+      // Log warning for missing rule handler
+      console.warn(`⚠️  AdorableCSS: Rule handler not found for "${selector.name}"`);
+      return { mainCSS: "", nestedCSS: [], priority: 0 };
+    }
 
-  const result =
-    selector.type === "function" && selector.args
-      ? handler(selector.args.join(""))
-      : handler("");
+    const result =
+      selector.type === "function" && selector.args
+        ? handler(selector.args.join(""))
+        : handler("");
 
-  const cssResult = cssObjectToString(result, parentSelector);
-  
-  return { 
-    ...cssResult, 
-    priority: ruleInfo?.priority || 0 
-  };
+    const cssResult = cssObjectToString(result, parentSelector);
+    
+    return { 
+      ...cssResult, 
+      priority: ruleInfo?.priority || 0 
+    };
 };
 
 // Handle pseudo-class selector
@@ -276,7 +279,8 @@ const handleRegularSelector = (v: any, parentSelector?: string): { mainCSS: stri
   return generateCSSFromSelector(createParsedSelector(selector), parentSelector);
 };
 
-export function generateCSSFromAdorableCSS(value: string): string {
+// Internal implementation
+function _generateCSSFromAdorableCSS(value: string): string {
   if (!value) return "";
   
   // Check if this is a state class FIRST (hover:, focus:, group-hover:, etc.)
@@ -378,6 +382,29 @@ export function generateCSSFromAdorableCSS(value: string): string {
     console.warn(`   Error:`, e);
     return ""; // Fail gracefully
   }
+}
+
+// Export with simple caching
+export function generateCSSFromAdorableCSS(value: string): string {
+  // Check cache first
+  if (cssGeneratorCache.has(value)) {
+    return cssGeneratorCache.get(value)!;
+  }
+  
+  const result = _generateCSSFromAdorableCSS(value);
+  
+  // Cache the result
+  cssGeneratorCache.set(value, result);
+  
+  // Limit cache size
+  if (cssGeneratorCache.size > 10000) {
+    const firstKey = cssGeneratorCache.keys().next().value;
+    if (firstKey) {
+      cssGeneratorCache.delete(firstKey);
+    }
+  }
+  
+  return result;
 }
 
 // Generate state CSS using decorator pattern
@@ -503,7 +530,8 @@ function generateResponsiveCSS(responsiveClassName: string): string {
   return `${mediaQuery}{${finalSelector}{${cssProperties}}}`;
 }
 
-export function generateCSS(classList: string[]): string {
+// Internal implementation
+function _generateCSS(classList: string[]): string {
   // Remove duplicates first to avoid generating redundant CSS
   const uniqueClasses = [...new Set(classList)];
   
@@ -533,6 +561,9 @@ export function generateCSS(classList: string[]): string {
   
   return cssRules;
 }
+
+// Export generateCSS
+export const generateCSS = _generateCSS;
 
 /**
  * Options for CSS generation
@@ -588,3 +619,4 @@ export function generateCSSWithTokens(
   
   return css;
 }
+
