@@ -95,6 +95,37 @@ export interface RuleDefinitions {
  * 7. Additional utilities
  */
 export const RULE_GROUPS: RuleDefinitions = {
+  // Text Group - Figma Text Properties
+  text: {
+    name: 'Text',
+    priority: RulePriority.UTILITY,
+    metadata: {
+      group: 'Text',
+      figmaSection: 'Text',
+      description: 'Typography and text styling'
+    },
+    subgroups: {
+      typography: {
+        name: 'Typography',
+        rules: typographyRules,
+        metadata: {
+          subgroup: 'Typography',
+          figmaEquivalent: 'Text Properties'
+        }
+      },
+      layout: {
+        name: 'Text Layout',
+        rules: {
+          text: typographyRules.text
+        },
+        metadata: {
+          subgroup: 'Typography',
+          figmaEquivalent: 'Text Properties'
+        }
+      }
+    }
+  },
+
   // 🔗 1. POSITION - Figma's Position (X, Y) - FIRST!
   position: {
     name: 'Position',
@@ -116,9 +147,9 @@ export const RULE_GROUPS: RuleDefinitions = {
     }
   },
 
-  // 📐 2. AUTO LAYOUT - Figma's Auto Layout panel
+  // 📐 2. LAYOUT - Figma's Auto Layout panel
   autoLayout: {
-    name: 'Auto Layout',
+    name: 'Layout',
     priority: RulePriority.LAYOUT,
     metadata: {
       group: 'Auto Layout',
@@ -133,24 +164,10 @@ export const RULE_GROUPS: RuleDefinitions = {
           vbox: displayRules.vbox,
           wrap: displayRules.wrap,
           pack: displayRules.pack,
-          items: displayRules.items,
-          justify: displayRules.justify,
-          flex: displayRules.flex,
-          shrink: displayRules.shrink,
-          grow: displayRules.grow,
-          'flex-wrap': displayRules['flex-wrap'],
         },
         metadata: { 
           subgroup: 'Auto Layout',
           figmaEquivalent: 'Auto Layout'
-        }
-      },
-      sizing: {
-        name: 'Sizing',
-        rules: sizeRules,
-        metadata: { 
-          subgroup: 'Sizing',
-          figmaEquivalent: 'Width & Height'
         }
       },
       gap: {
@@ -179,6 +196,14 @@ export const RULE_GROUPS: RuleDefinitions = {
           figmaEquivalent: 'Padding'
         }
       },
+      sizing: {
+        name: 'Sizing',
+        rules: sizeRules,
+        metadata: {
+          subgroup: 'Sizing',
+          figmaEquivalent: 'Width & Height'
+        }
+      },
     }
   },
 
@@ -193,24 +218,29 @@ export const RULE_GROUPS: RuleDefinitions = {
     },
     subgroups: {
       colors: {
-        name: 'Colors',
+        name: 'Fill',
         rules: colorRules,
         metadata: { 
-          subgroup: 'Colors',
+          subgroup: 'Fill',
           figmaEquivalent: 'Fill'
         }
       },
       borders: {
         name: 'Borders & Radius',
         rules: {
-          b: visualRules.b,
-          bt: visualRules.bt,
-          br: visualRules.br,
-          bb: visualRules.bb,
-          bl: visualRules.bl,
-          r: visualRules.r,
+          ...visualRules
         },
         metadata: { 
+          subgroup: 'Borders & Radius',
+          figmaEquivalent: 'Stroke & Corner Radius'
+        }
+      },
+      Radius: {
+        name: 'Radius',
+        rules: {
+          r: visualRules.r,
+        },
+        metadata: {
           subgroup: 'Borders & Radius',
           figmaEquivalent: 'Stroke & Corner Radius'
         }
@@ -218,7 +248,6 @@ export const RULE_GROUPS: RuleDefinitions = {
       effects: {
         name: 'Effects',
         rules: {
-          ...visualRules,
           ...effectsRules,
         },
         metadata: { 
@@ -226,34 +255,6 @@ export const RULE_GROUPS: RuleDefinitions = {
           figmaEquivalent: 'Effects'
         }
       },
-      background: {
-        name: 'Background',
-        rules: {},
-        metadata: { 
-          subgroup: 'Background'
-        }
-      }
-    }
-  },
-
-  // Text Group - Figma Text Properties
-  text: {
-    name: 'Text',
-    priority: RulePriority.UTILITY,
-    metadata: {
-      group: 'Text',
-      figmaSection: 'Text',
-      description: 'Typography and text styling'
-    },
-    subgroups: {
-      typography: {
-        name: 'Typography',
-        rules: typographyRules,
-        metadata: { 
-          subgroup: 'Typography',
-          figmaEquivalent: 'Text Properties'
-        }
-      }
     }
   },
 
@@ -296,6 +297,23 @@ export const RULE_GROUPS: RuleDefinitions = {
           figmaEquivalent: 'Advanced CSS Properties'
         }
       },
+
+      flexbox: {
+        name: 'Flexbox',
+        rules: {
+          items: displayRules.items,
+          justify: displayRules.justify,
+          flex: displayRules.flex,
+          shrink: displayRules.shrink,
+          grow: displayRules.grow,
+          'flex-wrap': displayRules['flex-wrap'],
+        },
+        metadata: {
+          subgroup: 'Flexbox',
+          figmaEquivalent: 'Flexbox'
+        }
+      },
+
       grid: {
         name: 'Grid',
         rules: gridRules,
@@ -419,7 +437,6 @@ export const RULE_GROUPS: RuleDefinitions = {
         name: 'Patterns',
         rules: {
           ...figmaComponents,
-          ...proseRules,
         },
         metadata: { 
           subgroup: 'Patterns',
@@ -441,8 +458,6 @@ export const RULE_GROUPS: RuleDefinitions = {
   }
 };
 
-// Import prose component
-import { prose } from '../components/patterns/prose';
 
 // String-based component rules (handled separately due to different type)
 export const STRING_RULE_GROUPS = {
@@ -466,7 +481,7 @@ export const STRING_RULE_GROUPS = {
   menuItem: { rules: menuItemRules, priority: RulePriority.COMPONENT },
   featureCard: { rules: featureCardRules, priority: RulePriority.COMPONENT },
   typographyHelpers: { rules: typographyHelperRules, priority: RulePriority.COMPONENT },
-  prose: { rules: { prose }, priority: RulePriority.COMPONENT },
+  prose: { rules: proseRules, priority: RulePriority.COMPONENT },
 };
 
 /**

@@ -9,6 +9,7 @@ import { text } from "./text";
 import { c } from "./color";
 import { bold } from "./bold";
 import { typographyUtilityRules } from "./typography-utils";
+import { listRules } from "./list";
 
 export const typographyRules = {
   font,
@@ -16,6 +17,7 @@ export const typographyRules = {
   c,
   bold,
   ...typographyUtilityRules,
+  ...listRules,
 };
 
 export const visualRules = {

@@ -1,14 +1,12 @@
 <script lang="ts">
   import { Copy, Check, ChevronDown, ChevronRight } from 'lucide-svelte';
-  import { generateCSS, priorityRegistry } from 'adorable-css';
-  import type { RuleInfo } from 'adorable-css';
+  import { generateCSS, RULE_GROUPS } from 'adorable-css';
   
   let copiedRule = '';
   let liveInput = '';
   let liveCSS = '';
   let liveError = '';
   let expandedGroups: Record<string, boolean> = {};
-  let expandedSubgroups: Record<string, boolean> = {};
   
   function copyToClipboard(text: string) {
     navigator.clipboard.writeText(text);
@@ -18,79 +16,6 @@
   
   function toggleGroup(groupName: string) {
     expandedGroups[groupName] = !expandedGroups[groupName];
-  }
-  
-  function toggleSubgroup(subgroupKey: string) {
-    expandedSubgroups[subgroupKey] = !expandedSubgroups[subgroupKey];
-  }
-  
-  function scrollToSection(sectionId: string) {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  }
-  
-  // Get all rules and maintain RULE_GROUPS order
-  $: allRules = priorityRegistry?.getAllRulesInfo?.() || [];
-  
-  // Define the order from RULE_GROUPS in rule-definitions.ts
-  const groupOrder = [
-    'Position',
-    'Auto Layout', 
-    'Visual',
-    'Text',
-    'CSS',
-    'Interaction',
-    'Utilities',
-    'Responsive',
-    'Components'
-  ];
-  
-  // Group rules by their metadata, preserving RULE_GROUPS order
-  $: groupedRules = allRules.reduce((acc: Record<string, Record<string, RuleInfo[]>>, rule: RuleInfo) => {
-    const group = rule.metadata?.group || 'Ungrouped';
-    const subgroup = rule.metadata?.subgroup || 'General';
-    
-    if (!acc[group]) acc[group] = {};
-    if (!acc[group][subgroup]) acc[group][subgroup] = [];
-    
-    acc[group][subgroup].push(rule);
-    return acc;
-  }, {} as Record<string, Record<string, RuleInfo[]>>);
-  
-  // Sort groups according to RULE_GROUPS order
-  $: orderedGroups = groupOrder
-    .filter(groupName => groupedRules[groupName])
-    .map(groupName => [groupName, groupedRules[groupName]] as [string, Record<string, RuleInfo[]>])
-    .concat(
-      Object.entries(groupedRules)
-        .filter(([groupName]) => !groupOrder.includes(groupName))
-    );
-  
-  function testRule(rule: RuleInfo): string {
-    try {
-      if (rule.type === 'string') {
-        return 'String rule - generates AdorableCSS classes';
-      }
-      
-      // Try to generate CSS with common test values
-      const testValues = ['', '16', 'lg', 'red', 'center'];
-      for (const testValue of testValues) {
-        try {
-          const className = testValue ? `${rule.name}(${testValue})` : rule.name;
-          const result = generateCSS([className]);
-          if (result && result.trim()) {
-            return result.substring(0, 150) + (result.length > 150 ? '...' : '');
-          }
-        } catch (e) {
-          // Continue to next test value
-        }
-      }
-      return 'No CSS generated with test values';
-    } catch (error) {
-      return `Error: ${(error as Error).message}`;
-    }
   }
   
   function generateLiveCSS() {
@@ -117,223 +42,192 @@
       liveError = (error as Error).message || 'Failed to generate CSS';
     }
   }
+  
+  // Count total rules
+  function countRules() {
+    let total = 0;
+    Object.values(RULE_GROUPS).forEach(group => {
+      Object.values(group.subgroups).forEach(subgroup => {
+        total += Object.keys(subgroup.rules).length;
+      });
+    });
+    return total;
+  }
+  
+  $: totalRules = countRules();
 </script>
 
-<div class="docs-page">
+<div class="min-h(100vh) bg(gray-50)">
   <!-- Main Layout -->
-  <div class="hbox(top) max-w(7xl) mx(auto)">
+  <div class="flex">
     <!-- Left Navigation -->
-    <nav class="docs-nav w(280) px(4) py(6) border-r(1/gray-200)">
-      <div class="sticky top(0)">
-        <h3 class="text(xs) font(mono) uppercase tracking(wider) c(gray-500) mb(8) px(4)">RULE GROUPS</h3>
-        <ul class="vbox gap(16)">
-          {#each orderedGroups as [groupName, subgroups]}
-            <li>
-              <button
-                class="w(full) text(left) px(4) py(2) text(lg) bold transition hover:c(gray-900) {expandedGroups[groupName] !== false ? 'c(gray-900)' : 'c(gray-600)'}"
-                on:click={() => toggleGroup(groupName)}
-              >
-                <div class="hbox(between)">
-                  <span>{groupName}</span>
-                  <span class="text(xs) font(mono) c(gray-400)">
-                    {Object.values(subgroups).flat().length}
-                  </span>
-                </div>
-              </button>
-              
-              {#if expandedGroups[groupName] !== false}
-                <ul class="vbox gap(0) mt(3) mb(2)">
-                  {#each Object.entries(subgroups) as [subgroupName, rules]}
-                    {@const subgroupKey = `${groupName}-${subgroupName}`}
-                    <li>
-                      <button
-                        class="w(full) text(left) px(4) pl(8) py(1.5) text(sm) transition hover:c(gray-900) {expandedSubgroups[subgroupKey] !== false ? 'c(gray-900)' : 'c(gray-500)'}"
-                        on:click={() => scrollToSection(`${groupName}-${subgroupName}`)}
-                      >
-                        <div class="hbox(between)">
-                          <span>· {subgroupName}</span>
-                          <span class="text(xs) font(mono) c(gray-400)">
-                            {rules.length}
-                          </span>
-                        </div>
-                      </button>
-                    </li>
-                  {/each}
-                </ul>
+    <nav class="hidden lg:block fixed top(0) left(0) w(240px) h(100vh) bg(white) border-r(1/gray-200) scroll(y) overscroll-behavior(contain) z(40)">
+      <div class="p(16) pb(12) border-b(1/gray-100)">
+        <h2 class="title(sm) c(gray-900)">API Reference</h2>
+        <p class="caption(xs) c(gray-500) mt(2)">Total: {totalRules} rules</p>
+      </div>
+      
+      <div class="p(12) vbox gap(20)">
+        {#each Object.entries(RULE_GROUPS) as [groupKey, group]}
+          <div>
+            <button
+              class="w(full) hbox(middle) gap(8) cursor(pointer) group"
+              on:click={() => toggleGroup(group.name)}
+            >
+              {#if expandedGroups[group.name]}
+                <ChevronDown size="16" class="c(gray-400)" />
+              {:else}
+                <ChevronRight size="16" class="c(gray-400)" />
               {/if}
-            </li>
-          {/each}
-        </ul>
+              <h3 class="caption(xs) c(gray-400) uppercase letter-spacing(widest) flex(1) text(left)">
+                {group.name}
+              </h3>
+            </button>
+            
+            {#if expandedGroups[group.name]}
+              <ul class="vbox gap(1) mt(8)">
+                {#each Object.entries(group.subgroups) as [subgroupKey, subgroup]}
+                  <li>
+                    <a 
+                      href="#{group.name}-{subgroup.name}"
+                      class="relative block py(6) px(12) ml(20) r(6) transition-all duration(150)
+                             c(gray-600) hover:bg(gray-50) hover:c(gray-900)"
+                    >
+                      <div class="hbox(middle) gap(8)">
+                        <span class="body(sm) flex(1)">{subgroup.name}</span>
+                        <span class="caption(xs) c(gray-400)">{Object.keys(subgroup.rules).length}</span>
+                      </div>
+                    </a>
+                  </li>
+                {/each}
+              </ul>
+            {/if}
+          </div>
+        {/each}
       </div>
     </nav>
     
     <!-- Main Content -->
-    <main class="flex(1) px(6)">
-    <!-- Live CSS Tester -->
-    <section class="mb(8) p(6) bg(white) border(1/gray-200) r(lg)">
-      <h3 class="text(lg) bold c(gray-900) mb(4)">Live CSS Tester</h3>
-      <div class="vbox gap(4)">
-        <div class="hbox gap(4)">
-          <input
-            bind:value={liveInput}
-            placeholder="Enter AdorableCSS classes... (e.g., w(300) p(lg) c(blue-500))"
-            class="flex(1) px(3) py(2) border(1/gray-300) r(md) text(sm) font(mono)"
-            on:input={generateLiveCSS}
-          />
-          <button
-            class="px(4) py(2) bg(blue-500) c(white) r(md) text(sm) hover:bg(blue-600) transition"
-            on:click={() => copyToClipboard(liveCSS)}
-            title="Copy CSS output"
-          >
-            Copy CSS
-          </button>
+    <main class="ml(0) lg:ml(240px) min-h(100vh) bg(white)">
+      <div class="px(20) lg:px(40) py(40) xl:pr(280)">
+        <!-- Page Header -->
+        <div class="mb(48)">
+          <h1 class="heading(h1) c(gray-900) mb(16)">API Reference</h1>
+          <p class="body(lg) c(gray-600) max-w(3xl)">
+            Complete reference for all AdorableCSS rules, organized by category.
+            Explore layout, visual, typography, and utility rules with live examples.
+          </p>
         </div>
-        {#if liveCSS}
-          <div class="vbox gap(2)">
-            <h4 class="text(sm) bold c(gray-700)">Generated CSS:</h4>
-            <pre class="p(4) bg(gray-50) border(1/gray-200) r(md) text(xs) font(mono) overflow-x(auto) max-h(300) scroll(y)">{liveCSS}</pre>
-          </div>
-        {/if}
-        {#if liveError}
-          <div class="p(3) bg(red-50) border(1/red-200) r(md)">
-            <p class="text(sm) c(red-700)">Error: {liveError}</p>
-          </div>
-        {/if}
-      </div>
-    </section>
 
-      {#if Object.keys(groupedRules).length === 0}
-      <!-- Empty State -->
-      <div class="text(center) py(16)">
-        <div class="text(6xl) mb(4)">🔍</div>
-        <h3 class="text(xl) bold c(gray-900) mb(2)">No rules found</h3>
-        <p class="text(gray-600)">No rules are currently loaded</p>
-      </div>
-    {:else}
-      <!-- Table View by Group -->
-      <div class="overflow-x(auto)">
-        <table class="docs-table w(full) border-collapse font(sm)">
-          <thead>
-            <tr class="bg(gray-50) border-b(2/gray-200)">
-              <th class="text(left) p(3) font(semibold) c(gray-900) w(200)">Rule</th>
-              <th class="text(left) p(3) font(semibold) c(gray-900) w(100)">Priority</th>
-              <th class="text(left) p(3) font(semibold) c(gray-900)">CSS Output</th>
-            </tr>
-          </thead>
-          <tbody>
-            {#each orderedGroups as [groupName, subgroups], index}
-              <!-- Spacer before group (except first) -->
-              {#if index > 0}
-                <tr>
-                  <td colspan="3" class="h(48)"></td>
-                </tr>
-              {/if}
-              <!-- Group Header Row -->
-              <tr class="border-t(3/gray-300)">
-                <td colspan="3" class="px(0) py(8)">
-                  <button 
-                    class="hbox(middle) gap(2) w(full) text(left) cursor(pointer)"
-                    on:click={() => toggleGroup(groupName)}
-                  >
-                    {#if expandedGroups[groupName] !== false}
-                      <ChevronDown size="20" class="c(gray-600)" />
-                    {:else}
-                      <ChevronRight size="20" class="c(gray-600)" />
-                    {/if}
-                    <span class="font(bold) text(2xl) c(gray-900)">{groupName}</span>
-                    <span class="text(sm) font(mono) c(gray-500) ml(3)">
-                      {Object.values(subgroups).flat().length} rules
-                    </span>
-                  </button>
-                </td>
-              </tr>
-              
-              {#if expandedGroups[groupName] !== false}
-                {#each Object.entries(subgroups) as [subgroupName, rules]}
-                  {@const subgroupKey = `${groupName}-${subgroupName}`}
-                  <!-- Spacer before subgroup (except first) -->
-                  {#if Object.keys(subgroups).indexOf(subgroupName) > 0}
-                    <tr>
-                      <td colspan="3" class="h(16)"></td>
-                    </tr>
-                  {/if}
-                  <!-- Subgroup Header Row -->
-                  <tr id="{groupName}-{subgroupName}">
-                    <td colspan="3" class="px(0) pt(6) pb(3)">
-                      <button 
-                        class="hbox(middle) gap(2) w(full) text(left) cursor(pointer) pl(6)"
-                        on:click={() => toggleSubgroup(subgroupKey)}
-                      >
-                        {#if expandedSubgroups[subgroupKey] !== false}
-                          <ChevronDown size="16" class="c(gray-500)" />
-                        {:else}
-                          <ChevronRight size="16" class="c(gray-500)" />
-                        {/if}
-                        <span class="font(semibold) text(lg) c(gray-700)">{subgroupName}</span>
-                        <span class="text(xs) font(mono) c(gray-400) ml(2)">
-                          {rules.length}
-                        </span>
-                      </button>
-                    </td>
-                  </tr>
+        <!-- Live CSS Tester -->
+        <section class="mb(48) p(24) bg(gray-50) r(12) border(1/gray-100)">
+          <h3 class="title(lg) c(gray-900) mb(16)">Live CSS Tester</h3>
+          <div class="vbox gap(16)">
+            <div class="hbox gap(12)">
+              <input
+                bind:value={liveInput}
+                placeholder="Enter AdorableCSS classes... (e.g., w(300) p(lg) c(blue-500))"
+                class="flex(1) px(16) py(12) border(1/gray-200) r(8) body(base) font(mono) bg(white)
+                       focus:border(purple-300) focus:ring(2/purple-100) transition-all"
+                on:input={generateLiveCSS}
+              />
+              <button
+                class="px(20) py(12) bg(purple-600) c(white) r(8) body(sm) bold hover:bg(purple-700) 
+                       active:scale(0.98) transition-all duration(150)"
+                on:click={() => copyToClipboard(liveCSS)}
+                title="Copy CSS output"
+              >
+                Copy CSS
+              </button>
+            </div>
+            {#if liveCSS}
+              <div class="vbox gap(8)">
+                <h4 class="label(sm) c(gray-600) uppercase letter-spacing(wide)">Generated CSS:</h4>
+                <pre class="p(20) bg(white) border(1/gray-200) r(8) caption(base) font(mono) 
+                           overflow-x(auto) max-h(300) scroll(y) c(gray-700)">{liveCSS}</pre>
+              </div>
+            {/if}
+            {#if liveError}
+              <div class="p(16) bg(red-50) border(1/red-200) r(8)">
+                <p class="body(sm) c(red-700)">Error: {liveError}</p>
+              </div>
+            {/if}
+          </div>
+        </section>
+
+      <!-- Rules by Group -->
+      <div class="vbox gap(48)">
+        {#each Object.entries(RULE_GROUPS) as [groupKey, group]}
+          <section>
+            <!-- Group Header -->
+            <div class="mb(24)">
+              <h2 class="heading(h1) c(gray-900) mb(8)">{group.name}</h2>
+              <p class="body(base) c(gray-600)">
+                {group.metadata?.description || `${group.name} utilities`}
+              </p>
+            </div>
+            
+            <div class="vbox gap(32)">
+              {#each Object.entries(group.subgroups) as [subgroupKey, subgroup]}
+                <div id="{group.name}-{subgroup.name}" class="card scroll-mt(24)">
+                  <!-- Subgroup Header -->
+                  <div class="mb(16)">
+                    <h3 class="title(lg) c(gray-800) mb(4)">{subgroup.name}</h3>
+                    <p class="caption(base) c(gray-500)">{Object.keys(subgroup.rules).length} rules</p>
+                  </div>
                   
-                  {#if expandedSubgroups[subgroupKey] !== false}
-                    {#each rules as rule}
-                      <tr class="border-b(1/gray-100) hover:bg(gray-50) transition">
-                        <!-- Rule Name -->
-                        <td class="p(3) pl(12)">
-                          <button
-                            class="hbox(middle) gap(2) text(left) cursor(pointer)"
-                            on:click={() => copyToClipboard(rule.name)}
-                            title="Click to copy {rule.name}"
-                          >
-                            <code class="text(sm) font(mono) bold c(indigo-600)">{rule.name}</code>
-                            {#if copiedRule === rule.name}
-                              <Check size="14" class="c(green-600)" />
-                            {:else}
-                              <Copy size="12" class="c(gray-400) hover:c(gray-600)" />
-                            {/if}
-                          </button>
-                        </td>
-                        
-                        <!-- Priority -->
-                        <td class="p(3)">
-                          <span class="text(sm) font(mono) c(gray-700)">{rule.priority}</span>
-                        </td>
-                        
-                        <!-- CSS Output -->
-                        <td class="p(3)">
-                          <code class="text(xs) font(mono) c(gray-600) bg(gray-50) px(2) py(1) r(sm)">{testRule(rule)}</code>
-                        </td>
-                      </tr>
-                    {/each}
-                  {/if}
-                {/each}
-              {/if}
-            {/each}
-          </tbody>
-        </table>
+                  <!-- Rules Table -->
+                  <div class="overflow-x(auto) r(8) border(1/gray-200)">
+                    <table class="w(full)">
+                      <thead>
+                        <tr class="bg(gray-50) border-b(1/gray-200)">
+                          <th class="text(left) p(sm/lg) label(sm) c(gray-600) w(200)">Rule</th>
+                          <th class="text(left) p(sm/lg) label(sm) c(gray-600) w(120)">Priority</th>
+                          <th class="text(left) p(sm/lg) label(sm) c(gray-600)">Description</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {#each Object.entries(subgroup.rules) as [ruleName, handler], i}
+                          <tr class="{i % 2 === 0 ? 'bg(white)' : 'bg(gray-50)'} 
+                                     border-b(1/gray-100) hover:bg(purple-50) transition-colors duration(150)">
+                            <!-- Rule Name -->
+                            <td class="p(sm/lg)">
+                              <button
+                                class="hbox(middle) gap(8) cursor(pointer) group"
+                                on:click={() => copyToClipboard(ruleName)}
+                                title="Click to copy {ruleName}"
+                              >
+                                <code class="font(mono) bold(medium) c(purple-600) body(xs)">{ruleName}</code>
+                                {#if copiedRule === ruleName}
+                                  <Check size="14" class="c(green-600)" />
+                                {:else}
+                                  <Copy size="12" class="c(gray-400) group-hover:c(gray-600) transition" />
+                                {/if}
+                              </button>
+                            </td>
+                            
+                            <!-- Priority -->
+                            <td class="p(sm/lg)">
+                              <span class="caption(base) font(mono) c(gray-600)">{group.priority}</span>
+                            </td>
+                            
+                            <!-- Description -->
+                            <td class="p(sm/lg)">
+                              <span class="body(xs) font(mono) c(gray-700)">{generateCSS([ruleName])}</span>
+                            </td>
+                          </tr>
+                        {/each}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              {/each}
+            </div>
+          </section>
+        {/each}
       </div>
-      {/if}
     
-      <!-- Debug Info -->
-      <section class="mt(16) p(6) bg(gray-50) r(lg)">
-        <h3 class="text(lg) bold c(gray-900) mb(4)">Debug Information</h3>
-        <div class="vbox gap(2) text(sm) c(gray-700)">
-          <div>
-            <strong>Priority Registry:</strong> {priorityRegistry ? 'Available' : 'Not Available'}
-          </div>
-          <div>
-            <strong>Total Rules:</strong> {allRules.length}
-          </div>
-          <div>
-            <strong>Rules with Metadata:</strong> {allRules.filter(r => r.metadata).length} / {allRules.length}
-          </div>
-          <div>
-            <strong>Group Order:</strong> {groupOrder.join(', ')}
-          </div>
-        </div>
-      </section>
+      </div>
     </main>
   </div>
 </div>
@@ -347,20 +241,24 @@
   th {
     position: sticky;
     top: 0;
-    background: var(--gray-50);
     z-index: 10;
   }
   
-  tbody tr {
-    position: relative;
+  /* Custom scrollbar for sidebar */
+  nav::-webkit-scrollbar {
+    width: 6px;
   }
   
-  tbody tr:hover {
-    background: var(--gray-50);
+  nav::-webkit-scrollbar-track {
+    background: transparent;
   }
   
-  /* Better column widths */
-  th:nth-child(1), td:nth-child(1) { min-width: 200px; } /* Rule */
-  th:nth-child(2), td:nth-child(2) { min-width: 100px; } /* Priority */
-  th:nth-child(3), td:nth-child(3) { min-width: 500px; } /* CSS Output */
+  nav::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 3px;
+  }
+  
+  nav::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
 </style>

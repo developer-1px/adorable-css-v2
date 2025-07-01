@@ -15,7 +15,8 @@
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run",
 		"build:gh-pages": "NODE_ENV=production vite build",
-		"deploy:gh-pages": "npm run build:gh-pages && touch build/.nojekyll && echo 'adorablecss.com' > build/CNAME"
+		"predeploy:gh-pages": "touch build/.nojekyll && echo 'adorablecss.com' > build/CNAME",
+		"deploy:gh-pages": "npm run build:gh-pages && npm run predeploy:gh-pages && gh-pages -d build -t true"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
@@ -29,6 +30,7 @@
 		"eslint": "^9.18.0",
 		"eslint-config-prettier": "^10.0.1",
 		"eslint-plugin-svelte": "^3.0.0",
+		"gh-pages": "^6.3.0",
 		"globals": "^16.0.0",
 		"highlight.js": "^11.11.1",
 		"markdown-it": "^14.1.0",

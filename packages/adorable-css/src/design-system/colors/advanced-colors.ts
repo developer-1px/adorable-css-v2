@@ -197,6 +197,7 @@ export function generateOklchToneMap(baseHex: string): Record<string, string> {
   
   // Perceptually balanced tone map
   const tones = {
+    25: { l: 0.99, cFactor: 0.08 },    // Ultra light, nearly white
     50: { l: 0.97, cFactor: 0.15 },   // Very light, almost white
     100: { l: 0.93, cFactor: 0.35 },  // Light pastel
     200: { l: 0.87, cFactor: 0.55 },  // Soft pastel
@@ -220,7 +221,9 @@ export function generateOklchToneMap(baseHex: string): Record<string, string> {
       
       // Dynamic max chroma based on lightness
       let maxChroma = 0.37;
-      if (config.l > 0.8) {
+      if (config.l > 0.98) {
+        maxChroma = 0.08; // Ultra light colors need very low chroma
+      } else if (config.l > 0.8) {
         maxChroma = 0.15; // Very light colors need low chroma
       } else if (config.l > 0.6) {
         maxChroma = 0.25; // Light colors

@@ -1,72 +1,76 @@
 import { defineComponent } from '../defineComponent';
 import type { ComponentDefinition } from '../defineComponent';
 
-// Elegant prose component with refined AdorableCSS syntax
+// VitePress-inspired prose component with refined typography
 const proseDefinition: ComponentDefinition = {
-  // Base typography with golden ratio spacing
-  base: 'text(md)',
+  // Base typography with optimal reading experience
+  base: 'font(16/1.6) c(stone-700)',
   
   selectors: {
-    // Typography hierarchy using heading component
-    'h1': 'heading(h1)',
-    'h2': 'heading(h2)',
-    'h3': 'heading(h3)',
-    'h4': 'heading(h4)',
-    'h5': 'heading(h5)',
-    'h6': 'heading(h6)',
+    // Typography hierarchy using heading component with margin
+    'h1': 'heading(h1) mt(0) mb(2xl)',
+    'h2': 'heading(h2) mt(5xl) mb(lg) pb(sm) border-b(1/stone-200)',
+    'h3': 'heading(h3) mt(3xl) mb(md)',
+    'h4': 'heading(h4) mt(2xl) mb(sm)',
+    'h5': 'heading(h5) mt(lg) mb(sm)',
+    'h6': 'heading(h6) mt(lg) mb(sm)',
     
-    // Body & inline elements
-    'p': 'font(md/relaxed) pb(lg)',
-    'strong': 'bold(semi) c(gray-900)',
+    // Body & inline elements - VitePress inspired
+    'p': 'font(16/1.7) mb(16) c(stone-700)',
+    'strong': 'bold(600) c(stone-900)',
     'em': 'italic',
-    'mark': 'bg(yellow-100) px(xs) r(xs)',
+    'mark': 'bg(yellow-200.5) px(4) py(1) r(2)',
     
-    // Links with subtle interaction
-    'a': 'link c(blue-600) underline decoration(blue-200) decoration(1) underline-offset(2)',
-    'a:hover': 'c(blue-700) decoration(blue-500) decoration(2)',
-    'a:active': 'c(blue-800)',
+    // Links - VitePress style
+    'a': 'c(purple-600) decoration(underline) decoration(purple-600.3) underline-offset(2) transition(all/150ms)',
+    'a:hover': 'c(purple-700) decoration(purple-700.6)',
+    'a:active': 'c(purple-800)',
     
-    // Lists with refined markers
-    'ul, ol': 'list-container my(lg)',
-    'ul > li': 'list-item(bullet) mb(sm)',
-    'ol > li': 'list-item(number) mb(sm) counter-increment(prose-ol)',
-    'ol > li::before': 'content(counter(prose-ol,decimal-leading-zero)) absolute left(0) c(gray-500) font(sm) bold(medium)',
-    'ol': 'counter-reset(prose-ol)',
-    'li ul, li ol': 'my(sm)',
-    'li li': 'font(md)',
+    // Lists - VitePress style
+    'ul, ol': 'my(16) pl(20)',
+    'ul': 'list(disc)',
+    'ol': 'list(decimal)',
+    'li': 'mb(4) pl(8)',
+    'li > ul, li > ol': 'my(8)',
+    'li > p': 'mb(8)',
+    'li > p:last-child': 'mb(0)',
     
 
-    // Blockquotes with elegance
-    'blockquote': 'blockquote my(2xl)',
-    'blockquote p': 'mb(md)',
+    // Blockquotes - VitePress style
+    'blockquote': 'my(16) pl(16) border-l(4/stone-300) c(stone-600) italic',
+    'blockquote p': 'mb(8)',
     'blockquote p:last-child': 'mb(0)',
-    'blockquote cite': 'block mt(sm) font(sm) not-italic c(gray-600)',
-    'blockquote cite::before': 'content("—") mr(xs)',
+    'blockquote cite': 'block mt(8) font(14) not-italic c(stone-500)',
+    'blockquote cite::before': 'content("—") mr(4)',
     
-    // Tables with clean design
-    'table': 'table my(xl)',
-    'th, td': 'table-cell',
-    'th': 'table-header',
-    'tbody tr:hover': 'bg(gray-50)',
+    // Tables - VitePress style
+    'table': 'w(full) my(16) border-collapse text(left)',
+    'thead': 'border-b(2/stone-300)',
+    'th': 'px(12) py(8) font(14) bold(600) c(stone-900) text(left)',
+    'td': 'px(12) py(8) border-b(1/stone-200)',
     'tbody tr:last-child td': 'border-b(0)',
+    'tbody tr:hover': 'bg(stone-50)',
     
-    // Media & visual elements
-    'hr': 'divider my(3xl)',
-    'img': 'image my(xl)',
-    'figure': 'figure my(xl)',
-    'figure img': 'mx(auto) mb(md)',
-    'figcaption': 'caption',
+    // Media & visual elements - VitePress style
+    'hr': 'my(32) border(0) h(1) bg(stone-200)',
+    'img': 'max-w(full) h(auto) r(8) my(16)',
+    'figure': 'my(24)',
+    'figure img': 'mx(auto) mb(8)',
+    'figcaption': 'text(center) font(14) c(stone-600) mt(8)',
     
-    // Interactive elements
-    'kbd': 'kbd',
+    // Code & interactive elements - Light theme
+    'code': 'px(4) py(1) bg(stone-50) r(4) border(1/stone-200) font(sm) break-words',
+    'pre': 'my(16) p(16) c(stone-900) r(8) border(1/stone-200) overflow-x(auto) font(mono) font(xs)',
+    'pre code': 'p(0) bg(transparent) c(inherit) border(0)',
+    'kbd': 'inline-block px(6) py(1) bg(stone-100) border(1/stone-300) r(4) shadow(sm) font(mono) font(12) c(stone-700)',
     'abbr[title]': 'decoration(dotted) underline-offset(2) cursor(help)',
     
     // Structured content
     'dl': 'my(lg)',
-    'dt': 'bold(medium) mt(lg) mb(xs) c(gray-900)',
-    'dd': 'ml(lg) c(gray-700)',
+    'dt': 'bold(medium) mt(lg) mb(xs) c(stone-900)',
+    'dd': 'ml(lg) c(stone-700)',
     
-    'details': 'my(lg) p(md) bg(gray-50) r(lg) group',
+    'details': 'my(lg) p(md) bg(stone-50) r(lg) group',
     'summary': 'bold(medium) cursor(pointer) select(none) list(none)',
     'details[open] summary': 'mb(md)',
     
@@ -74,10 +78,17 @@ const proseDefinition: ComponentDefinition = {
     '> *:first-child': 'mt(0)',
     '> *:last-child': 'mb(0)',
     
-    '.lead': 'font(xl/1.5) c(gray-700)',
+    '.lead': 'font(20/1.6) c(stone-600) mb(24)',
+    
+    // VitePress special elements
+    '.tip, .warning, .danger, .info': 'my(16) p(16) r(8) border-l(4)',
+    '.tip': 'bg(green-50) border-l(green-500) c(green-900)',
+    '.warning': 'bg(yellow-50) border-l(yellow-500) c(yellow-900)',
+    '.danger': 'bg(red-50) border-l(red-500) c(red-900)',
+    '.info': 'bg(blue-50) border-l(blue-500) c(blue-900)',
   },
   
-  // Size variants
+  // Size variants - VitePress inspired
   sizes: {
     sm: 'font(base/1.5) max-w(sm)',
     default: '',
@@ -87,66 +98,80 @@ const proseDefinition: ComponentDefinition = {
   // Style variants
   variants: {
     default: '',
-    article: 'font(serif) hyphens(auto)',
-    technical: 'font(mono)',
+    docs: 'max-w(3xl)',
+    article: 'font(serif) hyphens(auto) max-w(prose) mx(auto)',
+    technical: 'font(mono) max-w(4xl)',
     marketing: 'font(lg/1.65) tracking(tight)'
   },
   
   // Variant-specific overrides
   variantSelectors: {
     sm: {
-      'h1': 'font(2xl)',
-      'h2': 'font(xl)',
-      'h3': 'font(lg)',
-      'blockquote': 'pl(md) border-l(2)',
-      'code': 'font(xs)',
-      'pre': 'p(md)',
-      'th, td': 'p(sm)'
+      'h1': 'font(24/1.25) mt(0) mb(lg)',
+      'h2': 'font(20/1.3) mt(3xl) mb(md)',
+      'h3': 'font(16/1.4) mt(2xl) mb(sm)',
+      'blockquote': 'pl(12) border-l(3)',
+      'code': 'font(12)',
+      'pre': 'p(12) font(12)',
+      'th, td': 'px(8) py(6) font(13)'
     },
     
     lg: {
-      'h1': 'font(5xl/1/-3%)',
-      'h2': 'font(4xl/1.1/-2%)',
-      'h3': 'font(3xl/1.2/-1%)',
-      'p': 'mb(xl)',
-      'blockquote': 'my(3xl) pl(xl) border-l(6)',
-      'pre': 'p(xl) my(2xl)'
+      'h1': 'font(40/1.2/-2%) mt(0) mb(3xl)',
+      'h2': 'font(32/1.25/-1%) mt(6xl) mb(xl)',
+      'h3': 'font(24/1.3) mt(4xl) mb(lg)',
+      'p': 'mb(20) font(18/1.7)',
+      'blockquote': 'my(24) pl(24) border-l(5)',
+      'pre': 'p(20) my(24)'
+    },
+    
+    docs: {
+      'h1': 'scroll-mt(80) mt(0) mb(2xl)',
+      'h2': 'scroll-mt(80) mt(5xl) mb(lg) pb(sm) border-b(1/stone-200)',
+      'h3': 'scroll-mt(80) mt(3xl) mb(md)',
+      'h4': 'scroll-mt(80) mt(2xl) mb(sm)',
+      'a[href^="#"]': 'c(purple-600) decoration(none)',
+      'a[href^="#"]:hover': 'c(purple-700) decoration(underline)'
     },
     
     article: {
-      'p': 'text-indent(2rem) mb(0)',
-      'p:first-of-type': 'text-indent(0)',
+      'p': 'text-indent(2em) mb(0)',
+      'p:first-of-type': 'text-indent(0) font(18/1.8)',
+      'p:first-of-type::first-letter': 'float(left) font(72/1) bold(700) mr(8) mt(4) c(purple-600)',
       'p + p': 'mt(0)',
-      'h1, h2, h3': 'font(serif) text(center)',
-      'blockquote': 'font(italic) mx(xl)'
+      'h1, h2, h3': 'font(serif) text(center) my(32) mt(3xl) mb(xl)',
+      'blockquote': 'font(italic) mx(32) my(32) text(center) border(0)',
+      'blockquote p': 'font(20/1.6)'
     },
     
     technical: {
-      'h1, h2, h3, h4, h5, h6': 'font(mono) bold(normal)',
-      'p': 'lh(1.75)',
-      'code': 'bg(gray-900) c(green-400)',
-      'pre': 'bg(gray-900) c(gray-100) p(xl)',
-      'pre code': 'c(inherit)',
-      'a': 'c(cyan-500) decoration(none)',
-      'a:hover': 'c(cyan-400) underline'
+      'h1, h2, h3, h4, h5, h6': 'font(mono) bold(400) mt(2xl) mb(lg)',
+      'p': 'font(14/1.75)',
+      'code': 'bg(blue-50) c(blue-700) px(6) py(2) border(1/blue-200)',
+      'pre': 'bg(stone-50) c(stone-900) p(16) border(1/stone-300) font(mono)',
+      'pre code': 'p(0) bg(transparent) c(inherit) border(0)',
+      'a': 'c(blue-600) decoration(none) bold(500)',
+      'a:hover': 'c(blue-700) decoration(underline)',
+      'table': 'font(mono) font(13)',
+      'ul, ol': 'font(14)'
     },
     
     marketing: {
       'h1': 'font(..5xl/1/-4%) bold(black) tracking(tight) c(gradient(to-br/purple-600..pink-600))',
-      'h2': 'font(..4xl/1.1/-3%) c(gray-900)',
-      'h3': 'font(..3xl/1.2/-2%) c(gray-800)',
-      'p': 'font(lg) lh(1.75) c(gray-700)',
+      'h2': 'font(..4xl/1.1/-3%) c(stone-900)',
+      'h3': 'font(..3xl/1.2/-2%) c(stone-800)',
+      'p': 'font(lg) lh(1.75) c(stone-700)',
       'strong': 'c(purple-600)',
       'a': 'c(purple-600) bold(medium) decoration(none) hover:decoration(underline)',
       'blockquote': 'font(xl) italic border-l(purple-400) pl(xl) my(2xl)',
-      '.lead': 'font(2xl/1.5) bold(light) c(gray-700) max-w(4xl)'
+      '.lead': 'font(2xl/1.5) bold(light) c(stone-700) max-w(4xl)'
     }
   },
   
   // Dark mode support
   states: {
     // Dark mode colors
-    'dark': 'c(gray-100) bg(gray-900)',
+    'dark': 'c(stone-100) bg(stone-900)',
   }
 };
 

@@ -54,10 +54,40 @@ export const overflowY: RuleHandler = (args?: string): CSSRule => {
   return {};
 };
 
+export const overscrollBehavior: RuleHandler = (args?: string): CSSRule => {
+  if (!args) return { 'overscroll-behavior': 'auto' };
+  
+  const validValues = ['auto', 'contain', 'none'];
+  
+  // overscroll-behavior(x-contain) -> overscroll-behavior-x: contain
+  if (args.startsWith('x-')) {
+    const value = args.substring(2);
+    if (validValues.includes(value)) {
+      return { 'overscroll-behavior-x': value };
+    }
+  }
+  
+  // overscroll-behavior(y-contain) -> overscroll-behavior-y: contain
+  if (args.startsWith('y-')) {
+    const value = args.substring(2);
+    if (validValues.includes(value)) {
+      return { 'overscroll-behavior-y': value };
+    }
+  }
+  
+  // overscroll-behavior(contain), overscroll-behavior(none), etc.
+  if (validValues.includes(args)) {
+    return { 'overscroll-behavior': args };
+  }
+  
+  return {};
+};
+
 export const overflowRules = {
   overflow,
   'overflow-x': overflowX,
   'overflow-y': overflowY,
   scroll,
-  clip
+  clip,
+  'overscroll-behavior': overscrollBehavior
 };

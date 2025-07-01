@@ -212,9 +212,9 @@ export const size: RuleHandler = (args?: string): CSSRule => {
 export const sizeRules = {
   w,
   h,
+  size,
   'min-w': minW,
   'max-w': maxW,
   'min-h': minH,
   'max-h': maxH,
-  size,
 };

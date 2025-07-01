@@ -32,9 +32,8 @@ md.renderer.rules.fence = (tokens, idx) => {
 			: hljs.highlightAuto(content).value;
 
 	return `
-<div class="code-block">
   <pre><code class="hljs language-${lang}">${highlighted}</code></pre>
-</div>`;
+`;
 };
 
 // 링크
@@ -83,7 +82,7 @@ md.renderer.rules.blockquote_open = () => {
 // 인라인 코드
 md.renderer.rules.code_inline = (tokens, idx) => {
 	const content = tokens[idx].content;
-	return `<code class="bg(gray-100) c(pink-600) px(xs) py(0.5) r(sm) font(mono) text(sm)">${md.utils.escapeHtml(content)}</code>`;
+	return `<code class="bg(gray-50) c(purple-700) px(xs) py(0.5) r(sm) border(1/gray-200) font(mono) text(sm)">${md.utils.escapeHtml(content)}</code>`;
 };
 
 /**
@@ -99,23 +98,37 @@ export async function processMarkdownIt(content) {
 
 		// Highlight.js CSS
 		const css = `
-      /* Highlight.js GitHub Dark Theme */
-      .hljs-comment, .hljs-quote { color: #8b949e; }
-      .hljs-keyword, .hljs-selector-tag, .hljs-literal { color: #ff7b72; }
-      .hljs-string { color: #a5d6ff; }
-      .hljs-number { color: #79c0ff; }
-      .hljs-variable, .hljs-template-variable, .hljs-attr { color: #ffa657; }
-      .hljs-name, .hljs-selector-class, .hljs-selector-id { color: #7ee787; }
-      .hljs-title, .hljs-function { color: #d2a8ff; }
-      .hljs-built_in { color: #79c0ff; }
-      .hljs-params { color: #c9d1d9; }
-      .hljs-meta { color: #58a6ff; }
+      /* Highlight.js Light Theme inspired by GitHub */
+      .hljs { background: rgb(249 250 251); color: #24292e; }
+      .hljs-comment, .hljs-quote { color: #6a737d; }
+      .hljs-keyword, .hljs-selector-tag, .hljs-literal { color: #d73a49; }
+      .hljs-string { color: #032f62; }
+      .hljs-number { color: #005cc5; }
+      .hljs-variable, .hljs-template-variable, .hljs-attr { color: #e36209; }
+      .hljs-name, .hljs-selector-class, .hljs-selector-id { color: #22863a; }
+      .hljs-title, .hljs-function { color: #6f42c1; }
+      .hljs-built_in { color: #005cc5; }
+      .hljs-params { color: #24292e; }
+      .hljs-meta { color: #005cc5; }
       .hljs-emphasis { font-style: italic; }
       .hljs-strong { font-weight: bold; }
+      .hljs-deletion { color: #b31d28; background-color: #ffeef0; }
+      .hljs-addition { color: #22863a; background-color: #f0fff4; }
+      
+      /* Code blocks */
+      pre { 
+        background-color: rgb(249 250 251);
+        border: 1px solid rgb(229 231 235);
+      }
       
       /* Copy button */
+      .copy-btn {
+        background-color: rgb(243 244 246);
+        border: 1px solid rgb(209 213 219);
+        color: rgb(55 65 81);
+      }
       .copy-btn:hover {
-        background-color: rgb(55 65 81);
+        background-color: rgb(229 231 235);
       }
     `;
 

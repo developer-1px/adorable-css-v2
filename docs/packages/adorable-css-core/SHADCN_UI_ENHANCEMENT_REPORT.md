@@ -69,7 +69,7 @@ Successfully implemented the mixed AdorableCSS + raw CSS format, allowing:
 export const btnString: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
   return [
     // AdorableCSS utilities for layout
-    'inline-flex items(center) justify(center) gap(8) cursor(pointer) rounded(md)',
+    'inline-flex items(center) justify(center) gap(8) cursor(pointer) r(md)',
     // Raw CSS for complex interactions
     {
       'background': 'var(--gray-900)',
@@ -96,7 +96,6 @@ export const btnString: StringRuleHandler = (args?: string): string | (string | 
 6. **Typography Hierarchy**: Clear visual hierarchy with consistent spacing
 
 ## Missing Utilities (Non-Critical)
-- `rounded()`: Border-radius utility
 - `tracking()`: Letter-spacing utility
 - `underline-offset()`: Text underline offset
 

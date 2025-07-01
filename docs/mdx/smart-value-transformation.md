@@ -37,7 +37,7 @@ AdorableCSS v2의 **스마트 값 변환 시스템**은 개발자가 입력하�
 
 ```css
 /* Tailwind CSS - 기계적인 값 체계 */
-w-80 p-6 text-lg leading-relaxed rounded-lg shadow-md
+w-80 p-6 text-lg leading-relaxed r(lg) shadow-md
 
 /* 의미없는 숫자 조합, 토큰 시스템 없음 */
 mx-4 px-8 space-y-6 max-w-7xl

@@ -186,7 +186,7 @@ describe('defineThemedComponent', () => {
   it('should handle different variants in light and dark', () => {
     const component = defineThemedComponent({
       light: {
-        base: 'rounded',
+        base: 'r(md)',
         sizes: {
           sm: 'p(2)',
           lg: 'p(4)'
@@ -196,7 +196,7 @@ describe('defineThemedComponent', () => {
         }
       },
       dark: {
-        base: 'rounded', 
+        base: 'r(md)', 
         sizes: {
           sm: 'p(2)',
           lg: 'p(4)'
@@ -208,6 +208,6 @@ describe('defineThemedComponent', () => {
     });
     
     const result = component('card/lg');
-    expect(result).toBe('rounded p(4) bg(white) shadow(sm) dark:rounded dark:p(4) dark:bg(gray-800) dark:shadow(lg)');
+    expect(result).toBe('r(md) p(4) bg(white) shadow(sm) dark:r(md) dark:p(4) dark:bg(gray-800) dark:shadow(lg)');
   });
 });

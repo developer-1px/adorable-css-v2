@@ -18,7 +18,9 @@
     "release": "pnpm build && pnpm publish --recursive --filter './packages/*'",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "publish-packages": "changeset publish"
+    "publish-packages": "changeset publish",
+    "deploy": "pnpm build:homepage && pnpm --filter homepage-kit deploy:gh-pages",
+    "deploy:quick": "pnpm --filter homepage-kit deploy:gh-pages"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.0",

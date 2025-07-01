@@ -22,7 +22,6 @@ export const lineThrough: RuleHandler = (): CSSRule => ({
 
 // Aliases for line-through
 export const strike = lineThrough;
-export const del = lineThrough;
 
 // Font family utilities
 export const sansSerif: RuleHandler = (): CSSRule => ({
@@ -90,34 +89,6 @@ export const lh: RuleHandler = (args?: string): CSSRule => {
   return { 'line-height': args };
 };
 
-
-// Text rendering optimization
-export const textRendering: RuleHandler = (args?: string): CSSRule => {
-  const validValues = ['auto', 'optimizeSpeed', 'optimizeLegibility', 'geometricPrecision'];
-  if (!args || !validValues.includes(args)) {
-    return { 'text-rendering': 'optimizeLegibility' };
-  }
-  return { 'text-rendering': args };
-};
-
-// Webkit font smoothing
-export const webkitFontSmoothing: RuleHandler = (args?: string): CSSRule => {
-  const validValues = ['auto', 'none', 'antialiased', 'subpixel-antialiased'];
-  if (!args || !validValues.includes(args)) {
-    return { '-webkit-font-smoothing': 'antialiased' };
-  }
-  return { '-webkit-font-smoothing': args };
-};
-
-// Mozilla font smoothing
-export const mozFontSmoothing: RuleHandler = (args?: string): CSSRule => {
-  const validValues = ['auto', 'grayscale'];
-  if (!args || !validValues.includes(args)) {
-    return { '-moz-osx-font-smoothing': 'grayscale' };
-  }
-  return { '-moz-osx-font-smoothing': args };
-};
-
 // Export all typography utilities
 export const typographyUtilityRules = {
   italic,
@@ -125,7 +96,6 @@ export const typographyUtilityRules = {
   underline,
   'line-through': lineThrough,
   strike,
-  del,
   'sans-serif': sansSerif,
   serif,
   monospace,
@@ -137,7 +107,4 @@ export const typographyUtilityRules = {
   uppercase,
   capitalize,
   lh,
-  'text-rendering': textRendering,
-  '-webkit-font-smoothing': webkitFontSmoothing,
-  '-moz-osx-font-smoothing': mozFontSmoothing,
 };

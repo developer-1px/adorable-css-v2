@@ -1,20 +1,20 @@
 import { defineComponent } from '../defineComponent-unified';
 import type { ComponentDefinition } from '../defineComponent-unified';
 
-// Heading component definition with refined AdorableCSS syntax
+// Heading component definition with VitePress-inspired styling using tokens
 export const headingDefinition: ComponentDefinition = {
-  base: 'c(gray-900) transition(color/200ms) balance',
+  base: 'c(gray-900) transition(color/200ms) relative',
   
   sizes: {
-    // Primary headings with fluid scaling
-    h1: 'font(..5xl/1.1/-3%) bold(black) mt(0) mb(xl)',
-    h2: 'font(..4xl/1.2/-2%) bold(extra) mt(3xl) mb(lg) pb(md) border-b(gray-200)',
-    h3: 'font(..3xl/1.3/-1.5%) bold(bold) mt(2xl) mb(md)',
-    h4: 'font(..2xl/1.4/-1%) bold(semi) mt(xl) mb(sm)',
-    h5: 'font(..xl/1.5) bold(medium) mt(lg) mb(xs)',
-    h6: 'font(..lg/1.6) bold(medium) mt(md) mb(xs) uppercase',
+    // VitePress-inspired typography without margins
+    h1: 'font(3xl/tight/-2%) bold',
+    h2: 'font(2xl/tight/-1%) bold',
+    h3: 'font(xl/snug) bold(semi)',
+    h4: 'font(lg/relaxed) bold(semi)',
+    h5: 'font(md/relaxed) bold(semi)',
+    h6: 'font(sm/relaxed/widest) bold(semi) uppercase',
 
-    default: 'font(3xl/1.3/-1.5%) bold(semi) pb(md)' // Default to h3 style
+    default: 'font(lg/snug) bold(semi)' // Default to h3 style
   },
   
   variants: {

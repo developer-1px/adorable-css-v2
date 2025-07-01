@@ -70,7 +70,7 @@ const button = defineComponent({
 
 ```typescript
 const card = defineComponent({
-  base: 'rounded-lg p(4)',
+  base: 'r(lg) p(4)',
   compounds: {
     'elevated/lg': 'shadow(2xl) p(8)',
     'flat/*': 'shadow(none)', // 모든 flat variant
@@ -106,7 +106,7 @@ const input = defineComponent({
 
 ```typescript
 const alert = defineComponent({
-  base: 'p(4) rounded',
+  base: 'p(4) r(md)',
   sizes: {
     sm: 'text(sm)',
     md: 'text(base)',

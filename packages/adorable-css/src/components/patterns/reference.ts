@@ -65,7 +65,7 @@ export const categorySectionString: StringRuleHandler = (args?: string): string 
     
     // Card-style category section
     card: [
-      'vbox gap(2xl) p(2xl) bg(gray-50) rounded(xl)',
+      'vbox gap(2xl) p(2xl) bg(gray-50) r(xl)',
       {
         '& + &': {
           'margin-top': 'var(--spacing-2xl)'
@@ -116,7 +116,7 @@ export const rulesTableString: StringRuleHandler = (args?: string): string | (st
   const tableVariants: Record<string, (string | CSSRule)[]> = {
     // Default table style
     default: [
-      'w(100%) rounded(lg) clip',
+      'w(100%) r(lg) clip',
       {
         'border': '1px solid var(--gray-200)',
         'background': 'var(--white)',
@@ -187,7 +187,7 @@ export const rulesTableString: StringRuleHandler = (args?: string): string | (st
     
     // Striped table
     striped: [
-      'w(100%) rounded(lg) clip',
+      'w(100%) r(lg) clip',
       {
         'border': '1px solid var(--gray-200)',
         'background': 'var(--white)',
@@ -232,7 +232,7 @@ export const codeBlockString: StringRuleHandler = (args?: string): string | (str
   const codeVariants: Record<string, (string | CSSRule)[]> = {
     // Default code block
     default: [
-      'relative rounded(lg) clip',
+      'relative r(lg) clip',
       {
         'background': 'var(--gray-900)',
         'color': 'var(--gray-100)',
@@ -267,7 +267,7 @@ export const codeBlockString: StringRuleHandler = (args?: string): string | (str
     
     // Terminal/console style
     terminal: [
-      'relative rounded(lg) clip',
+      'relative r(lg) clip',
       {
         'background': 'var(--black)',
         'color': '#00FF00',
@@ -286,7 +286,7 @@ export const codeBlockString: StringRuleHandler = (args?: string): string | (str
     
     // Light theme code block
     light: [
-      'relative rounded(lg) clip',
+      'relative r(lg) clip',
       {
         'background': 'var(--gray-50)',
         'border': '1px solid var(--gray-200)',
@@ -311,7 +311,7 @@ export const infoCardString: StringRuleHandler = (args?: string): string | (stri
   const cardVariants: Record<string, (string | CSSRule)[]> = {
     // Default info card
     default: [
-      'p(xl) rounded(lg) bg(blue-50) border(1/blue-200)',
+      'p(xl) r(lg) bg(blue-50) border(1/blue-200)',
       {
         'color': 'var(--blue-900)',
         '& strong': {
@@ -330,7 +330,7 @@ export const infoCardString: StringRuleHandler = (args?: string): string | (stri
     
     // Warning card
     warning: [
-      'p(xl) rounded(lg) bg(amber-50) border(1/amber-200)',
+      'p(xl) r(lg) bg(amber-50) border(1/amber-200)',
       {
         'color': 'var(--amber-900)',
         '& strong': {
@@ -349,7 +349,7 @@ export const infoCardString: StringRuleHandler = (args?: string): string | (stri
     
     // Success card
     success: [
-      'p(xl) rounded(lg) bg(green-50) border(1/green-200)',
+      'p(xl) r(lg) bg(green-50) border(1/green-200)',
       {
         'color': 'var(--green-900)',
         '& strong': {
@@ -368,7 +368,7 @@ export const infoCardString: StringRuleHandler = (args?: string): string | (stri
     
     // Error card
     error: [
-      'p(xl) rounded(lg) bg(red-50) border(1/red-200)',
+      'p(xl) r(lg) bg(red-50) border(1/red-200)',
       {
         'color': 'var(--red-900)',
         '& strong': {
@@ -387,7 +387,7 @@ export const infoCardString: StringRuleHandler = (args?: string): string | (stri
     
     // Neutral card
     neutral: [
-      'p(xl) rounded(lg) bg(gray-50) border(1/gray-200)',
+      'p(xl) r(lg) bg(gray-50) border(1/gray-200)',
       {
         'color': 'var(--gray-700)',
         '& strong': {
@@ -415,7 +415,7 @@ export const ruleExampleString: StringRuleHandler = (args?: string): string | (s
   const exampleVariants: Record<string, (string | CSSRule)[]> = {
     // Default example with preview and code
     default: [
-      'rounded(lg) border(1/gray-200) clip',
+      'r(lg) border(1/gray-200) clip',
       {
         'background': 'var(--white)',
         '& .example-preview': {
@@ -436,7 +436,7 @@ export const ruleExampleString: StringRuleHandler = (args?: string): string | (s
     
     // Inline example
     inline: [
-      'inline-flex items(center) gap(md) p(sm/lg) rounded(md) bg(gray-50)',
+      'inline-flex items(center) gap(md) p(sm/lg) r(md) bg(gray-50)',
       {
         'font-size': '0.875rem',
         '& .example-label': {

@@ -215,6 +215,5 @@ export const borderRules = {
   'border-b': borderBottom,
   'border-t': borderTop,
   'border-l': borderLeft,
-  'border-r': borderRight,
-  'rounded': r  // Add rounded alias for better readability
+  'border-r': borderRight
 };

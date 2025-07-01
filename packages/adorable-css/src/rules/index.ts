@@ -76,3 +76,6 @@ export function getRuleWithPriority(name: string) {
 // Export priority registry and enhanced types for debugging and inspector
 export { priorityRegistry };
 export type { RuleMetadata, RuleInfo, RuleGroup, RuleGroupInfo } from './types';
+
+// Export RULE_GROUPS for direct access
+export { RULE_GROUPS } from './rule-definitions';

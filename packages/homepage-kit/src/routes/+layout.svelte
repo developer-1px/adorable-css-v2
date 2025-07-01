@@ -25,7 +25,7 @@
 
 <Navbar />
 
-<div class="min-h(screen) vbox pt(64)">
+<div class="min-h(screen) vbox pt(60)">
   <main class="flex(1)">
     <slot />
   </main>

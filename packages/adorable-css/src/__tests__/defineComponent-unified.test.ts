@@ -33,7 +33,7 @@ describe('defineComponent (unified)', () => {
 
     it('should handle size-only argument', () => {
       const component = defineComponent({
-        base: 'rounded',
+        base: 'r(md)',
         sizes: {
           sm: 'px(2)',
           lg: 'px(6)'
@@ -44,12 +44,12 @@ describe('defineComponent (unified)', () => {
       });
       
       const result = component('lg');
-      expect(result).toBe('rounded px(6) bg(gray-100)');
+      expect(result).toBe('r(md) px(6) bg(gray-100)');
     });
 
     it('should handle variant-only argument', () => {
       const component = defineComponent({
-        base: 'rounded',
+        base: 'r(md)',
         sizes: {
           default: 'px(4)'
         },
@@ -60,7 +60,7 @@ describe('defineComponent (unified)', () => {
       });
       
       const result = component('secondary');
-      expect(result).toBe('rounded px(4) bg(gray-100)');
+      expect(result).toBe('r(md) px(4) bg(gray-100)');
     });
   });
 
@@ -119,15 +119,15 @@ describe('defineComponent (unified)', () => {
   describe('compound variants (object syntax)', () => {
     it('should apply exact match compound variants', () => {
       const component = defineComponent({
-        base: 'rounded',
+        base: 'r(md)',
         compounds: {
           'primary/sm': 'bg(blue-500) text(xs) px(2)',
           'primary/lg': 'bg(blue-600) text(lg) px(4)'
         }
       });
       
-      expect(component('primary/sm')).toBe('rounded bg(blue-500) text(xs) px(2)');
-      expect(component('primary/lg')).toBe('rounded bg(blue-600) text(lg) px(4)');
+      expect(component('primary/sm')).toBe('r(md) bg(blue-500) text(xs) px(2)');
+      expect(component('primary/lg')).toBe('r(md) bg(blue-600) text(lg) px(4)');
     });
 
     it('should apply wildcard patterns', () => {
@@ -181,7 +181,7 @@ describe('defineComponent (unified)', () => {
   describe('defaults', () => {
     it('should use default size and variant from defaults object', () => {
       const component = defineComponent({
-        base: 'rounded',
+        base: 'r(md)',
         sizes: {
           sm: 'p(2)',
           md: 'p(4)',
@@ -198,7 +198,7 @@ describe('defineComponent (unified)', () => {
       });
       
       const result = component();
-      expect(result).toBe('rounded p(4) bg(blue-100)');
+      expect(result).toBe('r(md) p(4) bg(blue-100)');
     });
   });
 
@@ -260,7 +260,7 @@ describe('defineThemedComponent', () => {
   it('should handle complex themed components', () => {
     const component = defineThemedComponent({
       light: {
-        base: 'rounded',
+        base: 'r(md)',
         sizes: {
           sm: 'p(2)',
           lg: 'p(4)'
@@ -273,7 +273,7 @@ describe('defineThemedComponent', () => {
         }
       },
       dark: {
-        base: 'rounded', 
+        base: 'r(md)', 
         sizes: {
           sm: 'p(2)',
           lg: 'p(4)'
@@ -288,7 +288,7 @@ describe('defineThemedComponent', () => {
     });
     
     const result = component('card/lg');
-    expect(result).toContain('rounded p(4) bg(white) shadow(sm) hover:shadow(md)');
-    expect(result).toContain('dark:rounded dark:p(4) dark:bg(gray-800) dark:shadow(lg) dark:hover:shadow(xl)');
+    expect(result).toContain('r(md) p(4) bg(white) shadow(sm) hover:shadow(md)');
+    expect(result).toContain('dark:r(md) dark:p(4) dark:bg(gray-800) dark:shadow(lg) dark:hover:shadow(xl)');
   });
 });

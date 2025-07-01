@@ -131,7 +131,7 @@ btnComplex: () => "btn-base hover:btn-hover active:btn-active"
 ### 3. **컴포넌트 분해 전략**
 ```typescript
 // 복잡한 card를 더 작은 부분으로 분해
-cardBase: () => "bg(white) rounded(12) p(24)"
+cardBase: () => "bg(white) r(12) p(24)"
 cardElevated: () => "cardBase shadow(subtle) hover:shadow(elevated)"
 cardImage: () => "w(100%) h(auto) object(cover)"
 ```

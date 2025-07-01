@@ -32,7 +32,7 @@ describe('defineComponent', () => {
 
   it('should handle size-only argument', () => {
     const component = defineSimpleComponent({
-      base: 'rounded',
+      base: 'r(md)',
       sizes: {
         sm: 'px(2)',
         lg: 'px(6)'
@@ -43,12 +43,12 @@ describe('defineComponent', () => {
     });
     
     const result = component('lg');
-    expect(result).toBe('rounded px(6) bg(gray-100)');
+    expect(result).toBe('r(md) px(6) bg(gray-100)');
   });
 
   it('should handle variant-only argument', () => {
     const component = defineSimpleComponent({
-      base: 'rounded',
+      base: 'r(md)',
       sizes: {
         default: 'px(4)'
       },
@@ -59,12 +59,12 @@ describe('defineComponent', () => {
     });
     
     const result = component('secondary');
-    expect(result).toBe('rounded px(4) bg(gray-100)');
+    expect(result).toBe('r(md) px(4) bg(gray-100)');
   });
 
   it('should use default size and variant when not specified', () => {
     const component = defineSimpleComponent({
-      base: 'rounded',
+      base: 'r(md)',
       sizes: {
         default: 'px(4)',
         sm: 'px(2)'
@@ -76,7 +76,7 @@ describe('defineComponent', () => {
     });
     
     const result = component();
-    expect(result).toBe('rounded px(4) bg(gray-100)');
+    expect(result).toBe('r(md) px(4) bg(gray-100)');
   });
 
   it('should respect custom options', () => {
@@ -122,7 +122,7 @@ describe('defineComponent', () => {
 describe('defineCompoundComponent', () => {
   it('should apply compound variants', () => {
     const component = defineCompoundComponent({
-      base: 'rounded-full inline-flex',
+      base: 'r(full) inline-flex',
       compounds: {
         'primary/sm': 'bg(blue-500) text(xs) px(2)',
         'primary/lg': 'bg(blue-600) text(lg) px(4)'
@@ -130,7 +130,7 @@ describe('defineCompoundComponent', () => {
     });
     
     const result = component('primary/sm');
-    expect(result).toBe('rounded-full inline-flex bg(blue-500) text(xs) px(2)');
+    expect(result).toBe('r(full) inline-flex bg(blue-500) text(xs) px(2)');
   });
 
   it('should apply wildcard patterns for variants', () => {
