@@ -137,9 +137,19 @@ export const transformOrigin: RuleHandler = (args?: string): CSSRule => {
 
 /**
  * Scale utility - shorthand for transform: scale()
+ * Converts percentage-like values to decimal (e.g., 105 -> 1.05)
  */
 export const scale: RuleHandler = (args?: string): CSSRule => {
   if (!args) return { transform: 'scale(1)' };
+  
+  // Convert percentage-like values to decimal
+  const numValue = parseFloat(args);
+  if (!isNaN(numValue) && numValue > 2) {
+    // If value is greater than 2, assume it's a percentage-like value
+    const decimalValue = numValue / 100;
+    return { transform: `scale(${decimalValue})` };
+  }
+  
   return { transform: `scale(${args})` };
 };
 

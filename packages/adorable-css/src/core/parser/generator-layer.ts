@@ -4,10 +4,13 @@
  */
 
 import { parseAdorableCSS } from './parser';
-import { cssObjectToCssText } from '../generators/css-object-generator';
+import { cssObjectToString } from '../generators/css-object-generator';
 import { makeValue } from '../values/makeValue';
 import type { CSSRule } from '../../rules/types';
 import { layerRegistry, CSSLayer } from '../../rules/layer-registry';
+// Import to trigger rule registration
+import '../../rules/index-layer';
+
 import { 
   ResponsiveSelector, 
   StateSelector, 
@@ -16,7 +19,7 @@ import {
   createStateCSS 
 } from '../../extensions/responsive/responsive-decorator';
 import { AnimationHandler } from '../generators/animation-handler';
-import { memoize } from '../utils/memo';
+import { createMemo } from '../utils/memo';
 
 // Helper type for CSS generation results
 interface CSSResult {
@@ -26,7 +29,7 @@ interface CSSResult {
 }
 
 // Cache for parsed results
-const _generateCSSFromAdorableCSS = memoize((value: string): string => {
+const _generateCSSFromAdorableCSS = createMemo((value: string): string => {
   const result = parseAdorableCSS(value);
 
   // Handle parse errors
@@ -34,6 +37,7 @@ const _generateCSSFromAdorableCSS = memoize((value: string): string => {
     console.warn(`⚠️  AdorableCSS: Invalid AdorableCSS syntax: ${value}`);
     return "";
   }
+  
 
   const actualSelector = `.${result.escapedSelector}`;
   const allCSSResults: CSSResult[] = [];
@@ -110,9 +114,11 @@ function handleRegularSelector(v: any, rawSelector: string): CSSResult {
     nestedCSS: []
   };
 
-  if (v.type === "utility") {
-    const name = v.name;
-    const args = v.args as string | undefined;
+  // Handle the parser's selector structure
+  if (v.type === "selector" && v.selector) {
+    const selector = v.selector;
+    const name = selector.name;
+    const args = selector.type === "function" && selector.args ? selector.args.join("") : undefined;
     
     // Check CSS object rules
     const handler = layerRegistry.getHandler(name);
@@ -161,17 +167,19 @@ function processCSSObject(cssObject: CSSRule, selector: string): { mainCSS: stri
     if (key.startsWith('@') || key.startsWith(':')) {
       // Nested rule
       if (typeof value === 'object') {
-        const nestedContent = cssObjectToCssText(value);
-        if (nestedContent) {
-          nestedCSS.push(`${key}{${selector}{${nestedContent}}}`);
+        const nestedResult = cssObjectToString(value);
+        if (nestedResult.mainCSS) {
+          nestedCSS.push(`${key}{${selector}{${nestedResult.mainCSS}}}`);
         }
+        nestedCSS.push(...nestedResult.nestedCSS);
       }
     } else if (typeof value === 'object') {
       // Nested selector
-      const nestedContent = cssObjectToCssText(value);
-      if (nestedContent) {
-        nestedCSS.push(`${key}{${nestedContent}}`);
+      const nestedResult = cssObjectToString(value);
+      if (nestedResult.mainCSS) {
+        nestedCSS.push(`${key}{${nestedResult.mainCSS}}`);
       }
+      nestedCSS.push(...nestedResult.nestedCSS);
     } else {
       // Regular property
       mainProps[key] = String(value);
@@ -269,16 +277,16 @@ export function generateCSSFromSelector(selector: string): string {
             `.${selector.replace(/:/g, '\\:')}`
           );
           
-          return cssObjectToCssText(stateCSS);
+          const stateCSSResult = cssObjectToString(stateCSS);
+          return stateCSSResult.mainCSS + stateCSSResult.nestedCSS.join('');
         }
       }
     }
   }
   
   // Handle animations
-  const animHandler = AnimationHandler.getInstance();
-  if (animHandler.isAnimationClass(selector)) {
-    const keyframes = animHandler.getKeyframesForSelector(selector);
+  if (AnimationHandler.hasAnimations([selector])) {
+    const keyframes = AnimationHandler.getKeyframesCSS([selector]);
     const css = _generateCSSFromAdorableCSS(selector);
     return keyframes + css;
   }

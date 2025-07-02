@@ -1,6 +1,6 @@
 <script>
   import { onMount } from 'svelte';
-  import { generateCSS } from 'adorable-css';
+  import { generateCSSFromAdorableCSS } from 'adorable-css';
 
   // 파서 문법 패턴들을 카테고리별로 정리
   const syntaxPatterns = {
@@ -96,7 +96,7 @@
   // CSS 생성 함수 - 파서 동작 확인용
   function parseAndGenerate(input) {
     try {
-      const css = generateCSS([input]);
+      const css = generateCSSFromAdorableCSS(input);
       
       if (!css || css.trim() === '') {
         return {
@@ -120,14 +120,14 @@
   }
 
   onMount(async () => {
-    // 디버깅: generateCSS 함수 확인
-    console.log('generateCSS:', typeof generateCSS);
+    // 디버깅: generateCSSFromAdorableCSS 함수 확인
+    console.log('generateCSSFromAdorableCSS:', typeof generateCSSFromAdorableCSS);
     
     // 몇 가지 간단한 테스트
     try {
-      console.log('Test 1 - relative:', generateCSS(['relative']));
-      console.log('Test 2 - w(full):', generateCSS(['w(full)']));
-      console.log('Test 3 - p(10):', generateCSS(['p(10)']));
+      console.log('Test 1 - relative:', generateCSSFromAdorableCSS('relative'));
+      console.log('Test 2 - w(full):', generateCSSFromAdorableCSS('w(full)'));
+      console.log('Test 3 - p(10):', generateCSSFromAdorableCSS('p(10)'));
     } catch (e) {
       console.error('Test error:', e);
     }

@@ -6,7 +6,7 @@
   <div class="vbox(pack) gap(2xl)">
     <!-- Hero Section -->
     <div class="vbox(pack) gap(lg) text(center)">
-      <h1 class="font(5xl) bold c(135deg/#667eea..#764ba2)">
+      <h1 class="font(5xl) bold bg-clip(text) c(135deg/#667eea..#764ba2)">
         Welcome to AdorableCSS
       </h1>
       <p class="font(xl) c(gray-600) max-w(2xl) line-height(relaxed)">
@@ -16,7 +16,7 @@
 
     <!-- Feature Cards -->
     <div class="grid grid-cols(1) md:grid-cols(3) gap(xl) w(full)">
-      <div class="bg(white) p(xl) r(2xl) shadow(lg) hover:shadow(xl) transition group">
+      <div class="bg(white) p(xl) r(2xl) shadow(lg) hover:shadow(xl) transition group hover:translate-y(-4px)">
         <div class="size(60px) bg(135deg/#667eea..#764ba2) r(full) hbox(pack) mb(lg) group-hover:rotate(360) transition duration(1000)">
           <span class="font(2xl)">🎨</span>
         </div>
@@ -24,7 +24,7 @@
         <p class="c(gray-600)">Craft stunning interfaces with ease</p>
       </div>
       
-      <div class="bg(white) p(xl) r(2xl) shadow(lg) hover:shadow(xl) transition group">
+      <div class="bg(white) p(xl) r(2xl) shadow(lg) hover:shadow(xl) transition group hover:translate-y(-4px)">
         <div class="size(60px) bg(135deg/#f093fb..#f5576c) r(full) hbox(pack) mb(lg) group-hover:rotate(360) transition duration(1000)">
           <span class="font(2xl)">⚡</span>
         </div>
@@ -32,7 +32,7 @@
         <p class="c(gray-600)">Optimized for performance</p>
       </div>
       
-      <div class="bg(white) p(xl) r(2xl) shadow(lg) hover:shadow(xl) transition group">
+      <div class="bg(white) p(xl) r(2xl) shadow(lg) hover:shadow(xl) transition group hover:translate-y(-4px)">
         <div class="size(60px) bg(135deg/#4facfe..#00f2fe) r(full) hbox(pack) mb(lg) group-hover:rotate(360) transition duration(1000)">
           <span class="font(2xl)">🚀</span>
         </div>
@@ -42,7 +42,7 @@
     </div>
 
     <!-- CTA Button -->
-    <button class="px(2xl) py(lg) bg(135deg/#667eea..#764ba2) c(white) r(full) font(lg) bold(semi) shadow(xl) hover:shadow(2xl) hover:transform(translateY(-2px)) transition">
+    <button class="px(2xl) py(lg) bg(135deg/#667eea..#764ba2) c(white) r(full) font(lg) semi shadow(xl) hover:shadow(2xl) hover:translate-y(-2px) transition cursor(pointer)">
       Get Started →
     </button>
   </div>
@@ -55,6 +55,10 @@
   let stats: any = null;
   let codeLineNumbers = true;
   let showCSSStats = false;
+  let debounceTimer: number | null = null;
+  let isUpdating = false;
+  let editorElement: HTMLElement;
+  let highlightedHTML = '';
   
   // Sample templates
   const templates = [
@@ -155,6 +159,317 @@
     </div>
   </div>
 </div>`
+    },
+    {
+      name: 'Pricing Cards',
+      code: `<div class="container(xl) py(3xl)">
+  <div class="vbox gap(3xl)">
+    <!-- Header -->
+    <div class="vbox gap(md) text(center)">
+      <h2 class="font(4xl) bold">Choose Your Plan</h2>
+      <p class="font(lg) c(gray-600)">Simple pricing that scales with your business</p>
+    </div>
+    
+    <!-- Pricing Cards -->
+    <div class="grid grid-cols(1) md:grid-cols(3) gap(xl)">
+      <!-- Basic Plan -->
+      <div class="vbox bg(white) p(xl) r(xl) shadow(lg) hover:shadow(xl) transition">
+        <div class="vbox gap(md) mb(xl)">
+          <h3 class="font(xl) semibold">Basic</h3>
+          <div class="hbox(bottom) gap(xs)">
+            <span class="font(3xl) bold">$9</span>
+            <span class="font(md) c(gray-600)">/month</span>
+          </div>
+        </div>
+        
+        <ul class="vbox gap(md) mb(xl) flex(1)">
+          <li class="hbox gap(sm)">
+            <span class="c(green-500)">✓</span>
+            <span class="font(sm)">Up to 10 projects</span>
+          </li>
+          <li class="hbox gap(sm)">
+            <span class="c(green-500)">✓</span>
+            <span class="font(sm)">Basic analytics</span>
+          </li>
+          <li class="hbox gap(sm)">
+            <span class="c(green-500)">✓</span>
+            <span class="font(sm)">24/7 support</span>
+          </li>
+        </ul>
+        
+        <button class="w(full) py(md) b(1/gray-300) r(lg) hover:bg(gray-50) transition cursor(pointer)">
+          Get Started
+        </button>
+      </div>
+      
+      <!-- Pro Plan -->
+      <div class="vbox bg(135deg/#667eea..#764ba2) c(white) p(xl) r(xl) shadow(xl) scale(1.05) relative">
+        <div class="layer(top:0+left:50%) translate-x(-50%) translate-y(-50%) px(lg) py(xs) bg(yellow-400) c(gray-900) r(full) font(xs) bold uppercase">
+          Popular
+        </div>
+        
+        <div class="vbox gap(md) mb(xl)">
+          <h3 class="font(xl) semibold">Pro</h3>
+          <div class="hbox(bottom) gap(xs)">
+            <span class="font(3xl) bold">$29</span>
+            <span class="font(md) opacity(0.8)">/month</span>
+          </div>
+        </div>
+        
+        <ul class="vbox gap(md) mb(xl) flex(1)">
+          <li class="hbox gap(sm)">
+            <span class="opacity(0.9)">✓</span>
+            <span class="font(sm)">Unlimited projects</span>
+          </li>
+          <li class="hbox gap(sm)">
+            <span class="opacity(0.9)">✓</span>
+            <span class="font(sm)">Advanced analytics</span>
+          </li>
+          <li class="hbox gap(sm)">
+            <span class="opacity(0.9)">✓</span>
+            <span class="font(sm)">Priority support</span>
+          </li>
+          <li class="hbox gap(sm)">
+            <span class="opacity(0.9)">✓</span>
+            <span class="font(sm)">Custom integrations</span>
+          </li>
+        </ul>
+        
+        <button class="w(full) py(md) bg(white) c(purple-600) r(lg) font(medium) hover:opacity(0.9) transition cursor(pointer)">
+          Get Started
+        </button>
+      </div>
+      
+      <!-- Enterprise Plan -->
+      <div class="vbox bg(white) p(xl) r(xl) shadow(lg) hover:shadow(xl) transition">
+        <div class="vbox gap(md) mb(xl)">
+          <h3 class="font(xl) semibold">Enterprise</h3>
+          <div class="vbox gap(xs)">
+            <span class="font(3xl) bold">Custom</span>
+            <span class="font(sm) c(gray-600)">Contact us for pricing</span>
+          </div>
+        </div>
+        
+        <ul class="vbox gap(md) mb(xl) flex(1)">
+          <li class="hbox gap(sm)">
+            <span class="c(green-500)">✓</span>
+            <span class="font(sm)">Everything in Pro</span>
+          </li>
+          <li class="hbox gap(sm)">
+            <span class="c(green-500)">✓</span>
+            <span class="font(sm)">Dedicated account manager</span>
+          </li>
+          <li class="hbox gap(sm)">
+            <span class="c(green-500)">✓</span>
+            <span class="font(sm)">Custom SLA</span>
+          </li>
+          <li class="hbox gap(sm)">
+            <span class="c(green-500)">✓</span>
+            <span class="font(sm)">On-premise deployment</span>
+          </li>
+        </ul>
+        
+        <button class="w(full) py(md) b(1/gray-300) r(lg) hover:bg(gray-50) transition cursor(pointer)">
+          Contact Sales
+        </button>
+      </div>
+    </div>
+  </div>
+</div>`
+    },
+    {
+      name: 'Feature Grid',
+      code: `<div class="container(xl) py(3xl)">
+  <div class="vbox gap(3xl)">
+    <!-- Header -->
+    <div class="vbox gap(lg) text(center) max-w(3xl) mx(auto)">
+      <span class="px(lg) py(sm) bg(purple-100) c(purple-700) r(full) font(sm) semibold uppercase letter-spacing(wide) w(fit)">
+        Features
+      </span>
+      <h2 class="font(4xl) bold">Everything you need to succeed</h2>
+      <p class="font(lg) c(gray-600) line-height(relaxed)">
+        Our platform provides all the tools and features you need to build, deploy, and scale your applications with confidence.
+      </p>
+    </div>
+    
+    <!-- Feature Grid -->
+    <div class="grid grid-cols(1) md:grid-cols(2) lg:grid-cols(3) gap(xl)">
+      <!-- Feature 1 -->
+      <div class="vbox gap(lg) group">
+        <div class="size(64px) bg(purple-100) r(xl) hbox(pack) group-hover:bg(135deg/#667eea..#764ba2) transition">
+          <span class="font(2xl) group-hover:scale(1.2) transition">🚀</span>
+        </div>
+        <div class="vbox gap(sm)">
+          <h3 class="font(xl) semibold">Lightning Fast</h3>
+          <p class="c(gray-600) line-height(relaxed)">
+            Optimized performance with sub-second load times and instant updates.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Feature 2 -->
+      <div class="vbox gap(lg) group">
+        <div class="size(64px) bg(green-100) r(xl) hbox(pack) group-hover:bg(135deg/#10b981..#34d399) transition">
+          <span class="font(2xl) group-hover:scale(1.2) transition">🔒</span>
+        </div>
+        <div class="vbox gap(sm)">
+          <h3 class="font(xl) semibold">Secure by Default</h3>
+          <p class="c(gray-600) line-height(relaxed)">
+            Enterprise-grade security with end-to-end encryption and compliance.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Feature 3 -->
+      <div class="vbox gap(lg) group">
+        <div class="size(64px) bg(blue-100) r(xl) hbox(pack) group-hover:bg(135deg/#3b82f6..#60a5fa) transition">
+          <span class="font(2xl) group-hover:scale(1.2) transition">📊</span>
+        </div>
+        <div class="vbox gap(sm)">
+          <h3 class="font(xl) semibold">Advanced Analytics</h3>
+          <p class="c(gray-600) line-height(relaxed)">
+            Real-time insights and detailed metrics to drive data-driven decisions.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Feature 4 -->
+      <div class="vbox gap(lg) group">
+        <div class="size(64px) bg(pink-100) r(xl) hbox(pack) group-hover:bg(135deg/#ec4899..#f472b6) transition">
+          <span class="font(2xl) group-hover:scale(1.2) transition">🎨</span>
+        </div>
+        <div class="vbox gap(sm)">
+          <h3 class="font(xl) semibold">Beautiful Design</h3>
+          <p class="c(gray-600) line-height(relaxed)">
+            Stunning UI components and themes that delight your users.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Feature 5 -->
+      <div class="vbox gap(lg) group">
+        <div class="size(64px) bg(yellow-100) r(xl) hbox(pack) group-hover:bg(135deg/#f59e0b..#fbbf24) transition">
+          <span class="font(2xl) group-hover:scale(1.2) transition">⚡</span>
+        </div>
+        <div class="vbox gap(sm)">
+          <h3 class="font(xl) semibold">API First</h3>
+          <p class="c(gray-600) line-height(relaxed)">
+            Powerful APIs with comprehensive documentation and SDKs.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Feature 6 -->
+      <div class="vbox gap(lg) group">
+        <div class="size(64px) bg(indigo-100) r(xl) hbox(pack) group-hover:bg(135deg/#6366f1..#818cf8) transition">
+          <span class="font(2xl) group-hover:scale(1.2) transition">🌍</span>
+        </div>
+        <div class="vbox gap(sm)">
+          <h3 class="font(xl) semibold">Global Scale</h3>
+          <p class="c(gray-600) line-height(relaxed)">
+            Deploy globally with automatic scaling and load balancing.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>`
+    },
+    {
+      name: 'Contact Form',
+      code: `<div class="bg(gray-50) min-h(screen) py(3xl)">
+  <div class="container(xl)">
+    <div class="grid grid-cols(1) lg:grid-cols(2) gap(3xl)">
+      <!-- Left Side - Info -->
+      <div class="vbox gap(xl)">
+        <div class="vbox gap(lg)">
+          <h2 class="font(4xl) bold">Let's talk</h2>
+          <p class="font(lg) c(gray-600) line-height(relaxed)">
+            We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+          </p>
+        </div>
+        
+        <div class="vbox gap(lg)">
+          <div class="hbox gap(md)">
+            <div class="size(48px) bg(purple-100) r(xl) hbox(pack) flex-shrink(0)">
+              <span class="font(xl)">📧</span>
+            </div>
+            <div class="vbox gap(xs)">
+              <h4 class="font(md) semibold">Email</h4>
+              <p class="c(gray-600)">hello@example.com</p>
+            </div>
+          </div>
+          
+          <div class="hbox gap(md)">
+            <div class="size(48px) bg(green-100) r(xl) hbox(pack) flex-shrink(0)">
+              <span class="font(xl)">📱</span>
+            </div>
+            <div class="vbox gap(xs)">
+              <h4 class="font(md) semibold">Phone</h4>
+              <p class="c(gray-600)">+1 (555) 123-4567</p>
+            </div>
+          </div>
+          
+          <div class="hbox gap(md)">
+            <div class="size(48px) bg(blue-100) r(xl) hbox(pack) flex-shrink(0)">
+              <span class="font(xl)">📍</span>
+            </div>
+            <div class="vbox gap(xs)">
+              <h4 class="font(md) semibold">Office</h4>
+              <p class="c(gray-600)">123 Business Ave, Suite 100<br>San Francisco, CA 94107</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right Side - Form -->
+      <div class="bg(white) p(2xl) r(2xl) shadow(xl)">
+        <form class="vbox gap(xl)">
+          <div class="grid grid-cols(2) gap(lg)">
+            <div class="vbox gap(sm)">
+              <label class="font(sm) medium c(gray-700)">First Name</label>
+              <input type="text" 
+                class="w(full) px(lg) py(md) r(lg) b(1/gray-300) focus:b(2/purple-500) transition" 
+                placeholder="John" />
+            </div>
+            <div class="vbox gap(sm)">
+              <label class="font(sm) medium c(gray-700)">Last Name</label>
+              <input type="text" 
+                class="w(full) px(lg) py(md) r(lg) b(1/gray-300) focus:b(2/purple-500) transition" 
+                placeholder="Doe" />
+            </div>
+          </div>
+          
+          <div class="vbox gap(sm)">
+            <label class="font(sm) medium c(gray-700)">Email</label>
+            <input type="email" 
+              class="w(full) px(lg) py(md) r(lg) b(1/gray-300) focus:b(2/purple-500) transition" 
+              placeholder="john@example.com" />
+          </div>
+          
+          <div class="vbox gap(sm)">
+            <label class="font(sm) medium c(gray-700)">Subject</label>
+            <input type="text" 
+              class="w(full) px(lg) py(md) r(lg) b(1/gray-300) focus:b(2/purple-500) transition" 
+              placeholder="How can we help?" />
+          </div>
+          
+          <div class="vbox gap(sm)">
+            <label class="font(sm) medium c(gray-700)">Message</label>
+            <textarea 
+              class="w(full) px(lg) py(md) r(lg) b(1/gray-300) focus:b(2/purple-500) transition min-h(150px) resize(vertical)" 
+              placeholder="Tell us more about your project..."
+            ></textarea>
+          </div>
+          
+          <button class="w(full) py(lg) bg(135deg/#667eea..#764ba2) c(white) r(lg) font(medium) hover:opacity(0.9) transition cursor(pointer)">
+            Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>`
     }
   ];
   
@@ -187,6 +502,8 @@
   
   function updatePreview() {
     if (!iframeDoc) return;
+    
+    isUpdating = true;
     
     // Extract all classes from HTML
     const classes = extractClasses(htmlInput);
@@ -227,10 +544,50 @@
       </html>
     `);
     iframeDoc.close();
+    
+    isUpdating = false;
   }
   
   function handleInputChange() {
-    updatePreview();
+    if (debounceTimer) {
+      clearTimeout(debounceTimer);
+    }
+    
+    // Update syntax highlighting
+    highlightedHTML = highlightHTML(htmlInput);
+    
+    debounceTimer = setTimeout(() => {
+      updatePreview();
+      debounceTimer = null;
+    }, 300);
+  }
+  
+  function highlightHTML(html: string): string {
+    const escaped = escapeHtml(html);
+    return escaped
+      // HTML comments
+      .replace(/(&lt;!--[\s\S]*?--&gt;)/g, '<span class="comment">$1</span>')
+      // HTML tags
+      .replace(/(&lt;\/?)(\w+)(.*?)(&gt;)/g, (match, p1, p2, p3, p4) => {
+        // Highlight attributes
+        const attrs = p3.replace(/(\w+)(=)(["'])(.*?)\3/g, 
+          '<span class="attr-name">$1</span><span class="punctuation">$2</span><span class="attr-value">$3$4$3</span>'
+        );
+        return `<span class="punctuation">${p1}</span><span class="tag">${p2}</span>${attrs}<span class="punctuation">${p4}</span>`;
+      })
+      // Text content (basic)
+      .replace(/(&gt;)([^&<]+)(&lt;)/g, '$1<span class="text">$2</span>$3');
+  }
+  
+  function escapeHtml(text: string): string {
+    const map: {[key: string]: string} = {
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      '"': '&quot;',
+      "'": '&#039;'
+    };
+    return text.replace(/[&<>"']/g, m => map[m]);
   }
   
   function formatCSS(css: string): string {
@@ -256,6 +613,7 @@
   onMount(() => {
     const iframe = document.getElementById('preview-iframe') as HTMLIFrameElement;
     iframeDoc = iframe.contentDocument || iframe.contentWindow?.document || null;
+    highlightedHTML = highlightHTML(htmlInput);
     updatePreview();
   });
 </script>
@@ -291,7 +649,7 @@
           {#each templates as template}
             <button
               on:click={() => loadTemplate(template)}
-              class="px(lg) py(sm) bg(white.1) hover:bg(white.2) c(white) r(lg) font(sm) backdrop-blur(sm) transition"
+              class="px(lg) py(sm) bg(white/0.1) hover:bg(white/0.2) c(white) r(lg) font(sm) backdrop-blur(sm) transition cursor(pointer)"
             >
               {template.name}
             </button>
@@ -303,9 +661,9 @@
 
   <!-- Main Editor Area -->
   <div class="flex(1) container(full/px:0)">
-    <div class="grid grid-cols(1) lg:grid-cols(2) h(full)">
+    <div class="grid grid-cols(1) lg:grid-cols(2) h(full) relative">
       <!-- Left Panel - Code Editor -->
-      <div class="relative bg(white) br(1/gray-200)">
+      <div class="relative bg(white) br(1/gray-200) lg:br(1/gray-200) min-h(400px) lg:min-h(auto)">
         <!-- Editor Header -->
         <div class="px(xl) py(lg) bb(1/gray-200) bg(gray-50)">
           <div class="hbox(middle) gap(lg)">
@@ -326,17 +684,29 @@
               <pre class="p(lg) font-family(mono) font(sm) c(gray-400) line-height(relaxed) text(right)">{htmlInput.split('\n').map((_, i) => i + 1).join('\n')}</pre>
             </div>
           {/if}
-          <textarea
-            bind:value={htmlInput}
-            on:input={handleInputChange}
-            class="w(full) h(full) bg(transparent) c(gray-800) p(lg) {codeLineNumbers ? 'pl(64px)' : ''} font-family(mono) font(sm) line-height(relaxed) resize(none) focus:outline(none)"
-            spellcheck="false"
-          ></textarea>
+          <div class="relative w(full) h(full)">
+            <pre 
+              class="layer(fill) p(lg) {codeLineNumbers ? 'pl(64px)' : ''} font-family(mono) font(sm) line-height(relaxed) pointer-events(none) overflow(auto) whitespace(pre-wrap) word-break(break-word)"
+              aria-hidden="true"
+            ><code>{@html highlightedHTML || escapeHtml(htmlInput)}</code></pre>
+            <textarea
+              bind:value={htmlInput}
+              on:input={handleInputChange}
+              class="layer(fill) bg(transparent) caret-c(gray-800) c(transparent) p(lg) {codeLineNumbers ? 'pl(64px)' : ''} font-family(mono) font(sm) line-height(relaxed) resize(none) focus:outline(none)"
+              spellcheck="false"
+              placeholder="Type your HTML with AdorableCSS classes here..."
+            ></textarea>
+          </div>
+          {#if isUpdating}
+            <div class="layer(top:8+right:8) px(md) py(xs) bg(purple-600) c(white) r(full) font(xs) medium">
+              Updating...
+            </div>
+          {/if}
         </div>
       </div>
 
       <!-- Right Panel - Preview/CSS/Stats -->
-      <div class="relative bg(white)">
+      <div class="relative bg(white) min-h(400px) lg:min-h(auto)">
         <!-- Enhanced Tabs -->
         <div class="hbox bb(1/gray-200) bg(gray-50) px(xl)">
           <button
@@ -444,6 +814,33 @@
     overflow: hidden;
   }
   
+  /* Syntax highlighting colors */
+  :global(.tag) {
+    color: #22863a;
+    font-weight: 600;
+  }
+  
+  :global(.attr-name) {
+    color: #6f42c1;
+  }
+  
+  :global(.attr-value) {
+    color: #032f62;
+  }
+  
+  :global(.punctuation) {
+    color: #24292e;
+  }
+  
+  :global(.comment) {
+    color: #6a737d;
+    font-style: italic;
+  }
+  
+  :global(.text) {
+    color: #24292e;
+  }
+  
   @keyframes float {
     0%, 100% { transform: translateY(0px) rotate(0deg); }
     50% { transform: translateY(-30px) rotate(180deg); }
@@ -495,6 +892,27 @@
     .grid.lg\:grid-cols\(2\) {
       grid-template-columns: 1fr;
       grid-template-rows: 1fr 1fr;
+      max-height: none;
+    }
+  }
+  
+  /* Better mobile experience */
+  @media (max-width: 768px) {
+    .container\(xl\) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    
+    .font\(3xl\) {
+      font-size: 2rem;
+    }
+    
+    .font\(4xl\) {
+      font-size: 2.5rem;
+    }
+    
+    .font\(5xl\) {
+      font-size: 3rem;
     }
   }
 </style>

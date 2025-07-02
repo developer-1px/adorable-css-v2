@@ -27,7 +27,7 @@
     <div>
       <div class="hbox(middle) gap(8) px(20) py(10) r(full) glass(20/0.05) border(1/purple-500.3) shadow(lg/purple-500.1) hover:shadow(xl/purple-500.2) transition group">
         <Sparkles size="16" class="c(purple-500)" />
-        <span class="label(sm) bold(semi) bg(clip-text) c(135deg/purple-600..pink-600)">v2.0 Now Available</span>
+        <span class="label(sm) bold(semi) bg(clip-text) c(135deg/purple-600..pink-600)">v2.0 Alpha</span>
         <span class="px(8) py(2) r(full) bg(purple-500) c(white) caption(xs) bold">NEW</span>
       </div>
     </div>

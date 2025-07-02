@@ -23,6 +23,13 @@
   $: currentPath = $page.url.pathname;
 </script>
 
+<!-- Alpha Version Ribbon -->
+<div class="fixed top(0) left(0) z(100) w(100) h(100) overflow(hidden) pointer-events(none)">
+  <div class="absolute top(20) left(-35) w(120) bg(orange-500) c(white) py(4) text(center) shadow(sm) rotate(-45) pointer-events(auto)">
+    <span class="caption(xs) bold uppercase">Alpha</span>
+  </div>
+</div>
+
 <Navbar />
 
 <div class="min-h(screen) vbox pt(60)">

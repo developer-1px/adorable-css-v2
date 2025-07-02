@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reset CSS Test</title>
+  <style id="generated-css"></style>
+</head>
+<body>
+  <div class="p(40)">
+    <h1 class="heading(xl) mb(20)">Reset CSS Test</h1>
+    
+    <!-- Test reset styles are applied -->
+    <div class="mb(40)">
+      <p class="body(lg) mb(10)">This tests that reset styles are properly included in @layer base</p>
+      <ul>
+        <li>List items should have no bullets</li>
+        <li>Links should have no underline</li>
+        <li>Margins and paddings should be reset</li>
+      </ul>
+    </div>
+    
+    <!-- Test that utilities override reset -->
+    <a href="#" class="c(blue-500) underline">This link should be blue with underline (overriding reset)</a>
+    
+    <!-- Test form elements -->
+    <div class="mt(20)">
+      <button class="button(primary)">Button should look styled</button>
+      <input type="text" placeholder="Input should have no default styles" class="mt(10) p(10) border(1/gray-300) r(4)">
+    </div>
+  </div>
+
+  <script type="module">
+    import { generateCSS } from './packages/adorable-css/dist/index.js';
+    
+    // Get all classes from the page
+    const allClasses = [];
+    document.querySelectorAll('[class]').forEach(el => {
+      el.className.split(' ').forEach(cls => {
+        if (cls && !allClasses.includes(cls)) {
+          allClasses.push(cls);
+        }
+      });
+    });
+    
+    // Generate CSS
+    const css = generateCSS(allClasses);
+    document.getElementById('generated-css').textContent = css;
+    
+    // Log the generated CSS for inspection
+    console.log('Generated CSS with reset:', css);
+    
+    // Check if reset is in base layer
+    if (css.includes('@layer base') && css.includes('box-sizing:border-box')) {
+      console.log('✅ Reset CSS is properly included in @layer base');
+    } else {
+      console.error('❌ Reset CSS not found in @layer base');
+    }
+  </script>
+</body>
+</html>

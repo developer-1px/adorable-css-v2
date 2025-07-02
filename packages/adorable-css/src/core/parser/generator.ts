@@ -20,6 +20,7 @@ import { cssObjectToString } from '../generators/css-object-generator';
 import { createMediaQuery } from '../generators/breakpoints';
 import { extractImportanceLevel, addImportanceToSelector } from '../generators/importance-utils';
 import { createMemo } from '../utils/memo';
+import { resetCSS } from '../reset';
 
 // Helper function to get layer from priority
 function getLayerFromPriority(priority: number): string {
@@ -291,23 +292,12 @@ function _generateCSSFromAdorableCSS(value: string): string {
       return "";
     }
     
-    // Build final CSS with simplified specificity
+    // Build final CSS
     const cssParts: string[] = [];
-    
-    // Check if we need specificity boost for utilities
-    const hasHighPriorityRules = allCSSResults.some(r => (r.priority || 0) >= 300);
     
     // Add main rule if there are properties
     if (mainCSS) {
-      let finalSelector = actualSelector;
-      
-      // Only boost specificity for high-priority rules to ensure they override components
-      if (hasHighPriorityRules && importanceLevel === 0) {
-        // Use :where() wrapper to avoid issues with complex selectors
-        finalSelector = `:where(${actualSelector})${actualSelector}`;
-      }
-      
-      cssParts.push(`${finalSelector}{${mainCSS}}`);
+      cssParts.push(`${actualSelector}{${mainCSS}}`);
     }
     
     // Add nested rules
@@ -417,13 +407,56 @@ function _generateCSS(classList: string[]): string {
   // Remove duplicates first to avoid generating redundant CSS
   const uniqueClasses = [...new Set(classList)];
   
-  const cssRulesArray = uniqueClasses
-    .map((v) => generateCSSFromAdorableCSS(v))
-    .filter(css => css && css.trim() !== "");
+  // Group CSS by layer
+  const layers = {
+    base: [] as string[],
+    components: [] as string[],
+    composition: [] as string[],
+    utilities: [] as string[]
+  };
   
-  // Remove duplicate CSS rules as well
-  const uniqueCssRules = [...new Set(cssRulesArray)];
-  const cssRules = cleanDuplicateSelectors(uniqueCssRules.join("\n"));
+  uniqueClasses.forEach(className => {
+    const css = generateCSSFromAdorableCSS(className);
+    if (!css || css.trim() === "") return;
+    
+    // Determine layer based on class pattern
+    // Components: body(), heading(), button(), etc.
+    // Composition: hbox(), vbox(), grid(), layer(), etc. (layout compositions)
+    // Utilities: Everything else (c(), p(), m(), etc.)
+    if (/^(body|heading|title|label|caption|button|card|container|section|prose|glass|glow|interactive)\(/.test(className)) {
+      layers.components.push(css);
+    } else if (/^(hbox|vbox|grid|layer|stack|center|between|around|evenly)\(/.test(className)) {
+      layers.composition.push(css);
+    } else {
+      layers.utilities.push(css);
+    }
+  });
+  
+  // Build final CSS with @layer
+  const parts: string[] = [];
+  
+  // Define layer order
+  parts.push('@layer base, components, composition, utilities;');
+  
+  // Add base layer with reset CSS
+  parts.push(`@layer base {\n${resetCSS}\n}`);
+  
+  // Add components layer
+  if (layers.components.length > 0) {
+    parts.push(`@layer components {\n${layers.components.join("\n")}\n}`);
+  }
+  
+  // Add composition layer
+  if (layers.composition.length > 0) {
+    parts.push(`@layer composition {\n${layers.composition.join("\n")}\n}`);
+  }
+  
+  // Add utilities layer
+  if (layers.utilities.length > 0) {
+    parts.push(`@layer utilities {\n${layers.utilities.join("\n")}\n}`);
+  }
+  
+  const cssRules = cleanDuplicateSelectors(parts.join("\n"));
   
   // Include keyframes if animations are used
   return AnimationHandler.prependKeyframesIfNeeded(cssRules, uniqueClasses);

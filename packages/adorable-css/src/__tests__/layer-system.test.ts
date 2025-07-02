@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { generateCSS } from '../core/parser/generator';
+import { generateCSS } from '../core/parser/generator-layer';
 
 describe('Layer-based CSS System', () => {
   it('should generate CSS with @layer definition', () => {

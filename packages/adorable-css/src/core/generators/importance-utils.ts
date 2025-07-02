@@ -25,21 +25,16 @@ export function extractImportanceLevel(className: string): ImportanceInfo {
  * Add [class] specificity boost to selector based on importance level
  */
 export function addImportanceToSelector(selector: string, importanceLevel: number): string {
-  if (importanceLevel <= 0) {
-    return selector;
-  }
-  
-  return '[class]'.repeat(importanceLevel) + selector;
+  // Simply return the selector without any modification
+  // Layer system handles priority now
+  return selector;
 }
 
 /**
  * Add importance to CSS rule
  */
 export function addImportanceToCSS(css: string, importanceLevel: number): string {
-  if (importanceLevel <= 0 || !css) {
-    return css;
-  }
-  
-  // Add [class] at the beginning of the selector
-  return css.replace(/^(\.[^{]+)(\{)/, `${`[class]`.repeat(importanceLevel)}$1$2`);
+  // Simply return the css without modification
+  // Layer system handles priority now
+  return css;
 }

@@ -67,7 +67,10 @@
       "Bash(pnpm deploy:*)",
       "Bash(npm run deploy:gh-pages:*)",
       "Bash(npx gh-pages:*)",
-      "Bash(npm run predeploy:gh-pages:*)"
+      "Bash(npm run predeploy:gh-pages:*)",
+      "Bash(pnpm --filter adorable-css test layer-priority)",
+      "Bash(pnpm --filter adorable-css build --no-dts)",
+      "Bash(pnpm --filter adorable-css test layer-composition)"
     ],
     "deny": []
   }

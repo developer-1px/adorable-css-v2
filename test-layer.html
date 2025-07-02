@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layer Priority Test</title>
+  <style id="generated-css"></style>
+</head>
+<body>
+  <div class="p(40)">
+    <h1>Layer Priority Test</h1>
+    
+    <!-- Test case: c(white) should override body's color -->
+    <div class="body(base) c(white) bg(black) p(20) r(8) mb(20)">
+      This text should be WHITE (not gray) because c(white) has higher priority than body(base)
+    </div>
+    
+    <!-- Control: body without override -->
+    <div class="body(base) bg(gray-100) p(20) r(8) mb(20)">
+      This text should be the default body color (gray)
+    </div>
+    
+    <!-- Test with multiple utilities -->
+    <div class="body(lg) c(red-500) bold(bold) p(20) bg(red-50) r(8)">
+      This should be red and bold (utilities override component styles)
+    </div>
+  </div>
+
+  <script type="module">
+    import { generateCSS } from './packages/adorable-css/dist/index.js';
+    
+    // Get all classes from the page
+    const allClasses = [];
+    document.querySelectorAll('[class]').forEach(el => {
+      el.className.split(' ').forEach(cls => {
+        if (cls && !allClasses.includes(cls)) {
+          allClasses.push(cls);
+        }
+      });
+    });
+    
+    // Generate CSS
+    const css = generateCSS(allClasses);
+    document.getElementById('generated-css').textContent = css;
+    
+    // Log the generated CSS for inspection
+    console.log('Generated CSS:', css);
+  </script>
+</body>
+</html>

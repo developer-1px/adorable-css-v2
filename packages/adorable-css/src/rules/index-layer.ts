@@ -17,6 +17,7 @@ function priorityToLayer(priority: RulePriority): CSSLayer {
 }
 
 // Register all rules with metadata from central definitions
+let ruleCount = 0;
 Object.entries(RULE_GROUPS).forEach(([groupKey, group]) => {
   Object.entries(group.subgroups).forEach(([subgroupKey, subgroup]) => {
     Object.entries(subgroup.rules).forEach(([ruleName, handler]) => {
@@ -26,6 +27,7 @@ Object.entries(RULE_GROUPS).forEach(([groupKey, group]) => {
       
       // Register with layer and metadata
       layerRegistry.registerWithMetadata(ruleName, handler, layer, metadata);
+      ruleCount++;
     });
   });
 });
