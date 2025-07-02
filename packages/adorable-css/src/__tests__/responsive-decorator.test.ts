@@ -6,8 +6,8 @@ import {
   isResponsiveClass, 
   extractBaseClass, 
   createResponsiveCSS 
-} from '../parser/responsive-decorator';
-import { generateCSS } from '../parser/generator';
+} from '../extensions/responsive/responsive-decorator';
+import { generateCSS } from '../core/parser/generator';
 
 describe('Responsive Decorator Pattern', () => {
   describe('ResponsiveSelector.analyze()', () => {
@@ -180,7 +180,8 @@ describe('Responsive Decorator Pattern', () => {
       const css = generateCSS(['..lg:block']);
       
       expect(css).toContain('@media (max-width: 1024px)');
-      expect(css).toContain('\\.\\.lg\\:block{display:block}');
+      // The class selector is wrapped inside the media query
+      expect(css).toMatch(/@media \(max-width: 1024px\)\{\.\\\.lg\\:block\{display:block\}\}/);
     });
     
     it('should handle complex responsive selectors', () => {

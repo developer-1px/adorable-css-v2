@@ -135,7 +135,25 @@ export const transformOrigin: RuleHandler = (args?: string): CSSRule => {
   return { 'transform-origin': presetValues[args] || args };
 };
 
+/**
+ * Scale utility - shorthand for transform: scale()
+ */
+export const scale: RuleHandler = (args?: string): CSSRule => {
+  if (!args) return { transform: 'scale(1)' };
+  return { transform: `scale(${args})` };
+};
+
+/**
+ * Rotate utility - shorthand for transform: rotate()
+ */
+export const rotate: RuleHandler = (args?: string): CSSRule => {
+  if (!args) return { transform: 'rotate(0deg)' };
+  return { transform: `rotate(${addDegreeUnit(args)})` };
+};
+
 export const transformRules = {
   transform,
   'transform-origin': transformOrigin,
+  scale,
+  rotate,
 };

@@ -16,8 +16,8 @@ import type {
 import { RulePriority } from './types';
 
 /**
- * Priority-aware rule registry for CSS specificity management
- * Rules with higher priority values will override rules with lower priority values
+ * Layer-aware rule registry using CSS @layer instead of specificity hacks
+ * Rules are organized into CSS layers for natural cascade management
  */
 export class PriorityRuleRegistry {
   private rules: Map<string, RuleDefinition | EnhancedRuleDefinition> = new Map();
@@ -199,8 +199,8 @@ export class PriorityRuleRegistry {
   }
 
   /**
-   * Generate CSS with proper priority ordering
-   * Higher priority rules get higher CSS specificity
+   * Generate CSS with simplified specificity
+   * Uses minimal specificity boost only where necessary
    */
   generateCSS(className: string, ruleName: string, args?: string): string {
     const rule = this.getRule(ruleName);
@@ -219,28 +219,35 @@ export class PriorityRuleRegistry {
 
     if (!cssProperties) return '';
 
-    // Boost CSS specificity for high-priority rules
-    const selector = this.getSpecificitySelector(className, rule.priority);
+    // Use simplified selector with minimal specificity boost
+    const selector = this.getSimplifiedSelector(className, rule.priority);
     return `${selector}{${cssProperties}}`;
   }
 
   /**
-   * Generate CSS selector with appropriate specificity based on priority
+   * Get CSS layer based on priority
    */
-  private getSpecificitySelector(className: string, priority: RulePriority): string {
+  getLayerFromPriority(priority: RulePriority): string {
+    if (priority >= RulePriority.STATE) return 'state';
+    if (priority >= RulePriority.UTILITY) return 'utility';
+    if (priority >= RulePriority.LAYOUT) return 'layout';
+    return 'component';
+  }
+
+  /**
+   * Generate CSS selector with simplified specificity approach
+   */
+  private getSimplifiedSelector(className: string, priority: RulePriority): string {
     const baseSelector = `.${className}`;
     
-    // Higher priority = higher specificity
-    if (priority >= RulePriority.STATE) {
-      // Highest specificity for state/responsive rules
-      return `${baseSelector}${baseSelector}`;
-    } else if (priority >= RulePriority.UTILITY) {
-      // High specificity for utility rules
-      return `${baseSelector}.\\${className}`;
-    } else {
-      // Normal specificity for component/layout rules
-      return baseSelector;
+    // Only boost specificity for utilities and states that need to override components
+    if (priority >= RulePriority.UTILITY) {
+      // Use :where() to avoid specificity issues with nested selectors
+      return `:where(${baseSelector})${baseSelector}`;
     }
+    
+    // Components and layout use simple selectors
+    return baseSelector;
   }
 
   // === GROUP MANAGEMENT METHODS ===
@@ -394,3 +401,6 @@ export class PriorityRuleRegistry {
 
 // Global registry instance
 export const priorityRegistry = new PriorityRuleRegistry();
+
+// Export layer definition for use in CSS generation
+export const CSS_LAYER_DEFINITION = '@layer component, layout, utility, state;';

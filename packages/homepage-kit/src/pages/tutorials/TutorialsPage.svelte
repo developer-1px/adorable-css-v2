@@ -279,7 +279,7 @@
         <div class="relative stack(md) text(center)">
           <!-- Step Number -->
           <div class="w(80px) h(80px) r(full) bg(white) border(3/gray-400) mx(auto) relative z(10)
-                      hbox(pack) shadow(md) group-hover:scale(110) transition">
+                      hbox(pack) shadow(md) group-hover:scale(1.1) transition">
             <span class="font(2xl) 700 c(gray-700)">{item.step}</span>
           </div>
           
@@ -346,7 +346,7 @@
 
 <style>
   /* Smooth transitions for interactive elements */
-  :global(.group:hover .group-hover\:scale\(110\)) {
+  :global(.group:hover .group-hover\:scale\(1\.1\)) {
     transform: scale(1.1);
   }
   

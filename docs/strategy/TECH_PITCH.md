@@ -79,7 +79,7 @@ AdorableCSS speaks Figma's language:
   vbox(center) gap(xl) p(3xl)
   bg(gradient-adorable) r(2xl)
   shadow(2xl) backdrop-blur(md)
-  hover:scale(105) transition
+  hover:scale(1.05) transition
 ">
   <h1 class="font(3xl) 700 c(white)">
     CSS That Speaks Figma

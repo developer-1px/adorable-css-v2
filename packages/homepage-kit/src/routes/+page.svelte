@@ -55,7 +55,7 @@
           Get Started
           <ArrowRight size="20" class="group-hover:translate-x(4) transition" />
         </span>
-        <span class="absolute layer(fill) bg(white.2) scale(0) group-hover:scale(100) transition(transform/0.5s) r(full)"></span>
+        <span class="absolute layer(fill) bg(white.2) scale(0) group-hover:scale(1) transition(transform/0.5s) r(full)"></span>
       </a>
       
       <a href="https://github.com/adorablecss/adorable-css" target="_blank" rel="noopener" class="group px(32) py(16) r(xl) glass(20/0.05) border(2/gray-300) hover:border(2/purple-500) c(gray-700) hover:c(purple-600) label(button) bold shadow(md) hover:shadow(lg) hover:translate-y(-2) active:translate-y(0) transition">
@@ -73,7 +73,7 @@
         <div class="hbox(middle) gap(16) px(24) py(14) r(xl) glass(20/0.05) border(1/gray-300) shadow(lg) hover:shadow(xl) transition">
           <code class="label(base) font(mono) c(gray-800) select-all">npm install adorable-css</code>
           <button class="size(36) r(lg) hbox(center) bg(purple-100) hover:bg(purple-200) c(purple-700) transition group">
-            <Package size="18" class="group-hover:scale(110) transition" />
+            <Package size="18" class="group-hover:scale(1.1) transition" />
           </button>
         </div>
         <!-- Copy feedback -->
@@ -92,7 +92,7 @@
       <div class="absolute layer(fill) bg(radial/purple-500.05..transparent) opacity(0) group-hover:opacity(100) transition"></div>
       
       <div class="relative z(10)">
-        <div class="size(64) r(xl) bg(purple-500..purple-600) shadow(lg/purple-500.3) group-hover:shadow(xl/purple-500.4) hbox(center) mb(16) group-hover:scale(110) transition">
+        <div class="size(64) r(xl) bg(purple-500..purple-600) shadow(lg/purple-500.3) group-hover:shadow(xl/purple-500.4) hbox(center) mb(16) group-hover:scale(1.1) transition">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
           </svg>
@@ -108,7 +108,7 @@
       <div class="absolute layer(fill) bg(radial/emerald-500.05..transparent) opacity(0) group-hover:opacity(100) transition"></div>
       
       <div class="relative z(10)">
-        <div class="size(64) r(xl) bg(emerald-500..emerald-600) shadow(lg/emerald-500.3) group-hover:shadow(xl/emerald-500.4) hbox(center) mb(16) group-hover:scale(110) transition">
+        <div class="size(64) r(xl) bg(emerald-500..emerald-600) shadow(lg/emerald-500.3) group-hover:shadow(xl/emerald-500.4) hbox(center) mb(16) group-hover:scale(1.1) transition">
           <Zap size="32" class="c(white)" />
         </div>
         <h3 class="title(lg) c(gray-900) mb(8)">Design System Built-in</h3>
@@ -122,7 +122,7 @@
       <div class="absolute layer(fill) bg(radial/blue-500.05..transparent) opacity(0) group-hover:opacity(100) transition"></div>
       
       <div class="relative z(10)">
-        <div class="size(64) r(xl) bg(blue-500..blue-600) shadow(lg/blue-500.3) group-hover:shadow(xl/blue-500.4) hbox(center) mb(16) group-hover:scale(110) transition">
+        <div class="size(64) r(xl) bg(blue-500..blue-600) shadow(lg/blue-500.3) group-hover:shadow(xl/blue-500.4) hbox(center) mb(16) group-hover:scale(1.1) transition">
           <Sparkles size="32" class="c(white)" />
         </div>
         <h3 class="title(lg) c(gray-900) mb(8)">Amazing DX</h3>

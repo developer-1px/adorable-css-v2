@@ -71,7 +71,7 @@ export interface AdvancedComponentDefinition {
  *     }
  *   ],
  *   states: {
- *     hover: 'shadow(lg) scale(105)',
+ *     hover: 'shadow(lg) scale(1.05)',
  *     disabled: 'opacity(50) cursor(not-allowed)'
  *   }
  * });

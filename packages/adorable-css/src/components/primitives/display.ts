@@ -70,8 +70,8 @@ export const displayDefinition: ComponentDefinition = {
     }
   ],
   states: {
-    hover: 'scale(102) transition(transform/300ms/cubic-bezier(0.34,1.56,0.64,1))',
-    active: 'scale(98)'
+    hover: 'scale(1.02) transition(transform/300ms/cubic-bezier(0.34,1.56,0.64,1))',
+    active: 'scale(0.98)'
   }
 };
 

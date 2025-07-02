@@ -2,6 +2,7 @@ import { parseAdorableCSS } from "./parser";
 import { getRuleHandler, getPriorityRuleHandler, getRuleWithPriority } from "../../rules";
 import { priorityRegistry } from "../../rules/priority-registry";
 import type { CSSRule, ParsedSelector, StringRuleDefinition } from "../../rules/types";
+import { RulePriority } from "../../rules/types";
 import { cssEscape, cleanDuplicateSelectors } from "./cssEscape";
 import { px } from '../values/makeValue';
 import { 
@@ -20,9 +21,24 @@ import { createMediaQuery } from '../generators/breakpoints';
 import { extractImportanceLevel, addImportanceToSelector } from '../generators/importance-utils';
 import { createMemo } from '../utils/memo';
 
+// Helper function to get layer from priority
+function getLayerFromPriority(priority: number): string {
+  if (priority >= RulePriority.STATE) return 'state';
+  if (priority >= RulePriority.UTILITY) return 'utility';
+  if (priority >= RulePriority.LAYOUT) return 'layout';
+  return 'component';
+}
+
 // Extract CSS properties from generated CSS string
 export const extractCSSProperties = (baseCSS: string, className: string): string | null => {
-  const selectorMatch = baseCSS.match(/[^{]+\{([^}]+)\}/);
+  // Handle layer-wrapped CSS: @layer utility{.class{props}}
+  let selectorMatch = baseCSS.match(/@layer\s+\w+\s*\{[^{]+\{([^}]+)\}\}/);
+  
+  // Fallback to non-layer CSS: .class{props}
+  if (!selectorMatch) {
+    selectorMatch = baseCSS.match(/[^{]+\{([^}]+)\}/);
+  }
+  
   if (!selectorMatch) {
     console.warn(`⚠️  AdorableCSS: Could not parse base CSS for class "${className}"`);
     console.warn(`   Base CSS: "${baseCSS}"`);
@@ -275,20 +291,20 @@ function _generateCSSFromAdorableCSS(value: string): string {
       return "";
     }
     
-    // Build final CSS with specificity boosting for high-priority rules
+    // Build final CSS with simplified specificity
     const cssParts: string[] = [];
     
-    // Check if we have high-priority rules that need specificity boost
+    // Check if we need specificity boost for utilities
     const hasHighPriorityRules = allCSSResults.some(r => (r.priority || 0) >= 300);
     
     // Add main rule if there are properties
     if (mainCSS) {
       let finalSelector = actualSelector;
       
-      // Boost specificity for high-priority rules to ensure they override component rules
+      // Only boost specificity for high-priority rules to ensure they override components
       if (hasHighPriorityRules && importanceLevel === 0) {
-        // Double the class selector to increase specificity without !important
-        finalSelector = actualSelector + actualSelector.replace(/^\./, '.');
+        // Use :where() wrapper to avoid issues with complex selectors
+        finalSelector = `:where(${actualSelector})${actualSelector}`;
       }
       
       cssParts.push(`${finalSelector}{${mainCSS}}`);
@@ -338,6 +354,11 @@ function generateStateCSS(stateClassName: string): string {
     }
   });
   
+  // Get the layer for the base rule
+  const ruleName = pattern.selector.split('(')[0];
+  const rule = priorityRegistry.getAnyRule(ruleName);
+  const layer = rule ? getLayerFromPriority(rule.priority) : 'state';
+  
   // Generate state CSS
   const fullClassSelector = "." + cssEscape(cleanClassName);
   const stateCSS = createStateCSS(cssRule, pattern, fullClassSelector);
@@ -377,10 +398,17 @@ function generateResponsiveCSS(responsiveClassName: string): string {
   const mediaQuery = createMediaQuery(pattern.breakpoint, pattern.isMaxWidth);
   if (!mediaQuery) return "";
 
+  // Get the layer for the base rule
+  const basePattern = ResponsiveSelector.analyze(pattern.selector);
+  const ruleName = basePattern?.selector || pattern.selector;
+  const rule = priorityRegistry.getAnyRule(ruleName.split('(')[0]);
+  const layer = rule ? getLayerFromPriority(rule.priority) : 'utility';
+  
   // Build final selector with importance
   const responsiveSelector = "." + cssEscape(cleanClassName);
   const finalSelector = addImportanceToSelector(responsiveSelector, importanceLevel);
 
+  // Wrap in media query
   return `${mediaQuery}{${finalSelector}{${cssProperties}}}`;
 }
 

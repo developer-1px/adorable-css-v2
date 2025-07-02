@@ -153,14 +153,14 @@ describe('defineComponent (unified)', () => {
           primary: 'bg(blue-600)'
         },
         states: {
-          hover: 'shadow(lg) scale(105)',
+          hover: 'shadow(lg) scale(1.05)',
           focus: 'ring(2/blue-500)',
           disabled: 'opacity(50) cursor(not-allowed)'
         }
       });
       
       const result = component('primary');
-      expect(result).toContain('hover:shadow(lg) hover:scale(105)');
+      expect(result).toContain('hover:shadow(lg) hover:scale(1.05)');
       expect(result).toContain('focus:ring(2/blue-500)');
       expect(result).toContain('disabled:opacity(50) disabled:cursor(not-allowed)');
     });

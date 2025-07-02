@@ -13,7 +13,7 @@ export const cardDefinition: ComponentDefinition = {
   },
   
   variants: {
-    default: 'bg(white) shadow(sm) border(1/gray-200) hover:shadow(md) hover:border(gray-300)',
+    default: 'bg(white) shadow(xs) border(1/gray-200) hover:shadow(md) hover:border(gray-50)',
     outlined: 'bg(white) border(1/gray-200) shadow(none) hover:border(gray-300)',
     ghost: 'bg(gray-50) border(1/transparent) hover:bg(gray-100) hover:border(gray-200)',
     elevated: 'bg(white) border(1/gray-200.6) hover:border(purple-500.3) hover:bg(gray-50.5)',

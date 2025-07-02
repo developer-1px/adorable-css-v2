@@ -86,14 +86,14 @@ describe('defineComponent', () => {
         primary: 'bg(blue-600)'
       },
       states: {
-        hover: 'shadow(lg) scale(105)',
+        hover: 'shadow(lg) scale(1.05)',
         focus: 'ring(2/blue-500)',
         disabled: 'opacity(50) cursor(not-allowed)'
       }
     });
     
     const result = component('primary');
-    expect(result).toBe('btn bg(blue-600) hover:shadow(lg) scale(105) focus:ring(2/blue-500) disabled:opacity(50) cursor(not-allowed)');
+    expect(result).toBe('btn bg(blue-600) hover:shadow(lg) scale(1.05) focus:ring(2/blue-500) disabled:opacity(50) cursor(not-allowed)');
   });
 
   it('should handle default size and variant', () => {

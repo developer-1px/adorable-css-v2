@@ -19,33 +19,37 @@ const flexbox = (dir: string, align?: string, justify?: string): CSSRule => ({
 
 const parseAlign = (v: string) => ({ 
   top: 'flex-start', middle: 'center', bottom: 'flex-end', fill: 'stretch',
-  left: 'flex-start', center: 'center', right: 'flex-end'
+  left: 'flex-start', center: 'center', right: 'flex-end', end: 'flex-end'
 }[v] || v);
 
 const parseJustify = (v: string) => ({
-  left: 'flex-start', right: 'flex-end', center: 'center',
+  left: 'flex-start', right: 'flex-end', center: 'center', end: 'flex-end',
   between: 'space-between', around: 'space-around', evenly: 'space-evenly'
 }[v] || v);
 
 export const hbox: RuleHandler = (v = '') => {
+  if (v === 'pack') return flexbox('row', 'center', 'center');
   const vals = v.split(/[+/]/);
-  const align = vals.find(x => ['top', 'middle', 'bottom', 'fill'].includes(x));
-  const justify = vals.find(x => ['left', 'right', 'center', 'between', 'around', 'evenly'].includes(x));
+  const align = vals.find(x => ['top', 'middle', 'bottom', 'fill', 'end'].includes(x));
+  const justify = vals.find(x => ['left', 'right', 'center', 'end', 'between', 'around', 'evenly'].includes(x));
   return {
     ...flexbox('row', align ? parseAlign(align) : 'center', justify ? parseJustify(justify) : undefined),
     ...(vals.includes('wrap') && { 'flex-wrap': 'wrap' }),
-    ...(vals.includes('reverse') && { 'flex-direction': 'row-reverse' })
+    ...(vals.includes('reverse') && { 'flex-direction': 'row-reverse' }),
+    ":where(&>*)": {"flex": "0 0 auto"}
   };
 };
 
 export const vbox: RuleHandler = (v = '') => {
+  if (v === 'pack') return flexbox('column', 'center', 'center');
   const vals = v.split(/[+/]/);
-  const align = vals.find(x => ['left', 'center', 'right', 'fill'].includes(x));
-  const justify = vals.find(x => ['top', 'middle', 'bottom'].includes(x));
+  const align = vals.find(x => ['left', 'center', 'right', 'fill', 'end'].includes(x));
+  const justify = vals.find(x => ['top', 'middle', 'bottom', 'around', 'between', 'evenly'].includes(x));
   return {
-    ...flexbox('column', align ? parseAlign(align) : 'stretch', justify ? parseAlign(justify) : undefined),
+    ...flexbox('column', align ? parseAlign(align) : 'stretch', justify ? parseJustify(justify) : undefined),
     ...(vals.includes('wrap') && { 'flex-wrap': 'wrap' }),
-    ...(vals.includes('reverse') && { 'flex-direction': 'column-reverse' })
+    ...(vals.includes('reverse') && { 'flex-direction': 'column-reverse' }),
+    ":where(&>*)": {"flex": "0 0 auto"}
   };
 };
 

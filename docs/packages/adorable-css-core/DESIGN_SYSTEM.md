@@ -252,7 +252,7 @@ The design system utilities work seamlessly with regular AdorableCSS utilities:
 
 ```html
 <!-- Card with custom spacing and colors -->
-<div class="card-base() p(2xl) hover:scale(102) transition">
+<div class="card-base() p(2xl) hover:scale(1.02) transition">
   <h3 class="heading(h3) mb(md) c(purple-600)">Custom Card</h3>
   <p class="c(gray-600)">Mix design system with utilities</p>
 </div>

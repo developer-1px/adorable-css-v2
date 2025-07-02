@@ -94,7 +94,7 @@ Bundle bloat               Tree-shakable
   hbox(middle+right+reverse)  <!-- Multiple alignments -->
   w(200..400)                 <!-- Min/max constraints -->
   p(16/24)                    <!-- Vertical/horizontal -->
-  hover:scale(105)            <!-- State modifiers -->
+  hover:scale(1.05)           <!-- State modifiers -->
   md:w(full)                  <!-- Responsive -->
 ">
 ```
@@ -140,7 +140,7 @@ Bundle bloat               Tree-shakable
 
 **AdorableCSS**: 1 line
 ```html
-<div class="vbox gap(4) p(6) bg(purple-500..pink-500/135deg) r(4) shadow(lg) hover:scale(105) transition">
+<div class="vbox gap(4) p(6) bg(purple-500..pink-500/135deg) r(4) shadow(lg) hover:scale(1.05) transition">
 ```
 
 **Result**: Same output, 96% less code, 100% more intuitive.

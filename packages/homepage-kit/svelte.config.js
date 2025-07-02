@@ -15,10 +15,7 @@ const config = {
 			precompress: false,
 			strict: true
 		}),
-		// GitHub Pages base path
-		paths: {
-			base: process.env.NODE_ENV === 'production' ? '/adorable-css-v2' : ''
-		}
+		// No base path needed for custom domain
 	},
 	extensions: ['.svelte']
 };

@@ -1,130 +1,202 @@
----
-title: Getting Started with AdorableCSS
-description: Complete guide to getting started with AdorableCSS including installation, configuration, and basic usage
-order: 2
-category: Getting Started
----
+# Getting Started
 
-# Getting Started with AdorableCSS
+AdorableCSS를 시작하는 가장 빠른 방법을 안내합니다.
 
-Welcome to AdorableCSS v2! This guide will help you get up and running with our Figma-first CSS framework.
+## 설치
 
-## 설치 방법
-
-AdorableCSS는 다양한 방법으로 설치하고 사용할 수 있습니다.
-
-### NPM/PNPM 패키지 설치
-
+### NPM/PNPM 패키지
 ```bash
 npm install adorable-css
 # 또는
 pnpm add adorable-css
+# 또는  
+yarn add adorable-css
 ```
 
-### CDN 사용
-
-빠른 프로토타이핑을 위해 CDN을 사용할 수 있습니다:
-
+### CDN (프로토타이핑용)
 ```html
 <script src="https://unpkg.com/adorable-css/dist/adorable.min.js"></script>
 ```
 
-### 프로그래매틱 사용
+## 첫 번째 컴포넌트
 
-```typescript
-import { parse, getCSSSync, injectGlobal } from 'adorable-css';
+### 1. Import
+```javascript
+import 'adorable-css';  // 자동으로 토큰 주입
+```
 
-// CSS 클래스 파싱
-const css = getCSSSync('hbox gap(16) p(24)');
+### 2. Figma 스타일로 코딩하기
+```html
+<div class="vbox gap(lg) p(xl) bg(white) r(xl) shadow(lg)">
+  <!-- 프로필 헤더 -->
+  <div class="hbox gap(md)">
+    <div class="size(64) r(full) bg(gradient-adorable)"></div>
+    <div class="vbox gap(xs) flex(1)">
+      <h3 class="font(xl) bold c(gray-900)">김개발</h3>
+      <p class="font(sm) c(gray-600)">Frontend Developer</p>
+    </div>
+  </div>
+  
+  <!-- 구분선 -->
+  <div class="h(1) bg(gray-200)"></div>
+  
+  <!-- 액션 버튼 -->
+  <div class="hbox gap(sm)">
+    <button class="btn(primary) flex(1)">Follow</button>
+    <button class="btn(secondary) flex(1)">Message</button>
+  </div>
+</div>
+```
 
-// 브라우저 환경에서 자동 스타일 주입 (개발용)
-if (typeof window !== 'undefined') {
-  injectGlobal();
+### 3. 결과
+위 코드는 Figma에서 디자인한 것과 동일한 프로필 카드를 만듭니다!
+
+## 핵심 개념 이해하기
+
+### Figma Auto Layout = hbox/vbox
+```css
+hbox()      /* Horizontal Auto Layout */
+vbox()      /* Vertical Auto Layout */
+gap(16)     /* Item spacing */
+```
+
+### Figma Constraints = w/h
+```css
+w(fill)     /* Fill Container */
+w(hug)      /* Hug Contents */
+w(320)      /* Fixed Width */
+```
+
+### Figma Effects = 직관적 함수
+```css
+shadow(lg)  /* Drop Shadow */
+blur(8)     /* Layer Blur */
+r(xl)       /* Corner Radius */
+```
+
+## 개발 환경 설정
+
+### React
+```jsx
+import 'adorable-css';
+
+function App() {
+  return (
+    <div className="vbox(center) gap(xl) p(2xl) min-h(screen)">
+      <h1 className="heading(h1/gradient)">
+        Welcome to AdorableCSS
+      </h1>
+      <p className="text(lg) c(gray-600) text(center) max-w(prose)">
+        Figma와 같은 방식으로 UI를 구축하세요
+      </p>
+      <button className="btn(primary/lg)">
+        시작하기
+      </button>
+    </div>
+  );
 }
 ```
 
-### 빌드 도구 통합 (계획 중)
+### Vue
+```vue
+<template>
+  <div class="container(lg) py(xl)">
+    <article class="prose(lg)">
+      <h1>{{ title }}</h1>
+      <p>{{ content }}</p>
+    </article>
+  </div>
+</template>
 
-Vite, PostCSS 등의 빌드 도구와의 통합 플러그인은 현재 개발 중입니다. 커뮤니티 기여를 환영합니다!
+<script setup>
+import 'adorable-css';
 
-## Your First Component
-
-Once installed, you can start using AdorableCSS utilities in your HTML:
-
-```html
-<div class="vbox gap(lg) p(xl) bg(white) r(xl) shadow(lg)">
-  <h2 class="heading(h2) c(primary)">Hello World</h2>
-  <p class="font(md) c(gray-600)">
-    Welcome to AdorableCSS! This card uses our utilities to create
-    a beautiful, responsive design with minimal code.
-  </p>
-  <button class="px(lg) py(md) bg(primary) c(white) r(lg) hover:shadow(lg) transition">
-    Get Started
-  </button>
-</div>
+const title = 'AdorableCSS with Vue';
+const content = 'Vue와 완벽하게 호환됩니다.';
+</script>
 ```
 
-## Smart Containers
-
-One of our newest features is Smart Containers - a powerful shorthand for creating perfect container elements:
-
+### 바닐라 JavaScript
 ```html
-<!-- Traditional approach -->
-<div class="w(64) h(64) display(flex) align-items(center) justify-content(center)">
-  <img src="avatar.jpg" style="object-fit: cover;" />
-</div>
-
-<!-- Smart Container approach -->
-<div class="size(64)">
-  <img src="avatar.jpg" />
-</div>
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://unpkg.com/adorable-css/dist/adorable.min.js"></script>
+</head>
+<body>
+  <div class="vbox(center) gap(xl) p(xl) min-h(screen)">
+    <div class="card() p(xl)">
+      <h2 class="heading(h2) mb(md)">Pure HTML</h2>
+      <p class="c(gray-600)">
+        프레임워크 없이도 사용 가능합니다
+      </p>
+    </div>
+  </div>
+</body>
+</html>
 ```
 
-Smart Containers automatically include:
-- **Auto-centering**: Built-in flex layout with center alignment
-- **Image optimization**: Child images get `object-fit: cover` automatically
-- **Content protection**: `overflow: hidden` prevents layout breaks
-- **Positioning ready**: `position: relative` for absolute children
+## VS Code 설정 (권장)
 
-## Core Principles
-
-AdorableCSS is built on three core principles:
-
-### 1. Figma-First Design
-Every utility maps directly to Figma's mental model. If you know Figma, you already know AdorableCSS.
-
-```html
-<!-- Figma: Auto Layout, Vertical, Gap: 16 -->
-<div class="vbox gap(lg)">
-  <!-- Content here -->
-</div>
-
-<!-- Figma: Fill container -->
-<div class="w(fill)">Content</div>
+### 1. 자동완성
+```json
+{
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    ["class[Nn]ame\\s*=\\s*[\"']([^\"']*)[\"']", "([^\"']*)"]
+  ]
+}
 ```
 
-### 2. Declarative Syntax
-Write what you mean. `vbox gap(lg)` is clearer than memorizing flexbox properties.
+### 2. 문법 하이라이팅
+AdorableCSS Language Support 확장 설치 (개발 중)
 
+## 디버깅 팁
+
+### 1. 클래스 확인
+브라우저 개발자 도구에서 생성된 클래스명 확인:
 ```html
-<!-- Clear intent -->
-<div class="hbox(between) gap(md)">
-  <span>Label</span>
-  <button>Action</button>
-</div>
+<!-- 입력 -->
+<div class="hbox gap(lg)">
+
+<!-- 생성된 HTML -->
+<div class="hbox gap(lg)">
 ```
 
-### 3. 런타임 없는 순수 CSS
-모든 유틸리티는 순수 CSS로 컴파일됩니다. JavaScript 런타임이나 오버헤드 없이 빠른 캐싱 가능한 스타일시트를 생성합니다.
+### 2. CSS 확인
+생성된 CSS 규칙 확인:
+```css
+.hbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.gap\(lg\) {
+  gap: var(--spacing-lg);
+}
+```
 
-## Next Steps
+## 다음 단계
 
-Now that you have AdorableCSS installed, explore these topics:
+기본을 익혔다면 더 깊이 탐색해보세요:
 
-- [Syntax Reference](/docs/syntax) - Learn the complete syntax
-- [Layout System](/docs/layout) - Master our Figma-inspired layout utilities
-- [Design Tokens](/docs/tokens) - Understand our design token system
-- [Smart Containers](/docs/smart-containers) - Dive deeper into container utilities
-- [Examples](/docs/examples) - See real-world examples
+1. **[Figma-First CSS Utility](./02-figma-first-css-utility.md)**  
+   Figma 개념이 어떻게 CSS로 매핑되는지 상세히 알아보기
 
-Ready to build something amazing? Let's go! 🚀
+2. **[Design Token](./03-design-token.md)**  
+   Figma Variables와 동기화되는 토큰 시스템
+
+3. **[Layout](./04-layout.md)**  
+   Auto Layout, Grid, Positioning 마스터하기
+
+4. **[Component](./05-component.md)**  
+   내장 컴포넌트와 커스텀 컴포넌트 만들기
+
+## 도움이 필요하신가요?
+
+- 📚 [전체 문서](./01-overview.md)
+- 💬 [GitHub Discussions](https://github.com/adorable-css/adorable-css/discussions)
+- 🐛 [Issue 리포트](https://github.com/adorable-css/adorable-css/issues)
+- 🎮 [Interactive Playground](https://adorablecss.com/playground)

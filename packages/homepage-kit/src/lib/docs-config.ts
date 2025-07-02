@@ -19,198 +19,90 @@ export interface DocItem {
 
 export const docsConfig: DocSection[] = [
 	{
-		title: 'Getting Started',
+		title: '시작하기',
 		items: [
 			{
-				title: 'Introduction',
-				href: '/docs/introduction',
-				description: 'Learn about AdorableCSS and its philosophy',
-				source: '/docs/mdx/introduction.md'
+				title: 'Background',
+				href: '/docs/background',
+				description: '디자인과 코드 사이의 영원한 숙제',
+				source: '/docs/mdx/00-background.md',
+				badge: 'new'
+			},
+			{
+				title: 'Overview',
+				href: '/docs/overview',
+				description: 'AdorableCSS의 핵심 철학과 기본 개념',
+				source: '/docs/mdx/01-overview.md'
 			},
 			{
 				title: 'Getting Started',
 				href: '/docs/getting-started',
-				description: 'Complete guide to installation, configuration, and basic usage',
+				description: '설치와 첫 번째 컴포넌트',
 				source: '/docs/mdx/getting-started.md'
 			},
 			{
-				title: 'Quick Start',
-				href: '/docs/quick-start',
-				description: 'Build your first component with AdorableCSS',
-				source: '/docs/mdx/quick-start.md'
-			},
-			{
-				title: 'Syntax Philosophy',
-				href: '/docs/syntax-philosophy',
-				description: '문법의 철학과 체계 - 배경, 의도, 원칙을 중심으로',
-				source: '/docs/syntax-philosophy.md',
-				badge: 'new'
-			},
-			{
-				title: 'Syntax Guide',
+				title: '문법 가이드',
 				href: '/docs/syntax-guide',
-				description: 'AdorableCSS 문법을 처음부터 자세히 배워보세요',
-				source: '/docs/syntax-guide.md',
-				badge: 'essential'
+				description: '완전한 문법 체계와 사용법',
+				source: '/docs/mdx/11-syntax-guide.md'
+			}
+		]
+	},
+	{
+		title: '핵심 개념',
+		items: [
+			{
+				title: 'Figma-First CSS Utility',
+				href: '/docs/figma-first-css-utility',
+				description: 'Figma 디자인 패널과 CSS 유틸리티 매핑',
+				source: '/docs/mdx/02-figma-first-css-utility.md'
 			},
 			{
-				title: 'Theming & Customization',
-				href: '/docs/theming',
-				description: 'Customize tokens for colors, spacing, and fonts.',
-				source: '/docs/mdx/theming.md',
+				title: 'Design Token',
+				href: '/docs/design-token',
+				description: '완전한 디자인 토큰 시스템',
+				source: '/docs/mdx/03-design-token.md'
+			},
+			{
+				title: 'Layout 시스템',
+				href: '/docs/layout',
+				description: 'Auto Layout, Grid, Position 등 레이아웃 시스템',
+				source: '/docs/mdx/04-layout.md'
+			}
+		]
+	},
+	{
+		title: 'Component & Design System',
+		items: [
+			{
+				title: 'Component 시스템',
+				href: '/docs/component',
+				description: 'defineComponent API와 내장 컴포넌트',
+				source: '/docs/mdx/05-component.md'
+			},
+			{
+				title: 'Design System 구축',
+				href: '/docs/design-system',
+				description: '완전한 디자인 시스템 구축 가이드',
+				source: '/docs/mdx/06-design-system.md',
 				badge: 'new'
 			}
 		]
 	},
 	{
-		title: 'Layout System',
+		title: '기술 문서',
 		items: [
 			{
-				title: 'Layout Fundamentals',
-				href: '/docs/layout-system',
-				description: 'Master AdorableCSS layout utilities and concepts',
-				source: '/docs/mdx/layout-system.md'
+				title: '기술 아키텍처',
+				href: '/docs/technical-architecture',
+				description: '파서 시스템, 규칙 엔진, 우선순위 시스템',
+				source: '/docs/mdx/07-technical-architecture.md'
 			},
 			{
-				title: 'Responsive Design',
-				href: '/docs/responsive-design',
-				description: 'Create adaptive layouts with intuitive breakpoint prefixes.',
-				source: '/docs/mdx/responsive-design.md',
-				badge: 'new'
-			},
-			{
-				title: 'Figma Integration',
-				href: '/docs/figma-integration',
-				description: '디자인과 코드의 완벽한 연결, Auto Layout 매핑, 워크플로우 혁신',
-				source: '/docs/mdx/figma-auto-layout-mapping.md',
-				badge: 'new'
-			},
-			{
-				title: 'Size 유틸리티',
-				href: '/docs/smart-containers',
-				description: 'size() 유틸리티를 사용한 효율적인 크기 설정',
-				source: '/docs/mdx/smart-containers.md'
-			},
-			{
-				title: 'Layer 포지셔닝',
-				href: '/docs/layer-positioning',
-				description: 'Figma 스타일 절대 위치 지정 시스템',
-				source: '/docs/mdx/layer-positioning-system.md',
-				badge: 'new'
-			},
-			{
-				title: 'Position Coordinates',
-				href: '/docs/position-coordinates',
-				description: 'Intuitive coordinate-based positioning system',
-				source: '/docs/mdx/position-coordinates.md'
-			}
-		]
-	},
-	{
-		title: 'Design System',
-		items: [
-			{
-				title: 'Color System Overview',
+				title: '색상 시스템',
 				href: '/docs/color-system',
-				description: 'AdorableCSS 색상 시스템 완벽 가이드',
-				source: '/docs/mdx/color-system.md'
-			},
-			{
-				title: 'OKLCH 색상 시스템',
-				href: '/docs/oklch-colors',
-				description: '과학적 색상 혁신과 지각적으로 균일한 색상 공간',
-				source: '/docs/mdx/oklch-color-system.md',
-				badge: 'new'
-			},
-			{
-				title: 'Dot Notation 투명도',
-				href: '/docs/dot-notation-transparency',
-				description: '직관적 점 표기법 투명도 시스템',
-				source: '/docs/mdx/dot-notation-transparency.md',
-				badge: 'new'
-			},
-			{
-				title: '고급 그라디언트',
-				href: '/docs/advanced-gradients',
-				description: '완벽한 그라디언트 파서와 방향 우선 문법',
-				source: '/docs/mdx/advanced-gradients.md',
-				badge: 'new'
-			},
-			{
-				title: 'Container Tokens',
-				href: '/docs/container-tokens',
-				description: 'Token system for container widths and heights',
-				source: '/docs/mdx/container-tokens.md'
-			}
-		]
-	},
-	{
-		title: 'Components',
-		items: [
-			{
-				title: 'Component System',
-				href: '/docs/component-system',
-				description: '함수형 컴포넌트 시스템과 shadcn/ui 스타일 구현',
-				source: '/docs/mdx/component-system.md',
-				badge: 'new'
-			},
-			{
-				title: 'Component Reference',
-				href: '/docs/components',
-				description: '전체 컴포넌트 API 레퍼런스와 사용법',
-				source: '/docs/mdx/components.md'
-			}
-		]
-	},
-	{
-		title: 'Technical Deep Dive',
-		items: [
-			{
-				title: 'Parser System',
-				href: '/docs/parser-system',
-				description: 'Building a CSS parser from scratch',
-				source: '/docs/mdx/parser-system.md'
-			},
-			{
-				title: 'Architecture',
-				href: '/docs/architecture',
-				description: 'AdorableCSS v2 기술 아키텍처 심층 분석',
-				source: '/docs/mdx/architecture.md'
-			},
-			{
-				title: 'CSS 우선순위 아키텍처',
-				href: '/docs/css-priority-architecture',
-				description: '완벽한 계층형 CSS 시스템',
-				source: '/docs/mdx/css-priority-architecture.md',
-				badge: 'new'
-			},
-			{
-				title: 'State Management',
-				href: '/docs/state-management',
-				description: 'Handle interactive states like hover, focus, and group-hover.',
-				source: '/docs/mdx/state-management.md',
-				badge: 'new'
-			},
-			{
-				title: '스마트 값 변환',
-				href: '/docs/smart-value-transformation',
-				description: '직관적 값을 완벽한 CSS로 변환하는 시스템',
-				source: '/docs/mdx/smart-value-transformation.md',
-				badge: 'new'
-			},
-			{
-				title: 'Rules System',
-				href: '/docs/rules-system',
-				description: 'CSS 규칙의 체계적 관리와 5단계 우선순위 시스템',
-				source: '/docs/mdx/rules-system.md',
-				badge: 'new'
-			},
-			{
-				title: 'Technical Innovation Guide',
-				href: '/docs/technical-innovation-guide',
-				description: 'AdorableCSS v2의 7가지 핵심 기술 혁신과 구현 철학',
-				source: '/docs/mdx/technical-innovation-guide.md',
-				badge: 'new'
+				description: 'OKLCH, Dot Notation, 그라디언트 시스템',
+				source: '/docs/mdx/08-color-system.md'
 			}
 		]
 	},
@@ -218,28 +110,16 @@ export const docsConfig: DocSection[] = [
 		title: 'API Reference',
 		items: [
 			{
-				title: 'Syntax Guide',
-				href: '/docs/syntax',
-				description: 'Complete syntax reference',
-				source: '/docs/technical/SYNTAX_UPDATES.md'
-			},
-			{
-				title: 'All Rules',
-				href: '/docs/rules',
-				description: 'Browse all available utilities',
-				source: '/docs/RULES.md'
+				title: 'Rules Reference',
+				href: '/docs/rules-reference',
+				description: '모든 규칙과 유틸리티 클래스',
+				source: '/docs/mdx/09-rules-reference.md'
 			},
 			{
 				title: 'JavaScript API',
-				href: '/docs/api/javascript',
-				description: 'Using AdorableCSS programmatically',
-				source: '/docs/REFERENCE.md'
-			},
-			{
-				title: 'Color Specification',
-				href: '/docs/color-spec',
-				description: 'How to use colors and opacity',
-				source: '/docs/technical/COLOR_SPECIFICATION.md'
+				href: '/docs/javascript-api',
+				description: '프로그래매틱 사용법',
+				source: '/docs/mdx/10-javascript-api.md'
 			}
 		]
 	},

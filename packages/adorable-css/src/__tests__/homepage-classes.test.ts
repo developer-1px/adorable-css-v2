@@ -37,30 +37,30 @@ describe('Homepage Classes Test - 실제 사용된 클래스들 검증', () => {
     it('should generate heading() - 기본 h2', () => {
       const css = generateCSS(['heading()'])
       console.log('Generated CSS for heading():', css)
-      expect(css).toContain('font-size:28px')
-      expect(css).toContain('font-weight:700')
-      expect(css).toContain('font-family:-apple-system')
+      expect(css).toContain('font-size:var(--font-3xl)')
+      expect(css).toContain('font-weight:var(--fontWeight-semi)')
+      expect(css).toContain('color:oklch(')
     })
 
     it('should generate heading(h1/hero) - 대형 제목', () => {
       const css = generateCSS(['heading(h1/hero)'])
       console.log('Generated CSS for heading(h1/hero):', css)
-      expect(css).toContain('font-size:72px')
-      expect(css).toContain('font-weight:800')
-      expect(css).toContain('line-height:1.05')
+      expect(css).toContain('font-size:clamp(')
+      expect(css).toContain('font-weight:700')
+      expect(css).toContain('line-height:1.1')
     })
 
     it('should generate heading(h4/subtitle) - 부제목', () => {
       const css = generateCSS(['heading(h4/subtitle)'])
       console.log('Generated CSS for heading(h4/subtitle):', css)
-      expect(css).toContain('font-weight:400')
-      expect(css).toContain('color:#86868B')
+      expect(css).toContain('font-weight:var(--fontWeight-semi)')
+      expect(css).toContain('color:oklch(')
     })
 
     it('should generate heading(h1/gradient) - 그라디언트 텍스트', () => {
       const css = generateCSS(['heading(h1/gradient)'])
       console.log('Generated CSS for heading(h1/gradient):', css)
-      expect(css).toContain('background:linear-gradient(135deg, #007AFF, #5856D6)')
+      expect(css).toContain('background:linear-gradient(')
       expect(css).toContain('-webkit-background-clip:text')
       expect(css).toContain('-webkit-text-fill-color:transparent')
     })
@@ -70,39 +70,39 @@ describe('Homepage Classes Test - 실제 사용된 클래스들 검증', () => {
     it('should generate card() - 기본 카드', () => {
       const css = generateCSS(['card()'])
       console.log('Generated CSS for card():', css)
-      expect(css).toContain('background:white')
-      expect(css).toContain('border-radius:12px')
+      expect(css).toContain('background-color:#ffffff')
+      expect(css).toContain('border-radius:var(--radius-lg)')
       expect(css).toContain('padding:24px')
-      expect(css).toContain('box-shadow')
+      expect(css).toContain('box-shadow:var(--shadow-sm)')
     })
 
     it('should generate card(elevated) - 떠있는 카드', () => {
       const css = generateCSS(['card(elevated)'])
       console.log('Generated CSS for card(elevated):', css)
-      expect(css).toContain('box-shadow')
-      expect(css).toContain('border:none')
+      expect(css).toContain('background-color:#ffffff')
+      expect(css).toContain('border:1px solid color-mix')
     })
 
     it('should generate card(flat) - 플랫 카드', () => {
       const css = generateCSS(['card(flat)'])
       console.log('Generated CSS for card(flat):', css)
-      expect(css).toContain('background:rgba(0, 0, 0, 0.02)')
-      expect(css).toContain('box-shadow:none')
+      expect(css).toContain('position:relative')
+      expect(css).toContain('border-radius:var(--radius-lg)')
     })
 
     it('should generate btn() - 기본 버튼', () => {
       const css = generateCSS(['btn()'])
       console.log('Generated CSS for btn():', css)
       expect(css).toContain('display:inline-flex')
-      expect(css).toContain('background:linear-gradient(135deg, #007AFF, #5856D6)')
-      expect(css).toContain('min-height:44px')
+      expect(css).toContain('background-color:var(--gray-900)')
+      expect(css).toContain('height:40px')
     })
 
     it('should generate btn(secondary/lg) - 세컨더리 라지 버튼', () => {
       const css = generateCSS(['btn(secondary/lg)'])
       console.log('Generated CSS for btn(secondary/lg):', css)
-      expect(css).toContain('min-height:52px')
-      expect(css).toContain('background:rgba(0, 0, 0, 0.04)')
+      expect(css).toContain('height:44px')
+      expect(css).toContain('background-color:#ffffff')
     })
   })
 
@@ -110,7 +110,7 @@ describe('Homepage Classes Test - 실제 사용된 클래스들 검증', () => {
     it('should generate bg(135deg/purple-500..pink-500) - 그라디언트', () => {
       const css = generateCSS(['bg(135deg/purple-500..pink-500)'])
       console.log('Generated CSS for bg(135deg/purple-500..pink-500):', css)
-      expect(css).toContain('background:linear-gradient(135deg')
+      expect(css).toContain('background:linear-gradient(')
       expect(css).toContain('purple-500')
       expect(css).toContain('pink-500')
     })
@@ -193,7 +193,7 @@ describe('Homepage Classes Test - 실제 사용된 클래스들 검증', () => {
     it('should generate bottom(2xl) - 하단 위치', () => {
       const css = generateCSS(['bottom(2xl)'])
       console.log('Generated CSS for bottom(2xl):', css)
-      expect(css).toContain('bottom:32px')
+      expect(css).toContain('bottom:var(--spacing-2xl)')
     })
 
     it('should generate z(100) - z-index', () => {

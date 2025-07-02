@@ -176,7 +176,7 @@
       {#each [...colorGroups.spectrum, ...colorGroups.neutral] as colorName}
         {#if colorGroups.palette[colorName]}
           {@const color700 = colorGroups.palette[colorName]?.['700'] || ''}
-          <div class="hbox gap(0) items(stretch) hover:bg(gray-50) transition border-b(1/gray-100)">
+          <div class="hbox hover:bg(gray-50) transition">
             <div class="w(120px) hbox(center/middle) py(lg) px(md)" style="color: {color700}">
               <h4 class="font(medium) capitalize text(center)">{colorName}</h4>
             </div>
@@ -231,11 +231,11 @@
         {@const colorValue = colorGroups.palette[colorName]?.[shade] || ''}
         <div class="vbox gap(sm)">
           <button 
-            class="group vbox gap(md) p(lg) r(lg) hover:bg(gray-50) transition border(1/gray-200) cursor-pointer relative"
+            class="group vbox gap(md) p(sm) r(lg) hover:bg(gray-50) transition border(1/gray-200) cursor-pointer relative"
             on:click={() => copyColor(semanticName)}
           >
             <div 
-              class="h(64px) w(full) r(lg) shadow(md) group-hover:shadow(lg) transition" 
+              class="h(64px) w(full) r(sm) shadow(md) group-hover:shadow(lg) transition"
               style="background: {colorValue}"
             ></div>
             <div class="vbox gap(xs)">

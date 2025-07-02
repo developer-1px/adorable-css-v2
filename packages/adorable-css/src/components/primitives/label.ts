@@ -49,7 +49,7 @@ export const labelDefinition: ComponentDefinition = {
     helper: 'c(gray-500) font(xs/1.4)',
     
     // Interactive variants
-    clickable: 'cursor(pointer) hover:c(gray-900) active:scale(95)'
+    clickable: 'cursor(pointer) hover:c(gray-900) active:scale(0.95)'
   },
   
   compounds: [

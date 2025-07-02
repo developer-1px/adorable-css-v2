@@ -63,7 +63,11 @@
       "Bash(pnpm install:*)",
       "Bash(pnpm --filter homepage-kit dev:build)",
       "Bash(pnpm list:*)",
-      "Bash(do mv \"$f\" \"$f%.mdx.md\")"
+      "Bash(do mv \"$f\" \"$f%.mdx.md\")",
+      "Bash(pnpm deploy:*)",
+      "Bash(npm run deploy:gh-pages:*)",
+      "Bash(npx gh-pages:*)",
+      "Bash(npm run predeploy:gh-pages:*)"
     ],
     "deny": []
   }

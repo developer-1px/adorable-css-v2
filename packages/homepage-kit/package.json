@@ -14,7 +14,7 @@
 		"lint": "prettier --check . && eslint .",
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run",
-		"build:gh-pages": "NODE_ENV=production vite build",
+		"build:gh-pages": "vite build",
 		"predeploy:gh-pages": "touch build/.nojekyll && echo 'adorablecss.com' > build/CNAME",
 		"deploy:gh-pages": "npm run build:gh-pages && npm run predeploy:gh-pages && gh-pages -d build -t true"
 	},

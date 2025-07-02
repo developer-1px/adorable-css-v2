@@ -26,7 +26,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Monorepo Structure
 This is a **pnpm workspace** monorepo with three main packages:
 
-- **`packages/adorable-css-core`** - Core CSS framework (published as `adorable-css`)
+- **`packages/adorable-css`** - Core CSS framework (published as `adorable-css`)
   - Parser system with custom tokenizer and AST
   - Rule system with priority-based registration
   - Design token system with auto-injection
@@ -43,7 +43,7 @@ This is a **pnpm workspace** monorepo with three main packages:
 
 ### Core Library Architecture
 ```
-packages/adorable-css-core/src/
+packages/adorable-css/src/
 ├── core/           # Core parsing and runtime
 │   ├── parser/     # Tokenizer and CSS generation
 │   ├── runtime/    # Auto-injection system
@@ -67,13 +67,131 @@ packages/adorable-css-core/src/
     └── features/   # Glass, glow, interactive
 ```
 
-[... rest of the existing content remains the same ...]
+## Common Development Commands
 
-## Important Memories
-- **TailwindCSS Memory**: tailwindCSS와 제발 헷갈리지마 우리는 adorable-css-v2를 만들고 있어
-- **Development Communication**: 항상 중간중간이라도 뭔가 보여줄 수 있는걸 먼저해줘
-- **Page Design Commitment**: 지금부터 홈페이지의 모든 페이지 디자인은 adorable-css-v2 component만으로 만들거야.
-- 언제나 내가 볼수 있는걸 먼저 세팅하고 조금씩 점진적으로 내가 볼 수 있도록 해줘 한번에 다 만들려고 하지 말고
-- 지금부터는 코드를 더 간결하고 simple하고 코드 수를 줄이는 방향으로 작업할거야
+### Development
+```bash
+# Start all packages in parallel
+pnpm dev
 
-[... rest of the existing content remains the same ...]
+# Development for specific packages
+pnpm dev:core        # Core library only
+pnpm dev:homepage    # Documentation site only
+
+# Testing (IMPORTANT: avoid 'pnpm dev' for testing due to hang issues)
+pnpm test            # Run all tests
+pnpm test:core       # Core library tests only
+pnpm test:watch      # Watch mode
+pnpm test:ui         # Vitest UI
+
+# Building
+pnpm build           # Build all packages
+pnpm build:homepage  # Build documentation site only
+
+# Type checking
+pnpm check           # Check all packages
+
+# Deployment
+pnpm deploy          # Build and deploy docs to GitHub Pages
+pnpm deploy:quick    # Deploy without rebuild
+```
+
+### Testing a Single File
+```bash
+# Run specific test file
+pnpm --filter adorable-css test src/__tests__/parser/parser.test.ts
+
+# Run tests matching pattern
+pnpm --filter adorable-css test -t "parser"
+
+# Debug with Vitest UI
+pnpm --filter adorable-css test:ui
+```
+
+### Package Management
+```bash
+# Clean build artifacts
+pnpm clean
+
+# Release workflow
+pnpm changeset       # Create changeset
+pnpm version-packages # Version packages
+pnpm publish-packages # Publish to npm
+```
+
+## Parser System Architecture
+
+The parser follows a multi-stage architecture:
+
+1. **Input Processing** → Tokenization → AST Generation
+2. **Rule Matching** → Priority Resolution → CSS Generation
+3. **Value Transformation** → Token Injection → Output
+
+Key concepts:
+- **Priority System**: Rules have priorities (0-10) for specificity control
+- **Token System**: Design tokens are auto-injected during parsing
+- **Cache Layer**: LRU cache for performance optimization
+- **Extension Points**: Plugins can hook into parser stages
+
+## Important Development Notes
+
+- **TailwindCSS Memory**: 이 프로젝트는 AdorableCSS v2입니다. TailwindCSS와 혼동하지 마세요.
+- **Progressive Development**: 한번에 모든 것을 만들려고 하지 말고, 점진적으로 동작하는 것을 보여주면서 개발하세요.
+- **Component-First**: 홈페이지의 모든 페이지는 adorable-css 컴포넌트만으로 구성됩니다.
+- **Code Simplicity**: 코드를 간결하고 simple하게 유지하며, 코드량을 줄이는 방향으로 작업하세요.
+- **Design Consistency**: 디자인은 정의된 컴포넌트와 타이포그래피 시스템만 사용하세요.
+- **Performance Testing**: `pnpm dev`는 hang 이슈가 있으므로 테스트 시 `pnpm build` 또는 `pnpm test` 사용하세요.
+- **Documentation Language**: 문서는 한글로 작성합니다.
+
+## Extension System
+
+To add new CSS rules or features:
+
+1. **Add Rule**: Create in `src/rules/[category]/[name].ts`
+2. **Register Rule**: Import in `src/rules/index.ts`
+3. **Add Tests**: Create `src/__tests__/rules/[category]/[name].test.ts`
+4. **Update Types**: Ensure TypeScript definitions are updated
+
+Example rule structure:
+```typescript
+export const myRule: Rule = {
+  name: 'my-rule',
+  match: /^my-rule\((.*)\)$/,
+  priority: 5,
+  generate: (value: string) => ({
+    'css-property': value
+  })
+}
+```
+
+## Design Token System
+
+Tokens are defined in `src/design-system/tokens/`:
+- **Spacing**: xs, sm, md, lg, xl, 2xl, 3xl
+- **Colors**: OKLCH-based with automatic shade generation
+- **Typography**: Role-based system (display, heading, title, body, label, caption)
+- **Shadows**: Elevation-based (sm, md, lg, xl)
+- **Radii**: Corner radius tokens
+
+## Debugging Tips
+
+1. **Parser Issues**: Enable debug mode with `DEBUG=adorable:*`
+2. **Performance**: Check cache hit rates in console
+3. **Rule Conflicts**: Use priority system to resolve
+4. **Token Resolution**: Verify in `design-system/tokens/`
+
+## Integration Points
+
+- **React/Next.js**: Direct import `import 'adorable-css'`
+- **CDN Usage**: `https://unpkg.com/adorable-css/dist/adorable.css`
+- **Build Tools**: Compatible with Vite, Webpack, Parcel
+- **PostCSS**: Can be used as PostCSS plugin
+
+## Contribution Workflow
+
+1. Create feature branch from `main`
+2. Add tests for new functionality
+3. Run `pnpm test` to ensure all tests pass
+4. Update documentation if needed
+5. Create changeset with `pnpm changeset`
+6. Submit PR with clear description

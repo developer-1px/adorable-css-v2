@@ -184,7 +184,7 @@
 - `contrast(120)` - Contrast
 
 ### Transform
-- `scale(105)` - Scale 1.05
+- `scale(1.05)` - Scale 1.05
 - `scale-x(110)`, `scale-y(90)` - Directional scale
 - `translate-x(10)`, `translate-y(-20)` - Translation
 - `rotate(45)`, `rotate(-15)` - Rotation
@@ -271,7 +271,7 @@
 Prefix any utility:
 - `hover:bg(blue-500)` - Hover state
 - `focus:ring(2/blue-500)` - Focus state
-- `active:scale(95)` - Active state
+- `active:scale(0.95)` - Active state
 - `disabled:opacity(50)` - Disabled state
 - `group-hover:opacity(100)` - Group hover
 - `peer-checked:bg(green-500)` - Peer states
