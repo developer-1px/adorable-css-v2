@@ -9,6 +9,7 @@ $: isTokensActive = currentPath.startsWith('/tokens')
 
 const navItems = [
   {href: '/docs', label: 'Docs'},
+  {href: '/syntax', label: 'Syntax'},
   {href: '/rules', label: 'Rules'},
   {href: '/tokens', label: 'Tokens'},
   {href: '/components', label: 'Components'},

@@ -13,6 +13,7 @@ export { iconBoxRules } from './icon-box';
 export { codeBlockRules } from './code-block';
 export { menuRules } from './menu';
 export { menuItemRules } from './menu-item';
+export { tableRules } from './table';
 
 // Export component definitions
 export { cardDefinition } from './card';
