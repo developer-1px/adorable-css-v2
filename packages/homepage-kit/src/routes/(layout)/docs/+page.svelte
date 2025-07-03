@@ -1,7 +1,7 @@
 <script>
   import { goto } from '$app/navigation';
   import { onMount } from 'svelte';
-  import { getFirstDocItem } from '$lib/docs-config';
+  import { getFirstDocItem } from '$lib/docs-config.js';
   
   onMount(() => {
     // Redirect to the first item in docs config

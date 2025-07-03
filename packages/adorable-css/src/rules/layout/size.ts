@@ -14,6 +14,7 @@ export const w: RuleHandler = (args?: string): CSSRule => {
   if (args === 'full') return { width: '100%' };
   if (args === 'auto') return { width: 'auto' };
   if (args === 'screen') return { width: '100vw' };
+  if (args === 'fit') return { width: 'fit-content' }; // Standard fit-content
   
   // Check for container tokens first (for width utilities)
   if (isToken(args, 'container')) {
@@ -41,6 +42,7 @@ export const h: RuleHandler = (args?: string): CSSRule => {
   if (args === 'full') return { height: '100%' };
   if (args === 'auto') return { height: 'auto' };
   if (args === 'screen') return { height: '100vh' };
+  if (args === 'fit') return { height: 'fit-content' }; // Standard fit-content
   
   // Check for container tokens first (for height utilities)
   if (isToken(args, 'container')) {

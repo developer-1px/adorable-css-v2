@@ -1,4 +1,5 @@
 import { backgroundRules } from "./background";
+import { backgroundClipRules } from "./background-clip";
 import { borderRules } from "./border";
 import { bc, btc, brc, bbc, blc } from "./border-color";
 import { shadowRules } from "./shadow";
@@ -10,6 +11,7 @@ import { c } from "./color";
 import { bold } from "./bold";
 import { typographyUtilityRules } from "./typography-utils";
 import { listRules } from "./list";
+import { responsiveTypographyRules } from "./responsive-typography";
 
 export const typographyRules = {
   font,
@@ -20,10 +22,12 @@ export const typographyRules = {
   bold,
   ...typographyUtilityRules,
   ...listRules,
+  ...responsiveTypographyRules,
 };
 
 export const visualRules = {
   ...backgroundRules,
+  ...backgroundClipRules,
   ...borderRules,
   bc, btc, brc, bbc, blc,
   ...shadowRules,

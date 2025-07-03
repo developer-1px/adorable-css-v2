@@ -1,7 +1,7 @@
 <script>
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
-  import { docsConfig, getDocNavigation, findDocByHref } from '$lib/docs-config';
+  import { docsConfig, getDocNavigation, findDocByHref } from '$lib/docs-config.js';
   import { ChevronRight } from 'lucide-svelte';
 
   let mounted = false;
@@ -131,7 +131,7 @@
     <!-- Breadcrumb -->
     <div class="sticky top(60) z(30) bg(white) border-b(1/gray-100) px(32) lg:px(48) py(16)">
       <div class="hbox(middle) gap(6) font(sm/1.5)">
-        <a href="/" class="c(gray-600) hover:c(gray-900) transition">Home</a>
+        <a href="/packages/homepage-kit/static" class="c(gray-600) hover:c(gray-900) transition">Home</a>
         <ChevronRight size="14" class="c(gray-400)" />
         <a href="/docs" class="c(gray-600) hover:c(gray-900) transition">Docs</a>
         {#if currentDoc}

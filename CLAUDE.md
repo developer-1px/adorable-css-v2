@@ -20,8 +20,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **[docs/INDEX.md](./docs/INDEX.md)** - 전체 문서 구조 가이드
 - **[docs/PRODUCT_STRATEGY.md](./docs/PRODUCT_STRATEGY.md)** - 메인 전략 문서  
 - **[docs/REFERENCE.md](/docs/reference)** - API 레퍼런스
+- **[docs/development/ADORABLE_CSS_MISTAKES.md](./docs/development/ADORABLE_CSS_MISTAKES.md)** - 개발 시 주의사항
 
 ## Architecture Overview
+
+### Technology Stack & Requirements
+- **Node.js**: v18+ required
+- **Package Manager**: pnpm v10.8.0+ (strict - only pnpm allowed)
+- **TypeScript**: v5.8.3
+- **Framework**: SvelteKit 5 (for documentation)
+- **Testing**: Vitest
+- **Build Tools**: tsup (library), Vite (development)
+- **Published Package**: `adorable-css` on npm
 
 ### Monorepo Structure
 This is a **pnpm workspace** monorepo with three main packages:
@@ -90,6 +100,10 @@ pnpm build:homepage  # Build documentation site only
 
 # Type checking
 pnpm check           # Check all packages
+
+# Linting
+pnpm lint            # Lint all packages
+pnpm lint:fix        # Auto-fix lint issues
 
 # Deployment
 pnpm deploy          # Build and deploy docs to GitHub Pages
@@ -187,11 +201,54 @@ Tokens are defined in `src/design-system/tokens/`:
 - **Build Tools**: Compatible with Vite, Webpack, Parcel
 - **PostCSS**: Can be used as PostCSS plugin
 
+## Common AdorableCSS Syntax Mistakes
+
+Based on [docs/development/ADORABLE_CSS_MISTAKES.md](./docs/development/ADORABLE_CSS_MISTAKES.md):
+
+### Layout & Spacing
+- ❌ **Never use margin**: `mb(20)`, `mt(10)` → ✅ Use gap-based layout: `gap(20)`
+- ❌ **Implicit flexbox alignment**: `hbox` → ✅ Always specify: `hbox(middle)`, `vbox(center)`
+- ❌ **Wrong order syntax**: `hbox(middle/center)` → ✅ Use `+` for combination: `hbox(middle+center)`
+
+### Styling
+- ❌ **Wrong gradient syntax**: `bg(gradient-to-br/color1/color2)` → ✅ Use: `bg(135deg/color1..color2)`
+- ❌ **Long border names**: `border-l()`, `border-top()` → ✅ Use: `bl()`, `bt()`, `br()`, `bb()`
+- ❌ **Wrong overflow**: `overflow(hidden)` → ✅ Use: `clip`
+- ❌ **Wrong scroll**: `overflow(x-auto)` → ✅ Use: `scroll(x/auto)`
+
+### Testing Guidelines
+- **Framework**: Vitest with jsdom environment
+- **Test Pattern**: `src/**/*.{test,spec}.{js,ts}`
+- **Coverage**: 60+ test files covering parser, rules, components
+- **Before Commits**: Always run `pnpm test`
+- **Debugging**: Use `pnpm test:ui` for visual debugging
+
+## Code Quality Tools
+
+### Prettier Configuration
+- Tabs for indentation
+- Single quotes
+- No trailing commas
+- 100 character line width
+
+### ESLint
+- Configured for TypeScript and Svelte
+- Run `pnpm lint` before commits
+- Auto-fix with `pnpm lint:fix`
+
 ## Contribution Workflow
 
 1. Create feature branch from `main`
 2. Add tests for new functionality
 3. Run `pnpm test` to ensure all tests pass
-4. Update documentation if needed
-5. Create changeset with `pnpm changeset`
-6. Submit PR with clear description
+4. Run `pnpm lint` to check code style
+5. Update documentation if needed
+6. Create changeset with `pnpm changeset`
+7. Submit PR with clear description
+
+## Deployment Notes
+
+- **Automatic**: GitHub Pages deploys on push to `main` branch
+- **Manual**: Use `pnpm deploy` for full build and deploy
+- **Quick Deploy**: Use `pnpm deploy:quick` to deploy without rebuild
+- **Important**: Never commit `dist/` or `build/` directories

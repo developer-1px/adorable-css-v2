@@ -5,7 +5,7 @@ import { createMemo } from "../utils/memo";
 const tokenize = createTokenizer([
   ["(ws)", /(\s+)/],
   ["(hexcolor)", /(#[0-9a-fA-F]{3,8}(?:\.[0-9]+)*)/],
-  ["(dimension-pair)", /((?:[0-9]*\.[0-9]+|[0-9]+)[%a-z]*x(?:[0-9]*\.[0-9]+|[0-9]+)[%a-z]*)/], // matches 64x64, 100%x50px, etc
+  ["(dimension-pair)", /((?:[0-9]*\.[0-9]+|[0-9]+)[%a-z]*[x:](?:[0-9]*\.[0-9]+|[0-9]+)[%a-z]*)/], // matches 64x64, 100%x50px, 16:9, etc
   ["(dimension)", /((?:[0-9]*\.[0-9]+|[0-9]+)[%a-z]*)/],
   ["(string)", /('(?:[^']|\\')*'|"(?:[^"]|\\")*")/],
   ["(color-opacity)", /([a-zA-Z]+(?:-[0-9]+)*\.[0-9]+)/], // matches white.8, yellow-200.5

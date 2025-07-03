@@ -32,7 +32,8 @@ import {
   // responsiveRules, // Spec'd out 
   containerRules, 
   animationRules,
-  proseRules
+  proseRules,
+  glassmorphismRules
 } from '../extensions';
 
 // Components
@@ -40,20 +41,20 @@ import { heroRules } from '../components/patterns/hero';
 import { sectionRules } from '../components/patterns/section';
 import { referenceRules } from '../components/patterns/reference';
 import { docsRules } from '../components/patterns/docs';
-import { buttonRules } from '../components/primitives/button';
-import { headingRules } from '../components/primitives/heading';
-import { displayTextRules } from '../components/primitives/display';
-import { titleRules } from '../components/primitives/title';
-import { bodyRules } from '../components/primitives/body';
-import { labelRules } from '../components/primitives/label';
-import { captionRules } from '../components/primitives/caption';
-import { cardRules } from '../components/primitives/card';
-import { inputRules } from '../components/primitives/input';
-import { badgeRules } from '../components/primitives/badge';
-import { iconBoxRules } from '../components/primitives/icon-box';
-import { codeBlockRules } from '../components/primitives/code-block';
-import { menuRules } from '../components/primitives/menu';
-import { menuItemRules } from '../components/primitives/menu-item';
+import { buttonRules } from '../components/primitives';
+import { headingRules } from '../components/primitives';
+import { displayTextRules } from '../components/primitives';
+import { titleRules } from '../components/primitives';
+import { bodyRules } from '../components/primitives';
+import { labelRules } from '../components/primitives';
+import { captionRules } from '../components/primitives';
+import { cardRules } from '../components/primitives';
+import { inputRules } from '../components/primitives';
+import { badgeRules } from '../components/primitives';
+import { iconBoxRules } from '../components/primitives';
+import { codeBlockRules } from '../components/primitives';
+import { menuRules } from '../components/primitives';
+import { menuItemRules } from '../components/primitives';
 import { featureCardRules } from '../components/patterns/feature-card';
 import { typographyHelperRules } from '../components/patterns/typography-helpers';
 
@@ -265,7 +266,7 @@ export const RULE_GROUPS: RuleDefinitions = {
       },
       animation: {
         name: 'Animation',
-        rules: animationRules.rules,
+        rules: animationRules,
       }
     }
   },
@@ -310,6 +311,7 @@ export const RULE_GROUPS: RuleDefinitions = {
         rules: {
           ...glowRules,
           ...glassRules,
+          ...glassmorphismRules,
         },
       }
     }

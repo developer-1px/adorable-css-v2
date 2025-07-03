@@ -76,7 +76,10 @@
       "Bash(pnpm --filter adorable-css check)",
       "Bash(pnpm --filter adorable-css test scale-test --run)",
       "Bash(true)",
-      "WebFetch(domain:svelte.dev)"
+      "WebFetch(domain:svelte.dev)",
+      "Bash(pnpm --filter adorable-css test src/__tests__/auto-inject.test.ts)",
+      "Bash(pnpm --filter adorable-css test generator-tokens)",
+      "WebFetch(domain:www.practical-ui.com)"
     ],
     "deny": []
   }

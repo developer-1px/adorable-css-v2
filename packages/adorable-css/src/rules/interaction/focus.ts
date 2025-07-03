@@ -20,21 +20,41 @@ export const outline: RuleHandler = (value?: string): CSSRule => {
   return { outline: value };
 };
 
-// Ring utilities for focus states
+// Ring utilities for focus states - uses border-like syntax
 export const ring: RuleHandler = (value?: string): CSSRule => {
   if (!value) return {};
   
-  // ring(2/blue) format
-  if (value.includes('/')) {
-    const [width, color] = value.split('/');
+  const parts = value.split('/');
+  let width = '2px';
+  let offset = '0';
+  let color = 'currentColor';
+  
+  // Parse the values based on the number of parts
+  if (parts.length === 1) {
+    // ring(2) - just width
+    width = px(parts[0]);
+  } else if (parts.length === 2) {
+    // ring(2/blue) - width/color
+    width = px(parts[0]);
+    color = makeColor(parts[1]);
+  } else if (parts.length === 3) {
+    // ring(2/4/blue) - width/offset/color
+    width = px(parts[0]);
+    offset = px(parts[1]);
+    color = makeColor(parts[2]);
+  }
+  
+  // If there's an offset, we need to create two shadows
+  if (offset !== '0') {
+    // First shadow is the offset (usually white), second is the ring
     return {
-      'box-shadow': `0 0 0 ${px(width)} ${makeColor(color)}`
+      'box-shadow': `0 0 0 ${offset} var(--ring-offset-color, white), 0 0 0 calc(${width} + ${offset}) ${color}`
     };
   }
   
-  // ring(2) - default blue ring
+  // No offset, just the ring
   return {
-    'box-shadow': `0 0 0 ${px(value)} rgb(59 130 246 / 0.5)`
+    'box-shadow': `0 0 0 ${width} ${color}`
   };
 };
 

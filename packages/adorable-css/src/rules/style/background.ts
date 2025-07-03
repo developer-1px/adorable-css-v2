@@ -14,6 +14,24 @@ export const bg: RuleHandler = (args?: string): CSSRule => {
   if (args === 'brand' || args === 'gradient-brand') {
     return { 'background': 'linear-gradient(135deg, var(--brand-start, #8b5cf6), var(--brand-end, #ec4899))' };
   }
+
+  // Handle semantic backgrounds
+  if (args === 'gradient') {
+    // Use brand gradient as default gradient
+    return { 'background': 'linear-gradient(135deg, var(--brand-start, #8b5cf6), var(--brand-end, #ec4899))' };
+  }
+  
+  if (args === 'surface') {
+    // Use surface-base semantic color
+    const surfaceColor = makeColor('surface-base');
+    return { 'background-color': surfaceColor };
+  }
+  
+  if (args === 'muted' || args === 'mute') {
+    // Support both 'muted' and 'mute' for consistency
+    const mutedColor = makeColor('surface-subtle');
+    return { 'background-color': mutedColor };
+  }
   
   // bg(linear-gradient(...)) - full gradient syntax
   if (args.startsWith('linear-gradient(') || args.startsWith('radial-gradient(') || args.startsWith('conic-gradient(')) {

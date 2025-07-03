@@ -4,6 +4,12 @@ export {
   animationKeyframes,
   getAllKeyframes
 } from './animations/animations';
+
+export {
+  glassmorphismPlugin,
+  glassmorphismRules
+} from './glassmorphism/glassmorphism';
+
 // export * from './responsive/responsive'; // Spec'd out
 
 // Re-export components
@@ -14,4 +20,4 @@ export { containerRules } from '../components/patterns/container';
 export { proseRules } from '../components/patterns/prose';
 
 // Export animations as animationRules for backward compatibility
-export { animationsPlugin as animationRules } from './animations/animations';
+export { animationRules } from './animations/animations';

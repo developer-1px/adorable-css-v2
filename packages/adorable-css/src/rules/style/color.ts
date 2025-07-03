@@ -81,6 +81,46 @@ export const c: RuleHandler = (args?: string): CSSRule => {
     };
   }
 
+  // Handle special semantic values
+  if (args === 'gradient') {
+    // Use brand gradient from palette
+    const brandGradient = makeColor('brand-gradient-text');
+    if (brandGradient && brandGradient !== 'brand-gradient-text') {
+      // Parse the gradient value and extract colors
+      const gradientMatch = brandGradient.match(/linear-gradient\([^,]+,\s*(.+)\)/);
+      if (gradientMatch) {
+        return {
+          background: `linear-gradient(90deg, ${gradientMatch[1]})`,
+          "-webkit-background-clip": "text",
+          "background-clip": "text",
+          "-webkit-text-fill-color": "transparent",
+        };
+      }
+    }
+    // Fallback gradient
+    return {
+      background: `linear-gradient(135deg, oklch(0.35 0.30 264) 0%, oklch(0.45 0.25 280) 50%, oklch(0.40 0.28 250) 100%)`,
+      "-webkit-background-clip": "text",
+      "background-clip": "text",
+      "-webkit-text-fill-color": "transparent",
+    };
+  }
+
+  // Handle semantic colors by delegating to makeColor
+  // This ensures they resolve through the color palette system
+  const semanticMappings: Record<string, string> = {
+    'muted': 'mute',        // Map 'muted' to 'mute' semantic color
+    'surface': 'surface-base',
+    'surface-alt': 'surface-subtle',
+    'text': 'text-primary',
+    'text-muted': 'text-subtle',
+  };
+
+  if (semanticMappings[args]) {
+    const processedColor = makeColor(semanticMappings[args]);
+    return { color: processedColor };
+  }
+
   // Handle all colors including opacity syntax (white.8, black.2)
   const processedColor = makeColor(args);
   return { color: processedColor };

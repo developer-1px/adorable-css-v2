@@ -3,7 +3,7 @@ import { readFile } from 'fs/promises';
 import { join, resolve } from 'path';
 import { docsConfig } from '$lib/docs-config';
 import { processMarkdownIt } from '$lib/mdx/markdown-it-processor.js';
-import type { EntryGenerator } from './$types';
+import type { EntryGenerator } from '../../../../../.svelte-kit/types/src/routes';
 
 export const entries: EntryGenerator = () => {
   // Generate entries for all docs pages from docsConfig

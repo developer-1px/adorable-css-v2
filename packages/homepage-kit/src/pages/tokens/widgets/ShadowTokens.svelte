@@ -51,7 +51,7 @@
                         {index === 0 ? 'border-l(1px/gray-100) r(l-lg)' : ''}
                         {index === shadows.length - 1 ? 'border-r(1px/gray-100) r(r-lg)' : ''}
                         relative">
-              <div class="vbox(center/middle) h(full) p(sm)">
+              <div class="vbox(pack) h(full) p(sm)">
                 <div class="font(xl) md:font(2xl) bold c(indigo-600) mb(xs)">
                   {key === 'none' ? '0' : key}
                 </div>

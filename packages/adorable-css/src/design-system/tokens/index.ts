@@ -1,5 +1,8 @@
 // Modern Design Token System for AdorableCSS v2
 
+// Re-export semantic design system
+export * from '../semantic-system';
+
 // Semantic color configuration
 export interface SemanticColorConfig {
   primary?: string;      // e.g. "blue-500" or "#0ea5e9"
@@ -14,17 +17,17 @@ export interface SemanticColorConfig {
 }
 
 // Default semantic color mapping using AdorableCSS syntax
-// Using our color palette for semantic meanings - all based on 500 level
+// Modern, sophisticated color palette inspired by top design systems
 export const semanticColors: SemanticColorConfig = {
-  primary: "purple-500",     // Primary brand color - purple family
-  secondary: "gray-500",     // Secondary - neutral gray family
-  accent: "pink-500",        // Accent color - pink family
-  mute: "gray-500",          // Muted elements - gray family
-  brand: "purple-500..pink-500",  // Brand gradient - purple to pink
-  success: "green-500",      // Success states - green family
-  warning: "amber-500",      // Warning states - amber family
-  error: "red-500",          // Error states - red family
-  info: "blue-500"           // Info states - blue family
+  primary: "blue-600",       // Primary brand color - professional blue
+  secondary: "slate-600",    // Secondary - sophisticated slate
+  accent: "cyan-500",        // Accent color - modern cyan
+  mute: "gray-400",          // Muted elements - soft gray
+  brand: "blue-600..cyan-500",  // Brand gradient - blue to cyan
+  success: "emerald-600",    // Success states - emerald green
+  warning: "amber-500",      // Warning states - warm amber
+  error: "red-600",          // Error states - clear red
+  info: "sky-500"            // Info states - sky blue
 };
 
 // CONSISTENCY ENFORCING TEXT HIERARCHY - USE THESE ONLY
@@ -217,6 +220,8 @@ export interface DesignTokens {
     xl: string;
     '2xl': string;
     inner: string;
+    card: string;
+    hover: string;
   };
   colors: {
     // Core semantic colors
@@ -485,6 +490,8 @@ export const defaultTokens: DesignTokens = {
     xl: '0 20px 40px -4px rgb(0 0 0 / 0.1), 0 8px 16px -4px rgb(0 0 0 / 0.04)',
     '2xl': '0 32px 64px -6px rgb(0 0 0 / 0.14), 0 16px 32px -6px rgb(0 0 0 / 0.04)',
     inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.06)',
+    card: '0 4px 12px -2px rgb(0 0 0 / 0.08), 0 2px 6px -2px rgb(0 0 0 / 0.04)',
+    hover: '0 12px 24px -4px rgb(0 0 0 / 0.12), 0 6px 12px -4px rgb(0 0 0 / 0.06)',
   },
   
   colors: {

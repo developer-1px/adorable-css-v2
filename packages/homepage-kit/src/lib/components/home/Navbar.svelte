@@ -13,7 +13,9 @@ const navItems = [
   {href: '/rules', label: 'Rules'},
   {href: '/tokens', label: 'Tokens'},
   {href: '/components', label: 'Components'},
-  {href: '/playground', label: 'Playground'}
+  {href: '/design-system', label: 'Design System'},
+  {href: '/playground', label: 'Playground'},
+  {href: '/showroom', label: 'Showroom'}
 ]
 </script>
 
@@ -60,7 +62,7 @@ const navItems = [
           <Github size="20" class="c(gray-600)"/>
         </a>
         <div class="w(1px) h(24) bg(gray-200)"></div>
-        <a href="/docs/getting-started" class="px(16) py(8) r(8) bg(gray-900) c(white) font(sm/1.5) hover:bg(gray-800) transition">
+        <a href="/packages/homepage-kit/src/routes/(layout)/docs/getting-started" class="px(16) py(8) r(8) bg(gray-900) c(white) font(sm/1.5) hover:bg(gray-800) transition">
           Get Started
         </a>
       </div>
@@ -95,7 +97,7 @@ const navItems = [
           </a>
         {/each}
         <div class="mt(16) pt(16) border-t(1/gray-100)">
-          <a href="/docs/getting-started" class="block w(full) px(16) py(8) r(8) bg(gray-900) c(white) text(center) font(sm/1.5) hover:bg(gray-800) transition">
+          <a href="/packages/homepage-kit/src/routes/(layout)/docs/getting-started" class="block w(full) px(16) py(8) r(8) bg(gray-900) c(white) text(center) font(sm/1.5) hover:bg(gray-800) transition">
             Get Started
           </a>
         </div>
