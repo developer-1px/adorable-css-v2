@@ -78,6 +78,18 @@ export const grid: RuleHandler = (value?: string): CSSRule => {
     return gridPatterns[value];
   }
   
+  // Check for explicit columns x rows pattern: grid(3x2)
+  const gridDimensionMatch = value.match(/^(\d+)x(\d+)$/);
+  if (gridDimensionMatch) {
+    const [, cols, rows] = gridDimensionMatch;
+    return {
+      display: "grid",
+      "grid-template-columns": `repeat(${cols}, minmax(0, 1fr))`,
+      "grid-template-rows": `repeat(${rows}, minmax(0, 1fr))`,
+      "gap": "var(--spacing-lg, 1rem)"
+    };
+  }
+  
   // Check if value is just a number (for column count)
   if (/^\d+$/.test(value)) {
     const cols = parseInt(value);
