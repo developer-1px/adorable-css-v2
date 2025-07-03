@@ -242,6 +242,39 @@ export const makeColor = (value = 'transparent') => {
                          'border-default', 'border-accent', 'border-subtle',
                          'success', 'error', 'warning', 'info']
   
+  // Single color names that should default to 500 shade
+  const singleColorDefaults: Record<string, string> = {
+    'primary': 'primary-500',
+    'secondary': 'secondary-500',
+    'accent': 'accent-500',
+    'success': 'success-500',
+    'warning': 'warning-500',
+    'error': 'error-500',
+    'info': 'info-500',
+    'blue': 'blue-500',
+    'green': 'green-500',
+    'red': 'red-500',
+    'yellow': 'yellow-500',
+    'purple': 'purple-500',
+    'pink': 'pink-500',
+    'indigo': 'indigo-500',
+    'cyan': 'cyan-500',
+    'teal': 'teal-500',
+    'emerald': 'emerald-500',
+    'amber': 'amber-500',
+    'orange': 'orange-500',
+    'lime': 'lime-500',
+    'violet': 'violet-500',
+    'fuchsia': 'fuchsia-500',
+    'rose': 'rose-500',
+    'sky': 'sky-500',
+    'slate': 'slate-500',
+    'gray': 'gray-500',
+    'zinc': 'zinc-500',
+    'neutral': 'neutral-500',
+    'stone': 'stone-500'
+  }
+  
   // Check if it's a semantic color with shade (primary/100, neutral/500)
   if (colorName.includes('/')) {
     const [semantic, shade] = colorName.split('/')
@@ -255,8 +288,8 @@ export const makeColor = (value = 'transparent') => {
     }
   }
   
-  // Check if it's a full semantic color name
-  if (semanticColors.includes(colorName)) {
+  // Check if it's a full semantic color name (but skip if it's in singleColorDefaults)
+  if (semanticColors.includes(colorName) && !singleColorDefaults[colorName]) {
     const cssVar = `var(--${colorName})`
     if (alpha) {
       return `color-mix(in srgb, ${cssVar} ${alpha.includes('.') ? alpha : '0.' + alpha}, transparent)`
@@ -281,6 +314,18 @@ export const makeColor = (value = 'transparent') => {
       return `rgba(${rgb.join(',')},${alpha.includes('.') ? alpha : '0.' + alpha})`
     }
     return baseColor
+  }
+  
+  // Check if it's a single color name that should default to 500
+  if (singleColorDefaults[colorName]) {
+    const defaultColorName = singleColorDefaults[colorName]
+    const cssVar = `var(--${defaultColorName})`
+    if (alpha) {
+      // Use modern CSS color-mix for alpha blending
+      const alphaPercent = alpha.includes('.') ? parseFloat(alpha) * 100 : parseFloat(alpha) * 10
+      return `color-mix(in srgb, ${cssVar} ${alphaPercent}%, transparent)`
+    }
+    return cssVar
   }
   
   // Handle color tokens FIRST (prioritize CSS variables over palette)

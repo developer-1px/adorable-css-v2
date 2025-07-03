@@ -29,7 +29,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Package Manager**: pnpm v10.8.0+ (strict - only pnpm allowed)
 - **TypeScript**: v5.8.3
 - **Framework**: SvelteKit 5 (for documentation)
-- **Testing**: Vitest
+- **Testing**: Vitest with jsdom environment
 - **Build Tools**: tsup (library), Vite (development)
 - **Published Package**: `adorable-css` on npm
 
@@ -58,9 +58,10 @@ packages/adorable-css/src/
 │   ├── parser/     # Tokenizer and CSS generation
 │   ├── runtime/    # Auto-injection system
 │   └── values/     # Value transformation utilities
-├── rules/          # CSS rule definitions
+├── rules/          # CSS rule definitions (follows Figma panel order)
 │   ├── layout/     # Display, grid, flexbox, spacing
-│   ├── style/      # Colors, typography, borders
+│   ├── text/       # Typography, colors, fonts (recently moved from style/)
+│   ├── style/      # Backgrounds, borders, shadows, effects
 │   ├── position/   # Positioning and layer system
 │   ├── interaction/# Cursor, transitions, animations
 │   └── effects/    # Transforms, filters, backdrop
@@ -223,6 +224,21 @@ Based on [docs/development/ADORABLE_CSS_MISTAKES.md](./docs/development/ADORABLE
 - **Before Commits**: Always run `pnpm test`
 - **Debugging**: Use `pnpm test:ui` for visual debugging
 
+### Running Specific Tests
+```bash
+# Test a specific file
+pnpm --filter adorable-css test src/__tests__/parser/parser.test.ts
+
+# Test files matching a pattern
+pnpm --filter adorable-css test -t "parser"
+
+# Run tests in watch mode
+pnpm --filter adorable-css test:watch
+
+# Debug with Vitest UI
+pnpm --filter adorable-css test:ui
+```
+
 ## Code Quality Tools
 
 ### Prettier Configuration
@@ -252,6 +268,12 @@ Based on [docs/development/ADORABLE_CSS_MISTAKES.md](./docs/development/ADORABLE
 - **Manual**: Use `pnpm deploy` for full build and deploy
 - **Quick Deploy**: Use `pnpm deploy:quick` to deploy without rebuild
 - **Important**: Never commit `dist/` or `build/` directories
+
+## Current Development Status
+
+### Recent Architecture Changes
+- **Text Rules Reorganization**: Text-related rules are being moved from `rules/style/` to `rules/text/` for better organization
+- **Test Files Migration**: Test files in `__tests__/rules/style/` need to be moved to match the new `rules/text/` structure
 
 ## Development Notes
 
