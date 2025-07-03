@@ -10,12 +10,12 @@
   const trendStyles = {
     up: 'bg(success-100) c(success-700) ring(1/success-200)',
     down: 'bg(error-100) c(error-700) ring(1/error-200)',
-    neutral: 'bg(gray-100) c(gray-700) ring(1/gray-200)'
+    neutral: 'bg(neutral-100) c(neutral-700) ring(1/neutral-200)'
   };
 </script>
 
-<div class="metric-card relative vbox gap(md) p(lg) r(xl) bg(white) ring(1/gray-200) 
-           hover:shadow(lg) hover:ring(1/gray-300) hover:translate(0/-1) 
+<div class="metric-card relative vbox gap(md) p(lg) r(xl) bg(white) ring(1/neutral-200) 
+           hover:shadow(lg) hover:ring(1/neutral-300) hover:translate(0/-1) 
            transition-all duration(normal) ease(out) group cursor-pointer">
   
   <!-- Background decoration with improved design -->
@@ -29,7 +29,7 @@
   
   <!-- Header with enhanced spacing -->
   <div class="hbox(between+center) relative z(10)">
-    <h3 class="500 font(sm) c(gray-600) group-hover:c(gray-700) transition-colors duration(normal)">{title}</h3>
+    <h3 class="500 font(sm) c(neutral-600) group-hover:c(neutral-700) transition-colors duration(normal)">{title}</h3>
     {#if icon}
       <div class="icon-wrapper size(40) r(lg) shadow(xs) group-hover:shadow(md) group-hover:scale(1.02) transition-all duration(normal) ease(back)" 
            style="background: {iconColor}15; border: 1px solid {iconColor}20;">
@@ -40,7 +40,7 @@
   
   <!-- Value and change with enhanced typography -->
   <div class="vbox gap(xs) relative z(10)">
-    <p class="700 font(4xl/-2%) c(gray-900) group-hover:c(gray-900) transition-colors duration(normal)">{value}</p>
+    <p class="700 font(4xl/-2%) c(neutral-900) group-hover:c(neutral-900) transition-colors duration(normal)">{value}</p>
     
     <div class="hbox(center) gap(xs)">
       {#if trend !== 'neutral'}
@@ -51,7 +51,7 @@
           <span class="600 font(xs)">{Math.abs(change)}%</span>
         </div>
       {/if}
-      <span class="font(xs) c(gray-500)">from last period</span>
+      <span class="font(xs) c(neutral-500)">from last period</span>
     </div>
   </div>
   

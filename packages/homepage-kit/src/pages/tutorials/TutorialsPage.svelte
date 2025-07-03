@@ -94,15 +94,15 @@
 <section class="section(hero) bg(white) relative clip">
   <!-- Background Pattern -->
   <div class="layer pointer-events(none) opacity(0.03)">
-    <div class="absolute w(800px) h(800px) bg(gray-100) r(full) blur(200px) top(-400px) left(-200px)"></div>
-    <div class="absolute w(600px) h(600px) bg(gray-200) r(full) blur(150px) bottom(-300px) right(-150px)"></div>
+    <div class="absolute w(800px) h(800px) bg(neutral-100) r(full) blur(200px) top(-400px) left(-200px)"></div>
+    <div class="absolute w(600px) h(600px) bg(neutral-200) r(full) blur(150px) bottom(-300px) right(-150px)"></div>
   </div>
   
   <div class="contain(wide) relative z(10)">
     <div class="content(hero)">
       <!-- Animated Badge -->
-      <div class="badge() bg(gray-100) border(1/gray-300) gap(sm) hover:scale(1.05) transition r(9999px)">
-        <BookOpen size="16" class="c(gray-700)" />
+      <div class="badge() bg(neutral-100) border(1/neutral-300) gap(sm) hover:scale(1.05) transition r(9999px)">
+        <BookOpen size="16" class="c(neutral-700)" />
         <span class="600">Interactive Learning Platform</span>
       </div>
       
@@ -115,41 +115,41 @@
           </span>
         </h1>
         
-        <p class="lead() c(gray-600) max-w(600px)">
+        <p class="lead() c(neutral-600) max-w(600px)">
           Master the most intuitive CSS framework through hands-on tutorials. 
-          <strong class="c(gray-900)">Edit code on the left, see magic on the right.</strong>
+          <strong class="c(neutral-900)">Edit code on the left, see magic on the right.</strong>
         </p>
       </div>
       
       <!-- Quick Stats -->
       <div class="hbox(center) gap(xl) flex-wrap">
         <div class="hbox(middle) gap(sm)">
-          <div class="w(40px) h(40px) r(full) bg(gray-100) hbox(pack)">
-            <CheckCircle size="20" class="c(gray-700)" />
+          <div class="w(40px) h(40px) r(full) bg(neutral-100) hbox(pack)">
+            <CheckCircle size="20" class="c(neutral-700)" />
           </div>
           <div class="vbox">
-            <span class="font(xl) 700 c(gray-900)">2</span>
-            <span class="caption() c(gray-600)">Available Now</span>
+            <span class="font(xl) 700 c(neutral-900)">2</span>
+            <span class="caption() c(neutral-600)">Available Now</span>
           </div>
         </div>
         
         <div class="hbox(middle) gap(sm)">
-          <div class="w(40px) h(40px) r(full) bg(gray-100) hbox(pack)">
-            <Clock size="20" class="c(gray-700)" />
+          <div class="w(40px) h(40px) r(full) bg(neutral-100) hbox(pack)">
+            <Clock size="20" class="c(neutral-700)" />
           </div>
           <div class="vbox">
-            <span class="font(xl) 700 c(gray-900)">35 min</span>
-            <span class="caption() c(gray-600)">Total Time</span>
+            <span class="font(xl) 700 c(neutral-900)">35 min</span>
+            <span class="caption() c(neutral-600)">Total Time</span>
           </div>
         </div>
         
         <div class="hbox(middle) gap(sm)">
-          <div class="w(40px) h(40px) r(full) bg(gray-100) hbox(pack)">
-            <Star size="20" class="c(gray-700)" />
+          <div class="w(40px) h(40px) r(full) bg(neutral-100) hbox(pack)">
+            <Star size="20" class="c(neutral-700)" />
           </div>
           <div class="vbox">
-            <span class="font(xl) 700 c(gray-900)">30</span>
-            <span class="caption() c(gray-600)">Lessons Total</span>
+            <span class="font(xl) 700 c(neutral-900)">30</span>
+            <span class="caption() c(neutral-600)">Lessons Total</span>
           </div>
         </div>
       </div>
@@ -167,16 +167,16 @@
 </section>
 
 <!-- Features Section -->
-<section class="section(compact) bg(gray-50)">
+<section class="section(compact) bg(neutral-50)">
   <div class="contain()">
     <div class="feature-grid()">
       {#each features as feature}
         <div class="card-base() card-hover() text(center) stack(md)">
-          <div class="w(60px) h(60px) r(lg) bg(gray-100) hbox(pack) mx(auto)">
-            <svelte:component this={feature.icon} size="30" class="c(gray-700)" />
+          <div class="w(60px) h(60px) r(lg) bg(neutral-100) hbox(pack) mx(auto)">
+            <svelte:component this={feature.icon} size="30" class="c(neutral-700)" />
           </div>
           <h3 class="heading(h4)">{feature.title}</h3>
-          <p class="caption() c(gray-600)">{feature.description}</p>
+          <p class="caption() c(neutral-600)">{feature.description}</p>
         </div>
       {/each}
     </div>
@@ -188,7 +188,7 @@
   <div class="contain(wide)">
     <div class="content(centered)">
       <h2 class="heading(h2)">Choose Your Tutorial</h2>
-      <p class="lead() c(gray-600)">
+      <p class="lead() c(neutral-600)">
         Start with the basics or jump to what interests you most
       </p>
     </div>
@@ -205,18 +205,18 @@
           disabled={tutorial.status !== 'available'}
         >
           <!-- Card Header with Gradient -->
-          <div class="h(120px) bg(gray-700) relative">
+          <div class="h(120px) bg(neutral-700) relative">
             <div class="layer hbox(pack)">
               <svelte:component this={tutorial.icon} size="48" class="c(white.3)" />
             </div>
             <div class="layer p(lg) vbox(bottom)">
               <div class="w(48px) h(48px) bg(white) r(lg) hbox(pack) shadow(md)">
-                <svelte:component this={tutorial.icon} size="24" class="c(gray-700)" />
+                <svelte:component this={tutorial.icon} size="24" class="c(neutral-700)" />
               </div>
             </div>
             {#if tutorial.status === 'coming-soon'}
               <div class="absolute top(md) right(md)">
-                <span class="badge() bg(gray-900.8) c(white) backdrop-blur(sm) r(9999px)">
+                <span class="badge() bg(neutral-900.8) c(white) backdrop-blur(sm) r(9999px)">
                   Coming Soon
                 </span>
               </div>
@@ -227,19 +227,19 @@
           <div class="p(xl) stack(md)">
             <div class="stack(sm)">
               <h3 class="heading(h3)">{tutorial.title}</h3>
-              <p class="c(gray-600)">{tutorial.description}</p>
+              <p class="c(neutral-600)">{tutorial.description}</p>
             </div>
             
             <!-- Metadata -->
             <div class="hbox gap(md) flex-wrap">
-              <span class="badge() bg(gray-100) c(gray-700) r(9999px)">
+              <span class="badge() bg(neutral-100) c(neutral-700) r(9999px)">
                 {tutorial.difficulty}
               </span>
-              <span class="hbox(middle) gap(xs) caption() c(gray-500)">
+              <span class="hbox(middle) gap(xs) caption() c(neutral-500)">
                 <Clock size="14" />
                 {tutorial.time}
               </span>
-              <span class="hbox(middle) gap(xs) caption() c(gray-500)">
+              <span class="hbox(middle) gap(xs) caption() c(neutral-500)">
                 <BookOpen size="14" />
                 {tutorial.lessons} lessons
               </span>
@@ -247,7 +247,7 @@
             
             <!-- Action -->
             {#if tutorial.status === 'available'}
-              <div class="pt(md) bt(gray-100)">
+              <div class="pt(md) bt(neutral-100)">
                 <span class="hbox(middle) gap(sm) c(accent) 600 group-hover:gap(md) transition-all">
                   Start Learning
                   <ArrowRight size="16" />
@@ -262,31 +262,31 @@
 </section>
 
 <!-- Learning Path Section -->
-<section class="section() bg(gray-50)">
+<section class="section() bg(neutral-50)">
   <div class="contain()">
     <div class="content(centered)">
       <h2 class="heading(h2)">Your Learning Journey</h2>
-      <p class="lead() c(gray-600)">
+      <p class="lead() c(neutral-600)">
         Follow our recommended path to AdorableCSS mastery
       </p>
     </div>
     
     <div class="grid grid-cols(1) md:grid-cols(2) lg:grid-cols(4) gap(lg) relative">
       <!-- Connection Line (desktop only) -->
-      <div class="absolute top(40px) left(60px) right(60px) h(2px) bg(gray-300) ..lg:hidden"></div>
+      <div class="absolute top(40px) left(60px) right(60px) h(2px) bg(neutral-300) ..lg:hidden"></div>
       
       {#each learningPath as item, index}
         <div class="relative stack(md) text(center)">
           <!-- Step Number -->
-          <div class="w(80px) h(80px) r(full) bg(white) border(3/gray-400) mx(auto) relative z(10)
+          <div class="w(80px) h(80px) r(full) bg(white) border(3/neutral-400) mx(auto) relative z(10)
                       hbox(pack) shadow(md) group-hover:scale(1.1) transition">
-            <span class="font(2xl) 700 c(gray-700)">{item.step}</span>
+            <span class="font(2xl) 700 c(neutral-700)">{item.step}</span>
           </div>
           
           <!-- Content -->
           <div class="stack(xs)">
             <h3 class="heading(h4)">{item.title}</h3>
-            <p class="caption() c(gray-600)">{item.description}</p>
+            <p class="caption() c(neutral-600)">{item.description}</p>
           </div>
           
           <!-- Progress Indicator -->

@@ -391,8 +391,8 @@
         </div>
         
         <!-- Quick Actions -->
-        <div class="border(2/gray-200) p(2xl) r(xl) vbox gap(lg)" style="grid-row: span 2">
-          <h4 class="title(lg) c(gray-900)">Quick Actions</h4>
+        <div class="border(2/neutral-200) p(2xl) r(xl) vbox gap(lg)" style="grid-row: span 2">
+          <h4 class="title(lg) c(neutral-900)">Quick Actions</h4>
           <div class="vbox gap(md)">
             <button class="w(full) py(md) px(lg) bg(neutral-50) hover:bg(neutral-100) r(lg) text(left) body(sm) c(primary) transition">
               Create New Project
@@ -410,14 +410,14 @@
         </div>
         
         <!-- Recent Activity -->
-        <div class="bg(sky-50) p(2xl) r(xl) vbox gap(lg)">
-          <h4 class="title(lg) c(gray-900)">Recent Activity</h4>
+        <div class="bg(info-50) p(2xl) r(xl) vbox gap(lg)">
+          <h4 class="title(lg) c(neutral-900)">Recent Activity</h4>
           <div class="vbox gap(sm)">
             <div class="hbox gap(sm) items(start)">
-              <div class="size(8) r(full) bg(sky-400)" style="margin-top: 6px"></div>
+              <div class="size(8) r(full) bg(info-400)" style="margin-top: 6px"></div>
               <div class="vbox gap(xs)">
-                <p class="body(sm) c(gray-700)">New user registered</p>
-                <p class="caption c(gray-500)">2 min ago</p>
+                <p class="body(sm) c(neutral-700)">New user registered</p>
+                <p class="caption c(neutral-500)">2 min ago</p>
               </div>
             </div>
           </div>
@@ -427,13 +427,13 @@
   </section>
 
   <!-- Timeline Section -->
-  <section class="py(5xl) px(2xl) bg(gray-50)">
+  <section class="py(5xl) px(2xl) bg(neutral-50)">
     <div class="container(5xl) mx(auto) vbox gap(3xl)">
       <div class="text(center) vbox(pack) gap(lg)">
-        <h2 class="display(3xl) c(gray-900)">
+        <h2 class="display(3xl) c(neutral-900)">
           Our Journey
         </h2>
-        <p class="title(lg) c(gray-600) max-w(2xl)">
+        <p class="title(lg) c(neutral-600) max-w(2xl)">
           From idea to innovation, see how we've grown
         </p>
       </div>
@@ -441,7 +441,7 @@
       <!-- Timeline -->
       <div class="relative">
         <!-- Timeline Line -->
-        <div class="absolute left(50%) top(0) bottom(0) w(2) bg(gray-200) ..md:left(20)"></div>
+        <div class="absolute left(50%) top(0) bottom(0) w(2) bg(neutral-200) ..md:left(20)"></div>
         
         <!-- Timeline Items -->
         <div class="vbox gap(3xl)">
@@ -455,8 +455,8 @@
               <div class="w(full) max-w(lg) {item.align === 'left' ? 'pr(3xl)' : 'pl(3xl)'} ..md:pl(24) ..md:pr(0)">
                 <div class="glassmorphism(md) p(2xl) r(xl) vbox gap(lg) hover:shadow(xl) transition">
                   <div class="caption c(primary)">{item.year}</div>
-                  <h3 class="title(xl) c(gray-900)">{item.title}</h3>
-                  <p class="body(md) c(gray-600)">{item.desc}</p>
+                  <h3 class="title(xl) c(neutral-900)">{item.title}</h3>
+                  <p class="body(md) c(neutral-600)">{item.desc}</p>
                 </div>
               </div>
               <!-- Timeline Dot -->
@@ -472,27 +472,27 @@
   <section class="py(4xl) px(2xl) bg(white)">
     <div class="container(7xl) mx(auto) vbox gap(2xl)">
       <div class="text(center) vbox(pack) gap(lg)">
-        <h2 class="display(3xl) c(gray-900)">
+        <h2 class="display(3xl) c(neutral-900)">
           Impact by the numbers
         </h2>
-        <p class="title(lg) c(gray-600) max-w(2xl)">
+        <p class="title(lg) c(neutral-600) max-w(2xl)">
           Real results from real customers
         </p>
       </div>
       
       <div class="grid(4) gap(xl) ..lg:grid(2) ..sm:grid(1)">
         {#each [
-          { value: '99.9%', label: 'Uptime SLA', icon: 'shield', color: 'emerald' },
-          { value: '< 100ms', label: 'Response Time', icon: 'lightning', color: 'cyan' },
-          { value: '50M+', label: 'API Calls/Day', icon: 'globe', color: 'purple' },
-          { value: '4.9/5', label: 'Customer Rating', icon: 'star', color: 'amber' }
+          { value: '99.9%', label: 'Uptime SLA', icon: 'shield', color: 'success' },
+          { value: '< 100ms', label: 'Response Time', icon: 'lightning', color: 'info' },
+          { value: '50M+', label: 'API Calls/Day', icon: 'globe', color: 'primary' },
+          { value: '4.9/5', label: 'Customer Rating', icon: 'star', color: 'warning' }
         ] as stat}
           <div class="text(center) p(2xl) r(xl) bg({stat.color}-50) hover:shadow(lg) transition group">
             <div class="size(64) r(full) bg({stat.color}-100) c({stat.color}-600) hbox(center/middle) mx(auto) group-hover:scale(110) transition">
               {@html icons[stat.icon]}
             </div>
-            <h3 class="display(xl) c(gray-900) my(lg)">{stat.value}</h3>
-            <p class="body(md) c(gray-600)">{stat.label}</p>
+            <h3 class="display(xl) c(neutral-900) my(lg)">{stat.value}</h3>
+            <p class="body(md) c(neutral-600)">{stat.label}</p>
           </div>
         {/each}
       </div>
@@ -500,13 +500,13 @@
   </section>
 
   <!-- FAQ Accordion -->
-  <section class="py(5xl) px(2xl) bg(gray-50)">
+  <section class="py(5xl) px(2xl) bg(neutral-50)">
     <div class="container(5xl) mx(auto) vbox gap(3xl)">
       <div class="text(center) vbox(pack) gap(lg)">
-        <h2 class="display(3xl) c(gray-900)">
+        <h2 class="display(3xl) c(neutral-900)">
           Frequently asked questions
         </h2>
-        <p class="title(lg) c(gray-600) max-w(2xl)">
+        <p class="title(lg) c(neutral-600) max-w(2xl)">
           Everything you need to know about our platform
         </p>
       </div>
@@ -519,12 +519,12 @@
           { q: 'Do you offer enterprise plans?', a: 'Absolutely! We have custom enterprise plans with dedicated support and SLAs.' }
         ] as faq, i}
           <details class="group">
-            <summary class="py(lg) px(xl) bg(white) hover:bg(gray-50) r(lg) cursor(pointer) hbox(between) transition">
-              <h3 class="title(md) c(gray-900)">{faq.q}</h3>
-              <span class="c(gray-400) transition group-open:rotate(180)">▼</span>
+            <summary class="py(lg) px(xl) bg(white) hover:bg(neutral-50) r(lg) cursor(pointer) hbox(between) transition">
+              <h3 class="title(md) c(neutral-900)">{faq.q}</h3>
+              <span class="c(neutral-400) transition group-open:rotate(180)">▼</span>
             </summary>
             <div class="px(xl) pb(lg) bg(white) r(lg)">
-              <p class="body(md) c(gray-600)">{faq.a}</p>
+              <p class="body(md) c(neutral-600)">{faq.a}</p>
             </div>
           </details>
         {/each}

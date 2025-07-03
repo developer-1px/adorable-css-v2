@@ -22,32 +22,32 @@
   <div class="relative z(10) vbox(center) gap(32) px(24) py(80) max-w(6xl) mx(auto) text(center)">
     <!-- Badge -->
     <div>
-      <div class="hbox(middle) gap(8) px(20) py(10) r(full) glass(20/0.05) border(1/purple-500.3) shadow(lg/purple-500.1) hover:shadow(xl/purple-500.2) transition group">
-        <Sparkles size="16" class="c(purple-500)" />
-        <span class="label(sm) bold(600) bg(clip-text) c(135deg/purple-600..pink-600)">v2.0 Alpha</span>
-        <span class="px(8) py(2) r(full) bg(purple-500) c(white) caption(xs) bold">NEW</span>
+      <div class="hbox(middle) gap(8) px(20) py(10) r(full) glass(20/0.05) border(1/primary.3) shadow(lg/primary.1) hover:shadow(xl/primary.2) transition group">
+        <Sparkles size="16" class="c(primary)" />
+        <span class="label(sm) bold(600) bg(clip-text) c(135deg/primary..primary-600)">v2.0 Alpha</span>
+        <span class="px(8) py(2) r(full) bg(primary) c(white) caption(xs) bold">NEW</span>
       </div>
     </div>
     
     <!-- Main Heading -->
-    <h1 class="display(2xl) c(gray-900)">
+    <h1 class="display(2xl) c(neutral-900)">
       Write CSS like you
       <br />
       <span class="relative inline-block">
-        <span class="relative z(10) bg(clip-text) c(135deg/purple-600..pink-600)">think in Figma</span>
-        <span class="absolute bottom(-8) left(0) right(0) h(20) bg(purple-500.1) blur(xl)"></span>
+        <span class="relative z(10) bg(clip-text) c(135deg/primary..primary-600)">think in Figma</span>
+        <span class="absolute bottom(-8) left(0) right(0) h(20) bg(primary.1) blur(xl)"></span>
       </span>
     </h1>
     
     <!-- Subheading -->
-    <p class="body(lg) c(gray-600) max-w(4xl) mx(auto)">
-      A <span class="bold(600) c(purple-600)">Figma-first</span> CSS framework that bridges design and code. 
+    <p class="body(lg) c(neutral-600) max-w(4xl) mx(auto)">
+      A <span class="bold(600) c(primary)">Figma-first</span> CSS framework that bridges design and code. 
       Built-in design system, intuitive syntax, and seamless integration.
     </p>
     
     <!-- CTA Buttons -->
     <div class="hbox(center/wrap) gap(20)">
-      <a href="/docs" class="group px(32) py(16) r(xl) bg(purple-500..pink-500) c(white) label(button) bold(700) shadow(xl) hover:shadow(2xl) hover:translate-y(-2) active:translate-y(0) transition relative clip">
+      <a href="/docs" class="group px(32) py(16) r(xl) bg(primary..primary-600) c(white) label(button) bold(700) shadow(xl) hover:shadow(2xl) hover:translate-y(-2) active:translate-y(0) transition relative clip">
         <span class="relative z(10) hbox(middle) gap(8)">
           Get Started
           <ArrowRight size="20" class="group-hover:translate-x(4) transition" />

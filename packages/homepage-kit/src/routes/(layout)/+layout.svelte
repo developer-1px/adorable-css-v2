@@ -5,7 +5,7 @@ import ClassInspector from "$lib/components/debug/ClassInspector.svelte";
 
 <!-- Alpha Version Ribbon -->
 <div class="fixed top(0) left(0) z(100) w(100) h(100) clip pointer-events(none)">
-  <div class="absolute top(20) left(-35) w(120) bg(orange-500) py(4) text(center) shadow(sm) rotate(-45) pointer-events(auto)">
+  <div class="absolute top(20) left(-35) w(120) bg(warning) py(4) text(center) shadow(sm) rotate(-45) pointer-events(auto)">
     <span class="caption(xs) c(white) bold uppercase">Alpha</span>
   </div>
 </div>

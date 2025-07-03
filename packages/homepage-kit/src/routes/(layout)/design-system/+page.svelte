@@ -30,42 +30,42 @@
       name: 'Primary',
       description: 'Main brand colors',
       colors: [
-        { name: 'primary-50', value: 'var(--blue-50)' },
-        { name: 'primary-100', value: 'var(--blue-100)' },
-        { name: 'primary-200', value: 'var(--blue-200)' },
-        { name: 'primary-300', value: 'var(--blue-300)' },
-        { name: 'primary-400', value: 'var(--blue-400)' },
-        { name: 'primary-500', value: 'var(--blue-500)' },
-        { name: 'primary-600', value: 'var(--blue-600)' },
-        { name: 'primary-700', value: 'var(--blue-700)' },
-        { name: 'primary-800', value: 'var(--blue-800)' },
-        { name: 'primary-900', value: 'var(--blue-900)' }
+        { name: 'primary-50', value: 'var(--primary-50)' },
+        { name: 'primary-100', value: 'var(--primary-100)' },
+        { name: 'primary-200', value: 'var(--primary-200)' },
+        { name: 'primary-300', value: 'var(--primary-300)' },
+        { name: 'primary-400', value: 'var(--primary-400)' },
+        { name: 'primary-500', value: 'var(--primary-500)' },
+        { name: 'primary-600', value: 'var(--primary-600)' },
+        { name: 'primary-700', value: 'var(--primary-700)' },
+        { name: 'primary-800', value: 'var(--primary-800)' },
+        { name: 'primary-900', value: 'var(--primary-900)' }
       ]
     },
     {
       name: 'Neutral',
       description: 'Versatile grays for text and backgrounds',
       colors: [
-        { name: 'gray-50', value: 'var(--gray-50)' },
-        { name: 'gray-100', value: 'var(--gray-100)' },
-        { name: 'gray-200', value: 'var(--gray-200)' },
-        { name: 'gray-300', value: 'var(--gray-300)' },
-        { name: 'gray-400', value: 'var(--gray-400)' },
-        { name: 'gray-500', value: 'var(--gray-500)' },
-        { name: 'gray-600', value: 'var(--gray-600)' },
-        { name: 'gray-700', value: 'var(--gray-700)' },
-        { name: 'gray-800', value: 'var(--gray-800)' },
-        { name: 'gray-900', value: 'var(--gray-900)' }
+        { name: 'neutral-50', value: 'var(--neutral-50)' },
+        { name: 'neutral-100', value: 'var(--neutral-100)' },
+        { name: 'neutral-200', value: 'var(--neutral-200)' },
+        { name: 'neutral-300', value: 'var(--neutral-300)' },
+        { name: 'neutral-400', value: 'var(--neutral-400)' },
+        { name: 'neutral-500', value: 'var(--neutral-500)' },
+        { name: 'neutral-600', value: 'var(--neutral-600)' },
+        { name: 'neutral-700', value: 'var(--neutral-700)' },
+        { name: 'neutral-800', value: 'var(--neutral-800)' },
+        { name: 'neutral-900', value: 'var(--neutral-900)' }
       ]
     },
     {
       name: 'Semantic',
       description: 'Colors with specific meanings',
       colors: [
-        { name: 'success', value: 'var(--emerald-600)', label: 'Success' },
-        { name: 'warning', value: 'var(--amber-500)', label: 'Warning' },
-        { name: 'error', value: 'var(--red-600)', label: 'Error' },
-        { name: 'info', value: 'var(--sky-500)', label: 'Info' }
+        { name: 'success', value: 'var(--success-600)', label: 'Success' },
+        { name: 'warning', value: 'var(--warning-500)', label: 'Warning' },
+        { name: 'error', value: 'var(--error-600)', label: 'Error' },
+        { name: 'info', value: 'var(--info-500)', label: 'Info' }
       ]
     }
   ];
@@ -345,13 +345,13 @@
               <button class="px(xl) py(md) r(md) bg(primary) c(white) bold(500) hover:bg(primary-600) transition">
                 Primary
               </button>
-              <button class="px(xl) py(md) r(md) bg(gray-100) c(gray-700) bold(500) hover:bg(gray-200) transition">
+              <button class="px(xl) py(md) r(md) bg(neutral-100) c(neutral-700) bold(500) hover:bg(neutral-200) transition">
                 Secondary
               </button>
-              <button class="px(xl) py(md) r(md) border(1/gray-300) c(gray-700) bold(500) hover:bg(gray-50) transition">
+              <button class="px(xl) py(md) r(md) border(1/neutral-300) c(neutral-700) bold(500) hover:bg(neutral-50) transition">
                 Ghost
               </button>
-              <button class="px(xl) py(md) r(md) bg(red-500) c(white) bold(500) hover:bg(red-600) transition">
+              <button class="px(xl) py(md) r(md) bg(error) c(white) bold(500) hover:bg(error-600) transition">
                 Danger
               </button>
             </div>
@@ -378,7 +378,7 @@
           <h3 class="title(lg) bold(600)">카드 컴포넌트</h3>
           
           <div class="grid(3) gap(xl)">
-            <div class="vbox gap(lg) p(xl) r(lg) bg(white) border(1/gray-200)">
+            <div class="vbox gap(lg) p(xl) r(lg) bg(white) border(1/neutral-200)">
               <h4 class="title(md) bold(600)">Default Card</h4>
               <p class="body(sm) c(muted)">기본 카드 스타일</p>
             </div>
@@ -401,31 +401,31 @@
           
           <div class="vbox gap(xl)">
             <div class="vbox gap(sm)">
-              <label class="label(md) c(gray-700)">Default Input</label>
+              <label class="label(md) c(neutral-700)">Default Input</label>
               <input 
                 type="text" 
                 placeholder="텍스트를 입력하세요"
-                class="w(full) px(lg) py(md) r(md) border(1/gray-300) focus:border(primary) focus:ring(2/4/primary.2) transition"
+                class="w(full) px(lg) py(md) r(md) border(1/neutral-300) focus:border(primary) focus:ring(2/4/primary.2) transition"
               />
             </div>
             
             <div class="vbox gap(sm)">
-              <label class="label(md) c(gray-700)">Filled Input</label>
+              <label class="label(md) c(neutral-700)">Filled Input</label>
               <input 
                 type="text" 
                 placeholder="텍스트를 입력하세요"
-                class="w(full) px(lg) py(md) r(md) bg(gray-100) border(1/transparent) focus:bg(white) focus:border(primary) focus:ring(2/4/primary.2) transition"
+                class="w(full) px(lg) py(md) r(md) bg(neutral-100) border(1/transparent) focus:bg(white) focus:border(primary) focus:ring(2/4/primary.2) transition"
               />
             </div>
             
             <div class="vbox gap(sm)">
-              <label class="label(md) c(red-500)">Error State</label>
+              <label class="label(md) c(error)">Error State</label>
               <input 
                 type="text" 
                 placeholder="오류가 있습니다"
-                class="w(full) px(lg) py(md) r(md) border(1/red-500) focus:ring(2/4/red.2) transition"
+                class="w(full) px(lg) py(md) r(md) border(1/error) focus:ring(2/4/error.2) transition"
               />
-              <p class="caption c(red-500)">유효하지 않은 입력입니다</p>
+              <p class="caption c(error)">유효하지 않은 입력입니다</p>
             </div>
           </div>
         </div>

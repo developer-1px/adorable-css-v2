@@ -36,7 +36,7 @@
     {#if variant === 'simple'}
       <div class="vbox gap(xs)">
         {#if title}
-          <h3 class="font(sm) bold uppercase c(gray-500) mb(md) px(md) tracking(0.1em)">{title}</h3>
+          <h3 class="font(sm) bold uppercase c(neutral-500) mb(md) px(md) tracking(0.1em)">{title}</h3>
         {/if}
         
         {#each items as item}
@@ -47,7 +47,7 @@
               class:active={item.active}
             >
               {#if item.icon}
-                <svelte:component this={item.icon} size="16" class={item.color ? `c(${item.color}-500)` : 'c(gray-500)'} />
+                <svelte:component this={item.icon} size="16" class={item.color ? `c(${item.color}-500)` : 'c(neutral-500)'} />
               {/if}
               <span class="font(sm) medium">{item.title}</span>
             </a>
@@ -58,7 +58,7 @@
               on:click={() => handleItemClick(item)}
             >
               {#if item.icon}
-                <svelte:component this={item.icon} size="16" class={item.color ? `c(${item.color}-500)` : 'c(gray-500)'} />
+                <svelte:component this={item.icon} size="16" class={item.color ? `c(${item.color}-500)` : 'c(neutral-500)'} />
               {/if}
               <span class="font(sm) medium">{item.title}</span>
             </button>
@@ -70,7 +70,7 @@
       <div class="px(md) py(lg) scroll(y) flex(1)">
         {#each items as section}
           <div class="mb(lg)">
-            <h3 class="px(sm) font(xs) bold uppercase tracking(wider) c(gray-500) mb(sm)">{section.title}</h3>
+            <h3 class="px(sm) font(xs) bold uppercase tracking(wider) c(neutral-500) mb(sm)">{section.title}</h3>
             <ul class="vbox gap(xs)">
               {#each section.children || [] as item}
                 <li>
@@ -86,7 +86,7 @@
                         {/if}
                         {item.title}
                         {#if section.badge}
-                          <span class="font(xs) px(xs) py(0.5) r(sm) uppercase {section.badge === 'new' ? 'bg(green-100) c(green-700)' : section.badge === 'beta' ? 'bg(amber-100) c(amber-700)' : 'bg(gray-100) c(gray-700)'}">
+                          <span class="font(xs) px(xs) py(0.5) r(sm) uppercase {section.badge === 'new' ? 'bg(success-100) c(success-700)' : section.badge === 'beta' ? 'bg(warning-100) c(warning-700)' : 'bg(neutral-100) c(neutral-700)'}">
                             {section.badge}
                           </span>
                         {/if}
@@ -111,19 +111,19 @@
     {:else if variant === 'hierarchical'}
       <div class="px(md) py(lg)">
         {#if title}
-          <h3 class="font(xs) mono uppercase tracking(wider) c(gray-500) mb(lg) px(md)">{title}</h3>
+          <h3 class="font(xs) mono uppercase tracking(wider) c(neutral-500) mb(lg) px(md)">{title}</h3>
         {/if}
         <ul class="vbox gap(lg)">
           {#each items as item}
             <li>
               <button
-                class="w(full) text(left) px(md) py(sm) font(lg) bold transition {item.expanded !== false ? 'c(gray-900)' : 'c(gray-600)'}"
+                class="w(full) text(left) px(md) py(sm) font(lg) bold transition {item.expanded !== false ? 'c(neutral-900)' : 'c(neutral-600)'}"
                 on:click={() => handleItemClick(item)}
               >
                 <div class="hbox(between)">
                   <span>{item.title}</span>
                   {#if item.count}
-                    <span class="font(xs) mono c(gray-400)">
+                    <span class="font(xs) mono c(neutral-400)">
                       {item.count}
                     </span>
                   {/if}
@@ -135,13 +135,13 @@
                   {#each item.children as child}
                     <li>
                       <button
-                        class="w(full) text(left) px(md) pl(2xl) py(xs) font(sm) transition {child.active ? 'c(gray-900)' : 'c(gray-500)'}"
+                        class="w(full) text(left) px(md) pl(2xl) py(xs) font(sm) transition {child.active ? 'c(neutral-900)' : 'c(neutral-500)'}"
                         on:click={() => handleItemClick(child)}
                       >
                         <div class="hbox(between)">
                           <span>· {child.title}</span>
                           {#if child.count}
-                            <span class="font(xs) mono c(gray-400)">
+                            <span class="font(xs) mono c(neutral-400)">
                               {child.count}
                             </span>
                           {/if}
@@ -161,7 +161,7 @@
 
 <style>
   .docs-sidebar-item {
-    color: var(--gray-600, #6b7280);
+    color: var(--neutral-600, #6b7280);
     border: none;
     background: transparent;
     cursor: pointer;
@@ -174,11 +174,11 @@
   .docs-sidebar-item.active {
     background-color: var(--white, #ffffff);
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-    color: var(--gray-900, #111827);
+    color: var(--neutral-900, #111827);
   }
   
   .docs-sidebar-item:hover:not(.active) {
-    background-color: var(--gray-100, #f3f4f6);
+    background-color: var(--neutral-100, #f3f4f6);
   }
   
   .docs-sidebar-item:focus {

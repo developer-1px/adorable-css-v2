@@ -62,17 +62,17 @@
       <div class="hbox gap(md) flex-wrap">
         {#each availableThemes as theme}
           <button 
-            class="p(sm/md) r(md) border(1) font(sm) transition(all_200ms) {selectedTheme === theme ? 'bg(blue-500) c(white) border(blue-500)' : 'bg(white) c(gray-700) border(gray-300) hover:bg(gray-50)'}"
+            class="p(sm/md) r(md) border(1) font(sm) transition(all_200ms) {selectedTheme === theme ? 'bg(primary-500) c(white) border(primary-500)' : 'bg(white) c(neutral-700) border(neutral-300) hover:bg(neutral-50)'}"
             on:click={() => { selectedTheme = theme; handleThemeChange(); }}
           >
             {theme.charAt(0).toUpperCase() + theme.slice(1)}
           </button>
         {/each}
       </div>
-      <div class="font(sm) c(gray-600)">
+      <div class="font(sm) c(neutral-600)">
         Current theme: <span class="500">{currentTheme.name}</span>
         {#if currentTheme.options}
-          <span class="ml(sm) font-family(mono) font(xs) c(gray-500)">
+          <span class="ml(sm) font-family(mono) font(xs) c(neutral-500)">
             T:{currentTheme.options.temperature || 0} S:{currentTheme.options.saturation || 0} L:{currentTheme.options.lightness || 0}
           </span>
         {/if}
@@ -91,7 +91,7 @@
           {#each colors as colorName}
             {#if colorPalette[colorName]}
               <div class="color-row vbox gap(sm)">
-                <h4 class="600 font(md) c(gray-800) capitalize">{colorName}</h4>
+                <h4 class="600 font(md) c(neutral-800) capitalize">{colorName}</h4>
                 <div class="color-swatches hbox gap(xs)">
                   {#each Object.entries(colorPalette[colorName]) as [shade, colorValue]}
                     <div 
@@ -104,7 +104,7 @@
                         style="background-color: {colorValue}"
                       ></div>
                       <div class="absolute (center,100%+xs) text(center) w(max-content)">
-                        <div class="font(xs) c(gray-600) bg(white) p(xs) r(sm) shadow(sm) border(1/gray-200)">
+                        <div class="font(xs) c(neutral-600) bg(white) p(xs) r(sm) shadow(sm) border(1/neutral-200)">
                           {shade}
                         </div>
                       </div>
@@ -113,11 +113,11 @@
                 </div>
                 
                 <!-- Color details -->
-                <div class="color-details vbox gap(xs) mt(sm) p(sm) bg(gray-50) r(md)">
-                  <div class="font(xs) c(gray-600) font-family(mono)">
+                <div class="color-details vbox gap(xs) mt(sm) p(sm) bg(neutral-50) r(md)">
+                  <div class="font(xs) c(neutral-600) font-family(mono)">
                     Base: {getHexValue(colorName, '500') || colorPalette[colorName]['500']}
                   </div>
-                  <div class="font(xs) c(gray-500) font-family(mono)">
+                  <div class="font(xs) c(neutral-500) font-family(mono)">
                     OKLCH: {getOklchValue(colorName, '500') || colorPalette[colorName]['500']}
                   </div>
                 </div>
@@ -140,17 +140,17 @@
         <div class="vbox gap(sm)">
           <h4 class="600 font(md)">Text Colors</h4>
           <div class="grid(3) gap(md)">
-            <div class="p(md) r(md) bg(white) border(1/gray-200)">
+            <div class="p(md) r(md) bg(white) border(1/neutral-200)">
               <div class="c(blue-600) font(md)">c(blue-600)</div>
-              <div class="font(xs) c(gray-500) font-family(mono) mt(xs)">Text color utility</div>
+              <div class="font(xs) c(neutral-500) font-family(mono) mt(xs)">Text color utility</div>
             </div>
-            <div class="p(md) r(md) bg(white) border(1/gray-200)">
+            <div class="p(md) r(md) bg(white) border(1/neutral-200)">
               <div class="c(emerald-500) font(md)">c(emerald-500)</div>
-              <div class="font(xs) c(gray-500) font-family(mono) mt(xs)">Success color</div>
+              <div class="font(xs) c(neutral-500) font-family(mono) mt(xs)">Success color</div>
             </div>
-            <div class="p(md) r(md) bg(white) border(1/gray-200)">
+            <div class="p(md) r(md) bg(white) border(1/neutral-200)">
               <div class="c(red-500) font(md)">c(red-500)</div>
-              <div class="font(xs) c(gray-500) font-family(mono) mt(xs)">Error color</div>
+              <div class="font(xs) c(neutral-500) font-family(mono) mt(xs)">Error color</div>
             </div>
           </div>
         </div>
@@ -167,9 +167,9 @@
               <div class="c(white) font(md)">bg(emerald-500)</div>
               <div class="font(xs) c(emerald-100) font-family(mono) mt(xs)">Primary background</div>
             </div>
-            <div class="p(md) r(md) bg(gray-800) border(1/gray-900)">
+            <div class="p(md) r(md) bg(neutral-800) border(1/neutral-900)">
               <div class="c(white) font(md)">bg(gray-800)</div>
-              <div class="font(xs) c(gray-300) font-family(mono) mt(xs)">Dark background</div>
+              <div class="font(xs) c(neutral-300) font-family(mono) mt(xs)">Dark background</div>
             </div>
           </div>
         </div>

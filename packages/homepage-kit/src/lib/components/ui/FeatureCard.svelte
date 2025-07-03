@@ -1,6 +1,6 @@
 <script lang="ts">
   export let icon: any = null;
-  export let iconColor = 'purple-500';
+  export let iconColor = 'primary-500';
   export let title: string;
   export let description: string;
   export let gradient = false;
@@ -19,9 +19,9 @@
     </div>
   {/if}
   
-  <h3 class="font(xl) bold c({gradient ? 'white' : 'gray-900'})">{title}</h3>
+  <h3 class="font(xl) bold c({gradient ? 'white' : 'neutral-900'})">{title}</h3>
   
-  <p class="font(sm) c({gradient ? 'white.9' : 'gray-600'}) leading(relaxed)">
+  <p class="font(sm) c({gradient ? 'white.9' : 'neutral-600'}) leading(relaxed)">
     {description}
   </p>
   

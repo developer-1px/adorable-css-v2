@@ -38,14 +38,14 @@
     
     <!-- Tooltip -->
     <div class="absolute bottom(calc(100%+12px)) right(0) 
-                bg(gray-900.9) backdrop-blur(sm) c(white) 
+                bg(neutral-900.9) backdrop-blur(sm) c(white) 
                 px(md) py(sm) r(lg) font(sm) nowrap 
                 opacity(0) group-hover:opacity(1) 
                 transition pointer-events(none) shadow(lg)">
       Try Playground
       <div class="absolute top(full) right(20px) w(0) h(0) 
                   bl(6px/transparent) br(6px/transparent) 
-                  bt(6px/gray-900)"></div>
+                  bt(6px/neutral-900)"></div>
     </div>
   </button>
 </div>

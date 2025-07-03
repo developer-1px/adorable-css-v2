@@ -13,31 +13,31 @@
   
   const buttonVariants = {
     primary: 'bg(primary) c(white) hover:bg(primary-600) active:bg(primary-700)',
-    secondary: 'bg(gray-100) c(gray-700) hover:bg(gray-200) active:bg(gray-300)',
-    ghost: 'bg(transparent) c(gray-700) hover:bg(gray-100) active:bg(gray-200)',
-    danger: 'bg(red-500) c(white) hover:bg(red-600) active:bg(red-700)',
-    success: 'bg(green-500) c(white) hover:bg(green-600) active:bg(green-700)',
+    secondary: 'bg(neutral-100) c(neutral-700) hover:bg(neutral-200) active:bg(neutral-300)',
+    ghost: 'bg(transparent) c(neutral-700) hover:bg(neutral-100) active:bg(neutral-200)',
+    danger: 'bg(error) c(white) hover:bg(error-600) active:bg(error-700)',
+    success: 'bg(success) c(white) hover:bg(success-600) active:bg(success-700)',
   };
   
   const inputStates = [
     { label: 'Default', class: '', value: 'hello@example.com' },
     { label: 'Focused', class: 'ring(2/4/primary.2) border(primary)', value: 'hello@example.com' },
-    { label: 'Error', class: 'border(red-500) ring(2/4/red.2)', value: 'invalid-email' },
-    { label: 'Disabled', class: 'bg(gray-50) c(gray-400) cursor(not-allowed)', value: 'disabled@example.com', disabled: true },
+    { label: 'Error', class: 'border(error) ring(2/4/error.2)', value: 'invalid-email' },
+    { label: 'Disabled', class: 'bg(neutral-50) c(neutral-400) cursor(not-allowed)', value: 'disabled@example.com', disabled: true },
   ];
   
   const cardVariants = [
-    { name: 'Default', class: 'bg(white) border(1/gray-200)' },
+    { name: 'Default', class: 'bg(white) border(1/neutral-200)' },
     { name: 'Elevated', class: 'bg(white) shadow(md) hover:shadow(lg)' },
-    { name: 'Interactive', class: 'bg(white) border(1/gray-200) hover:border(primary) hover:shadow(md) cursor(pointer)' },
+    { name: 'Interactive', class: 'bg(white) border(1/neutral-200) hover:border(primary) hover:shadow(md) cursor(pointer)' },
     { name: 'Gradient', class: 'bg(gradient) c(white) border(none)' },
   ];
   
   const badges = [
-    { label: 'New', class: 'bg(blue-100) c(blue-700)' },
-    { label: 'Sale', class: 'bg(red-100) c(red-700)' },
-    { label: 'Pro', class: 'bg(purple-100) c(purple-700)' },
-    { label: 'Beta', class: 'bg(amber-100) c(amber-700)' },
+    { label: 'New', class: 'bg(primary-100) c(primary-700)' },
+    { label: 'Sale', class: 'bg(error-100) c(error-700)' },
+    { label: 'Pro', class: 'bg(primary-100) c(primary-700)' },
+    { label: 'Beta', class: 'bg(warning-100) c(warning-700)' },
   ];
   
   const alerts = [
@@ -46,28 +46,28 @@
       icon: `<svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/></svg>`,
       title: 'Information',
       message: 'This is an informational message to keep you updated.',
-      class: 'bg(blue-50) border(blue-200) c(blue-700)'
+      class: 'bg(primary-50) border(primary-200) c(primary-700)'
     },
     {
       type: 'success',
       icon: `<svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>`,
       title: 'Success!',
       message: 'Your changes have been saved successfully.',
-      class: 'bg(green-50) border(green-200) c(green-700)'
+      class: 'bg(success-50) border(success-200) c(success-700)'
     },
     {
       type: 'warning',
       icon: `<svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>`,
       title: 'Warning',
       message: 'Please review your input before proceeding.',
-      class: 'bg(amber-50) border(amber-200) c(amber-700)'
+      class: 'bg(warning-50) border(warning-200) c(warning-700)'
     },
     {
       type: 'error',
       icon: `<svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/></svg>`,
       title: 'Error',
       message: 'Something went wrong. Please try again.',
-      class: 'bg(red-50) border(red-200) c(red-700)'
+      class: 'bg(error-50) border(error-200) c(error-700)'
     }
   ];
   
@@ -91,12 +91,12 @@
     <h2 class="heading(lg) bold(700)">Buttons</h2>
     
     <!-- Interactive Controls -->
-    <div class="hbox gap(2xl) p(xl) r(lg) bg(gray-50) border(1/gray-200)">
+    <div class="hbox gap(2xl) p(xl) r(lg) bg(neutral-50) border(1/neutral-200)">
       <div class="vbox gap(md)">
-        <label class="label(md) c(gray-700)">Size</label>
+        <label class="label(md) c(neutral-700)">Size</label>
         <select 
           bind:value={selectedSize}
-          class="px(md) py(sm) r(md) border(1/gray-300) bg(white)"
+          class="px(md) py(sm) r(md) border(1/neutral-300) bg(white)"
         >
           {#each Object.keys(buttonSizes) as size}
             <option value={size}>{size}</option>
@@ -105,10 +105,10 @@
       </div>
       
       <div class="vbox gap(md)">
-        <label class="label(md) c(gray-700)">Variant</label>
+        <label class="label(md) c(neutral-700)">Variant</label>
         <select 
           bind:value={selectedVariant}
-          class="px(md) py(sm) r(md) border(1/gray-300) bg(white)"
+          class="px(md) py(sm) r(md) border(1/neutral-300) bg(white)"
         >
           {#each Object.keys(buttonVariants) as variant}
             <option value={variant}>{variant}</option>
@@ -118,7 +118,7 @@
     </div>
     
     <!-- Button Preview -->
-    <div class="p(3xl) r(xl) bg(white) border(1/gray-200) hbox(center/middle)">
+    <div class="p(3xl) r(xl) bg(white) border(1/neutral-200) hbox(center/middle)">
       <button 
         class="{buttonSizes[selectedSize]} {buttonVariants[selectedVariant]} r(md) bold(500) transition interactive(3)"
         on:click={() => alert('Button clicked!')}
@@ -158,7 +158,7 @@
         <button class="px(xl) py(md) r(md) bg(primary-600) c(white) bold(500) ring(2/4/primary.3)">
           Focused
         </button>
-        <button class="px(xl) py(md) r(md) bg(gray-100) c(gray-400) bold(500) cursor(not-allowed)" disabled>
+        <button class="px(xl) py(md) r(md) bg(neutral-100) c(neutral-400) bold(500) cursor(not-allowed)" disabled>
           Disabled
         </button>
         <button class="px(xl) py(md) r(md) bg(primary) c(white) bold(500) hbox gap(sm) items(center)">
@@ -174,7 +174,7 @@
   </section>
 
   <!-- Form Elements -->
-  <section class="vbox gap(2xl) container(7xl) mx(auto) px(2xl) border(t/1/gray-200) pt(4xl)">
+  <section class="vbox gap(2xl) container(7xl) mx(auto) px(2xl) border(t/1/neutral-200) pt(4xl)">
     <h2 class="heading(lg) bold(700)">Form Elements</h2>
     
     <!-- Text Inputs -->
@@ -183,12 +183,12 @@
       <div class="grid(2) gap(xl)">
         {#each inputStates as state}
           <div class="vbox gap(sm)">
-            <label class="label(md) c(gray-700)">{state.label}</label>
+            <label class="label(md) c(neutral-700)">{state.label}</label>
             <input 
               type="email"
               value={state.value}
               disabled={state.disabled}
-              class="w(full) px(lg) py(md) r(md) border(1/gray-300) transition {state.class}"
+              class="w(full) px(lg) py(md) r(md) border(1/neutral-300) transition {state.class}"
               placeholder="Enter your email"
             />
           </div>
@@ -200,8 +200,8 @@
     <div class="vbox gap(xl)">
       <h3 class="title(md) bold(600)">Select Dropdown</h3>
       <div class="max-w(md)">
-        <label class="label(md) c(gray-700)">Choose an option</label>
-        <select class="w(full) px(lg) py(md) r(md) border(1/gray-300) bg(white) focus:border(primary) focus:ring(2/4/primary.2) transition">
+        <label class="label(md) c(neutral-700)">Choose an option</label>
+        <select class="w(full) px(lg) py(md) r(md) border(1/neutral-300) bg(white) focus:border(primary) focus:ring(2/4/primary.2) transition">
           <option>Option 1</option>
           <option>Option 2</option>
           <option>Option 3</option>
@@ -263,7 +263,7 @@
   </section>
 
   <!-- Cards -->
-  <section class="vbox gap(2xl) container(7xl) mx(auto) px(2xl) border(t/1/gray-200) pt(4xl)">
+  <section class="vbox gap(2xl) container(7xl) mx(auto) px(2xl) border(t/1/neutral-200) pt(4xl)">
     <h2 class="heading(lg) bold(700)">Cards</h2>
     
     <div class="grid(2) gap(xl)">
@@ -282,7 +282,7 @@
   </section>
 
   <!-- Badges -->
-  <section class="vbox gap(2xl) container(7xl) mx(auto) px(2xl) border(t/1/gray-200) pt(4xl)">
+  <section class="vbox gap(2xl) container(7xl) mx(auto) px(2xl) border(t/1/neutral-200) pt(4xl)">
     <h2 class="heading(lg) bold(700)">Badges & Tags</h2>
     
     <div class="vbox gap(xl)">
@@ -308,7 +308,7 @@
   </section>
 
   <!-- Alerts -->
-  <section class="vbox gap(2xl) container(7xl) mx(auto) px(2xl) border(t/1/gray-200) pt(4xl)">
+  <section class="vbox gap(2xl) container(7xl) mx(auto) px(2xl) border(t/1/neutral-200) pt(4xl)">
     <h2 class="heading(lg) bold(700)">Alerts</h2>
     
     <div class="vbox gap(xl)">
@@ -332,7 +332,7 @@
   </section>
 
   <!-- Navigation -->
-  <section class="vbox gap(2xl) container(7xl) mx(auto) px(2xl) border(t/1/gray-200) pt(4xl)">
+  <section class="vbox gap(2xl) container(7xl) mx(auto) px(2xl) border(t/1/neutral-200) pt(4xl)">
     <h2 class="heading(lg) bold(700)">Navigation</h2>
     
     <!-- Tabs -->
@@ -379,7 +379,7 @@
   </section>
 
   <!-- Modals -->
-  <section class="vbox gap(2xl) container(7xl) mx(auto) px(2xl) border(t/1/gray-200) pt(4xl)">
+  <section class="vbox gap(2xl) container(7xl) mx(auto) px(2xl) border(t/1/neutral-200) pt(4xl)">
     <h2 class="heading(lg) bold(700)">Modals & Overlays</h2>
     
     <div class="p(3xl) r(lg) bg(gray-50) border(1/gray-200)">

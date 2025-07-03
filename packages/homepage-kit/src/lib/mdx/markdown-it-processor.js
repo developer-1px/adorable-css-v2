@@ -40,7 +40,7 @@ md.renderer.rules.fence = (tokens, idx) => {
 md.renderer.rules.link_open = (tokens, idx) => {
 	const href = tokens[idx].attrGet('href');
 	const title = tokens[idx].attrGet('title');
-	return `<a href="${href}" ${title ? `title="${title}"` : ''} class="c(blue-600) underline decoration(blue-200) hover:decoration(blue-500) transition(all/150ms)">`;
+	return `<a href="${href}" ${title ? `title="${title}"` : ''} class="c(primary) underline decoration(primary-200) hover:decoration(primary) transition(all/150ms)">`;
 };
 
 // 리스트
@@ -55,7 +55,7 @@ md.renderer.rules.ordered_list_open = (tokens, idx) => {
 
 // 테이블
 md.renderer.rules.table_open = () => {
-	return '<div class="overflow(auto) my(xl)"><table class="w(full) r(lg) border(1/gray-200)">';
+	return '<div class="overflow(auto) my(xl)"><table class="w(full) r(lg) border(1/neutral-200)">';
 };
 
 md.renderer.rules.table_close = () => {
@@ -63,26 +63,26 @@ md.renderer.rules.table_close = () => {
 };
 
 md.renderer.rules.tr_open = () => {
-	return '<tr class="hover:bg(gray-50) transition(colors/150ms)">';
+	return '<tr class="hover:bg(neutral-50) transition(colors/150ms)">';
 };
 
 md.renderer.rules.th_open = () => {
-	return '<th class="bg(gray-100) px(md) py(sm) text(left) font(semi) c(gray-900) border-b(2/gray-200)">';
+	return '<th class="bg(neutral-100) px(md) py(sm) text(left) font(semi) c(gray-900) border-b(2/neutral-200)">';
 };
 
 md.renderer.rules.td_open = () => {
-	return '<td class="px(md) py(sm) border-b(1/gray-100)">';
+	return '<td class="px(md) py(sm) border-b(1/neutral-100)">';
 };
 
 // 인용구
 md.renderer.rules.blockquote_open = () => {
-	return '<blockquote class="border-l(4/gray-300) pl(lg) my(xl) italic c(gray-700)">';
+	return '<blockquote class="border-l(4/neutral-300) pl(lg) my(xl) italic c(neutral-700)">';
 };
 
 // 인라인 코드
 md.renderer.rules.code_inline = (tokens, idx) => {
 	const content = tokens[idx].content;
-	return `<code class="bg(gray-50) c(purple-700) px(xs) py(0.5) r(sm) border(1/gray-200) font(mono) text(sm)">${md.utils.escapeHtml(content)}</code>`;
+	return `<code class="bg(neutral-50) c(primary-700) px(xs) py(0.5) r(sm) border(1/neutral-200) font(mono) text(sm)">${md.utils.escapeHtml(content)}</code>`;
 };
 
 /**

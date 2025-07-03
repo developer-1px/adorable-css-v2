@@ -43,11 +43,11 @@
 </script>
 
 <!-- 3열 레이아웃을 hbox로 간단하게 -->
-<div class="h(100vh) hbox bg(gray-50)">
+<div class="h(100vh) hbox bg(neutral-50)">
   <!-- 왼쪽: 설명 -->
-  <div class="w(300px) vbox bg(white) br(gray-200)">
-    <div class="p(lg) bb(gray-200)">
-      <h1 class="700 font(lg) c(gray-900)">{title}</h1>
+  <div class="w(300px) vbox bg(white) br(neutral-200)">
+    <div class="p(lg) bb(neutral-200)">
+      <h1 class="700 font(lg) c(neutral-900)">{title}</h1>
     </div>
     <div class="flex(1) p(lg)" style="overflow-y: auto;">
       {@render children?.instructions?.()}
@@ -55,17 +55,17 @@
   </div>
   
   <!-- 가운데: 코드 -->
-  <div class="flex(1) vbox br(gray-200)">
-    <div class="p(sm) bb(gray-200) bg(gray-100) hbox gap(auto)">
-      <span class="600 font(sm) c(gray-700)">Code</span>
+  <div class="flex(1) vbox br(neutral-200)">
+    <div class="p(sm) bb(neutral-200) bg(neutral-100) hbox gap(auto)">
+      <span class="600 font(sm) c(neutral-700)">Code</span>
       <button 
-        class="px(sm) py(xs) bg(purple-500) c(white) r(sm) 600 font(xs)"
+        class="px(sm) py(xs) bg(primary-500) c(white) r(sm) 600 font(xs)"
         onclick={() => { editorValue = code; updatePreview(); }}>
         Reset
       </button>
     </div>
     <textarea
-      class="flex(1) p(md) bg(gray-900) c(white) font(sm)"
+      class="flex(1) p(md) bg(neutral-900) c(white) font(sm)"
       style="font-family: monospace; resize: none; border: 0; outline: none;"
       value={editorValue}
       oninput={handleInput}
@@ -74,8 +74,8 @@
   
   <!-- 오른쪽: 미리보기 -->
   <div class="w(400px) vbox">
-    <div class="p(sm) bb(gray-200) bg(gray-100)">
-      <span class="600 font(sm) c(gray-700)">Preview</span>
+    <div class="p(sm) bb(neutral-200) bg(neutral-100)">
+      <span class="600 font(sm) c(neutral-700)">Preview</span>
     </div>
     <iframe
       bind:this={iframe}

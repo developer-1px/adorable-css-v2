@@ -106,7 +106,7 @@
         { name: 'Forest', value: 'green-400..blue-500/90deg' },
         { name: 'Berry', value: 'purple-500..pink-400/45deg' },
         { name: 'Fire', value: 'yellow-400..red-500/to-tr' },
-        { name: 'Night', value: 'gray-700..gray-900/180deg' }
+        { name: 'Night', value: 'neutral-700..neutral-900/180deg' }
       ] as gradient}
         <button 
           class="h(120px) r() bg({gradient.value}) relative clip"

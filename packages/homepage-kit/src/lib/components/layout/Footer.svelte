@@ -28,7 +28,7 @@
   ];
 </script>
 
-<footer class="border-t(1/gray-200)">
+<footer class="border-t(1/neutral-200)">
   <div class="container() py(4xl)">
     <div class="grid(4) gap(2xl) mb(4xl)">
       <!-- Brand -->
@@ -50,7 +50,7 @@
                   href={link.href}
                   target={link.external ? '_blank' : undefined}
                   rel={link.external ? 'noopener noreferrer' : undefined}
-                  class="font(sm) c(mute) hover:c(gray-900) transition"
+                  class="font(sm) c(mute) hover:c(neutral-900) transition"
                 >
                   {link.label}
                 </a>
@@ -62,10 +62,10 @@
     </div>
     
     <!-- Bottom -->
-    <div class="pt(2xl) border-t(1/gray-200)">
+    <div class="pt(2xl) border-t(1/neutral-200)">
       <p class="font(sm) c(mute)">
-        Built by <a href="https://twitter.com/1px" class="underline hover:c(gray-900)">@1px</a>. 
-        The source code is available on <a href="https://github.com/developer-1px/adorable-css-v2" class="underline hover:c(gray-900)">GitHub</a>.
+        Built by <a href="https://twitter.com/1px" class="underline hover:c(neutral-900)">@1px</a>. 
+        The source code is available on <a href="https://github.com/developer-1px/adorable-css-v2" class="underline hover:c(neutral-900)">GitHub</a>.
       </p>
     </div>
   </div>

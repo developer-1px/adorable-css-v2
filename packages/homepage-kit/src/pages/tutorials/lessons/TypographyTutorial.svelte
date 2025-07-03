@@ -3,22 +3,22 @@
   
   const code = `<div class="p(xl) vbox gap(lg)">
   
-  <h1 class="700 font(2xl) c(gray-900)">Typography</h1>
+  <h1 class="700 font(2xl) c(neutral-900)">Typography</h1>
   
-  <p class="font(lg/1.6) c(gray-700)">
+  <p class="font(lg/1.6) c(neutral-700)">
     Typography in AdorableCSS is simple and intuitive.
   </p>
   
   <div class="vbox gap(md)">
-    <h2 class="600 font(xl) c(gray-800)">Font Sizes</h2>
-    <p class="font(sm) c(gray-600)">Small text</p>
-    <p class="font(md) c(gray-700)">Medium text</p>
-    <p class="font(lg) c(gray-800)">Large text</p>
-    <p class="font(xl) c(gray-900)">Extra large text</p>
+    <h2 class="600 font(xl) c(neutral-800)">Font Sizes</h2>
+    <p class="font(sm) c(neutral-600)">Small text</p>
+    <p class="font(md) c(neutral-700)">Medium text</p>
+    <p class="font(lg) c(neutral-800)">Large text</p>
+    <p class="font(xl) c(neutral-900)">Extra large text</p>
   </div>
   
   <div class="vbox gap(md)">
-    <h2 class="600 font(xl) c(gray-800)">Font Weights</h2>
+    <h2 class="600 font(xl) c(neutral-800)">Font Weights</h2>
     <p class="400 font(md)">Regular (400)</p>
     <p class="600 font(md)">Semibold (600)</p>
     <p class="700 font(md)">Bold (700)</p>
