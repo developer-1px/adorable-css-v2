@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="../favicon.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>AdorableCSS - The Figma-First CSS Framework</title>
+		<meta name="description" content="AdorableCSS is a Figma-first CSS framework that brings the intuitive design concepts from Figma directly to your code." />
+		
+		
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+		
+		
+		<link href="../_app/immutable/assets/0.B0yyNCMn.css" rel="stylesheet">
+		<link href="../_app/immutable/assets/2.QeXihlYx.css" rel="stylesheet">
+		<link rel="modulepreload" href="../_app/immutable/entry/start.BHPKplNV.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BfGdh1H7.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/D4DjdV7p.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/B-2p_BWc.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/CwUcqWmW.js">
+		<link rel="modulepreload" href="../_app/immutable/entry/app.DPlEZ0_S.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/Dp1pzeXC.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BUH3cTKD.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/uurnr1Ro.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/WzherCB2.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/CopLrYF7.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/Bv5rEQ8U.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/vL0Wz1C2.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/CLKKGbfe.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/0.CbluT_hx.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/DdkkD1nE.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/CSMEiaPP.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/VsMKA5f8.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/0eAuSTll.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/CotvTMhr.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/HTaEjDrq.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/A_jRKOqY.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/B0cw1MF0.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/CvEDeCSl.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/2.BBKz7OlV.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/BQkHwmh6.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/B33C6Pjh.js">
+		<link rel="modulepreload" href="../_app/immutable/nodes/7.C7jdQ8j3.js">
+		<link rel="modulepreload" href="../_app/immutable/chunks/B1HwxMmP.js"><!--[--><meta name="description" content="defineComponent API와 내장 컴포넌트"/> <!--[--><!----><style>
+      /* Highlight.js Light Theme inspired by GitHub */
+      .hljs { background: rgb(249 250 251); color: #24292e; }
+      .hljs-comment, .hljs-quote { color: #6a737d; }
+      .hljs-keyword, .hljs-selector-tag, .hljs-literal { color: #d73a49; }
+      .hljs-string { color: #032f62; }
+      .hljs-number { color: #005cc5; }
+      .hljs-variable, .hljs-template-variable, .hljs-attr { color: #e36209; }
+      .hljs-name, .hljs-selector-class, .hljs-selector-id { color: #22863a; }
+      .hljs-title, .hljs-function { color: #6f42c1; }
+      .hljs-built_in { color: #005cc5; }
+      .hljs-params { color: #24292e; }
+      .hljs-meta { color: #005cc5; }
+      .hljs-emphasis { font-style: italic; }
+      .hljs-strong { font-weight: bold; }
+      .hljs-deletion { color: #b31d28; background-color: #ffeef0; }
+      .hljs-addition { color: #22863a; background-color: #f0fff4; }
+      
+      /* Code blocks */
+      pre { 
+        background-color: rgb(249 250 251);
+        border: 1px solid rgb(229 231 235);
+      }
+      
+      /* Copy button */
+      .copy-btn {
+        background-color: rgb(243 244 246);
+        border: 1px solid rgb(209 213 219);
+        color: rgb(55 65 81);
+      }
+      .copy-btn:hover {
+        background-color: rgb(229 231 235);
+      }
+    </style><!----><!--]--><!--]--><title>Component 시스템 - AdorableCSS Documentation</title>
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents"><!--[--><!--[--><!----><div class="fixed top(0) left(0) z(100) w(100) h(100) clip pointer-events(none)"><div class="absolute top(20) left(-35) w(120) bg(orange-500) py(4) text(center) shadow(sm) rotate(-45) pointer-events(auto)"><span class="caption(xs) c(white) bold uppercase">Alpha</span></div></div> <nav class="fixed! layer(top) z(50) bg(white) border-b(1/gray-200)"><div class="hbox(between) h(60) px(24) lg:px(32) max-w(1400px) mx(auto)"><a href="/" class="hbox(middle) gap(8) c(gray-900) hover:c(gray-700) transition"><svg viewBox="0 0 32 32" class="size(28) c(purple-600)" fill="currentColor"><rect x="4" y="4" width="10" height="10" rx="2"></rect><rect x="18" y="4" width="10" height="10" rx="2"></rect><rect x="4" y="18" width="10" height="10" rx="2"></rect><rect x="18" y="18" width="10" height="10" rx="2"></rect></svg> <span class="font(lg) bold(600) c(gray-900)">AdorableCSS</span></a> <div class="hbox(middle) gap(40) ..lg:hidden"><div class="hbox gap(32)"><!--[--><a href="/docs" class="font(sm/1.5) c(gray-600) hover:c(gray-900) transition py(4) c(gray-900) bold(600)">Docs</a><a href="/syntax" class="font(sm/1.5) c(gray-600) hover:c(gray-900) transition py(4)">Syntax</a><a href="/rules" class="font(sm/1.5) c(gray-600) hover:c(gray-900) transition py(4)">Rules</a><a href="/tokens" class="font(sm/1.5) c(gray-600) hover:c(gray-900) transition py(4)">Tokens</a><a href="/components" class="font(sm/1.5) c(gray-600) hover:c(gray-900) transition py(4)">Components</a><a href="/playground" class="font(sm/1.5) c(gray-600) hover:c(gray-900) transition py(4)">Playground</a><!--]--></div> <div class="hbox(middle) gap(20)"><button class="p(8) hover:bg(gray-100) r(8) transition"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon lucide lucide-search c(gray-600)"><!--[--><!----><path d="m21 21-4.34-4.34"><!----></path><!----><!----><circle cx="11" cy="11" r="8"><!----></circle><!----><!--]--><!----><!----><!----><!----></svg><!----></button> <a href="https://github.com/adorablecss/adorable-css" target="_blank" rel="noopener" class="p(8) hover:bg(gray-100) r(8) transition"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon lucide lucide-github c(gray-600)"><!--[--><!----><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"><!----></path><!----><!----><path d="M9 18c-4.51 2-5-2-7-2"><!----></path><!----><!--]--><!----><!----><!----><!----></svg><!----></a> <div class="w(1px) h(24) bg(gray-200)"></div> <a href="/docs/getting-started" class="px(16) py(8) r(8) bg(gray-900) c(white) font(sm/1.5) hover:bg(gray-800) transition">Get Started</a></div></div> <button class="p(8) hover:bg(gray-100) r(8) transition lg:hidden"><!--[!--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon lucide lucide-menu c(gray-600)"><!--[--><!----><path d="M4 12h16"><!----></path><!----><!----><path d="M4 18h16"><!----></path><!----><!----><path d="M4 6h16"><!----></path><!----><!--]--><!----><!----><!----><!----></svg><!--]--></button></div> <!--[!--><!--]--></nav><!----> <div class="min-h(screen) vbox pt(60)"><main class="flex(1)"><!----><!--[--><!----><div class="min-h(100vh) bg(white)"><nav class="hidden lg:block fixed top(60) left(0) w(260) h(calc(100vh-60px)) bg(white) border-r(1/gray-200) scroll(y) overscroll-behavior(contain) z(40) svelte-1fo03pu"><div class="pt(32) px(24) pb(24)"><h2 class="font(base/1.5) bold(600) c(gray-900)">Documentation</h2></div> <div class="px(24) pb(32) vbox gap(32)"><!--[--><div><!--[!--><!--]--> <h3 class="font(xs/1.5) bold(600) c(gray-400) uppercase letter-spacing(wide) mb(12)">시작하기</h3> <ul class="vbox gap(2)"><!--[--><li><a href="/docs/background" class="relative block py(8) px(12) -mx(12) r(6) transition c(gray-600) hover:c(gray-900)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">Background</span> <!--[--><span class="w(6px) h(6px) r(full) bg(green-500)"></span><!--]--></div></a></li><li><a href="/docs/overview" class="relative block py(8) px(12) -mx(12) r(6) transition c(gray-600) hover:c(gray-900)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">Overview</span> <!--[!--><!--]--></div></a></li><li><a href="/docs/getting-started" class="relative block py(8) px(12) -mx(12) r(6) transition c(gray-600) hover:c(gray-900)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">Getting Started</span> <!--[!--><!--]--></div></a></li><li><a href="/docs/syntax-guide" class="relative block py(8) px(12) -mx(12) r(6) transition c(gray-600) hover:c(gray-900)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">문법 가이드</span> <!--[!--><!--]--></div></a></li><!--]--></ul></div><div><!--[--><div class="mb(24) h(1px) bg(gray-100)"></div><!--]--> <h3 class="font(xs/1.5) bold(600) c(gray-400) uppercase letter-spacing(wide) mb(12)">핵심 개념</h3> <ul class="vbox gap(2)"><!--[--><li><a href="/docs/figma-first-css-utility" class="relative block py(8) px(12) -mx(12) r(6) transition c(gray-600) hover:c(gray-900)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">Figma-First CSS Utility</span> <!--[!--><!--]--></div></a></li><li><a href="/docs/design-token" class="relative block py(8) px(12) -mx(12) r(6) transition c(gray-600) hover:c(gray-900)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">Design Token</span> <!--[!--><!--]--></div></a></li><li><a href="/docs/layout" class="relative block py(8) px(12) -mx(12) r(6) transition c(gray-600) hover:c(gray-900)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">Layout 시스템</span> <!--[!--><!--]--></div></a></li><!--]--></ul></div><div><!--[--><div class="mb(24) h(1px) bg(gray-100)"></div><!--]--> <h3 class="font(xs/1.5) bold(600) c(gray-400) uppercase letter-spacing(wide) mb(12)">Component &amp; Design System</h3> <ul class="vbox gap(2)"><!--[--><li><a href="/docs/component" class="relative block py(8) px(12) -mx(12) r(6) transition bg(gray-100) c(gray-900) bold(600)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">Component 시스템</span> <!--[!--><!--]--></div></a></li><li><a href="/docs/design-system" class="relative block py(8) px(12) -mx(12) r(6) transition c(gray-600) hover:c(gray-900)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">Design System 구축</span> <!--[--><span class="w(6px) h(6px) r(full) bg(green-500)"></span><!--]--></div></a></li><!--]--></ul></div><div><!--[--><div class="mb(24) h(1px) bg(gray-100)"></div><!--]--> <h3 class="font(xs/1.5) bold(600) c(gray-400) uppercase letter-spacing(wide) mb(12)">기술 문서</h3> <ul class="vbox gap(2)"><!--[--><li><a href="/docs/technical-architecture" class="relative block py(8) px(12) -mx(12) r(6) transition c(gray-600) hover:c(gray-900)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">기술 아키텍처</span> <!--[!--><!--]--></div></a></li><li><a href="/docs/color-system" class="relative block py(8) px(12) -mx(12) r(6) transition c(gray-600) hover:c(gray-900)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">색상 시스템</span> <!--[!--><!--]--></div></a></li><!--]--></ul></div><div><!--[--><div class="mb(24) h(1px) bg(gray-100)"></div><!--]--> <h3 class="font(xs/1.5) bold(600) c(gray-400) uppercase letter-spacing(wide) mb(12)">API Reference</h3> <ul class="vbox gap(2)"><!--[--><li><a href="/docs/rules-reference" class="relative block py(8) px(12) -mx(12) r(6) transition c(gray-600) hover:c(gray-900)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">Rules Reference</span> <!--[!--><!--]--></div></a></li><li><a href="/docs/javascript-api" class="relative block py(8) px(12) -mx(12) r(6) transition c(gray-600) hover:c(gray-900)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">JavaScript API</span> <!--[!--><!--]--></div></a></li><!--]--></ul></div><div><!--[--><div class="mb(24) h(1px) bg(gray-100)"></div><!--]--> <h3 class="font(xs/1.5) bold(600) c(gray-400) uppercase letter-spacing(wide) mb(12)">Migration</h3> <ul class="vbox gap(2)"><!--[--><li><a href="/docs/migration/tailwind" class="relative block py(8) px(12) -mx(12) r(6) transition c(gray-600) hover:c(gray-900)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">From Tailwind</span> <!--[!--><!--]--></div></a></li><!--]--></ul></div><div><!--[--><div class="mb(24) h(1px) bg(gray-100)"></div><!--]--> <h3 class="font(xs/1.5) bold(600) c(gray-400) uppercase letter-spacing(wide) mb(12)">실전 가이드</h3> <ul class="vbox gap(2)"><!--[--><li><a href="/docs/why-adorablecss" class="relative block py(8) px(12) -mx(12) r(6) transition c(gray-600) hover:c(gray-900)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">Why AdorableCSS?</span> <!--[--><span class="w(6px) h(6px) r(full) bg(green-500)"></span><!--]--></div></a></li><li><a href="/docs/cheat-sheet" class="relative block py(8) px(12) -mx(12) r(6) transition c(gray-600) hover:c(gray-900)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">Cheat Sheet</span> <!--[!--><!--]--></div></a></li><li><a href="/docs/cookbook" class="relative block py(8) px(12) -mx(12) r(6) transition c(gray-600) hover:c(gray-900)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">Cookbook</span> <!--[!--><!--]--></div></a></li><li><a href="/docs/troubleshooting" class="relative block py(8) px(12) -mx(12) r(6) transition c(gray-600) hover:c(gray-900)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">Troubleshooting</span> <!--[!--><!--]--></div></a></li><!--]--></ul></div><div><!--[--><div class="mb(24) h(1px) bg(gray-100)"></div><!--]--> <h3 class="font(xs/1.5) bold(600) c(gray-400) uppercase letter-spacing(wide) mb(12)">팀 &amp; 프로젝트</h3> <ul class="vbox gap(2)"><!--[--><li><a href="/docs/team-onboarding" class="relative block py(8) px(12) -mx(12) r(6) transition c(gray-600) hover:c(gray-900)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">팀 온보딩</span> <!--[--><span class="w(6px) h(6px) r(full) bg(green-500)"></span><!--]--></div></a></li><li><a href="/docs/project-setup" class="relative block py(8) px(12) -mx(12) r(6) transition c(gray-600) hover:c(gray-900)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">프로젝트 설정</span> <!--[!--><!--]--></div></a></li><li><a href="/docs/best-practices" class="relative block py(8) px(12) -mx(12) r(6) transition c(gray-600) hover:c(gray-900)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">Best Practices</span> <!--[!--><!--]--></div></a></li><li><a href="/docs/integration" class="relative block py(8) px(12) -mx(12) r(6) transition c(gray-600) hover:c(gray-900)"><div class="hbox(middle) gap(8)"><span class="font(sm/1.5) flex(1)">통합 가이드</span> <!--[!--><!--]--></div></a></li><!--]--></ul></div><!--]--></div></nav> <main class="ml(0) lg:ml(260) min-h(100vh)"><div class="sticky top(60) z(30) bg(white) border-b(1/gray-100) px(32) lg:px(48) py(16)"><div class="hbox(middle) gap(6) font(sm/1.5)"><a href="/" class="c(gray-600) hover:c(gray-900) transition">Home</a> <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon lucide lucide-chevron-right c(gray-400)"><!--[--><!----><path d="m9 18 6-6-6-6"><!----></path><!----><!--]--><!----><!----><!----><!----></svg><!----> <a href="/docs" class="c(gray-600) hover:c(gray-900) transition">Docs</a> <!--[--><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon lucide lucide-chevron-right c(gray-400)"><!--[--><!----><path d="m9 18 6-6-6-6"><!----></path><!----><!--]--><!----><!----><!----><!----></svg><!----> <span class="c(gray-900)">Component 시스템</span><!--]--></div></div> <div class="px(32) lg:px(48) py(40) xl:pr(320)"><article class="prose max-w(3xl)"><!----><!----><article class="prose max-w(4xl) p(2xl)"><!----><h1>Component 시스템</h1>
+<blockquote class="border-l(4/gray-300) pl(lg) my(xl) italic c(gray-700)"><p>“컴포넌트는 디자인 결정의 문서화입니다. 한 번 만들고 어디서나 사용하세요.”</p>
+</blockquote>
+<p>AdorableCSS의 컴포넌트 시스템은 CSS-in-JS의 생산성과 Utility-First의 간결함을 결합합니다.</p>
+<h2>왜 컴포넌트 시스템이 필요한가?</h2>
+<h3>문제: 복사-붙여넣기 지옥</h3>
+
+  <pre><code class="hljs language-html"><span class="hljs-comment">&lt;!-- 똑같은 버튼을 100번 만들 때... --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;px(16) py(8) bg(blue-500) c(white) r(8) hover:bg(blue-600) cursor(pointer)&quot;</span>&gt;</span>
+  버튼 1
+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;px(16) py(8) bg(blue-500) c(white) r(8) hover:bg(blue-600) cursor(pointer)&quot;</span>&gt;</span>
+  버튼 2
+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-comment">&lt;!-- 반복... --&gt;</span>
+</code></pre>
+<h3>해결: 컴포넌트 정의</h3>
+
+  <pre><code class="hljs language-html"><span class="hljs-comment">&lt;!-- 한 번 정의, 어디서나 사용 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn(primary)&quot;</span>&gt;</span>버튼 1<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn(primary)&quot;</span>&gt;</span>버튼 2<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn(primary/lg)&quot;</span>&gt;</span>큰 버튼<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn(secondary/sm)&quot;</span>&gt;</span>작은 보조 버튼<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</code></pre>
+<p>이것이 컴포넌트의 힘입니다: <strong>일관성</strong>과 <strong>생산성</strong>.</p>
+<h2>defineComponent API</h2>
+<h3>기본 구조</h3>
+<p>AdorableCSS는 컴포넌트 정의를 위한 통합 API를 제공합니다:</p>
+
+  <pre><code class="hljs language-typescript"><span class="hljs-keyword">import</span> { defineComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;adorable-css&#x27;</span>;
+
+<span class="hljs-keyword">const</span> myComponent = <span class="hljs-title function_">defineComponent</span>({
+  <span class="hljs-comment">// 기본 스타일 (필수)</span>
+  <span class="hljs-attr">base</span>: <span class="hljs-string">&#x27;inline-flex items(center) gap(sm)&#x27;</span>,
+  
+  <span class="hljs-comment">// 크기 변형</span>
+  <span class="hljs-attr">sizes</span>: {
+    <span class="hljs-attr">sm</span>: <span class="hljs-string">&#x27;h(32) px(12) text(sm)&#x27;</span>,
+    <span class="hljs-attr">md</span>: <span class="hljs-string">&#x27;h(40) px(16) text(md)&#x27;</span>,
+    <span class="hljs-attr">lg</span>: <span class="hljs-string">&#x27;h(48) px(20) text(lg)&#x27;</span>
+  },
+  
+  <span class="hljs-comment">// 스타일 변형</span>
+  <span class="hljs-attr">variants</span>: {
+    <span class="hljs-attr">primary</span>: <span class="hljs-string">&#x27;bg(primary) c(white)&#x27;</span>,
+    <span class="hljs-attr">secondary</span>: <span class="hljs-string">&#x27;bg(gray-100) c(gray-900)&#x27;</span>,
+    <span class="hljs-attr">danger</span>: <span class="hljs-string">&#x27;bg(red-500) c(white)&#x27;</span>
+  },
+  
+  <span class="hljs-comment">// 복합 변형 (특정 조합에 추가 스타일)</span>
+  <span class="hljs-attr">compounds</span>: [
+    {
+      <span class="hljs-attr">variant</span>: <span class="hljs-string">&#x27;primary&#x27;</span>,
+      <span class="hljs-attr">size</span>: <span class="hljs-string">&#x27;lg&#x27;</span>,
+      <span class="hljs-attr">class</span>: <span class="hljs-string">&#x27;font-weight(bold) uppercase&#x27;</span>
+    }
+  ],
+  
+  <span class="hljs-comment">// 상태 스타일</span>
+  <span class="hljs-attr">states</span>: {
+    <span class="hljs-attr">hover</span>: <span class="hljs-string">&#x27;brightness(1.1)&#x27;</span>,
+    <span class="hljs-attr">focus</span>: <span class="hljs-string">&#x27;ring(2/primary)&#x27;</span>,
+    <span class="hljs-attr">disabled</span>: <span class="hljs-string">&#x27;opacity(0.5) cursor(not-allowed)&#x27;</span>
+  },
+  
+  <span class="hljs-comment">// 기본값</span>
+  <span class="hljs-attr">defaults</span>: {
+    <span class="hljs-attr">size</span>: <span class="hljs-string">&#x27;md&#x27;</span>,
+    <span class="hljs-attr">variant</span>: <span class="hljs-string">&#x27;primary&#x27;</span>
+  }
+});
+</code></pre>
+<h3>사용 방법</h3>
+
+  <pre><code class="hljs language-html"><span class="hljs-comment">&lt;!-- 기본 사용 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn()&quot;</span>&gt;</span>기본 버튼<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 변형 사용 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn(secondary)&quot;</span>&gt;</span>보조 버튼<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 크기와 변형 조합 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn(primary/lg)&quot;</span>&gt;</span>큰 주요 버튼<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 여러 변형 조합 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn(danger/sm)&quot;</span>&gt;</span>작은 위험 버튼<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</code></pre>
+<h2>Built-in 컴포넌트</h2>
+<h3>1. Primitives (기본 컴포넌트)</h3>
+<h4>Button (<code class="bg(gray-50) c(purple-700) px(xs) py(0.5) r(sm) border(1/gray-200) font(mono) text(sm)">btn</code>)</h4>
+<p>다양한 스타일과 크기의 버튼 컴포넌트:</p>
+
+  <pre><code class="hljs language-css"><span class="hljs-comment">/* 크기 */</span>
+btn(sm)         <span class="hljs-comment">/* 작은 버튼 (h: 32px) */</span>
+btn()           <span class="hljs-comment">/* 기본 버튼 (h: 40px) */</span>
+btn(lg)         <span class="hljs-comment">/* 큰 버튼 (h: 44px) */</span>
+btn(<span class="hljs-attribute">icon</span>)       <span class="hljs-comment">/* 아이콘 버튼 (정사각형) */</span>
+
+<span class="hljs-comment">/* 변형 */</span>
+btn(primary)    <span class="hljs-comment">/* 주요 액션 */</span>
+btn(secondary)  <span class="hljs-comment">/* 보조 액션 */</span>
+btn(destructive) <span class="hljs-comment">/* 위험한 액션 */</span>
+btn(<span class="hljs-attribute">outline</span>)    <span class="hljs-comment">/* 외곽선 버튼 */</span>
+btn(ghost)      <span class="hljs-comment">/* 투명 버튼 */</span>
+btn(link)       <span class="hljs-comment">/* 링크 스타일 */</span>
+
+<span class="hljs-comment">/* 조합 */</span>
+btn(primary/lg) <span class="hljs-comment">/* 큰 주요 버튼 */</span>
+btn(ghost/<span class="hljs-attribute">icon</span>) <span class="hljs-comment">/* 고스트 아이콘 버튼 */</span>
+</code></pre>
+<h4>Card (<code class="bg(gray-50) c(purple-700) px(xs) py(0.5) r(sm) border(1/gray-200) font(mono) text(sm)">card</code>)</h4>
+<p>컨텐츠를 담는 카드 컴포넌트:</p>
+
+  <pre><code class="hljs language-css"><span class="hljs-comment">/* 크기 */</span>
+card(sm)        <span class="hljs-comment">/* 작은 카드 (p: 16px) */</span>
+card()          <span class="hljs-comment">/* 기본 카드 (p: 24px) */</span>
+card(lg)        <span class="hljs-comment">/* 큰 카드 (p: 32px) */</span>
+
+<span class="hljs-comment">/* 변형 */</span>
+card(outlined)  <span class="hljs-comment">/* 테두리 카드 */</span>
+card(elevated)  <span class="hljs-comment">/* 그림자 강조 */</span>
+card(glass)     <span class="hljs-comment">/* 글래스모피즘 */</span>
+card(gradient)  <span class="hljs-comment">/* 그라디언트 배경 */</span>
+card(interactive) <span class="hljs-comment">/* 호버 효과 */</span>
+
+<span class="hljs-comment">/* 특수 카드 */</span>
+card(feature)   <span class="hljs-comment">/* 기능 소개용 */</span>
+card(flat)      <span class="hljs-comment">/* 평면 스타일 */</span>
+</code></pre>
+<h4>Heading (<code class="bg(gray-50) c(purple-700) px(xs) py(0.5) r(sm) border(1/gray-200) font(mono) text(sm)">heading</code>)</h4>
+<p>계층적 제목 시스템:</p>
+
+  <pre><code class="hljs language-css"><span class="hljs-comment">/* 제목 레벨 */</span>
+heading(<span class="hljs-selector-tag">h1</span>)     <span class="hljs-comment">/* 가장 큰 제목 */</span>
+heading(<span class="hljs-selector-tag">h2</span>)     <span class="hljs-comment">/* 섹션 제목 */</span>
+heading(<span class="hljs-selector-tag">h3</span>)     <span class="hljs-comment">/* 서브섹션 제목 */</span>
+heading(<span class="hljs-selector-tag">h4</span>)     <span class="hljs-comment">/* 소제목 */</span>
+heading(<span class="hljs-selector-tag">h5</span>)     <span class="hljs-comment">/* 작은 제목 */</span>
+heading(<span class="hljs-selector-tag">h6</span>)     <span class="hljs-comment">/* 가장 작은 제목 */</span>
+
+<span class="hljs-comment">/* 특수 스타일 */</span>
+heading(<span class="hljs-attribute">display</span>) <span class="hljs-comment">/* 디스플레이 제목 */</span>
+heading(hero)   <span class="hljs-comment">/* 히어로 제목 (반응형) */</span>
+heading(<span class="hljs-selector-tag">caption</span>) <span class="hljs-comment">/* 캡션 스타일 */</span>
+
+<span class="hljs-comment">/* 변형 */</span>
+heading(<span class="hljs-selector-tag">h1</span>/gradient)  <span class="hljs-comment">/* 그라디언트 제목 */</span>
+heading(<span class="hljs-selector-tag">h2</span>/muted)     <span class="hljs-comment">/* 약한 제목 */</span>
+heading(<span class="hljs-selector-tag">h3</span>/primary)   <span class="hljs-comment">/* 주요 색상 제목 */</span>
+heading(hero/rainbow) <span class="hljs-comment">/* 무지개 히어로 제목 */</span>
+</code></pre>
+<h4>Form 컴포넌트</h4>
+<p>폼 요소들:</p>
+
+  <pre><code class="hljs language-css"><span class="hljs-comment">/* Input */</span>
+<span class="hljs-selector-tag">input</span>()         <span class="hljs-comment">/* 기본 입력 필드 */</span>
+<span class="hljs-selector-tag">input</span>(error)    <span class="hljs-comment">/* 오류 상태 */</span>
+<span class="hljs-selector-tag">input</span>(success)  <span class="hljs-comment">/* 성공 상태 */</span>
+
+<span class="hljs-comment">/* Textarea */</span>
+<span class="hljs-selector-tag">textarea</span>()      <span class="hljs-comment">/* 기본 텍스트영역 */</span>
+<span class="hljs-selector-tag">textarea</span>(lg)    <span class="hljs-comment">/* 큰 텍스트영역 */</span>
+
+<span class="hljs-comment">/* Checkbox &amp; Radio */</span>
+checkbox()      <span class="hljs-comment">/* 체크박스 */</span>
+radio()         <span class="hljs-comment">/* 라디오 버튼 */</span>
+</code></pre>
+<h3>2. Patterns (패턴 컴포넌트)</h3>
+<h4>Container (<code class="bg(gray-50) c(purple-700) px(xs) py(0.5) r(sm) border(1/gray-200) font(mono) text(sm)">container</code>)</h4>
+<p>반응형 컨테이너:</p>
+
+  <pre><code class="hljs language-css"><span class="hljs-comment">/* 크기별 컨테이너 */</span>
+<span class="hljs-attribute">container</span>(sm)   <span class="hljs-comment">/* max-w: 640px */</span>
+<span class="hljs-attribute">container</span>(md)   <span class="hljs-comment">/* max-w: 768px */</span>
+<span class="hljs-attribute">container</span>(lg)   <span class="hljs-comment">/* max-w: 1024px */</span>
+<span class="hljs-attribute">container</span>(xl)   <span class="hljs-comment">/* max-w: 1280px */</span>
+<span class="hljs-attribute">container</span>(<span class="hljs-number">2</span>xl)  <span class="hljs-comment">/* max-w: 1440px */</span>
+
+<span class="hljs-comment">/* 특수 컨테이너 */</span>
+<span class="hljs-attribute">container</span>(prose) <span class="hljs-comment">/* 읽기 최적화 (65ch) */</span>
+<span class="hljs-attribute">container</span>(full) <span class="hljs-comment">/* 전체 너비 */</span>
+</code></pre>
+<h4>Prose (<code class="bg(gray-50) c(purple-700) px(xs) py(0.5) r(sm) border(1/gray-200) font(mono) text(sm)">prose</code>)</h4>
+<p>읽기 최적화된 텍스트 스타일:</p>
+
+  <pre><code class="hljs language-css"><span class="hljs-comment">/* 기본 사용 */</span>
+prose()         <span class="hljs-comment">/* 기본 문서 스타일 */</span>
+prose(sm)       <span class="hljs-comment">/* 작은 텍스트 */</span>
+prose(lg)       <span class="hljs-comment">/* 큰 텍스트 */</span>
+
+<span class="hljs-comment">/* 변형 */</span>
+prose(docs)     <span class="hljs-comment">/* 문서용 스타일 */</span>
+prose(<span class="hljs-selector-tag">article</span>)  <span class="hljs-comment">/* 기사 스타일 */</span>
+prose(technical) <span class="hljs-comment">/* 기술 문서 */</span>
+prose(marketing) <span class="hljs-comment">/* 마케팅 콘텐츠 */</span>
+</code></pre>
+<p>Prose는 내부 HTML 요소를 자동으로 스타일링합니다:</p>
+<ul class="list(disc) pl(xl) my(lg)"><li>제목 (h1-h6)</li>
+<li>문단 (p)</li>
+<li>링크 (a)</li>
+<li>목록 (ul, ol)</li>
+<li>인용문 (blockquote)</li>
+<li>코드 (code, pre)</li>
+<li>테이블 (table)</li>
+</ul>
+<h4>Section (<code class="bg(gray-50) c(purple-700) px(xs) py(0.5) r(sm) border(1/gray-200) font(mono) text(sm)">section</code>)</h4>
+<p>페이지 섹션 구성:</p>
+
+  <pre><code class="hljs language-css"><span class="hljs-comment">/* 간격 변형 */</span>
+<span class="hljs-selector-tag">section</span>(compact) <span class="hljs-comment">/* 작은 패딩 */</span>
+<span class="hljs-selector-tag">section</span>()       <span class="hljs-comment">/* 기본 패딩 */</span>
+<span class="hljs-selector-tag">section</span>(spacious) <span class="hljs-comment">/* 큰 패딩 */</span>
+
+<span class="hljs-comment">/* 스타일 변형 */</span>
+<span class="hljs-selector-tag">section</span>(hero)   <span class="hljs-comment">/* 히어로 섹션 */</span>
+<span class="hljs-selector-tag">section</span>(feature) <span class="hljs-comment">/* 기능 섹션 */</span>
+<span class="hljs-selector-tag">section</span>(cta)    <span class="hljs-comment">/* CTA 섹션 */</span>
+</code></pre>
+<h3>3. Features (기능 컴포넌트)</h3>
+<h4>Glass 효과</h4>
+<p>글래스모피즘 효과:</p>
+
+  <pre><code class="hljs language-css"><span class="hljs-comment">/* 기본 글래스 */</span>
+glass()         <span class="hljs-comment">/* 기본 효과 */</span>
+glass(<span class="hljs-selector-tag">strong</span>)   <span class="hljs-comment">/* 강한 효과 */</span>
+glass(subtle)   <span class="hljs-comment">/* 약한 효과 */</span>
+
+<span class="hljs-comment">/* 커스텀 글래스 */</span>
+glass(<span class="hljs-number">20</span>/<span class="hljs-number">0.2</span>/blue) <span class="hljs-comment">/* blur/opacity/tint */</span>
+
+<span class="hljs-comment">/* 글래스 컴포넌트 */</span>
+glass-card()    <span class="hljs-comment">/* 글래스 카드 */</span>
+glass-<span class="hljs-selector-tag">nav</span>()     <span class="hljs-comment">/* 글래스 네비게이션 */</span>
+glass-dark()    <span class="hljs-comment">/* 다크 글래스 */</span>
+</code></pre>
+<h4>Interactive 효과</h4>
+<p>상호작용 강도 시스템:</p>
+
+  <pre><code class="hljs language-css"><span class="hljs-comment">/* 레벨별 효과 */</span>
+interactive(<span class="hljs-number">1</span>)  <span class="hljs-comment">/* 미세한 효과 */</span>
+interactive(<span class="hljs-number">2</span>)  <span class="hljs-comment">/* 약한 효과 */</span>
+interactive(<span class="hljs-number">3</span>)  <span class="hljs-comment">/* 중간 효과 */</span>
+interactive(<span class="hljs-number">4</span>)  <span class="hljs-comment">/* 강한 효과 */</span>
+interactive(<span class="hljs-number">5</span>)  <span class="hljs-comment">/* 매우 강한 효과 */</span>
+
+<span class="hljs-comment">/* 특정 상호작용 */</span>
+clickable()     <span class="hljs-comment">/* 클릭 가능 */</span>
+hoverable()     <span class="hljs-comment">/* 호버 효과 */</span>
+pressable()     <span class="hljs-comment">/* 누름 효과 */</span>
+draggable()     <span class="hljs-comment">/* 드래그 가능 */</span>
+selectable()    <span class="hljs-comment">/* 선택 가능 */</span>
+</code></pre>
+<h4>Glow 효과</h4>
+<p>빛나는 효과:</p>
+
+  <pre><code class="hljs language-css"><span class="hljs-comment">/* 기본 글로우 */</span>
+glow()          <span class="hljs-comment">/* 기본 효과 */</span>
+glow(primary)   <span class="hljs-comment">/* 주요 색상 */</span>
+glow(accent)    <span class="hljs-comment">/* 강조 색상 */</span>
+
+<span class="hljs-comment">/* 강도 조절 */</span>
+glow(sm)        <span class="hljs-comment">/* 약한 글로우 */</span>
+glow(lg)        <span class="hljs-comment">/* 강한 글로우 */</span>
+</code></pre>
+<h2>커스텀 컴포넌트 만들기</h2>
+<h3>1. 실전 예제: 프로덕트 카드</h3>
+
+  <pre><code class="hljs language-typescript"><span class="hljs-keyword">import</span> { defineComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;adorable-css&#x27;</span>;
+
+<span class="hljs-comment">// 실제 프로젝트에서 사용하는 카드 컴포넌트</span>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> productCard = <span class="hljs-title function_">defineComponent</span>({
+  <span class="hljs-comment">// 기본 스타일</span>
+  <span class="hljs-attr">base</span>: <span class="hljs-string">&#x27;vbox bg(white) r(xl) overflow(hidden) transition&#x27;</span>,
+  
+  <span class="hljs-comment">// 크기 변형</span>
+  <span class="hljs-attr">sizes</span>: {
+    <span class="hljs-attr">sm</span>: <span class="hljs-string">&#x27;w(280)&#x27;</span>,
+    <span class="hljs-attr">md</span>: <span class="hljs-string">&#x27;w(320)&#x27;</span>,     <span class="hljs-comment">// 기본값</span>
+    <span class="hljs-attr">lg</span>: <span class="hljs-string">&#x27;w(400)&#x27;</span>
+  },
+  
+  <span class="hljs-comment">// 스타일 변형</span>
+  <span class="hljs-attr">variants</span>: {
+    <span class="hljs-attr">default</span>: <span class="hljs-string">&#x27;shadow(md) hover:shadow(lg)&#x27;</span>,
+    <span class="hljs-attr">featured</span>: <span class="hljs-string">&#x27;shadow(xl) border(2/primary) hover:scale(1.02)&#x27;</span>,
+    <span class="hljs-attr">minimal</span>: <span class="hljs-string">&#x27;border(1/gray-200)&#x27;</span>,
+    <span class="hljs-attr">sale</span>: <span class="hljs-string">&#x27;shadow(lg/red-500.3) border(2/red-500)&#x27;</span>
+  },
+  
+  <span class="hljs-comment">// 상태 스타일</span>
+  <span class="hljs-attr">states</span>: {
+    <span class="hljs-attr">hover</span>: <span class="hljs-string">&#x27;transform(translateY(-2px))&#x27;</span>,
+    <span class="hljs-string">&#x27;group-hover&#x27;</span>: <span class="hljs-string">&#x27;shadow(xl)&#x27;</span>  <span class="hljs-comment">// 그룹 호버 지원</span>
+  },
+  
+  <span class="hljs-comment">// 복합 조건 (특정 조합에만 적용)</span>
+  <span class="hljs-attr">compounds</span>: [
+    {
+      <span class="hljs-attr">variant</span>: <span class="hljs-string">&#x27;featured&#x27;</span>,
+      <span class="hljs-attr">size</span>: <span class="hljs-string">&#x27;lg&#x27;</span>,
+      <span class="hljs-attr">class</span>: <span class="hljs-string">&#x27;p(xl) gap(lg)&#x27;</span>  <span class="hljs-comment">// 특별 패딩과 간격</span>
+    },
+    {
+      <span class="hljs-attr">variant</span>: <span class="hljs-string">&#x27;sale&#x27;</span>,
+      <span class="hljs-attr">size</span>: <span class="hljs-string">&#x27;sm&#x27;</span>,
+      <span class="hljs-attr">class</span>: <span class="hljs-string">&#x27;relative&#x27;</span>  <span class="hljs-comment">// 세일 배지용</span>
+    }
+  ],
+  
+  <span class="hljs-comment">// 기본값</span>
+  <span class="hljs-attr">defaults</span>: {
+    <span class="hljs-attr">size</span>: <span class="hljs-string">&#x27;md&#x27;</span>,
+    <span class="hljs-attr">variant</span>: <span class="hljs-string">&#x27;default&#x27;</span>
+  }
+});
+</code></pre>
+<h3>사용 예시</h3>
+
+  <pre><code class="hljs language-html"><span class="hljs-comment">&lt;!-- 기본 상품 카드 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;productCard()&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;product.jpg&quot;</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;w(full) h(200) object(cover)&quot;</span> /&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;p(lg) vbox gap(sm)&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h3</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;font(lg) bold&quot;</span>&gt;</span>상품명<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;c(gray-600)&quot;</span>&gt;</span>상품 설명<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;font(xl) bold c(primary)&quot;</span>&gt;</span>₩29,900<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 특성 상품 (Featured) --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;productCard(featured/lg)&quot;</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- 더 큰 카드에 특별한 스타일 적용 --&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+<span class="hljs-comment">&lt;!-- 세일 상품 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;productCard(sale/sm)&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;absolute top(10) right(10) bg(red-500) c(white) px(8) py(4) r(full)&quot;</span>&gt;</span>
+    SALE
+  <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+  <span class="hljs-comment">&lt;!-- 상품 내용 --&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<h3>2. 테마 지원 컴포넌트</h3>
+
+  <pre><code class="hljs language-typescript"><span class="hljs-keyword">import</span> { defineThemedComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;adorable-css&#x27;</span>;
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> themedButton = <span class="hljs-title function_">defineThemedComponent</span>({
+  <span class="hljs-attr">light</span>: {
+    <span class="hljs-attr">base</span>: <span class="hljs-string">&#x27;bg(white) c(gray-900) border(1/gray-200)&#x27;</span>,
+    <span class="hljs-attr">variants</span>: {
+      <span class="hljs-attr">primary</span>: <span class="hljs-string">&#x27;bg(blue-500) c(white)&#x27;</span>,
+      <span class="hljs-attr">secondary</span>: <span class="hljs-string">&#x27;bg(gray-100)&#x27;</span>
+    }
+  },
+  <span class="hljs-attr">dark</span>: {
+    <span class="hljs-attr">base</span>: <span class="hljs-string">&#x27;bg(gray-800) c(white) border(1/gray-700)&#x27;</span>,
+    <span class="hljs-attr">variants</span>: {
+      <span class="hljs-attr">primary</span>: <span class="hljs-string">&#x27;bg(blue-600) c(white)&#x27;</span>,
+      <span class="hljs-attr">secondary</span>: <span class="hljs-string">&#x27;bg(gray-700)&#x27;</span>
+    }
+  }
+});
+</code></pre>
+<h3>3. 복잡한 컴포넌트</h3>
+
+  <pre><code class="hljs language-typescript"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> dataTable = <span class="hljs-title function_">defineComponent</span>({
+  <span class="hljs-attr">base</span>: <span class="hljs-string">&#x27;w(full) bg(white) r(lg) overflow(hidden)&#x27;</span>,
+  
+  <span class="hljs-attr">selectors</span>: {
+    <span class="hljs-string">&#x27;&amp; thead&#x27;</span>: <span class="hljs-string">&#x27;bg(gray-50) border-b(1/gray-200)&#x27;</span>,
+    <span class="hljs-string">&#x27;&amp; th&#x27;</span>: <span class="hljs-string">&#x27;p(12) text(left) font(semi) c(gray-900)&#x27;</span>,
+    <span class="hljs-string">&#x27;&amp; td&#x27;</span>: <span class="hljs-string">&#x27;p(12) border-b(1/gray-100)&#x27;</span>,
+    <span class="hljs-string">&#x27;&amp; tr:hover&#x27;</span>: <span class="hljs-string">&#x27;bg(gray-50/0.5)&#x27;</span>,
+    <span class="hljs-string">&#x27;&amp; tr:last-child td&#x27;</span>: <span class="hljs-string">&#x27;border-b(none)&#x27;</span>
+  },
+  
+  <span class="hljs-attr">variants</span>: {
+    <span class="hljs-attr">striped</span>: {
+      <span class="hljs-string">&#x27;&amp; tbody tr:nth-child(even)&#x27;</span>: <span class="hljs-string">&#x27;bg(gray-50)&#x27;</span>
+    },
+    <span class="hljs-attr">compact</span>: {
+      <span class="hljs-string">&#x27;&amp; th, &amp; td&#x27;</span>: <span class="hljs-string">&#x27;p(8) text(sm)&#x27;</span>
+    }
+  }
+});
+</code></pre>
+<h2>컴포넌트 조합 패턴</h2>
+<h3>1. 컴포넌트 합성</h3>
+
+  <pre><code class="hljs language-html"><span class="hljs-comment">&lt;!-- 카드 안의 버튼 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card(lg)&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">h3</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;heading(h3) mb(md)&quot;</span>&gt;</span>카드 제목<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;text(gray-600) mb(lg)&quot;</span>&gt;</span>카드 내용...<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn(primary)&quot;</span>&gt;</span>액션<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<h3>2. 컴포넌트 확장</h3>
+
+  <pre><code class="hljs language-html"><span class="hljs-comment">&lt;!-- 기본 컴포넌트에 유틸리티 추가 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;btn(primary) w(full) transition hover:scale(1.02)&quot;</span>&gt;</span>
+  전체 너비 버튼
+<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+</code></pre>
+<h3>3. 컴포넌트 변형 조합</h3>
+
+  <pre><code class="hljs language-html"><span class="hljs-comment">&lt;!-- 여러 컴포넌트 특성 조합 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;card(glass) interactive(3) p(xl)&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;prose(docs)&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">h2</span>&gt;</span>글래스 인터랙티브 카드<span class="hljs-tag">&lt;/<span class="hljs-name">h2</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>호버 시 부드럽게 움직입니다.<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+</code></pre>
+<h2>성능 최적화</h2>
+<h3>1. 컴포넌트 캐싱</h3>
+<ul class="list(disc) pl(xl) my(lg)"><li>자주 사용되는 컴포넌트 조합은 자동으로 캐싱</li>
+<li>동일한 조합 재사용 시 파싱 생략</li>
+</ul>
+<h3>2. 선택적 로드</h3>
+<ul class="list(disc) pl(xl) my(lg)"><li>사용하지 않는 컴포넌트는 번들에서 제외</li>
+<li>트리 쉐이킹으로 최적화</li>
+</ul>
+<h3>3. CSS 중복 제거</h3>
+<ul class="list(disc) pl(xl) my(lg)"><li>동일한 스타일은 한 번만 생성</li>
+<li>효율적인 CSS 출력</li>
+</ul>
+<h2>컴포넌트 철학: 비즈니스 로직의 캐프슐화</h2>
+<h3>전통적 접근</h3>
+
+  <pre><code class="hljs language-css"><span class="hljs-comment">/* CSS 클래스: &quot;어떻게 보일까?&quot; */</span>
+<span class="hljs-selector-class">.btn-primary</span> {
+  <span class="hljs-attribute">background</span>: blue;
+  <span class="hljs-attribute">color</span>: white;
+  <span class="hljs-comment">/* ... */</span>
+}
+</code></pre>
+<h3>AdorableCSS 접근</h3>
+
+  <pre><code class="hljs language-typescript"><span class="hljs-comment">/* 컴포넌트: &quot;무엇을 할까?&quot; */</span>
+<span class="hljs-title function_">defineComponent</span>({
+  <span class="hljs-comment">// 주요 버튼 = 주요 액션을 수행</span>
+  <span class="hljs-attr">variants</span>: {
+    <span class="hljs-attr">primary</span>: <span class="hljs-string">&#x27;bg(primary) c(white)&#x27;</span>,
+    <span class="hljs-attr">secondary</span>: <span class="hljs-string">&#x27;bg(gray-100) c(gray-900)&#x27;</span>,
+    <span class="hljs-attr">danger</span>: <span class="hljs-string">&#x27;bg(red-500) c(white)&#x27;</span>  <span class="hljs-comment">// 위험한 액션</span>
+  }
+})
+</code></pre>
+<p>컴포넌트는 <strong>비즈니스 로직</strong>을 코드에 담습니다.</p>
+<h2>다음 단계</h2>
+<ul class="list(disc) pl(xl) my(lg)"><li><a href="./06-design-system.md"  class="c(blue-600) underline decoration(blue-200) hover:decoration(blue-500) transition(all/150ms)">Design System</a> - 완전한 디자인 시스템 구축</li>
+</ul>
+<!----></article><!----><!----></article> <nav class="grid(2) gap(24) mt(80) pt(48) border-t(1/gray-100) max-w(3xl) svelte-1fo03pu"><!--[--><a href="/docs/layout" class="group p(20) r(8) border(1/gray-200) hover:border(gray-300) hover:shadow(md) transition"><div class="vbox gap(4)"><span class="font(xs/1.5) c(gray-500) group-hover:c(gray-700) transition">← Previous</span> <span class="font(sm/1.5) bold(600) c(gray-900)">Layout 시스템</span></div></a><!--]--> <!--[--><a href="/docs/design-system" class="group p(20) r(8) border(1/gray-200) hover:border(gray-300) hover:shadow(md) transition text(right)"><div class="vbox gap(4) items(end)"><span class="font(xs/1.5) c(gray-500) group-hover:c(gray-700) transition">Next →</span> <span class="font(sm/1.5) bold(600) c(gray-900)">Design System 구축</span></div></a><!--]--></nav></div></main> <!--[!--><!--]--></div><!----><!--]--><!----></main></div> <!--[!--><!--]--> <div class="class-inspector fixed bottom(lg) right(lg) z(100)"><button class="w(48px) h(48px) r(full) bg(purple-600) hover:bg(purple-700) c(white) shadow(lg) transition hbox(center) " title="Enable Class Inspector"><!--[!--><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide-icon lucide lucide-eye"><!--[--><!----><path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"><!----></path><!----><!----><circle cx="12" cy="12" r="3"><!----></circle><!----><!--]--><!----><!----><!----><!----></svg><!--]--></button></div> <!--[!--><!--]--><!----><!----><!--]--> <!--[!--><!--]--><!--]-->
+			
+			<script>
+				{
+					__sveltekit_1ebdmu5 = {
+						base: new URL("..", location).pathname.slice(0, -1)
+					};
+
+					const element = document.currentScript.parentElement;
+
+					Promise.all([
+						import("../_app/immutable/entry/start.BHPKplNV.js"),
+						import("../_app/immutable/entry/app.DPlEZ0_S.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 2, 7],
+							data: [null,null,{type:"data",data:{title:"Component 시스템",description:"defineComponent API와 내장 컴포넌트",code:"\u003Ch1>Component 시스템\u003C/h1>\n\u003Cblockquote class=\"border-l(4/gray-300) pl(lg) my(xl) italic c(gray-700)\">\u003Cp>“컴포넌트는 디자인 결정의 문서화입니다. 한 번 만들고 어디서나 사용하세요.”\u003C/p>\n\u003C/blockquote>\n\u003Cp>AdorableCSS의 컴포넌트 시스템은 CSS-in-JS의 생산성과 Utility-First의 간결함을 결합합니다.\u003C/p>\n\u003Ch2>왜 컴포넌트 시스템이 필요한가?\u003C/h2>\n\u003Ch3>문제: 복사-붙여넣기 지옥\u003C/h3>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-html\">\u003Cspan class=\"hljs-comment\">&lt;!-- 똑같은 버튼을 100번 만들 때... --&gt;\u003C/span>\n\u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">button\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;px(16) py(8) bg(blue-500) c(white) r(8) hover:bg(blue-600) cursor(pointer)&quot;\u003C/span>&gt;\u003C/span>\n  버튼 1\n\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">button\u003C/span>&gt;\u003C/span>\n\u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">button\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;px(16) py(8) bg(blue-500) c(white) r(8) hover:bg(blue-600) cursor(pointer)&quot;\u003C/span>&gt;\u003C/span>\n  버튼 2\n\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">button\u003C/span>&gt;\u003C/span>\n\u003Cspan class=\"hljs-comment\">&lt;!-- 반복... --&gt;\u003C/span>\n\u003C/code>\u003C/pre>\n\u003Ch3>해결: 컴포넌트 정의\u003C/h3>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-html\">\u003Cspan class=\"hljs-comment\">&lt;!-- 한 번 정의, 어디서나 사용 --&gt;\u003C/span>\n\u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">button\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;btn(primary)&quot;\u003C/span>&gt;\u003C/span>버튼 1\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">button\u003C/span>&gt;\u003C/span>\n\u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">button\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;btn(primary)&quot;\u003C/span>&gt;\u003C/span>버튼 2\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">button\u003C/span>&gt;\u003C/span>\n\u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">button\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;btn(primary/lg)&quot;\u003C/span>&gt;\u003C/span>큰 버튼\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">button\u003C/span>&gt;\u003C/span>\n\u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">button\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;btn(secondary/sm)&quot;\u003C/span>&gt;\u003C/span>작은 보조 버튼\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">button\u003C/span>&gt;\u003C/span>\n\u003C/code>\u003C/pre>\n\u003Cp>이것이 컴포넌트의 힘입니다: \u003Cstrong>일관성\u003C/strong>과 \u003Cstrong>생산성\u003C/strong>.\u003C/p>\n\u003Ch2>defineComponent API\u003C/h2>\n\u003Ch3>기본 구조\u003C/h3>\n\u003Cp>AdorableCSS는 컴포넌트 정의를 위한 통합 API를 제공합니다:\u003C/p>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-typescript\">\u003Cspan class=\"hljs-keyword\">import\u003C/span> { defineComponent } \u003Cspan class=\"hljs-keyword\">from\u003C/span> \u003Cspan class=\"hljs-string\">&#x27;adorable-css&#x27;\u003C/span>;\n\n\u003Cspan class=\"hljs-keyword\">const\u003C/span> myComponent = \u003Cspan class=\"hljs-title function_\">defineComponent\u003C/span>({\n  \u003Cspan class=\"hljs-comment\">// 기본 스타일 (필수)\u003C/span>\n  \u003Cspan class=\"hljs-attr\">base\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;inline-flex items(center) gap(sm)&#x27;\u003C/span>,\n  \n  \u003Cspan class=\"hljs-comment\">// 크기 변형\u003C/span>\n  \u003Cspan class=\"hljs-attr\">sizes\u003C/span>: {\n    \u003Cspan class=\"hljs-attr\">sm\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;h(32) px(12) text(sm)&#x27;\u003C/span>,\n    \u003Cspan class=\"hljs-attr\">md\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;h(40) px(16) text(md)&#x27;\u003C/span>,\n    \u003Cspan class=\"hljs-attr\">lg\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;h(48) px(20) text(lg)&#x27;\u003C/span>\n  },\n  \n  \u003Cspan class=\"hljs-comment\">// 스타일 변형\u003C/span>\n  \u003Cspan class=\"hljs-attr\">variants\u003C/span>: {\n    \u003Cspan class=\"hljs-attr\">primary\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;bg(primary) c(white)&#x27;\u003C/span>,\n    \u003Cspan class=\"hljs-attr\">secondary\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;bg(gray-100) c(gray-900)&#x27;\u003C/span>,\n    \u003Cspan class=\"hljs-attr\">danger\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;bg(red-500) c(white)&#x27;\u003C/span>\n  },\n  \n  \u003Cspan class=\"hljs-comment\">// 복합 변형 (특정 조합에 추가 스타일)\u003C/span>\n  \u003Cspan class=\"hljs-attr\">compounds\u003C/span>: [\n    {\n      \u003Cspan class=\"hljs-attr\">variant\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;primary&#x27;\u003C/span>,\n      \u003Cspan class=\"hljs-attr\">size\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;lg&#x27;\u003C/span>,\n      \u003Cspan class=\"hljs-attr\">class\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;font-weight(bold) uppercase&#x27;\u003C/span>\n    }\n  ],\n  \n  \u003Cspan class=\"hljs-comment\">// 상태 스타일\u003C/span>\n  \u003Cspan class=\"hljs-attr\">states\u003C/span>: {\n    \u003Cspan class=\"hljs-attr\">hover\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;brightness(1.1)&#x27;\u003C/span>,\n    \u003Cspan class=\"hljs-attr\">focus\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;ring(2/primary)&#x27;\u003C/span>,\n    \u003Cspan class=\"hljs-attr\">disabled\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;opacity(0.5) cursor(not-allowed)&#x27;\u003C/span>\n  },\n  \n  \u003Cspan class=\"hljs-comment\">// 기본값\u003C/span>\n  \u003Cspan class=\"hljs-attr\">defaults\u003C/span>: {\n    \u003Cspan class=\"hljs-attr\">size\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;md&#x27;\u003C/span>,\n    \u003Cspan class=\"hljs-attr\">variant\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;primary&#x27;\u003C/span>\n  }\n});\n\u003C/code>\u003C/pre>\n\u003Ch3>사용 방법\u003C/h3>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-html\">\u003Cspan class=\"hljs-comment\">&lt;!-- 기본 사용 --&gt;\u003C/span>\n\u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">button\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;btn()&quot;\u003C/span>&gt;\u003C/span>기본 버튼\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">button\u003C/span>&gt;\u003C/span>\n\n\u003Cspan class=\"hljs-comment\">&lt;!-- 변형 사용 --&gt;\u003C/span>\n\u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">button\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;btn(secondary)&quot;\u003C/span>&gt;\u003C/span>보조 버튼\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">button\u003C/span>&gt;\u003C/span>\n\n\u003Cspan class=\"hljs-comment\">&lt;!-- 크기와 변형 조합 --&gt;\u003C/span>\n\u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">button\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;btn(primary/lg)&quot;\u003C/span>&gt;\u003C/span>큰 주요 버튼\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">button\u003C/span>&gt;\u003C/span>\n\n\u003Cspan class=\"hljs-comment\">&lt;!-- 여러 변형 조합 --&gt;\u003C/span>\n\u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">button\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;btn(danger/sm)&quot;\u003C/span>&gt;\u003C/span>작은 위험 버튼\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">button\u003C/span>&gt;\u003C/span>\n\u003C/code>\u003C/pre>\n\u003Ch2>Built-in 컴포넌트\u003C/h2>\n\u003Ch3>1. Primitives (기본 컴포넌트)\u003C/h3>\n\u003Ch4>Button (\u003Ccode class=\"bg(gray-50) c(purple-700) px(xs) py(0.5) r(sm) border(1/gray-200) font(mono) text(sm)\">btn\u003C/code>)\u003C/h4>\n\u003Cp>다양한 스타일과 크기의 버튼 컴포넌트:\u003C/p>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-css\">\u003Cspan class=\"hljs-comment\">/* 크기 */\u003C/span>\nbtn(sm)         \u003Cspan class=\"hljs-comment\">/* 작은 버튼 (h: 32px) */\u003C/span>\nbtn()           \u003Cspan class=\"hljs-comment\">/* 기본 버튼 (h: 40px) */\u003C/span>\nbtn(lg)         \u003Cspan class=\"hljs-comment\">/* 큰 버튼 (h: 44px) */\u003C/span>\nbtn(\u003Cspan class=\"hljs-attribute\">icon\u003C/span>)       \u003Cspan class=\"hljs-comment\">/* 아이콘 버튼 (정사각형) */\u003C/span>\n\n\u003Cspan class=\"hljs-comment\">/* 변형 */\u003C/span>\nbtn(primary)    \u003Cspan class=\"hljs-comment\">/* 주요 액션 */\u003C/span>\nbtn(secondary)  \u003Cspan class=\"hljs-comment\">/* 보조 액션 */\u003C/span>\nbtn(destructive) \u003Cspan class=\"hljs-comment\">/* 위험한 액션 */\u003C/span>\nbtn(\u003Cspan class=\"hljs-attribute\">outline\u003C/span>)    \u003Cspan class=\"hljs-comment\">/* 외곽선 버튼 */\u003C/span>\nbtn(ghost)      \u003Cspan class=\"hljs-comment\">/* 투명 버튼 */\u003C/span>\nbtn(link)       \u003Cspan class=\"hljs-comment\">/* 링크 스타일 */\u003C/span>\n\n\u003Cspan class=\"hljs-comment\">/* 조합 */\u003C/span>\nbtn(primary/lg) \u003Cspan class=\"hljs-comment\">/* 큰 주요 버튼 */\u003C/span>\nbtn(ghost/\u003Cspan class=\"hljs-attribute\">icon\u003C/span>) \u003Cspan class=\"hljs-comment\">/* 고스트 아이콘 버튼 */\u003C/span>\n\u003C/code>\u003C/pre>\n\u003Ch4>Card (\u003Ccode class=\"bg(gray-50) c(purple-700) px(xs) py(0.5) r(sm) border(1/gray-200) font(mono) text(sm)\">card\u003C/code>)\u003C/h4>\n\u003Cp>컨텐츠를 담는 카드 컴포넌트:\u003C/p>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-css\">\u003Cspan class=\"hljs-comment\">/* 크기 */\u003C/span>\ncard(sm)        \u003Cspan class=\"hljs-comment\">/* 작은 카드 (p: 16px) */\u003C/span>\ncard()          \u003Cspan class=\"hljs-comment\">/* 기본 카드 (p: 24px) */\u003C/span>\ncard(lg)        \u003Cspan class=\"hljs-comment\">/* 큰 카드 (p: 32px) */\u003C/span>\n\n\u003Cspan class=\"hljs-comment\">/* 변형 */\u003C/span>\ncard(outlined)  \u003Cspan class=\"hljs-comment\">/* 테두리 카드 */\u003C/span>\ncard(elevated)  \u003Cspan class=\"hljs-comment\">/* 그림자 강조 */\u003C/span>\ncard(glass)     \u003Cspan class=\"hljs-comment\">/* 글래스모피즘 */\u003C/span>\ncard(gradient)  \u003Cspan class=\"hljs-comment\">/* 그라디언트 배경 */\u003C/span>\ncard(interactive) \u003Cspan class=\"hljs-comment\">/* 호버 효과 */\u003C/span>\n\n\u003Cspan class=\"hljs-comment\">/* 특수 카드 */\u003C/span>\ncard(feature)   \u003Cspan class=\"hljs-comment\">/* 기능 소개용 */\u003C/span>\ncard(flat)      \u003Cspan class=\"hljs-comment\">/* 평면 스타일 */\u003C/span>\n\u003C/code>\u003C/pre>\n\u003Ch4>Heading (\u003Ccode class=\"bg(gray-50) c(purple-700) px(xs) py(0.5) r(sm) border(1/gray-200) font(mono) text(sm)\">heading\u003C/code>)\u003C/h4>\n\u003Cp>계층적 제목 시스템:\u003C/p>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-css\">\u003Cspan class=\"hljs-comment\">/* 제목 레벨 */\u003C/span>\nheading(\u003Cspan class=\"hljs-selector-tag\">h1\u003C/span>)     \u003Cspan class=\"hljs-comment\">/* 가장 큰 제목 */\u003C/span>\nheading(\u003Cspan class=\"hljs-selector-tag\">h2\u003C/span>)     \u003Cspan class=\"hljs-comment\">/* 섹션 제목 */\u003C/span>\nheading(\u003Cspan class=\"hljs-selector-tag\">h3\u003C/span>)     \u003Cspan class=\"hljs-comment\">/* 서브섹션 제목 */\u003C/span>\nheading(\u003Cspan class=\"hljs-selector-tag\">h4\u003C/span>)     \u003Cspan class=\"hljs-comment\">/* 소제목 */\u003C/span>\nheading(\u003Cspan class=\"hljs-selector-tag\">h5\u003C/span>)     \u003Cspan class=\"hljs-comment\">/* 작은 제목 */\u003C/span>\nheading(\u003Cspan class=\"hljs-selector-tag\">h6\u003C/span>)     \u003Cspan class=\"hljs-comment\">/* 가장 작은 제목 */\u003C/span>\n\n\u003Cspan class=\"hljs-comment\">/* 특수 스타일 */\u003C/span>\nheading(\u003Cspan class=\"hljs-attribute\">display\u003C/span>) \u003Cspan class=\"hljs-comment\">/* 디스플레이 제목 */\u003C/span>\nheading(hero)   \u003Cspan class=\"hljs-comment\">/* 히어로 제목 (반응형) */\u003C/span>\nheading(\u003Cspan class=\"hljs-selector-tag\">caption\u003C/span>) \u003Cspan class=\"hljs-comment\">/* 캡션 스타일 */\u003C/span>\n\n\u003Cspan class=\"hljs-comment\">/* 변형 */\u003C/span>\nheading(\u003Cspan class=\"hljs-selector-tag\">h1\u003C/span>/gradient)  \u003Cspan class=\"hljs-comment\">/* 그라디언트 제목 */\u003C/span>\nheading(\u003Cspan class=\"hljs-selector-tag\">h2\u003C/span>/muted)     \u003Cspan class=\"hljs-comment\">/* 약한 제목 */\u003C/span>\nheading(\u003Cspan class=\"hljs-selector-tag\">h3\u003C/span>/primary)   \u003Cspan class=\"hljs-comment\">/* 주요 색상 제목 */\u003C/span>\nheading(hero/rainbow) \u003Cspan class=\"hljs-comment\">/* 무지개 히어로 제목 */\u003C/span>\n\u003C/code>\u003C/pre>\n\u003Ch4>Form 컴포넌트\u003C/h4>\n\u003Cp>폼 요소들:\u003C/p>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-css\">\u003Cspan class=\"hljs-comment\">/* Input */\u003C/span>\n\u003Cspan class=\"hljs-selector-tag\">input\u003C/span>()         \u003Cspan class=\"hljs-comment\">/* 기본 입력 필드 */\u003C/span>\n\u003Cspan class=\"hljs-selector-tag\">input\u003C/span>(error)    \u003Cspan class=\"hljs-comment\">/* 오류 상태 */\u003C/span>\n\u003Cspan class=\"hljs-selector-tag\">input\u003C/span>(success)  \u003Cspan class=\"hljs-comment\">/* 성공 상태 */\u003C/span>\n\n\u003Cspan class=\"hljs-comment\">/* Textarea */\u003C/span>\n\u003Cspan class=\"hljs-selector-tag\">textarea\u003C/span>()      \u003Cspan class=\"hljs-comment\">/* 기본 텍스트영역 */\u003C/span>\n\u003Cspan class=\"hljs-selector-tag\">textarea\u003C/span>(lg)    \u003Cspan class=\"hljs-comment\">/* 큰 텍스트영역 */\u003C/span>\n\n\u003Cspan class=\"hljs-comment\">/* Checkbox &amp; Radio */\u003C/span>\ncheckbox()      \u003Cspan class=\"hljs-comment\">/* 체크박스 */\u003C/span>\nradio()         \u003Cspan class=\"hljs-comment\">/* 라디오 버튼 */\u003C/span>\n\u003C/code>\u003C/pre>\n\u003Ch3>2. Patterns (패턴 컴포넌트)\u003C/h3>\n\u003Ch4>Container (\u003Ccode class=\"bg(gray-50) c(purple-700) px(xs) py(0.5) r(sm) border(1/gray-200) font(mono) text(sm)\">container\u003C/code>)\u003C/h4>\n\u003Cp>반응형 컨테이너:\u003C/p>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-css\">\u003Cspan class=\"hljs-comment\">/* 크기별 컨테이너 */\u003C/span>\n\u003Cspan class=\"hljs-attribute\">container\u003C/span>(sm)   \u003Cspan class=\"hljs-comment\">/* max-w: 640px */\u003C/span>\n\u003Cspan class=\"hljs-attribute\">container\u003C/span>(md)   \u003Cspan class=\"hljs-comment\">/* max-w: 768px */\u003C/span>\n\u003Cspan class=\"hljs-attribute\">container\u003C/span>(lg)   \u003Cspan class=\"hljs-comment\">/* max-w: 1024px */\u003C/span>\n\u003Cspan class=\"hljs-attribute\">container\u003C/span>(xl)   \u003Cspan class=\"hljs-comment\">/* max-w: 1280px */\u003C/span>\n\u003Cspan class=\"hljs-attribute\">container\u003C/span>(\u003Cspan class=\"hljs-number\">2\u003C/span>xl)  \u003Cspan class=\"hljs-comment\">/* max-w: 1440px */\u003C/span>\n\n\u003Cspan class=\"hljs-comment\">/* 특수 컨테이너 */\u003C/span>\n\u003Cspan class=\"hljs-attribute\">container\u003C/span>(prose) \u003Cspan class=\"hljs-comment\">/* 읽기 최적화 (65ch) */\u003C/span>\n\u003Cspan class=\"hljs-attribute\">container\u003C/span>(full) \u003Cspan class=\"hljs-comment\">/* 전체 너비 */\u003C/span>\n\u003C/code>\u003C/pre>\n\u003Ch4>Prose (\u003Ccode class=\"bg(gray-50) c(purple-700) px(xs) py(0.5) r(sm) border(1/gray-200) font(mono) text(sm)\">prose\u003C/code>)\u003C/h4>\n\u003Cp>읽기 최적화된 텍스트 스타일:\u003C/p>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-css\">\u003Cspan class=\"hljs-comment\">/* 기본 사용 */\u003C/span>\nprose()         \u003Cspan class=\"hljs-comment\">/* 기본 문서 스타일 */\u003C/span>\nprose(sm)       \u003Cspan class=\"hljs-comment\">/* 작은 텍스트 */\u003C/span>\nprose(lg)       \u003Cspan class=\"hljs-comment\">/* 큰 텍스트 */\u003C/span>\n\n\u003Cspan class=\"hljs-comment\">/* 변형 */\u003C/span>\nprose(docs)     \u003Cspan class=\"hljs-comment\">/* 문서용 스타일 */\u003C/span>\nprose(\u003Cspan class=\"hljs-selector-tag\">article\u003C/span>)  \u003Cspan class=\"hljs-comment\">/* 기사 스타일 */\u003C/span>\nprose(technical) \u003Cspan class=\"hljs-comment\">/* 기술 문서 */\u003C/span>\nprose(marketing) \u003Cspan class=\"hljs-comment\">/* 마케팅 콘텐츠 */\u003C/span>\n\u003C/code>\u003C/pre>\n\u003Cp>Prose는 내부 HTML 요소를 자동으로 스타일링합니다:\u003C/p>\n\u003Cul class=\"list(disc) pl(xl) my(lg)\">\u003Cli>제목 (h1-h6)\u003C/li>\n\u003Cli>문단 (p)\u003C/li>\n\u003Cli>링크 (a)\u003C/li>\n\u003Cli>목록 (ul, ol)\u003C/li>\n\u003Cli>인용문 (blockquote)\u003C/li>\n\u003Cli>코드 (code, pre)\u003C/li>\n\u003Cli>테이블 (table)\u003C/li>\n\u003C/ul>\n\u003Ch4>Section (\u003Ccode class=\"bg(gray-50) c(purple-700) px(xs) py(0.5) r(sm) border(1/gray-200) font(mono) text(sm)\">section\u003C/code>)\u003C/h4>\n\u003Cp>페이지 섹션 구성:\u003C/p>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-css\">\u003Cspan class=\"hljs-comment\">/* 간격 변형 */\u003C/span>\n\u003Cspan class=\"hljs-selector-tag\">section\u003C/span>(compact) \u003Cspan class=\"hljs-comment\">/* 작은 패딩 */\u003C/span>\n\u003Cspan class=\"hljs-selector-tag\">section\u003C/span>()       \u003Cspan class=\"hljs-comment\">/* 기본 패딩 */\u003C/span>\n\u003Cspan class=\"hljs-selector-tag\">section\u003C/span>(spacious) \u003Cspan class=\"hljs-comment\">/* 큰 패딩 */\u003C/span>\n\n\u003Cspan class=\"hljs-comment\">/* 스타일 변형 */\u003C/span>\n\u003Cspan class=\"hljs-selector-tag\">section\u003C/span>(hero)   \u003Cspan class=\"hljs-comment\">/* 히어로 섹션 */\u003C/span>\n\u003Cspan class=\"hljs-selector-tag\">section\u003C/span>(feature) \u003Cspan class=\"hljs-comment\">/* 기능 섹션 */\u003C/span>\n\u003Cspan class=\"hljs-selector-tag\">section\u003C/span>(cta)    \u003Cspan class=\"hljs-comment\">/* CTA 섹션 */\u003C/span>\n\u003C/code>\u003C/pre>\n\u003Ch3>3. Features (기능 컴포넌트)\u003C/h3>\n\u003Ch4>Glass 효과\u003C/h4>\n\u003Cp>글래스모피즘 효과:\u003C/p>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-css\">\u003Cspan class=\"hljs-comment\">/* 기본 글래스 */\u003C/span>\nglass()         \u003Cspan class=\"hljs-comment\">/* 기본 효과 */\u003C/span>\nglass(\u003Cspan class=\"hljs-selector-tag\">strong\u003C/span>)   \u003Cspan class=\"hljs-comment\">/* 강한 효과 */\u003C/span>\nglass(subtle)   \u003Cspan class=\"hljs-comment\">/* 약한 효과 */\u003C/span>\n\n\u003Cspan class=\"hljs-comment\">/* 커스텀 글래스 */\u003C/span>\nglass(\u003Cspan class=\"hljs-number\">20\u003C/span>/\u003Cspan class=\"hljs-number\">0.2\u003C/span>/blue) \u003Cspan class=\"hljs-comment\">/* blur/opacity/tint */\u003C/span>\n\n\u003Cspan class=\"hljs-comment\">/* 글래스 컴포넌트 */\u003C/span>\nglass-card()    \u003Cspan class=\"hljs-comment\">/* 글래스 카드 */\u003C/span>\nglass-\u003Cspan class=\"hljs-selector-tag\">nav\u003C/span>()     \u003Cspan class=\"hljs-comment\">/* 글래스 네비게이션 */\u003C/span>\nglass-dark()    \u003Cspan class=\"hljs-comment\">/* 다크 글래스 */\u003C/span>\n\u003C/code>\u003C/pre>\n\u003Ch4>Interactive 효과\u003C/h4>\n\u003Cp>상호작용 강도 시스템:\u003C/p>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-css\">\u003Cspan class=\"hljs-comment\">/* 레벨별 효과 */\u003C/span>\ninteractive(\u003Cspan class=\"hljs-number\">1\u003C/span>)  \u003Cspan class=\"hljs-comment\">/* 미세한 효과 */\u003C/span>\ninteractive(\u003Cspan class=\"hljs-number\">2\u003C/span>)  \u003Cspan class=\"hljs-comment\">/* 약한 효과 */\u003C/span>\ninteractive(\u003Cspan class=\"hljs-number\">3\u003C/span>)  \u003Cspan class=\"hljs-comment\">/* 중간 효과 */\u003C/span>\ninteractive(\u003Cspan class=\"hljs-number\">4\u003C/span>)  \u003Cspan class=\"hljs-comment\">/* 강한 효과 */\u003C/span>\ninteractive(\u003Cspan class=\"hljs-number\">5\u003C/span>)  \u003Cspan class=\"hljs-comment\">/* 매우 강한 효과 */\u003C/span>\n\n\u003Cspan class=\"hljs-comment\">/* 특정 상호작용 */\u003C/span>\nclickable()     \u003Cspan class=\"hljs-comment\">/* 클릭 가능 */\u003C/span>\nhoverable()     \u003Cspan class=\"hljs-comment\">/* 호버 효과 */\u003C/span>\npressable()     \u003Cspan class=\"hljs-comment\">/* 누름 효과 */\u003C/span>\ndraggable()     \u003Cspan class=\"hljs-comment\">/* 드래그 가능 */\u003C/span>\nselectable()    \u003Cspan class=\"hljs-comment\">/* 선택 가능 */\u003C/span>\n\u003C/code>\u003C/pre>\n\u003Ch4>Glow 효과\u003C/h4>\n\u003Cp>빛나는 효과:\u003C/p>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-css\">\u003Cspan class=\"hljs-comment\">/* 기본 글로우 */\u003C/span>\nglow()          \u003Cspan class=\"hljs-comment\">/* 기본 효과 */\u003C/span>\nglow(primary)   \u003Cspan class=\"hljs-comment\">/* 주요 색상 */\u003C/span>\nglow(accent)    \u003Cspan class=\"hljs-comment\">/* 강조 색상 */\u003C/span>\n\n\u003Cspan class=\"hljs-comment\">/* 강도 조절 */\u003C/span>\nglow(sm)        \u003Cspan class=\"hljs-comment\">/* 약한 글로우 */\u003C/span>\nglow(lg)        \u003Cspan class=\"hljs-comment\">/* 강한 글로우 */\u003C/span>\n\u003C/code>\u003C/pre>\n\u003Ch2>커스텀 컴포넌트 만들기\u003C/h2>\n\u003Ch3>1. 실전 예제: 프로덕트 카드\u003C/h3>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-typescript\">\u003Cspan class=\"hljs-keyword\">import\u003C/span> { defineComponent } \u003Cspan class=\"hljs-keyword\">from\u003C/span> \u003Cspan class=\"hljs-string\">&#x27;adorable-css&#x27;\u003C/span>;\n\n\u003Cspan class=\"hljs-comment\">// 실제 프로젝트에서 사용하는 카드 컴포넌트\u003C/span>\n\u003Cspan class=\"hljs-keyword\">export\u003C/span> \u003Cspan class=\"hljs-keyword\">const\u003C/span> productCard = \u003Cspan class=\"hljs-title function_\">defineComponent\u003C/span>({\n  \u003Cspan class=\"hljs-comment\">// 기본 스타일\u003C/span>\n  \u003Cspan class=\"hljs-attr\">base\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;vbox bg(white) r(xl) overflow(hidden) transition&#x27;\u003C/span>,\n  \n  \u003Cspan class=\"hljs-comment\">// 크기 변형\u003C/span>\n  \u003Cspan class=\"hljs-attr\">sizes\u003C/span>: {\n    \u003Cspan class=\"hljs-attr\">sm\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;w(280)&#x27;\u003C/span>,\n    \u003Cspan class=\"hljs-attr\">md\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;w(320)&#x27;\u003C/span>,     \u003Cspan class=\"hljs-comment\">// 기본값\u003C/span>\n    \u003Cspan class=\"hljs-attr\">lg\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;w(400)&#x27;\u003C/span>\n  },\n  \n  \u003Cspan class=\"hljs-comment\">// 스타일 변형\u003C/span>\n  \u003Cspan class=\"hljs-attr\">variants\u003C/span>: {\n    \u003Cspan class=\"hljs-attr\">default\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;shadow(md) hover:shadow(lg)&#x27;\u003C/span>,\n    \u003Cspan class=\"hljs-attr\">featured\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;shadow(xl) border(2/primary) hover:scale(1.02)&#x27;\u003C/span>,\n    \u003Cspan class=\"hljs-attr\">minimal\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;border(1/gray-200)&#x27;\u003C/span>,\n    \u003Cspan class=\"hljs-attr\">sale\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;shadow(lg/red-500.3) border(2/red-500)&#x27;\u003C/span>\n  },\n  \n  \u003Cspan class=\"hljs-comment\">// 상태 스타일\u003C/span>\n  \u003Cspan class=\"hljs-attr\">states\u003C/span>: {\n    \u003Cspan class=\"hljs-attr\">hover\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;transform(translateY(-2px))&#x27;\u003C/span>,\n    \u003Cspan class=\"hljs-string\">&#x27;group-hover&#x27;\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;shadow(xl)&#x27;\u003C/span>  \u003Cspan class=\"hljs-comment\">// 그룹 호버 지원\u003C/span>\n  },\n  \n  \u003Cspan class=\"hljs-comment\">// 복합 조건 (특정 조합에만 적용)\u003C/span>\n  \u003Cspan class=\"hljs-attr\">compounds\u003C/span>: [\n    {\n      \u003Cspan class=\"hljs-attr\">variant\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;featured&#x27;\u003C/span>,\n      \u003Cspan class=\"hljs-attr\">size\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;lg&#x27;\u003C/span>,\n      \u003Cspan class=\"hljs-attr\">class\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;p(xl) gap(lg)&#x27;\u003C/span>  \u003Cspan class=\"hljs-comment\">// 특별 패딩과 간격\u003C/span>\n    },\n    {\n      \u003Cspan class=\"hljs-attr\">variant\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;sale&#x27;\u003C/span>,\n      \u003Cspan class=\"hljs-attr\">size\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;sm&#x27;\u003C/span>,\n      \u003Cspan class=\"hljs-attr\">class\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;relative&#x27;\u003C/span>  \u003Cspan class=\"hljs-comment\">// 세일 배지용\u003C/span>\n    }\n  ],\n  \n  \u003Cspan class=\"hljs-comment\">// 기본값\u003C/span>\n  \u003Cspan class=\"hljs-attr\">defaults\u003C/span>: {\n    \u003Cspan class=\"hljs-attr\">size\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;md&#x27;\u003C/span>,\n    \u003Cspan class=\"hljs-attr\">variant\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;default&#x27;\u003C/span>\n  }\n});\n\u003C/code>\u003C/pre>\n\u003Ch3>사용 예시\u003C/h3>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-html\">\u003Cspan class=\"hljs-comment\">&lt;!-- 기본 상품 카드 --&gt;\u003C/span>\n\u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">div\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;productCard()&quot;\u003C/span>&gt;\u003C/span>\n  \u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">img\u003C/span> \u003Cspan class=\"hljs-attr\">src\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;product.jpg&quot;\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;w(full) h(200) object(cover)&quot;\u003C/span> /&gt;\u003C/span>\n  \u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">div\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;p(lg) vbox gap(sm)&quot;\u003C/span>&gt;\u003C/span>\n    \u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">h3\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;font(lg) bold&quot;\u003C/span>&gt;\u003C/span>상품명\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">h3\u003C/span>&gt;\u003C/span>\n    \u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">p\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;c(gray-600)&quot;\u003C/span>&gt;\u003C/span>상품 설명\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">p\u003C/span>&gt;\u003C/span>\n    \u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">span\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;font(xl) bold c(primary)&quot;\u003C/span>&gt;\u003C/span>₩29,900\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">span\u003C/span>&gt;\u003C/span>\n  \u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">div\u003C/span>&gt;\u003C/span>\n\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">div\u003C/span>&gt;\u003C/span>\n\n\u003Cspan class=\"hljs-comment\">&lt;!-- 특성 상품 (Featured) --&gt;\u003C/span>\n\u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">div\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;productCard(featured/lg)&quot;\u003C/span>&gt;\u003C/span>\n  \u003Cspan class=\"hljs-comment\">&lt;!-- 더 큰 카드에 특별한 스타일 적용 --&gt;\u003C/span>\n\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">div\u003C/span>&gt;\u003C/span>\n\n\u003Cspan class=\"hljs-comment\">&lt;!-- 세일 상품 --&gt;\u003C/span>\n\u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">div\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;productCard(sale/sm)&quot;\u003C/span>&gt;\u003C/span>\n  \u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">span\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;absolute top(10) right(10) bg(red-500) c(white) px(8) py(4) r(full)&quot;\u003C/span>&gt;\u003C/span>\n    SALE\n  \u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">span\u003C/span>&gt;\u003C/span>\n  \u003Cspan class=\"hljs-comment\">&lt;!-- 상품 내용 --&gt;\u003C/span>\n\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">div\u003C/span>&gt;\u003C/span>\n\u003C/code>\u003C/pre>\n\u003Ch3>2. 테마 지원 컴포넌트\u003C/h3>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-typescript\">\u003Cspan class=\"hljs-keyword\">import\u003C/span> { defineThemedComponent } \u003Cspan class=\"hljs-keyword\">from\u003C/span> \u003Cspan class=\"hljs-string\">&#x27;adorable-css&#x27;\u003C/span>;\n\n\u003Cspan class=\"hljs-keyword\">export\u003C/span> \u003Cspan class=\"hljs-keyword\">const\u003C/span> themedButton = \u003Cspan class=\"hljs-title function_\">defineThemedComponent\u003C/span>({\n  \u003Cspan class=\"hljs-attr\">light\u003C/span>: {\n    \u003Cspan class=\"hljs-attr\">base\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;bg(white) c(gray-900) border(1/gray-200)&#x27;\u003C/span>,\n    \u003Cspan class=\"hljs-attr\">variants\u003C/span>: {\n      \u003Cspan class=\"hljs-attr\">primary\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;bg(blue-500) c(white)&#x27;\u003C/span>,\n      \u003Cspan class=\"hljs-attr\">secondary\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;bg(gray-100)&#x27;\u003C/span>\n    }\n  },\n  \u003Cspan class=\"hljs-attr\">dark\u003C/span>: {\n    \u003Cspan class=\"hljs-attr\">base\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;bg(gray-800) c(white) border(1/gray-700)&#x27;\u003C/span>,\n    \u003Cspan class=\"hljs-attr\">variants\u003C/span>: {\n      \u003Cspan class=\"hljs-attr\">primary\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;bg(blue-600) c(white)&#x27;\u003C/span>,\n      \u003Cspan class=\"hljs-attr\">secondary\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;bg(gray-700)&#x27;\u003C/span>\n    }\n  }\n});\n\u003C/code>\u003C/pre>\n\u003Ch3>3. 복잡한 컴포넌트\u003C/h3>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-typescript\">\u003Cspan class=\"hljs-keyword\">export\u003C/span> \u003Cspan class=\"hljs-keyword\">const\u003C/span> dataTable = \u003Cspan class=\"hljs-title function_\">defineComponent\u003C/span>({\n  \u003Cspan class=\"hljs-attr\">base\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;w(full) bg(white) r(lg) overflow(hidden)&#x27;\u003C/span>,\n  \n  \u003Cspan class=\"hljs-attr\">selectors\u003C/span>: {\n    \u003Cspan class=\"hljs-string\">&#x27;&amp; thead&#x27;\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;bg(gray-50) border-b(1/gray-200)&#x27;\u003C/span>,\n    \u003Cspan class=\"hljs-string\">&#x27;&amp; th&#x27;\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;p(12) text(left) font(semi) c(gray-900)&#x27;\u003C/span>,\n    \u003Cspan class=\"hljs-string\">&#x27;&amp; td&#x27;\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;p(12) border-b(1/gray-100)&#x27;\u003C/span>,\n    \u003Cspan class=\"hljs-string\">&#x27;&amp; tr:hover&#x27;\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;bg(gray-50/0.5)&#x27;\u003C/span>,\n    \u003Cspan class=\"hljs-string\">&#x27;&amp; tr:last-child td&#x27;\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;border-b(none)&#x27;\u003C/span>\n  },\n  \n  \u003Cspan class=\"hljs-attr\">variants\u003C/span>: {\n    \u003Cspan class=\"hljs-attr\">striped\u003C/span>: {\n      \u003Cspan class=\"hljs-string\">&#x27;&amp; tbody tr:nth-child(even)&#x27;\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;bg(gray-50)&#x27;\u003C/span>\n    },\n    \u003Cspan class=\"hljs-attr\">compact\u003C/span>: {\n      \u003Cspan class=\"hljs-string\">&#x27;&amp; th, &amp; td&#x27;\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;p(8) text(sm)&#x27;\u003C/span>\n    }\n  }\n});\n\u003C/code>\u003C/pre>\n\u003Ch2>컴포넌트 조합 패턴\u003C/h2>\n\u003Ch3>1. 컴포넌트 합성\u003C/h3>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-html\">\u003Cspan class=\"hljs-comment\">&lt;!-- 카드 안의 버튼 --&gt;\u003C/span>\n\u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">div\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;card(lg)&quot;\u003C/span>&gt;\u003C/span>\n  \u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">h3\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;heading(h3) mb(md)&quot;\u003C/span>&gt;\u003C/span>카드 제목\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">h3\u003C/span>&gt;\u003C/span>\n  \u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">p\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;text(gray-600) mb(lg)&quot;\u003C/span>&gt;\u003C/span>카드 내용...\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">p\u003C/span>&gt;\u003C/span>\n  \u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">button\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;btn(primary)&quot;\u003C/span>&gt;\u003C/span>액션\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">button\u003C/span>&gt;\u003C/span>\n\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">div\u003C/span>&gt;\u003C/span>\n\u003C/code>\u003C/pre>\n\u003Ch3>2. 컴포넌트 확장\u003C/h3>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-html\">\u003Cspan class=\"hljs-comment\">&lt;!-- 기본 컴포넌트에 유틸리티 추가 --&gt;\u003C/span>\n\u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">button\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;btn(primary) w(full) transition hover:scale(1.02)&quot;\u003C/span>&gt;\u003C/span>\n  전체 너비 버튼\n\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">button\u003C/span>&gt;\u003C/span>\n\u003C/code>\u003C/pre>\n\u003Ch3>3. 컴포넌트 변형 조합\u003C/h3>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-html\">\u003Cspan class=\"hljs-comment\">&lt;!-- 여러 컴포넌트 특성 조합 --&gt;\u003C/span>\n\u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">div\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;card(glass) interactive(3) p(xl)&quot;\u003C/span>&gt;\u003C/span>\n  \u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">div\u003C/span> \u003Cspan class=\"hljs-attr\">class\u003C/span>=\u003Cspan class=\"hljs-string\">&quot;prose(docs)&quot;\u003C/span>&gt;\u003C/span>\n    \u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">h2\u003C/span>&gt;\u003C/span>글래스 인터랙티브 카드\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">h2\u003C/span>&gt;\u003C/span>\n    \u003Cspan class=\"hljs-tag\">&lt;\u003Cspan class=\"hljs-name\">p\u003C/span>&gt;\u003C/span>호버 시 부드럽게 움직입니다.\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">p\u003C/span>&gt;\u003C/span>\n  \u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">div\u003C/span>&gt;\u003C/span>\n\u003Cspan class=\"hljs-tag\">&lt;/\u003Cspan class=\"hljs-name\">div\u003C/span>&gt;\u003C/span>\n\u003C/code>\u003C/pre>\n\u003Ch2>성능 최적화\u003C/h2>\n\u003Ch3>1. 컴포넌트 캐싱\u003C/h3>\n\u003Cul class=\"list(disc) pl(xl) my(lg)\">\u003Cli>자주 사용되는 컴포넌트 조합은 자동으로 캐싱\u003C/li>\n\u003Cli>동일한 조합 재사용 시 파싱 생략\u003C/li>\n\u003C/ul>\n\u003Ch3>2. 선택적 로드\u003C/h3>\n\u003Cul class=\"list(disc) pl(xl) my(lg)\">\u003Cli>사용하지 않는 컴포넌트는 번들에서 제외\u003C/li>\n\u003Cli>트리 쉐이킹으로 최적화\u003C/li>\n\u003C/ul>\n\u003Ch3>3. CSS 중복 제거\u003C/h3>\n\u003Cul class=\"list(disc) pl(xl) my(lg)\">\u003Cli>동일한 스타일은 한 번만 생성\u003C/li>\n\u003Cli>효율적인 CSS 출력\u003C/li>\n\u003C/ul>\n\u003Ch2>컴포넌트 철학: 비즈니스 로직의 캐프슐화\u003C/h2>\n\u003Ch3>전통적 접근\u003C/h3>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-css\">\u003Cspan class=\"hljs-comment\">/* CSS 클래스: &quot;어떻게 보일까?&quot; */\u003C/span>\n\u003Cspan class=\"hljs-selector-class\">.btn-primary\u003C/span> {\n  \u003Cspan class=\"hljs-attribute\">background\u003C/span>: blue;\n  \u003Cspan class=\"hljs-attribute\">color\u003C/span>: white;\n  \u003Cspan class=\"hljs-comment\">/* ... */\u003C/span>\n}\n\u003C/code>\u003C/pre>\n\u003Ch3>AdorableCSS 접근\u003C/h3>\n\n  \u003Cpre>\u003Ccode class=\"hljs language-typescript\">\u003Cspan class=\"hljs-comment\">/* 컴포넌트: &quot;무엇을 할까?&quot; */\u003C/span>\n\u003Cspan class=\"hljs-title function_\">defineComponent\u003C/span>({\n  \u003Cspan class=\"hljs-comment\">// 주요 버튼 = 주요 액션을 수행\u003C/span>\n  \u003Cspan class=\"hljs-attr\">variants\u003C/span>: {\n    \u003Cspan class=\"hljs-attr\">primary\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;bg(primary) c(white)&#x27;\u003C/span>,\n    \u003Cspan class=\"hljs-attr\">secondary\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;bg(gray-100) c(gray-900)&#x27;\u003C/span>,\n    \u003Cspan class=\"hljs-attr\">danger\u003C/span>: \u003Cspan class=\"hljs-string\">&#x27;bg(red-500) c(white)&#x27;\u003C/span>  \u003Cspan class=\"hljs-comment\">// 위험한 액션\u003C/span>\n  }\n})\n\u003C/code>\u003C/pre>\n\u003Cp>컴포넌트는 \u003Cstrong>비즈니스 로직\u003C/strong>을 코드에 담습니다.\u003C/p>\n\u003Ch2>다음 단계\u003C/h2>\n\u003Cul class=\"list(disc) pl(xl) my(lg)\">\u003Cli>\u003Ca href=\"./06-design-system.md\"  class=\"c(blue-600) underline decoration(blue-200) hover:decoration(blue-500) transition(all/150ms)\">Design System\u003C/a> - 완전한 디자인 시스템 구축\u003C/li>\n\u003C/ul>\n",frontmatter:{},css:"\n      /* Highlight.js Light Theme inspired by GitHub */\n      .hljs { background: rgb(249 250 251); color: #24292e; }\n      .hljs-comment, .hljs-quote { color: #6a737d; }\n      .hljs-keyword, .hljs-selector-tag, .hljs-literal { color: #d73a49; }\n      .hljs-string { color: #032f62; }\n      .hljs-number { color: #005cc5; }\n      .hljs-variable, .hljs-template-variable, .hljs-attr { color: #e36209; }\n      .hljs-name, .hljs-selector-class, .hljs-selector-id { color: #22863a; }\n      .hljs-title, .hljs-function { color: #6f42c1; }\n      .hljs-built_in { color: #005cc5; }\n      .hljs-params { color: #24292e; }\n      .hljs-meta { color: #005cc5; }\n      .hljs-emphasis { font-style: italic; }\n      .hljs-strong { font-weight: bold; }\n      .hljs-deletion { color: #b31d28; background-color: #ffeef0; }\n      .hljs-addition { color: #22863a; background-color: #f0fff4; }\n      \n      /* Code blocks */\n      pre { \n        background-color: rgb(249 250 251);\n        border: 1px solid rgb(229 231 235);\n      }\n      \n      /* Copy button */\n      .copy-btn {\n        background-color: rgb(243 244 246);\n        border: 1px solid rgb(209 213 219);\n        color: rgb(55 65 81);\n      }\n      .copy-btn:hover {\n        background-color: rgb(229 231 235);\n      }\n    "},uses:{params:["slug"]}}],
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>

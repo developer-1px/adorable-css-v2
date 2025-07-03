@@ -1,1 +1,0 @@
-import{h as r,e as c,E as s,F as i,G as h,I as p,k as d}from"./BG9eX_xi.js";function u(t,f,o){r&&c();var n=t,a,e;s(()=>{a!==(a=f())&&(e&&(p(e),e=null),a&&(e=h(()=>o(n,a))))},i),r&&(n=d)}export{u as c};

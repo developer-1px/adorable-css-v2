@@ -1,1 +1,0 @@
-import{h as n,e as s}from"./BG9eX_xi.js";function u(l,f,t,i,d){var r;n&&s();var e=(r=f.$$slots)==null?void 0:r[t],a=!1;e===!0&&(e=f[t==="default"?"children":t],a=!0),e===void 0||e(l,a?()=>i:i)}export{u as s};
