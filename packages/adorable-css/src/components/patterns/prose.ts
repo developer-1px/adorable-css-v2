@@ -4,27 +4,27 @@ import type { ComponentDefinition } from '../defineComponent';
 // VitePress-inspired prose component with refined typography
 const proseDefinition: ComponentDefinition = {
   // Base typography with optimal reading experience
-  base: 'font(16/1.6) c(stone-700)',
+  base: 'font(16/1.6) c(neutral-700)',
   
   selectors: {
     // Typography hierarchy using heading component with margin
     'h1': 'heading(h1) mt(0) mb(2xl)',
-    'h2': 'heading(h2) mt(5xl) mb(lg) pb(sm) border-b(1/stone-200)',
+    'h2': 'heading(h2) mt(5xl) mb(lg) pb(sm) border-b(1/neutral-200)',
     'h3': 'heading(h3) mt(3xl) mb(md)',
     'h4': 'heading(h4) mt(2xl) mb(sm)',
     'h5': 'heading(h5) mt(lg) mb(sm)',
     'h6': 'heading(h6) mt(lg) mb(sm)',
     
     // Body & inline elements - VitePress inspired
-    'p': 'font(16/1.7) mb(16) c(stone-700)',
-    'strong': 'bold(600) c(stone-900)',
+    'p': 'font(16/1.7) mb(16) c(neutral-700)',
+    'strong': 'bold(600) c(primary)',
     'em': 'italic',
-    'mark': 'bg(yellow-200.5) px(4) py(1) r(2)',
+    'mark': 'bg(warning.2) px(4) py(1) r(2)',
     
     // Links - VitePress style
-    'a': 'c(purple-600) decoration(underline) decoration(purple-600.3) underline-offset(2) transition(all/150ms)',
-    'a:hover': 'c(purple-700) decoration(purple-700.6)',
-    'a:active': 'c(purple-800)',
+    'a': 'c(primary) decoration(underline) decoration(primary.3) underline-offset(2) transition(all/150ms)',
+    'a:hover': 'c(primary-700) decoration(primary-700.6)',
+    'a:active': 'c(primary-800)',
     
     // Lists - VitePress style
     'ul, ol': 'my(16) pl(20)',
@@ -37,40 +37,40 @@ const proseDefinition: ComponentDefinition = {
     
 
     // Blockquotes - VitePress style
-    'blockquote': 'my(16) pl(16) border-l(4/stone-300) c(stone-600) italic',
+    'blockquote': 'my(16) pl(16) border-l(4/neutral-300) c(neutral-600) italic',
     'blockquote p': 'mb(8)',
     'blockquote p:last-child': 'mb(0)',
-    'blockquote cite': 'block mt(8) font(14) not-italic c(stone-500)',
+    'blockquote cite': 'block mt(8) font(14) not-italic c(neutral-500)',
     'blockquote cite::before': 'content("—") mr(4)',
     
     // Tables - VitePress style
     'table': 'w(full) my(16) border-collapse text(left)',
-    'thead': 'border-b(2/stone-300)',
-    'th': 'px(12) py(8) font(14) bold(600) c(stone-900) text(left)',
-    'td': 'px(12) py(8) border-b(1/stone-200)',
+    'thead': 'border-b(2/neutral-300)',
+    'th': 'px(12) py(8) font(14) bold(600) c(primary) text(left)',
+    'td': 'px(12) py(8) border-b(1/neutral-200)',
     'tbody tr:last-child td': 'border-b(0)',
-    'tbody tr:hover': 'bg(stone-50)',
+    'tbody tr:hover': 'bg(neutral-50)',
     
     // Media & visual elements - VitePress style
-    'hr': 'my(32) border(0) h(1) bg(stone-200)',
+    'hr': 'my(32) border(0) h(1) bg(neutral-200)',
     'img': 'max-w(full) h(auto) r(8) my(16)',
     'figure': 'my(24)',
     'figure img': 'mx(auto) mb(8)',
-    'figcaption': 'text(center) font(14) c(stone-600) mt(8)',
+    'figcaption': 'text(center) font(14) c(neutral-600) mt(8)',
     
     // Code & interactive elements - Light theme
-    'code': 'px(4) py(1) bg(stone-50) r(4) border(1/stone-200) font(sm) break-words',
-    'pre': 'my(16) p(16) c(stone-900) r(8) border(1/stone-200) overflow-x(auto) font(mono) font(xs)',
+    'code': 'px(4) py(1) bg(neutral-50) r(4) border(1/neutral-200) font(sm) break-words',
+    'pre': 'my(16) p(16) c(neutral-900) r(8) border(1/neutral-200) overflow-x(auto) font(mono) font(xs)',
     'pre code': 'p(0) bg(transparent) c(inherit) border(0)',
-    'kbd': 'inline-block px(6) py(1) bg(stone-100) border(1/stone-300) r(4) shadow(sm) font(mono) font(12) c(stone-700)',
+    'kbd': 'inline-block px(6) py(1) bg(neutral-100) border(1/neutral-300) r(4) shadow(sm) font(mono) font(12) c(neutral-700)',
     'abbr[title]': 'decoration(dotted) underline-offset(2) cursor(help)',
     
     // Structured content
     'dl': 'my(lg)',
-    'dt': 'bold(medium) mt(lg) mb(xs) c(stone-900)',
-    'dd': 'ml(lg) c(stone-700)',
+    'dt': 'bold(medium) mt(lg) mb(xs) c(primary)',
+    'dd': 'ml(lg) c(neutral-700)',
     
-    'details': 'my(lg) p(md) bg(stone-50) r(lg) group',
+    'details': 'my(lg) p(md) bg(neutral-50) r(lg) group',
     'summary': 'bold(medium) cursor(pointer) select(none) list(none)',
     'details[open] summary': 'mb(md)',
     
@@ -78,14 +78,14 @@ const proseDefinition: ComponentDefinition = {
     '> *:first-child': 'mt(0)',
     '> *:last-child': 'mb(0)',
     
-    '.lead': 'font(20/1.6) c(stone-600) mb(24)',
+    '.lead': 'font(20/1.6) c(neutral-600) mb(24)',
     
     // VitePress special elements
     '.tip, .warning, .danger, .info': 'my(16) p(16) r(8) border-l(4)',
-    '.tip': 'bg(green-50) border-l(green-500) c(green-900)',
-    '.warning': 'bg(yellow-50) border-l(yellow-500) c(yellow-900)',
-    '.danger': 'bg(red-50) border-l(red-500) c(red-900)',
-    '.info': 'bg(blue-50) border-l(blue-500) c(blue-900)',
+    '.tip': 'bg(success.1) border-l(success) c(success-900)',
+    '.warning': 'bg(warning.1) border-l(warning) c(warning-900)',
+    '.danger': 'bg(error.1) border-l(error) c(error-900)',
+    '.info': 'bg(primary.1) border-l(primary) c(primary-900)',
   },
   
   // Size variants - VitePress inspired
@@ -127,17 +127,17 @@ const proseDefinition: ComponentDefinition = {
     
     docs: {
       'h1': 'scroll-mt(80) mt(0) mb(2xl)',
-      'h2': 'scroll-mt(80) mt(5xl) mb(lg) pb(sm) border-b(1/stone-200)',
+      'h2': 'scroll-mt(80) mt(5xl) mb(lg) pb(sm) border-b(1/neutral-200)',
       'h3': 'scroll-mt(80) mt(3xl) mb(md)',
       'h4': 'scroll-mt(80) mt(2xl) mb(sm)',
-      'a[href^="#"]': 'c(purple-600) decoration(none)',
-      'a[href^="#"]:hover': 'c(purple-700) decoration(underline)'
+      'a[href^="#"]': 'c(primary) decoration(none)',
+      'a[href^="#"]:hover': 'c(primary-700) decoration(underline)'
     },
     
     article: {
       'p': 'text-indent(2em) mb(0)',
       'p:first-of-type': 'text-indent(0) font(18/1.8)',
-      'p:first-of-type::first-letter': 'float(left) font(72/1) bold(700) mr(8) mt(4) c(purple-600)',
+      'p:first-of-type::first-letter': 'float(left) font(72/1) bold(700) mr(8) mt(4) c(primary)',
       'p + p': 'mt(0)',
       'h1, h2, h3': 'font(serif) text(center) my(32) mt(3xl) mb(xl)',
       'blockquote': 'font(italic) mx(32) my(32) text(center) border(0)',
@@ -147,31 +147,31 @@ const proseDefinition: ComponentDefinition = {
     technical: {
       'h1, h2, h3, h4, h5, h6': 'font(mono) bold(400) mt(2xl) mb(lg)',
       'p': 'font(14/1.75)',
-      'code': 'bg(blue-50) c(blue-700) px(6) py(2) border(1/blue-200)',
-      'pre': 'bg(stone-50) c(stone-900) p(16) border(1/stone-300) font(mono)',
+      'code': 'bg(primary.1) c(primary-700) px(6) py(2) border(1/primary-200)',
+      'pre': 'bg(neutral-50) c(neutral-900) p(16) border(1/neutral-300) font(mono)',
       'pre code': 'p(0) bg(transparent) c(inherit) border(0)',
-      'a': 'c(blue-600) decoration(none) bold(500)',
-      'a:hover': 'c(blue-700) decoration(underline)',
+      'a': 'c(primary) decoration(none) bold(500)',
+      'a:hover': 'c(primary-700) decoration(underline)',
       'table': 'font(mono) font(13)',
       'ul, ol': 'font(14)'
     },
     
     marketing: {
-      'h1': 'font(..5xl/1/-4%) bold(black) tracking(tight) c(gradient(to-br/purple-600..pink-600))',
-      'h2': 'font(..4xl/1.1/-3%) c(stone-900)',
-      'h3': 'font(..3xl/1.2/-2%) c(stone-800)',
-      'p': 'font(lg) lh(1.75) c(stone-700)',
-      'strong': 'c(purple-600)',
-      'a': 'c(purple-600) bold(medium) decoration(none) hover:decoration(underline)',
-      'blockquote': 'font(xl) italic border-l(purple-400) pl(xl) my(2xl)',
-      '.lead': 'font(2xl/1.5) bold(light) c(stone-700) max-w(4xl)'
+      'h1': 'font(..5xl/1/-4%) bold(black) tracking(tight) c(gradient(to-br/primary..primary-700))',
+      'h2': 'font(..4xl/1.1/-3%) c(primary)',
+      'h3': 'font(..3xl/1.2/-2%) c(primary-800)',
+      'p': 'font(lg) lh(1.75) c(neutral-700)',
+      'strong': 'c(primary)',
+      'a': 'c(primary) bold(medium) decoration(none) hover:decoration(underline)',
+      'blockquote': 'font(xl) italic border-l(primary) pl(xl) my(2xl)',
+      '.lead': 'font(2xl/1.5) bold(light) c(neutral-700) max-w(4xl)'
     }
   },
   
   // Dark mode support
   states: {
     // Dark mode colors
-    'dark': 'c(stone-100) bg(stone-900)',
+    'dark': 'c(neutral-100) bg(neutral-900)',
   }
 };
 

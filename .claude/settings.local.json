@@ -79,7 +79,14 @@
       "WebFetch(domain:svelte.dev)",
       "Bash(pnpm --filter adorable-css test src/__tests__/auto-inject.test.ts)",
       "Bash(pnpm --filter adorable-css test generator-tokens)",
-      "WebFetch(domain:www.practical-ui.com)"
+      "WebFetch(domain:www.practical-ui.com)",
+      "Bash(pnpm --filter adorable-css test src/__tests__/grid.test.ts)",
+      "Bash(-e 's/text-primary/c(primary)/g' )",
+      "Bash(-e 's/text-secondary/c(neutral-600)/g' )",
+      "Bash(-e 's/text-subtle/c(neutral-500)/g' )",
+      "Bash(-e 's/hover:c(primary)/hover:c(primary)/g' )",
+      "Bash(-e 's/hover:c(neutral-600)/hover:c(neutral-600)/g' )",
+      "Bash(src/routes/(empty)/showroom/+page.svelte)"
     ],
     "deny": []
   }

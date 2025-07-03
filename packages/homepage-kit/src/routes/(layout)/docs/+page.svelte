@@ -13,6 +13,6 @@
   });
 </script>
 
-<div class="p(8) text(center)">
-  <p class="c(gray-500)">Redirecting to documentation...</p>
+<div class="vbox(center/middle) min-h(60vh)">
+  <p class="body(md) c(neutral-500)">Redirecting to documentation...</p>
 </div>

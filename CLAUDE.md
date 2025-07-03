@@ -252,3 +252,8 @@ Based on [docs/development/ADORABLE_CSS_MISTAKES.md](./docs/development/ADORABLE
 - **Manual**: Use `pnpm deploy` for full build and deploy
 - **Quick Deploy**: Use `pnpm deploy:quick` to deploy without rebuild
 - **Important**: Never commit `dist/` or `build/` directories
+
+## Development Notes
+
+- **Manual Style Generation**: 
+  - `style 만들지 않아. 필요하면 직접 adorable-component를 수정해.`
