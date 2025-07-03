@@ -4,46 +4,23 @@
   import { onMount } from 'svelte';
   import Navbar from '$lib/components/home/Navbar.svelte';
   import Footer from '$lib/components/layout/Footer.svelte';
-  import Sidebar from '$lib/components/layout/Sidebar.svelte';
   import ClassInspector from '$lib/components/debug/ClassInspector.svelte';
   
-  // AdorableCSS is automatically initialized via CSS import
-  onMount(() => {
-    // Additional initialization if needed
-    console.log('Layout initialized');
+  // Initialize AdorableCSS CDN in browser
+  onMount(async () => {
+    if (typeof window !== 'undefined') {
+      const AdorableCSSModule = await import('adorable-css-cdn');
+      const AdorableCSSV2 = AdorableCSSModule.default;
+      
+      // Initialize with auto-detection
+      AdorableCSSV2.init({
+        watch: true,
+        debug: false
+      });
+    }
   });
   
   $: currentPath = $page.url.pathname;
-  
-  // Determine layout type based on current path
-  $: layoutType = getLayoutType(currentPath);
-  $: layoutClass = getLayoutClass(currentPath);
-  $: showSidebar = shouldShowSidebar(currentPath);
-  $: showFooter = shouldShowFooter(currentPath);
-  
-  function getLayoutType(path: string): 'docs' | 'tokens' | 'components' | 'default' {
-    if (path.startsWith('/docs')) return 'docs';
-    if (path.startsWith('/tokens')) return 'tokens';
-    if (path.startsWith('/components')) return 'components';
-    return 'default';
-  }
-  
-  function getLayoutClass(path: string): string {
-    if (path === '/') return 'layout-home';
-    if (path.startsWith('/docs')) return 'layout-docs';
-    if (path.startsWith('/tokens')) return 'layout-tokens';
-    if (path.startsWith('/components')) return 'layout-components';
-    if (path.startsWith('/playground')) return 'layout-playground';
-    return 'layout-default';
-  }
-  
-  function shouldShowSidebar(path: string): boolean {
-    return path.startsWith('/docs') || path.startsWith('/tokens') || path.startsWith('/components');
-  }
-  
-  function shouldShowFooter(path: string): boolean {
-    return !path.startsWith('/docs') && !path.startsWith('/playground');
-  }
 </script>
 
 <!-- Alpha Version Ribbon -->
@@ -53,29 +30,17 @@
   </div>
 </div>
 
-<div class="app-grid {layoutClass}">
-  <!-- Header -->
-  <header class="app-header">
-    <Navbar />
-  </header>
+<Navbar />
 
-  <!-- Sidebar (conditionally rendered) -->
-  {#if showSidebar}
-    <Sidebar layoutType={layoutType === 'docs' ? 'docs' : layoutType === 'tokens' ? 'tokens' : 'components'} />
-  {/if}
-
-  <!-- Main Content -->
-  <main class="app-main">
+<div class="min-h(screen) vbox pt(60)">
+  <main class="flex(1)">
     <slot />
   </main>
-
-  <!-- Footer (conditionally rendered) -->
-  {#if showFooter}
-    <footer class="app-footer">
-      <Footer />
-    </footer>
-  {/if}
 </div>
+
+{#if !currentPath.startsWith('/docs')}
+  <Footer />
+{/if}
 
 <!-- Global Class Inspector -->
 <ClassInspector />
