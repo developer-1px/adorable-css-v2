@@ -85,7 +85,7 @@
 
 <div class="min-h(screen) bg(white)">
   <!-- Navigation Sidebar -->
-  <nav class="hidden lg:block fixed top(60) left(0) h(calc(100vh-60px)) w(280) bg(white) b(neutral-100) br(1) scroll(y) z(40)">
+  <nav class="hidden lg:block fixed top(60) left(0) h(calc(100vh-60px)) w(280) bg(white) b(1/neutral-100) scroll(y) z(40)">
       <!-- Navigation Header -->
       <div class="py(2xl) px(xl)">
         <h2 class="title(lg) c(primary)">Documentation</h2>
@@ -154,8 +154,8 @@
         <nav class="grid(2) gap(lg) pt(4xl) bt(1/neutral-100)">
             {#if navigation.prev}
               <a href={navigation.prev.href} 
-                 class="p(xl) r(lg) b(neutral-200)
-                        hover:b(primary) hover:shadow(md) 
+                 class="p(xl) r(lg) b(1/neutral-200)
+                        hover:b(1/primary) hover:shadow(md) 
                         transition vbox gap(sm)">
                 <span class="caption c(neutral-500)">← Previous</span>
                 <span class="body(md) bold(600) c(primary)">{navigation.prev.title}</span>
@@ -165,8 +165,8 @@
             {/if}
             {#if navigation.next}
               <a href={navigation.next.href} 
-                 class="p(xl) r(lg) b(neutral-200)
-                        hover:b(primary) hover:shadow(md) 
+                 class="p(xl) r(lg) b(1/neutral-200)
+                        hover:b(1/primary) hover:shadow(md) 
                         transition vbox gap(sm) text(right)">
                 <span class="caption c(neutral-500)">Next →</span>
                 <span class="body(md) bold(600) c(primary)">{navigation.next.title}</span>
@@ -190,8 +190,8 @@
                     href="#{item.id}" 
                     class="block py(sm) pl(md) bl(2) transition
                            {activeSection === item.id 
-                             ? 'b(primary) c(primary) bold(600)' 
-                             : 'b(neutral-200) c(neutral-600) hover:c(primary) hover:b(neutral-400)'}"
+                             ? 'b(1/primary) c(primary) bold(600)' 
+                             : 'b(1/neutral-200) c(neutral-600) hover:c(primary) hover:b(1/neutral-400)'}"
                     on:click={(e) => {
                       scrollToSection(e, item.id);
                       activeParentSection = item.id;

@@ -551,7 +551,7 @@
           <p class="caption c(neutral-600)">Prompt: "Create a 3x2 analytics dashboard with key metrics"</p>
         </div>
         <div class="grid(3x2) gap(lg)" style="min-height: 400px">
-          <div class="bg(white) p(xl) r(lg) vbox gap(lg) bt(1) b(neutral-100) shadow(sm)">
+          <div class="bg(white) p(xl) r(lg) vbox gap(lg) bt(1/neutral-100) shadow(sm)">
             <div class="hbox(between/middle)">
               <p class="caption c(neutral-600)">Revenue</p>
               <span class="caption c(success)">+12%</span>
@@ -559,7 +559,7 @@
             <h4 class="title(xl) c(primary)">$84.5K</h4>
             <div class="h(40) bg(success.1) r(sm)"></div>
           </div>
-          <div class="bg(white) p(xl) r(lg) vbox gap(lg) bt(1) b(neutral-100) shadow(sm)">
+          <div class="bg(white) p(xl) r(lg) vbox gap(lg) bt(1/neutral-100) shadow(sm)">
             <div class="hbox(between/middle)">
               <p class="caption c(neutral-600)">Active Users</p>
               <span class="caption c(primary)">+8%</span>
@@ -567,7 +567,7 @@
             <h4 class="title(xl) c(primary)">12,459</h4>
             <div class="h(40) bg(primary.1) r(sm)"></div>
           </div>
-          <div class="bg(white) p(xl) r(lg) vbox gap(lg) bt(1) b(neutral-100) shadow(sm)">
+          <div class="bg(white) p(xl) r(lg) vbox gap(lg) bt(1/neutral-100) shadow(sm)">
             <div class="hbox(between/middle)">
               <p class="caption c(neutral-600)">Conversion</p>
               <span class="caption c(neutral-600)">0%</span>
@@ -575,7 +575,7 @@
             <h4 class="title(xl) c(primary)">3.24%</h4>
             <div class="h(40) bg(neutral-100) r(sm)"></div>
           </div>
-          <div class="bg(white) p(xl) r(lg) vbox gap(lg) bt(1) b(neutral-100) shadow(sm)">
+          <div class="bg(white) p(xl) r(lg) vbox gap(lg) bt(1/neutral-100) shadow(sm)">
             <div class="hbox(between/middle)">
               <p class="caption c(neutral-600)">API Calls</p>
               <span class="caption c(success)">+25%</span>
@@ -583,7 +583,7 @@
             <h4 class="title(xl) c(primary)">1.2M</h4>
             <div class="h(40) bg(success.1) r(sm)"></div>
           </div>
-          <div class="bg(white) p(xl) r(lg) vbox gap(lg) bt(1) b(neutral-100) shadow(sm)">
+          <div class="bg(white) p(xl) r(lg) vbox gap(lg) bt(1/neutral-100) shadow(sm)">
             <div class="hbox(between/middle)">
               <p class="caption c(neutral-600)">Response Time</p>
               <span class="caption c(success)">-15%</span>
@@ -591,7 +591,7 @@
             <h4 class="title(xl) c(primary)">48ms</h4>
             <div class="h(40) bg(success.1) r(sm)"></div>
           </div>
-          <div class="bg(white) p(xl) r(lg) vbox gap(lg) bt(1) b(neutral-100) shadow(sm)">
+          <div class="bg(white) p(xl) r(lg) vbox gap(lg) bt(1/neutral-100) shadow(sm)">
             <div class="hbox(between/middle)">
               <p class="caption c(neutral-600)">Error Rate</p>
               <span class="caption c(success)">-32%</span>
@@ -620,7 +620,7 @@
               Try Now
             </button>
           </div>
-          <div class="bg(white) p(lg) r(lg) vbox gap(md) bt(1) b(neutral-100) shadow(sm)">
+          <div class="bg(white) p(lg) r(lg) vbox gap(md) bt(1/neutral-100) shadow(sm)">
             <div class="h(80) bg(neutral-50) r(sm)"></div>
             <h4 class="body(sm) bold(600) c(primary)">Form Builder</h4>
             <p class="caption c(neutral-600)">$29/mo</p>
@@ -639,17 +639,17 @@
               </div>
             </div>
           </div>
-          <div class="bg(white) p(lg) r(lg) vbox gap(md) bt(1) b(neutral-100) shadow(sm)">
+          <div class="bg(white) p(lg) r(lg) vbox gap(md) bt(1/neutral-100) shadow(sm)">
             <div class="h(80) bg(neutral-50) r(sm)"></div>
             <h4 class="body(sm) bold(600) c(primary)">API Tools</h4>
             <p class="caption c(neutral-600)">$19/mo</p>
           </div>
-          <div class="bg(white) p(lg) r(lg) vbox gap(md) bt(1) b(neutral-100) shadow(sm)">
+          <div class="bg(white) p(lg) r(lg) vbox gap(md) bt(1/neutral-100) shadow(sm)">
             <div class="h(80) bg(neutral-50) r(sm)"></div>
             <h4 class="body(sm) bold(600) c(primary)">Testing Suite</h4>
             <p class="caption c(neutral-600)">$39/mo</p>
           </div>
-          <div class="bg(white) p(lg) r(lg) vbox gap(md) bt(1) b(neutral-100) shadow(sm)">
+          <div class="bg(white) p(lg) r(lg) vbox gap(md) bt(1/neutral-100) shadow(sm)">
             <div class="h(80) bg(neutral-50) r(sm)"></div>
             <h4 class="body(sm) bold(600) c(primary)">Deploy Agent</h4>
             <p class="caption c(neutral-600)">$49/mo</p>
@@ -680,7 +680,7 @@
               <p class="c(white) pl(xl)">return transform(validated);</p>
               <p class="c(primary)">{`}`}</p>
             </div>
-            <div class="mt(auto) pt(lg) bt(1) b(neutral-800)">
+            <div class="mt(auto) pt(lg) bt(1/neutral-800)">
               <p class="caption c(neutral-500)">AI suggestions: Press Tab to accept</p>
             </div>
           </div>
@@ -697,11 +697,11 @@
           </div>
           
           <!-- Quick Actions -->
-          <div class="bg(white) p(md) r(lg) vbox(middle+center) bt(1) b(neutral-100) shadow(sm)">
+          <div class="bg(white) p(md) r(lg) vbox(middle+center) bt(1/neutral-100) shadow(sm)">
             <span class="c(primary)">{@html icons.lightning}</span>
             <p class="caption c(neutral-600) mt(sm)">Deploy</p>
           </div>
-          <div class="bg(white) p(md) r(lg) vbox(middle+center) bt(1) b(neutral-100) shadow(sm)">
+          <div class="bg(white) p(md) r(lg) vbox(middle+center) bt(1/neutral-100) shadow(sm)">
             <span class="c(primary)">{@html icons.shield}</span>
             <p class="caption c(neutral-600) mt(sm)">Test</p>
           </div>
