@@ -84,10 +84,8 @@
 </script>
 
 <div class="min-h(screen) bg(white)">
-  <!-- Main Container -->
-  <div class="hbox(start/top) gap(0) relative">
-    <!-- Navigation Sidebar -->
-    <nav class="hidden lg:block sticky top(60) h(calc(100vh-60px)) w(280) bg(white) b(neutral-100) br(1) scroll(y) z(40)">
+  <!-- Navigation Sidebar -->
+  <nav class="hidden lg:block fixed top(60) left(0) h(calc(100vh-60px)) w(280) bg(white) b(neutral-100) br(1) scroll(y) z(40)">
       <!-- Navigation Header -->
       <div class="py(2xl) px(xl)">
         <h2 class="title(lg) c(primary)">Documentation</h2>
@@ -128,12 +126,12 @@
     </div>
   </nav>
 
-    <!-- Main Content Area -->
-    <main class="flex(1) min-h(screen)">
-      <!-- Center Column Container -->
-      <div class="max-w(7xl) mx(auto) w(full) hbox gap(2xl)">
-        <!-- Article Content -->
-        <div class="flex(1) max-w(4xl) px(2xl) py(4xl)">
+  <!-- Main Content Area -->
+  <main class="min-h(screen) lg:pl(280)">
+    <!-- Center Column Container -->
+    <div class="hbox(center) min-h(screen)">
+      <!-- Article Content -->
+      <article class="max-w(4xl) w(full) px(2xl) py(4xl)">
           <!-- Breadcrumb -->
           <nav class="vbox gap(lg) pb(2xl)">
             <div class="hbox(middle) gap(sm) flex-wrap">
@@ -147,13 +145,13 @@
             </div>
           </nav>
           
-          <!-- Article -->
-          <article class="prose(docs)">
-            <slot />
-          </article>
+        <!-- Article -->
+        <div class="prose(docs)">
+          <slot />
+        </div>
       
-          <!-- Pagination -->
-          <nav class="grid(2) gap(lg) pt(4xl) bt(neutral-100)">
+        <!-- Pagination -->
+        <nav class="grid(2) gap(lg) pt(4xl) bt(1/neutral-100)">
             {#if navigation.prev}
               <a href={navigation.prev.href} 
                  class="p(xl) r(lg) b(neutral-200)
@@ -176,13 +174,13 @@
             {:else}
               <div></div>
             {/if}
-          </nav>
-        </div>
-  
-        <!-- Table of Contents -->
-        {#if mounted && tocItems.length > 0}
-          <aside class="hidden xl:block sticky top(80) h(fit) w(280)">
-            <nav class="py(xl) pr(xl) max-h(calc(100vh-160px)) scroll(y)">
+        </nav>
+      </article>
+      
+      <!-- Table of Contents -->
+      {#if mounted && tocItems.length > 0}
+        <aside class="hidden xl:block sticky top(80) h(fit) w(280) ml(2xl)">
+          <nav class="py(xl) max-h(calc(100vh-160px)) scroll(y)">
               <h3 class="body(md) bold(600) c(primary) pb(lg)">On this page</h3>
               <ul class="vbox gap(sm)">
           {#each tocItems as item, i}
@@ -227,9 +225,8 @@
           </ul>
         </nav>
       </aside>
-    {/if}
-      </div>
-    </main>
-  </div>
+      {/if}
+    </div>
+  </main>
 </div>
 
