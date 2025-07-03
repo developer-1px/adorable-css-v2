@@ -1,4 +1,3 @@
-@import 'adorable-css/css';
 @import './styles/grid-layout.css';
 
 /* CSS Reset is now included in AdorableCSS via @layer base */
