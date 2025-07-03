@@ -130,5 +130,5 @@ import 'adorable-css'
 **준비되셨나요?** 
 
 - 🎮 [Playground에서 바로 실험하기](/playground)
-- 📖 [전체 변환 가이드](./MIGRATION_GUIDE.md)
+- 📖 [전체 변환 가이드](/docs/migration-guide)
 - 💬 [커뮤니티에서 질문하기](https://github.com/adorablecss/adorable-css-v2/discussions)

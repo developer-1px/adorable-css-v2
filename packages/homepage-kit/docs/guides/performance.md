@@ -236,6 +236,3 @@ console.log('Cache size:', adorable.getCacheStats());
 
 ## 📚 추가 리소스
 
-- [Webpack 설정 예제](./webpack-config.md)
-- [Next.js 최적화](./nextjs-optimization.md)
-- [성능 벤치마크](./benchmarks.md)

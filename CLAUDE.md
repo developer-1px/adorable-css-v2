@@ -19,7 +19,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### 📚 Documentation Structure
 - **[docs/INDEX.md](./docs/INDEX.md)** - 전체 문서 구조 가이드
 - **[docs/PRODUCT_STRATEGY.md](./docs/PRODUCT_STRATEGY.md)** - 메인 전략 문서  
-- **[docs/REFERENCE.md](./docs/REFERENCE.md)** - API 레퍼런스
+- **[docs/REFERENCE.md](/docs/reference)** - API 레퍼런스
 
 ## Architecture Overview
 

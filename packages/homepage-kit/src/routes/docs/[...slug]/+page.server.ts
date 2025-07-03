@@ -3,6 +3,21 @@ import { readFile } from 'fs/promises';
 import { join, resolve } from 'path';
 import { docsConfig } from '$lib/docs-config';
 import { processMarkdownIt } from '$lib/mdx/markdown-it-processor.js';
+import type { EntryGenerator } from './$types';
+
+export const entries: EntryGenerator = () => {
+  // Generate entries for all docs pages from docsConfig
+  return docsConfig.flatMap(section => 
+    section.items.map(item => {
+      // Extract slug from href (remove /docs/ prefix)
+      const slug = item.href.replace('/docs/', '');
+      // For [...slug] route, we need to return the slug as a string
+      return { slug };
+    })
+  );
+};
+
+export const prerender = true;
 
 export async function load({ params }) {
   const slug = Array.isArray(params.slug) ? params.slug.join('/') : (params.slug || 'introduction');

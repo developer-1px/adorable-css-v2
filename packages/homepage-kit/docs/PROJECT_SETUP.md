@@ -388,10 +388,10 @@ export function ResponsiveLayout({ children }) {
 
 ## 🔗 다음 단계
 
-- [팀 온보딩 가이드](./TEAM_ONBOARDING.md)
-- [Best Practices](./BEST_PRACTICES.md)
-- [성능 최적화](./guides/performance.md)
-- [트러블슈팅](./guides/troubleshooting.md)
+- [팀 온보딩 가이드](/docs/team-onboarding)
+- [Best Practices](/docs/best-practices)
+- [성능 최적화](https://github.com/developer-1px/adorable-css-v2/blob/main/packages/homepage-kit/docs/guides/performance.md)
+- [트러블슈팅](/docs/troubleshooting)
 
 ---
 

@@ -455,5 +455,5 @@ translate-x(50%)    /* GPU 가속 */
 
 ## 다음 단계
 
-- [Component](./05-component.md) - 레이아웃 기반 컴포넌트 구축
-- [Design System](./06-design-system.md) - 완전한 디자인 시스템 구축
+- [Component](/docs/component) - 레이아웃 기반 컴포넌트 구축
+- [Design System](/docs/design-system) - 완전한 디자인 시스템 구축

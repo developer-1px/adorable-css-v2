@@ -199,8 +199,8 @@ AdorableCSS는 단순한 CSS Framework가 아닙니다.
 
 ### 🔗 다음 단계
 
-- 🎮 **[5분 안에 시작하기](./QUICK_START.md)**
-- 🔄 **[TailwindCSS에서 마이그레이션](./TAILWIND_USERS.md)**
+- 🎮 **[5분 안에 시작하기](/docs/getting-started)**
+- 🔄 **[TailwindCSS에서 마이그레이션](/docs/migration-tailwind)**
 - 💬 **[커뮤니티 참여하기](https://github.com/adorablecss/adorable-css-v2/discussions)**
 - 📺 **[데모 영상 보기](https://youtube.com/adorablecss)** (준비 중)
 

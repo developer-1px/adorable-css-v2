@@ -495,4 +495,4 @@ defineComponent({
 
 ## 다음 단계
 
-- [Design System](./06-design-system.md) - 완전한 디자인 시스템 구축
+- [Design System](/docs/design-system) - 완전한 디자인 시스템 구축

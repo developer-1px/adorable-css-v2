@@ -452,6 +452,6 @@ const myTransform = (value: string) => {
 
 ## 다음 단계
 
-- [Design Token](./03-design-token.md) - 디자인 토큰 시스템 이해
-- [Layout](./04-layout.md) - 레이아웃 시스템 심화
-- [Component](./05-component.md) - 컴포넌트 시스템 활용
+- [Design Token](/docs/design-token) - 디자인 토큰 시스템 이해
+- [Layout](/docs/layout) - 레이아웃 시스템 심화
+- [Component](/docs/component) - 컴포넌트 시스템 활용

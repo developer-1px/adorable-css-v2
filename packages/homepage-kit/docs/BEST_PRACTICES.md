@@ -387,7 +387,7 @@ AdorableCSS는 **도구**입니다. 모든 상황에 맞는 만능 해결책은 
 ---
 
 ### 참고 자료
-- [팀 온보딩](./TEAM_ONBOARDING.md)
-- [프로젝트 설정](./PROJECT_SETUP.md)
-- [트러블슈팅](./guides/troubleshooting.md)
-- [성능 가이드](./guides/performance.md)
+- [팀 온보딩](/docs/team-onboarding)
+- [프로젝트 설정](/docs/project-setup)
+- [트러블슈팅](/docs/troubleshooting)
+- [성능 가이드](https://github.com/developer-1px/adorable-css-v2/blob/main/packages/homepage-kit/docs/guides/performance.md)

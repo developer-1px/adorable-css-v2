@@ -4,25 +4,25 @@
       title: 'Documentation',
       links: [
         { label: 'Introduction', href: '/docs' },
-        { label: 'Installation', href: '/docs/installation' },
-        { label: 'Components', href: '/docs/components' },
-        { label: 'Examples', href: '/examples' }
+        { label: 'Components', href: '/components' },
+        { label: 'Playground', href: '/playground' },
+        { label: 'Examples', href: 'https://github.com/developer-1px/adorable-css-v2', external: true }
       ]
     },
     {
       title: 'Community',
       links: [
-        { label: 'GitHub', href: 'https://github.com/adorablecss/adorable-css', external: true },
-        { label: 'Discord', href: '/discord', external: true },
+        { label: 'GitHub', href: 'https://github.com/developer-1px/adorable-css-v2', external: true },
+        { label: 'Discord', href: 'https://github.com/developer-1px/adorable-css-v2', external: true },
         { label: 'Twitter', href: 'https://twitter.com/adorablecss', external: true }
       ]
     },
     {
       title: 'More',
       links: [
-        { label: 'Blog', href: '/blog' },
-        { label: 'Releases', href: '/releases' },
-        { label: 'License', href: '/license' }
+        { label: 'Blog', href: 'https://velog.io/@teo/series/AdorableCSS', external: true },
+        { label: 'Releases', href: 'https://github.com/developer-1px/adorable-css-v2', external: true },
+        { label: 'License', href: 'https://github.com/developer-1px/adorable-css-v2', external: true }
       ]
     }
   ];
@@ -65,7 +65,7 @@
     <div class="pt(2xl) border-t(1/gray-200)">
       <p class="font(sm) c(mute)">
         Built by <a href="https://twitter.com/1px" class="underline hover:c(gray-900)">@1px</a>. 
-        The source code is available on <a href="https://github.com/adorablecss/adorable-css" class="underline hover:c(gray-900)">GitHub</a>.
+        The source code is available on <a href="https://github.com/developer-1px/adorable-css-v2" class="underline hover:c(gray-900)">GitHub</a>.
       </p>
     </div>
   </div>

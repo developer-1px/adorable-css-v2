@@ -38,8 +38,8 @@ pnpm dev
 ```
 
 #### 3. 핵심 개념 학습 (1시간)
-- [ ] [Why AdorableCSS](./WHY_ADORABLECSS.md) 읽기 (15분)
-- [ ] [Cheat Sheet](./CHEAT_SHEET.md) 훑어보기 (15분)
+- [ ] [Why AdorableCSS](/docs/why-adorablecss) 읽기 (15분)
+- [ ] [Cheat Sheet](/docs/cheat-sheet) 훑어보기 (15분)
 - [ ] Playground에서 예제 따라하기 (30분)
 
 ### 오후 (3시간)
@@ -134,14 +134,14 @@ pnpm dev
 ## 🎓 학습 리소스
 
 ### 필수 문서 (Day 1)
-1. [Quick Start](./QUICK_START.md) - 기본 사용법
-2. [Cheat Sheet](./CHEAT_SHEET.md) - 문법 참고
-3. [Troubleshooting](./guides/troubleshooting.md) - 문제 해결
+1. [Quick Start](/docs/getting-started) - 기본 사용법
+2. [Cheat Sheet](/docs/cheat-sheet) - 문법 참고
+3. [Troubleshooting](/docs/troubleshooting) - 문제 해결
 
 ### 심화 학습 (Week 1)
-1. [COOKBOOK](./COOKBOOK.md) - 실전 패턴
-2. [API Reference](../REFERENCE.md) - 전체 API
-3. [Performance](./guides/performance.md) - 최적화
+1. [COOKBOOK](/docs/cookbook) - 실전 패턴
+2. [API Reference](/docs/reference) - 전체 API
+3. [Performance](https://github.com/developer-1px/adorable-css-v2/blob/main/packages/homepage-kit/docs/guides/performance.md) - 최적화
 
 ### 프로젝트별 문서
 ```

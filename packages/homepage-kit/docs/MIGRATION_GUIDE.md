@@ -4,11 +4,11 @@
 
 ## 📋 목차
 
-1. [TailwindCSS에서 마이그레이션](#tailwindcss에서-마이그레이션)
-2. [CSS-in-JS에서 마이그레이션](#css-in-js에서-마이그레이션)
-3. [Vanilla CSS에서 마이그레이션](#vanilla-css에서-마이그레이션)
-4. [점진적 마이그레이션 전략](#점진적-마이그레이션-전략)
-5. [도구 및 자동화](#도구-및-자동화)
+1. [TailwindCSS에서 마이그레이션](#-tailwindcss에서-마이그레이션)
+2. [CSS-in-JS에서 마이그레이션](#-css-in-js에서-마이그레이션)
+3. [Vanilla CSS에서 마이그레이션](#-vanilla-css에서-마이그레이션)
+4. [점진적 마이그레이션 전략](#-점진적-마이그레이션-전략)
+5. [도구 및 자동화](#-도구-및-자동화)
 
 ## 🔄 TailwindCSS에서 마이그레이션
 
@@ -296,8 +296,8 @@ module.exports = {
 
 ## 📚 추가 리소스
 
-- [API Reference](./REFERENCE.md)
-- [예제 코드](./mdx/)
+- [API Reference](/docs/reference)
+- [Cookbook 예제](/docs/cookbook)
 - [Playground](/playground)
 - [커뮤니티 포럼](https://github.com/adorablecss/adorable-css-v2/discussions)
 
@@ -307,4 +307,4 @@ module.exports = {
 
 1. [GitHub Issues](https://github.com/adorablecss/adorable-css-v2/issues)에 문의
 2. [Discord 커뮤니티](준비 중) 참여
-3. [마이그레이션 가이드 개선 제안](./CONTRIBUTING.md)
+3. [마이그레이션 가이드 개선 제안](https://github.com/developer-1px/adorable-css-v2/blob/main/CONTRIBUTING.md)

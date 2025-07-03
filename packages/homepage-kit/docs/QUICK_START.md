@@ -71,7 +71,7 @@ import 'adorable-css'
 
 1. **[인터랙티브 Playground](/playground)** - 실시간으로 실험해보세요
 2. **[컴포넌트 갤러리](/components)** - 더 많은 예제 확인
-3. **[API Reference](./REFERENCE.md)** - 전체 기능 탐색
+3. **[API Reference](/docs/reference)** - 전체 기능 탐색
 
 ### 핵심 개념 요약
 
@@ -95,4 +95,4 @@ import 'adorable-css'
 </div>
 ```
 
-준비되셨나요? [다음 튜토리얼로 →](./mdx/01-layout-system.mdx)
+준비되셨나요? [다음 튜토리얼로 →](/docs/layout)

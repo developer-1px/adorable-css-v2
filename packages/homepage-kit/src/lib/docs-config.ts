@@ -120,6 +120,12 @@ export const docsConfig: DocSection[] = [
 				href: '/docs/javascript-api',
 				description: '프로그래매틱 사용법',
 				source: '/docs/mdx/10-javascript-api.md'
+			},
+			{
+				title: 'API Reference',
+				href: '/docs/reference',
+				description: '전체 API 문서',
+				source: '/docs/REFERENCE.md'
 			}
 		]
 	},
@@ -128,9 +134,15 @@ export const docsConfig: DocSection[] = [
 		items: [
 			{
 				title: 'From Tailwind',
-				href: '/docs/migration/tailwind',
+				href: '/docs/migration-tailwind',
 				description: 'Migrating from Tailwind CSS',
 				source: '/docs/packages/homepage-kit/TAILWIND_CONVERSION_REPORT.md'
+			},
+			{
+				title: 'Migration Guide',
+				href: '/docs/migration-guide',
+				description: '전체 마이그레이션 가이드',
+				source: '/packages/homepage-kit/docs/MIGRATION_GUIDE.md'
 			}
 		]
 	},

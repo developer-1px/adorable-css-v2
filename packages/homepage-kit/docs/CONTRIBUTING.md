@@ -197,8 +197,8 @@ it('should handle multiple rules', () => {
 
 ### 새로운 기능 문서화
 
-1. **API Reference 업데이트** (`docs/REFERENCE.md`)
-2. **예제 추가** (`docs/mdx/`)
+1. **API Reference 업데이트** (`/docs/reference`)
+2. **예제 추가** (문서에 예제 코드 추가)
 3. **Features 업데이트** (`docs/features.md`)
 4. **TypeScript 정의** 추가
 

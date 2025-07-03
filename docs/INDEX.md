@@ -5,30 +5,30 @@
 ## 🎯 빠른 네비게이션
 
 ### 🆕 처음 시작하는 분
-1. **[🤔 Why AdorableCSS?](../packages/homepage-kit/docs/WHY_ADORABLECSS.md)** - 왜 AdorableCSS인가?
-2. **[🚀 Quick Start](../packages/homepage-kit/docs/QUICK_START.md)** - 5분 안에 시작하기
-3. **[🎯 Cheat Sheet](../packages/homepage-kit/docs/CHEAT_SHEET.md)** - 한 장으로 보는 핵심 문법
+1. **[🤔 Why AdorableCSS?](/docs/why-adorablecss)** - 왜 AdorableCSS인가?
+2. **[🚀 Quick Start](/docs/getting-started)** - 5분 안에 시작하기
+3. **[🎯 Cheat Sheet](/docs/cheat-sheet)** - 한 장으로 보는 핵심 문법
 
 ### 🔄 마이그레이션 하는 분
-1. **[💙 TailwindCSS 사용자를 위한 10초 가이드](../packages/homepage-kit/docs/TAILWIND_USERS.md)**
-2. **[🔄 전체 마이그레이션 가이드](../packages/homepage-kit/docs/MIGRATION_GUIDE.md)**
-3. **[🍳 Cookbook](../packages/homepage-kit/docs/COOKBOOK.md)** - 실무 레시피
+1. **[💙 TailwindCSS 사용자를 위한 10초 가이드](https://github.com/developer-1px/adorable-css-v2/blob/main/packages/homepage-kit/docs/TAILWIND_USERS.md)**
+2. **[🔄 전체 마이그레이션 가이드](/docs/migration-guide)**
+3. **[🍳 Cookbook](/docs/cookbook)** - 실무 레시피
 
 ### 📚 깊이 있게 배우는 분
-1. **[📖 API Reference](./REFERENCE.md)** - 전체 API 문서
-2. **[🎨 핵심 개념 시각화](./technical/CORE_CONCEPTS_VISUAL.md)**
-3. **[🎯 기능 추적](../packages/homepage-kit/docs/features.md)**
+1. **[📖 API Reference](/docs/reference)** - 전체 API 문서
+2. **[🎨 핵심 개념 시각화](https://github.com/developer-1px/adorable-css-v2/blob/main/docs/technical/CORE_CONCEPTS_VISUAL.md)**
+3. **[🎯 기능 추적](https://github.com/developer-1px/adorable-css-v2/blob/main/packages/homepage-kit/docs/features.md)**
 
 ### 👥 팀/프로젝트 관리
-1. **[👥 팀 온보딩](../packages/homepage-kit/docs/TEAM_ONBOARDING.md)** - 새 팀원 가이드
-2. **[🚀 프로젝트 설정](../packages/homepage-kit/docs/PROJECT_SETUP.md)** - 초기 설정
-3. **[🏆 모범 사례](../packages/homepage-kit/docs/BEST_PRACTICES.md)** - 대규모 프로젝트
-4. **[🔌 통합 가이드](../packages/homepage-kit/docs/INTEGRATION_GUIDE.md)** - 도구 통합
+1. **[👥 팀 온보딩](/docs/team-onboarding)** - 새 팀원 가이드
+2. **[🚀 프로젝트 설정](/docs/project-setup)** - 초기 설정
+3. **[🏆 모범 사례](/docs/best-practices)** - 대규모 프로젝트
+4. **[🔌 통합 가이드](/docs/integration)** - 도구 통합
 
 ### 🆘 문제 해결
-1. **[🔧 Troubleshooting](../packages/homepage-kit/docs/guides/troubleshooting.md)** - 문제 해결 가이드
-2. **[🚀 성능 최적화](../packages/homepage-kit/docs/guides/performance.md)**
-3. **[🤝 기여 가이드](../packages/homepage-kit/docs/CONTRIBUTING.md)**
+1. **[🔧 Troubleshooting](/docs/troubleshooting)** - 문제 해결 가이드
+2. **[🚀 성능 최적화](https://github.com/developer-1px/adorable-css-v2/blob/main/packages/homepage-kit/docs/guides/performance.md)**
+3. **[🤝 기여 가이드](https://github.com/developer-1px/adorable-css-v2/blob/main/packages/homepage-kit/docs/CONTRIBUTING.md)**
 
 ---
 
@@ -37,76 +37,74 @@
 ### 🎯 Strategy (전략)
 핵심 비전, 제품 전략, 시장 분석 관련 문서들
 
-- **[PRODUCT_STRATEGY.md](./PRODUCT_STRATEGY.md)** - 📋 **메인 전략 문서**  
+- **[PRODUCT_STRATEGY.md](https://github.com/developer-1px/adorable-css-v2/blob/main/docs/PRODUCT_STRATEGY.md)** - 📋 **메인 전략 문서**  
   *핵심 비전, 로드맵, CSS Framework 완결성 전략*
   
-- **[TECH_PITCH.md](./strategy/TECH_PITCH.md)** - 🎤 기술 피치 문서  
+- **[TECH_PITCH.md](https://github.com/developer-1px/adorable-css-v2/blob/main/docs/strategy/TECH_PITCH.md)** - 🎤 기술 피치 문서  
   *AdorableCSS v2의 기술적 차별점과 비전*
   
-- **[TECH_MESSAGING.md](./strategy/TECH_MESSAGING.md)** - 💬 기술 메시징  
+- **[TECH_MESSAGING.md](https://github.com/developer-1px/adorable-css-v2/blob/main/docs/strategy/TECH_MESSAGING.md)** - 💬 기술 메시징  
   *기술적 커뮤니케이션 전략*
   
 
 ### 🔧 Technical (기술)
 기술 스펙, 구현 세부사항, 개발 가이드
 
-- **[REFERENCE.md](./REFERENCE.md)** - 📖 **API 레퍼런스**  
+- **[REFERENCE.md](/docs/reference)** - 📖 **API 레퍼런스**  
   *전체 유틸리티 클래스 및 문법 가이드*
   
-- **[CORE_CONCEPTS_VISUAL.md](./technical/CORE_CONCEPTS_VISUAL.md)** - 🎨 핵심 개념 시각화  
+- **[CORE_CONCEPTS_VISUAL.md](https://github.com/developer-1px/adorable-css-v2/blob/main/docs/technical/CORE_CONCEPTS_VISUAL.md)** - 🎨 핵심 개념 시각화  
   *Figma-first 개념과 시각적 설명*
   
-- **[SYNTAX_UPDATES.md](./technical/SYNTAX_UPDATES.md)** - 🔄 문법 업데이트  
+- **[SYNTAX_UPDATES.md](https://github.com/developer-1px/adorable-css-v2/blob/main/docs/technical/SYNTAX_UPDATES.md)** - 🔄 문법 업데이트  
   *최신 문법 변경사항 및 업데이트 내역*
 
 ### 🎨 Brand (브랜드)
 브랜드 아이덴티티, 디자인 언어, 시각적 가이드라인
 
-- **[BRAND_DESIGN_CONCEPT.md](./brand/BRAND_DESIGN_CONCEPT.md)** - ✨ **브랜드 디자인 컨셉**  
-  *"Delightfully Intuitive" 브랜드 철학과 시각적 언어*
 
 ### 👩‍💻 Development (개발)
 개발 과정, 실수 분석, 개선 방향
 
-- **[ADORABLE_CSS_MISTAKES.md](./development/ADORABLE_CSS_MISTAKES.md)** - ⚠️ 실수 분석  
+- **[ADORABLE_CSS_MISTAKES.md](https://github.com/developer-1px/adorable-css-v2/blob/main/docs/development/ADORABLE_CSS_MISTAKES.md)** - ⚠️ 실수 분석  
   *개발 과정에서의 실수와 교훈, 개선 방향*
   
-- **[features.md](../packages/homepage-kit/docs/features.md)** - 🎯 기능 추적  
+- **[features.md](https://github.com/developer-1px/adorable-css-v2/blob/main/packages/homepage-kit/docs/features.md)** - 🎯 기능 추적  
   *완료, 진행 중, 계획된 모든 기능 추적*
   
-- **[CONTRIBUTING.md](../packages/homepage-kit/docs/CONTRIBUTING.md)** - 🤝 기여 가이드  
+- **[CONTRIBUTING.md](https://github.com/developer-1px/adorable-css-v2/blob/main/packages/homepage-kit/docs/CONTRIBUTING.md)** - 🤝 기여 가이드  
   *프로젝트 기여 방법과 개발 환경 설정*
 
 ### 📚 Guides (가이드)
 사용자를 위한 실용적인 가이드
 
-- **[MIGRATION_GUIDE.md](../packages/homepage-kit/docs/MIGRATION_GUIDE.md)** - 🔄 마이그레이션 가이드  
+- **[MIGRATION_GUIDE.md](/docs/migration-guide)** - 🔄 마이그레이션 가이드  
   *TailwindCSS, CSS-in-JS에서 전환하는 방법*
   
-- **[performance.md](../packages/homepage-kit/docs/guides/performance.md)** - 🚀 성능 최적화  
+- **[performance.md](https://github.com/developer-1px/adorable-css-v2/blob/main/packages/homepage-kit/docs/guides/performance.md)** - 🚀 성능 최적화  
   *프로덕션 최적화 및 성능 모범 사례*
   
-- **[TEAM_ONBOARDING.md](../packages/homepage-kit/docs/TEAM_ONBOARDING.md)** - 👥 팀 온보딩  
+- **[TEAM_ONBOARDING.md](/docs/team-onboarding)** - 👥 팀 온보딩  
   *새로운 팀원을 위한 1일차 가이드*
   
-- **[PROJECT_SETUP.md](../packages/homepage-kit/docs/PROJECT_SETUP.md)** - 🚀 프로젝트 설정  
+- **[PROJECT_SETUP.md](/docs/project-setup)** - 🚀 프로젝트 설정  
   *새 프로젝트에서 AdorableCSS 시작하기*
   
-- **[BEST_PRACTICES.md](../packages/homepage-kit/docs/BEST_PRACTICES.md)** - 🏆 모범 사례  
+- **[BEST_PRACTICES.md](/docs/best-practices)** - 🏆 모범 사례  
   *대규모 프로젝트에서의 베스트 프랙티스*
   
-- **[INTEGRATION_GUIDE.md](../packages/homepage-kit/docs/INTEGRATION_GUIDE.md)** - 🔌 통합 가이드  
+- **[INTEGRATION_GUIDE.md](/docs/integration)** - 🔌 통핥 가이드  
   *다른 도구들과의 조화로운 공존*
 
 ## 🌟 하이라이트
 
 ### 🆕 신규 문서
-- **[Why AdorableCSS?](../packages/homepage-kit/docs/WHY_ADORABLECSS.md)** - 비즈니스 가치와 철학
-- **[Quick Start](../packages/homepage-kit/docs/QUICK_START.md)** - 5분 퀵스타트 가이드
-- **[Cheat Sheet](../packages/homepage-kit/docs/CHEAT_SHEET.md)** - 한 눈에 보는 문법
-- **[TailwindCSS 사용자 가이드](../packages/homepage-kit/docs/TAILWIND_USERS.md)** - 10초 비교
-- **[Cookbook](../packages/homepage-kit/docs/COOKBOOK.md)** - 실무 패턴 모음
-- **[Troubleshooting](../packages/homepage-kit/docs/guides/troubleshooting.md)** - 문제 해결
+- **[Why AdorableCSS?](/docs/why-adorablecss)** - 비즈니스 가치와 철학
+- **[Quick Start](/docs/getting-started)** - 5분 퀵스타트 가이드
+- **[Cheat Sheet](/docs/cheat-sheet)** - 한 눈에 보는 문법
+- **[TailwindCSS 사용자 가이드](https://github.com/developer-1px/adorable-css-v2/blob/main/packages/homepage-kit/docs/TAILWIND_USERS.md)** - 10초 비교
+- **[Cookbook](/docs/cookbook)** - 실무 패턴 모음
+- **[Troubleshooting](/docs/troubleshooting)** - 문제 해결
 
 ### 🔗 빠른 링크
 - **[🎮 Playground](/playground)** - 실시간 테스트
@@ -120,7 +118,6 @@
 |------|------|---------------|--------|
 | PRODUCT_STRATEGY.md | ✅ 최신 | 2025-01-27 | 🔥 HIGH |
 | REFERENCE.md | ✅ 최신 | - | 🔥 HIGH |
-| BRAND_DESIGN_CONCEPT.md | ✅ 최신 | - | 🔶 MEDIUM |
 | CORE_CONCEPTS_VISUAL.md | ✅ 최신 | - | 🔶 MEDIUM |
 | SYNTAX_UPDATES.md | ✅ 최신 | 2025-01-27 | 🔶 MEDIUM |
 | TECH_PITCH.md | ✅ 최신 | - | 🔶 MEDIUM |

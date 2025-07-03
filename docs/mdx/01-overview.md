@@ -231,8 +231,8 @@ const css = generateCSS([
 
 ## 다음 단계
 
-- [Figma-First CSS Utility](./02-figma-first-css-utility.md) - Figma 개념과 CSS 매핑
-- [Design Token](./03-design-token.md) - 디자인 토큰 시스템
-- [Layout](./04-layout.md) - 레이아웃 시스템
-- [Component](./05-component.md) - 컴포넌트 시스템
-- [Design System](./06-design-system.md) - 디자인 시스템 구축
+- [Figma-First CSS Utility](/docs/figma-first-css-utility) - Figma 개념과 CSS 매핑
+- [Design Token](/docs/design-token) - 디자인 토큰 시스템
+- [Layout](/docs/layout) - 레이아웃 시스템
+- [Component](/docs/component) - 컴포넌트 시스템
+- [Design System](/docs/design-system) - 디자인 시스템 구축

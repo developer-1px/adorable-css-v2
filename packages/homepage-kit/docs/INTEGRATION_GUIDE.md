@@ -461,10 +461,8 @@ export default {
 
 ## 📚 추가 리소스
 
-- [플러그인 개발 가이드](./plugin-development.md)
-- [API 통합 예제](./api-integration.md)
-- [마이그레이션 가이드](./MIGRATION_GUIDE.md)
-- [트러블슈팅](./guides/troubleshooting.md)
+- [마이그레이션 가이드](/docs/migration-guide)
+- [트러블슈팅](/docs/troubleshooting)
 
 ---
 

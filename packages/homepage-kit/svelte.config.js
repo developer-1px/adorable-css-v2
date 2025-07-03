@@ -15,7 +15,11 @@ const config = {
 			precompress: false,
 			strict: true
 		}),
-		// No base path needed for custom domain
+		prerender: {
+			handleHttpError: 'warn',
+			handleMissingId: 'warn',
+			handleEntryGeneratorMismatch: 'warn'
+		}
 	},
 	extensions: ['.svelte']
 };

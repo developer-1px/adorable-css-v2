@@ -457,6 +457,6 @@ const tokens: DesignTokens = {
 
 ## 다음 단계
 
-- [Layout](./04-layout.md) - 레이아웃 시스템 활용
-- [Component](./05-component.md) - 토큰 기반 컴포넌트 구축
-- [Design System](./06-design-system.md) - 완전한 디자인 시스템 구축
+- [Layout](/docs/layout) - 레이아웃 시스템 활용
+- [Component](/docs/component) - 토큰 기반 컴포넌트 구축
+- [Design System](/docs/design-system) - 완전한 디자인 시스템 구축

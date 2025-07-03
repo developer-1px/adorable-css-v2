@@ -14,8 +14,8 @@
 		"lint": "prettier --check . && eslint .",
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run",
-		"build:gh-pages": "vite build",
-		"predeploy:gh-pages": "touch build/.nojekyll && echo 'adorable-css.com' > build/CNAME",
+		"build:gh-pages": "vite build && rm -rf build && mkdir -p build && cp -r .svelte-kit/output/prerendered/* build/ && cp -r .svelte-kit/output/client/_app build/ && cp static/* build/ 2>/dev/null || true",
+		"predeploy:gh-pages": "touch build/.nojekyll",
 		"deploy:gh-pages": "npm run build:gh-pages && npm run predeploy:gh-pages && gh-pages -d build -t true"
 	},
 	"devDependencies": {

@@ -221,10 +221,10 @@ AdorableCSS.cache.stats()
 
 ## 📚 추가 리소스
 
-- [일반적인 패턴과 해결책](./common-patterns.md)
-- [성능 최적화 가이드](./performance.md)
-- [마이그레이션 가이드](../MIGRATION_GUIDE.md)
-- [API Reference](../REFERENCE.md)
+- [일반적인 패턴과 해결책](/docs/cookbook)
+- [성능 최적화 가이드](https://github.com/developer-1px/adorable-css-v2/blob/main/packages/homepage-kit/docs/guides/performance.md)
+- [마이그레이션 가이드](/docs/migration-guide)
+- [API Reference](/docs/reference)
 
 ---
 

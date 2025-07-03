@@ -397,5 +397,5 @@ AdorableCSS는 단순히 새로운 CSS 프레임워크가 아닙니다. **디자
 
 이 철학이 구체적으로 어떻게 구현되는지 알아보려면:
 
-- [Overview](./01-overview.md) - AdorableCSS의 핵심 개념
-- [Getting Started](./getting-started.md) - 실제 사용 방법
+- [Overview](/docs/overview) - AdorableCSS의 핵심 개념
+- [Getting Started](/docs/getting-started) - 실제 사용 방법

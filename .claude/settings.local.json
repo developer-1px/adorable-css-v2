@@ -74,7 +74,9 @@
       "Bash(pnpm --filter adorable-css test scale-test)",
       "Bash(pnpm --filter adorable-css exec node -e \"const { transformRules } = require(''./dist/index.js''); console.log(''scale empty:'', transformRules.scale(''''))\")",
       "Bash(pnpm --filter adorable-css check)",
-      "Bash(pnpm --filter adorable-css test scale-test --run)"
+      "Bash(pnpm --filter adorable-css test scale-test --run)",
+      "Bash(true)",
+      "WebFetch(domain:svelte.dev)"
     ],
     "deny": []
   }
