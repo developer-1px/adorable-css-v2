@@ -15,8 +15,7 @@
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run",
 		"build:gh-pages": "vite build && touch build/.nojekyll",
-		"predeploy:gh-pages": "echo 'Build completed'",
-		"deploy:gh-pages": "npm run build:gh-pages && npm run predeploy:gh-pages && gh-pages -d build -t true"
+		"deploy:gh-pages": "npm run build:gh-pages && npx gh-pages -d build --dotfiles"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
