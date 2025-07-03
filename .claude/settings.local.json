@@ -70,7 +70,11 @@
       "Bash(npm run predeploy:gh-pages:*)",
       "Bash(pnpm --filter adorable-css test layer-priority)",
       "Bash(pnpm --filter adorable-css build --no-dts)",
-      "Bash(pnpm --filter adorable-css test layer-composition)"
+      "Bash(pnpm --filter adorable-css test layer-composition)",
+      "Bash(pnpm --filter adorable-css test scale-test)",
+      "Bash(pnpm --filter adorable-css exec node -e \"const { transformRules } = require(''./dist/index.js''); console.log(''scale empty:'', transformRules.scale(''''))\")",
+      "Bash(pnpm --filter adorable-css check)",
+      "Bash(pnpm --filter adorable-css test scale-test --run)"
     ],
     "deny": []
   }

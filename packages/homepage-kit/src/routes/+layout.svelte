@@ -24,9 +24,9 @@
 </script>
 
 <!-- Alpha Version Ribbon -->
-<div class="fixed top(0) left(0) z(100) w(100) h(100) overflow(hidden) pointer-events(none)">
-  <div class="absolute top(20) left(-35) w(120) bg(orange-500) c(white) py(4) text(center) shadow(sm) rotate(-45) pointer-events(auto)">
-    <span class="caption(xs) bold uppercase">Alpha</span>
+<div class="fixed top(0) left(0) z(100) w(100) h(100) clip pointer-events(none)">
+  <div class="absolute top(20) left(-35) w(120) bg(orange-500) py(4) text(center) shadow(sm) rotate(-45) pointer-events(auto)">
+    <span class="caption(xs) c(white) bold uppercase">Alpha</span>
   </div>
 </div>
 
@@ -45,12 +45,3 @@
 <!-- Global Class Inspector -->
 <ClassInspector />
 
-<style>
-  :global(html) {
-    font-family: system-ui, -apple-system, sans-serif;
-  }
-  
-  :global(body) {
-    margin: 0;
-  }
-</style>

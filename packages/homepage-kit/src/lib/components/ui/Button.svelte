@@ -53,18 +53,3 @@
   </button>
 {/if}
 
-<style>
-  /* Remove default button styles */
-  :where(button) {
-    border: none;
-    background: none;
-    font-family: inherit;
-    cursor: pointer;
-  }
-  
-  /* Remove default link styles */
-  :where(a) {
-    text-decoration: none;
-    color: inherit;
-  }
-</style>

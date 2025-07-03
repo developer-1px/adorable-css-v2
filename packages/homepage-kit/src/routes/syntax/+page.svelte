@@ -201,7 +201,7 @@
                     <td class="font(mono) text(xs)">
                       {#if result}
                         {#if result.parsed}
-                          <code class="c(gray-600) break(all)">{result.css}</code>
+                          <code class="c(gray-600) block whitespace(pre-wrap) text(left)">{result.css}</code>
                         {:else}
                           <code class="c(red-600)">{result.error}</code>
                         {/if}

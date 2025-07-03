@@ -96,7 +96,7 @@
         title: 'Position',
         icon: '🎯',
         items: [
-          { syntax: 'absolute', desc: 'position: absolute', example: 'layer(top:0+right:0)' },
+          { syntax: 'absolute', desc: 'position: absolute', example: 'layer(top:0/right:0)' },
           { syntax: 'relative', desc: 'position: relative', example: 'relative z(10)' },
           { syntax: 'fixed', desc: 'position: fixed', example: 'fixed' },
           { syntax: 'sticky', desc: 'position: sticky', example: 'sticky top(0)' }
@@ -110,8 +110,8 @@
           { syntax: 'x(center)', desc: '가로 중앙 (left 50% + translateX)', example: 'layer(center)' },
           { syntax: 'xy(center)', desc: '정중앙', example: 'layer(center)' },
           { syntax: 'layer(fill)', desc: '모든 방향 0 (absolute 포함)', example: 'layer(fill)' },
-          { syntax: 'top(20)', desc: 'top: 20px', example: 'layer(top:20+left:20)' },
-          { syntax: 'layer(top:20+left:30)', desc: '복합 위치', example: 'layer(top:20+left:30)' }
+          { syntax: 'top(20)', desc: 'top: 20px', example: 'layer(top:20/left:20)' },
+          { syntax: 'layer(top:20/left:30)', desc: '복합 위치', example: 'layer(top:20/left:30)' }
         ]
       }
     ],

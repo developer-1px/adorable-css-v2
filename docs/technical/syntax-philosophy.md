@@ -135,7 +135,7 @@ md:hover:p(20)          → 중간 화면에서 hover일 때
 ```
 p(calc(20+10))
 bg(linear-gradient(45deg,red,blue))
-layer(top:20+left:30)
+layer(top:20/left:30)
 ```
 
 ## 파싱 우선순위

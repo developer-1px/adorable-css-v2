@@ -7,7 +7,7 @@
   import ColorPalette from '../components/ui/ColorPalette.svelte';
 </script>
 
-<div class="showcase-container p(xl) bg(--colors-gray-50) min-h(screen)">
+<div class="p(xl) bg(180deg/gray-50..white..gray-50) min-h(screen)">
   <div class="container  mx(auto) vbox gap(xl)">
     <!-- Hero Section -->
     <div class="vbox(center) text(center) gap(lg) fade-up(0.8s/ease-out)">
@@ -139,12 +139,3 @@
   </div>
 </div>
 
-<style>
-  .showcase-container {
-    background: linear-gradient(180deg, 
-      var(--colors-gray-50) 0%, 
-      var(--colors-white) 50%, 
-      var(--colors-gray-50) 100%
-    );
-  }
-</style>

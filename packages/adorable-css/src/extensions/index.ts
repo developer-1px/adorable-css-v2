@@ -4,7 +4,7 @@ export {
   animationKeyframes,
   getAllKeyframes
 } from './animations/animations';
-export * from './responsive/responsive';
+// export * from './responsive/responsive'; // Spec'd out
 
 // Re-export components
 export { glowRules } from '../components/features/glow';

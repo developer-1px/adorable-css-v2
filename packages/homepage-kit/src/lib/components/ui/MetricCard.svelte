@@ -19,7 +19,7 @@
            transition-all duration(normal) ease(out) group cursor-pointer">
   
   <!-- Background decoration with improved design -->
-  <div class="decoration layer(top:-10+right:-10) size(100) opacity(xs) rotate(12) group-hover:rotate(24) group-hover:scale(1.02) transition-all duration(slower) ease(out)">
+  <div class="decoration layer(top:-10/right:-10) size(100) opacity(xs) rotate(12) group-hover:rotate(24) group-hover:scale(1.02) transition-all duration(slower) ease(out)">
     <svg viewBox="0 0 100 100" class="w(fill) h(fill)">
       <circle cx="50" cy="50" r="40" fill="currentColor" style="color: {iconColor}" opacity="0.08" />
       <circle cx="50" cy="50" r="25" fill="none" stroke="currentColor" stroke-width="1" opacity="0.12" style="color: {iconColor}" />

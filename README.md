@@ -222,7 +222,7 @@ dark:c(white)
 ### 카드 컴포넌트
 
 ```html
-<article class="vbox w(fill) bg(white) r(xl) shadow(lg) overflow(hidden)">
+<article class="vbox w(fill) bg(white) r(xl) shadow(lg) clip">
   <img class="w(fill) h(200) object(cover)" src="..." />
   <div class="vbox p(xl) gap(md)">
     <h3 class="font(title/lg) c(gray-900)">카드 제목</h3>

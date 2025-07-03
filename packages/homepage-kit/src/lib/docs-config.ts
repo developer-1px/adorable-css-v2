@@ -38,7 +38,7 @@ export const docsConfig: DocSection[] = [
 				title: 'Getting Started',
 				href: '/docs/getting-started',
 				description: '설치와 첫 번째 컴포넌트',
-				source: '/docs/mdx/getting-started.md'
+				source: '/packages/homepage-kit/docs/QUICK_START.md'
 			},
 			{
 				title: '문법 가이드',
@@ -131,6 +131,66 @@ export const docsConfig: DocSection[] = [
 				href: '/docs/migration/tailwind',
 				description: 'Migrating from Tailwind CSS',
 				source: '/docs/packages/homepage-kit/TAILWIND_CONVERSION_REPORT.md'
+			}
+		]
+	},
+	{
+		title: '실전 가이드',
+		items: [
+			{
+				title: 'Why AdorableCSS?',
+				href: '/docs/why-adorablecss',
+				description: '왜 AdorableCSS를 선택해야 하는가',
+				source: '/packages/homepage-kit/docs/WHY_ADORABLECSS.md',
+				badge: 'new'
+			},
+			{
+				title: 'Cheat Sheet',
+				href: '/docs/cheat-sheet',
+				description: '한 장으로 보는 핵심 문법',
+				source: '/packages/homepage-kit/docs/CHEAT_SHEET.md'
+			},
+			{
+				title: 'Cookbook',
+				href: '/docs/cookbook',
+				description: '실무에서 바로 쓰는 레시피',
+				source: '/packages/homepage-kit/docs/COOKBOOK.md'
+			},
+			{
+				title: 'Troubleshooting',
+				href: '/docs/troubleshooting',
+				description: '문제 해결 가이드',
+				source: '/packages/homepage-kit/docs/guides/troubleshooting.md'
+			}
+		]
+	},
+	{
+		title: '팀 & 프로젝트',
+		items: [
+			{
+				title: '팀 온보딩',
+				href: '/docs/team-onboarding',
+				description: '새로운 팀원을 위한 가이드',
+				source: '/packages/homepage-kit/docs/TEAM_ONBOARDING.md',
+				badge: 'new'
+			},
+			{
+				title: '프로젝트 설정',
+				href: '/docs/project-setup',
+				description: '프로젝트 초기 설정 가이드',
+				source: '/packages/homepage-kit/docs/PROJECT_SETUP.md'
+			},
+			{
+				title: 'Best Practices',
+				href: '/docs/best-practices',
+				description: '대규모 프로젝트 모범 사례',
+				source: '/packages/homepage-kit/docs/BEST_PRACTICES.md'
+			},
+			{
+				title: '통합 가이드',
+				href: '/docs/integration',
+				description: '다른 도구들과의 통합',
+				source: '/packages/homepage-kit/docs/INTEGRATION_GUIDE.md'
 			}
 		]
 	}

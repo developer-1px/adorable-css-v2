@@ -1,4 +1,9 @@
 import { describe, it, expect } from 'vitest';
+
+// SPEC'D OUT - Responsive features are disabled
+describe.skip('Responsive Decorator Pattern (SPEC\'D OUT)', () => {});
+
+/*
 import { 
   ResponsiveSelector, 
   MediaQueryDecorator, 
@@ -235,3 +240,4 @@ describe('Responsive Decorator Pattern', () => {
     });
   });
 });
+*/

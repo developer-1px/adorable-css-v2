@@ -88,8 +88,8 @@
 
 <div class="parser-container min-h(screen) bg(white) relative clip">
   <!-- Subtle background accent -->
-  <div class="layer(top:-20%+right:-10%) w(800px) h(800px) bg(primary) opacity(3) r(full) blur(200px) pointer(none)"></div>
-  <div class="layer(bottom:-30%+left:-15%) w(1000px) h(1000px) bg(accent) opacity(2) r(full) blur(250px) pointer(none)"></div>
+  <div class="layer(top:-20%/right:-10%) w(800px) h(800px) bg(primary) opacity(3) r(full) blur(200px) pointer(none)"></div>
+  <div class="layer(bottom:-30%/left:-15%) w(1000px) h(1000px) bg(accent) opacity(2) r(full) blur(250px) pointer(none)"></div>
   
   <!-- Main content -->
   <div class="relative z(10) container(max:1400)">

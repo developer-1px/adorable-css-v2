@@ -1,32 +1,91 @@
 # AdorableCSS v2 Reference
 
-## Positioning
+> 전체 API 레퍼런스 및 사용 가이드
+
+## 🎯 핵심 컨셉
+
+### CSS @layer 시스템
+
+AdorableCSS는 CSS @layer를 활용하여 예측 가능한 캐스케이드를 구현합니다:
+
+```css
+@layer component, layout, utility, state;
+```
+
+- **component**: 사전 정의된 UI 컴포넌트 (Priority 100)
+- **layout**: 레이아웃 및 공간 설정 (Priority 200)
+- **utility**: 시각적 스타일링 (Priority 300)
+- **state**: 상태 및 인터랙션 (Priority 400)
+
+### 문법 패턴
+
+| 패턴 | 예시 | 설명 |
+|------|------|------|
+| 키워드 | `relative` | 단순 키워드 |
+| 함수 | `w(100)` | 단일 값 |
+| 토큰 | `p(lg)` | 디자인 토큰 |
+| 슬래시 | `p(10/20)` | 다중 값 |
+| 플러스 | `hbox(top+left)` | 값 결합 |
+| 콜론 | `layer(top:20)` | 키-값 쌍 |
+| 범위 | `bg(red..blue)` | 그라데이션 |
+| 투명도 | `c(blue.5)` | 50% 투명도 |
+| 계산 | `w(100%-20)` | CSS calc() |
+| 상태 | `hover:scale(1.05)` | 의사 클래스 |
+| 반응형 | `md:hidden` | 미디어 쿼리 |
+| 중요도 | `w(full)!` | !important |
+
+## 📦 Components (@layer component)
+
+### 사전 정의된 컴포넌트
+
+| 컴포넌트 | 설명 | 포함된 스타일 |
+|----------|------|-------------|
+| `card` | 기본 카드 | 배경, 패딩, 모서리, 그림자 |
+| `btn` | 버튼 | 패딩, 모서리, 호버 효과 |
+| `heading` | 제목 | 타이포그래피, 간격 |
+| `hero` | 히어로 섹션 | 크기, 패딩, 배경 |
+| `section` | 컨텐츠 섹션 | 패딩, 최대 너비 |
+| `container` | 컨테이너 | 최대 너비, 중앙 정렬 |
+| `prose` | 긴 글 | 타이포그래피, 간격 |
+
+```html
+<!-- 컴포넌트 사용 예시 -->
+<div class="card">
+  <h2 class="heading">Title</h2>
+  <p class="prose">Content...</p>
+  <button class="btn">Action</button>
+</div>
+```
+
+## 📏 Layout (@layer layout)
+
+### Positioning
 
 ### Layer Utility (Recommended)
 - `layer()` or `layer(fill)` - Covers entire parent (position: absolute, all sides 0)
 - `layer(center)` - Centers element (top: 50%, left: 50%, transform: translate(-50%, -50%))
 - `layer(top:20)` - Positioned from top
-- `layer(top:20+left:30)` - Multiple positions
+- `layer(top:20/left:30)` - Multiple positions
 - `layer(top:20+outside)` - Outside positioning (bottom: calc(100% + 20px))
-- `layer(top:-20+right:-40)` - Negative positioning
+- `layer(top:-20/right:-40)` - Negative positioning
 
 ### Legacy Positioning
 - `absolute`, `relative`, `fixed`, `sticky`, `static`
 - `top(10)`, `right(10)`, `bottom(10)`, `left(10)`
 - `z(10)`, `z(top)` - Z-index (z(top) = 9999)
 
-## Layout
+### Layout
 
-### Flexbox (v2 Enhanced)
+#### Flexbox (v2 Enhanced)
 - `hbox()` - Horizontal flex (align-items: center by default)
-- `vbox()` - Vertical flex (align-items: stretch by default)
+- `vbox()` - Vertical flex (align-items: fill by default)
 - `hbox(pack)` or `vbox(pack)` - Center all (justify-content: center, align-items: center)
 
 #### Horizontal Box (hbox) Alignment
 - `hbox(top)` - Align top (align-items: flex-start)
 - `hbox(middle)` - Align middle (align-items: center) [default]
 - `hbox(bottom)` - Align bottom (align-items: flex-end)
-- `hbox(fill)` - Stretch items (align-items: stretch)
+- `hbox(fill)` - Fill container (align-items: stretch)
 
 #### Horizontal Box (hbox) Justification
 - `hbox(left)` - Justify left (justify-content: flex-start)
@@ -37,7 +96,7 @@
 - `vbox(left)` - Align left (align-items: flex-start)
 - `vbox(center)` - Align center (align-items: center)
 - `vbox(right)` - Align right (align-items: flex-end)
-- `vbox(fill)` - Stretch items (align-items: stretch) [default]
+- `vbox(fill)` - Fill container (align-items: stretch) [default]
 
 #### Vertical Box (vbox) Justification
 - `vbox(top)` - Justify top (justify-content: flex-start)
@@ -56,7 +115,7 @@
 - `pack()` - Shorthand for hbox(center+middle)
 - `wrap()` - hbox with flex-wrap
 
-### Container Utility (New)
+#### Container Utility
 - `container()` - Default container (max-width: 1280px, auto margins, responsive padding)
 - `container(sm)` - Small container (640px)
 - `container(md)` - Medium container (768px)
@@ -74,7 +133,9 @@
 - `container(xl/px:lg)` - Large padding (1.5rem)
 - `container(xl/px:lg+md)` - Asymmetric padding (left: 1.5rem, right: 1rem)
 
-### Sizing
+#### Sizing
+
+##### 기본 크기
 - `w(100)`, `h(100)` - Fixed size
 - `w(fill)`, `h(fill)` - 100%
 - `w(hug)`, `h(hug)` - Fit content
@@ -82,12 +143,52 @@
 - `w(100~200~300)` - Min/preferred/max
 - `min-w(100)`, `max-w(400)`, `min-h(50)`, `max-h(200)`
 
-### Grid
+##### 특수 크기
+
+| 클래스 | CSS | 설명 |
+|-------|-----|------|
+| `size(100)` | width: 100px; height: 100px | 정사각형 |
+| `size(16:9)` | aspect-ratio: 16/9 | 비율 |
+| `size(320x200)` | width: 320px; height: 200px | 고정 크기 |
+
+#### Grid
 - `grid` - Display grid
 - `grid-cols(3)` - 3 columns
 - `grid-rows(2)` - 2 rows
 
-## Typography
+### Spacing
+
+#### Padding & Margin
+
+| 클래스 | 토큰 값 | 설명 |
+|-------|----------|------|
+| `p(xs)` | 0.25rem | Extra small |
+| `p(sm)` | 0.5rem | Small |
+| `p(md)` | 1rem | Medium |
+| `p(lg)` | 1.5rem | Large |
+| `p(xl)` | 2rem | Extra large |
+| `p(2xl)` | 3rem | 2x large |
+| `p(3xl)` | 4rem | 3x large |
+
+#### Gap
+
+```html
+<!-- Flexbox gap -->
+<div class="hbox gap(md)">
+  <div>Item 1</div>
+  <div>Item 2</div>
+</div>
+
+<!-- Auto gap (space-between) -->
+<div class="hbox gap(auto)">
+  <div>Left</div>
+  <div>Right</div>
+</div>
+```
+
+## 🎨 Utility (@layer utility)
+
+### Typography
 
 ### Font Utility
 - `font(16)` - Font size only
@@ -95,10 +196,40 @@
 - `font(3xl)` - Token size (3xl = 1.875rem)
 - `font-family(Inter)` - Font family only
 
+#### 의미론적 타이포그래피
+
+| 클래스 | 크기 | 사용처 |
+|-------|-----|--------|
+| `display(sm)` | 3rem | 작은 디스플레이 |
+| `display(md)` | 4rem | 중간 디스플레이 |
+| `display(lg)` | 6rem | 큰 디스플레이 |
+| `heading(sm)` | 1.25rem | 작은 제목 |
+| `heading(md)` | 1.5rem | 중간 제목 |
+| `heading(lg)` | 2rem | 큰 제목 |
+| `title(sm)` | 1rem | 작은 타이틀 |
+| `title(md)` | 1.125rem | 중간 타이틀 |
+| `title(lg)` | 1.25rem | 큰 타이틀 |
+| `body(sm)` | 0.875rem | 작은 본문 |
+| `body(md)` | 1rem | 기본 본문 |
+| `body(lg)` | 1.125rem | 큰 본문 |
+| `label(sm)` | 0.75rem | 작은 레이블 |
+| `label(md)` | 0.875rem | 기본 레이블 |
+| `label(lg)` | 1rem | 큰 레이블 |
+| `caption(sm)` | 0.625rem | 작은 캐프션 |
+| `caption(md)` | 0.75rem | 기본 캐프션 |
+
 ### Font Weights
-- `thin` (200), `light` (300), `regular` (normal)
-- `medium` (500), `semibold` (600), `bold` (bold), `heavy` (900)
-- `100` to `900` - Numeric weights
+
+| 클래스 | Weight | 설명 |
+|-------|--------|------|
+| `bold(200)` | 200 | 매우 얇음 |
+| `bold(300)` | 300 | 얇음 |
+| `bold(400)` | 400 | 기본 |
+| `bold(500)` | 500 | 중간 |
+| `bold(600)` | 600 | 약간 굵음 |
+| `bold(700)` | 700 | 굵음 (기본) |
+| `bold(900)` | 900 | 매우 굵음 |
+| `bold()` | 700 | bold(700)과 동일 |
 
 ### Text Utilities
 - `text(center)`, `text(left)`, `text(right)`, `text(justify)`
@@ -110,61 +241,117 @@
 - `letter-spacing(0.05em)` or `letter-spacing(wide)`
 - `underline-offset(4)`
 
-### Gradient Text (New)
-- `bg-clip(text)` - Background clip for gradient text
-- `text-fill-color(transparent)` - Make text transparent
-- Usage: `bg(linear-gradient(...)) bg-clip(text) text-fill-color(transparent)`
+### Gradient Text
 
-## Colors
+```html
+<!-- 그라디언트 텍스트 -->
+<h1 class="font(4xl) bold(700) bg-clip(text) c(135deg/#667eea..#764ba2)">
+  Gradient Text
+</h1>
+```
 
-### Text Color
-- `c(#000)` - Hex color
-- `c(#000/50)` - With opacity (50%)
-- `c(red)`, `c(blue-500)` - Named/token colors
-- `c(--custom-var)` - CSS variable
+### Colors
 
-### Background
-- `bg(#fff)` - Solid color
-- `bg(#000/50)` - With opacity
-- `bg(linear-gradient(to_right,#667eea,#764ba2))` - Linear gradient
-- `bg(linear-gradient(135deg,#667eea_0%,#764ba2_100%))` - With stops
-- `bg(radial-gradient(circle,#667eea,#764ba2))` - Radial gradient
+#### OKLCH 색상 시스템
 
-### Border Color (New)
-- `bc(gray-200)` - All borders
-- `btc(red)` - Top border color
-- `brc(blue)` - Right border color
-- `bbc(green)` - Bottom border color
-- `blc(purple)` - Left border color
+AdorableCSS는 지각적 균일성을 위해 OKLCH 색상 공간을 사용합니다:
 
-## Spacing
+| 토큰 | 색상 | 사용처 |
+|-------|------|--------|
+| `gray-50` ~ `gray-950` | 회색 | 중립 색상 |
+| `red-50` ~ `red-950` | 빨강 | 오류, 경고 |
+| `green-50` ~ `green-950` | 초록 | 성공, 확인 |
+| `blue-50` ~ `blue-950` | 파랑 | 정보, 링크 |
+| `yellow-50` ~ `yellow-950` | 노랑 | 주의 |
+| `purple-50` ~ `purple-950` | 보라 | 브랜드 |
 
-### Padding/Margin
-- `p(16)` - All sides
-- `px(16)` - Horizontal (left & right)
-- `py(16)` - Vertical (top & bottom)
-- `pt(16)`, `pr(16)`, `pb(16)`, `pl(16)` - Individual sides
-- `p(16/24)` - Vertical/horizontal
-- `p(10/20/30/40)` - Top/right/bottom/left
-- Same patterns for margin: `m()`, `mx()`, `my()`, etc.
+#### Text Color
+- `c(#000)` - Hex 색상
+- `c(red)` - 기본 색상
+- `c(blue-500)` - 토큰 색상
+- `c(blue-500.5)` - 50% 투명도
+- `c(--custom-var)` - CSS 변수
 
-## Borders & Radius
+#### Background
 
-### Border
-- `b(1/gray-200)` - Width/color
-- `bt(2/blue-500)` - Top border
-- `br(1/red)` - Right border
-- `bb(1/green)` - Bottom border
-- `bl(1/purple)` - Left border
-- `bx(1/gray)` - Horizontal borders
-- `by(1/gray)` - Vertical borders
-- `b(2/dashed/black)` - Width/style/color
+##### 단색 배경
+- `bg(white)` - 기본 색상
+- `bg(gray-100)` - 토큰 색상
+- `bg(blue-500.5)` - 50% 투명도
 
-### Border Radius
-- `r(8)` - All corners 8px
-- `r(lg)` - Large radius (token)
-- `r(full)` - Fully rounded (9999px)
-- `r(8/16)` - Top/bottom different
+##### 그라디언트 배경
+```html
+<!-- 선형 그라디언트 -->
+<div class="bg(to-r/#667eea..#764ba2)">
+<div class="bg(135deg/#667eea..#764ba2)">
+
+<!-- 방사형 그라디언트 -->
+<div class="bg(radial/#667eea..#764ba2)">
+<div class="bg(circle/#667eea..#764ba2)">
+```
+
+#### Border Color
+
+| 클래스 | 설명 |
+|-------|------|
+| `bc(gray-200)` | 모든 테두리 색상 |
+| `btc(red)` | 위쪽 테두리 색상 |
+| `brc(blue)` | 오른쪽 테두리 색상 |
+| `bbc(green)` | 아래쪽 테두리 색상 |
+| `blc(purple)` | 왼쪽 테두리 색상 |
+
+### Effects
+
+#### Shadow
+
+| 클래스 | 효과 | 사용처 |
+|-------|------|--------|
+| `shadow(sm)` | 작은 그림자 | 버튼, 입력 필드 |
+| `shadow(md)` | 중간 그림자 | 카드 |
+| `shadow(lg)` | 큰 그림자 | 모달 |
+| `shadow(xl)` | 매우 큰 그림자 | 팝업 |
+| `shadow(2xl)` | 2x 큰 그림자 | 드롭다운 |
+| `shadow(none)` | 그림자 없음 | 초기화 |
+
+#### Opacity & Blur
+
+```html
+<!-- 투명도 -->
+<div class="opacity(0.5)">50% 투명</div>
+
+<!-- 블러 -->
+<div class="blur(4)">4px 블러</div>
+<div class="backdrop-blur(10)">10px 배경 블러</div>
+```
+
+### Borders & Radius
+
+#### Border
+
+```html
+<!-- 기본 테두리 -->
+<div class="b(1/gray-200)">1px 회색 테두리</div>
+
+<!-- 방향별 테두리 -->
+<div class="bt(2/blue-500)">2px 위쪽 테두리</div>
+<div class="bx(1/gray)">1px 수평 테두리</div>
+<div class="by(1/gray)">1px 수직 테두리</div>
+
+<!-- 테두리 스타일 -->
+<div class="b(2/dashed/black)">2px 점선 테두리</div>
+<div class="b(1/solid/red)">1px 실선 테두리</div>
+```
+
+#### Border Radius
+
+| 클래스 | 토큰 값 | 설명 |
+|-------|----------|------|
+| `r(sm)` | 0.25rem | 작은 모서리 |
+| `r(md)` | 0.5rem | 중간 모서리 |
+| `r(lg)` | 0.75rem | 큰 모서리 |
+| `r(xl)` | 1rem | 매우 큰 모서리 |
+| `r(2xl)` | 1.5rem | 2x 큰 모서리 |
+| `r(full)` | 9999px | 원형 |
 - `r(8/16/24/32)` - All corners different
 - `rt(8)`, `rr(8)`, `rb(8)`, `rl(8)` - Individual sides
 
@@ -303,9 +490,9 @@ Prefix any utility:
 ## Special Utilities
 
 ### Aspect Ratio
-- `aspect(16/9)` - 16:9 aspect ratio
-- `aspect(1/1)` - Square
-- `aspect(4/3)` - 4:3 ratio
+- `size(16:9)` - 16:9 aspect ratio
+- `size(1:1)` - Square
+- `size(4:3)` - 4:3 ratio
 
 ### Object Fit
 - `object(cover)`, `object(contain)`

@@ -25,7 +25,7 @@ width: fit-content;  →     w(hug)
 - **Solution**: `layer()` utility that mimics Figma constraints
 ```html
 <!-- Just like Figma constraints -->
-<div class="layer(top:20+left:30)">
+<div class="layer(top:20/left:30)">
 <div class="layer(center)">
 <div class="layer(fill)">
 ```

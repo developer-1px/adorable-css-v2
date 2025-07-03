@@ -23,7 +23,7 @@
       <div class="category-filter hbox(pack) gap(sm) mt(2xl)">
         {#each categories as category}
           <button
-            class="px(lg) py(sm) r(full) font(sm) semibold transition
+            class="px(lg) py(sm) r(full) font(sm) bold(600) transition
               {activeCategory === category 
                 ? 'bg(purple-500) c(white)' 
                 : 'bg(white) c(gray-600) hover:bg(purple-50) hover:c(purple-600)'}"
@@ -55,7 +55,7 @@
                     <p class="font(sm) c(white.8)">Stunning glassmorphism effect</p>
                   </div>
                 </div>
-                <button class="w(full) py(md) bg(white.2) c(white) r(lg) font(sm) semibold hover:bg(white.3) transition">
+                <button class="w(full) py(md) bg(white.2) c(white) r(lg) font(sm) bold(600) hover:bg(white.3) transition">
                   Learn More
                 </button>
               </div>
@@ -72,13 +72,13 @@
           <div class="showcase-item">
             <div class="showcase-preview p(2xl) bg(white) r(xl) h(300px) vbox(pack)">
               <div class="vbox gap(lg) w(full)">
-                <button class="px(xl) py(lg) bg(135deg/purple-400..pink-400) c(white) r(lg) font(md) semibold shadow(lg) hover:shadow(2xl) hover:scale(1.05) transition">
+                <button class="px(xl) py(lg) bg(135deg/purple-400..pink-400) c(white) r(lg) font(md) bold(600) shadow(lg) hover:shadow(2xl) hover:scale(1.05) transition">
                   Gradient Primary
                 </button>
-                <button class="px(xl) py(lg) bg(blue-400..teal-400/to-r) c(white) r(lg) font(md) semibold shadow(lg) hover:shadow(2xl) hover:scale(1.05) transition">
+                <button class="px(xl) py(lg) bg(blue-400..teal-400/to-r) c(white) r(lg) font(md) bold(600) shadow(lg) hover:shadow(2xl) hover:scale(1.05) transition">
                   Ocean Gradient
                 </button>
-                <button class="px(xl) py(lg) bg(transparent) b(2/gradient-to-r/purple-400/pink-400) c(purple-600) r(lg) font(md) semibold hover:bg(purple-50) transition">
+                <button class="px(xl) py(lg) bg(transparent) b(2/gradient-to-r/purple-400/pink-400) c(purple-600) r(lg) font(md) bold(600) hover:bg(purple-50) transition">
                   Gradient Border
                 </button>
               </div>
@@ -141,13 +141,13 @@
               <div class="vbox gap(xl) w(full)">
                 <div class="floating-input relative">
                   <input type="text" class="w(full) px(lg) py(lg) bg(gray-50) b(2/gray-200) r(lg) focus:b(2/purple-400) focus:bg(white) transition peer" placeholder=" " />
-                  <label class="layer(top:50%+left:lg) translate(-50%) bg(white) px(sm) c(gray-500) transition peer-focus:top(0) peer-focus:font(sm) peer-focus:c(purple-600) peer-placeholder-shown:top(50%)">
+                  <label class="layer(top:50%/left:lg) translate(-50%) bg(white) px(sm) c(gray-500) transition peer-focus:top(0) peer-focus:font(sm) peer-focus:c(purple-600) peer-placeholder-shown:top(50%)">
                     Email Address
                   </label>
                 </div>
                 <div class="floating-input relative">
                   <input type="password" class="w(full) px(lg) py(lg) bg(gray-50) b(2/gray-200) r(lg) focus:b(2/purple-400) focus:bg(white) transition peer" placeholder=" " />
-                  <label class="layer(top:50%+left:lg) translate(-50%) bg(white) px(sm) c(gray-500) transition peer-focus:top(0) peer-focus:font(sm) peer-focus:c(purple-600) peer-placeholder-shown:top(50%)">
+                  <label class="layer(top:50%/left:lg) translate(-50%) bg(white) px(sm) c(gray-500) transition peer-focus:top(0) peer-focus:font(sm) peer-focus:c(purple-600) peer-placeholder-shown:top(50%)">
                     Password
                   </label>
                 </div>
@@ -194,15 +194,15 @@
                     <Image size="48" class="c(white)" />
                   </div>
                   <div class="layer(bottom+left+right) h(50%) bg(gradient-to-t/black/transparent) opacity(0.6)"></div>
-                  <div class="layer(bottom:lg+left:lg) c(white)">
+                  <div class="layer(bottom:lg/left:lg) c(white)">
                     <h3 class="font(lg) bold mb(xs)">Gallery Card</h3>
                     <p class="font(sm) opacity(0.9)">Beautiful image overlays</p>
                   </div>
                 </div>
                 <div class="p(lg)">
                   <div class="hbox gap(sm)">
-                    <span class="px(sm) py(xs) bg(purple-100) c(purple-700) r(sm) font(xs) semibold">Design</span>
-                    <span class="px(sm) py(xs) bg(pink-100) c(pink-700) r(sm) font(xs) semibold">UI/UX</span>
+                    <span class="px(sm) py(xs) bg(purple-100) c(purple-700) r(sm) font(xs) bold(600)">Design</span>
+                    <span class="px(sm) py(xs) bg(pink-100) c(pink-700) r(sm) font(xs) bold(600)">UI/UX</span>
                   </div>
                 </div>
               </div>
@@ -248,7 +248,7 @@
                   <div class="w(80px) h(80px) bg(purple-100) r(xl) vbox(pack)">
                     <Mail size="32" class="c(purple-600)" />
                   </div>
-                  <div class="layer(top:-8px+right:-8px) w(32px) h(32px) bg(red-500) r(full) vbox(pack) c(white) font(sm) bold shadow(lg) animate-pulse">
+                  <div class="layer(top:-8px/right:-8px) w(32px) h(32px) bg(red-500) r(full) vbox(pack) c(white) font(sm) bold shadow(lg) animate-pulse">
                     5
                   </div>
                 </div>
@@ -257,7 +257,7 @@
                   <div class="w(80px) h(80px) bg(blue-100) r(xl) vbox(pack)">
                     <Calendar size="32" class="c(blue-600)" />
                   </div>
-                  <div class="layer(top:-8px+right:-8px) px(sm) py(xs) bg(gradient-to-r/orange-400/red-500) r(full) c(white) font(xs) bold shadow(lg) min-w(24px)">
+                  <div class="layer(top:-8px/right:-8px) px(sm) py(xs) bg(gradient-to-r/orange-400/red-500) r(full) c(white) font(xs) bold shadow(lg) min-w(24px)">
                     New
                   </div>
                 </div>

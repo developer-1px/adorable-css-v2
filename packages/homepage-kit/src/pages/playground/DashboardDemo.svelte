@@ -179,7 +179,7 @@
           
           <!-- Chart Area -->
           <div class="chart-area relative h(320) bg(#fafbfc) r(xl) p(xl)">
-            <div class="chart-grid layer(top:xl+right:xl+bottom:xl+left:xl)">
+            <div class="chart-grid layer(top:xl/right:xl/bottom:xl/left:xl)">
               <!-- Grid lines -->
               {#each [0, 1, 2, 3, 4] as i}
                 <div class="grid-line absolute w(fill) h(1) bg(#e5e5e5.5)" style="bottom: {i * 25}%"></div>

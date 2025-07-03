@@ -59,7 +59,7 @@ fixed bottom(0) right(0)     /* position: fixed; bottom: 0; right: 0 */
 
 /* Layer positioning - AdorableCSS 고유 기능 */
 layer(center)                /* 중앙 정렬 */
-layer(top:20+left:30)       /* 복합 포지셔닝 */
+layer(top:20/left:30)       /* 복합 포지셔닝 */
 layer(fill/20)              /* 전체 채우기 + inset */
 
 /* 좌표 연산 */
@@ -84,7 +84,7 @@ hbox(evenly)                /* 완전 균등 분배 */
 hbox(top)                   /* align-items: flex-start */
 hbox(middle)                /* align-items: center */
 hbox(bottom)                /* align-items: flex-end */
-hbox(stretch)               /* align-items: stretch */
+hbox(fill)                  /* align-items: stretch */
 
 /* 복합 정렬 */
 hbox(center+middle)         /* 완전 중앙 정렬 */
@@ -105,7 +105,7 @@ vbox(pack)                  /* justify-content: center */
 vbox(left)                  /* align-items: flex-start */
 vbox(center)                /* align-items: center */
 vbox(right)                 /* align-items: flex-end */
-vbox(stretch)               /* align-items: stretch (기본값) */
+vbox(fill)                  /* align-items: stretch (기본값) */
 
 /* 복합 정렬 */
 vbox(middle+center)         /* 완전 중앙 정렬 */
@@ -168,7 +168,7 @@ text(xl)                    /* font-size: var(--font-xl) */
 /* 폰트 굵기 */
 bold()                      /* font-weight: 700 */
 bold(600)                   /* font-weight: 600 */
-bold(semi)                  /* font-weight: var(--fontWeight-semi) */
+bold(semi)                  /* font-weight: 600 (deprecated, use bold(600)) */
 
 /* 색상 */
 c(black)                    /* color: black */
@@ -422,7 +422,7 @@ const myTransform = (value: string) => {
 <div class="vbox gap(16) p(24) bg(white) r(16) shadow(md)">
   <div class="hbox(between+middle)">
     <h3>상품명</h3>
-    <span class="font(24) bold c(indigo-500)">₩29,900</span>
+    <span class="font(24) bold(700) c(indigo-500)">₩29,900</span>
   </div>
   <!-- 나머지 컨텐츠 -->
 </div>

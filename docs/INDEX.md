@@ -1,8 +1,38 @@
-# AdorableCSS v2 Documentation Index
+# 📚 AdorableCSS v2 Documentation
 
-이 문서는 AdorableCSS v2 프로젝트의 모든 문서를 체계적으로 정리한 인덱스입니다.
+> 사용자 여정에 따른 문서 가이드
 
-## 📁 Document Structure
+## 🎯 빠른 네비게이션
+
+### 🆕 처음 시작하는 분
+1. **[🤔 Why AdorableCSS?](../packages/homepage-kit/docs/WHY_ADORABLECSS.md)** - 왜 AdorableCSS인가?
+2. **[🚀 Quick Start](../packages/homepage-kit/docs/QUICK_START.md)** - 5분 안에 시작하기
+3. **[🎯 Cheat Sheet](../packages/homepage-kit/docs/CHEAT_SHEET.md)** - 한 장으로 보는 핵심 문법
+
+### 🔄 마이그레이션 하는 분
+1. **[💙 TailwindCSS 사용자를 위한 10초 가이드](../packages/homepage-kit/docs/TAILWIND_USERS.md)**
+2. **[🔄 전체 마이그레이션 가이드](../packages/homepage-kit/docs/MIGRATION_GUIDE.md)**
+3. **[🍳 Cookbook](../packages/homepage-kit/docs/COOKBOOK.md)** - 실무 레시피
+
+### 📚 깊이 있게 배우는 분
+1. **[📖 API Reference](./REFERENCE.md)** - 전체 API 문서
+2. **[🎨 핵심 개념 시각화](./technical/CORE_CONCEPTS_VISUAL.md)**
+3. **[🎯 기능 추적](../packages/homepage-kit/docs/features.md)**
+
+### 👥 팀/프로젝트 관리
+1. **[👥 팀 온보딩](../packages/homepage-kit/docs/TEAM_ONBOARDING.md)** - 새 팀원 가이드
+2. **[🚀 프로젝트 설정](../packages/homepage-kit/docs/PROJECT_SETUP.md)** - 초기 설정
+3. **[🏆 모범 사례](../packages/homepage-kit/docs/BEST_PRACTICES.md)** - 대규모 프로젝트
+4. **[🔌 통합 가이드](../packages/homepage-kit/docs/INTEGRATION_GUIDE.md)** - 도구 통합
+
+### 🆘 문제 해결
+1. **[🔧 Troubleshooting](../packages/homepage-kit/docs/guides/troubleshooting.md)** - 문제 해결 가이드
+2. **[🚀 성능 최적화](../packages/homepage-kit/docs/guides/performance.md)**
+3. **[🤝 기여 가이드](../packages/homepage-kit/docs/CONTRIBUTING.md)**
+
+---
+
+## 📁 전체 문서 구조
 
 ### 🎯 Strategy (전략)
 핵심 비전, 제품 전략, 시장 분석 관련 문서들
@@ -16,8 +46,6 @@
 - **[TECH_MESSAGING.md](./strategy/TECH_MESSAGING.md)** - 💬 기술 메시징  
   *기술적 커뮤니케이션 전략*
   
-- **[design-system-analysis.md](./strategy/design-system-analysis.md)** - 📊 디자인 시스템 분석  
-  *업계 디자인 시스템 분석 및 벤치마킹*
 
 ### 🔧 Technical (기술)
 기술 스펙, 구현 세부사항, 개발 가이드
@@ -42,14 +70,49 @@
 
 - **[ADORABLE_CSS_MISTAKES.md](./development/ADORABLE_CSS_MISTAKES.md)** - ⚠️ 실수 분석  
   *개발 과정에서의 실수와 교훈, 개선 방향*
+  
+- **[features.md](../packages/homepage-kit/docs/features.md)** - 🎯 기능 추적  
+  *완료, 진행 중, 계획된 모든 기능 추적*
+  
+- **[CONTRIBUTING.md](../packages/homepage-kit/docs/CONTRIBUTING.md)** - 🤝 기여 가이드  
+  *프로젝트 기여 방법과 개발 환경 설정*
 
-## 🚀 Quick Start
+### 📚 Guides (가이드)
+사용자를 위한 실용적인 가이드
 
-AdorableCSS v2를 처음 접하신다면 다음 순서로 문서를 읽어보세요:
+- **[MIGRATION_GUIDE.md](../packages/homepage-kit/docs/MIGRATION_GUIDE.md)** - 🔄 마이그레이션 가이드  
+  *TailwindCSS, CSS-in-JS에서 전환하는 방법*
+  
+- **[performance.md](../packages/homepage-kit/docs/guides/performance.md)** - 🚀 성능 최적화  
+  *프로덕션 최적화 및 성능 모범 사례*
+  
+- **[TEAM_ONBOARDING.md](../packages/homepage-kit/docs/TEAM_ONBOARDING.md)** - 👥 팀 온보딩  
+  *새로운 팀원을 위한 1일차 가이드*
+  
+- **[PROJECT_SETUP.md](../packages/homepage-kit/docs/PROJECT_SETUP.md)** - 🚀 프로젝트 설정  
+  *새 프로젝트에서 AdorableCSS 시작하기*
+  
+- **[BEST_PRACTICES.md](../packages/homepage-kit/docs/BEST_PRACTICES.md)** - 🏆 모범 사례  
+  *대규모 프로젝트에서의 베스트 프랙티스*
+  
+- **[INTEGRATION_GUIDE.md](../packages/homepage-kit/docs/INTEGRATION_GUIDE.md)** - 🔌 통합 가이드  
+  *다른 도구들과의 조화로운 공존*
 
-1. **[PRODUCT_STRATEGY.md](./PRODUCT_STRATEGY.md)** - 전체 비전과 방향성 이해
-2. **[REFERENCE.md](./REFERENCE.md)** - 실제 사용법과 문법 익히기
-3. **[BRAND_DESIGN_CONCEPT.md](./brand/BRAND_DESIGN_CONCEPT.md)** - 브랜드 철학 이해
+## 🌟 하이라이트
+
+### 🆕 신규 문서
+- **[Why AdorableCSS?](../packages/homepage-kit/docs/WHY_ADORABLECSS.md)** - 비즈니스 가치와 철학
+- **[Quick Start](../packages/homepage-kit/docs/QUICK_START.md)** - 5분 퀵스타트 가이드
+- **[Cheat Sheet](../packages/homepage-kit/docs/CHEAT_SHEET.md)** - 한 눈에 보는 문법
+- **[TailwindCSS 사용자 가이드](../packages/homepage-kit/docs/TAILWIND_USERS.md)** - 10초 비교
+- **[Cookbook](../packages/homepage-kit/docs/COOKBOOK.md)** - 실무 패턴 모음
+- **[Troubleshooting](../packages/homepage-kit/docs/guides/troubleshooting.md)** - 문제 해결
+
+### 🔗 빠른 링크
+- **[🎮 Playground](/playground)** - 실시간 테스트
+- **[🎨 Components](/components)** - 컴포넌트 갈러리
+- **[🎯 Tokens](/tokens)** - 디자인 토큰
+- **[📦 Rules](/rules)** - 모든 유틸리티
 
 ## 📋 Document Status
 
@@ -64,6 +127,20 @@ AdorableCSS v2를 처음 접하신다면 다음 순서로 문서를 읽어보세
 | TECH_MESSAGING.md | ✅ 최신 | - | 🔶 MEDIUM |
 | design-system-analysis.md | ✅ 최신 | - | 🔶 MEDIUM |
 | ADORABLE_CSS_MISTAKES.md | ✅ 최신 | - | 🟡 LOW |
+| features.md | ✅ 최신 | 2024-12-27 | 🔥 HIGH |
+| CONTRIBUTING.md | ✅ 최신 | 2024-12-27 | 🔶 MEDIUM |
+| MIGRATION_GUIDE.md | ✅ 최신 | 2024-12-27 | 🔥 HIGH |
+| performance.md | ✅ 최신 | 2024-12-27 | 🔶 MEDIUM |
+| WHY_ADORABLECSS.md | ✅ 최신 | 2024-12-27 | 🔥 HIGH |
+| QUICK_START.md | ✅ 최신 | 2024-12-27 | 🔥 HIGH |
+| CHEAT_SHEET.md | ✅ 최신 | 2024-12-27 | 🔥 HIGH |
+| TAILWIND_USERS.md | ✅ 최신 | 2024-12-27 | 🔥 HIGH |
+| COOKBOOK.md | ✅ 최신 | 2024-12-27 | 🔶 MEDIUM |
+| troubleshooting.md | ✅ 최신 | 2024-12-27 | 🔶 MEDIUM |
+| TEAM_ONBOARDING.md | ✅ 최신 | 2024-12-27 | 🔥 HIGH |
+| PROJECT_SETUP.md | ✅ 최신 | 2024-12-27 | 🔥 HIGH |
+| BEST_PRACTICES.md | ✅ 최신 | 2024-12-27 | 🔥 HIGH |
+| INTEGRATION_GUIDE.md | ✅ 최신 | 2024-12-27 | 🔶 MEDIUM |
 
 ## 🔄 Document Updates
 

@@ -18,7 +18,7 @@ export { parseAdorableCSS } from "./core/parser/parser";
 export { generateCSS, generateCSSFromAdorableCSS, generateCSSWithTokens } from "./core/parser/generator";
 export type { GenerateCSSOptions } from "./core/parser/generator";
 export { resetCSS, getResetCSS } from "./core/reset";
-export { getRuleHandler, rules, groupedRules, RULE_GROUPS } from "./rules";
+export { getRuleHandler, rules, RULE_GROUPS } from "./rules";
 export { defaultTokens, generateTokenCSS, isToken, getTokenVar } from "./design-system/tokens/index";
 export { createTokensPlugin, injectTokens, tokensPlugin } from "./design-system/tokens";
 

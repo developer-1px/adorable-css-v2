@@ -50,7 +50,7 @@ vbox()              /* display: flex; flex-direction: column */
 vbox(left)          /* align-items: flex-start */
 vbox(center)        /* align-items: center */
 vbox(right)         /* align-items: flex-end */
-vbox(stretch)       /* align-items: stretch (기본값) */
+vbox(fill)          /* align-items: stretch (기본값) */
 
 /* 정렬 조합 */
 hbox(middle+pack)   /* 가로 세로 중앙 정렬 */
@@ -145,9 +145,9 @@ max-h(500)          /* max-height: 500px */
 ### 3. 종횡비 (Aspect Ratio)
 ```css
 /* 일반 비율 */
-aspect(16:9)        /* aspect-ratio: 16/9 */
-aspect(4:3)         /* aspect-ratio: 4/3 */
-aspect(1:1)         /* aspect-ratio: 1/1 (정사각형) */
+size(16:9)          /* aspect-ratio: 16/9 */
+size(4:3)           /* aspect-ratio: 4/3 */
+size(1:1)           /* aspect-ratio: 1/1 (정사각형) */
 
 /* Size 유틸리티로 크기와 비율 동시 설정 */
 size(200)           /* width: 200px; height: 200px */
@@ -201,8 +201,8 @@ layer(bottom-left)  /* 왼쪽 하단 */
 layer(bottom-right) /* 오른쪽 하단 */
 
 /* 복합 포지셔닝 */
-layer(top:20+left:30)    /* top: 20px; left: 30px */
-layer(center+top:20)     /* 가로 중앙, top: 20px */
+layer(top:20/left:30)    /* top: 20px; left: 30px */
+layer(center/top:20)     /* 가로 중앙, top: 20px */
 
 /* Fill 포지셔닝 */
 layer(fill)         /* inset: 0 (전체 채우기) */
@@ -293,7 +293,7 @@ evenly              /* justify-content: space-evenly */
 items(start)        /* align-items: flex-start */
 items(center)       /* align-items: center */
 items(end)          /* align-items: flex-end */
-items(stretch)      /* align-items: stretch */
+items(fill)         /* align-items: stretch */
 
 /* Wrap */
 wrap                /* flex-wrap: wrap */
@@ -305,7 +305,7 @@ wrap-reverse        /* flex-wrap: wrap-reverse */
 
 ```css
 /* 기본 overflow */
-overflow(hidden)    /* overflow: hidden */
+clip    /* overflow: hidden */
 overflow(auto)      /* overflow: auto */
 overflow(scroll)    /* overflow: scroll */
 overflow(visible)   /* overflow: visible */
@@ -340,7 +340,7 @@ scrollable          /* overflow: auto */
     <button class="btn(primary)">시작하기</button>
   </header>
   
-  <div class="hbox flex(1) overflow(hidden)">
+  <div class="hbox flex(1) clip">
     <aside class="w(240) bg(gray-50) p(lg) overflow-y(auto)">
       <!-- 사이드바 -->
     </aside>
@@ -405,12 +405,12 @@ scrollable          /* overflow: auto */
 ### 5. 비율 기반 레이아웃
 ```html
 <!-- 16:9 비디오 컨테이너 -->
-<div class="aspect(16:9) bg(black) r(lg) overflow(hidden)">
+<div class="size(16:9) bg(black) r(lg) clip">
   <video class="w(full) h(full) object(cover)" />
 </div>
 
 <!-- 1:1 프로필 이미지 -->
-<div class="size(120) r(full) overflow(hidden)">
+<div class="size(120) r(full) clip">
   <img class="w(full) h(full) object(cover)" />
 </div>
 ```
@@ -423,7 +423,7 @@ scrollable          /* overflow: auto */
 w(320) h(200)      /* 레이아웃 시프트 방지 */
 
 /* 종횡비 유지 */
-aspect(16:9)       /* 이미지 로드 전 공간 확보 */
+size(16:9)         /* 이미지 로드 전 공간 확보 */
 ```
 
 ### 2. 하드웨어 가속

@@ -28,7 +28,7 @@
 
 ### 5. Positioning with Layer
 - **Old**: `absolute top(10) left(20)`
-- **New**: `layer(top:10+left:20)`
+- **New**: `layer(top:10/left:20)`
 - **Special Cases**:
   - `layer(fill)` - All sides 0
   - `layer(center)` - Centered positioning
@@ -37,7 +37,7 @@
 
 ### 6. Flexbox Alignment
 - **hbox()** - Default align-items: center
-- **vbox()** - Default align-items: stretch
+- **vbox()** - Default align-items: fill (CSS: stretch)
 - **Pack Utility**: `hbox(pack)` or `vbox(pack)` centers everything
 - **Status**: Already correctly implemented
 

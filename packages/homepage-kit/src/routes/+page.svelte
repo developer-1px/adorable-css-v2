@@ -1,13 +1,10 @@
 <script lang="ts">
   import { Github, ArrowRight, Sparkles, Zap, Package } from 'lucide-svelte';
-  import Button from '$lib/components/ui/Button.svelte';
-  import FeatureCard from '$lib/components/ui/FeatureCard.svelte';
-  import IconBox from '$lib/components/ui/IconBox.svelte';
   import CodeBlock from '$lib/components/ui/CodeBlock.svelte';
 </script>
 
 <!-- Hero Section -->
-<section class="relative min-h(100vh) vbox(center) overflow(hidden) bg(white)">
+<section class="relative min-h(100vh) vbox(center) clip bg(white)">
   <!-- Light Grid Background -->
   <div class="absolute layer(fill) pointer-events(none)">
     <!-- Large checkered grid pattern -->
@@ -27,7 +24,7 @@
     <div>
       <div class="hbox(middle) gap(8) px(20) py(10) r(full) glass(20/0.05) border(1/purple-500.3) shadow(lg/purple-500.1) hover:shadow(xl/purple-500.2) transition group">
         <Sparkles size="16" class="c(purple-500)" />
-        <span class="label(sm) bold(semi) bg(clip-text) c(135deg/purple-600..pink-600)">v2.0 Alpha</span>
+        <span class="label(sm) bold(600) bg(clip-text) c(135deg/purple-600..pink-600)">v2.0 Alpha</span>
         <span class="px(8) py(2) r(full) bg(purple-500) c(white) caption(xs) bold">NEW</span>
       </div>
     </div>
@@ -44,13 +41,13 @@
     
     <!-- Subheading -->
     <p class="body(lg) c(gray-600) max-w(4xl) mx(auto)">
-      A <span class="bold(semi) c(purple-600)">Figma-first</span> CSS framework that bridges design and code. 
+      A <span class="bold(600) c(purple-600)">Figma-first</span> CSS framework that bridges design and code. 
       Built-in design system, intuitive syntax, and seamless integration.
     </p>
     
     <!-- CTA Buttons -->
     <div class="hbox(center/wrap) gap(20)">
-      <a href="/docs" class="group px(32) py(16) r(xl) bg(purple-500..pink-500) c(white) label(button) bold shadow(xl) hover:shadow(2xl) hover:translate-y(-2) active:translate-y(0) transition relative overflow(hidden)">
+      <a href="/docs" class="group px(32) py(16) r(xl) bg(purple-500..pink-500) c(white) label(button) bold(700) shadow(xl) hover:shadow(2xl) hover:translate-y(-2) active:translate-y(0) transition relative clip">
         <span class="relative z(10) hbox(middle) gap(8)">
           Get Started
           <ArrowRight size="20" class="group-hover:translate-x(4) transition" />
@@ -58,7 +55,7 @@
         <span class="absolute layer(fill) bg(white.2) scale(0) group-hover:scale(1) transition(transform/0.5s) r(full)"></span>
       </a>
       
-      <a href="https://github.com/adorablecss/adorable-css" target="_blank" rel="noopener" class="group px(32) py(16) r(xl) glass(20/0.05) border(2/gray-300) hover:border(2/purple-500) c(gray-700) hover:c(purple-600) label(button) bold shadow(md) hover:shadow(lg) hover:translate-y(-2) active:translate-y(0) transition">
+      <a href="https://github.com/adorablecss/adorable-css" target="_blank" rel="noopener" class="group px(32) py(16) r(xl) glass(20/0.05) border(2/gray-300) hover:border(2/purple-500) c(gray-700) hover:c(purple-600) label(button) bold(700) shadow(md) hover:shadow(lg) hover:translate-y(-2) active:translate-y(0) transition">
         <span class="hbox(middle) gap(8)">
           <Github size="20" />
           <span>View on GitHub</span>
@@ -87,7 +84,7 @@
   <!-- Feature Grid Preview -->
   <div class="grid(3) gap(32) max-w(7xl) mx(auto) px(24) pb(120) relative z(10) ..lg:grid(1) lg:gap(24)">
     <!-- Figma-First -->
-    <div class="group vbox gap(16) p(32) r(2xl) glass(20/0.02) border(1/gray-200) hover:border(1/purple-500.5) shadow(lg) hover:shadow(2xl) transition relative overflow(hidden)">
+    <div class="group vbox gap(16) p(32) r(2xl) glass(20/0.02) border(1/gray-200) hover:border(1/purple-500.5) shadow(lg) hover:shadow(2xl) transition relative clip">
       <!-- Background gradient on hover -->
       <div class="absolute layer(fill) bg(radial/purple-500.05..transparent) opacity(0) group-hover:opacity(100) transition"></div>
       
@@ -103,7 +100,7 @@
     </div>
     
     <!-- Built-in Design System -->
-    <div class="group vbox gap(16) p(32) r(2xl) glass(20/0.02) border(1/gray-200) hover:border(1/emerald-500.5) shadow(lg) hover:shadow(2xl) transition relative overflow(hidden)">
+    <div class="group vbox gap(16) p(32) r(2xl) glass(20/0.02) border(1/gray-200) hover:border(1/emerald-500.5) shadow(lg) hover:shadow(2xl) transition relative clip">
       <!-- Background gradient on hover -->
       <div class="absolute layer(fill) bg(radial/emerald-500.05..transparent) opacity(0) group-hover:opacity(100) transition"></div>
       
@@ -117,7 +114,7 @@
     </div>
     
     <!-- Developer Experience -->
-    <div class="group vbox gap(16) p(32) r(2xl) glass(20/0.02) border(1/gray-200) hover:border(1/blue-500.5) shadow(lg) hover:shadow(2xl) transition relative overflow(hidden)">
+    <div class="group vbox gap(16) p(32) r(2xl) glass(20/0.02) border(1/gray-200) hover:border(1/blue-500.5) shadow(lg) hover:shadow(2xl) transition relative clip">
       <!-- Background gradient on hover -->
       <div class="absolute layer(fill) bg(radial/blue-500.05..transparent) opacity(0) group-hover:opacity(100) transition"></div>
       
@@ -133,7 +130,7 @@
 </section>
 
 <!-- Code Comparison Section -->
-<section class="relative py(120) overflow(hidden)">
+<section class="relative py(120) clip">
   <!-- Background pattern -->
   <div class="absolute layer(fill) bg(gray-50)"></div>
   <div class="absolute layer(fill)" 
@@ -165,7 +162,7 @@
             <p class="caption(xs) c(gray-400)">17 lines, 268 characters</p>
           </div>
         </div>
-        <div class="r(xl) overflow(hidden) shadow(xl) border(1/gray-200) group-hover:shadow(2xl) transition">
+        <div class="r(xl) clip shadow(xl) border(1/gray-200) group-hover:shadow(2xl) transition">
           <CodeBlock 
             theme="dark"
             language="css"
@@ -201,11 +198,11 @@
             <Sparkles size="24" class="c(white)" />
           </div>
           <div class="vbox gap(4)">
-            <h3 class="title(base) bold c(gray-900)">AdorableCSS</h3>
-            <p class="caption(xs) c(purple-600) bold(medium)">10 lines, 145 characters</p>
+            <h3 class="title(base) bold(700) c(gray-900)">AdorableCSS</h3>
+            <p class="caption(xs) c(purple-600) bold(500)">10 lines, 145 characters</p>
           </div>
         </div>
-        <div class="r(xl) overflow(hidden) shadow(xl) border(2/purple-500.3) group-hover:shadow(2xl) group-hover:border(2/purple-500.5) transition">
+        <div class="r(xl) clip shadow(xl) border(2/purple-500.3) group-hover:shadow(2xl) group-hover:border(2/purple-500.5) transition">
           <CodeBlock 
             theme="branded"
             language="html"

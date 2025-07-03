@@ -1,10 +1,10 @@
 /**
- * Central rule definitions with metadata
- * Single source of truth for all rules, groups, and metadata
+ * Central rule definitions
+ * Single source of truth for all rules and groups
  */
 
 import { RulePriority } from './types';
-import type { RuleHandler, KeywordRuleHandler, RuleMetadata } from './types';
+import type { RuleHandler, KeywordRuleHandler } from './types';
 
 // Import all rule modules
 import { displayRules } from './layout/display';
@@ -29,7 +29,7 @@ import {
   glowRules, 
   glassRules, 
   figmaComponents, 
-  responsiveRules, 
+  // responsiveRules, // Spec'd out 
   containerRules, 
   animationRules,
   proseRules
@@ -61,18 +61,12 @@ import { typographyHelperRules } from '../components/patterns/typography-helpers
 export interface RuleSubgroup {
   name: string;
   rules: Record<string, RuleHandler | KeywordRuleHandler>;
-  metadata?: Partial<RuleMetadata>;
   description?: string;
 }
 
 export interface RuleGroupDefinition {
   name: string;
   priority: RulePriority;
-  metadata?: {
-    group: string;
-    figmaSection?: string;
-    description?: string;
-  };
   subgroups: Record<string, RuleSubgroup>;
   type?: 'css' | 'string';
 }
@@ -99,29 +93,16 @@ export const RULE_GROUPS: RuleDefinitions = {
   text: {
     name: 'Text',
     priority: RulePriority.UTILITY,
-    metadata: {
-      group: 'Text',
-      figmaSection: 'Text',
-      description: 'Typography and text styling'
-    },
     subgroups: {
       typography: {
         name: 'Typography',
         rules: typographyRules,
-        metadata: {
-          subgroup: 'Typography',
-          figmaEquivalent: 'Text Properties'
-        }
       },
       layout: {
         name: 'Text Layout',
         rules: {
           text: typographyRules.text
         },
-        metadata: {
-          subgroup: 'Typography',
-          figmaEquivalent: 'Text Properties'
-        }
       }
     }
   },
@@ -130,19 +111,10 @@ export const RULE_GROUPS: RuleDefinitions = {
   position: {
     name: 'Position',
     priority: RulePriority.LAYOUT,
-    metadata: {
-      group: 'Position',
-      figmaSection: 'Position (X, Y)',
-      description: 'Figma Position - positioning, constraints, layers'
-    },
     subgroups: {
       position: {
         name: 'Position & Layer',
         rules: positionCategoryRules,
-        metadata: { 
-          subgroup: 'Position',
-          figmaEquivalent: 'Position (X, Y) & Constraints'
-        }
       }
     }
   },
@@ -151,11 +123,6 @@ export const RULE_GROUPS: RuleDefinitions = {
   autoLayout: {
     name: 'Layout',
     priority: RulePriority.LAYOUT,
-    metadata: {
-      group: 'Auto Layout',
-      figmaSection: 'Auto Layout',
-      description: 'Figma Auto Layout - flexbox, spacing, sizing'
-    },
     subgroups: {
       autoLayout: {
         name: 'Auto Layout',
@@ -165,20 +132,12 @@ export const RULE_GROUPS: RuleDefinitions = {
           wrap: displayRules.wrap,
           pack: displayRules.pack,
         },
-        metadata: { 
-          subgroup: 'Auto Layout',
-          figmaEquivalent: 'Auto Layout'
-        }
       },
       gap: {
         name: 'Gap',
         rules: {
           gap: spacingRules.gap,
         },
-        metadata: { 
-          subgroup: 'Gap',
-          figmaEquivalent: 'Gap'
-        }
       },
       padding: {
         name: 'Padding',
@@ -191,18 +150,10 @@ export const RULE_GROUPS: RuleDefinitions = {
           pl: spacingRules.pl,
           pr: spacingRules.pr,
         },
-        metadata: { 
-          subgroup: 'Padding',
-          figmaEquivalent: 'Padding'
-        }
       },
       sizing: {
         name: 'Sizing',
         rules: sizeRules,
-        metadata: {
-          subgroup: 'Sizing',
-          figmaEquivalent: 'Width & Height'
-        }
       },
     }
   },
@@ -211,49 +162,28 @@ export const RULE_GROUPS: RuleDefinitions = {
   visual: {
     name: 'Visual',
     priority: RulePriority.UTILITY,
-    metadata: {
-      group: 'Visual',
-      figmaSection: 'Appearance',
-      description: 'Visual appearance - fill, stroke, effects'
-    },
     subgroups: {
       colors: {
         name: 'Fill',
         rules: colorRules,
-        metadata: { 
-          subgroup: 'Fill',
-          figmaEquivalent: 'Fill'
-        }
       },
       borders: {
         name: 'Borders & Radius',
         rules: {
           ...visualRules
         },
-        metadata: { 
-          subgroup: 'Borders & Radius',
-          figmaEquivalent: 'Stroke & Corner Radius'
-        }
       },
       Radius: {
         name: 'Radius',
         rules: {
           r: visualRules.r,
         },
-        metadata: {
-          subgroup: 'Borders & Radius',
-          figmaEquivalent: 'Stroke & Corner Radius'
-        }
       },
       effects: {
         name: 'Effects',
         rules: {
           ...effectsRules,
         },
-        metadata: { 
-          subgroup: 'Effects',
-          figmaEquivalent: 'Effects'
-        }
       },
     }
   },
@@ -261,10 +191,6 @@ export const RULE_GROUPS: RuleDefinitions = {
   css: {
     name: 'CSS',
     priority: RulePriority.UTILITY,
-    metadata: {
-      group: 'CSS',
-      description: 'CSS-specific properties not in Figma'
-    },
     subgroups: {
       margin: {
         name: 'Margin',
@@ -277,10 +203,6 @@ export const RULE_GROUPS: RuleDefinitions = {
           ml: spacingRules.ml,
           mr: spacingRules.mr,
         },
-        metadata: {
-          subgroup: 'Margin',
-          figmaEquivalent: 'Not available in Figma'
-        }
       },
       display: {
         name: 'Display',
@@ -292,10 +214,6 @@ export const RULE_GROUPS: RuleDefinitions = {
           none: displayRules.none,
           hidden: displayRules.hidden,
         },
-        metadata: {
-          subgroup: 'Display',
-          figmaEquivalent: 'Advanced CSS Properties'
-        }
       },
 
       flexbox: {
@@ -308,27 +226,15 @@ export const RULE_GROUPS: RuleDefinitions = {
           grow: displayRules.grow,
           'flex-wrap': displayRules['flex-wrap'],
         },
-        metadata: {
-          subgroup: 'Flexbox',
-          figmaEquivalent: 'Flexbox'
-        }
       },
 
       grid: {
         name: 'Grid',
         rules: gridRules,
-        metadata: {
-          subgroup: 'Grid',
-          figmaEquivalent: 'CSS Grid'
-        }
       },
       overflow: {
         name: 'Overflow',
         rules: overflowRules,
-        metadata: {
-          subgroup: 'Overflow',
-          figmaEquivalent: 'Scroll behavior'
-        }
       },
       positioning: {
         name: 'Positioning',
@@ -340,18 +246,10 @@ export const RULE_GROUPS: RuleDefinitions = {
           'scroll-mr': scrollMr,
           'scroll-m': scrollM,
         },
-        metadata: {
-          subgroup: 'Positioning',
-          figmaEquivalent: 'Advanced positioning'
-        }
       },
       container: {
         name: 'Container',
         rules: containerRules,
-        metadata: {
-          subgroup: 'Container',
-          figmaEquivalent: 'Frame Constraints'
-        }
       }
     }
   },
@@ -360,27 +258,14 @@ export const RULE_GROUPS: RuleDefinitions = {
   interaction: {
     name: 'Interaction',
     priority: RulePriority.UTILITY,
-    metadata: {
-      group: 'Interaction',
-      figmaSection: 'Prototype',
-      description: 'Interactive behaviors'
-    },
     subgroups: {
       states: {
         name: 'States',
         rules: interactionRules,
-        metadata: { 
-          subgroup: 'States',
-          figmaEquivalent: 'Interactive Components'
-        }
       },
       animation: {
         name: 'Animation',
         rules: animationRules.rules,
-        metadata: { 
-          subgroup: 'Animation',
-          figmaEquivalent: 'Smart Animate'
-        }
       }
     }
   },
@@ -389,59 +274,36 @@ export const RULE_GROUPS: RuleDefinitions = {
   utilities: {
     name: 'Utilities',
     priority: RulePriority.UTILITY,
-    metadata: {
-      group: 'Utilities',
-      description: 'Utility helpers'
-    },
     subgroups: {
       misc: {
         name: 'Miscellaneous',
         rules: utilityRules,
-        metadata: { 
-          subgroup: 'Miscellaneous'
-        }
       }
     }
   },
 
-  // Responsive Group
-  responsive: {
-    name: 'Responsive',
-    priority: RulePriority.STATE,
-    metadata: {
-      group: 'Responsive',
-      description: 'Responsive modifiers'
-    },
-    subgroups: {
-      breakpoints: {
-        name: 'Breakpoints',
-        rules: responsiveRules,
-        metadata: { 
-          subgroup: 'Breakpoints'
-        }
-      }
-    }
-  },
+  // Responsive Group - SPEC'D OUT
+  // responsive: {
+  //   name: 'Responsive',
+  //   priority: RulePriority.STATE,
+  //   subgroups: {
+  //     breakpoints: {
+  //       name: 'Breakpoints',
+  //       rules: responsiveRules,
+  //     }
+  //   }
+  // },
 
   // Components Group - CSS-based component rules
   components: {
     name: 'Components',
     priority: RulePriority.COMPONENT,
-    metadata: {
-      group: 'Components',
-      figmaSection: 'Components',
-      description: 'Pre-built component patterns'
-    },
     subgroups: {
       patterns: {
         name: 'Patterns',
         rules: {
           ...figmaComponents,
         },
-        metadata: { 
-          subgroup: 'Patterns',
-          figmaEquivalent: 'Component Patterns'
-        }
       },
       features: {
         name: 'Features',
@@ -449,10 +311,6 @@ export const RULE_GROUPS: RuleDefinitions = {
           ...glowRules,
           ...glassRules,
         },
-        metadata: { 
-          subgroup: 'Features',
-          figmaEquivalent: 'Visual Effects'
-        }
       }
     }
   }
@@ -499,71 +357,4 @@ export function flattenRuleGroups(groups: RuleDefinitions): Record<string, RuleH
   return flatRules;
 }
 
-/**
- * Extract grouped rules for backward compatibility
- */
-export function extractGroupedRules(groups: RuleDefinitions) {
-  const grouped: Record<string, any> = {};
-  
-  // Layout rules (combine position + autoLayout)
-  grouped.layout = {};
-  if (groups.position?.subgroups) {
-    Object.values(groups.position.subgroups).forEach(subgroup => {
-      Object.assign(grouped.layout, subgroup.rules);
-    });
-  }
-  if (groups.autoLayout?.subgroups) {
-    Object.values(groups.autoLayout.subgroups).forEach(subgroup => {
-      Object.assign(grouped.layout, subgroup.rules);
-    });
-  }
-  
-  // Typography rules
-  grouped.typography = groups.visual?.subgroups?.typography?.rules || {};
-  
-  // Visual rules
-  grouped.visuals = {};
-  if (groups.visual?.subgroups) {
-    Object.values(groups.visual.subgroups).forEach(subgroup => {
-      Object.assign(grouped.visuals, subgroup.rules);
-    });
-  }
-  
-  // Position rules
-  grouped.position = groups.position?.subgroups?.position?.rules || {};
-  
-  // Interaction rules
-  grouped.interaction = groups.interaction?.subgroups?.states?.rules || {};
-  
-  // Utilities
-  grouped.utilities = groups.utilities?.subgroups?.misc?.rules || {};
-  
-  // Effects
-  grouped.effects = groups.visual?.subgroups?.effects?.rules || {};
-  
-  // Plugins (with safe access)
-  grouped.plugins = {
-    responsive: groups.responsive?.subgroups?.breakpoints?.rules || {},
-    container: groups.autoLayout?.subgroups?.container?.rules || {},
-  };
-  
-  return grouped;
-}
 
-/**
- * Generate metadata for a rule based on its group and subgroup
- */
-export function generateRuleMetadata(
-  ruleName: string,
-  group: RuleGroupDefinition,
-  subgroup: RuleSubgroup
-): RuleMetadata {
-  return {
-    group: group.metadata?.group || group.name,
-    subgroup: subgroup.metadata?.subgroup || subgroup.name,
-    description: `${subgroup.name} utility`,
-    syntax: `${ruleName}(value)`,
-    examples: [`${ruleName}(16)`, `${ruleName}(auto)`],
-    figmaEquivalent: subgroup.metadata?.figmaEquivalent,
-  };
-}

@@ -31,7 +31,7 @@ Width: Hug            →  w(hug)
 Width: Fixed (200)    →  w(200)
 Min Width: 200        →  w(200..)
 Max Width: 400        →  w(..400)
-Constraints           →  layer(top:20+left:30)
+Constraints           →  layer(top:20/left:30)
 Corner Radius: 16     →  r(16)
 ```
 
@@ -46,7 +46,7 @@ CSS doesn't have Figma's constraint system. Developers resort to:
 ### The Solution
 ```html
 <!-- Pin to corners like Figma -->
-<div class="layer(top:20+right:20)">
+<div class="layer(top:20/right:20)">
 
 <!-- Center perfectly -->
 <div class="layer(center)">

@@ -3,8 +3,6 @@
   import { Ruler, Copy, Grid, Layers, Box } from 'lucide-svelte';
   import TokenSection from '$lib/components/tokens/TokenSection.svelte';
   import TokenCard from '$lib/components/tokens/TokenCard.svelte';
-  import CopyButton from '$lib/components/tokens/CopyButton.svelte';
-  import SpacingDemo from '$lib/components/tokens/SpacingDemo.svelte';
   
   // Enhanced spacing data with usage context
   const spacingVariants = Object.entries(defaultTokens.spacing).map(([key, value]) => ({

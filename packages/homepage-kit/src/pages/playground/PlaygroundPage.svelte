@@ -74,18 +74,18 @@
     
     <form class="vbox gap(lg)">
       <div class="vbox gap(sm)">
-        <label class="font(sm) medium c(gray-700)">Email</label>
+        <label class="font(sm) bold(500) c(gray-700)">Email</label>
         <input type="email" placeholder="you@example.com" 
           class="w(full) px(lg) py(md) r(lg) b(1/gray-300) focus:b(2/blue-500) transition" />
       </div>
       
       <div class="vbox gap(sm)">
-        <label class="font(sm) medium c(gray-700)">Password</label>
+        <label class="font(sm) bold(500) c(gray-700)">Password</label>
         <input type="password" placeholder="••••••••" 
           class="w(full) px(lg) py(md) r(lg) b(1/gray-300) focus:b(2/blue-500) transition" />
       </div>
       
-      <button class="w(full) py(md) bg(135deg/#667eea..#764ba2) c(white) r(lg) medium hover:opacity(0.9) transition">
+      <button class="w(full) py(md) bg(135deg/#667eea..#764ba2) c(white) r(lg) bold(500) hover:opacity(0.9) transition">
         Sign In
       </button>
       
@@ -175,7 +175,7 @@
       <!-- Basic Plan -->
       <div class="vbox bg(white) p(xl) r(xl) shadow(lg) hover:shadow(xl) transition">
         <div class="vbox gap(md) mb(xl)">
-          <h3 class="font(xl) semibold">Basic</h3>
+          <h3 class="font(xl) bold(600)">Basic</h3>
           <div class="hbox(bottom) gap(xs)">
             <span class="font(3xl) bold">$9</span>
             <span class="font(md) c(gray-600)">/month</span>
@@ -204,12 +204,12 @@
       
       <!-- Pro Plan -->
       <div class="vbox bg(135deg/#667eea..#764ba2) c(white) p(xl) r(xl) shadow(xl) scale(1.05) relative">
-        <div class="layer(top:0+left:50%) translate-x(-50%) translate-y(-50%) px(lg) py(xs) bg(yellow-400) c(gray-900) r(full) font(xs) bold uppercase">
+        <div class="layer(top:0/left:50%) translate-x(-50%) translate-y(-50%) px(lg) py(xs) bg(yellow-400) c(gray-900) r(full) font(xs) bold uppercase">
           Popular
         </div>
         
         <div class="vbox gap(md) mb(xl)">
-          <h3 class="font(xl) semibold">Pro</h3>
+          <h3 class="font(xl) bold(600)">Pro</h3>
           <div class="hbox(bottom) gap(xs)">
             <span class="font(3xl) bold">$29</span>
             <span class="font(md) opacity(0.8)">/month</span>
@@ -235,7 +235,7 @@
           </li>
         </ul>
         
-        <button class="w(full) py(md) bg(white) c(purple-600) r(lg) font(medium) hover:opacity(0.9) transition cursor(pointer)">
+        <button class="w(full) py(md) bg(white) c(purple-600) r(lg) bold(500) hover:opacity(0.9) transition cursor(pointer)">
           Get Started
         </button>
       </div>
@@ -243,7 +243,7 @@
       <!-- Enterprise Plan -->
       <div class="vbox bg(white) p(xl) r(xl) shadow(lg) hover:shadow(xl) transition">
         <div class="vbox gap(md) mb(xl)">
-          <h3 class="font(xl) semibold">Enterprise</h3>
+          <h3 class="font(xl) bold(600)">Enterprise</h3>
           <div class="vbox gap(xs)">
             <span class="font(3xl) bold">Custom</span>
             <span class="font(sm) c(gray-600)">Contact us for pricing</span>
@@ -283,7 +283,7 @@
   <div class="vbox gap(3xl)">
     <!-- Header -->
     <div class="vbox gap(lg) text(center) max-w(3xl) mx(auto)">
-      <span class="px(lg) py(sm) bg(purple-100) c(purple-700) r(full) font(sm) semibold uppercase letter-spacing(wide) w(fit)">
+      <span class="px(lg) py(sm) bg(purple-100) c(purple-700) r(full) font(sm) bold(600) uppercase letter-spacing(wide) w(fit)">
         Features
       </span>
       <h2 class="font(4xl) bold">Everything you need to succeed</h2>
@@ -300,7 +300,7 @@
           <span class="font(2xl) group-hover:scale(1.2) transition">🚀</span>
         </div>
         <div class="vbox gap(sm)">
-          <h3 class="font(xl) semibold">Lightning Fast</h3>
+          <h3 class="font(xl) bold(600)">Lightning Fast</h3>
           <p class="c(gray-600) line-height(relaxed)">
             Optimized performance with sub-second load times and instant updates.
           </p>
@@ -313,7 +313,7 @@
           <span class="font(2xl) group-hover:scale(1.2) transition">🔒</span>
         </div>
         <div class="vbox gap(sm)">
-          <h3 class="font(xl) semibold">Secure by Default</h3>
+          <h3 class="font(xl) bold(600)">Secure by Default</h3>
           <p class="c(gray-600) line-height(relaxed)">
             Enterprise-grade security with end-to-end encryption and compliance.
           </p>
@@ -326,7 +326,7 @@
           <span class="font(2xl) group-hover:scale(1.2) transition">📊</span>
         </div>
         <div class="vbox gap(sm)">
-          <h3 class="font(xl) semibold">Advanced Analytics</h3>
+          <h3 class="font(xl) bold(600)">Advanced Analytics</h3>
           <p class="c(gray-600) line-height(relaxed)">
             Real-time insights and detailed metrics to drive data-driven decisions.
           </p>
@@ -339,7 +339,7 @@
           <span class="font(2xl) group-hover:scale(1.2) transition">🎨</span>
         </div>
         <div class="vbox gap(sm)">
-          <h3 class="font(xl) semibold">Beautiful Design</h3>
+          <h3 class="font(xl) bold(600)">Beautiful Design</h3>
           <p class="c(gray-600) line-height(relaxed)">
             Stunning UI components and themes that delight your users.
           </p>
@@ -352,7 +352,7 @@
           <span class="font(2xl) group-hover:scale(1.2) transition">⚡</span>
         </div>
         <div class="vbox gap(sm)">
-          <h3 class="font(xl) semibold">API First</h3>
+          <h3 class="font(xl) bold(600)">API First</h3>
           <p class="c(gray-600) line-height(relaxed)">
             Powerful APIs with comprehensive documentation and SDKs.
           </p>
@@ -365,7 +365,7 @@
           <span class="font(2xl) group-hover:scale(1.2) transition">🌍</span>
         </div>
         <div class="vbox gap(sm)">
-          <h3 class="font(xl) semibold">Global Scale</h3>
+          <h3 class="font(xl) bold(600)">Global Scale</h3>
           <p class="c(gray-600) line-height(relaxed)">
             Deploy globally with automatic scaling and load balancing.
           </p>
@@ -395,7 +395,7 @@
               <span class="font(xl)">📧</span>
             </div>
             <div class="vbox gap(xs)">
-              <h4 class="font(md) semibold">Email</h4>
+              <h4 class="font(md) bold(600)">Email</h4>
               <p class="c(gray-600)">hello@example.com</p>
             </div>
           </div>
@@ -405,7 +405,7 @@
               <span class="font(xl)">📱</span>
             </div>
             <div class="vbox gap(xs)">
-              <h4 class="font(md) semibold">Phone</h4>
+              <h4 class="font(md) bold(600)">Phone</h4>
               <p class="c(gray-600)">+1 (555) 123-4567</p>
             </div>
           </div>
@@ -415,7 +415,7 @@
               <span class="font(xl)">📍</span>
             </div>
             <div class="vbox gap(xs)">
-              <h4 class="font(md) semibold">Office</h4>
+              <h4 class="font(md) bold(600)">Office</h4>
               <p class="c(gray-600)">123 Business Ave, Suite 100<br>San Francisco, CA 94107</p>
             </div>
           </div>
@@ -427,13 +427,13 @@
         <form class="vbox gap(xl)">
           <div class="grid grid-cols(2) gap(lg)">
             <div class="vbox gap(sm)">
-              <label class="font(sm) medium c(gray-700)">First Name</label>
+              <label class="font(sm) bold(500) c(gray-700)">First Name</label>
               <input type="text" 
                 class="w(full) px(lg) py(md) r(lg) b(1/gray-300) focus:b(2/purple-500) transition" 
                 placeholder="John" />
             </div>
             <div class="vbox gap(sm)">
-              <label class="font(sm) medium c(gray-700)">Last Name</label>
+              <label class="font(sm) bold(500) c(gray-700)">Last Name</label>
               <input type="text" 
                 class="w(full) px(lg) py(md) r(lg) b(1/gray-300) focus:b(2/purple-500) transition" 
                 placeholder="Doe" />
@@ -441,28 +441,28 @@
           </div>
           
           <div class="vbox gap(sm)">
-            <label class="font(sm) medium c(gray-700)">Email</label>
+            <label class="font(sm) bold(500) c(gray-700)">Email</label>
             <input type="email" 
               class="w(full) px(lg) py(md) r(lg) b(1/gray-300) focus:b(2/purple-500) transition" 
               placeholder="john@example.com" />
           </div>
           
           <div class="vbox gap(sm)">
-            <label class="font(sm) medium c(gray-700)">Subject</label>
+            <label class="font(sm) bold(500) c(gray-700)">Subject</label>
             <input type="text" 
               class="w(full) px(lg) py(md) r(lg) b(1/gray-300) focus:b(2/purple-500) transition" 
               placeholder="How can we help?" />
           </div>
           
           <div class="vbox gap(sm)">
-            <label class="font(sm) medium c(gray-700)">Message</label>
+            <label class="font(sm) bold(500) c(gray-700)">Message</label>
             <textarea 
               class="w(full) px(lg) py(md) r(lg) b(1/gray-300) focus:b(2/purple-500) transition min-h(150px) resize(vertical)" 
               placeholder="Tell us more about your project..."
             ></textarea>
           </div>
           
-          <button class="w(full) py(lg) bg(135deg/#667eea..#764ba2) c(white) r(lg) font(medium) hover:opacity(0.9) transition cursor(pointer)">
+          <button class="w(full) py(lg) bg(135deg/#667eea..#764ba2) c(white) r(lg) bold(500) hover:opacity(0.9) transition cursor(pointer)">
             Send Message
           </button>
         </form>
@@ -623,8 +623,8 @@
   <div class="bg(135deg/#667eea..#764ba2) relative clip">
     <!-- Animated background patterns -->
     <div class="layer(fill) opacity(0.2)">
-      <div class="layer(top:-100+left:-100) w(300px) h(300px) bg(white) r(full) blur(100px)" style="animation: pulse 4s ease-in-out infinite;"></div>
-      <div class="layer(bottom:-100+right:-100) w(400px) h(400px) bg(white) r(full) blur(120px)" style="animation: pulse 5s ease-in-out infinite reverse;"></div>
+      <div class="layer(top:-100/left:-100) w(300px) h(300px) bg(white) r(full) blur(100px)" style="animation: pulse 4s ease-in-out infinite;"></div>
+      <div class="layer(bottom:-100/right:-100) w(400px) h(400px) bg(white) r(full) blur(120px)" style="animation: pulse 5s ease-in-out infinite reverse;"></div>
       <div class="layer(center) w(500px) h(500px) bg(white.1) r(full) blur(150px)" style="animation: float 20s ease-in-out infinite;"></div>
     </div>
     
@@ -667,7 +667,7 @@
         <!-- Editor Header -->
         <div class="px(xl) py(lg) bb(1/gray-200) bg(gray-50)">
           <div class="hbox(middle) gap(lg)">
-            <h2 class="font(sm) semibold uppercase letter-spacing(wide) c(gray-700)">HTML Editor</h2>
+            <h2 class="font(sm) bold(600) uppercase letter-spacing(wide) c(gray-700)">HTML Editor</h2>
             <div class="hbox gap(sm)">
               <label class="hbox(middle) gap(xs) font(sm) c(gray-600)">
                 <input type="checkbox" bind:checked={codeLineNumbers} class="cursor(pointer)" />
@@ -698,7 +698,7 @@
             ></textarea>
           </div>
           {#if isUpdating}
-            <div class="layer(top:8+right:8) px(md) py(xs) bg(purple-600) c(white) r(full) font(xs) medium">
+            <div class="layer(top:8/right:8) px(md) py(xs) bg(purple-600) c(white) r(full) font(xs) medium">
               Updating...
             </div>
           {/if}
@@ -711,7 +711,7 @@
         <div class="hbox bb(1/gray-200) bg(gray-50) px(xl)">
           <button
             on:click={() => activeTab = 'preview'}
-            class="px(xl) py(lg) font(sm) semibold transition relative {activeTab === 'preview' ? 'c(purple-600)' : 'c(gray-600) hover:c(gray-900)'}"
+            class="px(xl) py(lg) font(sm) bold(600) transition relative {activeTab === 'preview' ? 'c(purple-600)' : 'c(gray-600) hover:c(gray-900)'}"
           >
             <span class="relative z(10)">Preview</span>
             {#if activeTab === 'preview'}
@@ -720,7 +720,7 @@
           </button>
           <button
             on:click={() => activeTab = 'css'}
-            class="px(xl) py(lg) font(sm) semibold transition relative {activeTab === 'css' ? 'c(purple-600)' : 'c(gray-600) hover:c(gray-900)'}"
+            class="px(xl) py(lg) font(sm) bold(600) transition relative {activeTab === 'css' ? 'c(purple-600)' : 'c(gray-600) hover:c(gray-900)'}"
           >
             <span class="relative z(10)">Generated CSS</span>
             {#if activeTab === 'css'}
@@ -729,7 +729,7 @@
           </button>
           <button
             on:click={() => activeTab = 'stats'}
-            class="px(xl) py(lg) font(sm) semibold transition relative {activeTab === 'stats' ? 'c(purple-600)' : 'c(gray-600) hover:c(gray-900)'}"
+            class="px(xl) py(lg) font(sm) bold(600) transition relative {activeTab === 'stats' ? 'c(purple-600)' : 'c(gray-600) hover:c(gray-900)'}"
           >
             <span class="relative z(10)">Stats</span>
             {#if activeTab === 'stats'}
@@ -784,7 +784,7 @@
                   <h3 class="font(lg) semibold">Success Rate</h3>
                   <div class="relative h(24px) bg(gray-200) r(full) clip">
                     <div class="h(full) bg(#667eea..#764ba2/to-right) transition duration(500)" style="width: {stats.successRate}"></div>
-                    <div class="layer(center) font(sm) semibold c(white)">{stats.successRate}</div>
+                    <div class="layer(center) font(sm) bold(600) c(white)">{stats.successRate}</div>
                   </div>
                 </div>
                 

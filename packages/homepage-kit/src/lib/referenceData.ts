@@ -105,7 +105,7 @@ export const referenceData: ReferenceData = {
         property: "hbox-combined",
         syntax: [
           "hbox(center+center)",
-          "hbox(end+stretch)",
+          "hbox(end+fill)",
           "gap(auto)",
         ],
       },
@@ -124,7 +124,7 @@ export const referenceData: ReferenceData = {
       {
         property: "layout-combinations",
         syntax: [
-          "vbox(around+stretch)",
+          "vbox(around+fill)",
           "hbox(end+end)",
           "gap(auto)",
         ],

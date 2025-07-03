@@ -22,7 +22,7 @@ hbox(evenly)        /* justify-content: space-evenly */
 hbox(top)           /* align-items: flex-start */
 hbox(middle)        /* align-items: center */
 hbox(bottom)        /* align-items: flex-end */
-hbox(stretch)       /* align-items: stretch */
+hbox(fill)          /* align-items: stretch */
 
 /* 복합 정렬 */
 hbox(center+middle) /* 완전 중앙 정렬 */
@@ -175,8 +175,8 @@ layer(bottom-left)  /* 왼쪽 하단 */
 layer(bottom-right) /* 오른쪽 하단 */
 
 /* 복합 포지셔닝 */
-layer(top:20+left:30)    /* top: 20px; left: 30px */
-layer(center+top:20)     /* 가로 중앙, top: 20px */
+layer(top:20/left:30)    /* top: 20px; left: 30px */
+layer(center/top:20)     /* 가로 중앙, top: 20px */
 
 /* Fill 포지셔닝 */
 layer(fill)         /* inset: 0 */
@@ -257,11 +257,11 @@ font(16/1.5/-2%)    /* + letter-spacing */
 
 ### 폰트 굵기
 ```css
-bold                /* font-weight: 700 */
+bold()              /* font-weight: 700 */
 bold(600)           /* font-weight: 600 */
-bold(semi)          /* font-weight: var(--fontWeight-semi) */
-normal              /* font-weight: 400 */
-light               /* font-weight: 300 */
+bold(semi)          /* Deprecated: use bold(600) */
+bold(400)           /* font-weight: 400 (normal) */
+bold(300)           /* font-weight: 300 (light) */
 ```
 
 ### 텍스트 정렬
@@ -442,7 +442,7 @@ grid                /* display: grid */
 
 ### 오버플로우
 ```css
-overflow(hidden)    /* overflow: hidden */
+clip    /* overflow: hidden */
 overflow(auto)      /* overflow: auto */
 overflow(scroll)    /* overflow: scroll */
 overflow-x(auto)    /* overflow-x: auto */

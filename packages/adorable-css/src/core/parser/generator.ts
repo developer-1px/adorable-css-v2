@@ -1,5 +1,5 @@
 import { parseAdorableCSS } from "./parser";
-import { getRuleHandler, getPriorityRuleHandler, getRuleWithPriority } from "../../rules";
+import { getRuleHandler, getRuleWithPriority } from "../../rules";
 import { priorityRegistry } from "../../rules/priority-registry";
 import type { CSSRule, ParsedSelector, StringRuleDefinition } from "../../rules/types";
 import { RulePriority } from "../../rules/types";
@@ -172,8 +172,8 @@ const generateCSSFromSelector = (selector: ParsedSelector, parentSelector?: stri
       return resolveStringRule(selector.name, args, new Set(), parentSelector);
     }
     
-    // Get handler
-    const handler = getPriorityRuleHandler(selector.name) || getRuleHandler(selector.name);
+    // Get handler and rule info
+    const handler = getRuleHandler(selector.name);
     const ruleInfo = getRuleWithPriority(selector.name);
     
     if (!handler) {

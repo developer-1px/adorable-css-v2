@@ -143,10 +143,11 @@ export const gridResponsive: RuleHandler = (args?: string): CSSRule => {
   };
 };
 
-export const responsiveRules = {
-  'font-responsive': fontResponsive,
-  'gap-responsive': gapResponsive,
-  'p-responsive': pResponsive,
-  'container-responsive': containerResponsive,
-  'grid-responsive': gridResponsive
-};
+// SPEC'D OUT - Responsive rules are disabled
+// export const responsiveRules = {
+//   'font-responsive': fontResponsive,
+//   'gap-responsive': gapResponsive,
+//   'p-responsive': pResponsive,
+//   'container-responsive': containerResponsive,
+//   'grid-responsive': gridResponsive
+// };
