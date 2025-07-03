@@ -102,4 +102,4 @@ AdorableCSS speaks Figma's language:
 
 **Join 10,000+ developers** who've already bridged the design-code gap.
 
-[Get Started](https://adorablecss.com) • [Interactive Demo](https://adorablecss.com/playground) • [5-Min Tutorial](https://adorablecss.com/tutorial)
+[Get Started](https://adorable-css.com) • [Interactive Demo](https://adorable-css.com/playground) • [5-Min Tutorial](https://adorable-css.com/tutorial)

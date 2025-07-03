@@ -289,13 +289,13 @@ addPlugin({
 
 ## 📖 전체 문서
 
-상세한 문서는 [adorablecss.com](https://adorablecss.com)에서 확인하세요:
+상세한 문서는 [adorable-css.com](https://adorable-css.com)에서 확인하세요:
 
-- [시작하기](https://adorablecss.com/docs/getting-started)
-- [레이아웃 시스템](https://adorablecss.com/docs/layout)
-- [타이포그래피](https://adorablecss.com/docs/typography)
-- [디자인 토큰](https://adorablecss.com/docs/tokens)
-- [Figma 플러그인](https://adorablecss.com/docs/figma-plugin)
+- [시작하기](https://adorable-css.com/docs/getting-started)
+- [레이아웃 시스템](https://adorable-css.com/docs/layout)
+- [타이포그래피](https://adorable-css.com/docs/typography)
+- [디자인 토큰](https://adorable-css.com/docs/tokens)
+- [Figma 플러그인](https://adorable-css.com/docs/figma-plugin)
 
 ## 🤝 기여하기
 

@@ -178,4 +178,4 @@ c(--custom-var)     /* CSS variables */
 ---
 
 📄 **Print Tip**: 가로 모드로 인쇄하면 한 장에 모두 들어갑니다!  
-🔗 **온라인 버전**: [adorablecss.com/cheatsheet](/cheatsheet)
+🔗 **온라인 버전**: [adorable-css.com/cheatsheet](/cheatsheet)
