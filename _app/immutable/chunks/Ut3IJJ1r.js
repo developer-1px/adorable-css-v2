@@ -1,0 +1,41 @@
+import{n as B,o as F,p as M,q as K,r as v,S as O,s as f,u as U,v as A,w as j,x as k,y as C,z as H}from"./DW9qJUvo.js";const b=t=>{const n=t.length,e=t.charCodeAt(0);let s=-1,r,o="";for(;++s<n;){if(r=t.charCodeAt(s),r==0){o+="�";continue}if(r>=1&&r<=31||r==127||s==0&&r>=48&&r<=57||s==1&&r>=48&&r<=57&&e==45){o+="\\"+r.toString(16)+" ";continue}if(s==0&&n==1&&r==45){o+="\\"+t.charAt(s);continue}if(r>=128||r==45||r==95||r>=48&&r<=57||r>=65&&r<=90||r>=97&&r<=122){o+=t.charAt(s);continue}o+="\\"+t.charAt(s)}return o};function E(t){return t.replace(/(\.[^{\.]+)(\1)+/g,"$1")}function x(t){var n;return{type:t.name?"function":"keyword",name:t.name||t.image,args:(n=t.args)==null?void 0:n.map(e=>{if(e.type==="triple-range")return`${e.min.image}..${e.preferred.image}..${e.max.image}`;if(e.type==="range"){const s=e.min?e.min.image:"",r=e.max?e.max.image:"";return`${s}..${r}`}return e.image})}}class q{static hasAnimations(n){return n.some(e=>e.includes("fade-")||e.includes("scale-")||e.includes("slide-")||e.includes("bounce-")||e.includes("float")||e.includes("animate("))}static getKeyframesCSS(n){return this.hasAnimations(n)?B():""}static prependKeyframesIfNeeded(n,e){const s=this.getKeyframesCSS(e);return s?s+`
+`+n:n}}function m(t,n){const e=[],s=[];return Object.entries(t||{}).forEach(([r,o])=>{if(o!==void 0)if(typeof o=="object"&&o!==null){const i=m(o,n);if(i.mainCSS){const c=n?r.replace("&",n):r;s.push(`${c}{${i.mainCSS}}`)}s.push(...i.nestedCSS)}else e.push(`${r}:${o}`)}),{mainCSS:e.join(";"),nestedCSS:s}}const Q={sm:"640px",md:"768px",lg:"1024px",xl:"1280px","2xl":"1536px","3xl":"1920px","4xl":"2560px","5xl":"3200px","6xl":"3840px","7xl":"4096px"};function W(t){return Q[t]}function Y(t,n=!1){const e=W(t);if(e)return n?`@media (max-width: ${e})`:`@media (min-width: ${e})`}function w(t){const n=t.match(/(!+)$/),e=n?n[1].length:0;return{level:e,className:e>0?t.slice(0,-e):t}}function y(t,n){return t}const _=`
+/* Box sizing and reset */
+:where(*,::before,::after){box-sizing:border-box;margin:0;padding:0;border:0 solid;font:inherit;color:inherit;min-width:0;min-height:0;}
+
+/* Root element defaults */
+:where(:root){line-height:1;overflow-wrap:break-word;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;text-size-adjust:100%;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+
+/* Full height for html and body */
+:where(html,body){height:100%;}
+
+/* Media elements */
+:where(img,picture,video,canvas,svg){display:block;max-width:100%;height:auto;}
+
+/* Form elements */
+:where(button,input,textarea,select){background:none;appearance:none;-webkit-appearance:none;text-align:inherit;}
+
+/* Interactive elements */
+:where(a,button,input[type=submit],input[type=button],input[type=reset]){cursor:pointer;}
+
+/* Links */
+:where(a){text-decoration:none;}
+
+/* Lists */
+:where(ul,ol){list-style:none;}
+
+/* Tables */
+:where(table){border-collapse:collapse;border-spacing:0;}
+`.trim();function z(t){return t>=C.STATE?"state":t>=C.UTILITY?"utility":t>=C.LAYOUT?"layout":"component"}const I=(t,n)=>{let e=t.match(/@layer\s+\w+\s*\{[^{]+\{([^}]+)\}\}/);return e||(e=t.match(/[^{]+\{([^}]+)\}/)),e?e[1]:(console.warn(`⚠️  AdorableCSS: Could not parse base CSS for class "${n}"`),console.warn(`   Base CSS: "${t}"`),null)},P=(t,n,e,s)=>{var r;for(const o of t)if(o)try{const i=v(o);if(i.value.length>0){const c=i.value[0].selector,l=c.name||c.image,p=(r=c.args)==null?void 0:r.map(S=>S.image).join("");if(f.hasString(l)){const S=L(l,p,new Set(e));s.push(S)}else{const S=$(x(c));s.push(S)}}}catch(i){console.warn(`⚠️  AdorableCSS: Error parsing class "${o}" from string rule "${n}":`,i)}},L=(t,n,e=new Set,s)=>{const r=`${t}(${n||""})`;if(e.has(r))return console.warn(`⚠️  AdorableCSS: Circular dependency detected for string rule "${r}"`),{mainCSS:"",nestedCSS:[],priority:0};e.add(r);const o=f.getStringRule(t);if(!o)return{mainCSS:"",nestedCSS:[],priority:0};const i=o.handler;let c;try{c=typeof i=="function"?n!==void 0?i(n):i():""}catch(a){return console.warn(`⚠️  AdorableCSS: Error executing string rule "${t}":`,a),{mainCSS:"",nestedCSS:[],priority:o.priority}}const l=[];if(Array.isArray(c)){for(const a of c)if(typeof a=="string"){if(!a.trim())continue;const u=a.trim().split(/\s+/);P(u,t,e,l)}else if(typeof a=="object"&&a!==null){const u=m(a,s);l.push({...u,priority:o.priority})}}else{const a=c;if(!a.trim())return{mainCSS:"",nestedCSS:[],priority:o.priority};const u=a.trim().split(/\s+/);P(u,t,e,l)}const p=l.map(a=>a.mainCSS).filter(Boolean),S=l.flatMap(a=>a.nestedCSS);return{mainCSS:p.join(";"),nestedCSS:S,priority:o.priority}},$=(t,n)=>{if(f.hasString(t.name)){const c=t.type==="function"&&t.args?t.args.join(""):void 0;return L(t.name,c,new Set,n)}const e=k(t.name),s=H(t.name);if(!e)return console.warn(`⚠️  AdorableCSS: Rule handler not found for "${t.name}"`),{mainCSS:"",nestedCSS:[],priority:0};const r=t.type==="function"&&t.args?t.args.join(""):"",o=e(r);return{...m(o,n),priority:(s==null?void 0:s.priority)||0}},D=(t,n)=>{const e=t.combinators[0],s=t.selector.image,r=e.selector,o=`${n}:${s}`;return{selector:o,cssResult:$(x(r),o)}},V=(t,n)=>{const e=t.selector;if(e.type==="position")return{...m({position:"absolute",left:String(j(e.x.image)),top:String(j(e.y.image))},n),priority:200};if(e.type==="(dimension-pair)"){const s=k("dimension-pair");if(s){const r=s(e.image);return{...m(r,n),priority:200}}}return $(x(e),n)};function G(t){if(!t)return"";if(M(t))return J(t);if(K(t))return X(t);try{const n=v(t),{level:e}=w(t),s="."+b(t);let r=y(s,e);const o=[];let i=!1;n.value.forEach(a=>{var d;const u=((d=a.combinators)==null?void 0:d.length)>0&&a.combinators[0].combinator===":"?(()=>{const{selector:h,cssResult:g}=D(a,s);return r=y(h,e),g})():V(a,s);o.push(u),(u.mainCSS||u.nestedCSS.length>0)&&(i=!0)}),o.sort((a,u)=>(a.priority||0)-(u.priority||0));const l=o.map(a=>a.mainCSS).filter(Boolean).join(";"),p=o.flatMap(a=>a.nestedCSS);if(!i&&n.value.length>0&&console.warn(`⚠️  AdorableCSS: Class "${t}" parsed successfully but generated no CSS`),!l&&p.length===0)return"";const S=[];return l&&S.push(`${r}{${l}}`),S.push(...p),E(S.join(""))}catch(n){return console.warn(`❌ AdorableCSS: Failed to parse "${t}"`),console.warn("   Error:",n),""}}const R=F(G);function J(t){const{level:n,className:e}=w(t),s=O.analyze(e);if(!s)return console.warn(`⚠️  AdorableCSS: Invalid state pattern "${e}"`),"";const r=R(s.selector);if(!r)return console.warn(`⚠️  AdorableCSS: Base class "${s.selector}" generated no CSS for state "${e}"`),"";const o=I(r,e);if(!o)return"";const i={};o.split(";").forEach(d=>{if(d.trim()){const[h,g]=d.split(":").map(T=>T.trim());h&&g&&(i[h]=g)}});const c=s.selector.split("(")[0],l=f.getAnyRule(c);l&&z(l.priority);const p="."+b(e),S=U(i,s,p),a=m(S);let u=a.nestedCSS.length>0?a.nestedCSS[0]:"";return n>0&&u&&(u=u.replace(/^(\.[^{]+)(\{)/,`${"[class]".repeat(n)}$1$2`)),u}function X(t){const{className:n}=w(t),e=A.analyze(n);if(!e)return console.warn(`⚠️  AdorableCSS: Invalid responsive pattern "${n}"`),"";const s=R(e.selector);if(!s)return console.warn(`⚠️  AdorableCSS: Base class "${e.selector}" generated no CSS for responsive "${n}"`),"";const r=I(s,n);if(!r)return"";const o=Y(e.breakpoint,e.isMaxWidth);if(!o)return"";const i=A.analyze(e.selector),c=(i==null?void 0:i.selector)||e.selector,l=f.getAnyRule(c.split("(")[0]);l&&z(l.priority);const p="."+b(n),S=y(p);return`${o}{${S}{${r}}}`}function Z(t){const n=[...new Set(t)],e={components:[],composition:[],utilities:[]};n.forEach(o=>{const i=R(o);!i||i.trim()===""||(/^(body|heading|title|label|caption|button|card|container|section|prose|glass|glow|interactive)\(/.test(o)?e.components.push(i):/^(hbox|vbox|grid|layer|stack|center|between|around|evenly)\(/.test(o)?e.composition.push(i):e.utilities.push(i))});const s=[];s.push("@layer base, components, composition, utilities;"),s.push(`@layer base {
+${_}
+}`),e.components.length>0&&s.push(`@layer components {
+${e.components.join(`
+`)}
+}`),e.composition.length>0&&s.push(`@layer composition {
+${e.composition.join(`
+`)}
+}`),e.utilities.length>0&&s.push(`@layer utilities {
+${e.utilities.join(`
+`)}
+}`);const r=E(s.join(`
+`));return q.prependKeyframesIfNeeded(r,n)}const ee=Z;export{ee as a,R as g};
