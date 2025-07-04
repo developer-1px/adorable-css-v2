@@ -29,7 +29,7 @@ pnpm dev
 #### 2. 첫 체험 (30분)
 ```html
 <!-- playground에서 직접 해보기 -->
-<div class="hbox(pack) min-h(screen) bg(gray-50)">
+<div class="hbox(fill) min-h(screen) bg(gray-50)">
   <div class="card p(xl)">
     <h1 class="heading(xl)">안녕하세요! 👋</h1>
     <p class="body">AdorableCSS에 오신 것을 환영합니다.</p>
@@ -199,10 +199,10 @@ pnpm dev
 ### 2. 과도한 인라인
 ```html
 <!-- ❌ 너무 많은 클래스 -->
-<div class="hbox(middle+between) p(md) m(lg) bg(white) r(lg) shadow(md) b(1/gray-200) hover:shadow(lg) transition">
+<div class="hbox(middle) gap(auto) p(md) m(lg) bg(white) r(lg) shadow(md) b(1/gray-200) hover:shadow(lg) transition">
 
 <!-- ✅ 컴포넌트 활용 -->
-<div class="card hbox(middle+between)">
+<div class="card hbox(middle) gap(auto)">
 ```
 
 ### 3. 토큰 무시

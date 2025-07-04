@@ -289,9 +289,9 @@ const formSystem = {
 const layoutPatterns = {
   // 페이지 레이아웃
   'page-layout': 'min-h(screen) vbox',
-  'page-header': 'h(64) hbox(between) px(xl) border-b(1/gray-200)',
+  'page-header': 'h(64) hbox(middle) gap(auto) px(xl) border-b(1/gray-200)',
   'page-content': 'flex(1) container(xl) py(xl)',
-  'page-footer': 'h(120) bg(gray-50) hbox(center) px(xl)',
+  'page-footer': 'h(120) bg(gray-50) hbox(pack) px(xl)',
   
   // 사이드바 레이아웃
   'sidebar-layout': 'hbox h(screen)',

@@ -41,7 +41,7 @@ import 'adorable-css'
 
 ```html
 <!-- 중앙 정렬 컨테이너 -->
-<div class="hbox(pack) min-h(screen)">
+<div class="hbox(fill) min-h(screen)">
   <div class="card w(400px)">
     <h1 class="heading(lg) mb(md)">환영합니다!</h1>
     <p class="body c(gray-600) mb(lg)">

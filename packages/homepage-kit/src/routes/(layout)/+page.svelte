@@ -1,226 +1,203 @@
 <script lang="ts">
-  import { Github, ArrowRight, Sparkles, Zap, Package } from 'lucide-svelte';
+  import { Github, ArrowRight, MessageCircle, Users, Layers, Code, Palette, Grid } from 'lucide-svelte';
   import CodeBlock from '$lib/components/ui/CodeBlock.svelte';
+  import Card from '$lib/components/ui/Card.svelte';
+  import Badge from '$lib/components/ui/Badge.svelte';
+  import Button from '$lib/components/ui/Button.svelte';
 </script>
 
 <!-- Hero Section -->
-<section class="relative min-h(100vh) vbox(center) clip bg(white)">
-  <!-- Light Grid Background -->
-  <div class="absolute layer(fill) pointer-events(none)">
-    <!-- Large checkered grid pattern -->
-    <div class="absolute layer(fill)" 
-         style="background-image: 
-                linear-gradient(to right, rgb(0 0 0 / 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgb(0 0 0 / 0.03) 1px, transparent 1px);
-                background-size: 80px 80px;">
-    </div>
-    <!-- Subtle gradient overlay -->
-    <div class="absolute layer(fill) bg(to-b/white.0..white.7)"></div>
-  </div>
-  
-  <!-- Hero Content -->
-  <div class="relative z(10) vbox(center) gap(32) px(24) py(80) max-w(6xl) mx(auto) text(center)">
-    <!-- Badge -->
-    <div>
-      <div class="hbox(middle) gap(8) px(20) py(10) r(full) glass(20/0.05) border(1/primary.3) shadow(lg/primary.1) hover:shadow(xl/primary.2) transition group">
-        <Sparkles size="16" class="c(primary)" />
-        <span class="label(sm) bold(600) bg(clip-text) c(135deg/primary..primary-600)">v2.0 Alpha</span>
-        <span class="px(8) py(2) r(full) bg(primary) c(white) caption(xs) bold">NEW</span>
-      </div>
-    </div>
-    
-    <!-- Main Heading -->
-    <h1 class="display(2xl) c(neutral-900)">
-      Write CSS like you
-      <br />
-      <span class="relative inline-block">
-        <span class="relative z(10) bg(clip-text) c(135deg/primary..primary-600)">think in Figma</span>
-        <span class="absolute bottom(-8) left(0) right(0) h(20) bg(primary.1) blur(xl)"></span>
-      </span>
-    </h1>
-    
-    <!-- Subheading -->
-    <p class="body(lg) c(neutral-600) max-w(4xl) mx(auto)">
-      A <span class="bold(600) c(primary)">Figma-first</span> CSS framework that bridges design and code. 
-      Built-in design system, intuitive syntax, and seamless integration.
-    </p>
-    
-    <!-- CTA Buttons -->
-    <div class="hbox(center/wrap) gap(20)">
-      <a href="/docs" class="group px(32) py(16) r(xl) bg(primary..primary-600) c(white) label(button) bold(700) shadow(xl) hover:shadow(2xl) hover:translate-y(-2) active:translate-y(0) transition relative clip">
-        <span class="relative z(10) hbox(middle) gap(8)">
-          Get Started
-          <ArrowRight size="20" class="group-hover:translate-x(4) transition" />
-        </span>
-        <span class="absolute layer(fill) bg(white.2) scale(0) group-hover:scale(1) transition(transform/0.5s) r(full)"></span>
-      </a>
+<section class="relative min-h(100vh) vbox(center) bg(white)">
+  <div class="container(6xl) mx(auto) px(2xl) py(8xl)">
+    <div class="vbox(center) gap(6xl)">
       
-      <a href="https://github.com/adorablecss/adorable-css" target="_blank" rel="noopener" class="group px(32) py(16) r(xl) glass(20/0.05) border(2/gray-300) hover:border(2/purple-500) c(gray-700) hover:c(purple-600) label(button) bold(700) shadow(md) hover:shadow(lg) hover:translate-y(-2) active:translate-y(0) transition">
-        <span class="hbox(middle) gap(8)">
-          <Github size="20" />
-          <span>View on GitHub</span>
-        </span>
-      </a>
-    </div>
-    
-    <!-- Quick Install -->
-    <div class="vbox(center) gap(16)">
-      <p class="caption(sm) uppercase tracking(wider)">Quick Install</p>
-      <div class="group relative">
-        <div class="hbox(middle) gap(16) px(24) py(14) r(xl) glass(20/0.05) border(1/gray-300) shadow(lg) hover:shadow(xl) transition">
-          <code class="label(base) font(mono) c(gray-800) select-all">npm install adorable-css</code>
-          <button class="size(36) r(lg) hbox(center) bg(purple-100) hover:bg(purple-200) c(purple-700) transition group">
-            <Package size="18" class="group-hover:scale(1.1) transition" />
-          </button>
-        </div>
-        <!-- Copy feedback -->
-        <div class="absolute top(full) left(50%) translate-x(-50%) mt(8) px(12) py(6) r(md) bg(gray-900) c(white) caption(xs) opacity(0) group-hover:opacity(100) transition pointer-events(none)">
-          Click to copy
-        </div>
+      <!-- Main Heading -->
+      <div class="vbox(center) gap(3xl) max-w(5xl)">
+        <h1 class="heading(display/3xl) c(mute-900) leading(tight)">
+          CSS Framework that Speaks
+          <br />
+          <span class="c(mute-600)">Figma Language</span>
+        </h1>
+        
+        <p class="body(xl) c(mute-600) max-w(4xl)">
+          Write CSS using the same terms designers use in Figma. 
+          <span class="c(mute-900)">hbox(), gap(), w(fill)</span> — no translation needed.
+        </p>
       </div>
-    </div>
-  </div>
-  
-  <!-- Feature Grid Preview -->
-  <div class="grid(3) gap(32) max-w(7xl) mx(auto) px(24) pb(120) relative z(10) ..lg:grid(1) lg:gap(24)">
-    <!-- Figma-First -->
-    <div class="group vbox gap(16) p(32) r(2xl) glass(20/0.02) border(1/gray-200) hover:border(1/purple-500.5) shadow(lg) hover:shadow(2xl) transition relative clip">
-      <!-- Background gradient on hover -->
-      <div class="absolute layer(fill) bg(radial/purple-500.05..transparent) opacity(0) group-hover:opacity(100) transition"></div>
       
-      <div class="relative z(10)">
-        <div class="size(64) r(xl) bg(purple-500..purple-600) shadow(lg/purple-500.3) group-hover:shadow(xl/purple-500.4) hbox(center) mb(16) group-hover:scale(1.1) transition">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="white">
-            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
-          </svg>
+      <!-- Simple Demo -->
+      <div class="p(3xl) bg(mute-50) r(2xl) max-w(4xl)">
+        <div class="vbox(center) gap(xl)">
+          <div class="hbox(center) gap(2xl)">
+            <div class="vbox(center) gap(sm)">
+              <p class="caption c(mute-700)">Designer</p>
+              <p class="body(lg) c(mute-900)">"hbox gap(16)"</p>
+            </div>
+            <ArrowRight size="24" class="c(mute-400)" />
+            <div class="vbox(center) gap(sm)">
+              <p class="caption c(mute-700)">Developer</p>
+              <code class="code(lg) c(mute-900)">hbox gap(16)</code>
+            </div>
+          </div>
+          <p class="caption c(mute-600)">Same language, perfect communication</p>
         </div>
-        <h3 class="title(lg) c(gray-900) mb(8)">Figma Mental Model</h3>
-        <p class="body(base) c(gray-600)">Auto Layout, constraints, and layer positioning - just like in Figma</p>
       </div>
-    </div>
-    
-    <!-- Built-in Design System -->
-    <div class="group vbox gap(16) p(32) r(2xl) glass(20/0.02) border(1/gray-200) hover:border(1/emerald-500.5) shadow(lg) hover:shadow(2xl) transition relative clip">
-      <!-- Background gradient on hover -->
-      <div class="absolute layer(fill) bg(radial/emerald-500.05..transparent) opacity(0) group-hover:opacity(100) transition"></div>
       
-      <div class="relative z(10)">
-        <div class="size(64) r(xl) bg(emerald-500..emerald-600) shadow(lg/emerald-500.3) group-hover:shadow(xl/emerald-500.4) hbox(center) mb(16) group-hover:scale(1.1) transition">
-          <Zap size="32" class="c(white)" />
-        </div>
-        <h3 class="title(lg) c(gray-900) mb(8)">Design System Built-in</h3>
-        <p class="body(base) c(gray-600)">Professional design tokens, semantic colors, and consistent spacing out of the box</p>
+      <!-- CTA -->
+      <div class="hbox(center) gap(lg)">
+        <Button size="lg" variant="default">
+          Try AdorableCSS
+        </Button>
+        <Button size="lg" variant="ghost">
+          <div class="hbox(middle) gap(sm)">
+            <Github size="20" />
+            <span>GitHub</span>
+          </div>
+        </Button>
       </div>
-    </div>
-    
-    <!-- Developer Experience -->
-    <div class="group vbox gap(16) p(32) r(2xl) glass(20/0.02) border(1/gray-200) hover:border(1/blue-500.5) shadow(lg) hover:shadow(2xl) transition relative clip">
-      <!-- Background gradient on hover -->
-      <div class="absolute layer(fill) bg(radial/blue-500.05..transparent) opacity(0) group-hover:opacity(100) transition"></div>
       
-      <div class="relative z(10)">
-        <div class="size(64) r(xl) bg(blue-500..blue-600) shadow(lg/blue-500.3) group-hover:shadow(xl/blue-500.4) hbox(center) mb(16) group-hover:scale(1.1) transition">
-          <Sparkles size="32" class="c(white)" />
-        </div>
-        <h3 class="title(lg) c(gray-900) mb(8)">Amazing DX</h3>
-        <p class="body(base) c(gray-600)">IntelliSense support, tiny bundle size, and zero runtime overhead</p>
-      </div>
     </div>
   </div>
 </section>
 
-<!-- Code Comparison Section -->
-<section class="relative py(120) clip">
-  <!-- Background pattern -->
-  <div class="absolute layer(fill) bg(gray-50)"></div>
-  <div class="absolute layer(fill)" 
-       style="background-image: 
-              linear-gradient(to right, rgb(255 255 255 / 0.5) 1px, transparent 1px),
-              linear-gradient(to bottom, rgb(255 255 255 / 0.5) 1px, transparent 1px);
-              background-size: 40px 40px;"></div>
-  
-  <div class="relative z(10) container max-w(7xl)">
-    <div class="text(center) mb(64)">
-      <h2 class="display(xl) c(gray-900) mb(20)">
-        Write Less, <span class="bg(clip-text) c(135deg/purple-600..pink-600)">Design More</span>
-      </h2>
-      <p class="body(lg) c(gray-600) max-w(2xl) mx(auto)">
-        See how AdorableCSS simplifies your workflow with intuitive, Figma-like syntax
-      </p>
+<!-- Problem Section -->
+<section class="bg(mute-50) py(6xl)">
+  <div class="container(6xl) mx(auto) px(2xl)">
+    <div class="vbox(center) gap(4xl)">
+      
+      <div class="vbox(center) gap(xl) max-w(4xl)">
+        <h2 class="heading(h1) c(mute-900)">
+          The Problem
+        </h2>
+        <p class="body(lg) c(mute-600)">
+          Designer: "Auto Layout Horizontal, 16px gap"
+          <br />
+          Developer: "display: flex; gap: 1rem"
+          <br />
+          <span class="c(mute-900)">Same intention, different vocabulary.</span>
+        </p>
+      </div>
+      
     </div>
-    
-    <!-- Code Comparison -->
-    <div class="grid(2) gap(40) items(stretch) ..lg:grid(1) lg:gap(32)">
-      <!-- Traditional CSS -->
-      <div class="vbox gap(20) group">
-        <div class="hbox(middle) gap(12)">
-          <div class="size(48) r(xl) bg(gray-200) hbox(center) group-hover:bg(gray-300) transition">
-            <div class="size(24) r(md) bg(gray-400)"></div>
-          </div>
-          <div class="vbox gap(4)">
-            <h3 class="title(base) c(gray-500)">Traditional CSS</h3>
-            <p class="caption(xs) c(gray-400)">17 lines, 268 characters</p>
+  </div>
+</section>
+
+<!-- Solution Section -->
+<section class="bg(white) py(6xl)">
+  <div class="container(6xl) mx(auto) px(2xl)">
+    <div class="vbox(center) gap(4xl)">
+      
+      <div class="vbox(center) gap(xl) max-w(4xl)">
+        <h2 class="heading(h1) c(mute-900)">
+          The Solution
+        </h2>
+        <p class="body(lg) c(mute-600)">
+          Use the same terms in both design and code
+        </p>
+      </div>
+      
+      <!-- Simple Before/After -->
+      <div class="grid(2) gap(2xl) max-w(5xl)">
+        <div class="vbox(center) gap(lg) p(2xl) bg(mute-50) r(xl)">
+          <h3 class="heading(h3) c(mute-900)">Before</h3>
+          <div class="vbox(center) gap(md)">
+            <p class="body(md) c(mute-700)">"Auto Layout Vertical"</p>
+            <p class="caption c(mute-500)">↓ translation required</p>
+            <code class="code(sm) c(mute-800)">display: flex; flex-direction: column;</code>
           </div>
         </div>
-        <div class="r(xl) clip shadow(xl) border(1/gray-200) group-hover:shadow(2xl) transition">
-          <CodeBlock 
-            theme="dark"
-            language="css"
-            code={`.card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding: 1.5rem;
-  border-radius: 0.75rem;
-  background: linear-gradient(
-    135deg, 
-    #8b5cf6 0%, 
-    #ec4899 100%
-  );
-  box-shadow: 0 10px 15px -3px 
-    rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-}
-
-.card:hover {
-  transform: scale(1.05);
-}`}
-          />
+        
+        <div class="vbox(center) gap(lg) p(2xl) bg(white) r(xl) border(2/mute-200)">
+          <h3 class="heading(h3) c(mute-900)">AdorableCSS</h3>
+          <div class="vbox(center) gap(md)">
+            <p class="body(md) c(mute-700)">"vbox"</p>
+            <p class="caption c(mute-500)">↓ same term</p>
+            <code class="code(sm) c(mute-800)">vbox</code>
+          </div>
         </div>
       </div>
       
-      <!-- AdorableCSS -->
-      <div class="vbox gap(20) group">
-        <div class="hbox(middle) gap(12)">
-          <div class="size(48) r(xl) bg(purple-500..pink-500) hbox(center) shadow(md/purple-500.3) group-hover:shadow(lg/purple-500.4) group-hover:scale(110) transition">
-            <Sparkles size="24" class="c(white)" />
-          </div>
-          <div class="vbox gap(4)">
-            <h3 class="title(base) bold(700) c(gray-900)">AdorableCSS</h3>
-            <p class="caption(xs) c(purple-600) bold(500)">10 lines, 145 characters</p>
-          </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features Section -->
+<section class="bg(mute-50) py(6xl)">
+  <div class="container(6xl) mx(auto) px(2xl)">
+    <div class="vbox(center) gap(4xl)">
+      
+      <div class="vbox(center) gap(xl) max-w(4xl)">
+        <h2 class="heading(h1) c(mute-900)">
+          Core Features
+        </h2>
+      </div>
+      
+      <!-- Feature Grid -->
+      <div class="grid(3) gap(xl) max-w(6xl)">
+        <div class="vbox(center) gap(lg) p(xl) bg(white) r(lg)">
+          <Grid size="32" class="c(mute-700)" />
+          <h3 class="heading(h3) c(mute-900)">Figma Terms</h3>
+          <p class="body(md) c(mute-600)">
+            hbox(), vbox(), gap(), w(fill) — use the same words designers use
+          </p>
         </div>
-        <div class="r(xl) clip shadow(xl) border(2/purple-500.3) group-hover:shadow(2xl) group-hover:border(2/purple-500.5) transition">
-          <CodeBlock 
-            theme="branded"
-            language="html"
-            code={`<div class="
-  vbox(center) 
-  gap(16) 
-  p(24) 
-  r(lg) 
-  bg(135deg/purple-500..pink-500)
-  shadow(lg) 
-  hover:scale(1.05) 
-  transition
-">
-  <!-- Your content -->
-</div>`}
-          />
+        
+        <div class="vbox(center) gap(lg) p(xl) bg(white) r(lg)">
+          <Palette size="32" class="c(mute-700)" />
+          <h3 class="heading(h3) c(mute-900)">Design Tokens</h3>
+          <p class="body(md) c(mute-600)">
+            c(primary), gap(lg), heading(h1) — semantic tokens, not hex codes
+          </p>
+        </div>
+        
+        <div class="vbox(center) gap(lg) p(xl) bg(white) r(lg)">
+          <Layers size="32" class="c(mute-700)" />
+          <h3 class="heading(h3) c(mute-900)">Components</h3>
+          <p class="body(md) c(mute-600)">
+            btn(primary/lg), card(elevated) — describe what you want
+          </p>
         </div>
       </div>
+      
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="bg(mute-900) py(6xl)">
+  <div class="container(5xl) mx(auto) px(2xl)">
+    <div class="vbox(center) gap(4xl)">
+      
+      <div class="vbox(center) gap(xl) max-w(4xl)">
+        <h2 class="heading(h1) c(white)">
+          Start Using AdorableCSS
+        </h2>
+        <p class="body(lg) c(white.8)">
+          Experience what it's like when designers and developers 
+          finally speak the same language.
+        </p>
+      </div>
+      
+      <div class="hbox(center) gap(lg)">
+        <Button size="lg" variant="secondary">
+          Try AdorableCSS
+        </Button>
+        <Button size="lg" variant="ghost">
+          <div class="hbox(middle) gap(sm) c(white)">
+            <Github size="20" />
+            <span>GitHub</span>
+          </div>
+        </Button>
+      </div>
+      
+      <!-- Install -->
+      <div class="p(xl) bg(white.1) r(lg) max-w(3xl)">
+        <div class="vbox(center) gap(md)">
+          <p class="caption c(white.7)">Install in 30 seconds</p>
+          <code class="code(lg) c(white) bg(transparent)">npm install adorable-css</code>
+        </div>
+      </div>
+      
     </div>
   </div>
 </section>

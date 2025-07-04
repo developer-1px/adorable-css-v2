@@ -174,9 +174,9 @@ export interface SemanticDesignSystem {
 export const defaultSemanticSystem: SemanticDesignSystem = {
   colors: {
     brand: {
-      primary: 'purple-500',
-      secondary: 'pink-500',
-      accent: 'blue-500',
+      primary: 'indigo-600',    // Unified with tokens/index.ts
+      secondary: 'slate-600',   // Unified with tokens/index.ts
+      accent: 'violet-500',     // Unified with tokens/index.ts
     },
     ui: {
       background: 'white',
@@ -192,24 +192,24 @@ export const defaultSemanticSystem: SemanticDesignSystem = {
       tertiary: 'gray-500',
       disabled: 'gray-400',
       inverse: 'white',
-      link: 'blue-600',
-      linkHover: 'blue-700',
+      link: 'indigo-600',         // Unified to use indigo like primary
+      linkHover: 'indigo-700',    // Unified to use indigo like primary
     },
     state: {
-      success: 'green-600',
-      successLight: 'green-50',
-      warning: 'amber-600',
+      success: 'emerald-600',    // Unified with tokens/index.ts
+      successLight: 'emerald-50',
+      warning: 'amber-500',       // Unified with tokens/index.ts
       warningLight: 'amber-50',
-      error: 'red-600',
+      error: 'red-600',           // Unified with tokens/index.ts
       errorLight: 'red-50',
-      info: 'blue-600',
-      infoLight: 'blue-50',
+      info: 'sky-500',            // Unified with tokens/index.ts
+      infoLight: 'sky-50',
     },
     interactive: {
       hover: 'gray-50',
       active: 'gray-100',
-      focus: 'purple-500',
-      selected: 'purple-50',
+      focus: 'indigo-500',        // Unified to use indigo like primary
+      selected: 'indigo-50',      // Unified to use indigo like primary
     },
   },
   typography: {

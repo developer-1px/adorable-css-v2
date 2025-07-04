@@ -145,7 +145,7 @@
               <div class="font(xs) c(neutral-500) font-family(mono) mt(xs)">Text color utility</div>
             </div>
             <div class="p(md) r(md) bg(white) border(1/neutral-200)">
-              <div class="c(emerald-500) font(md)">c(emerald-500)</div>
+              <div class="c(success) font(md)">c(success)</div>
               <div class="font(xs) c(neutral-500) font-family(mono) mt(xs)">Success color</div>
             </div>
             <div class="p(md) r(md) bg(white) border(1/neutral-200)">
@@ -163,9 +163,9 @@
               <div class="c(blue-800) font(md)">bg(blue-100)</div>
               <div class="font(xs) c(blue-600) font-family(mono) mt(xs)">Light background</div>
             </div>
-            <div class="p(md) r(md) bg(emerald-500) border(1/emerald-600)">
-              <div class="c(white) font(md)">bg(emerald-500)</div>
-              <div class="font(xs) c(emerald-100) font-family(mono) mt(xs)">Primary background</div>
+            <div class="p(md) r(md) bg(success) border(1/success-600)">
+              <div class="c(white) font(md)">bg(success)</div>
+              <div class="font(xs) c(white) font-family(mono) mt(xs)">Primary background</div>
             </div>
             <div class="p(md) r(md) bg(neutral-800) border(1/neutral-900)">
               <div class="c(white) font(md)">bg(gray-800)</div>

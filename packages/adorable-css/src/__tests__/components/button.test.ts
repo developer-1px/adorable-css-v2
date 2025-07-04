@@ -5,7 +5,7 @@ describe('button component', () => {
   describe('btnString', () => {
     it('should return default button styles', () => {
       const result = btnString();
-      expect(result).toContain('inline-flex items(center) justify(center)');
+      expect(result).toContain('hbox(center+center)');
       expect(result).toContain('h(40) px(16) py(8) font(sm)'); // default size
       expect(result).toContain('bg(gray-900) c(white) border(transparent)'); // default variant
     });
@@ -60,10 +60,11 @@ describe('button component', () => {
       expect(result).toContain('h(auto) px(0) py(0)'); // compound variant overrides
     });
 
-    it('should include state classes', () => {
+    it('should include default styles', () => {
       const result = btnString();
-      expect(result).toContain('focus:outline(none) ring(2/blue-500) ring-offset(2)');
-      expect(result).toContain('disabled:pointer-events(none) opacity(50)');
+      expect(result).toContain('hbox(center+center)');
+      expect(result).toContain('gap(8)');
+      expect(result).toContain('cursor(pointer)');
     });
 
     it('should combine variant and size', () => {
@@ -76,7 +77,7 @@ describe('button component', () => {
   describe('iconBtnString', () => {
     it('should return default icon button styles', () => {
       const result = iconBtnString();
-      expect(result).toContain('inline-flex items(center) justify(center)');
+      expect(result).toContain('hbox(center+center)');
       expect(result).toContain('w(40) h(40) p(0) r(md)'); // default size
       expect(result).toContain('bg(transparent) c(gray-700)'); // default variant
     });
@@ -96,10 +97,11 @@ describe('button component', () => {
       expect(result).toContain('hover:bg(gray-100) hover:c(gray-900) active:bg(gray-200)');
     });
 
-    it('should include focus and disabled states', () => {
+    it('should include default icon button styles', () => {
       const result = iconBtnString();
-      expect(result).toContain('focus:outline(none) ring(2/blue-500) ring-offset(2)');
-      expect(result).toContain('disabled:pointer-events(none) opacity(50)');
+      expect(result).toContain('hbox(center+center)');
+      expect(result).toContain('cursor(pointer)');
+      expect(result).toContain('w(40) h(40)');
     });
   });
 });

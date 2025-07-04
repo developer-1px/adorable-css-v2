@@ -210,7 +210,7 @@
               <input
                 bind:value={liveInput}
                 placeholder="Enter AdorableCSS classes... (e.g., w(300) p(lg) c(blue-500))"
-                class="flex(1) px(16) py(12) border(1/gray-200) r(8) body(base) font(mono) bg(white)
+                class="flex(1) px(16) py(12) border(1/gray-200) r(8) body(base) mono bg(white)
                        focus:border(purple-300) focus:ring(2/purple-100) transition-all"
                 on:input={generateLiveCSS}
               />
@@ -226,7 +226,7 @@
             {#if liveCSS}
               <div class="vbox gap(8)">
                 <h4 class="label(sm) c(gray-600) uppercase letter-spacing(wide)">Generated CSS:</h4>
-                <pre class="p(20) bg(white) border(1/gray-200) r(8) caption(base) font(mono) 
+                <pre class="p(20) bg(white) border(1/gray-200) r(8) caption(base) mono 
                            overflow-x(auto) max-h(300) scroll(y) c(gray-700)">{liveCSS}</pre>
               </div>
             {/if}
@@ -246,7 +246,7 @@
               <!-- Layer Header -->
               <div class="mb(32) pb(16) border-b(2/purple-200)">
                 <div class="hbox(middle) gap(12) mb(8)">
-                  <code class="px(16) py(8) bg(purple-100) c(purple-800) r(8) font(mono) body(sm)">@layer {layerGroup.layer}</code>
+                  <code class="px(16) py(8) bg(purple-100) c(purple-800) r(8) mono body(sm)">@layer {layerGroup.layer}</code>
                   <h2 class="heading(h2) c(gray-900)">{layerGroup.name}</h2>
                 </div>
                 <p class="body(base) c(gray-600)">
@@ -275,6 +275,47 @@
                             <p class="caption(base) c(gray-500)">{Object.keys(subgroup.rules).length} rules</p>
                           </div>
                   
+                  <!-- Examples Grid for Key Rules -->
+                  {#if subgroup.name === 'Layout' || subgroup.name === 'Colors' || subgroup.name === 'Typography' || subgroup.name === 'Spacing'}
+                    <div class="mb(24) p(20) bg(gray-50) r(12) border(1/gray-200)">
+                      <h5 class="label(sm) c(gray-700) mb(16) uppercase letter-spacing(wide)">Visual Examples</h5>
+                      <div class="grid(2) lg:grid(3) gap(16)">
+                        {#each Object.entries(subgroup.rules).slice(0, 6) as [ruleName, handler]}
+                          {#if ruleName.includes('blue') || ruleName.includes('lg') || ruleName.includes('center') || ruleName.includes('gap') || ruleName.includes('p(') || ruleName.includes('heading')}
+                            <div class="p(16) bg(white) r(8) border(1/gray-200) vbox gap(8)">
+                              <code class="mono caption(xs) c(purple-600)">{ruleName}</code>
+                              <div class="min-h(40) hbox(center) border(1/gray-100) r(6) relative">
+                                <!-- Visual demo based on rule type -->
+                                {#if ruleName.includes('c(') && ruleName.includes('blue')}
+                                  <div class="{ruleName} p(8) r(4)">Colored text</div>
+                                {:else if ruleName.includes('bg(') && ruleName.includes('blue')}
+                                  <div class="{ruleName} p(8) r(4) c(white)">Background</div>
+                                {:else if ruleName.includes('p(') || ruleName.includes('gap(')}
+                                  <div class="{ruleName} bg(purple-100) r(4)">
+                                    <div class="w(20) h(20) bg(purple-300) r(2)"></div>
+                                    <div class="w(20) h(20) bg(purple-300) r(2)"></div>
+                                  </div>
+                                {:else if ruleName.includes('hbox') || ruleName.includes('vbox')}
+                                  <div class="{ruleName} gap(8) p(8) bg(blue-50) r(4)">
+                                    <div class="w(16) h(16) bg(blue-300) r(2)"></div>
+                                    <div class="w(16) h(16) bg(blue-300) r(2)"></div>
+                                    <div class="w(16) h(16) bg(blue-300) r(2)"></div>
+                                  </div>
+                                {:else if ruleName.includes('w(') || ruleName.includes('h(')}
+                                  <div class="{ruleName} bg(green-200) r(4) min-h(20)">Size demo</div>
+                                {:else if ruleName.includes('heading') || ruleName.includes('font')}
+                                  <div class="{ruleName} c(gray-800)">Typography</div>
+                                {:else}
+                                  <div class="{ruleName} p(4) bg(gray-100) r(4) min-w(40) min-h(20)">Demo</div>
+                                {/if}
+                              </div>
+                            </div>
+                          {/if}
+                        {/each}
+                      </div>
+                    </div>
+                  {/if}
+
                   <!-- Rules Table -->
                   <div class="overflow-x(auto) r(8) border(1/gray-200)">
                     <table class="w(full)">
@@ -282,6 +323,7 @@
                         <tr class="bg(gray-50) border-b(1/gray-200)">
                           <th class="text(left) p(sm/lg) label(sm) c(gray-600) w(200)">Rule</th>
                           <th class="text(left) p(sm/lg) label(sm) c(gray-600)">CSS Output</th>
+                          <th class="text(left) p(sm/lg) label(sm) c(gray-600) w(100)">Preview</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -295,7 +337,7 @@
                                 on:click={() => copyToClipboard(ruleName)}
                                 title="Click to copy {ruleName}"
                               >
-                                <code class="font(mono) bold(medium) c(purple-600) body(xs)">{ruleName}</code>
+                                <code class="mono bold(medium) c(purple-600) body(xs)">{ruleName}</code>
                                 {#if copiedRule === ruleName}
                                   <Check size="14" class="c(green-600)" />
                                 {:else}
@@ -307,6 +349,30 @@
                             <!-- CSS Output -->
                             <td class="p(sm/lg)">
                               <code class="body(xs) font(mono) c(gray-700) block whitespace(pre-wrap)">{generateCSSFromAdorableCSS(ruleName)}</code>
+                            </td>
+                            
+                            <!-- Mini Preview -->
+                            <td class="p(sm/lg)">
+                              <div class="w(60) h(24) hbox(center) border(1/gray-200) r(4) bg(gray-50) relative overflow(hidden)">
+                                {#if ruleName.includes('c(') && (ruleName.includes('blue') || ruleName.includes('red') || ruleName.includes('green'))}
+                                  <div class="{ruleName} caption(xs)">Aa</div>
+                                {:else if ruleName.includes('bg(') && (ruleName.includes('blue') || ruleName.includes('red') || ruleName.includes('green'))}
+                                  <div class="{ruleName} w(full) h(full) r(2)"></div>
+                                {:else if ruleName.includes('p(') || ruleName.includes('gap(')}
+                                  <div class="{ruleName} bg(blue-100) r(2) hbox">
+                                    <div class="w(6) h(6) bg(blue-400) r(1)"></div>
+                                    <div class="w(6) h(6) bg(blue-400) r(1)"></div>
+                                  </div>
+                                {:else if ruleName.includes('hbox') || ruleName.includes('vbox')}
+                                  <div class="{ruleName} gap(2)">
+                                    <div class="w(4) h(4) bg(purple-400) r(1)"></div>
+                                    <div class="w(4) h(4) bg(purple-400) r(1)"></div>
+                                    <div class="w(4) h(4) bg(purple-400) r(1)"></div>
+                                  </div>
+                                {:else}
+                                  <div class="{ruleName} w(8) h(8) bg(gray-300) r(1)"></div>
+                                {/if}
+                              </div>
                             </td>
                           </tr>
                         {/each}

@@ -53,7 +53,7 @@
 
 ### 7. Gradient 문법 실수
 ```css
-❌ Wrong: bg(gradient-to-br/purple-500/pink-500)
+❌ Wrong: bg(to-br/purple-500/pink-500)
 ✅ Correct: bg(135deg/purple-500..pink-500)
 ```
 **이유**: AdorableCSS는 degree/color1..color2 문법 사용.

@@ -59,7 +59,7 @@ describe('Nested Selector Feature', () => {
     
     it('should handle complex nested CSS structures', () => {
       const testCases = [
-        'hbox(middle+between)',
+        'hbox(middle) gap(auto)',
         'vbox(pack)',
         'hbox(center+wrap)'
       ];
@@ -78,7 +78,7 @@ describe('Nested Selector Feature', () => {
   describe('Integration with layout classes', () => {
     it('should work with header layout classes', () => {
       const headerClasses = [
-        'hbox(middle+between)',
+        'hbox(middle) gap(auto)',
         'vbox(pack)', 
         'container(6xl)',
         'py(lg)',

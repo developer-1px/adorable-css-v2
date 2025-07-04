@@ -23,8 +23,8 @@
   }
   
   const semanticColors = [
-    { name: 'brand', value: 'purple-600', desc: 'Primary brand color' },
-    { name: 'accent', value: 'pink-500', desc: 'Accent for highlights' },
+    { name: 'brand', value: 'primary', desc: 'Primary brand color' },
+    { name: 'accent', value: 'primary-500', desc: 'Accent for highlights' },
     { name: 'success', value: 'green-500', desc: 'Success states' },
     { name: 'warning', value: 'yellow-500', desc: 'Warning messages' },
     { name: 'danger', value: 'red-500', desc: 'Error states' },
@@ -101,10 +101,10 @@
     <h3 class="heading()">Gradients</h3>
     <div class="grid() gap()">
       {#each [
-        { name: 'Sunset', value: 'orange-400..pink-500/135deg' },
-        { name: 'Ocean', value: 'blue-400..purple-600/to-br' },
-        { name: 'Forest', value: 'green-400..blue-500/90deg' },
-        { name: 'Berry', value: 'purple-500..pink-400/45deg' },
+        { name: 'Sunset', value: 'warning-400..error-500/135deg' },
+        { name: 'Ocean', value: 'primary-400..primary-600/to-br' },
+        { name: 'Forest', value: 'success-400..primary-500/90deg' },
+        { name: 'Berry', value: 'primary-500..error-400/45deg' },
         { name: 'Fire', value: 'yellow-400..red-500/to-tr' },
         { name: 'Night', value: 'neutral-700..neutral-900/180deg' }
       ] as gradient}

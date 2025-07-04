@@ -21,14 +21,14 @@ After analyzing the homepage-kit package, I found several files still containing
   - `text-xl font-bold text-gray-900 mb-2`
   - `text-gray-600 leading-relaxed`
   - `min-h-screen flex flex-col items-center justify-center`
-  - `bg-gradient-to-br from-purple-500 to-pink-500 text-white px-4`
+  - `bg-to-br from-purple-500 to-pink-500 text-white px-4`
   - `text-5xl md:text-6xl font-bold text-center mb-6`
   - `mt-8 px-8 py-4 bg-white text-purple-600 r(lg) font-semibold hover:scale-105 transition-transform`
 
 ### 3. **DramaticCodeComparison.svelte** - Contains extensive Tailwind examples
 - Classes in example code:
   - `relative flex flex-col items-center justify-center min-h-screen`
-  - `bg-gradient-to-br from-purple-500 via-pink-500 to-red-500`
+  - `bg-to-br from-purple-500 via-pink-500 to-red-500`
   - `absolute inset-0 bg-black/20`
   - `text-5xl md:text-6xl lg:text-7xl font-black`
   - `text-center text-white drop-shadow-2xl animate-pulse`
@@ -51,9 +51,9 @@ After analyzing the homepage-kit package, I found several files still containing
 
 ### Layout Classes
 - `flex`, `flex-col`, `flex-row` → `hbox()`, `vbox()`
-- `items-center`, `justify-center` → `hbox(center)`, `vbox(center)`
+- `items-center`, `justify-center` → `hbox(pack)`, `vbox(center)`
 - `items-start`, `items-end` → `hbox(top)`, `hbox(bottom)`
-- `justify-between`, `justify-start` → `hbox(between)`, `hbox(left)`
+- `justify-between`, `justify-start` → `hbox(middle) gap(auto)`, `hbox(left)`
 - `grid grid-cols-X` → `grid(X)`
 - `gap-X` → `gap(sm/md/lg/xl)`
 - `space-x-X`, `space-y-X` → `gap()` in flex containers
@@ -72,7 +72,7 @@ After analyzing the homepage-kit package, I found several files still containing
 
 ### Background & Colors
 - `bg-white`, `bg-gray-X` → `bg(white)`, `bg(gray-X)`
-- `bg-gradient-to-br from-X to-Y` → `bg(135deg/X..Y)` or `bg(to-br/X..Y)`
+- `bg-to-br from-X to-Y` → `bg(135deg/X..Y)` or `bg(to-br/X..Y)`
 - `text-white`, `text-purple-X` → `c(white)`, `c(purple-X)`
 
 ### Borders & Shadows

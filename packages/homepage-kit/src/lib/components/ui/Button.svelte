@@ -10,14 +10,21 @@
   
   const dispatch = createEventDispatcher();
   
-  // Use AdorableCSS btn() component classes
-  $: btnClass = size === 'icon' ? `icon-btn(${size})` : `btn(${variant}/${size})`;
+  // Map Svelte props to AdorableCSS btn syntax
+  const getVariantName = (variant: string) => {
+    switch (variant) {
+      case 'destructive': return 'destructive'
+      default: return variant
+    }
+  }
+
+  const disabledClasses = disabled ? 'opacity(50) cursor(not-allowed) pointer-events-none' : ''
   
-  // Additional state classes
-  $: stateClasses = [
-    disabled && 'disabled:opacity(50) disabled:cursor(not-allowed)',
-    loading && 'cursor(wait)'
-  ].filter(Boolean).join(' ');
+  $: btnClass = size === 'default' 
+    ? `btn(${getVariantName(variant)})`
+    : `btn(${getVariantName(variant)}/${size})`
+    
+  $: classes = `${btnClass} ${disabledClasses}`
   
   function handleClick(event: MouseEvent) {
     if (!disabled && !loading) {
@@ -29,25 +36,25 @@
 {#if href && !disabled}
   <a 
     {href}
-    class="{btnClass} {stateClasses}"
+    class={classes}
     on:click={handleClick}
     role="button"
     tabindex="0"
   >
     {#if loading}
-      <div class="size(16) mr(xs) border(2/currentColor) border-t(2/transparent) r(full) animate(spin)"></div>
+      <div class="size(16) mr(xs) bd(2/solid/currentColor) bt(2/solid/transparent) r(full) animate(spin)"></div>
     {/if}
     <slot />
   </a>
 {:else}
   <button
     type="button"
-    class="{btnClass} {stateClasses}"
+    class={classes}
     disabled={disabled || loading}
     on:click={handleClick}
   >
     {#if loading}
-      <div class="size(16) mr(xs) border(2/currentColor) border-t(2/transparent) r(full) animate(spin)"></div>
+      <div class="size(16) mr(xs) bd(2/solid/currentColor) bt(2/solid/transparent) r(full) animate(spin)"></div>
     {/if}
     <slot />
   </button>

@@ -81,7 +81,7 @@
   <header class="relative z(10) pt(4xl) pb(3xl) px(xl) overflow(hidden)">
     <div class="container(7xl) mx(auto)">
       <!-- Decorative element -->
-      <div class="hbox(center) gap(xs) mb(xl)">
+      <div class="hbox(pack) gap(xs) mb(xl)">
         <span class="inline-block w(40px) h(1px) bg(to-r/transparent..indigo-400)"></span>
         <span class="text(xs) uppercase tracking(0.2em) c(indigo-600) font(medium)">Design System</span>
         <span class="inline-block w(40px) h(1px) bg(to-l/transparent..indigo-400)"></span>

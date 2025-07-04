@@ -1,4 +1,4 @@
-import { RuleHandler, CSSRule } from '../types';
+import type { RuleHandler, CSSRule } from '../../rules/types';
 
 /**
  * Semantic color utilities

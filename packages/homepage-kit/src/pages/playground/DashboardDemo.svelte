@@ -70,9 +70,9 @@
 <div class="dashboard vbox w(fill) min-h(screen) bg(#fafbfc)">
   <!-- Modern Header -->
   <header class="header hbox(between+center) h(64) px(2xl) bg(white.8) backdrop(blur/12) border-bottom(1/#f0f0f2) sticky top(0) z(50)">
-    <div class="hbox(center) gap(2xl)">
+    <div class="hbox(pack) gap(2xl)">
       <!-- Logo -->
-      <div class="logo hbox(center) gap(xs)">
+      <div class="logo hbox(pack) gap(xs)">
         <div class="logo-mark relative size(40) r(lg) bg(135deg/#0a0a0a..#262626) shadow(md)">
           <span class="bold font(xl) c(white)">A</span>
           <div class="logo-shine layer(fill) r(lg) bg(135deg/white.2..transparent) opacity(0) hover:opacity(1) transition"></div>
@@ -95,7 +95,7 @@
       </nav>
     </div>
     
-    <div class="hbox(center) gap(md)">
+    <div class="hbox(pack) gap(md)">
       <!-- Search -->
       <div class="search-container relative">
         <input 
@@ -114,7 +114,7 @@
       <div class="divider w(1) h(24) bg(#e5e5e5)"></div>
       
       <!-- User -->
-      <button class="user-menu hbox(center) gap(xs) px(xs) py(xs) r(2xl) hover:bg(#f5f5f5) transition">
+      <button class="user-menu hbox(pack) gap(xs) px(xs) py(xs) r(2xl) hover:bg(#f5f5f5) transition">
         <div class="avatar size(32) r(full) bg(135deg/#6366f1..#8b5cf6) shadow(sm)">
           <span class="bold font(sm) c(white)">JW</span>
         </div>
@@ -186,7 +186,7 @@
               {/each}
               
               <!-- Bars -->
-              <div class="bars layer(left+right+bottom) hbox(between) gap(xs)">
+              <div class="bars layer(left+right+bottom) hbox(middle) gap(auto) gap(xs)">
                 {#each Array(30) as _, i}
                   <div class="bar-wrapper flex vbox(end) group">
                     <div 
@@ -287,7 +287,7 @@
                   <span class="font(sm) medium c(#0a0a0a)">#TRX-001234</span>
                 </td>
                 <td class="px(xl) py(lg)">
-                  <div class="hbox(center) gap(xs)">
+                  <div class="hbox(pack) gap(xs)">
                     <div class="size(32) r() bg(#e5e5e5)"></div>
                     <div class="vbox gap(xs)">
                       <span class="font(sm) medium c(#0a0a0a)">Emma Wilson</span>
@@ -307,7 +307,7 @@
                   <span class="font(sm) medium c(#0a0a0a)">#TRX-001233</span>
                 </td>
                 <td class="px(xl) py(lg)">
-                  <div class="hbox(center) gap(xs)">
+                  <div class="hbox(pack) gap(xs)">
                     <div class="size(32) r() bg(#e5e5e5)"></div>
                     <div class="vbox gap(xs)">
                       <span class="font(sm) medium c(#0a0a0a)">Michael Chen</span>
@@ -327,7 +327,7 @@
                   <span class="font(sm) medium c(#0a0a0a)">#TRX-001232</span>
                 </td>
                 <td class="px(xl) py(lg)">
-                  <div class="hbox(center) gap(xs)">
+                  <div class="hbox(pack) gap(xs)">
                     <div class="size(32) r() bg(#e5e5e5)"></div>
                     <div class="vbox gap(xs)">
                       <span class="font(sm) medium c(#0a0a0a)">Sarah Johnson</span>

@@ -48,7 +48,7 @@ width: fit-content;  →     w(hug)
 ### 2. **Intelligent Parser**
 - Understands complex expressions: `w(200..400)`
 - Smart value processing: `16` → `16px`
-- Function composition: `hbox(middle+between)`
+- Function composition: `hbox(middle) gap(auto)`
 
 ### 3. **Performance First**
 - **12KB average production bundle**

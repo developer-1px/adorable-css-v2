@@ -109,8 +109,8 @@
 <!-- Toggle Button -->
 <div class="class-inspector fixed bottom(lg) right(lg) z(100)">
   <button
-    class="w(48px) h(48px) r(full) bg(purple-600) hover:bg(purple-700) c(white) 
-           shadow(lg) transition hbox(center) {isEnabled ? 'bg(green-600) hover:bg(green-700)' : ''}"
+    class="w(48px) h(48px) r(full) bg(primary) hover:bg(primary-700) c(white) 
+           shadow(lg) transition hbox(pack) {isEnabled ? 'bg(green-600) hover:bg(green-700)' : ''}"
     on:click={toggleInspector}
     title={isEnabled ? 'Disable Class Inspector' : 'Enable Class Inspector'}
   >

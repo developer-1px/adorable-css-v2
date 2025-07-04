@@ -150,7 +150,7 @@ CSS 용어를 배우는 대신, Figma 용어를 그대로 사용합니다.
 <div class="display-flex flex-direction-row align-items-center justify-content-space-between">
 
 <!-- AdorableCSS: WHAT을 표현 -->
-<div class="hbox(between)">
+<div class="hbox(middle) gap(auto)">
 ```
 
 "어떻게 구현할 것인가"가 아닌 "무엇을 만들 것인가"를 코드로 표현합니다.

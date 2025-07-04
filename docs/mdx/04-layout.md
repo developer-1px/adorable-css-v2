@@ -328,7 +328,7 @@ scrollable          /* overflow: auto */
 <!-- 전통적 CSS: 50+ 줄 -->
 <!-- AdorableCSS: 5줄 -->
 <div class="vbox h(screen)">
-  <header class="hbox(between) px(xl) py(md) bg(white) shadow(sm)">
+  <header class="hbox(middle) gap(auto) px(xl) py(md) bg(white) shadow(sm)">
     <div class="hbox gap(lg)">
       <img class="w(40) h(40)" src="logo.png" />
       <nav class="hbox gap(md)">

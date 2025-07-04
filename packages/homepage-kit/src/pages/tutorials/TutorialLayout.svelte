@@ -59,7 +59,7 @@
     <div class="p(sm) bb(1/neutral-200) bg(neutral-100) hbox gap(auto)">
       <span class="600 font(sm) c(neutral-700)">Code</span>
       <button 
-        class="px(sm) py(xs) bg(primary-500) c(white) r(sm) 600 font(xs)"
+        class="px(sm) py(xs) bg(primary) c(white) r(sm) 600 font(xs)"
         onclick={() => { editorValue = code; updatePreview(); }}>
         Reset
       </button>

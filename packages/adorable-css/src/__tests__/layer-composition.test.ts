@@ -3,7 +3,7 @@ import { generateCSS } from '../core/parser/generator';
 
 describe('Layer Composition System', () => {
   it('should place layout compositions in @layer composition', () => {
-    const css = generateCSS(['hbox(center)', 'vbox(middle)', 'grid(3)']);
+    const css = generateCSS(['hbox(pack)', 'vbox(middle)', 'grid(3)']);
     
     expect(css).toContain('@layer base, components, composition, utilities;');
     expect(css).toContain('@layer composition {');
@@ -16,7 +16,7 @@ describe('Layer Composition System', () => {
   });
 
   it('should ensure utilities override composition', () => {
-    const css = generateCSS(['hbox(center)', 'p(20)', 'c(white)']);
+    const css = generateCSS(['hbox(pack)', 'p(20)', 'c(white)']);
     
     // Find the positions of each layer
     const compositionIndex = css.indexOf('@layer composition');
@@ -29,7 +29,7 @@ describe('Layer Composition System', () => {
   it('should handle all layer types correctly', () => {
     const css = generateCSS([
       'body(base)',      // components
-      'hbox(center)',    // composition
+      'hbox(pack)',    // composition
       'c(white)',        // utilities
       'p(16)'           // utilities
     ]);

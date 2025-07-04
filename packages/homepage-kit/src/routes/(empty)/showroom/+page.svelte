@@ -108,7 +108,7 @@
         while you focus on building what matters.
       </p>
       
-      <div class="hbox(center) gap(lg) flex-wrap">
+      <div class="hbox(pack) gap(lg) flex-wrap">
         <button class="px(2xl) py(lg) bg(primary) c(white) r(full) bold(600) body(md) hover:bg(primary-700) transition shadow(lg) hover:shadow(xl) hover:translate-y(-2) transform">
           Start free trial
         </button>
@@ -311,7 +311,7 @@
       <p class="body(md) c(white.8) max-w(2xl)">
         Join 50,000+ developers who ship code 10x faster with AI
       </p>
-      <div class="hbox(center) gap(lg)">
+      <div class="hbox(pack) gap(lg)">
         <button class="px(2xl) py(lg) bg(white) c(primary) r(full) bold(600) body(md) hover:bg(neutral-50) transition shadow(lg) hover:shadow(xl)">
           Start Free Today
         </button>
@@ -519,7 +519,7 @@
           { q: 'Do you offer enterprise plans?', a: 'Absolutely! We have custom enterprise plans with dedicated support and SLAs.' }
         ] as faq, i}
           <details class="group">
-            <summary class="py(lg) px(xl) bg(white) hover:bg(neutral-50) r(lg) cursor(pointer) hbox(between) transition">
+            <summary class="py(lg) px(xl) bg(white) hover:bg(neutral-50) r(lg) cursor(pointer) hbox(middle) gap(auto) transition">
               <h3 class="title(md) c(neutral-900)">{faq.q}</h3>
               <span class="c(neutral-400) transition group-open:rotate(180)">▼</span>
             </summary>
@@ -772,7 +772,7 @@
         </div>
       </div>
       
-      <div class="pt(2xl) bt(neutral-800) hbox(between) items(center) ..sm:vbox ..sm:gap(lg)">
+      <div class="pt(2xl) bt(neutral-800) hbox(middle) gap(auto) items(center) ..sm:vbox ..sm:gap(lg)">
         <p class="caption c(neutral-400)">© 2024 Lumina. All rights reserved.</p>
         <div class="hbox gap(lg)">
           <a href="#" class="caption c(neutral-400) hover:c(white) transition">Privacy Policy</a>

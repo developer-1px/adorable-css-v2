@@ -3,7 +3,7 @@ import type { ComponentDefinition } from '../defineComponent-unified';
 
 // Button component definition
 export const buttonDefinition: ComponentDefinition = {
-  base: 'inline-flex items(center) justify(center) gap(8) cursor(pointer) select(none) font(medium) whitespace(nowrap) r(md) transition-all',
+  base: 'hbox(pack) gap(8) cursor(pointer) select(none) font(medium) whitespace(nowrap) r(md) transition-all',
   
   sizes: {
     sm: 'h(36) px(12) font(xs) r(md)',
@@ -36,11 +36,15 @@ export const buttonDefinition: ComponentDefinition = {
 };
 
 // Button component using unified defineComponent
-export const btnString = defineComponent(buttonDefinition);
+export const btnString = defineComponent(buttonDefinition, {
+  sizeOptions: ['sm', 'default', 'lg', 'icon'],
+  defaultSize: 'default',
+  defaultVariant: 'default'
+});
 
 // Icon button definition
 export const iconButtonDefinition: ComponentDefinition = {
-  base: 'inline-flex items(center) justify(center) cursor(pointer) select(none) r(md) transition-all',
+  base: 'hbox(center+center) cursor(pointer) select(none) r(md) transition-all',
   
   sizes: {
     sm: 'w(36) h(36) p(0) r(md)',

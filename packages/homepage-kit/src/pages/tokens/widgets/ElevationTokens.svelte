@@ -140,7 +140,7 @@
           <!-- Content -->
           <div class="vbox gap(md)">
             <!-- Level indicator -->
-            <div class="hbox(between) items(center)">
+            <div class="hbox(middle) gap(auto) items(center)">
               <div class="hbox(middle) gap(sm)">
                 <code class="px(sm) py(xs) bg(purple-100) c(purple-700) r(md) font(mono) text(sm) font(bold)">
                   elevation({level})
@@ -152,8 +152,8 @@
             </div>
 
             <!-- Visual demonstration -->
-            <div class="relative h(80px) bg(gray-50) r(lg) overflow(hidden) hbox(center) items(center)">
-              <div class="w(60px) h(60px) bg(white) r(lg) elevation({level}) hbox(center) items(center)">
+            <div class="relative h(80px) bg(gray-50) r(lg) overflow(hidden) hbox(pack) items(center)">
+              <div class="w(60px) h(60px) bg(white) r(lg) elevation({level}) hbox(pack) items(center)">
                 <span class="text(xs) c(gray-500) font(bold)">{level}</span>
               </div>
             </div>

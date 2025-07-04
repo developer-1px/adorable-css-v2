@@ -75,7 +75,7 @@ describe('Warning System for Missing Rules', () => {
     it('should help debug layout classes used in header', () => {
       // Mix of real and potentially missing classes from our layout
       const headerClasses = [
-        'hbox(middle+between)', // Should work
+        'hbox(middle) gap(auto)', // Should work
         'container(6xl)',       // Should work
         'py(lg)',              // Should work
         'some-missing-class',   // Should warn

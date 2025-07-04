@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://unpkg.com/adorable-css/dist/adorable.css">
 </head>
 <body>
-  <div class="hbox(pack) min-h(screen)">
+  <div class="hbox(fill) min-h(screen)">
     <h1 class="heading(xl)">Hello AdorableCSS!</h1>
   </div>
 </body>

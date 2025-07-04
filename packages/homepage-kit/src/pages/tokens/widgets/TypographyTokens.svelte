@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Type, Hash, AlignLeft, Minus, Heading1, Type as TypeIcon, FileText, Tag, MessageSquare, Info } from 'lucide-svelte';
+  import { defaultTokens } from 'adorable-css';
   
   // Display component variants - for maximum visual impact
   const displayVariants = [
@@ -112,11 +113,11 @@
 <div class="vbox gap(4xl)">
   <!-- Section Header -->
   <div class="text(center)">
-    <div class="hbox(center) gap(sm) mb(xl)">
-      <Type size="32" class="c(purple-600)" />
+    <div class="hbox(pack) gap(sm)">
+      <Type size="32" class="c(primary)" />
       <h1 class="display(lg) gradient">Typography System</h1>
     </div>
-    <p class="body(lg) c(gray-600) max-w(3xl) mx(auto)">
+    <p class="body(lg) c(neutral-600) max-w(3xl) mx(auto) pt(xl)">
       A comprehensive 6-role typography system designed for clarity, hierarchy, and beautiful reading experiences. 
       Each role serves a specific purpose in your design system.
     </p>
@@ -125,234 +126,234 @@
   <!-- Role-Based Typography System -->
   <div class="vbox gap(3xl)">
     <!-- Display Role -->
-    <div class="bg(135deg/purple-50..pink-50) r(2xl) p(3xl) border(2/purple-200)">
-      <div class="hbox(between/start) mb(2xl)">
+    <div class="bg(primary-50) r(2xl) p(3xl) b(1/neutral-200)">
+      <div class="hbox(between/start) gap(xl)">
         <div>
-          <div class="hbox(start) gap(sm) mb(md)">
-            <div class="p(sm) r(lg) bg(purple-600) c(white)">
+          <div class="hbox(start) gap(sm) pb(md)">
+            <div class="p(sm) r(lg) bg(primary) c(white)">
               <TypeIcon size="20" />
             </div>
-            <h2 class="heading(h2) c(purple-900)">Display</h2>
+            <h2 class="heading(h2) c(neutral-900)">Display</h2>
           </div>
-          <p class="body(base) c(purple-700) max-w(2xl)">
+          <p class="body(base) c(neutral-700) max-w(2xl)">
             Maximum visual impact for hero sections, landing pages, and marketing materials. 
             Features tight line-height and negative letter-spacing for dramatic effect.
           </p>
         </div>
-        <code class="caption(base) bg(purple-100) px(md) py(sm) r(lg) font(mono) c(purple-800)">
+        <code class="caption(base) bg(white) px(md) py(sm) r(lg) font(mono) c(neutral-800)">
           display(size)
         </code>
       </div>
       
-      <div class="vbox gap(xl)">
+      <div class="vbox gap(xl) pt(2xl)">
         {#each displayVariants as variant}
           <div 
-            class="group p(xl) r(xl) bg(white) hover:shadow(2xl) transition-all cursor-pointer border(1/purple-100) hover:border(purple-300)"
+            class="group p(xl) r(xl) bg(white) hover:shadow(2xl) transition-all cursor(pointer) b(1/neutral-100) hover:b(1/primary-200)"
             on:click={() => copyCode(`display(${variant.name})`)}
           >
-            <div class="hbox(between) mb(sm)">
+            <div class="hbox(middle) gap(auto) pb(sm)">
               <code class="badge(sm/primary)">
                 display({variant.name})
               </code>
-              <span class="caption(xs) c(purple-600)">{variant.usage}</span>
+              <span class="caption(xs) c(neutral-600)">{variant.usage}</span>
             </div>
-            <div class="display({variant.name}) c(gray-900) mb(sm)">
+            <div class="display({variant.name}) c(neutral-900) pb(sm)">
               {variant.example}
             </div>
-            <p class="caption(base) c(gray-600)">{variant.description}</p>
+            <p class="caption(base) c(neutral-600)">{variant.description}</p>
           </div>
         {/each}
       </div>
     </div>
 
     <!-- Heading Role -->
-    <div class="bg(135deg/indigo-50..blue-50) r(2xl) p(3xl) border(2/indigo-200)">
-      <div class="hbox(between/start) mb(2xl)">
+    <div class="bg(white) r(2xl) p(3xl) b(1/neutral-200)">
+      <div class="hbox(between/start) gap(xl)">
         <div>
-          <div class="hbox(start) gap(sm) mb(md)">
-            <div class="p(sm) r(lg) bg(indigo-600) c(white)">
+          <div class="hbox(start) gap(sm) pb(md)">
+            <div class="p(sm) r(lg) bg(neutral-700) c(white)">
               <Heading1 size="20" />
             </div>
-            <h2 class="heading(h2) c(indigo-900)">Heading</h2>
+            <h2 class="heading(h2) c(neutral-900)">Heading</h2>
           </div>
-          <p class="body(base) c(indigo-700) max-w(2xl)">
+          <p class="body(base) c(neutral-700) max-w(2xl)">
             Semantic HTML headings for document structure and SEO. 
             Provides clear visual hierarchy with balanced typography.
           </p>
         </div>
-        <code class="caption(base) bg(indigo-100) px(md) py(sm) r(lg) font(mono) c(indigo-800)">
+        <code class="caption(base) bg(neutral-100) px(md) py(sm) r(lg) font(mono) c(neutral-800)">
           heading(level)
         </code>
       </div>
       
-      <div class="vbox gap(lg)">
+      <div class="vbox gap(lg) pt(2xl)">
         {#each headingVariants as variant}
           <div 
-            class="group p(xl) r(xl) bg(white) hover:shadow(xl) transition-all cursor-pointer border(1/indigo-100) hover:border(indigo-300)"
+            class="group p(xl) r(xl) bg(neutral-50) hover:shadow(xl) transition-all cursor(pointer) b(1/neutral-100) hover:b(1/neutral-300)"
             on:click={() => copyCode(`heading(${variant.name})`)}
           >
-            <div class="hbox(between) mb(md)">
-              <code class="badge(sm/primary)">
+            <div class="hbox(middle) gap(auto) pb(md)">
+              <code class="badge(sm/muted)">
                 heading({variant.name})
               </code>
-              <span class="caption(xs) c(indigo-600)">{variant.usage}</span>
+              <span class="caption(xs) c(neutral-600)">{variant.usage}</span>
             </div>
-            <div class="heading({variant.name}) c(gray-900) mb(sm)">
+            <div class="heading({variant.name}) c(neutral-900) pb(sm)">
               {variant.example}
             </div>
-            <p class="caption(base) c(gray-600)">{variant.description}</p>
+            <p class="caption(base) c(neutral-600)">{variant.description}</p>
           </div>
         {/each}
       </div>
     </div>
 
     <!-- Title Role -->
-    <div class="bg(135deg/cyan-50..sky-50) r(2xl) p(3xl) border(2/cyan-200)">
-      <div class="hbox(between/start) mb(2xl)">
+    <div class="bg(neutral-50) r(2xl) p(3xl) b(1/neutral-200)">
+      <div class="hbox(between/start) gap(xl)">
         <div>
-          <div class="hbox(start) gap(sm) mb(md)">
-            <div class="p(sm) r(lg) bg(cyan-600) c(white)">
+          <div class="hbox(start) gap(sm) pb(md)">
+            <div class="p(sm) r(lg) bg(primary) c(white)">
               <Tag size="20" />
             </div>
-            <h2 class="heading(h2) c(cyan-900)">Title</h2>
+            <h2 class="heading(h2) c(neutral-900)">Title</h2>
           </div>
-          <p class="body(base) c(cyan-700) max-w(2xl)">
+          <p class="body(base) c(neutral-700) max-w(2xl)">
             Component identifiers for cards, modals, and UI elements. 
             Balanced weight and spacing for clear labeling without dominating.
           </p>
         </div>
-        <code class="caption(base) bg(cyan-100) px(md) py(sm) r(lg) font(mono) c(cyan-800)">
+        <code class="caption(base) bg(white) px(md) py(sm) r(lg) font(mono) c(neutral-800)">
           title(size)
         </code>
       </div>
       
-      <div class="grid(3) gap(lg)">
+      <div class="grid(3) gap(lg) pt(2xl)">
         {#each titleVariants as variant}
           <div 
-            class="group p(lg) r(xl) bg(white) hover:shadow(lg) transition-all cursor-pointer border(1/cyan-100) hover:border(cyan-300)"
+            class="group p(lg) r(xl) bg(white) hover:shadow(lg) transition-all cursor(pointer) b(1/neutral-100) hover:b(1/primary-200)"
             on:click={() => copyCode(`title(${variant.name})`)}
           >
-            <div class="hbox(between) mb(sm)">
+            <div class="hbox(middle) gap(auto) pb(sm)">
               <code class="badge(xs/primary)">
                 title({variant.name})
               </code>
             </div>
-            <h3 class="title({variant.name}) c(gray-900) mb(xs) truncate">
+            <h3 class="title({variant.name}) c(neutral-900) pb(xs) truncate">
               {variant.example}
             </h3>
-            <p class="caption(xs) c(gray-600)">{variant.usage}</p>
+            <p class="caption(xs) c(neutral-600)">{variant.usage}</p>
           </div>
         {/each}
       </div>
     </div>
 
     <!-- Body Role -->
-    <div class="bg(135deg/green-50..emerald-50) r(2xl) p(3xl) border(2/green-200)">
-      <div class="hbox(between/start) mb(2xl)">
+    <div class="bg(white) r(2xl) p(3xl) b(1/neutral-200)">
+      <div class="hbox(between/start) gap(xl)">
         <div>
-          <div class="hbox(start) gap(sm) mb(md)">
-            <div class="p(sm) r(lg) bg(green-600) c(white)">
+          <div class="hbox(start) gap(sm) pb(md)">
+            <div class="p(sm) r(lg) bg(neutral-700) c(white)">
               <FileText size="20" />
             </div>
-            <h2 class="heading(h2) c(green-900)">Body</h2>
+            <h2 class="heading(h2) c(neutral-900)">Body</h2>
           </div>
-          <p class="body(base) c(green-700) max-w(2xl)">
+          <p class="body(base) c(neutral-700) max-w(2xl)">
             Optimized for readability with generous line-height and comfortable spacing. 
             The workhorse of content presentation.
           </p>
         </div>
-        <code class="caption(base) bg(green-100) px(md) py(sm) r(lg) font(mono) c(green-800)">
+        <code class="caption(base) bg(neutral-100) px(md) py(sm) r(lg) font(mono) c(neutral-800)">
           body(size)
         </code>
       </div>
       
-      <div class="vbox gap(lg)">
+      <div class="vbox gap(lg) pt(2xl)">
         {#each bodyVariants as variant}
           <div 
-            class="group p(xl) r(xl) bg(white) hover:shadow(lg) transition-all cursor-pointer border(1/green-100) hover:border(green-300)"
+            class="group p(xl) r(xl) bg(neutral-50) hover:shadow(lg) transition-all cursor(pointer) b(1/neutral-100) hover:b(1/neutral-300)"
             on:click={() => copyCode(`body(${variant.name})`)}
           >
-            <div class="hbox(between) mb(md)">
-              <code class="badge(sm/success)">
+            <div class="hbox(middle) gap(auto) pb(md)">
+              <code class="badge(sm/muted)">
                 body({variant.name})
               </code>
-              <span class="caption(xs) c(green-600)">{variant.usage}</span>
+              <span class="caption(xs) c(neutral-600)">{variant.usage}</span>
             </div>
-            <p class="body({variant.name}) c(gray-800)">
+            <p class="body({variant.name}) c(neutral-800)">
               {variant.example}
             </p>
-            <p class="caption(sm) c(gray-600) mt(sm)">{variant.description}</p>
+            <p class="caption(sm) c(neutral-600) pt(sm)">{variant.description}</p>
           </div>
         {/each}
       </div>
     </div>
 
     <!-- Label Role -->
-    <div class="bg(135deg/amber-50..yellow-50) r(2xl) p(3xl) border(2/amber-200)">
-      <div class="hbox(between/start) mb(2xl)">
+    <div class="bg(primary-50) r(2xl) p(3xl) b(1/neutral-200)">
+      <div class="hbox(between/start) gap(xl)">
         <div>
-          <div class="hbox(start) gap(sm) mb(md)">
-            <div class="p(sm) r(lg) bg(amber-600) c(white)">
+          <div class="hbox(start) gap(sm) pb(md)">
+            <div class="p(sm) r(lg) bg(primary) c(white)">
               <Tag size="20" />
             </div>
-            <h2 class="heading(h2) c(amber-900)">Label</h2>
+            <h2 class="heading(h2) c(neutral-900)">Label</h2>
           </div>
-          <p class="body(base) c(amber-700) max-w(2xl)">
+          <p class="body(base) c(neutral-700) max-w(2xl)">
             Functional UI text for buttons, forms, and interactive elements. 
             Clear and concise with enhanced weight for small sizes.
           </p>
         </div>
-        <code class="caption(base) bg(amber-100) px(md) py(sm) r(lg) font(mono) c(amber-800)">
+        <code class="caption(base) bg(white) px(md) py(sm) r(lg) font(mono) c(neutral-800)">
           label(size)
         </code>
       </div>
       
-      <div class="grid(3) gap(lg)">
+      <div class="grid(3) gap(lg) pt(2xl)">
         {#each labelVariants as variant}
           <div 
-            class="group p(lg) r(xl) bg(white) hover:shadow(lg) transition-all cursor-pointer border(1/amber-100) hover:border(amber-300)"
+            class="group p(lg) r(xl) bg(white) hover:shadow(lg) transition-all cursor(pointer) b(1/neutral-100) hover:b(1/primary-200)"
             on:click={() => copyCode(`label(${variant.name})`)}
           >
-            <div class="label({variant.name}) c(gray-900) mb(xs) block">
+            <div class="label({variant.name}) c(neutral-900) pb(xs) block">
               {variant.example}
             </div>
-            <p class="caption(xs) c(gray-600)">{variant.usage}</p>
+            <p class="caption(xs) c(neutral-600)">{variant.usage}</p>
           </div>
         {/each}
       </div>
     </div>
 
     <!-- Caption Role -->
-    <div class="bg(135deg/gray-50..slate-50) r(2xl) p(3xl) border(2/gray-300)">
-      <div class="hbox(between/start) mb(2xl)">
+    <div class="bg(neutral-50) r(2xl) p(3xl) b(1/neutral-300)">
+      <div class="hbox(between/start) gap(xl)">
         <div>
-          <div class="hbox(start) gap(sm) mb(md)">
-            <div class="p(sm) r(lg) bg(gray-600) c(white)">
+          <div class="hbox(start) gap(sm) pb(md)">
+            <div class="p(sm) r(lg) bg(neutral-600) c(white)">
               <Info size="20" />
             </div>
-            <h2 class="heading(h2) c(gray-900)">Caption</h2>
+            <h2 class="heading(h2) c(neutral-900)">Caption</h2>
           </div>
-          <p class="body(base) c(gray-700) max-w(2xl)">
+          <p class="body(base) c(neutral-700) max-w(2xl)">
             Supplementary information that doesn't compete for attention. 
             Intentionally subdued color and weight for supporting content.
           </p>
         </div>
-        <code class="caption(base) bg(gray-200) px(md) py(sm) r(lg) font(mono) c(gray-800)">
+        <code class="caption(base) bg(neutral-200) px(md) py(sm) r(lg) font(mono) c(neutral-800)">
           caption(size)
         </code>
       </div>
       
-      <div class="grid(2) gap(lg)">
+      <div class="grid(2) gap(lg) pt(2xl)">
         {#each captionVariants as variant}
           <div 
-            class="group p(lg) r(xl) bg(white) hover:shadow(md) transition-all cursor-pointer border(1/gray-200) hover:border(gray-400)"
+            class="group p(lg) r(xl) bg(white) hover:shadow(md) transition-all cursor(pointer) b(1/neutral-200) hover:b(1/neutral-400)"
             on:click={() => copyCode(`caption(${variant.name})`)}
           >
-            <div class="hbox(between) mb(sm)">
+            <div class="hbox(middle) gap(auto) pb(sm)">
               <code class="badge(xs/muted)">
                 caption({variant.name})
               </code>
-              <span class="caption(xs) c(gray-500)">{variant.usage}</span>
+              <span class="caption(xs) c(neutral-500)">{variant.usage}</span>
             </div>
             <p class="caption({variant.name})">
               {variant.example}
@@ -366,62 +367,62 @@
   <!-- Typography Utilities -->
   <div class="grid(1) gap(xl)">
     <!-- Bold Utility -->
-    <div class="bg(white) r(2xl) p(2xl) shadow(xl) shadow(gray-200.5)">
-      <div class="hbox(start) gap(sm) mb(xl)">
-        <AlignLeft size="20" class="c(indigo-600)" />
-        <h3 class="heading(h3) c(gray-900)">Bold Utility</h3>
+    <div class="bg(white) r(2xl) p(2xl) shadow(xl) shadow(neutral-200.5)">
+      <div class="hbox(start) gap(sm) pb(xl)">
+        <AlignLeft size="20" class="c(primary)" />
+        <h3 class="heading(h3) c(neutral-900)">Bold Utility</h3>
       </div>
       
-      <p class="body(base) c(gray-600) mb(xl)">
+      <p class="body(base) c(neutral-600) pb(xl)">
         Fine-tune font weights independently of typography roles
       </p>
       
       <div class="hbox gap(md) overflow-x(auto) pb(md)">
         {#each boldWeights as weight}
           <div 
-            class="group p(lg) r(lg) hover:bg(gray-50) transition cursor-pointer bg(gray-50) hover:bg(gray-100) min-w(140px) text(center)"
+            class="group p(lg) r(lg) hover:bg(neutral-50) transition cursor(pointer) bg(neutral-50) hover:bg(neutral-100) min-w(140px) text(center)"
             on:click={() => copyCode(`bold(${weight.name})`)}
           >
-            <div class="body(lg) bold({weight.name}) c(gray-800) mb(md)">
+            <div class="body(lg) bold({weight.name}) c(neutral-800) pb(md)">
               Aa
             </div>
-            <code class="badge(xs/muted) block mb(xs)">
+            <code class="badge(xs/muted) block pb(xs)">
               bold({weight.name})
             </code>
-            <span class="caption(xs) c(gray-500) block">{weight.value}</span>
+            <span class="caption(xs) c(neutral-500) block">{weight.value}</span>
           </div>
         {/each}
       </div>
     </div>
 
     <!-- Line Height Tokens -->
-    <div class="bg(white) r(2xl) p(2xl) shadow(xl) shadow(gray-200.5)">
-      <div class="hbox(start) gap(sm) mb(xl)">
-        <Minus size="20" class="c(cyan-600)" />
-        <h3 class="heading(h3) c(gray-900)">Line Height</h3>
+    <div class="bg(white) r(2xl) p(2xl) shadow(xl) shadow(neutral-200.5)">
+      <div class="hbox(start) gap(sm) pb(xl)">
+        <Minus size="20" class="c(primary)" />
+        <h3 class="heading(h3) c(neutral-900)">Line Height</h3>
       </div>
       
-      <p class="body(base) c(gray-600) mb(xl)">
+      <p class="body(base) c(neutral-600) pb(xl)">
         Control the vertical spacing between lines of text using the integrated font() syntax
       </p>
       
       <div class="grid(2) lg:grid(3) gap(lg)">
         {#each lineHeightTokens as token}
           <div 
-            class="group p(lg) r(lg) bg(gray-50) hover:bg(gray-100) transition cursor-pointer"
+            class="group p(lg) r(lg) bg(neutral-50) hover:bg(neutral-100) transition cursor(pointer)"
             on:click={() => copyCode(`font(base/${token.name})`)}
           >
-            <div class="mb(md)">
-              <p class="font(base/{token.name}) c(gray-800)">
+            <div class="pb(md)">
+              <p class="font(base/{token.name}) c(neutral-800)">
                 {token.example}
               </p>
             </div>
-            <code class="badge(xs/muted) block mb(xs)">
+            <code class="badge(xs/muted) block pb(xs)">
               font(base/{token.name})
             </code>
-            <div class="hbox(between) gap(sm)">
-              <span class="caption(xs) c(gray-500)">{token.value}</span>
-              <span class="caption(xs) c(gray-500)">{token.usage}</span>
+            <div class="hbox(middle) gap(auto) gap(sm)">
+              <span class="caption(xs) c(neutral-500)">{token.value}</span>
+              <span class="caption(xs) c(neutral-500)">{token.usage}</span>
             </div>
           </div>
         {/each}
@@ -429,33 +430,33 @@
     </div>
 
     <!-- Letter Spacing Tokens -->
-    <div class="bg(white) r(2xl) p(2xl) shadow(xl) shadow(gray-200.5)">
-      <div class="hbox(start) gap(sm) mb(xl)">
-        <AlignLeft size="20" class="c(purple-600)" />
-        <h3 class="heading(h3) c(gray-900)">Letter Spacing</h3>
+    <div class="bg(white) r(2xl) p(2xl) shadow(xl) shadow(neutral-200.5)">
+      <div class="hbox(start) gap(sm) pb(xl)">
+        <AlignLeft size="20" class="c(primary)" />
+        <h3 class="heading(h3) c(neutral-900)">Letter Spacing</h3>
       </div>
       
-      <p class="body(base) c(gray-600) mb(xl)">
+      <p class="body(base) c(neutral-600) pb(xl)">
         Adjust the horizontal spacing between characters using the integrated font() syntax
       </p>
       
       <div class="grid(2) lg:grid(3) gap(lg)">
         {#each letterSpacingTokens as token}
           <div 
-            class="group p(lg) r(lg) bg(gray-50) hover:bg(gray-100) transition cursor-pointer"
+            class="group p(lg) r(lg) bg(neutral-50) hover:bg(neutral-100) transition cursor(pointer)"
             on:click={() => copyCode(`font(lg/1.5/${token.name})`)}
           >
-            <div class="mb(md) text(center)">
-              <p class="font(lg/1.5/{token.name}) c(gray-800)">
+            <div class="pb(md) text(center)">
+              <p class="font(lg/1.5/{token.name}) c(neutral-800)">
                 Typography
               </p>
             </div>
-            <code class="badge(xs/muted) block mb(xs) text(center)">
+            <code class="badge(xs/muted) block pb(xs) text(center)">
               font(lg/1.5/{token.name})
             </code>
-            <div class="hbox(between) gap(sm)">
-              <span class="caption(xs) c(gray-500)">{token.value}</span>
-              <span class="caption(xs) c(gray-500)">{token.usage}</span>
+            <div class="hbox(middle) gap(auto) gap(sm)">
+              <span class="caption(xs) c(neutral-500)">{token.value}</span>
+              <span class="caption(xs) c(neutral-500)">{token.usage}</span>
             </div>
           </div>
         {/each}
@@ -463,26 +464,26 @@
     </div>
 
     <!-- Typography Tips -->
-    <div class="bg(black) r(2xl) p(2xl) c(white)">
-      <h3 class="heading(h3) c(white) mb(xl)">Pro Tips</h3>
+    <div class="bg(neutral-900) r(2xl) p(2xl) c(white)">
+      <h3 class="heading(h3) c(white) pb(xl)">Pro Tips</h3>
       
       <div class="vbox gap(lg)">
         <div class="p(lg) bg(white.1) r(lg) backdrop-blur(sm)">
-          <h4 class="title(sm) c(white) mb(sm)">Semantic HTML</h4>
+          <h4 class="title(sm) c(white) pb(sm)">Semantic HTML</h4>
           <p class="body(sm) c(white.9)">
             Always use the appropriate HTML element. <code class="bg(white.2) px(xs) r(sm)">heading(h1)</code> should be used with <code class="bg(white.2) px(xs) r(sm)">&lt;h1&gt;</code> tags.
           </p>
         </div>
         
         <div class="p(lg) bg(white.1) r(lg) backdrop-blur(sm)">
-          <h4 class="title(sm) c(white) mb(sm)">Combine Utilities</h4>
+          <h4 class="title(sm) c(white) pb(sm)">Combine Utilities</h4>
           <p class="body(sm) c(white.9)">
             Mix typography roles with other utilities: <code class="bg(white.2) px(xs) r(sm)">display(hero) gradient hover:glow</code>
           </p>
         </div>
         
         <div class="p(lg) bg(white.1) r(lg) backdrop-blur(sm)">
-          <h4 class="title(sm) c(white) mb(sm)">Responsive Typography</h4>
+          <h4 class="title(sm) c(white) pb(sm)">Responsive Typography</h4>
           <p class="body(sm) c(white.9)">
             Use responsive prefixes: <code class="bg(white.2) px(xs) r(sm)">display(base) md:display(lg)</code>
           </p>
@@ -492,48 +493,48 @@
   </div>
 
   <!-- Typography Composition Examples -->
-  <div class="bg(gray-900) r(2xl) p(3xl) c(white)">
-    <h2 class="heading(h1) c(white) mb(xl) text(center)">Typography in Action</h2>
-    <p class="body(lg) c(gray-300) text(center) max-w(3xl) mx(auto) mb(3xl)">
+  <div class="bg(neutral-900) r(2xl) p(3xl) c(white)">
+    <h2 class="heading(h1) c(white) pb(xl) text(center)">Typography in Action</h2>
+    <p class="body(lg) c(neutral-300) text(center) max-w(3xl) mx(auto) pb(3xl)">
       See how different typography roles work together to create beautiful, functional interfaces
     </p>
 
     <div class="grid(3) gap(xl)">
       <!-- Card Example -->
-      <div class="bg(white) r(xl) p(xl) c(gray-900)">
-        <div class="caption(xs) uppercase c(purple-600) mb(sm)">Article</div>
-        <h3 class="title(card) mb(sm)">Getting Started with AdorableCSS</h3>
-        <p class="body(sm) c(gray-700) mb(md)">
+      <div class="bg(white) r(xl) p(xl) c(neutral-900)">
+        <div class="caption(xs) uppercase c(primary) pb(sm)">Article</div>
+        <h3 class="title(card) pb(sm)">Getting Started with AdorableCSS</h3>
+        <p class="body(sm) c(neutral-700) pb(md)">
           Learn the fundamentals of our intuitive CSS framework and start building beautiful interfaces in minutes.
         </p>
-        <div class="hbox(between)">
+        <div class="hbox(middle) gap(auto)">
           <span class="caption(base)">5 min read</span>
-          <span class="label(button) c(purple-600)">Read More →</span>
+          <span class="label(button) c(primary)">Read More →</span>
         </div>
       </div>
 
       <!-- Form Example -->
-      <div class="bg(white) r(xl) p(xl) c(gray-900)">
-        <h3 class="title(modal) mb(lg)">Create Account</h3>
+      <div class="bg(white) r(xl) p(xl) c(neutral-900)">
+        <h3 class="title(modal) pb(lg)">Create Account</h3>
         <div class="vbox gap(md)">
           <div>
             <label class="label(input) required">Email Address</label>
-            <div class="mt(xs) p(md) r(lg) border(1/gray-300) body(base) c(gray-500)">
+            <div class="pt(xs) p(md) r(lg) b(1/neutral-300) body(base) c(neutral-500)">
               name@example.com
             </div>
-            <p class="caption(form) help mt(xs)">We'll never share your email</p>
+            <p class="caption(form) help pt(xs)">We'll never share your email</p>
           </div>
-          <button class="p(md) r(lg) bg(indigo-600) c(white) label(button) hover:bg(indigo-700) transition">
+          <button class="p(md) r(lg) bg(primary) c(white) label(button) hover:bg(primary-700) transition">
             Continue
           </button>
         </div>
       </div>
 
       <!-- Feature Card -->
-      <div class="bg(white) r(xl) p(xl) c(gray-900)">
-        <div class="badge(xs/success) inline-block mb(md)">NEW</div>
-        <h3 class="title(lg) mb(sm)">Dark Mode Support</h3>
-        <p class="body(base) c(gray-700) mb(md)">
+      <div class="bg(white) r(xl) p(xl) c(neutral-900)">
+        <div class="badge(xs/success) inline-block pb(md)">NEW</div>
+        <h3 class="title(lg) pb(sm)">Dark Mode Support</h3>
+        <p class="body(base) c(neutral-700) pb(md)">
           Built-in dark mode with automatic theme detection and smooth transitions.
         </p>
         <div class="caption(hint) italic">
@@ -545,7 +546,7 @@
 
   <!-- Copy Feedback -->
   {#if copiedCode}
-    <div class="fixed bottom(20) right(20) bg(green-600) c(white) px(lg) py(md) r(lg) shadow(xl) animate(fade-in-up)">
+    <div class="fixed bottom(20) right(20) bg(success) c(white) px(lg) py(md) r(lg) shadow(xl) animate(fade-in-up)">
       Copied: {copiedCode}
     </div>
   {/if}

@@ -19,9 +19,9 @@ describe('Homepage Classes Test - 실제 사용된 클래스들 검증', () => {
       expect(css).toContain('align-items:center')
     })
 
-    it('should generate hbox(between) - 공간 분산', () => {
-      const css = generateCSS(['hbox(between)'])
-      console.log('Generated CSS for hbox(between):', css)
+    it('should generate hbox(middle) gap(auto) - 공간 분산', () => {
+      const css = generateCSS(['hbox(middle) gap(auto)'])
+      console.log('Generated CSS for hbox(middle) gap(auto):', css)
       expect(css).toContain('display:flex')
       expect(css).toContain('justify-content:space-between')
     })

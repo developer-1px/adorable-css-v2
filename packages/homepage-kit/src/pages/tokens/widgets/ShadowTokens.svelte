@@ -18,7 +18,7 @@
 <div class="vbox gap(4xl)">
   <!-- Section Header -->
   <div class="text(center)">
-    <div class="hbox(center) gap(sm) mb(xl)">
+    <div class="hbox(pack) gap(sm) mb(xl)">
       <Sun size="24" class="c(indigo-600)" />
       <h2 class="display(lg) c(gray-900)">Shadows & Elevation</h2>
     </div>
@@ -78,7 +78,7 @@
       <h4 class="font(lg) bold c(gray-800) mb(xl) text(center)">Elevation Profile</h4>
       <div class="hbox(stretch) gap(0) h(120px) items(end)">
         {#each shadows as { key }, index}
-          <div class="flex(1) hbox(center) relative group">
+          <div class="flex(1) hbox(pack) relative group">
             <div 
               class="w(full) bg(to-t/indigo-500..indigo-300) transition-all duration-300
                      group-hover:bg(to-t/indigo-600..indigo-400)"

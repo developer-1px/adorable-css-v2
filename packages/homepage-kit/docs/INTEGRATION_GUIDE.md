@@ -253,7 +253,7 @@ function Card({ children }) {
 
 // ↓ 자동 생성
 
-<div class="hbox(middle+between) gap(md) p(lg)">
+<div class="hbox(middle) gap(auto) gap(md) p(lg)">
 ```
 
 ### Storybook

@@ -110,8 +110,10 @@ export const font: RuleHandler = (args?: string): CSSRule => {
       }
       
       // Handle single value with clamp support
-      if (isToken(part, 'font')) {
-        result['font-size'] = getTokenVar('font', part);
+      // Handle 'base' as alias for 'md'
+      const tokenName = part === 'base' ? 'md' : part;
+      if (isToken(tokenName, 'font')) {
+        result['font-size'] = getTokenVar('font', tokenName);
       } else {
         result['font-size'] = String(pxWithClamp(part));
       }

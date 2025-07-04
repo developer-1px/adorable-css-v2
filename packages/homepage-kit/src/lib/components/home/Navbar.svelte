@@ -20,7 +20,7 @@ const navItems = [
 </script>
 
 <nav class="fixed! layer(top) z(50) bg(white) border-b(1/neutral-200)">
-  <div class="hbox(between) h(60) px(24) lg:px(32) max-w(1400px) mx(auto)">
+  <div class="hbox(middle) gap(auto) h(60) px(24) lg:px(32) max-w(1400px) mx(auto)">
     <!-- Logo -->
     <a href="/" class="hbox(middle) gap(8) c(neutral-900) hover:c(neutral-700) transition">
       <svg viewBox="0 0 32 32" class="size(28) c(primary)" fill="currentColor">
@@ -29,7 +29,7 @@ const navItems = [
         <rect x="4" y="18" width="10" height="10" rx="2"/>
         <rect x="18" y="18" width="10" height="10" rx="2"/>
       </svg>
-      <span class="font(lg) bold(600) c(neutral-900)">AdorableCSS</span>
+      <span class="title(lg) bold(600) c(neutral-900)">AdorableCSS</span>
     </a>
 
     <!-- Desktop Navigation -->
@@ -39,7 +39,7 @@ const navItems = [
         {#each navItems as item}
           <a
             href={item.href}
-            class="font(sm/1.5) c(neutral-600) hover:c(neutral-900) transition py(4)"
+            class="body(sm) c(neutral-600) hover:c(neutral-900) transition py(4)"
             class:c(neutral-900)={item.href === '/tokens' ? isTokensActive : currentPath.startsWith(item.href)}
             class:bold(600)={item.href === '/tokens' ? isTokensActive : currentPath.startsWith(item.href)}
           >
@@ -62,7 +62,7 @@ const navItems = [
           <Github size="20" class="c(neutral-600)"/>
         </a>
         <div class="w(1px) h(24) bg(neutral-200)"></div>
-        <a href="/packages/homepage-kit/src/routes/(layout)/docs/getting-started" class="px(16) py(8) r(8) bg(neutral-900) c(white) font(sm/1.5) hover:bg(neutral-800) transition">
+        <a href="/packages/homepage-kit/src/routes/(layout)/docs/getting-started" class="px(16) py(8) r(8) bg(neutral-900) c(white) label(button) hover:bg(neutral-800) transition">
           Get Started
         </a>
       </div>
@@ -88,7 +88,7 @@ const navItems = [
         {#each navItems as item}
           <a
             href={item.href}
-            class="px(16) py(12) font(sm/1.5) c(neutral-600) hover:bg(neutral-50) hover:c(neutral-900) r(8) transition"
+            class="px(16) py(12) body(sm) c(neutral-600) hover:bg(neutral-50) hover:c(neutral-900) r(8) transition"
             class:c(neutral-900)={item.href === '/tokens' ? isTokensActive : currentPath.startsWith(item.href)}
             class:bold(600)={item.href === '/tokens' ? isTokensActive : currentPath.startsWith(item.href)}
             on:click={() => menuOpen = false}
@@ -97,7 +97,7 @@ const navItems = [
           </a>
         {/each}
         <div class="mt(16) pt(16) border-t(1/neutral-100)">
-          <a href="/packages/homepage-kit/src/routes/(layout)/docs/getting-started" class="block w(full) px(16) py(8) r(8) bg(neutral-900) c(white) text(center) font(sm/1.5) hover:bg(neutral-800) transition">
+          <a href="/packages/homepage-kit/src/routes/(layout)/docs/getting-started" class="block w(full) px(16) py(8) r(8) bg(neutral-900) c(white) text(center) label(button) hover:bg(neutral-800) transition">
             Get Started
           </a>
         </div>

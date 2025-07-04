@@ -177,7 +177,7 @@ console.log('Cache size:', adorable.getCacheStats());
 <div class="p(30)">
 
 <!-- ❌ Bad: 불필요한 특이성 -->
-<div class="hbox hbox(middle) hbox(center)">
+<div class="hbox hbox(middle) hbox(pack)">
 
 <!-- ✅ Good: 간결한 표현 -->
 <div class="hbox(pack)">

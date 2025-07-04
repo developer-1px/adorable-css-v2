@@ -52,7 +52,7 @@
           { syntax: 'hbox', desc: 'flex 가로', example: 'hbox gap(lg)' },
           { syntax: 'vbox', desc: 'flex 세로', example: 'vbox gap(xl)' },
           { syntax: 'hbox(pack)', desc: '정중앙', example: 'hbox(pack)' },
-          { syntax: 'hbox(center)', desc: 'align center', example: 'hbox(center)' },
+          { syntax: 'hbox(pack)', desc: 'align center', example: 'hbox(pack)' },
           { syntax: 'hbox(end)', desc: 'justify end', example: 'hbox(end)' },
           { syntax: 'hbox(end+center)', desc: '복합 정렬', example: 'hbox(end+center)' },
           { syntax: 'gap(lg)', desc: '간격', example: 'gap(lg)' },
@@ -410,7 +410,7 @@
       {#each categoryData as [categoryId, sections]}
         {#each filterSections(sections) as section}
           <section class="reference-section vbox gap(sm)">
-            <div class="section-header hbox(center) gap(md)">
+            <div class="section-header hbox(pack) gap(md)">
               <span class="section-icon font(16)">{section.icon}</span>
               <h2 class="700 font(16) c(#0f172a)">{section.title}</h2>
             </div>

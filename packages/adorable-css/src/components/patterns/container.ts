@@ -75,8 +75,11 @@ export const container: RuleHandler = (args?: string): CSSRule => {
   // Set max-width based on size
   if (containerSizes[size]) {
     styles['max-width'] = containerSizes[size];
+  } else if (isToken(size, 'container')) {
+    // Use container tokens (proper tokens for layout containers)
+    styles['max-width'] = getTokenVar('container', size);
   } else if (isToken(size, 'size')) {
-    // Use size tokens
+    // Fallback to size tokens for backward compatibility
     styles['max-width'] = getTokenVar('size', size);
   } else {
     // Default to standard width

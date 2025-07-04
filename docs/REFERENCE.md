@@ -89,7 +89,7 @@ AdorableCSS는 CSS @layer를 활용하여 예측 가능한 캐스케이드를 �
 
 #### Horizontal Box (hbox) Justification
 - `hbox(left)` - Justify left (justify-content: flex-start)
-- `hbox(center)` - Justify center (justify-content: center)
+- `hbox(pack)` - Justify center (justify-content: center)
 - `hbox(right)` - Justify right (justify-content: flex-end)
 
 #### Vertical Box (vbox) Alignment

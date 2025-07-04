@@ -47,7 +47,7 @@
     <!-- Floating decoration -->
     <div class="absolute top(-20px) left(50%) translate-x(-50%) w(200px) h(1px) bg(to-r/transparent..orange-300..transparent) opacity(60)"></div>
     
-    <div class="hbox(center) gap(md) mb(xl)">
+    <div class="hbox(pack) gap(md) mb(xl)">
       <div class="p(md) r(full) bg(to-br/orange-100..amber-100) border(1px/orange-200)">
         <Circle size="24" class="c(orange-600)" />
       </div>
@@ -58,7 +58,7 @@
     </p>
     
     <!-- Stats row -->
-    <div class="hbox(center) gap(2xl) mt(2xl) text(center)">
+    <div class="hbox(pack) gap(2xl) mt(2xl) text(center)">
       <div class="vbox gap(xs)">
         <div class="text(2xl) bold c(orange-600)">{radiusVariants.length}</div>
         <div class="text(sm) c(gray-500)">Radius Steps</div>

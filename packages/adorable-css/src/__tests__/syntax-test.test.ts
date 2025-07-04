@@ -107,7 +107,7 @@ describe('AdorableCSS Syntax Tests', () => {
         'border-b(gray-200)',
         'shadow(sm)',
         'container(6xl)',
-        'hbox(middle+between)',
+        'hbox(middle) gap(auto)',
         'py(lg)',
         'px(xl)',
         'vbox(pack)',

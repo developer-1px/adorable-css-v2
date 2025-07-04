@@ -20,7 +20,7 @@ export const iconBoxString: StringRuleHandler = (args?: string): string | (strin
   const finalSize = sizeMap[size] || size;
   
   return [
-    `size(${finalSize}) hbox(center) r(lg)`,
+    `size(${finalSize}) hbox(pack) r(lg)`,
     {
       'flex-shrink': '0',
       'transition': 'all 0.2s ease',

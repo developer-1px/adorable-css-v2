@@ -39,13 +39,13 @@ describe('Responsive Decorator Pattern', () => {
     });
     
     it('should handle complex selectors', () => {
-      const pattern = ResponsiveSelector.analyze('xl:hbox(middle+between)');
+      const pattern = ResponsiveSelector.analyze('xl:hbox(middle) gap(auto)');
       
       expect(pattern).toEqual({
         breakpoint: 'xl',
         isMaxWidth: false,
-        selector: 'hbox(middle+between)',
-        originalClass: 'xl:hbox(middle+between)'
+        selector: 'hbox(middle) gap(auto)',
+        originalClass: 'xl:hbox(middle) gap(auto)'
       });
     });
     
@@ -232,7 +232,7 @@ describe('Responsive Decorator Pattern', () => {
     });
     
     it('should properly escape CSS selectors in responsive context', () => {
-      const css = generateCSS(['md:hbox(middle+between)']);
+      const css = generateCSS(['md:hbox(middle) gap(auto)']);
       
       // Should properly escape the selector
       expect(css).toContain('md\\:hbox\\(middle\\+between\\)');

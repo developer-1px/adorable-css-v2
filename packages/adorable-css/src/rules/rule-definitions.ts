@@ -53,6 +53,7 @@ import { inputRules } from '../components/primitives';
 import { badgeRules } from '../components/primitives';
 import { iconBoxRules } from '../components/primitives';
 import { codeBlockRules } from '../components/primitives';
+import { codeRule } from '../components/primitives';
 import { menuRules } from '../components/primitives';
 import { menuItemRules } from '../components/primitives';
 import { featureCardRules } from '../components/patterns/feature-card';
@@ -211,7 +212,7 @@ export const RULE_GROUPS: RuleDefinitions = {
           block: displayRules.block,
           inline: displayRules.inline,
           'inline-block': displayRules['inline-block'],
-          'inline-flex': displayRules['inline-flex'],
+          // 'inline-flex': displayRules['inline-flex'], // Deprecated - use hbox/vbox
           none: displayRules.none,
           hidden: displayRules.hidden,
         },
@@ -337,6 +338,7 @@ export const STRING_RULE_GROUPS = {
   badge: { rules: badgeRules, priority: RulePriority.COMPONENT },
   iconBox: { rules: iconBoxRules, priority: RulePriority.COMPONENT },
   codeBlock: { rules: codeBlockRules, priority: RulePriority.COMPONENT },
+  code: { rules: codeRule, priority: RulePriority.COMPONENT },
   menu: { rules: menuRules, priority: RulePriority.COMPONENT },
   menuItem: { rules: menuItemRules, priority: RulePriority.COMPONENT },
   featureCard: { rules: featureCardRules, priority: RulePriority.COMPONENT },

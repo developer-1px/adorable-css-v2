@@ -74,9 +74,9 @@ Figma의 Auto Layout을 직관적으로 표현:
 ```css
 /* Main Axis (가로 정렬) */
 hbox()                      /* 기본: 왼쪽 정렬 */
-hbox(center)                /* 가운데 정렬 */
+hbox(pack)                /* 가운데 정렬 */
 hbox(right)                 /* 오른쪽 정렬 */
-hbox(between)               /* 양쪽 끝 정렬 */
+hbox(middle) gap(auto)               /* 양쪽 끝 정렬 */
 hbox(around)                /* 균등 분배 */
 hbox(evenly)                /* 완전 균등 분배 */
 
@@ -433,7 +433,7 @@ const myTransform = (value: string) => {
 
 > "디자이너와의 커뮤니케이션이 놀랍도록 개선되었습니다. 같은 언어를 쓰니까요." - 이프론트, 시니어 개발자
 
-> "코드 리뷰가 디자인 리뷰가 되었어요. 'hbox(between)' 보면 바로 이해되거든요." - 박시니어, 테크 리드
+> "코드 리뷰가 디자인 리뷰가 되었어요. 'hbox(middle) gap(auto)' 보면 바로 이해되거든요." - 박시니어, 테크 리드
 
 ## Mental Model의 전환
 

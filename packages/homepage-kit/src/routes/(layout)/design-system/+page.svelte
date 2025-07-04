@@ -151,7 +151,7 @@
   </section>
 
   <!-- Tab Navigation -->
-  <nav class="hbox(center) gap(md) container(7xl) mx(auto) px(2xl) border(b/1/muted)">
+  <nav class="hbox(pack) gap(md) container(7xl) mx(auto) px(2xl) border(b/1/muted)">
     <button 
       class="px(xl) py(md) border(b/2/{activeTab === 'principles' ? 'primary' : 'transparent'}) c({activeTab === 'principles' ? 'primary' : 'muted'}) bold(600) transition hover:c(primary)"
       on:click={() => activeTab = 'principles'}

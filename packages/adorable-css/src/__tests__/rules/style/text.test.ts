@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { text } from '../../../rules/style/text';
+import { text } from '../../../rules/text/text';
 
 describe('text rule', () => {
   describe('text alignment', () => {

@@ -12,9 +12,9 @@ vbox()              /* display: flex; flex-direction: column */
 
 /* 정렬 옵션 */
 hbox(left)          /* justify-content: flex-start */
-hbox(center)        /* justify-content: center */
+hbox(pack)        /* justify-content: center */
 hbox(right)         /* justify-content: flex-end */
-hbox(between)       /* justify-content: space-between */
+hbox(middle) gap(auto)       /* justify-content: space-between */
 hbox(around)        /* justify-content: space-around */
 hbox(evenly)        /* justify-content: space-evenly */
 

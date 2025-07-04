@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { c } from '../rules/style/color';
+import { c } from '../rules/text/color';
 
 describe('Gradient Text with c() utility', () => {
   it('should handle simple gradient with .. syntax', () => {

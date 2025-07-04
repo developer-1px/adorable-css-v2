@@ -18,7 +18,7 @@ AdorableCSS는 **Figma-First CSS**를 지향하는 CSS 프레임워크입니다.
 
 ```css
 /* 🎨 Figma에서 디자인한 그대로 */
-hbox(center) gap(16) p(24) r(12) bg(white) shadow(md)
+hbox(pack) gap(16) p(24) r(12) bg(white) shadow(md)
 
 /* 🔄 코드에서 수정하면 Figma에 반영 */
 /* 🚀 디자인 토큰 자동 동기화 */
@@ -85,7 +85,7 @@ pnpm add adorable-css
 <link rel="stylesheet" href="https://unpkg.com/adorable-css/dist/adorable.css">
 
 <!-- HTML에서 바로 사용 -->
-<div class="hbox(center) gap(16) p(24) r(12) bg(white) shadow(md)">
+<div class="hbox(pack) gap(16) p(24) r(12) bg(white) shadow(md)">
   <img class="size(48) r(full)" src="avatar.jpg" />
   <div class="vbox gap(4)">
     <h3 class="font(title/lg) c(gray-900)">김철수</h3>
@@ -104,7 +104,7 @@ function Card({ title, description }) {
     <div className="vbox w(fill) p(xl) r(lg) bg(white) shadow(md) gap(lg)">
       <h3 className="font(title/lg) c(gray-900)">{title}</h3>
       <p className="font(body/base) c(gray-600)">{description}</p>
-      <button className="hbox(center) h(md) px(lg) r(md) bg(primary) c(white) hover:bg(primary-600)">
+      <button className="hbox(pack) h(md) px(lg) r(md) bg(primary) c(white) hover:bg(primary-600)">
         자세히 보기
       </button>
     </div>
@@ -120,7 +120,7 @@ function Card({ title, description }) {
 /* Flexbox 레이아웃 */
 hbox              /* 수평 배치 */
 vbox              /* 수직 배치 */
-hbox(center)      /* 중앙 정렬 */
+hbox(pack)      /* 중앙 정렬 */
 vbox(between)     /* 양끝 정렬 */
 
 /* 간격 */
@@ -229,7 +229,7 @@ dark:c(white)
     <p class="font(body/base) c(gray-600) line-clamp(3)">
       카드 설명 텍스트가 들어갑니다...
     </p>
-    <button class="hbox(center) w(fit) px(lg) py(sm) r(md) bg(primary) c(white) hover:bg(primary-600) transition">
+    <button class="hbox(pack) w(fit) px(lg) py(sm) r(md) bg(primary) c(white) hover:bg(primary-600) transition">
       더보기
     </button>
   </div>

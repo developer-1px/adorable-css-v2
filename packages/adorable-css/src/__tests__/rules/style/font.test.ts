@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { font } from '../../../rules/style/font';
+import { font } from '../../../rules/text/font';
 
 describe('font', () => {
   it('should handle font size only', () => {
@@ -65,7 +65,7 @@ describe('font', () => {
     expect(font('lg/1.5/inter')).toEqual({
       'font-size': 'var(--font-lg)',
       'line-height': '1.5',
-      'font-family': 'inter'
+      'font-family': "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif"
     });
   });
 

@@ -6,7 +6,7 @@ import {
   getAutoInjectConfig,
   resetInjectionState
 } from '../core/runtime/auto-inject';
-import { defaultTokens } from '../design-system/tokens';
+import { defaultTokens } from '../design-system/tokens/index';
 
 describe('Auto-inject Tokens', () => {
   beforeEach(() => {

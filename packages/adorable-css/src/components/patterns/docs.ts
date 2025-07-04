@@ -50,7 +50,7 @@ const docsToc: StringRuleHandler = (args?: string): string | (string | CSSRule)[
   const variants: Record<string, string> = {
     default: 'w(250) h(fit) max-h(calc(100vh-120px)) sticky top(80) ml(8) mr(4) bg(white) r(xl) shadow(xl) scroll(y) ring(1/gray-200) p(6)',
     floating: 'w(250) h(fit) max-h(calc(100vh-120px)) sticky top(80) ml(8) mr(4) bg(white.95) backdrop-blur(sm) r(2xl) shadow(2xl/shadow-lg) scroll(y) ring(1/gray-100) p(6) hover:shadow(2xl/shadow-xl) transition',
-    glass: 'w(250) h(fit) max-h(calc(100vh-120px)) sticky top(80) ml(8) mr(4) bg(gradient-to-br/from-white.7/to-gray-50.5) backdrop-blur(md) r(2xl) shadow(xl) scroll(y) ring(1/white.3) p(6) hover:shadow(2xl) transition',
+    glass: 'w(250) h(fit) max-h(calc(100vh-120px)) sticky top(80) ml(8) mr(4) bg(to-br/from-white.7/to-gray-50.5) backdrop-blur(md) r(2xl) shadow(xl) scroll(y) ring(1/white.3) p(6) hover:shadow(2xl) transition',
     hidden: 'hidden'
   };
   
@@ -63,7 +63,7 @@ const docsSection: StringRuleHandler = (args?: string): string | (string | CSSRu
   
   const variants: Record<string, string> = {
     default: 'section mb(16) relative',
-    hero: 'section hero py(24) mb(20) bg(gradient-to-br/gray-50..white) r(2xl) px(8) border(1/gray-100)',
+    hero: 'section hero py(24) mb(20) bg(to-br/gray-50..white) r(2xl) px(8) border(1/gray-100)',
     compact: 'section mb(10)',
     divided: 'section mb(16) pb(16) border-b(1/gray-200) relative after:layer(bottom-8+left+50%) after:w(100) after:h(1) after:bg(gradient-to-r/transparent..gray-300..transparent)'
   };
@@ -204,7 +204,7 @@ const docsPagination: StringRuleHandler = (args?: string): string | (string | CS
   
   const variants: Record<string, string> = {
     default: 'grid grid-cols(2) gap(4) mt(20) pt(12) border-t(2/gray-100)',
-    minimal: 'hbox(between) mt(16) pt(8) border-t(1/gray-200)',
+    minimal: 'hbox(middle) gap(auto) mt(16) pt(8) border-t(1/gray-200)',
     cards: 'grid grid-cols(2) gap(6) mt(24)'
   };
   

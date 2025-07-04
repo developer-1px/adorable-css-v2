@@ -140,7 +140,7 @@
   <!-- Top Navigation Bar -->
   <header class="sticky top(0) z(90) bg(white) border-b(1/gray-200) backdrop-blur(lg)">
     <div class="contain(wide)">
-      <div class="hbox(middle+between) h(64px)">
+      <div class="hbox(middle) gap(auto) h(64px)">
         <!-- Logo & Brand -->
         <div class="hbox(middle) gap(lg)">
           <!-- Mobile menu button -->
@@ -222,7 +222,7 @@
           {#each navigation as section}
             <li>
               <button
-                class="w(full) hbox(middle+between) px(md) py(sm) r(md) transition
+                class="w(full) hbox(middle) gap(auto) px(md) py(sm) r(md) transition
                        hover:bg(gray-50) {activeSection === section.id ? 'bg(purple-50)' : ''}"
                 on:click={() => toggleSection(section.id)}
               >
@@ -818,7 +818,7 @@ btn(link)</pre>
                         <button class="btn(outline)">Learn More</button>
                       </div>
                     </div>
-                    <div class="bg(gradient-to-br/purple-400..pink-400) hbox(pack)">
+                    <div class="bg(to-br/purple-400..pink-400) hbox(pack)">
                       <div class="64x64 bg(white.2) r(lg)"></div>
                     </div>
                   </div>
@@ -834,7 +834,7 @@ btn(link)</pre>
         {/if}
 
         <!-- Page Navigation -->
-        <nav class="hbox(middle+between) mt(4xl) pt(xl) border-t(1/gray-200)">
+        <nav class="hbox(middle) gap(auto) mt(4xl) pt(xl) border-t(1/gray-200)">
           <button class="hbox(middle) gap(sm) c(gray-600) hover:c(gray-900) transition">
             <ChevronRight size="20" class="rotate(180deg)" />
             <span class="font(sm)">Previous</span>
@@ -848,7 +848,7 @@ btn(link)</pre>
         <!-- Feedback -->
         <div class="mt(2xl) p(xl) bg(gray-50) r(lg) text(center)">
           <p class="font(sm) c(gray-600) mb(md)">Was this page helpful?</p>
-          <div class="hbox(center) gap(md)">
+          <div class="hbox(pack) gap(md)">
             <button class="px(lg) py(sm) bg(white) border(1/gray-200) r(md) hover:bg(gray-50) transition">
               👍 Yes
             </button>

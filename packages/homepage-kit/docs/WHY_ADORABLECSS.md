@@ -79,7 +79,7 @@ name(key:value)
 <div class="flex items-center justify-between px-6 py-4 bg-white rounded-lg shadow-md">
 
 <!-- AdorableCSS (49자) -->
-<div class="hbox(middle+between) px(lg) py(md) card">
+<div class="hbox(middle) gap(auto) px(lg) py(md) card">
 
 <!-- 33% 더 짧음! -->
 ```
@@ -141,7 +141,7 @@ name(key:value)
 
 ### After (AdorableCSS)
 ```html
-<div class="hbox(pack) min-h(screen) bg(gray-50) p(md)">
+<div class="hbox(fill) min-h(screen) bg(gray-50) p(md)">
   <div class="card container(narrow) vbox gap(xl)">
     <h2 class="heading(xl) text(center)">로그인</h2>
     <!-- 깔끔하고 의미있는 코드 -->

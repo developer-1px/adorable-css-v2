@@ -52,45 +52,45 @@
   <!-- Enhanced Section Header -->
   <div class="text(center) relative">
     <!-- Floating decoration -->
-    <div class="absolute top(-20px) left(50%) translate-x(-50%) w(200px) h(1px) bg(to-r/transparent..cyan-300..transparent) opacity(60)"></div>
+    <div class="absolute top(-20px) left(50%) translate-x(-50%) w(200px) h(1px) bg(to-r/transparent..primary-300..transparent) opacity(60)"></div>
     
-    <div class="hbox(center) gap(md) mb(xl)">
-      <div class="p(md) r(full) bg(to-br/cyan-100..blue-100) border(1px/cyan-200)">
-        <Sparkles size="24" class="c(cyan-600)" />
+    <div class="hbox(pack) gap(md) mb(xl)">
+      <div class="p(md) r(full) bg(to-br/primary-100..primary-200) b(1/primary-200)">
+        <Sparkles size="24" class="c(primary)" />
       </div>
-      <h2 class="display(lg) c(to-r/cyan-600..blue-600)">Effects & Animation</h2>
+      <h2 class="display(lg) c(to-r/primary..primary-700)">Effects & Animation</h2>
     </div>
     <p class="text(xl) c(gray-600) max-w(3xl) mx(auto) leading(relaxed)">
       Carefully crafted timing and easing that brings interfaces to life with purposeful motion
     </p>
     
     <!-- Stats row -->
-    <div class="hbox(center) gap(2xl) mt(2xl) text(center)">
+    <div class="hbox(pack) gap(2xl) mt(2xl) text(center)">
       <div class="vbox gap(xs)">
-        <div class="text(2xl) bold c(cyan-600)">{durationVariants.length}</div>
+        <div class="text(2xl) bold c(primary)">{durationVariants.length}</div>
         <div class="text(sm) c(gray-500)">Duration Steps</div>
       </div>
       <div class="vbox gap(xs)">
-        <div class="text(2xl) bold c(blue-600)">{easeVariants.length}</div>
+        <div class="text(2xl) bold c(primary-600)">{easeVariants.length}</div>
         <div class="text(sm) c(gray-500)">Easing Curves</div>
       </div>
       <div class="vbox gap(xs)">
-        <div class="text(2xl) bold c(cyan-500)">∞</div>
+        <div class="text(2xl) bold c(primary-500)">∞</div>
         <div class="text(sm) c(gray-500)">Combinations</div>
       </div>
     </div>
   </div>
 
   <!-- Animation Duration Tokens -->
-  <div class="bg(white) r(3xl) shadow(2xl) shadow(cyan-100.3) overflow(hidden) border(1px/gray-100)">
-    <div class="bg(to-r/cyan-50..blue-50) p(2xl) border-b(1px/cyan-100)">
+  <div class="bg(white) r(3xl) shadow(2xl) shadow(primary-100.3) overflow(hidden) b(1/neutral-100)">
+    <div class="bg(to-r/primary-50..neutral-50) p(2xl) bb(1/primary-100)">
       <div class="hbox(between/middle) mb(xl)">
         <div>
           <h3 class="heading(h2) c(gray-900) mb(sm)">Animation Duration</h3>
           <p class="text(base) c(gray-600) max-w(xl)">Precise timing that feels natural and responsive to user interactions</p>
         </div>
         <div class="p(lg) r(2xl) bg(white) shadow(lg)">
-          <Clock size="24" class="c(cyan-500)" />
+          <Clock size="24" class="c(primary)" />
         </div>
       </div>
     </div>
@@ -98,18 +98,18 @@
     <div class="p(2xl)">
       <div class="vbox gap(xl)">
         {#each durationVariants as { key, value, usage }, index}
-          <div class="group relative p(2xl) r(2xl) bg(gray-50) hover:bg(white transition-all duration-500 hover:shadow(xl) hover:shadow(cyan-100.2) border(1px/transparent) hover:border(cyan-200) cursor-pointer"
+          <div class="group relative p(2xl) r(2xl) bg(gray-50) hover:bg(white transition-all duration-500 hover:shadow(xl) hover:shadow(primary-100.2) b(1/transparent) hover:b(1/primary-200) cursor-pointer"
                on:click={() => copyCode(`duration(${key})`)}>
             
             <!-- Copy indicator -->
             <div class="absolute top(md) right(md) opacity(0) group-hover:opacity(100) transition-all duration-300">
               {#if copiedCode === `duration(${key})`}
-                <div class="px(sm) py(xs) r(full) bg(cyan-100) c(cyan-700) text(xs) bold">
+                <div class="px(sm) py(xs) r(full) bg(primary-100) c(primary-700) text(xs) bold">
                   ✓ Copied!
                 </div>
               {:else}
-                <button class="p(sm) r(full) bg(cyan-100) hover:bg(cyan-200) transition">
-                  <Copy size="14" class="c(cyan-600)" />
+                <button class="p(sm) r(full) bg(primary-100) hover:bg(primary-200) transition">
+                  <Copy size="14" class="c(primary)" />
                 </button>
               {/if}
             </div>
@@ -118,10 +118,10 @@
               <!-- Meta info -->
               <div class="min-w(240px)">
                 <div class="hbox(middle) gap(md) mb(sm)">
-                  <div class="px(md) py(sm) r(full) bg(to-r/cyan-600..blue-600) text(white) text(xs) bold uppercase tracking(wide)">
+                  <div class="px(md) py(sm) r(full) bg(to-r/primary..primary-700) text(white) text(xs) bold uppercase tracking(wide)">
                     timing
                   </div>
-                  <code class="text(sm) px(md) py(sm) r(lg) bg(gray-900) c(white) font(mono) group-hover:bg(cyan-600) transition">
+                  <code class="text(sm) px(md) py(sm) r(lg) bg(neutral-900) c(white) font(mono) group-hover:bg(primary) transition">
                     duration({key})
                   </code>
                 </div>
@@ -130,10 +130,10 @@
               </div>
               
               <!-- Animation demo -->
-              <div class="flex(1) relative h(80px) bg(cyan-50) r(xl) border(1px/cyan-200) overflow(hidden)">
-                <div class="absolute left(md) top(50%) translate-y(-50%) w(40px) h(40px) bg(to-br/cyan-400..blue-500) r(lg) shadow(lg) 
+              <div class="flex(1) relative h(80px) bg(primary-50) r(xl) b(1/primary-200) overflow(hidden)">
+                <div class="absolute left(md) top(50%) translate-y(-50%) w(40px) h(40px) bg(to-br/primary..primary-600) r(lg) shadow(lg) 
                            group-hover:translate-x(calc(100vw - 400px)) transition-transform duration({key}) ease(out)"></div>
-                <div class="absolute right(md) top(50%) translate-y(-50%) text(xs) c(cyan-600) font(mono)">
+                <div class="absolute right(md) top(50%) translate-y(-50%) text(xs) c(primary) font(mono)">
                   {key}
                 </div>
               </div>
@@ -145,15 +145,15 @@
   </div>
 
   <!-- Easing Functions -->
-  <div class="bg(white) r(3xl) shadow(2xl) shadow(blue-100.3) overflow(hidden) border(1px/gray-100)">
-    <div class="bg(to-r/blue-50..indigo-50) p(2xl) border-b(1px/blue-100)">
+  <div class="bg(white) r(3xl) shadow(2xl) shadow(primary-100.3) overflow(hidden) b(1/neutral-100)">
+    <div class="bg(to-r/primary-50..primary-100) p(2xl) bb(1/primary-100)">
       <div class="hbox(between/middle) mb(xl)">
         <div>
           <h3 class="heading(h2) c(gray-900) mb(sm)">Easing Functions</h3>
           <p class="text(base) c(gray-600) max-w(xl)">Animation curves that create natural, life-like motion</p>
         </div>
         <div class="p(lg) r(2xl) bg(white) shadow(lg)">
-          <Waves size="24" class="c(blue-500)" />
+          <Waves size="24" class="c(primary)" />
         </div>
       </div>
     </div>
@@ -161,17 +161,17 @@
     <div class="p(2xl)">
       <div class="grid(2) gap(xl)">
         {#each easeVariants as { key, value, usage }, index}
-          <div class="group relative p(2xl) r(2xl) bg(gray-50) hover:bg(white transition-all duration-500 hover:shadow(xl) hover:shadow(blue-100.2) border(1px/transparent) hover:border(blue-200) cursor-pointer"
+          <div class="group relative p(2xl) r(2xl) bg(gray-50) hover:bg(white transition-all duration-500 hover:shadow(xl) hover:shadow(primary-100.2) b(1/transparent) hover:b(1/primary-200) cursor-pointer"
                on:click={() => copyCode(`ease(${key})`)}>
             
             <!-- Copy indicator -->
             <div class="absolute top(md) right(md) opacity(0) group-hover:opacity(100) transition-all duration-300">
               {#if copiedCode === `ease(${key})`}
-                <div class="px(sm) py(xs) r(full) bg(blue-100) c(blue-700) text(xs) bold">
+                <div class="px(sm) py(xs) r(full) bg(primary-100) c(primary-700) text(xs) bold">
                   ✓ Copied!
                 </div>
               {:else}
-                <button class="p(sm) r(full) bg(blue-100) hover:bg(blue-200) transition">
+                <button class="p(sm) r(full) bg(primary-100) hover:bg(primary-200) transition">
                   <Copy size="14" class="c(blue-600)" />
                 </button>
               {/if}

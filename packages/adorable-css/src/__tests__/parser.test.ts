@@ -231,7 +231,7 @@ describe('parseAdorableCSS', () => {
 
   describe('Real-world Examples', () => {
     it('should parse layout combinations', () => {
-      const result = parseAdorableCSS('hbox(center) gap(16) p(20)')
+      const result = parseAdorableCSS('hbox(pack) gap(16) p(20)')
       expect(result.value).toHaveLength(3)
       expect(result.value[0].selector.name).toBe('hbox')
       expect(result.value[1].selector.name).toBe('gap')

@@ -120,7 +120,7 @@
                 class="w(full) text(left) px(md) py(sm) font(lg) bold transition {item.expanded !== false ? 'c(neutral-900)' : 'c(neutral-600)'}"
                 on:click={() => handleItemClick(item)}
               >
-                <div class="hbox(between)">
+                <div class="hbox(middle) gap(auto)">
                   <span>{item.title}</span>
                   {#if item.count}
                     <span class="font(xs) mono c(neutral-400)">
@@ -138,7 +138,7 @@
                         class="w(full) text(left) px(md) pl(2xl) py(xs) font(sm) transition {child.active ? 'c(neutral-900)' : 'c(neutral-500)'}"
                         on:click={() => handleItemClick(child)}
                       >
-                        <div class="hbox(between)">
+                        <div class="hbox(middle) gap(auto)">
                           <span>· {child.title}</span>
                           {#if child.count}
                             <span class="font(xs) mono c(neutral-400)">

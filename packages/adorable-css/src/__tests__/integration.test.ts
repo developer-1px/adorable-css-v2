@@ -32,7 +32,7 @@ describe("AdorableCSS Integration Tests", () => {
 
     it("should parse and generate complex function utilities", () => {
       const complexUtilities = [
-        "hbox(center)",
+        "hbox(pack)",
         "vbox(middle)",
         "font(Inter/16/1.5)",
       ];
@@ -83,7 +83,7 @@ describe("AdorableCSS Integration Tests", () => {
 
   describe("Complex real-world examples", () => {
     it("should handle layout combinations", () => {
-      const layoutCode = "hbox(center) gap(16) p(20)";
+      const layoutCode = "hbox(pack) gap(16) p(20)";
 
       expect(() => parseAdorableCSS(layoutCode)).not.toThrow();
       expect(() => generateCSSFromAdorableCSS(layoutCode)).not.toThrow();

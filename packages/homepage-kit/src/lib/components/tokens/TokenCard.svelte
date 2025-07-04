@@ -7,7 +7,7 @@
   export let iconColor = 'neutral-400';
   export let shadowColor = 'neutral-200.5';
   export let gradient = false;
-  export let gradientColors = 'indigo-50..primary-50';
+  export let gradientColors = 'primary-50..neutral-50';
 </script>
 
 <div class="bg(white) r(2xl) shadow(xl) shadow({shadowColor}) {gradient ? '' : 'p(2xl)'} {$$props.class || ''}">

@@ -19,7 +19,7 @@ console.log('\n');
 console.log('2. Complex layout responsive classes:');
 const layoutResponsive = [
   'vbox(pack)',           // Default: vertical centered
-  'md:hbox(middle+between)', // Medium+: horizontal with space between
+  'md:hbox(middle) gap(auto)', // Medium+: horizontal with space between
   '..sm:p(sm)',          // Small and below: small padding
   'lg:p(xl)',            // Large+: extra large padding
 ];

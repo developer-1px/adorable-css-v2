@@ -225,7 +225,7 @@ export const colorRules: Record<string, RuleHandler> = {
     // Handle special brand gradient for text
     if (value === 'brand' || value === 'gradient-brand') {
       return {
-        background: colorPalette['brand-gradient-text'] || 'linear-gradient(90deg, #8b5cf6, #ec4899)',
+        background: colorPalette['brand-gradient-text'] || colorPalette['brand-gradient'] || 'var(--brand-gradient)',
         "-webkit-background-clip": "text",
         "background-clip": "text", 
         "-webkit-text-fill-color": "transparent",
@@ -336,7 +336,7 @@ export const colorRules: Record<string, RuleHandler> = {
     
     // Handle special brand gradient
     if (value === 'brand' || value === 'gradient-brand') {
-      return { background: colorPalette['brand-gradient'] || 'linear-gradient(135deg, #8b5cf6, #ec4899)' };
+      return { background: colorPalette['brand-gradient'] || 'var(--brand-gradient)' };
     }
     
     // Handle gradient syntax - direction first: 135deg/purple-500..pink-500

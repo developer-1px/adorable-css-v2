@@ -41,13 +41,13 @@ export const listItemString: StringRuleHandler = (args?: string) => {
 
 // Code inline component
 export const codeInlineString = defineComponent({
-  base: 'font(mono) font(sm) bg(gray-100) px(xs) py(0.5) r(sm)',
+  base: 'code(inline)',
   variants: {
     default: '',
-    primary: 'bg(blue-100) c(blue-700)',
-    success: 'bg(green-100) c(green-700)',
-    warning: 'bg(yellow-100) c(yellow-900)',
-    error: 'bg(red-100) c(red-700)'
+    primary: 'code(primary)',
+    success: 'code(success)',
+    warning: 'code(warning)',
+    error: 'code(error)'
   }
 });
 

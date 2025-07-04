@@ -56,18 +56,18 @@ export const labelDefinition: ComponentDefinition = {
     // Button labels need specific handling
     {
       size: 'button',
-      class: 'inline-flex items(center) gap(xs)'
+      class: 'hbox(middle) gap(xs)'
     },
     // Input labels need proper spacing
     {
       size: 'input',
       variant: 'required',
-      class: 'inline-block'
+      class: 'block'
     },
     // Badge labels are always uppercase
     {
       size: 'badge',
-      class: 'inline-block px(xs) whitespace(nowrap)'
+      class: 'block px(xs) whitespace(nowrap)'
     },
     // Tab labels need hover states
     {

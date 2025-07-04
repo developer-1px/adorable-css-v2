@@ -86,7 +86,20 @@
       "Bash(-e 's/text-subtle/c(neutral-500)/g' )",
       "Bash(-e 's/hover:c(primary)/hover:c(primary)/g' )",
       "Bash(-e 's/hover:c(neutral-600)/hover:c(neutral-600)/g' )",
-      "Bash(src/routes/(empty)/showroom/+page.svelte)"
+      "Bash(src/routes/(empty)/showroom/+page.svelte)",
+      "Bash(pnpm --filter adorable-css test --run src/__tests__/primitives/badge.test.ts)",
+      "Bash(pnpm --filter adorable-css test --run -t \"badge\")",
+      "Bash(pnpm --filter adorable-css test --run -t \"badge component\")",
+      "Bash(pnpm --filter adorable-css test --run -t \"display\")",
+      "Bash(pnpm --filter adorable-css test src/__tests__/color-alpha.test.ts)",
+      "Bash(pnpm --filter adorable-css test src/__tests__/semantic-colors.test.ts)",
+      "Bash(pnpm --filter adorable-css test)",
+      "Bash(git reset:*)",
+      "Bash(pnpm --filter adorable-css test src/__tests__/components/code.test.ts)",
+      "Bash(pnpm --filter adorable-css test semantic-color-system.test.ts)",
+      "Bash(pnpm --filter adorable-css test src/__tests__/rules/text/font.test.ts)",
+      "Bash(pnpm --filter adorable-css test src/__tests__/rules/style/font.test.ts --run)",
+      "Bash(pnpm --filter adorable-css test src/__tests__/vbox-textalign.test.ts --run)"
     ],
     "deny": []
   }

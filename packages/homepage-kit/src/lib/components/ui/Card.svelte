@@ -1,19 +1,15 @@
 <script lang="ts">
-  import { setContext } from 'svelte';
-  
-  // Card root component props
-  export let variant: 'default' | 'gradient' | 'ghost' = 'default';
+  export let variant: 'default' | 'gradient' | 'ghost' | 'elevated' | 'interactive' | 'feature' | 'glass' | 'outlined' = 'default';
+  export let size: 'sm' | 'default' | 'lg' | 'xl' = 'default';
   export let className = '';
   
-  // Use AdorableCSS card component
-  $: cardClass = variant === 'gradient' ? 'card-gradient' : variant === 'ghost' ? 'card-ghost' : 'card';
-  
-  // Set context for child components to access card styling
-  setContext('card', {
-    variant
-  });
+  $: cardClass = size === 'default' 
+    ? `card(${variant})`
+    : `card(${variant}/${size})`
+    
+  $: classes = `${cardClass} ${className}`
 </script>
 
-<div class="{cardClass} {className}">
+<div class={classes}>
   <slot />
 </div>

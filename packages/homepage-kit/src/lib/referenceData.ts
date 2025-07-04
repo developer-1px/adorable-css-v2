@@ -99,7 +99,7 @@ export const referenceData: ReferenceData = {
       { property: "flex-wrap", syntax: ["wrap", "nowrap"] },
       {
         property: "hbox-alignment",
-        syntax: ["hbox(center)", "hbox(end)", "hbox(around)", "gap(auto)"],
+        syntax: ["hbox(pack)", "hbox(end)", "hbox(around)", "gap(auto)"],
       },
       {
         property: "hbox-combined",
@@ -116,7 +116,7 @@ export const referenceData: ReferenceData = {
       { property: "center-alignment", syntax: ["pack"] },
       {
         property: "justify-content",
-        syntax: ["hbox(center)", "vbox(around)", "gap(auto)"],
+        syntax: ["hbox(pack)", "vbox(around)", "gap(auto)"],
       },
     ],
     "Pack Shorthand": [

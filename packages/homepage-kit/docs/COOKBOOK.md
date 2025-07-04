@@ -7,7 +7,7 @@
 ### 로그인 폼
 
 ```html
-<div class="hbox(pack) min-h(screen) bg(gray-50)">
+<div class="hbox(fill) min-h(screen) bg(gray-50)">
   <form class="card w(400px) p(2xl)">
     <h2 class="heading(lg) text(center) mb(xl)">로그인</h2>
     

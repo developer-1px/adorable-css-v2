@@ -122,7 +122,7 @@
       </div>
       
       <!-- Quick Stats -->
-      <div class="hbox(center) gap(xl) flex-wrap">
+      <div class="hbox(pack) gap(xl) flex-wrap">
         <div class="hbox(middle) gap(sm)">
           <div class="w(40px) h(40px) r(full) bg(neutral-100) hbox(pack)">
             <CheckCircle size="20" class="c(neutral-700)" />

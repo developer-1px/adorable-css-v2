@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { generateCSSWithTokens } from '../core/parser/generator';
-import { defaultTokens } from '../design-system/tokens';
+import { defaultTokens } from '../design-system/tokens/index';
 
 describe('generateCSSWithTokens', () => {
   it('should include tokens by default', () => {

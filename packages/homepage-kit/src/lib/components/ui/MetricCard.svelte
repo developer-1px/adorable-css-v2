@@ -42,9 +42,9 @@
   <div class="vbox gap(xs) relative z(10)">
     <p class="700 font(4xl/-2%) c(neutral-900) group-hover:c(neutral-900) transition-colors duration(normal)">{value}</p>
     
-    <div class="hbox(center) gap(xs)">
+    <div class="hbox(pack) gap(xs)">
       {#if trend !== 'neutral'}
-        <div class="trend-indicator hbox(center) gap(xs) px(xs) py(xs) r(lg) {trendStyles[trend]} backdrop-blur shadow(xs)">
+        <div class="trend-indicator hbox(pack) gap(xs) px(xs) py(xs) r(lg) {trendStyles[trend]} backdrop-blur shadow(xs)">
           <span class="trend-arrow 700 font(xs)">
             {trend === 'up' ? '↗' : '↘'}
           </span>

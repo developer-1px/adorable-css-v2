@@ -11,7 +11,7 @@ generateCSS(['hbox', 'missing-rule', 'vbox', 'another-fake']);
 
 console.log('\n3. Testing header layout classes with some typos:');
 generateCSS([
-  'hbox(middle+between)', // valid
+  'hbox(middle) gap(auto)', // valid
   'container(6xl)',       // valid
   'py(lg)',              // valid
   'px(xl)',              // valid

@@ -247,6 +247,7 @@ export const makeColor = (value = 'transparent') => {
     'primary': 'primary-500',
     'secondary': 'secondary-500',
     'accent': 'accent-500',
+    'mute': 'mute-500',
     'success': 'success-500',
     'warning': 'warning-500',
     'error': 'error-500',

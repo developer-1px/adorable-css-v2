@@ -61,7 +61,7 @@
       </div>
       
       <!-- Tab Navigation -->
-      <nav class="hbox(center) gap(xs) overflow(x-auto) pb(xs)" role="tablist">
+      <nav class="hbox(pack) gap(xs) overflow(x-auto) pb(xs)" role="tablist">
         {#each tokenPages as item}
           <a 
             href={item.path}

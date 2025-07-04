@@ -172,7 +172,7 @@
       <div class="hbox gap(8) flex-wrap">
         <button 
           on:click={() => { selectedVariant = 'all'; selectedSize = 'all'; }}
-          class="btn(ghost/sm) {selectedVariant === 'all' && selectedSize === 'all' ? 'bg(primary-100) c(primary-700) border(primary-200)' : ''}"
+          class="btn(ghost/sm) {selectedVariant === 'all' && selectedSize === 'all' ? 'bg(primary-50) c(primary) b(1/primary-200)' : ''}"
         >
           All ({allExamples.length})
         </button>
@@ -182,7 +182,7 @@
           {#each variants as variant}
             <button 
               on:click={() => { selectedVariant = variant; selectedSize = 'all'; }}
-              class="btn(ghost/sm) {selectedVariant === variant && selectedSize === 'all' ? 'bg(primary-100) c(primary-700) border(primary-200)' : ''}"
+              class="btn(ghost/sm) {selectedVariant === variant && selectedSize === 'all' ? 'bg(primary-50) c(primary) b(1/primary-200)' : ''}"
             >
               {variant}
             </button>
@@ -194,7 +194,7 @@
           {#each sizes as size}
             <button 
               on:click={() => { selectedVariant = 'all'; selectedSize = size; }}
-              class="btn(ghost/sm) {selectedVariant === 'all' && selectedSize === size ? 'bg(primary-100) c(primary-700) border(primary-200)' : ''}"
+              class="btn(ghost/sm) {selectedVariant === 'all' && selectedSize === size ? 'bg(primary-50) c(primary) b(1/primary-200)' : ''}"
             >
               {size}
             </button>
