@@ -690,10 +690,11 @@ export function buildSemanticColors(config: SemanticColorConfig = semanticColors
       result[key] = resolved.value;
       
       // For non-gradient colors, also create color family variations
-      // Extract the base color name (e.g., "purple" from "purple-500")
-      const colorMatch = value.match(/^(\w+)-500$/);
+      // Extract the base color name (e.g., "purple" from "purple-500" or "violet" from "violet-500")
+      const colorMatch = value.match(/^(\w+)-(\d+)$/);
       if (colorMatch) {
         const baseColorName = colorMatch[1];
+        const specifiedShade = colorMatch[2];
         
         // Generate all shades for this semantic color
         const shades = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950'];
@@ -774,6 +775,18 @@ export function generateTokenCSS(tokens: DesignTokens = defaultTokens): string {
     cssVars.push('\n  /* Full OKLCH Color Palette */');
     for (const [colorName, colorValue] of Object.entries(colorPalette)) {
       cssVars.push(`  --${colorName}: ${colorValue};`);
+    }
+  }
+  
+  // Add semantic color variations if they're not already in the palette
+  const semanticColorVariations = buildSemanticColors(semanticColors);
+  if (semanticColorVariations && Object.keys(semanticColorVariations).length > 0) {
+    cssVars.push('\n  /* Semantic Color Variations */');
+    for (const [colorName, colorValue] of Object.entries(semanticColorVariations)) {
+      // Only add if not already in colorPalette to avoid duplicates
+      if (!colorPalette[colorName] && colorValue) {
+        cssVars.push(`  --${colorName}: ${colorValue};`);
+      }
     }
   }
   
