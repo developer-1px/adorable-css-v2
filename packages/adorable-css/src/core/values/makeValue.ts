@@ -1,5 +1,5 @@
 import { colorPalette } from '../../design-system/colors/colors'
-import { isToken, getTokenVar } from '../../design-system/tokens/index'
+import { isToken } from '../../design-system/tokens/index'
 
 // Base colors with actual hex values for gradient generation
 const baseColorValues: Record<string, string> = {

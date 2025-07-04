@@ -6,8 +6,8 @@ import {
 } from './rule-definitions';
 
 // Register all rules from central definitions
-Object.entries(RULE_GROUPS).forEach(([groupKey, group]) => {
-  Object.entries(group.subgroups).forEach(([subgroupKey, subgroup]) => {
+Object.entries(RULE_GROUPS).forEach(([, group]) => {
+  Object.entries(group.subgroups).forEach(([, subgroup]) => {
     Object.entries(subgroup.rules).forEach(([ruleName, handler]) => {
       // Register rule
       priorityRegistry.register(ruleName, handler, group.priority, `${subgroup.name} utility`);
@@ -16,7 +16,7 @@ Object.entries(RULE_GROUPS).forEach(([groupKey, group]) => {
 });
 
 // Register string-based component rules
-Object.entries(STRING_RULE_GROUPS).forEach(([groupKey, { rules, priority }]) => {
+Object.entries(STRING_RULE_GROUPS).forEach(([, { rules, priority }]) => {
   Object.entries(rules).forEach(([ruleName, handler]) => {
     priorityRegistry.registerString(ruleName, {
       handler,

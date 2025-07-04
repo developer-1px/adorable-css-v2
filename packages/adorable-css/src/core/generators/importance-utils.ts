@@ -24,7 +24,7 @@ export function extractImportanceLevel(className: string): ImportanceInfo {
 /**
  * Add [class] specificity boost to selector based on importance level
  */
-export function addImportanceToSelector(selector: string, importanceLevel: number): string {
+export function addImportanceToSelector(selector: string): string {
   // Simply return the selector without any modification
   // Layer system handles priority now
   return selector;
@@ -33,7 +33,7 @@ export function addImportanceToSelector(selector: string, importanceLevel: numbe
 /**
  * Add importance to CSS rule
  */
-export function addImportanceToCSS(css: string, importanceLevel: number): string {
+export function addImportanceToCSS(css: string): string {
   // Simply return the css without modification
   // Layer system handles priority now
   return css;

@@ -49,7 +49,7 @@ function generateColorShades(
     return shades;
   }
   
-  const [family, defaultShade] = parsed;
+  const [family] = parsed;
   const shadesToGenerate = colorFamily.shades || DEFAULT_SHADES;
   
   // Set the base semantic color (e.g., 'primary' -> 'indigo-600')
@@ -263,7 +263,7 @@ export function createFromPrimaryColor(
     throw new Error(`Invalid color format: ${primaryColor}. Expected format: 'family-shade' (e.g., 'indigo-600')`);
   }
   
-  const [primaryFamily, primaryShade] = parsed;
+  const [primaryFamily] = parsed;
   
   // Auto-generate complementary colors based on primary
   const colorFamilies = ['red', 'orange', 'amber', 'yellow', 'lime', 'green', 'emerald', 'teal', 'cyan', 'sky', 'blue', 'indigo', 'violet', 'purple', 'fuchsia', 'pink', 'rose'];

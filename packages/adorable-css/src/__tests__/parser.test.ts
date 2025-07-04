@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { parseAdorableCSS } from './parser'
+import { parseAdorableCSS } from '../core/parser/parser'
 
 describe('parseAdorableCSS', () => {
   describe('Basic Utilities', () => {
@@ -241,7 +241,7 @@ describe('parseAdorableCSS', () => {
     it('should parse responsive typography', () => {
       const result = parseAdorableCSS('sm:font(14/1.4) md:font(16/1.5) lg:font(18/1.6)')
       expect(result.value).toHaveLength(3)
-      result.value.forEach((selector, index) => {
+      result.value.forEach(selector => {
         expect(selector.combinators[0].selector.name).toBe('font')
       })
     })

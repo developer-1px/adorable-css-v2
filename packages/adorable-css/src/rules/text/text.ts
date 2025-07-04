@@ -65,6 +65,14 @@ export const text: RuleHandler = (v?: string): CSSRule => {
   if (aligns.includes(v)) return { 'text-align': v };
   if (transforms.includes(v)) return { 'text-transform': v };
   if (decorations.includes(v)) return { 'text-decoration': v };
+  
+  // White space handling
+  if (v === 'nowrap') return { 'white-space': 'nowrap' };
+  if (v === 'wrap') return { 'white-space': 'normal' };
+  if (v === 'pre') return { 'white-space': 'pre' };
+  if (v === 'pre-wrap') return { 'white-space': 'pre-wrap' };
+  if (v === 'pre-line') return { 'white-space': 'pre-line' };
+  
   return isToken(v, 'font') ? { 'font-size': getTokenVar('font', v) } : {};
 };
 

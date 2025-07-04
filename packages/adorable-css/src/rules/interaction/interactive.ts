@@ -10,7 +10,6 @@ export const interactive: RuleHandler = (level?: string): CSSRule => {
   const levelNum = parseInt(level);
   if (isNaN(levelNum) || levelNum < 1 || levelNum > 5) return {};
 
-  const baseTransition = 'transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1)';
   
   switch (levelNum) {
     case 1:

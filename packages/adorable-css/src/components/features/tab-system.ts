@@ -1,5 +1,4 @@
 import type { CSSRule, RuleHandler } from '../../rules/types';
-import { px } from '../../../values/makeValue';
 
 // tab-active - 활성 탭 스타일
 export const tabActive: RuleHandler = (args?: string): CSSRule => {

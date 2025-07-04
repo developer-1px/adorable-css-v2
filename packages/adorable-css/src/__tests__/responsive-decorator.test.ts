@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe } from 'vitest';
 
 // SPEC'D OUT - Responsive features are disabled
 describe.skip('Responsive Decorator Pattern (SPEC\'D OUT)', () => {});

@@ -1,4 +1,3 @@
-import { defineComponent } from '../defineComponent-unified';
 import type { StringRuleHandler } from '../../rules/types';
 
 // Code component - semantic typography for code snippets

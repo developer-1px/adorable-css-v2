@@ -99,7 +99,16 @@
       "Bash(pnpm --filter adorable-css test semantic-color-system.test.ts)",
       "Bash(pnpm --filter adorable-css test src/__tests__/rules/text/font.test.ts)",
       "Bash(pnpm --filter adorable-css test src/__tests__/rules/style/font.test.ts --run)",
-      "Bash(pnpm --filter adorable-css test src/__tests__/vbox-textalign.test.ts --run)"
+      "Bash(pnpm --filter adorable-css test src/__tests__/vbox-textalign.test.ts --run)",
+      "Bash(pnpm --filter adorable-css test src/__tests__/rules/text/truncate.test.ts)",
+      "Bash(pnpm --filter adorable-css test src/__tests__/integration/truncate.test.ts)",
+      "Bash(pnpm --filter adorable-css test src/__tests__/rules/style/text.test.ts)",
+      "Bash(pnpm --filter adorable-css test src/__tests__/integration/text-nowrap.test.ts)",
+      "Bash(pnpm lint:*)",
+      "Bash(npx eslint:*)",
+      "Bash(pnpm --filter adorable-css test:check)",
+      "Bash(pnpm --filter adorable-css test src/**/*.test.ts --run)",
+      "Bash(pnpm --filter adorable-css lint)"
     ],
     "deny": []
   }

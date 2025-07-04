@@ -1,4 +1,4 @@
-import type { RuleHandler, KeywordRuleHandler, CSSRule } from '../types';
+import type { RuleHandler, CSSRule } from '../types';
 import { makeColor, px } from '../../core/values/makeValue';
 
 // Outline utilities

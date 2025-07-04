@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { defineComponent, defineCompoundComponent } from '../components/defineComponent';
+import { defineComponent } from '../components/defineComponent';
 
 describe('defineComponent', () => {
   it('should return base classes when no arguments provided', () => {
-    const component = defineSimpleComponent({
+    const component = defineComponent({
       base: 'inline-flex items(center)'
     });
     
@@ -12,7 +12,7 @@ describe('defineComponent', () => {
   });
 
   it('should combine base, size, and variant classes', () => {
-    const component = defineSimpleComponent({
+    const component = defineComponent({
       base: 'inline-flex items(center)',
       sizes: {
         sm: 'px(2) py(1)',
@@ -31,7 +31,7 @@ describe('defineComponent', () => {
   });
 
   it('should handle size-only argument', () => {
-    const component = defineSimpleComponent({
+    const component = defineComponent({
       base: 'r(md)',
       sizes: {
         sm: 'px(2)',
@@ -47,7 +47,7 @@ describe('defineComponent', () => {
   });
 
   it('should handle variant-only argument', () => {
-    const component = defineSimpleComponent({
+    const component = defineComponent({
       base: 'r(md)',
       sizes: {
         default: 'px(4)'
@@ -63,7 +63,7 @@ describe('defineComponent', () => {
   });
 
   it('should use default size and variant when not specified', () => {
-    const component = defineSimpleComponent({
+    const component = defineComponent({
       base: 'r(md)',
       sizes: {
         default: 'px(4)',
@@ -80,7 +80,7 @@ describe('defineComponent', () => {
   });
 
   it('should respect custom options', () => {
-    const component = defineSimpleComponent({
+    const component = defineComponent({
       base: 'text',
       sizes: {
         xs: 'font(xs)',
@@ -102,7 +102,7 @@ describe('defineComponent', () => {
   });
 
   it('should handle arguments in any order', () => {
-    const component = defineSimpleComponent({
+    const component = defineComponent({
       base: 'btn',
       sizes: {
         sm: 'h(32)',
@@ -119,9 +119,9 @@ describe('defineComponent', () => {
   });
 });
 
-describe('defineCompoundComponent', () => {
+describe('defineComponent with compounds', () => {
   it('should apply compound variants', () => {
-    const component = defineCompoundComponent({
+    const component = defineComponent({
       base: 'r(full) inline-flex',
       compounds: {
         'primary/sm': 'bg(blue-500) text(xs) px(2)',
@@ -134,7 +134,7 @@ describe('defineCompoundComponent', () => {
   });
 
   it('should apply wildcard patterns for variants', () => {
-    const component = defineCompoundComponent({
+    const component = defineComponent({
       base: 'btn',
       compounds: {
         'primary/*': 'text(white)',
@@ -147,7 +147,7 @@ describe('defineCompoundComponent', () => {
   });
 
   it('should combine base definition with compound variants', () => {
-    const component = defineCompoundComponent({
+    const component = defineComponent({
       base: 'btn',
       sizes: {
         sm: 'h(32)',
@@ -167,7 +167,7 @@ describe('defineCompoundComponent', () => {
   });
 
   it('should handle size wildcard patterns', () => {
-    const component = defineCompoundComponent({
+    const component = defineComponent({
       base: 'badge',
       sizes: {
         sm: 'text(xs)',

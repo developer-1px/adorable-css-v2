@@ -1,5 +1,5 @@
 import type { CSSRule, RuleHandler } from '../types';
-import { px, percentToEm, makeNumber, cssvar, makeClamp, makeRangeClamp, pxWithClamp } from '../../core/values/makeValue';
+import { px, percentToEm, makeNumber, makeClamp, makeRangeClamp, pxWithClamp } from '../../core/values/makeValue';
 import { isToken, getTokenVar, defaultTokens } from '../../design-system/tokens/index';
 
 export const font: RuleHandler = (args?: string): CSSRule => {

@@ -1,7 +1,7 @@
 // Advanced OKLCH-based Color System for AdorableCSS v2
 // Provides scientifically accurate, perceptually uniform color generation
 
-import type { CSSRule, RuleHandler } from '../../rules/types';
+import type { CSSRule } from '../../rules/types';
 
 // OKLCH Color Space Utilities
 export interface OKLCH {
@@ -275,7 +275,7 @@ export const advancedColorRules = {
     if (!args) return {};
     
     // Parse OKLCH values: oklch(70/0.15/180) or oklch(70%/0.15/180deg)
-    const match = args.match(/([0-9.]+)%?\s*[\/,]\s*([0-9.]+)\s*[\/,]\s*([0-9.]+)/);
+    const match = args.match(/([0-9.]+)%?\s*[/,]\s*([0-9.]+)\s*[/,]\s*([0-9.]+)/);
     if (!match) return {};
     
     const l = parseFloat(match[1]) / 100;

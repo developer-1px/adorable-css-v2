@@ -252,7 +252,7 @@ function _generateCSSFromAdorableCSS(value: string): string {
     const { level: importanceLevel } = extractImportanceLevel(value);
     
     const rawSelector = "." + cssEscape(value);
-    let actualSelector = addImportanceToSelector(rawSelector, importanceLevel);
+    let actualSelector = addImportanceToSelector(rawSelector);
 
     const allCSSResults: { mainCSS: string; nestedCSS: string[]; priority?: number }[] = [];
     let hasValidRules = false;
@@ -261,7 +261,7 @@ function _generateCSSFromAdorableCSS(value: string): string {
       const cssResult = v.combinators?.length > 0 && v.combinators[0].combinator === ":"
         ? (() => {
             const { selector, cssResult } = handlePseudoClass(v, rawSelector);
-            actualSelector = addImportanceToSelector(selector, importanceLevel);
+            actualSelector = addImportanceToSelector(selector);
             return cssResult;
           })()
         : handleRegularSelector(v, rawSelector);
@@ -396,7 +396,7 @@ function generateResponsiveCSS(responsiveClassName: string): string {
   
   // Build final selector with importance
   const responsiveSelector = "." + cssEscape(cleanClassName);
-  const finalSelector = addImportanceToSelector(responsiveSelector, importanceLevel);
+  const finalSelector = addImportanceToSelector(responsiveSelector);
 
   // Wrap in media query
   return `${mediaQuery}{${finalSelector}{${cssProperties}}}`;

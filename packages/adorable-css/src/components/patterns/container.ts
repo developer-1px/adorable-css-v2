@@ -1,12 +1,6 @@
 import type { RuleHandler, CSSRule } from '../../rules/types';
 import { isToken, getTokenVar } from '../../design-system/tokens/index';
 
-// Legacy container sizes (for backward compatibility)
-const legacySizeMap: Record<string, string> = {
-  narrow: '600px',
-  wide: '1600px'
-};
-
 const paddingMap: Record<string, string> = {
   '0': '0',
   'xs': '0.25rem',

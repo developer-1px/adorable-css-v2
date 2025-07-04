@@ -1,5 +1,4 @@
 import type { RuleHandler, KeywordRuleHandler, CSSRule } from '../types';
-import { px } from '../../core/values/makeValue';
 
 // Duration utilities
 export const duration: RuleHandler = (value?: string): CSSRule => {
@@ -11,7 +10,6 @@ export const duration: RuleHandler = (value?: string): CSSRule => {
     
     // CSS transition-duration cannot be negative, use 0 instead
     if (numericValue < 0) {
-      console.warn(`⚠️  AdorableCSS: Negative duration "${value}" is invalid, using 0ms`);
       return { 'transition-duration': '0ms' };
     }
     

@@ -289,9 +289,7 @@ export function generateColorCSS(
 }
 
 // Advanced color utilities for CSS rules
-export function createAdvancedColorRules(
-  palette: Record<string, string>
-): Record<string, RuleHandler> {
+export function createAdvancedColorRules(): Record<string, RuleHandler> {
   const rules: Record<string, RuleHandler> = {};
   
   // Note: Direct color name rules removed - AdorableCSS v2 uses function syntax
@@ -305,7 +303,7 @@ export function createAdvancedColorRules(
     if (!args) return {};
     
     // Parse OKLCH values: oklch(70/0.15/180) or oklch(70%/0.15/180deg)
-    const match = args.match(/([0-9.]+)%?\s*[\/,]\s*([0-9.]+)\s*[\/,]\s*([0-9.]+)/);
+    const match = args.match(/([0-9.]+)%?\s*[/,]\s*([0-9.]+)\s*[/,]\s*([0-9.]+)/);
     if (!match) return {};
     
     const l = parseFloat(match[1]) / 100;
@@ -324,7 +322,7 @@ export function createAdvancedColorRules(
 export function createAdvancedColorSystem(themeOptions: ColorThemeOptions = {}) {
   const nestedPalette = generateAdvancedColorPalette(themeOptions);
   const flatPalette = flattenColorPalette(nestedPalette, 'oklch');
-  const colorRules = createAdvancedColorRules(flatPalette);
+  const colorRules = createAdvancedColorRules();
   
   return {
     nestedPalette,

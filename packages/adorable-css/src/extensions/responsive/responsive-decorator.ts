@@ -36,7 +36,6 @@ export class MediaQueryDecorator implements CSSRuleDecorator {
     const breakpointValue = BREAKPOINTS[pattern.breakpoint];
     
     if (!breakpointValue) {
-      console.warn(`⚠️  Unknown breakpoint: ${pattern.breakpoint}`);
       return rule;
     }
 
@@ -115,14 +114,14 @@ export class ResponsiveDecoratorFactory {
     });
 
     // Generate media query blocks
-    groupedRules.forEach((rulesGroup, mediaKey) => {
+    groupedRules.forEach((rulesGroup) => {
       if (rulesGroup.length === 0) return;
 
       const firstPattern = rulesGroup[0].pattern;
       const combinedRule: CSSRule = {};
 
       // Combine all rules for the same media query
-      rulesGroup.forEach(({ rule }, index) => {
+      rulesGroup.forEach(({ rule }) => {
         Object.assign(combinedRule, rule);
       });
 
@@ -157,12 +156,7 @@ export function extractBaseClass(responsiveClassName: string): string {
 export function debugResponsivePattern(className: string): void {
   const pattern = ResponsiveSelector.analyze(className);
   if (pattern) {
-    console.log(`🔍 Responsive Pattern Analysis for "${className}":`);
-    console.log(`   Breakpoint: ${pattern.breakpoint} (${BREAKPOINTS[pattern.breakpoint]})`);
-    console.log(`   Type: ${pattern.isMaxWidth ? 'max-width' : 'min-width'}`);
-    console.log(`   Base selector: ${pattern.selector}`);
   } else {
-    console.log(`❌ No responsive pattern found in "${className}"`);
   }
 }
 

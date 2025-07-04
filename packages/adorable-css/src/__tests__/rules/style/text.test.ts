@@ -43,6 +43,28 @@ describe('text rule', () => {
     });
   });
 
+  describe('white-space handling', () => {
+    it('should handle nowrap', () => {
+      expect(text('nowrap')).toEqual({ 'white-space': 'nowrap' });
+    });
+
+    it('should handle wrap', () => {
+      expect(text('wrap')).toEqual({ 'white-space': 'normal' });
+    });
+
+    it('should handle pre', () => {
+      expect(text('pre')).toEqual({ 'white-space': 'pre' });
+    });
+
+    it('should handle pre-wrap', () => {
+      expect(text('pre-wrap')).toEqual({ 'white-space': 'pre-wrap' });
+    });
+
+    it('should handle pre-line', () => {
+      expect(text('pre-line')).toEqual({ 'white-space': 'pre-line' });
+    });
+  });
+
   it('should return empty object for invalid values', () => {
     expect(text('invalid')).toEqual({});
     expect(text('foo')).toEqual({});

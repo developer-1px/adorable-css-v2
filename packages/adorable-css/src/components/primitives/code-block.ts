@@ -2,8 +2,6 @@ import type { StringRuleHandler, CSSRule } from '../../rules/types';
 
 // Code block component for displaying code snippets
 export const codeBlockString: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {
-  const theme = args || 'dark';
-  
   return [
     'r(lg) p(24) overflow(auto) font(mono/sm) leading(relaxed) bg(gray-50) c(black)',
   ];

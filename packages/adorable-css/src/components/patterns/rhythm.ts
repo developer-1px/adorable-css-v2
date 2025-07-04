@@ -101,8 +101,6 @@ export const featureGridRule: Rule = {
   name: "feature-grid",
   match: /^feature-grid(?:\(([\w\s,]+)\))?$/,
   create(match) {
-    const columns = match[1] || "3";
-    
     return [
       "display: grid",
       `grid-template-columns: repeat(auto-fit, minmax(280px, 1fr))`,

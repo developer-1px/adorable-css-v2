@@ -5,7 +5,6 @@ export * from '../semantic-system';
 
 import { 
   generateSemanticColorVariables, 
-  buildSemanticColorConfig,
   getColorScheme,
   type SemanticColorSystemConfig 
 } from '../colors/semantic-color-system';
@@ -701,7 +700,6 @@ export function buildSemanticColors(config: SemanticColorConfig = semanticColors
       const colorMatch = value.match(/^(\w+)-(\d+)$/);
       if (colorMatch) {
         const baseColorName = colorMatch[1];
-        const specifiedShade = colorMatch[2];
         
         // Generate all shades for this semantic color
         const shades = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950'];
@@ -741,7 +739,7 @@ export function isToken(value: string, category: keyof DesignTokens): boolean {
     }
     
     // Check nested keys (like gray.500)
-    for (const [key, nestedValue] of Object.entries(categoryTokens)) {
+    for (const [, nestedValue] of Object.entries(categoryTokens)) {
       if (typeof nestedValue === 'object' && nestedValue !== null) {
         if (value in nestedValue) {
           return true;

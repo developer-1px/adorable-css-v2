@@ -1,6 +1,7 @@
 import type { CSSRule, RuleHandler } from '../types';
 import { isToken, getTokenVar } from '../../design-system/tokens/index';
-import { px, makeColor } from '../../core/values/makeValue';
+import { makeColor } from '../../core/values/makeValue';
+import { truncate } from './truncate';
 
 // Font style utilities
 export const italic: RuleHandler = (): CSSRule => ({
@@ -121,4 +122,5 @@ export const typographyUtilityRules = {
   uppercase,
   capitalize,
   lh,
+  truncate,
 };
