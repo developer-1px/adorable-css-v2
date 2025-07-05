@@ -103,7 +103,7 @@
         <span class="bg(gradient) bg-clip(text) c(transparent)">AI-powered development</span>
       </h1>
       
-      <p class="body(md) c(neutral-600) max-w(3xl)">
+      <p class="body(md) c(neutral-600) max-w(4xl)">
         From code generation to deployment in seconds. Let AI handle the complexity 
         while you focus on building what matters.
       </p>
@@ -678,7 +678,7 @@
               <p class="c(primary)">function processUserData(data) {`{`}</p>
               <p class="c(white) pl(xl)">const validated = validate(data);</p>
               <p class="c(white) pl(xl)">return transform(validated);</p>
-              <p class="c(primary)">{`}`}</p>
+              <p class="c(primary)">}</p>
             </div>
             <div class="mt(auto) pt(lg) bt(1/neutral-800)">
               <p class="caption c(neutral-500)">AI suggestions: Press Tab to accept</p>

@@ -9,6 +9,25 @@ import {
   type SemanticColorSystemConfig 
 } from '../colors/semantic-color-system';
 
+// Import scale generator
+import { 
+  generateTokenScales, 
+  defaultScaleConfig,
+  type TokenScaleConfig,
+  SCALE_RATIOS
+} from './scale-generator';
+
+// Export scale generator utilities for external use
+export { 
+  generateTokenScales, 
+  SCALE_RATIOS, 
+  type TokenScaleConfig,
+  generateTypographyScale,
+  generateSpacingScale,
+  generateContainerScale,
+  generateSizeScale,
+} from './scale-generator';
+
 // Semantic color configuration
 export interface SemanticColorConfig {
   primary?: string;      // e.g. "blue-500" or "#0ea5e9"
@@ -344,282 +363,181 @@ export interface DesignTokens {
   };
 }
 
+// Create tokens with custom scale configuration
+export function createTokens(scaleConfig: TokenScaleConfig = defaultScaleConfig): DesignTokens {
+  const scales = generateTokenScales(scaleConfig);
+  
+  return {
+    // Generated scales
+    font: scales.font,
+    spacing: scales.spacing,
+    size: scales.size,
+    container: scales.container,
+    
+    // Static token values that don't need generation
+    lineHeight: {
+      none: '1',
+      tight: '1.1',
+      snug: '1.2',
+      normal: '1.4',
+      relaxed: '1.6',
+      loose: '1.8',
+    },
+    letterSpacing: {
+      tighter: '-0.05em',
+      tight: '-0.025em',
+      normal: '0',
+      wide: '0.025em',
+      wider: '0.05em',
+      widest: '0.1em',
+    },
+    fontWeight: {
+      thin: '100',
+      extralight: '200',
+      light: '300',
+      normal: '400',
+      medium: '500',
+      semi: '600',
+      bold: '700',
+      extra: '800',
+      black: '900',
+    },
+    radius: {
+      none: '0',
+      xs: '0.125rem',
+      sm: '0.25rem',
+      md: '0.5rem',
+      lg: '0.75rem',
+      xl: '1rem',
+      '2xl': '1.5rem',
+      '3xl': '2rem',
+      '4xl': '3rem',
+      full: '9999px',
+    },
+    shadow: {
+      none: 'none',
+      xs: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+      sm: '0 2px 4px -1px rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04)',
+      md: '0 4px 8px -2px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.04)',
+      lg: '0 10px 20px -3px rgb(0 0 0 / 0.08), 0 4px 8px -3px rgb(0 0 0 / 0.04)',
+      xl: '0 20px 40px -4px rgb(0 0 0 / 0.1), 0 8px 16px -4px rgb(0 0 0 / 0.04)',
+      '2xl': '0 32px 64px -6px rgb(0 0 0 / 0.14), 0 16px 32px -6px rgb(0 0 0 / 0.04)',
+      inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.06)',
+      card: '0 4px 12px -2px rgb(0 0 0 / 0.08), 0 2px 6px -2px rgb(0 0 0 / 0.04)',
+      hover: '0 12px 24px -4px rgb(0 0 0 / 0.12), 0 6px 12px -4px rgb(0 0 0 / 0.06)',
+    },
+    colors: {
+      primary: '',
+      secondary: '',
+      accent: '',
+      mute: '',
+      brand: '',
+      'brand-start': '',
+      'brand-end': '',
+      success: '',
+      warning: '',
+      error: '',
+      info: '',
+      white: '#ffffff',
+      black: '#000000',
+    },
+    opacity: {
+      '0': '0',
+      '5': '0.05',
+      '10': '0.1',
+      '20': '0.2',
+      '25': '0.25',
+      '30': '0.3',
+      '40': '0.4',
+      '50': '0.5',
+      '60': '0.6',
+      '70': '0.7',
+      '75': '0.75',
+      '80': '0.8',
+      '90': '0.9',
+      '95': '0.95',
+      '100': '1',
+    },
+    zIndex: {
+      hide: '-1',
+      auto: 'auto',
+      base: '0',
+      docked: '10',
+      dropdown: '1000',
+      sticky: '1100',
+      banner: '1200',
+      overlay: '1300',
+      modal: '1400',
+      popover: '1500',
+      skipLink: '1600',
+      toast: '1700',
+      tooltip: '1800',
+    },
+    duration: {
+      instant: '0ms',
+      fast: '150ms',
+      normal: '300ms',
+      slow: '500ms',
+      slower: '750ms',
+      slowest: '1000ms',
+    },
+    ease: {
+      linear: 'linear',
+      in: 'cubic-bezier(0.4, 0, 1, 1)',
+      out: 'cubic-bezier(0, 0, 0.2, 1)',
+      'in-out': 'cubic-bezier(0.4, 0, 0.2, 1)',
+      back: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+      bounce: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
+    },
+    heading: {
+      h1: {
+        fontSize: '2.25rem',
+        lineHeight: '1.1',
+        letterSpacing: '-0.025em',
+        fontWeight: '700',
+        marginBottom: '1.5rem',
+      },
+      h2: {
+        fontSize: '1.875rem',
+        lineHeight: '1.2',
+        letterSpacing: '-0.02em',
+        fontWeight: '700',
+        marginBottom: '1.25rem',
+      },
+      h3: {
+        fontSize: '1.5rem',
+        lineHeight: '1.25',
+        letterSpacing: '-0.015em',
+        fontWeight: '600',
+        marginBottom: '1rem',
+      },
+      h4: {
+        fontSize: '1.25rem',
+        lineHeight: '1.3',
+        letterSpacing: '-0.01em',
+        fontWeight: '600',
+        marginBottom: '0.875rem',
+      },
+      h5: {
+        fontSize: '1.125rem',
+        lineHeight: '1.4',
+        letterSpacing: '0',
+        fontWeight: '600',
+        marginBottom: '0.75rem',
+      },
+      h6: {
+        fontSize: '1rem',
+        lineHeight: '1.4',
+        letterSpacing: '0',
+        fontWeight: '600',
+        marginBottom: '0.5rem',
+      },
+    },
+  };
+}
+
 // Modern token values based on industry best practices
-export const defaultTokens: DesignTokens = {
-  // Typography Scale - Minor Third (1.2) ratio for better web readability
-  // Based on 16px (1rem) with more conservative scaling
-  font: {
-    '3xs': '0.5rem',   // 8px     (16 × 0.5)
-    '2xs': '0.625rem', // 10px    (16 × 0.625)
-    xs: '0.75rem',     // 12px    (16 ÷ 1.333)
-    sm: '0.875rem',    // 14px    (16 × 0.875)
-    md: '1rem',        // 16px    (base - perfect for body text)
-    lg: '1.125rem',    // 18px    (16 × 1.125)
-    xl: '1.25rem',     // 20px    (16 × 1.25)
-    '2xl': '1.5rem',   // 24px    (16 × 1.5)
-    '3xl': '1.875rem', // 30px    (16 × 1.875)
-    '4xl': '2.25rem',  // 36px    (16 × 2.25)
-    '5xl': '3rem',     // 48px    (16 × 3)
-    '6xl': '3.75rem',  // 60px    (16 × 3.75)
-    '7xl': '4.5rem',   // 72px    (16 × 4.5)
-    '8xl': '6rem',     // 96px    (16 × 6)
-    '9xl': '8rem',     // 128px   (16 × 8)
-  },
-  
-  // Spacing Scale - Based on 4px grid system
-  spacing: {
-    // Base 4px grid increments
-    xs: '0.25rem',        // 4px - smallest unit (1x base)
-    sm: '0.5rem',         // 8px - small spacing (2x base)
-    md: '0.75rem',        // 12px - medium spacing (3x base)
-    lg: '1rem',           // 16px - default spacing (4x base)
-    xl: '1.25rem',        // 20px - large spacing (5x base)
-    '2xl': '1.5rem',      // 24px - extra large (6x base)
-    '3xl': '2rem',        // 32px - section spacing (8x base)
-    '4xl': '2.5rem',      // 40px - subsection spacing (10x base)
-    '5xl': '3rem',        // 48px - large section (12x base)
-    '6xl': '4rem',        // 64px - hero spacing (16x base)
-    '7xl': '5rem',        // 80px - extra hero (20x base)
-    '8xl': '6rem',        // 96px - maximum spacing (24x base)
-    '9xl': '8rem'         // 128px - mega spacing (32x base)
-  },
-  
-  // Size Scale - for size() utility (icons, avatars, squares)
-  size: {
-    // Icon and small element sizes (4px base)
-    '4xs': '1rem',      // 16px - tiny icons
-    '3xs': '1.25rem',   // 20px - small icons
-    '2xs': '1.5rem',    // 24px - medium icons
-    xs: '2rem',         // 32px - large icons, small squares
-    sm: '2.5rem',       // 40px - buttons, medium squares
-    md: '3rem',         // 48px - larger buttons
-    lg: '4rem',         // 64px - avatar, large squares
-    xl: '5rem',         // 80px - large avatars
-    '2xl': '6rem',      // 96px - hero avatars
-    
-    // Legacy container sizes (kept for backward compatibility)
-    '3xl': '20rem',     // 320px
-    '4xl': '30rem',     // 480px
-    '5xl': '40rem',     // 640px
-    '6xl': '48rem',     // 768px
-    '7xl': '64rem',     // 1024px
-    '8xl': '80rem',     // 1280px
-    '9xl': '96rem',     // 1536px
-    
-    // Special values
-    'auto': 'auto',
-    'full': '100%',
-    'screen': '100vw',  // for width, becomes 100vh for height
-    'min': 'min-content',
-    'max': 'max-content',
-    'fit': 'fit-content',
-  },
-  
-  // Container Scale - for w/h/max-w/max-h utilities
-  container: {
-    // Based on common breakpoints and content widths
-    xs: '20rem',        // 320px - mobile content
-    sm: '24rem',        // 384px - small mobile
-    md: '28rem',        // 448px - large mobile
-    lg: '32rem',        // 512px - small tablet
-    xl: '36rem',        // 576px - tablet
-    '2xl': '42rem',     // 672px - large tablet
-    '3xl': '48rem',     // 768px - small desktop
-    '4xl': '56rem',     // 896px - medium desktop
-    '5xl': '64rem',     // 1024px - desktop
-    '6xl': '72rem',     // 1152px - large desktop
-    '7xl': '80rem',     // 1280px - extra large desktop
-    '8xl': '90rem',     // 1440px - 2K displays
-    '9xl': '100rem',    // 1600px - ultra wide
-    
-    // Special container values
-    'auto': 'auto',
-    'full': '100%',
-    'screen': '100vw',  // becomes 100vh for height
-    'min': 'min-content',
-    'max': 'max-content',
-    'fit': 'fit-content',
-    'prose': '65ch',    // Optimal reading width
-  },
-  
-  lineHeight: {
-    none: '1',        // 100% - for titles that need tight spacing
-    tight: '1.1',     // 110% - for large headings (minimal line spacing)
-    snug: '1.2',      // 120% - for medium headings
-    normal: '1.4',    // 140% - for body text (optimal readability)
-    relaxed: '1.6',   // 160% - for comfortable reading
-    loose: '1.8',     // 180% - for maximum readability
-  },
-  
-  letterSpacing: {
-    tighter: '-0.05em',
-    tight: '-0.025em',
-    normal: '0',
-    wide: '0.025em',
-    wider: '0.05em',
-    widest: '0.1em',
-  },
-  
-  fontWeight: {
-    thin: '100',
-    extralight: '200',
-    light: '300',
-    normal: '400',
-    medium: '500',
-    semi: '600',
-    bold: '700',
-    extra: '800',
-    black: '900',
-  },
-  
-  // Modern rounded design with practical values
-  radius: {
-    none: '0',
-    xs: '0.125rem',    // 2px - subtle rounding
-    sm: '0.25rem',     // 4px - small elements
-    md: '0.5rem',      // 8px - default radius
-    lg: '0.75rem',     // 12px - cards, modals
-    xl: '1rem',        // 16px - large cards
-    '2xl': '1.5rem',   // 24px - hero sections
-    '3xl': '2rem',     // 32px - decorative
-    '4xl': '3rem',     // 48px - extra decorative
-    full: '9999px',    // pills, circles
-  },
-  
-  // Sophisticated layered shadow system
-  shadow: {
-    none: 'none',
-    xs: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
-    sm: '0 2px 4px -1px rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04)',
-    md: '0 4px 8px -2px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.04)',
-    lg: '0 10px 20px -3px rgb(0 0 0 / 0.08), 0 4px 8px -3px rgb(0 0 0 / 0.04)',
-    xl: '0 20px 40px -4px rgb(0 0 0 / 0.1), 0 8px 16px -4px rgb(0 0 0 / 0.04)',
-    '2xl': '0 32px 64px -6px rgb(0 0 0 / 0.14), 0 16px 32px -6px rgb(0 0 0 / 0.04)',
-    inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.06)',
-    card: '0 4px 12px -2px rgb(0 0 0 / 0.08), 0 2px 6px -2px rgb(0 0 0 / 0.04)',
-    hover: '0 12px 24px -4px rgb(0 0 0 / 0.12), 0 6px 12px -4px rgb(0 0 0 / 0.06)',
-  },
-  
-  colors: {
-    // Core semantic colors - these will be dynamically resolved from semanticColors config
-    primary: '',       // Will be resolved to purple-500
-    secondary: '',     // Will be resolved to gray-500
-    accent: '',        // Will be resolved to pink-500
-    mute: '',          // Will be resolved to gray-500
-    brand: '',         // Will be resolved to purple-500..pink-500
-    'brand-start': '', // Will be resolved from brand gradient
-    'brand-end': '',   // Will be resolved from brand gradient
-    success: '',       // Will be resolved to green-500
-    warning: '',       // Will be resolved to amber-500
-    error: '',         // Will be resolved to red-500
-    info: '',          // Will be resolved to blue-500
-    
-    // Basic non-OKLCH colors only
-    white: '#ffffff',
-    black: '#000000',
-    
-    // All other colors (gray-*, blue-*, purple-*, etc.) are generated by the OKLCH color system
-    // and injected via colorPalette in generateTokenCSS()
-  },
-  
-  opacity: {
-    '0': '0',
-    '5': '0.05',
-    '10': '0.1',
-    '20': '0.2',
-    '25': '0.25',
-    '30': '0.3',
-    '40': '0.4',
-    '50': '0.5',
-    '60': '0.6',
-    '70': '0.7',
-    '75': '0.75',
-    '80': '0.8',
-    '90': '0.9',
-    '95': '0.95',
-    '100': '1',
-  },
-  
-  zIndex: {
-    hide: '-1',
-    auto: 'auto',
-    base: '0',
-    docked: '10',
-    dropdown: '1000',
-    sticky: '1100',
-    banner: '1200',
-    overlay: '1300',
-    modal: '1400',
-    popover: '1500',
-    skipLink: '1600',
-    toast: '1700',
-    tooltip: '1800',
-  },
-  
-  duration: {
-    instant: '0ms',
-    fast: '150ms',
-    normal: '300ms',
-    slow: '500ms',
-    slower: '750ms',
-    slowest: '1000ms',
-  },
-  
-  ease: {
-    linear: 'linear',
-    in: 'cubic-bezier(0.4, 0, 1, 1)',
-    out: 'cubic-bezier(0, 0, 0.2, 1)',
-    'in-out': 'cubic-bezier(0.4, 0, 0.2, 1)',
-    back: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
-    bounce: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-  },
-  
-  // Heading System - More reasonable sizes for web
-  heading: {
-    h1: {
-      fontSize: '2.25rem',      // 36px - Main page title
-      lineHeight: '1.1',        // tight - for maximum impact
-      letterSpacing: '-0.025em', // tight - better visual density for large text
-      fontWeight: '700',        // bold - strong hierarchy
-      marginBottom: '1.5rem',   // 24px
-    },
-    h2: {
-      fontSize: '1.875rem',     // 30px - Section titles
-      lineHeight: '1.2',        // snug
-      letterSpacing: '-0.02em',
-      fontWeight: '700',        // bold
-      marginBottom: '1.25rem',  // 20px
-    },
-    h3: {
-      fontSize: '1.5rem',       // 24px - Subsection titles
-      lineHeight: '1.25',       // snug
-      letterSpacing: '-0.015em',
-      fontWeight: '600',        // semi
-      marginBottom: '1rem',     // 16px
-    },
-    h4: {
-      fontSize: '1.25rem',      // 20px - Content headings
-      lineHeight: '1.3',        // snug
-      letterSpacing: '-0.01em',
-      fontWeight: '600',        // semi
-      marginBottom: '0.875rem', // 14px
-    },
-    h5: {
-      fontSize: '1.125rem',     // 18px - Minor headings
-      lineHeight: '1.4',        // normal
-      letterSpacing: '0',
-      fontWeight: '600',        // semi
-      marginBottom: '0.75rem',  // 12px
-    },
-    h6: {
-      fontSize: '1rem',         // 16px - Small headings
-      lineHeight: '1.4',        // normal - better readability for smaller headings
-      letterSpacing: '0',       // normal
-      fontWeight: '600',        // semi
-      marginBottom: '0.5rem',   // 8px (spacing-sm)
-    },
-  },
-};
+export const defaultTokens: DesignTokens = createTokens(defaultScaleConfig);
 
 // Color palette for resolving semantic colors
 // This will be populated by the color system

@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { fade } from 'svelte/transition';
-  import { Copy, Check, Eye, EyeOff, X } from 'lucide-svelte';
+  import { Copy, Check, X } from 'lucide-svelte';
 
-  let isEnabled = false;
+  let isModifierKeyPressed = false;
   let inspectedElement: HTMLElement | null = null;
   let classString = '';
   let copied = false;
@@ -26,11 +26,8 @@
     }
   }
 
-  function handleElementClick(event: MouseEvent) {
-    if (!isEnabled) return;
-    
-    event.preventDefault();
-    event.stopPropagation();
+  function handleElementHover(event: MouseEvent) {
+    if (!isModifierKeyPressed) return;
     
     const target = event.target as HTMLElement;
     if (!target || target.closest('.class-inspector')) {
@@ -55,6 +52,21 @@
     copied = false;
   }
 
+  function handleKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Meta' || event.key === 'Control') {
+      isModifierKeyPressed = true;
+      document.body.classList.add('inspector-enabled');
+    }
+  }
+
+  function handleKeyUp(event: KeyboardEvent) {
+    if (event.key === 'Meta' || event.key === 'Control') {
+      isModifierKeyPressed = false;
+      document.body.classList.remove('inspector-enabled');
+      removeHighlight();
+    }
+  }
+
   function handleScroll() {
     if (inspectedElement) {
       updateLabelPosition();
@@ -77,27 +89,22 @@
     classString = '';
   }
 
-  function toggleInspector() {
-    isEnabled = !isEnabled;
-    if (!isEnabled) {
-      removeHighlight();
-      document.body.classList.remove('inspector-enabled');
-    } else {
-      document.body.classList.add('inspector-enabled');
-    }
-  }
 
   function closeInspector() {
     removeHighlight();
   }
 
   onMount(() => {
-    document.addEventListener('click', handleElementClick, true);
+    document.addEventListener('mouseover', handleElementHover, true);
+    document.addEventListener('keydown', handleKeyDown, true);
+    document.addEventListener('keyup', handleKeyUp, true);
     window.addEventListener('scroll', handleScroll, true);
     window.addEventListener('resize', handleScroll);
     
     return () => {
-      document.removeEventListener('click', handleElementClick, true);
+      document.removeEventListener('mouseover', handleElementHover, true);
+      document.removeEventListener('keydown', handleKeyDown, true);
+      document.removeEventListener('keyup', handleKeyUp, true);
       window.removeEventListener('scroll', handleScroll, true);
       window.removeEventListener('resize', handleScroll);
       document.body.classList.remove('inspector-enabled');
@@ -106,24 +113,19 @@
   });
 </script>
 
-<!-- Toggle Button -->
+<!-- Permanent Indicator -->
 <div class="class-inspector fixed bottom(lg) right(lg) z(100)">
-  <button
-    class="w(48px) h(48px) r(full) bg(primary) hover:bg(primary-700) c(white) 
-           shadow(lg) transition hbox(pack) {isEnabled ? 'bg(green-600) hover:bg(green-700)' : ''}"
-    on:click={toggleInspector}
-    title={isEnabled ? 'Disable Class Inspector' : 'Enable Class Inspector'}
-  >
-    {#if isEnabled}
-      <EyeOff size="20" />
-    {:else}
-      <Eye size="20" />
-    {/if}
-  </button>
+  <div class="{isModifierKeyPressed ? 'bg(green-600) c(white)' : 'bg(gray-700) c(gray-300)'} px(md) py(sm) r(md) shadow(lg) text(xs) transition-all duration-200 hbox gap(xs) items(center)">
+    <span class="text(xs)">Class Inspector:</span>
+    <kbd class="bg({isModifierKeyPressed ? 'green-500' : 'gray-600'}) c(white) px(xs) py(xxs) r(xs) font(mono) text(xxs) transition-all duration-200">
+      {navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'}
+    </kbd>
+    <span class="text(xs)">+ hover</span>
+  </div>
 </div>
 
 <!-- Fixed Class Label -->
-{#if isEnabled && classString && inspectedElement}
+{#if isModifierKeyPressed && classString && inspectedElement}
   <div 
     class="class-inspector fixed z(200) bg(gray-900) c(white) px(sm) py(xs) r(sm) 
            shadow(lg) font(mono) text(xs) max-w(600px) overflow(hidden) hbox gap(xs) items(center)"

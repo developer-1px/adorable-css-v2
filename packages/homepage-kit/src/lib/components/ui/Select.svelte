@@ -4,7 +4,7 @@
 
 <div class="relative">
   <select 
-    class="w(full) px(12) py(8) pr(32) r(md) body(sm) bd(1/solid/gray-300) focus:bd(1/solid/primary) focus:outline(none) focus:ring(2/primary/0.2) appearance-none cursor(pointer) transition"
+    class="w(full) px(12) py(8) pr(32) r(md) body(sm) b(gray-300) focus:b(primary) focus:outline(none) focus:ring(2/primary/0.2) appearance-none cursor(pointer) transition"
     bind:value
     {...$$restProps}
   >

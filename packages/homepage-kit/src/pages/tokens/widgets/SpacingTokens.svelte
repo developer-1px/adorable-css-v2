@@ -154,7 +154,7 @@
     <div class="relative z(10) p(4xl) text(center) c(white)">
       <div class="mb(3xl)">
         <h3 class="heading(hero) mb(lg)">Perfect Spacing</h3>
-        <p class="text(xl) opacity(90) max-w(3xl) mx(auto) leading(relaxed)">
+        <p class="text(xl) opacity(90) max-w(4xl) mx(auto) leading(relaxed)">
           Every pixel matters. Our spacing system creates visual harmony through mathematical precision.
         </p>
       </div>

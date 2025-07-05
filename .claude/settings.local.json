@@ -108,7 +108,9 @@
       "Bash(npx eslint:*)",
       "Bash(pnpm --filter adorable-css test:check)",
       "Bash(pnpm --filter adorable-css test src/**/*.test.ts --run)",
-      "Bash(pnpm --filter adorable-css lint)"
+      "Bash(pnpm --filter adorable-css lint)",
+      "Bash(npx unimported:*)",
+      "Bash(npx ts-prune:*)"
     ],
     "deny": []
   }

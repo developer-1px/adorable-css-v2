@@ -1,5 +1,3 @@
-import type { StringRuleHandler, CSSRule } from '../../rules/types';
-
 // Modern technical documentation components using AdorableCSS string composition
 
 // Export docs rules with both kebab-case and dot notation support

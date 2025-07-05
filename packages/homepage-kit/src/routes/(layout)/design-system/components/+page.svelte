@@ -49,7 +49,7 @@
   <!-- Header -->
   <section class="vbox gap(16) container mx(auto) px(24)">
     <h1 class="font(4xl/bold) c(gray-900)">Component Library</h1>
-    <p class="font(lg) c(gray-600) max-w(3xl)">
+    <p class="font(lg) c(gray-600) max-w(4xl)">
       shadcn/ui에서 영감을 받아 AdorableCSS로 구현한 컴포넌트 라이브러리입니다.
       모든 컴포넌트는 순수 CSS 유틸리티만으로 스타일링되었습니다.
     </p>

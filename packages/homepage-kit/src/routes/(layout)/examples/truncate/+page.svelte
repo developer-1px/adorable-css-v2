@@ -14,7 +14,7 @@
         <h1 class="heading(display/xl) c(mute-900)">
           Truncate Rule
         </h1>
-        <p class="body(xl) c(mute-600) max-w(3xl)">
+        <p class="body(xl) c(mute-600) max-w(4xl)">
           Elegant text truncation with ellipsis. Single-line by default, multi-line with line clamping.
         </p>
       </div>

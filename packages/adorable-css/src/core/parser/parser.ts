@@ -351,13 +351,9 @@ function _parseAdorableCSS(input: string) {
     };
   }
 
-  try {
-    const r = SelectorList();
-    eof(r);
-    return r;
-  } catch (e) {
-    throw e;
-  }
+  const r = SelectorList();
+  eof(r);
+  return r;
 }
 
 // Export memoized version

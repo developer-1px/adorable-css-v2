@@ -6,10 +6,17 @@ export const cardDefinition: ComponentDefinition = {
   base: 'relative clip transition-all',
   
   sizes: {
-    sm: 'p(16) r(md)',
-    default: 'p(24) r(lg)',
-    lg: 'p(32) r(xl)',
-    xl: 'p(48) r(2xl)'
+    sm: 'p(sm) r(sm)',
+    md: 'p(md) r(md)',
+    lg: 'p(lg) r(lg)',
+    xl: 'p(xl) r(xl)',
+    '2xl': 'p(2xl) r(2xl)',
+    '3xl': 'p(3xl) r(3xl)'
+  },
+  
+  defaults: {
+    size: 'md',
+    variant: 'default'
   },
   
   variants: {

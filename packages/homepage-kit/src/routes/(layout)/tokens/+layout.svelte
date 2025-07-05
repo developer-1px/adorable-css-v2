@@ -39,6 +39,12 @@
       path: '/tokens/effects',
       icon: 'Sparkles',
       description: 'Animation & transitions'
+    },
+    {
+      name: 'Generator', 
+      path: '/tokens/generator',
+      icon: 'Settings',
+      description: 'Token scale generator'
     }
   ];
   
@@ -51,10 +57,10 @@
 <div class="min-h(screen) bg(gray-50)">
   <!-- Header Section -->
   <div class="bg(white) border-b(1/gray-200)">
-    <div class="max-w(7xl) mx(auto) px(xl) py(2xl)">
+    <div class="max-w(4xl) mx(auto) px(xl) py(2xl)">
       <div class="text(center) mb(2xl)">
         <h1 class="display(lg) gradient mb(lg)">Design Tokens</h1>
-        <p class="body(lg) c(gray-600) max-w(3xl) mx(auto)">
+        <p class="body(lg) c(gray-600) max-w(4xl) mx(auto)">
           The foundation of AdorableCSS's design system. Consistent, scalable, and beautiful tokens
           for building cohesive interfaces.
         </p>
@@ -83,12 +89,12 @@
   </div>
   
   <!-- Content Area -->
-  <main class="max-w(7xl) mx(auto) px(xl) py(3xl)">
+  <main class="max-w(4xl) mx(auto) px(xl) py(3xl)">
     <slot />
   </main>
   
   <!-- Previous/Next Navigation -->
-  <nav class="max-w(7xl) mx(auto) px(xl) pb(3xl)">
+  <nav class="max-w(4xl) mx(auto) px(xl) pb(3xl)">
     <div class="border-t(1/gray-200) pt(3xl)">
       <div class="grid(2) gap(xl)">
         <!-- Previous Button -->

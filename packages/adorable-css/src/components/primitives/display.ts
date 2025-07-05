@@ -3,7 +3,7 @@ import type { ComponentDefinition } from '../defineComponent-unified';
 
 // Display component - for maximum visual impact
 export const displayDefinition: ComponentDefinition = {
-  base: 'c(gray-900) transition(color/200ms) balance block',
+  base: 'balance',
   
   sizes: {
     xs: 'font(3xl/1.2/-1%) bold(bold)',

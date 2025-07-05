@@ -282,7 +282,7 @@
       code: `<div class="container(xl) py(3xl)">
   <div class="vbox gap(3xl)">
     <!-- Header -->
-    <div class="vbox gap(lg) text(center) max-w(3xl) mx(auto)">
+    <div class="vbox gap(lg) text(center) max-w(4xl) mx(auto)">
       <span class="px(lg) py(sm) bg(primary-100) c(primary-700) r(full) caption(sm) bold(600) uppercase letter-spacing(wide) w(fit)">
         Features
       </span>

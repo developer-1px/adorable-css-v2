@@ -83,5 +83,5 @@ export const cssEscape = (string:string):string => {
  */
 export function cleanDuplicateSelectors(css: string): string {
   // Match pattern: repeated identical selectors
-  return css.replace(/(\.[^{\.]+)(\1)+/g, '$1');
+  return css.replace(/(\.[^{.]+)(\1)+/g, '$1');
 }

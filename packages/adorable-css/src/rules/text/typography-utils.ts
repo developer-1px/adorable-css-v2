@@ -17,19 +17,13 @@ export const underline: RuleHandler = (): CSSRule => ({
   'text-decoration': 'underline'
 });
 
-export const lineThrough: RuleHandler = (): CSSRule => ({
-  'text-decoration': 'line-through'
-});
-
-// Aliases for line-through
-export const strike = lineThrough;
 
 // Decoration handler - decoration(underline), decoration(purple-600.3)
 export const decoration: RuleHandler = (args?: string): CSSRule => {
   if (!args) return { 'text-decoration': 'underline' };
   
   // Handle decoration styles
-  if (args === 'underline' || args === 'overline' || args === 'line-through' || args === 'none') {
+  if (args === 'underline' || args === 'overline' || args === 'none') {
     return { 'text-decoration': args };
   }
   
@@ -108,8 +102,6 @@ export const typographyUtilityRules = {
   italic,
   overline,
   underline,
-  'line-through': lineThrough,
-  strike,
   decoration,
   'sans-serif': sansSerif,
   serif,

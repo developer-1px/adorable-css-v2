@@ -10,7 +10,7 @@ describe('font(base) token resolution', () => {
 
   it('should verify that base is properly aliased to md in isToken', () => {
     // Test that 'base' resolves to 'md' token
-    const tokenName = 'base' === 'base' ? 'md' : 'base';
+    const tokenName = 'md';
     expect(isToken(tokenName, 'font')).toBe(true);
     expect(isToken('md', 'font')).toBe(true);
   });

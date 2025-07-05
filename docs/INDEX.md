@@ -63,6 +63,12 @@
 브랜드 아이덴티티, 디자인 언어, 시각적 가이드라인
 
 
+### 🌐 Background (배경)
+프로젝트의 철학과 배경에 대한 깊이 있는 문서
+
+- **[background-figma-compatibility.md](https://github.com/developer-1px/adorable-css-v2/blob/main/docs/background-figma-compatibility.md)** - 🔄 Figma 호환성 문제  
+  *Design to Code, Code to Design의 본질적 문제와 해결 방향*
+
 ### 👩‍💻 Development (개발)
 개발 과정, 실수 분석, 개선 방향
 
@@ -138,6 +144,7 @@
 | PROJECT_SETUP.md | ✅ 최신 | 2024-12-27 | 🔥 HIGH |
 | BEST_PRACTICES.md | ✅ 최신 | 2024-12-27 | 🔥 HIGH |
 | INTEGRATION_GUIDE.md | ✅ 최신 | 2024-12-27 | 🔶 MEDIUM |
+| background-figma-compatibility.md | ✅ 최신 | 2025-07-04 | 🔥 HIGH |
 
 ## 🔄 Document Updates
 

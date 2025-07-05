@@ -60,7 +60,7 @@
       </div>
       <h2 class="display(lg) c(to-r/primary..primary-700)">Effects & Animation</h2>
     </div>
-    <p class="text(xl) c(gray-600) max-w(3xl) mx(auto) leading(relaxed)">
+    <p class="text(xl) c(gray-600) max-w(4xl) mx(auto) leading(relaxed)">
       Carefully crafted timing and easing that brings interfaces to life with purposeful motion
     </p>
     

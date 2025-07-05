@@ -81,10 +81,28 @@ function parseComponentArgs(
   }
 
   const parts = args.split('/');
-  const size = parts.find(p => sizeOptions.includes(p)) || defaultSize;
-  const variant = parts.find(p => !sizeOptions.includes(p)) || defaultVariant;
-
-  return { variant, size };
+  
+  // Handle explicit variant/size syntax
+  if (parts.length === 2) {
+    // First part is variant, second is size
+    return { variant: parts[0], size: parts[1] };
+  }
+  
+  // Single argument - need to determine if it's size or variant
+  if (parts.length === 1) {
+    const arg = parts[0];
+    
+    // If it matches a size option, treat as size
+    if (sizeOptions.includes(arg)) {
+      return { variant: defaultVariant, size: arg };
+    }
+    
+    // Otherwise treat as variant
+    return { variant: arg, size: defaultSize };
+  }
+  
+  // Fallback to defaults
+  return { variant: defaultVariant, size: defaultSize };
 }
 
 /**
@@ -252,7 +270,7 @@ export function defineComponent(
   options: ComponentOptions = {}
 ): StringRuleHandler {
   const {
-    sizeOptions = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'default'],
+    sizeOptions = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'],
     defaultSize = definition.defaults?.size || 'default',
     defaultVariant = definition.defaults?.variant || 'default',
     parseArgs = (args) => parseComponentArgs(args, sizeOptions, defaultSize, defaultVariant)

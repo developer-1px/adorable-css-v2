@@ -117,7 +117,7 @@
       <Type size="32" class="c(primary)" />
       <h1 class="display(lg) gradient">Typography System</h1>
     </div>
-    <p class="body(lg) c(neutral-600) max-w(3xl) mx(auto) pt(xl)">
+    <p class="body(lg) c(neutral-600) max-w(4xl) mx(auto) pt(xl)">
       A comprehensive 6-role typography system designed for clarity, hierarchy, and beautiful reading experiences. 
       Each role serves a specific purpose in your design system.
     </p>
@@ -495,7 +495,7 @@
   <!-- Typography Composition Examples -->
   <div class="bg(neutral-900) r(2xl) p(3xl) c(white)">
     <h2 class="heading(h1) c(white) pb(xl) text(center)">Typography in Action</h2>
-    <p class="body(lg) c(neutral-300) text(center) max-w(3xl) mx(auto) pb(3xl)">
+    <p class="body(lg) c(neutral-300) text(center) max-w(4xl) mx(auto) pb(3xl)">
       See how different typography roles work together to create beautiful, functional interfaces
     </p>
 

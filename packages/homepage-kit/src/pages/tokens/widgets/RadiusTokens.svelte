@@ -53,7 +53,7 @@
       </div>
       <h2 class="display(lg) c(to-r/orange-600..amber-600)">Border Radius</h2>
     </div>
-    <p class="text(xl) c(gray-600) max-w(3xl) mx(auto) leading(relaxed)">
+    <p class="text(xl) c(gray-600) max-w(4xl) mx(auto) leading(relaxed)">
       Thoughtful corner radius that brings softness and personality to every interface element
     </p>
     
@@ -184,7 +184,7 @@
     <div class="relative z(10) p(4xl) text(center) c(white)">
       <div class="mb(3xl)">
         <h3 class="heading(hero) mb(lg)">Perfect Curves</h3>
-        <p class="text(xl) opacity(90) max-w(3xl) mx(auto) leading(relaxed)">
+        <p class="text(xl) opacity(90) max-w(4xl) mx(auto) leading(relaxed)">
           From sharp precision to gentle curves, radius creates personality and hierarchy in your interface.
         </p>
       </div>

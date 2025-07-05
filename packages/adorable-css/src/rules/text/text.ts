@@ -4,7 +4,7 @@ import { isToken, getTokenVar } from '../../design-system/tokens/index';
 
 const aligns = ['left', 'center', 'right', 'justify', 'start', 'end'];
 const transforms = ['uppercase', 'lowercase', 'capitalize'];
-const decorations = ['underline', 'overline', 'line-through'];
+const decorations = ['underline', 'overline'];
 
 // Helper function for text box layout inspired by Figma
 const makeTextBox = (value: string): CSSRule => {

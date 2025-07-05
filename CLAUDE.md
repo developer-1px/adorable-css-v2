@@ -11,6 +11,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Figma Auto Layout Mapping**: hbox(), vbox(), w(fill), w(hug) 등 직관적 매핑
 - **Integration-First**: CSS Framework 한계를 인정하고 기존 생태계와 시너지 창출
 - **Design Rules**: no margin, no font, no line-height, no color, just use components and semantic token
+- **Memory**: margin을 쓰지 말라니까!
+- **Memory**: no margin!
 
 ### Development Priorities
 1. **Priority 1 (3개월)**: 상태 스타일링, Form 시스템, 의미론적 컴포넌트

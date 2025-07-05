@@ -153,7 +153,7 @@
       <div class="vbox gap(lg) text(center)">
         <Badge variant="outline">Parser Reference</Badge>
         <h1 class="heading(h1) c(mute-900)">Parser Syntax Test</h1>
-        <p class="body(lg) c(mute-600) max-w(3xl) mx(auto)">
+        <p class="body(lg) c(mute-600) max-w(4xl) mx(auto)">
           Comprehensive test of AdorableCSS parser patterns and edge cases
         </p>
       </div>

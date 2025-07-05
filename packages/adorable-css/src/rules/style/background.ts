@@ -1,5 +1,49 @@
 import type { CSSRule, RuleHandler } from '../types';
 import { makeColor } from '../../core/values/makeValue';
+import { hexToOklch, hexToRgb } from '../../design-system/colors/advanced-colors';
+
+// Calculate auto text color based on background lightness
+function getAutoTextColor(backgroundColor: string): string {
+  // Handle CSS variables
+  if (backgroundColor.startsWith('var(') || backgroundColor.startsWith('oklch(')) {
+    // For CSS variables and OKLCH colors, use CSS contrast-color if available
+    return `contrast-color(${backgroundColor})`;
+  }
+  
+  // Convert color to hex if possible
+  let hexColor = backgroundColor;
+  if (backgroundColor.startsWith('#')) {
+    hexColor = backgroundColor;
+  } else if (backgroundColor.startsWith('rgb')) {
+    // Simple RGB to hex conversion for basic cases
+    const match = backgroundColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)\)/);
+    if (match) {
+      const r = parseInt(match[1]);
+      const g = parseInt(match[2]);
+      const b = parseInt(match[3]);
+      hexColor = '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+    }
+  }
+  
+  // Use OKLCH lightness to determine text color
+  const oklch = hexToOklch(hexColor);
+  if (oklch) {
+    // OKLCH lightness threshold: 0.6 is a good balance point
+    // Higher lightness = use dark text, lower lightness = use light text
+    return oklch.l > 0.6 ? '#000000' : '#ffffff';
+  }
+  
+  // Fallback: use relative luminance calculation
+  const rgb = hexToRgb(hexColor);
+  if (rgb) {
+    // Convert to relative luminance (Y in XYZ color space)
+    const luminance = (0.299 * rgb.r + 0.587 * rgb.g + 0.114 * rgb.b) / 255;
+    return luminance > 0.5 ? '#000000' : '#ffffff';
+  }
+  
+  // Final fallback
+  return '#000000';
+}
 
 export const bg: RuleHandler = (args?: string): CSSRule => {
   if (!args) return { 'background-color': 'var(--gray-900)' }; // Default to gray-900 for code blocks
@@ -110,6 +154,18 @@ export const bg: RuleHandler = (args?: string): CSSRule => {
   if (args.startsWith('radial/')) {
     const gradientValue = args.replace(/\//g, ' ').replace('radial ', 'radial-gradient(');
     return { 'background': gradientValue + ')' };
+  }
+  
+  // Check for auto-text syntax: bg(color/auto-text)
+  if (args.includes('/auto-text')) {
+    const color = args.replace('/auto-text', '');
+    const backgroundColor = String(makeColor(color));
+    const textColor = getAutoTextColor(backgroundColor);
+    
+    return { 
+      'background-color': backgroundColor,
+      'color': textColor
+    };
   }
   
   // bg(#fff) or bg(#000.5) - regular colors

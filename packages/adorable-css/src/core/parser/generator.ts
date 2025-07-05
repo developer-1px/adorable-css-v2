@@ -1,7 +1,7 @@
 import { parseAdorableCSS } from "./parser";
 import { getRuleHandler, getRuleWithPriority } from "../../rules";
 import { priorityRegistry } from "../../rules/priority-registry";
-import type { CSSRule, ParsedSelector, StringRuleDefinition } from "../../rules/types";
+import type { CSSRule, ParsedSelector } from "../../rules/types";
 import { RulePriority } from "../../rules/types";
 import { cssEscape, cleanDuplicateSelectors } from "./cssEscape";
 import { px } from '../values/makeValue';
@@ -249,7 +249,7 @@ function _generateCSSFromAdorableCSS(value: string): string {
     const result = parseAdorableCSS(value);
     
     // Extract importance level
-    const { level: importanceLevel } = extractImportanceLevel(value);
+    extractImportanceLevel(value);
     
     const rawSelector = "." + cssEscape(value);
     let actualSelector = addImportanceToSelector(rawSelector);
@@ -347,7 +347,7 @@ function generateStateCSS(stateClassName: string): string {
   // Get the layer for the base rule
   const ruleName = pattern.selector.split('(')[0];
   const rule = priorityRegistry.getAnyRule(ruleName);
-  const layer = rule ? getLayerFromPriority(rule.priority) : 'state';
+  rule ? getLayerFromPriority(rule.priority) : 'state';
   
   // Generate state CSS
   const fullClassSelector = "." + cssEscape(cleanClassName);
@@ -365,7 +365,7 @@ function generateStateCSS(stateClassName: string): string {
 
 // Generate responsive CSS using decorator pattern
 function generateResponsiveCSS(responsiveClassName: string): string {
-  const { level: importanceLevel, className: cleanClassName } = extractImportanceLevel(responsiveClassName);
+  const { className: cleanClassName } = extractImportanceLevel(responsiveClassName);
   
   const pattern = ResponsiveSelector.analyze(cleanClassName);
   if (!pattern) {
@@ -392,7 +392,7 @@ function generateResponsiveCSS(responsiveClassName: string): string {
   const basePattern = ResponsiveSelector.analyze(pattern.selector);
   const ruleName = basePattern?.selector || pattern.selector;
   const rule = priorityRegistry.getAnyRule(ruleName.split('(')[0]);
-  const layer = rule ? getLayerFromPriority(rule.priority) : 'utility';
+  rule ? getLayerFromPriority(rule.priority) : 'utility';
   
   // Build final selector with importance
   const responsiveSelector = "." + cssEscape(cleanClassName);

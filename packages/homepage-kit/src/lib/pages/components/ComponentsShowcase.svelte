@@ -25,7 +25,7 @@
       <h1 class="display(lg) text(center) mb(lg)">
         Component Showcase
       </h1>
-      <p class="text(xl) text(center) c(gray-600) max-w(3xl) mx(auto)">
+      <p class="text(xl) text(center) c(gray-600) max-w(4xl) mx(auto)">
         Explore all component variants and combinations with live preview and code generation
       </p>
     </div>

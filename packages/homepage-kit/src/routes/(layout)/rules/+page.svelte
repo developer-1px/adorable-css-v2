@@ -115,18 +115,18 @@
 
 <div class="min-h(100vh) bg(white)">
   <!-- Hero Section -->
-  <section class="relative overflow(hidden) bg(gradient-to-br/mute-900..mute-800) py(6xl)">
+  <section class="relative overflow(hidden) bg(to-br/mute-900..mute-800) py(2xl)">
     <div class="container(6xl) mx(auto) px(2xl) relative z(10)">
-      <div class="vbox(center) gap(4xl)">
+      <div class="vbox(center) gap(2xl)">
         <!-- Hero Content -->
-        <div class="vbox(center) gap(2xl) max-w(4xl)">
+        <div class="vbox(center) gap(lg) max-w(4xl)">
           <Badge variant="outline">
             <span class="c(white)">{totalRules} Rules Available</span>
           </Badge>
-          <h1 class="heading(display/2xl) c(white)">
+          <h1 class="display(lg) c(white)">
             AdorableCSS Rule Reference
           </h1>
-          <p class="body(xl) c(white.8) max-w(3xl)">
+          <p class="body(base) c(white.8) max-w(4xl)">
             Complete API reference for all AdorableCSS rules. Organized by CSS @layer cascade for predictable styling without specificity battles.
           </p>
           
@@ -151,11 +151,11 @@
         </div>
 
         <!-- Live Playground -->
-        <div class="w(full) max-w(5xl)">
-          <div class="card(glass/lg) backdrop-blur(lg)">
-            <div class="vbox gap(2xl)">
-              <div class="vbox(center) gap(md)">
-                <h3 class="title(lg) c(white)">Try It Live</h3>
+        <div class="w(full) max-w(4xl)">
+          <div class="bg(white.05) p(2xl) r(xl) backdrop-blur(md)">
+            <div class="vbox gap(lg)">
+              <div class="vbox(center) gap(xs)">
+                <h3 class="title(base) c(white)">Try It Live</h3>
                 <p class="body(sm) c(white.7)">Test any AdorableCSS rule and see the generated CSS instantly</p>
               </div>
               
@@ -164,8 +164,8 @@
                   <input
                     bind:value={liveInput}
                     placeholder="Try: hbox(center) gap(xl) p(2xl) bg(primary) c(white) r(lg)"
-                    class="flex(1) px(xl) py(lg) border(2/white.2) r(lg) body(base) mono bg(white.1) c(white)
-                           placeholder:c(white.4) focus:border(white.4) focus:bg(white.15) transition-all"
+                    class="flex(1) px(lg) py(md) r(lg) body(base) mono bg(white.1) c(white)
+                           placeholder:c(white.4) focus:bg(white.15) transition-all"
                     on:input={generateLiveCSS}
                   />
                   <Button size="lg" variant="secondary" on:click={() => copyToClipboard(liveCSS)}>
@@ -175,13 +175,13 @@
                 
                 {#if liveCSS}
                   <div class="vbox gap(sm)">
-                    <pre class="p(xl) bg(black.3) border(1/white.1) r(lg) caption(sm) mono 
+                    <pre class="p(lg) bg(black.3) r(lg) caption(sm) mono 
                                overflow-x(auto) max-h(200) scroll(y) c(white.9)">{liveCSS}</pre>
                   </div>
                 {/if}
                 
                 {#if liveError}
-                  <div class="p(lg) bg(error.2) border(1/error.3) r(lg)">
+                  <div class="p(lg) bg(error.2) r(lg)">
                     <p class="body(sm) c(white)">Error: {liveError}</p>
                   </div>
                 {/if}
@@ -202,8 +202,8 @@
   <!-- Main Layout -->
   <div class="flex">
     <!-- Left Navigation -->
-    <nav class="hidden lg:block fixed top(60) left(0) w(280) h(calc(100vh-60px)) bg(white) border-r(1/mute-100) scroll(y) overscroll-behavior(contain) z(40)">
-      <div class="p(xl) border-b(1/mute-100)">
+    <nav class="hidden lg:block fixed top(60) left(0) w(280) h(calc(100vh-60px)) bg(white) scroll(y) overscroll-behavior(contain) z(40)">
+      <div class="p(xl) pb(lg)">
         <h2 class="title(md) c(mute-900)">Quick Navigation</h2>
         <p class="caption c(mute-600) pt(xs)">Jump to any rule category</p>
       </div>
@@ -262,7 +262,7 @@
     
     <!-- Main Content -->
     <main class="ml(0) lg:ml(280) min-h(100vh) bg(white)">
-      <div class="px(xl) lg:px(3xl) py(3xl) max-w(7xl)">
+      <div class="px(xl) lg:px(3xl) py(3xl) max-w(4xl)">
 
       <!-- Rules by Layer -->
       <div class="vbox gap(8xl)">
@@ -276,7 +276,7 @@
                     @layer {layerGroup.layer}
                   </Badge>
                   <h2 class="heading(h1) c(mute-900)">{layerGroup.name}</h2>
-                  <p class="body(xl) c(mute-600) max-w(3xl)">
+                  <p class="body(xl) c(mute-600) max-w(4xl)">
                     {layerGroup.description}
                   </p>
                 </div>
@@ -327,7 +327,7 @@
                 {#each layerGroup.groups as group}
                   <div class="vbox gap(3xl)">
                     <!-- Group Section Header -->
-                    <div class="vbox gap(lg) pb(xl) border-b(2/mute-100)">
+                    <div class="vbox gap(lg) pb(xl)">
                       <h3 class="heading(h2) c(mute-900)">{group.name}</h3>
                       <p class="body(lg) c(mute-600)">
                         {group.metadata?.description || `${group.name} utilities`}
@@ -397,10 +397,10 @@
                           {/if}
 
                           <!-- Rules Table -->
-                          <div class="overflow-x(auto) r(xl) border(1/mute-200) bg(white)">
+                          <div class="overflow-x(auto) r(xl) bg(white)">
                             <table class="w(full)">
                               <thead>
-                                <tr class="bg(mute-50) border-b(2/mute-100)">
+                                <tr class="bg(mute-50)">
                                   <th class="text(left) p(lg) label(sm) c(mute-700) w(240)">Rule</th>
                                   <th class="text(left) p(lg) label(sm) c(mute-700)">CSS Output</th>
                                   <th class="text(left) p(lg) label(sm) c(mute-700) w(120)">Preview</th>
@@ -409,7 +409,7 @@
                               <tbody>
                                 {#each Object.entries(subgroup.rules) as [ruleName, handler], i}
                                   <tr class="{i % 2 === 0 ? 'bg(white)' : 'bg(mute-50.5)'} 
-                                             border-b(1/mute-100) hover:bg(primary.05) transition-colors duration(150)">
+                                             hover:bg(primary.05) transition-colors duration(150)">
                                     <!-- Rule Name -->
                                     <td class="p(lg)">
                                       <button
@@ -433,7 +433,7 @@
                                     
                                     <!-- Mini Preview -->
                                     <td class="p(lg)">
-                                      <div class="w(80) h(32) hbox(center) border(1/mute-200) r(md) bg(mute-50) relative overflow(hidden)">
+                                      <div class="w(80) h(32) hbox(center) r(md) bg(mute-50) relative overflow(hidden)">
                                         {#if ruleName.includes('c(') && (ruleName.includes('primary') || ruleName.includes('error') || ruleName.includes('success'))}
                                           <div class="{ruleName} body(sm)">Aa</div>
                                         {:else if ruleName.includes('bg(') && (ruleName.includes('primary') || ruleName.includes('error') || ruleName.includes('success'))}

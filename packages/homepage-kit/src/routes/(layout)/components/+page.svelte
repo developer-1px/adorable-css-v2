@@ -1,286 +1,607 @@
 <script>
-  import Button from '$lib/components/ui/Button.svelte'
-  import Badge from '$lib/components/ui/Badge.svelte'
-  import Avatar from '$lib/components/ui/Avatar.svelte'
-  import Input from '$lib/components/ui/Input.svelte'
-  import Label from '$lib/components/ui/Label.svelte'
-  import Alert from '$lib/components/ui/Alert.svelte'
-  import Checkbox from '$lib/components/ui/Checkbox.svelte'
-  import RadioGroup from '$lib/components/ui/RadioGroup.svelte'
-  import RadioButton from '$lib/components/ui/RadioButton.svelte'
-  import Switch from '$lib/components/ui/Switch.svelte'
-  import Slider from '$lib/components/ui/Slider.svelte'
-  import Progress from '$lib/components/ui/Progress.svelte'
-  import Separator from '$lib/components/ui/Separator.svelte'
-  import Select from '$lib/components/ui/Select.svelte'
-  import Textarea from '$lib/components/ui/Textarea.svelte'
-  import Card from '$lib/components/ui/Card.svelte'
+import Button from '$lib/components/ui/Button.svelte'
+import Badge from '$lib/components/ui/Badge.svelte'
+import Avatar from '$lib/components/ui/Avatar.svelte'
+import Input from '$lib/components/ui/Input.svelte'
+import Label from '$lib/components/ui/Label.svelte'
+import Alert from '$lib/components/ui/Alert.svelte'
+import Checkbox from '$lib/components/ui/Checkbox.svelte'
+import RadioGroup from '$lib/components/ui/RadioGroup.svelte'
+import RadioButton from '$lib/components/ui/RadioButton.svelte'
+import Switch from '$lib/components/ui/Switch.svelte'
+import Slider from '$lib/components/ui/Slider.svelte'
+import Progress from '$lib/components/ui/Progress.svelte'
+import Separator from '$lib/components/ui/Separator.svelte'
+import Select from '$lib/components/ui/Select.svelte'
+import Textarea from '$lib/components/ui/Textarea.svelte'
+import Card from '$lib/components/ui/Card.svelte'
+import Tabs from '$lib/components/ui/Tabs.svelte'
+import TabsList from '$lib/components/ui/TabsList.svelte'
+import TabsTrigger from '$lib/components/ui/TabsTrigger.svelte'
+import TabsContent from '$lib/components/ui/TabsContent.svelte'
+import Table from '$lib/components/ui/Table.svelte'
+import TableHeader from '$lib/components/ui/TableHeader.svelte'
+import TableRow from '$lib/components/ui/TableRow.svelte'
+import TableCell from '$lib/components/ui/TableCell.svelte'
+import TableHeaderCell from '$lib/components/ui/TableHeaderCell.svelte'
+import Skeleton from '$lib/components/ui/Skeleton.svelte'
+import Accordion from '$lib/components/ui/Accordion.svelte'
+import AccordionItem from '$lib/components/ui/AccordionItem.svelte'
+import Breadcrumb from '$lib/components/ui/Breadcrumb.svelte'
+import BreadcrumbItem from '$lib/components/ui/BreadcrumbItem.svelte'
+import Tooltip from '$lib/components/ui/Tooltip.svelte'
 </script>
 
-<div class="bg(gray-50) min-h(screen)">
+<div class="bg(mute-50) min-h(screen)">
   <!-- Hero Section -->
-  <section class="relative overflow(hidden) bg(to-br/primary..accent) py(8xl)">
-    <div class="container(5xl) mx(auto) px(2xl)">
-      <div class="vbox gap(3xl) text(center) relative z(10)">
-        <div class="vbox(center) gap(xl)">
+  <section class="relative overflow(hidden) bg(to-br/mute-900..mute-800) py(3xl)">
+    <div class="pack px(2xl)">
+      <div class="container(6xl) vbox gap(2xl) text(center) relative z(10)">
+        <div class="vbox(center) gap(lg)">
           <Badge variant="outline">
-            <span class="c(white)">Component Library v2.0</span>
+            <span class="c(white)">47 UI Components</span>
           </Badge>
-          <h1 class="heading(display/lg) c(white)">
-            Beautiful Components
+          <h1 class="display(lg) c(white)">
+            Component Showcase
           </h1>
-          <p class="heading(title/sm) c(white.9) max-w(3xl) mx(auto)">
-            AdorableCSS로 구현한 현대적인 UI 컴포넌트 라이브러리.
-            디자인 시스템의 일관성과 미니멀한 아름다움을 경험하세요.
-          </p>
+          <div class="pack">
+            <p class="body(base) c(white.8) max-w(4xl)">
+              모든 컴포넌트를 실제 사용 시나리오에 맞게 조합하여 구성적인 미를 보여주는 종합 전시관
+            </p>
+          </div>
         </div>
-        
-        <div class="hbox(center) gap(lg)">
+
+        <div class="pack gap(lg)">
           <Button size="lg" variant="secondary">
             Explore Components
           </Button>
           <Button size="lg" variant="outline">
-            <span class="c(white)">View Showcase</span>
+            <span class="c(white)">View Documentation</span>
           </Button>
         </div>
       </div>
     </div>
-    
+
     <!-- Decorative elements -->
     <div class="absolute top(0) left(0) w(80%) h(80%) bg(to-br/white.05..transparent) r(full) blur(3xl)"></div>
-    <div class="absolute bottom(0) right(0) w(60%) h(60%) bg(gradient-to-tl/accent.1..transparent) r(full) blur(3xl)"></div>
+    <div
+      class="absolute bottom(0) right(0) w(60%) h(60%) bg(gradient-to-tl/accent.1..transparent) r(full) blur(3xl)"></div>
   </section>
 
-  <!-- Component Categories -->
-  <section class="container(5xl) mx(auto) px(2xl) py(6xl)">
-    <div class="vbox gap(4xl)">
-      <div class="vbox gap(lg) text(center)">
-        <h2 class="heading(h2) c(gray-900)">Component Categories</h2>
-        <p class="body(lg) c(gray-600)">모든 컴포넌트를 한눈에 살펴보세요</p>
-      </div>
-      
-      <div class="grid(3) gap(2xl)">
-        <Card variant="interactive">
-          <div class="p(2xl) vbox gap(xl) text(center)">
-            <div class="icon-box(xl) bg(primary.1) c(primary) mx(auto)">
-              <svg class="size(32)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="3" y="3" width="18" height="18" rx="2" />
-                <line x1="12" y1="8" x2="12" y2="16" />
-                <line x1="8" y1="12" x2="16" y2="12" />
-              </svg>
+  <!-- Dashboard Layout Example -->
+  <section class="pack px(2xl) py(6xl)">
+    <div class="container(6xl)">
+      <div class="vbox gap(4xl)">
+        <!-- Header with Breadcrumb -->
+        <div class="vbox gap(lg)">
+          <Breadcrumb>
+            <BreadcrumbItem>Home</BreadcrumbItem>
+            <BreadcrumbItem>Components</BreadcrumbItem>
+            <BreadcrumbItem>Dashboard</BreadcrumbItem>
+          </Breadcrumb>
+
+          <div class="hbox(between) gap(lg)">
+            <div class="vbox gap(sm)">
+              <h1 class="heading(h1) c(mute-900)">Dashboard Overview</h1>
+              <p class="body(base) c(mute-600)">실제 대시보드 구성을 통한 컴포넌트 조합 시연</p>
             </div>
-            <h3 class="heading(h4) c(gray-900)">Buttons & Actions</h3>
-            <p class="body(md) c(gray-600)">인터랙션을 위한 버튼 컴포넌트</p>
-            <Badge variant="secondary">6 components</Badge>
-          </div>
-        </Card>
-        
-        <Card variant="interactive">
-          <div class="p(2xl) vbox gap(xl) text(center)">
-            <div class="icon-box(xl) bg(accent.1) c(accent) mx(auto)">
-              <svg class="size(32)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M12 2L2 7L12 12L22 7L12 2Z" />
-                <path d="M2 17L12 22L22 17" />
-                <path d="M2 12L12 17L22 12" />
-              </svg>
+
+            <div class="hbox gap(md)">
+              <Button variant="outline">Export</Button>
+              <Button>New Project</Button>
             </div>
-            <h3 class="heading(h4) c(gray-900)">Form Components</h3>
-            <p class="body(md) c(gray-600)">폼 입력을 위한 다양한 컴포넌트</p>
-            <Badge variant="secondary">8 components</Badge>
           </div>
-        </Card>
-        
-        <Card variant="interactive">
-          <div class="p(2xl) vbox gap(xl) text(center)">
-            <div class="icon-box(xl) bg(success.1) c(success) mx(auto)">
-              <svg class="size(32)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <rect x="3" y="3" width="7" height="7" />
-                <rect x="14" y="3" width="7" height="7" />
-                <rect x="14" y="14" width="7" height="7" />
-                <rect x="3" y="14" width="7" height="7" />
-              </svg>
+        </div>
+
+        <!-- Stats Cards - 수학적 간격 시스템 실험 -->
+        <div class="grid(4) gap(3xl)">
+          <Card size="xl">
+            <div class="vbox gap(xl)">
+              <div class="vbox gap(sm)">
+                <div class="hbox(between)">
+                  <p class="caption c(mute-600)">Total Users</p>
+                  <Badge variant="secondary">+12%</Badge>
+                </div>
+                <p class="heading(h2) c(mute-900)">12,543</p>
+              </div>
+              <Progress value={75}/>
             </div>
-            <h3 class="heading(h4) c(gray-900)">Layout Components</h3>
-            <p class="body(md) c(gray-600)">레이아웃 구성을 위한 컴포넌트</p>
-            <Badge variant="secondary">3 components</Badge>
-          </div>
-        </Card>
+          </Card>
+
+          <Card size="xl">
+            <div class="vbox gap(xl)">
+              <div class="vbox gap(sm)">
+                <div class="hbox(between)">
+                  <p class="caption c(mute-600)">Revenue</p>
+                  <Badge>+8%</Badge>
+                </div>
+                <p class="heading(h2) c(mute-900)">$45,231</p>
+              </div>
+              <Progress value={60}/>
+            </div>
+          </Card>
+
+          <Card size="xl">
+            <div class="vbox gap(xl)">
+              <div class="vbox gap(sm)">
+                <div class="hbox(between)">
+                  <p class="caption c(mute-600)">Projects</p>
+                  <Badge variant="outline">+3</Badge>
+                </div>
+                <p class="heading(h2) c(mute-900)">89</p>
+              </div>
+              <Progress value={45}/>
+            </div>
+          </Card>
+
+          <Card size="xl">
+            <div class="vbox gap(xl)">
+              <div class="vbox gap(sm)">
+                <div class="hbox(between)">
+                  <p class="caption c(mute-600)">Tasks</p>
+                  <Badge variant="destructive">-2%</Badge>
+                </div>
+                <p class="heading(h2) c(mute-900)">234</p>
+              </div>
+              <Progress value={90}/>
+            </div>
+          </Card>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Buttons Section -->
+  <!-- User Profile Section -->
   <section class="py(6xl) bg(white)">
-    <div class="container(5xl) mx(auto) px(2xl)">
-      <div class="vbox gap(4xl)">
-        <div class="vbox gap(lg)">
-          <Badge>Buttons</Badge>
-          <h2 class="heading(h2) c(gray-900)">Button Components</h2>
-          <p class="body(lg) c(gray-600)">다양한 스타일과 상태를 지원하는 버튼 컴포넌트</p>
-        </div>
-        
-        <div class="grid(2) gap(2xl)">
-          <!-- Interactive Demo -->
-          <Card variant="elevated">
-            <div class="p(3xl)">
-              <div class="vbox gap(2xl)">
-                <h3 class="heading(h4) c(gray-900)">Interactive Demo</h3>
-                
-                <!-- Live Button Demo -->
-                <div class="p(2xl) bg(gray-50) r(xl) text(center)">
+    <div class="pack px(2xl)">
+      <div class="container(6xl)">
+        <div class="vbox gap(4xl)">
+          <!-- Profile Header -->
+          <Card variant="elevated" size="xl">
+            <div class="vbox gap(2xl)">
+              <!-- Profile Header -->
+              <div class="hbox gap(2xl)">
+                <!-- Left: Profile Info -->
+                <div class="vbox gap(xl)">
+                  <div class="hbox gap(xl)">
+                    <Avatar size="lg">JD</Avatar>
+                    <div class="vbox gap(sm)">
+                      <h2 class="heading(h2) c(mute-900)">John Doe</h2>
+                      <p class="body(base) c(mute-600)">Senior Product Manager</p>
+                      <div class="hbox gap(md)">
+                        <Badge>Pro User</Badge>
+                        <Badge variant="outline">Verified</Badge>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="hbox gap(lg)">
+                    <Button>Edit Profile</Button>
+                    <Button variant="outline">Settings</Button>
+                    <Button variant="ghost">Share</Button>
+                  </div>
+                </div>
+
+                <!-- Right: Stats -->
+                <div class="flex(1) vbox gap(xl)">
+                  <div class="grid(3) gap(lg)">
+                    <div class="vbox gap(xs) text(center)">
+                      <p class="heading(h3) c(mute-900)">127</p>
+                      <p class="caption c(mute-600)">Projects</p>
+                    </div>
+                    <div class="vbox gap(xs) text(center)">
+                      <p class="heading(h3) c(mute-900)">2.4k</p>
+                      <p class="caption c(mute-600)">Followers</p>
+                    </div>
+                    <div class="vbox gap(xs) text(center)">
+                      <p class="heading(h3) c(mute-900)">891</p>
+                      <p class="caption c(mute-600)">Following</p>
+                    </div>
+                  </div>
+
+                  <div class="vbox gap(sm)">
+                    <Label>Profile Completion</Label>
+                    <Progress value={85}/>
+                    <p class="caption c(mute-600)">85% completed</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          <!-- Tabs Content -->
+          <Tabs defaultValue="overview">
+            <TabsList>
+              <TabsTrigger value="overview">Overview</TabsTrigger>
+              <TabsTrigger value="projects">Projects</TabsTrigger>
+              <TabsTrigger value="team">Team</TabsTrigger>
+              <TabsTrigger value="settings">Settings</TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="overview">
+              <div class="grid(2) gap(xl)">
+                <Card size="xl">
                   <div class="vbox gap(xl)">
-                    <div class="mb(lg)">
-                      <Button size="lg">Try Clicking Me!</Button>
+                    <h3 class="heading(h4) c(mute-900)">Recent Activity</h3>
+                    <div class="vbox gap(lg)">
+                      <div class="hbox gap(md)">
+                        <Avatar size="sm">AB</Avatar>
+                        <div class="vbox gap(xs)">
+                          <p class="body(sm) c(mute-900)">Alice updated Project Alpha</p>
+                          <p class="caption c(mute-600)">2 hours ago</p>
+                        </div>
+                      </div>
+                      <div class="hbox gap(md)">
+                        <Avatar size="sm">BK</Avatar>
+                        <div class="vbox gap(xs)">
+                          <p class="body(sm) c(mute-900)">Bob created new task</p>
+                          <p class="caption c(mute-600)">5 hours ago</p>
+                        </div>
+                      </div>
+                      <div class="hbox gap(md)">
+                        <Avatar size="sm">CM</Avatar>
+                        <div class="vbox gap(xs)">
+                          <p class="body(sm) c(mute-900)">Carol finished milestone</p>
+                          <p class="caption c(mute-600)">1 day ago</p>
+                        </div>
+                      </div>
                     </div>
-                    <p class="caption c(gray-600)">Watch hover and click animations</p>
                   </div>
-                </div>
-                
-                <!-- Usage Examples -->
-                <div class="vbox gap(lg)">
-                  <h4 class="title(sm) c(gray-700)">Common Usage</h4>
-                  <div class="vbox gap(md)">
-                    <div class="p(lg) bg(gray-50) r(lg)">
-                      <code class="caption mono c(gray-700)">btn(primary/lg)</code>
-                      <p class="caption c(gray-600) mt(xs)">→ Primary large button</p>
-                    </div>
-                    <div class="p(lg) bg(gray-50) r(lg)">
-                      <code class="caption mono c(gray-700)">btn(outline/sm)</code>
-                      <p class="caption c(gray-600) mt(xs)">→ Outline small button</p>
-                    </div>
-                    <div class="p(lg) bg(gray-50) r(lg)">
-                      <code class="caption mono c(gray-700)">btn(ghost)</code>
-                      <p class="caption c(gray-600) mt(xs)">→ Ghost button</p>
+                </Card>
+
+                <Card size="xl">
+                  <div class="vbox gap(xl)">
+                    <h3 class="heading(h4) c(mute-900)">Quick Actions</h3>
+                    <div class="vbox gap(md)">
+                      <Button variant="outline" class="w(full) justify(start)">
+                        <svg class="size(16)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M12 5v14m-7-7h14"/>
+                        </svg>
+                        Create New Project
+                      </Button>
+                      <Button variant="outline" class="w(full) justify(start)">
+                        <svg class="size(16)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                          <circle cx="9" cy="7" r="4"/>
+                          <path d="m22 22-1.5-1.5"/>
+                        </svg>
+                        Invite Team Member
+                      </Button>
+                      <Button variant="outline" class="w(full) justify(start)">
+                        <svg class="size(16)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M9 12l2 2 4-4"/>
+                          <path d="M21 12c.552 0 1-.448 1-1s-.448-1-1-1"/>
+                        </svg>
+                        Review Tasks
+                      </Button>
                     </div>
                   </div>
-                </div>
+                </Card>
               </div>
-            </div>
-          </Card>
-          
-          <!-- Variants Showcase -->
-          <Card variant="elevated">
-            <div class="p(3xl)">
-              <div class="vbox gap(3xl)">
-                <!-- Variants -->
+            </TabsContent>
+
+            <TabsContent value="projects">
+              <Card size="xl">
                 <div class="vbox gap(xl)">
-                  <h3 class="heading(h4) c(gray-900)">All Variants</h3>
-                  <div class="vbox gap(lg)">
-                    <div class="hbox(middle) gap(lg) flex-wrap">
-                      <Button>Default</Button>
-                      <Button variant="secondary">Secondary</Button>
-                      <Button variant="outline">Outline</Button>
-                    </div>
-                    <div class="hbox(middle) gap(lg) flex-wrap">
-                      <Button variant="ghost">Ghost</Button>
-                      <Button variant="link">Link</Button>
-                      <Button variant="destructive">Destructive</Button>
-                    </div>
-                  </div>
+                  <h3 class="heading(h4) c(mute-900)">Active Projects</h3>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHeaderCell>Project</TableHeaderCell>
+                        <TableHeaderCell>Status</TableHeaderCell>
+                        <TableHeaderCell>Progress</TableHeaderCell>
+                        <TableHeaderCell>Team</TableHeaderCell>
+                        <TableHeaderCell>Actions</TableHeaderCell>
+                      </TableRow>
+                    </TableHeader>
+                    <TableRow>
+                      <TableCell>Project Alpha</TableCell>
+                      <TableCell>
+                        <Badge>Active</Badge>
+                      </TableCell>
+                      <TableCell>
+                        <Progress value={75}/>
+                      </TableCell>
+                      <TableCell>
+                        <div class="hbox gap(sm)">
+                          <Avatar size="sm">AB</Avatar>
+                          <Avatar size="sm">CD</Avatar>
+                          <Avatar size="sm">+3</Avatar>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div class="hbox gap(sm)">
+                          <Button size="sm" variant="outline">View</Button>
+                          <Button size="sm">Edit</Button>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Beta Launch</TableCell>
+                      <TableCell>
+                        <Badge variant="secondary">Planning</Badge>
+                      </TableCell>
+                      <TableCell>
+                        <Progress value={25}/>
+                      </TableCell>
+                      <TableCell>
+                        <div class="hbox gap(sm)">
+                          <Avatar size="sm">EF</Avatar>
+                          <Avatar size="sm">GH</Avatar>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div class="hbox gap(sm)">
+                          <Button size="sm" variant="outline">View</Button>
+                          <Button size="sm">Edit</Button>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  </Table>
                 </div>
-                
-                <Separator />
-                
-                <!-- Sizes -->
-                <div class="vbox gap(xl)">
-                  <h3 class="heading(h4) c(gray-900)">All Sizes</h3>
-                  <div class="hbox(middle) gap(lg) flex-wrap">
-                    <Button size="sm">Small</Button>
-                    <Button>Default</Button>
-                    <Button size="lg">Large</Button>
-                    <Button size="icon">
-                      <svg class="size(16)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 5v14m-7-7h14"/>
-                      </svg>
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Card>
+              </Card>
+            </TabsContent>
+          </Tabs>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Form Components Section -->
-  <section class="py(6xl) bg(gray-50)">
-    <div class="container(5xl) mx(auto) px(2xl)">
-      <div class="vbox gap(4xl)">
-        <div class="vbox gap(lg)">
-          <Badge>Forms</Badge>
-          <h2 class="heading(h2) c(gray-900)">Form Components</h2>
-          <p class="body(lg) c(gray-600)">사용자 입력을 받기 위한 폼 컴포넌트</p>
-        </div>
-        
-        <div class="grid(2) gap(2xl)">
-          <Card>
-            <div class="p(3xl)">
-              <div class="vbox gap(2xl)">
-                <h3 class="heading(h4) c(gray-900)">Text Inputs</h3>
-                
-                <div class="vbox gap(xl)">
+  <!-- Form Registration Example -->
+  <section class="py(6xl) bg(mute-100)">
+    <div class="pack px(2xl)">
+      <div class="container(6xl)">
+        <div class="hbox gap(4xl)">
+          <!-- Registration Form -->
+          <div class="w(480) vbox gap(2xl)">
+            <Card size="xl">
+              <div class="vbox gap(xl)">
+                <!-- Header -->
+                <div class="vbox gap(sm)">
+                  <h2 class="heading(h2) c(mute-900)">Create Account</h2>
+                  <p class="body(base) c(mute-600)">Join our community today</p>
+                </div>
+
+                <!-- Form Fields -->
+                <div class="vbox gap(lg)">
                   <div class="vbox gap(sm)">
-                    <Label>Default Input</Label>
-                    <Input placeholder="Enter text..." />
+                    <Label>Full Name</Label>
+                    <Input placeholder="John Doe"/>
                   </div>
-                  
+
                   <div class="vbox gap(sm)">
-                    <Label>Error State</Label>
-                    <Input variant="error" placeholder="Invalid input" />
+                    <Label>Email Address</Label>
+                    <Input type="email" placeholder="john@example.com"/>
                   </div>
-                  
+
                   <div class="vbox gap(sm)">
-                    <Label>Select</Label>
+                    <Label>Password</Label>
+                    <Input type="password" placeholder="Create a strong password"/>
+                  </div>
+
+                  <div class="vbox gap(sm)">
+                    <Label>Country</Label>
                     <Select>
-                      <option>Choose an option</option>
-                      <option>Option 1</option>
-                      <option>Option 2</option>
+                      <option>Select your country</option>
+                      <option>United States</option>
+                      <option>United Kingdom</option>
+                      <option>Canada</option>
+                      <option>Australia</option>
                     </Select>
                   </div>
-                  
+
                   <div class="vbox gap(sm)">
-                    <Label>Textarea</Label>
-                    <Textarea placeholder="Write your message..." />
+                    <Label>Bio</Label>
+                    <Textarea placeholder="Tell us about yourself..."/>
+                  </div>
+
+                  <div class="vbox gap(md)">
+                    <Checkbox>I agree to the Terms of Service</Checkbox>
+                    <Checkbox>Subscribe to newsletter</Checkbox>
+                  </div>
+
+                  <div class="vbox gap(sm)">
+                    <Button class="w(full)" size="lg">Create Account</Button>
+                    <Button variant="outline" class="w(full)">Sign in with Google</Button>
                   </div>
                 </div>
               </div>
-            </div>
-          </Card>
-          
-          <Card>
-            <div class="p(3xl)">
-              <div class="vbox gap(2xl)">
-                <h3 class="heading(h4) c(gray-900)">Toggle Controls</h3>
-                
-                <div class="vbox gap(2xl)">
-                  <div class="vbox gap(lg)">
-                    <Label>Checkboxes</Label>
-                    <Checkbox>Accept terms</Checkbox>
-                    <Checkbox checked>Send updates</Checkbox>
+            </Card>
+          </div>
+
+          <!-- Settings Panel -->
+          <div class="flex(1) vbox gap(xl)">
+            <Card size="xl">
+              <div class="vbox gap(xl)">
+                <h3 class="heading(h4) c(mute-900)">Account Preferences</h3>
+                <div class="vbox gap(lg)">
+                  <div class="hbox(between)">
+                    <div class="vbox gap(xs)">
+                      <p class="body(sm) c(mute-900)">Email Notifications</p>
+                      <p class="caption c(mute-600)">Receive updates about your account</p>
+                    </div>
+                    <Switch checked/>
                   </div>
-                  
-                  <div class="vbox gap(lg)">
-                    <Label>Radio Buttons</Label>
+
+                  <div class="hbox(between)">
+                    <div class="vbox gap(xs)">
+                      <p class="body(sm) c(mute-900)">Marketing Emails</p>
+                      <p class="caption c(mute-600)">Get notified about new features</p>
+                    </div>
+                    <Switch/>
+                  </div>
+
+                  <div class="hbox(between)">
+                    <div class="vbox gap(xs)">
+                      <p class="body(sm) c(mute-900)">Two-Factor Auth</p>
+                      <p class="caption c(mute-600)">Add an extra layer of security</p>
+                    </div>
+                    <Switch checked/>
+                  </div>
+                </div>
+              </div>
+            </Card>
+
+            <Card size="xl">
+              <div class="vbox gap(xl)">
+                <h3 class="heading(h4) c(mute-900)">Display Settings</h3>
+                <div class="vbox gap(lg)">
+                  <div class="vbox gap(sm)">
+                    <Label>Theme Preference</Label>
                     <RadioGroup>
-                      <RadioButton checked>Option A</RadioButton>
-                      <RadioButton>Option B</RadioButton>
-                      <RadioButton>Option C</RadioButton>
+                      <RadioButton checked>Light Mode</RadioButton>
+                      <RadioButton>Dark Mode</RadioButton>
+                      <RadioButton>System Default</RadioButton>
                     </RadioGroup>
                   </div>
-                  
-                  <div class="vbox gap(lg)">
-                    <Label>Switch</Label>
-                    <div class="hbox gap(xl)">
-                      <Switch />
-                      <Switch checked />
+
+                  <div class="vbox gap(sm)">
+                    <Label>Font Size</Label>
+                    <Slider value={16}/>
+                    <div class="hbox(between)">
+                      <span class="caption c(mute-600)">Small</span>
+                      <span class="caption c(mute-600)">Large</span>
                     </div>
                   </div>
-                  
-                  <div class="vbox gap(lg)">
-                    <Label>Slider</Label>
-                    <Slider value={60} />
+
+                  <div class="vbox gap(sm)">
+                    <Label>Sidebar Position</Label>
+                    <RadioGroup>
+                      <RadioButton checked>Left</RadioButton>
+                      <RadioButton>Right</RadioButton>
+                    </RadioGroup>
                   </div>
+                </div>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- E-commerce Product Page -->
+  <section class="py(6xl) bg(white)">
+    <div class="pack px(2xl)">
+      <div class="container(6xl)">
+        <div class="vbox gap(4xl)">
+          <!-- Alert Notifications -->
+          <div class="vbox gap(md)">
+            <Alert>Free shipping on orders over $50! Use code FREESHIP</Alert>
+            <Alert variant="warning">Only 3 items left in stock</Alert>
+          </div>
+
+          <div class="hbox gap(3xl)">
+            <!-- Product Images -->
+            <div class="w(480) vbox gap(lg)">
+              <div class="aspect-square bg(mute-100) r(xl) pack">
+                <p class="body(lg) c(mute-600)">Product Image</p>
+              </div>
+
+              <div class="hbox gap(md)">
+                <div class="w(80) h(80) bg(mute-100) r(md)"></div>
+                <div class="w(80) h(80) bg(mute-100) r(md)"></div>
+                <div class="w(80) h(80) bg(mute-100) r(md)"></div>
+                <div class="w(80) h(80) bg(mute-100) r(md)"></div>
+              </div>
+            </div>
+
+            <!-- Product Details -->
+            <div class="flex(1) vbox gap(xl)">
+              <div class="vbox gap(lg)">
+                <div class="hbox gap(md)">
+                  <Badge>New Arrival</Badge>
+                  <Badge variant="secondary">Best Seller</Badge>
+                </div>
+
+                <div class="vbox gap(sm)">
+                  <h1 class="heading(h1) c(mute-900)">Premium Wireless Headphones</h1>
+                  <p class="body(lg) c(mute-600)">Experience crystal-clear audio with our latest wireless technology</p>
+                </div>
+
+                <div class="hbox gap(md)">
+                  <div class="hbox gap(sm)">
+                    <span class="heading(h2) c(mute-900)">$199.99</span>
+                    <span class="body(base) c(mute-500) line-through">$249.99</span>
+                  </div>
+                  <Badge variant="destructive">20% OFF</Badge>
+                </div>
+
+                <div class="hbox gap(lg)">
+                  <div class="hbox gap(sm)">
+                    <Avatar size="sm">★</Avatar>
+                    <Avatar size="sm">★</Avatar>
+                    <Avatar size="sm">★</Avatar>
+                    <Avatar size="sm">★</Avatar>
+                    <Avatar size="sm">★</Avatar>
+                  </div>
+                  <p class="body(sm) c(mute-600)">4.8 (247 reviews)</p>
+                </div>
+              </div>
+
+              <Separator/>
+
+              <div class="vbox gap(lg)">
+                <div class="vbox gap(sm)">
+                  <Label>Color</Label>
+                  <RadioGroup>
+                    <RadioButton checked>Midnight Black</RadioButton>
+                    <RadioButton>Pearl White</RadioButton>
+                    <RadioButton>Rose Gold</RadioButton>
+                  </RadioGroup>
+                </div>
+
+                <div class="vbox gap(sm)">
+                  <Label>Size</Label>
+                  <Select>
+                    <option>Standard</option>
+                    <option>Large</option>
+                    <option>Extra Large</option>
+                  </Select>
+                </div>
+
+                <div class="vbox gap(sm)">
+                  <Label>Quantity</Label>
+                  <div class="hbox gap(md) w(120)">
+                    <Button variant="outline" size="sm">-</Button>
+                    <Input value="1" class="text(center)"/>
+                    <Button variant="outline" size="sm">+</Button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="vbox gap(md)">
+                <Button size="lg" class="w(full)">Add to Cart</Button>
+                <Button variant="outline" size="lg" class="w(full)">Add to Wishlist</Button>
+              </div>
+
+              <div class="vbox gap(sm)">
+                <div class="hbox gap(md)">
+                  <Checkbox>Extended Warranty (+$29.99)</Checkbox>
+                </div>
+                <div class="hbox gap(md)">
+                  <Checkbox>Gift Wrapping (+$9.99)</Checkbox>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Loading States -->
+          <Card size="xl">
+            <div class="vbox gap(xl)">
+              <h3 class="heading(h4) c(mute-900)">Loading States</h3>
+              <div class="vbox gap(lg)">
+                <div class="hbox gap(md)">
+                  <Skeleton class="w(60) h(60) r(full)"/>
+                  <div class="vbox gap(sm)">
+                    <Skeleton class="w(200) h(20)"/>
+                    <Skeleton class="w(150) h(16)"/>
+                  </div>
+                </div>
+                <div class="vbox gap(sm)">
+                  <Skeleton class="w(full) h(200)"/>
+                  <Skeleton class="w(80%) h(16)"/>
+                  <Skeleton class="w(60%) h(16)"/>
                 </div>
               </div>
             </div>
@@ -290,130 +611,94 @@
     </div>
   </section>
 
-  <!-- Data Display Section -->
-  <section class="py(6xl) bg(white)">
-    <div class="container(5xl) mx(auto) px(2xl)">
-      <div class="vbox gap(4xl)">
-        <div class="vbox gap(lg)">
-          <Badge>Data Display</Badge>
-          <h2 class="heading(h2) c(gray-900)">Data Display Components</h2>
-          <p class="body(lg) c(gray-600)">정보를 효과적으로 표시하는 컴포넌트</p>
-        </div>
-        
-        <div class="grid(3) gap(2xl)">
-          <!-- Badges -->
-          <Card variant="interactive">
-            <div class="p(2xl)">
-              <div class="vbox gap(xl)">
-                <h3 class="heading(h5) c(gray-900)">Badges</h3>
-                <div class="vbox gap(lg)">
-                  <div class="hbox gap(md) flex-wrap">
-                    <Badge>New</Badge>
-                    <Badge variant="secondary">Beta</Badge>
-                    <Badge variant="outline">Pro</Badge>
-                  </div>
-                  <div class="vbox gap(sm)">
-                    <div class="p(md) bg(gray-50) r(md)">
-                      <code class="caption mono c(gray-700)">badge(sm/success)</code>
-                    </div>
-                    <div class="p(md) bg(gray-50) r(md)">
-                      <code class="caption mono c(gray-700)">badge(outline)</code>
+  <!-- Accordion FAQ Section -->
+  <section class="py(3xl) bg(mute-100)">
+    <div class="pack px(2xl)">
+      <div class="container(6xl)">
+        <div class="vbox gap(2xl)">
+          <div class="vbox gap(lg) text(center)">
+            <h2 class="heading(h2) c(mute-900)">Frequently Asked Questions</h2>
+            <p class="body(base) c(mute-600)">Find answers to common questions about our components</p>
+          </div>
+
+          <div class="pack w(full)">
+            <div class="max-w(4xl) w(full)">
+              <Accordion>
+                <AccordionItem>
+                  <summary class="p(lg) cursor(pointer) hbox(between) hover:bg(mute-200) transition-colors">
+                    <p class="body(base) c(mute-900)">How do I install AdorableCSS components?</p>
+                  </summary>
+                  <div class="p(lg) pt(0) vbox gap(md)">
+                    <p class="body(sm) c(mute-700)">You can install our components using npm or yarn. Simply run the
+                      installation command and import the components you need.</p>
+                    <div class="p(md) bg(mute-900) r(md)">
+                      <code class="caption mono c(white)">npm install adorable-css-components</code>
                     </div>
                   </div>
-                </div>
-              </div>
-            </div>
-          </Card>
-          
-          <!-- Avatars -->
-          <Card variant="interactive">
-            <div class="p(2xl)">
-              <div class="vbox gap(xl)">
-                <h3 class="heading(h5) c(gray-900)">Avatars</h3>
-                <div class="vbox gap(lg)">
-                  <div class="hbox(middle) gap(lg)">
-                    <Avatar size="sm">JD</Avatar>
-                    <Avatar>AB</Avatar>
-                    <Avatar size="lg">MK</Avatar>
+                </AccordionItem>
+
+                <AccordionItem>
+                  <summary class="p(lg) cursor(pointer) hbox(between) hover:bg(mute-200) transition-colors">
+                    <p class="body(base) c(mute-900)">Are components accessible by default?</p>
+                  </summary>
+                  <div class="p(lg) pt(0)">
+                    <p class="body(sm) c(mute-700)">Yes, all our components are built with accessibility in mind. They
+                      include proper ARIA labels, keyboard navigation, and screen reader support.</p>
                   </div>
-                  <div class="vbox gap(sm)">
-                    <div class="p(md) bg(gray-50) r(md) text(center)">
-                      <code class="caption mono c(gray-700)">avatar(sm)</code>
-                    </div>
-                    <div class="p(md) bg(gray-50) r(md) text(center)">
-                      <code class="caption mono c(gray-700)">avatar(lg)</code>
-                    </div>
+                </AccordionItem>
+
+                <AccordionItem>
+                  <summary class="p(lg) cursor(pointer) hbox(between) hover:bg(mute-200) transition-colors">
+                    <p class="body(base) c(mute-900)">Can I customize the component styles?</p>
+                  </summary>
+                  <div class="p(lg) pt(0)">
+                    <p class="body(sm) c(mute-700)">Absolutely! Our components are designed to be easily customizable
+                      using CSS variables and utility classes. You can also extend them with your own styles.</p>
                   </div>
-                </div>
-              </div>
-            </div>
-          </Card>
-          
-          <!-- Progress -->
-          <Card variant="interactive">
-            <div class="p(2xl)">
-              <div class="vbox gap(xl)">
-                <h3 class="heading(h5) c(gray-900)">Progress</h3>
-                <div class="vbox gap(lg)">
-                  <div class="vbox gap(md)">
-                    <div class="hbox(middle) gap(sm)">
-                      <Progress value={25} />
-                      <span class="caption c(gray-600)">25%</span>
-                    </div>
-                    <div class="hbox(middle) gap(sm)">
-                      <Progress value={60} />
-                      <span class="caption c(gray-600)">60%</span>
-                    </div>
-                    <div class="hbox(middle) gap(sm)">
-                      <Progress value={90} />
-                      <span class="caption c(gray-600)">90%</span>
-                    </div>
+                </AccordionItem>
+
+                <AccordionItem>
+                  <summary class="p(lg) cursor(pointer) hbox(between) hover:bg(mute-200) transition-colors">
+                    <p class="body(base) c(mute-900)">What frameworks are supported?</p>
+                  </summary>
+                  <div class="p(lg) pt(0)">
+                    <p class="body(sm) c(mute-700)">Our components work with React, Vue, Svelte, and vanilla JavaScript.
+                      We provide framework-specific packages for each platform.</p>
                   </div>
-                  <div class="p(md) bg(gray-50) r(md) text(center)">
-                    <code class="caption mono c(gray-700)">progress(value)</code>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </Card>
-        </div>
-        
-        <!-- Alerts -->
-        <Card variant="elevated">
-          <div class="p(3xl)">
-            <div class="vbox gap(xl)">
-              <h3 class="heading(h4) c(gray-900)">Alert Components</h3>
-              <div class="vbox gap(lg)">
-                <Alert>Default alert message with important information</Alert>
-                <Alert variant="destructive">Error alert that requires immediate attention</Alert>
-                <Alert variant="warning">Warning alert for potential issues</Alert>
-              </div>
+                </AccordionItem>
+              </Accordion>
             </div>
           </div>
-        </Card>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg(gray-900) py(4xl)">
-    <div class="container(5xl) mx(auto) px(2xl)">
-      <div class="vbox gap(2xl) text(center)">
-        <div class="vbox gap(lg)">
-          <h3 class="heading(h3) c(white)">AdorableCSS Component Library</h3>
-          <p class="body(lg) c(gray-400)">디자인 시스템의 일관성과 아름다움</p>
-        </div>
-        
-        <div class="hbox(center) gap(xl)">
-          <Button variant="ghost">
-            <span class="c(gray-400) hover:c(white)">Documentation</span>
-          </Button>
-          <Button variant="ghost">
-            <span class="c(gray-400) hover:c(white)">GitHub</span>
-          </Button>
-          <Button variant="ghost">
-            <span class="c(gray-400) hover:c(white)">Showcase</span>
-          </Button>
+  <footer class="bg(mute-900) py(3xl)">
+    <div class="pack px(2xl)">
+      <div class="container(6xl)">
+        <div class="vbox gap(2xl) text(center)">
+          <div class="vbox gap(lg)">
+            <h3 class="heading(h3) c(white)">AdorableCSS Component Showcase</h3>
+            <p class="body(base) c(mute-400)">모든 컴포넌트를 실제 사용 시나리오로 구성한 종합 전시관</p>
+          </div>
+
+          <div class="pack gap(xl)">
+            <Button variant="ghost">
+              <span class="c(mute-400) hover:c(white)">Documentation</span>
+            </Button>
+            <Button variant="ghost">
+              <span class="c(mute-400) hover:c(white)">GitHub</span>
+            </Button>
+            <Button variant="ghost">
+              <span class="c(mute-400) hover:c(white)">Components</span>
+            </Button>
+          </div>
+
+          <div class="pt(lg)">
+            <p class="caption c(mute-500)">Built with AdorableCSS • No margins used • Only gap and padding</p>
+          </div>
         </div>
       </div>
     </div>

@@ -12,7 +12,7 @@
     <div class="vbox(center) gap(6xl)">
       
       <!-- Main Heading -->
-      <div class="vbox(center) gap(3xl) max-w(5xl)">
+      <div class="vbox(center) gap(3xl) max-w(4xl)">
         <h1 class="heading(display/3xl) c(mute-900) leading(tight)">
           CSS Framework that Speaks
           <br />
@@ -97,7 +97,7 @@
       </div>
       
       <!-- Simple Before/After -->
-      <div class="grid(2) gap(2xl) max-w(5xl)">
+      <div class="grid(2) gap(2xl) max-w(4xl)">
         <div class="vbox(center) gap(lg) p(2xl) bg(mute-50) r(xl)">
           <h3 class="heading(h3) c(mute-900)">Before</h3>
           <div class="vbox(center) gap(md)">
@@ -133,7 +133,7 @@
       </div>
       
       <!-- Feature Grid -->
-      <div class="grid(3) gap(xl) max-w(6xl)">
+      <div class="grid(3) gap(xl) max-w(4xl)">
         <div class="vbox(center) gap(lg) p(xl) bg(white) r(lg)">
           <Grid size="32" class="c(mute-700)" />
           <h3 class="heading(h3) c(mute-900)">Figma Terms</h3>
@@ -191,7 +191,7 @@
       </div>
       
       <!-- Install -->
-      <div class="p(xl) bg(white.1) r(lg) max-w(3xl)">
+      <div class="p(xl) bg(white.1) r(lg) max-w(4xl)">
         <div class="vbox(center) gap(md)">
           <p class="caption c(white.7)">Install in 30 seconds</p>
           <code class="code(lg) c(white) bg(transparent)">npm install adorable-css</code>
