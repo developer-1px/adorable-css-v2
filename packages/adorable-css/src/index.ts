@@ -41,7 +41,8 @@ export {
   startTokenCollection,
   stopTokenCollection,
   registerToken,
-  getUsedTokens
+  getUsedTokens,
+  clearTokenRegistry
 } from "./core/runtime/tokenRegistry";
 
 // Export scale configuration

@@ -11,6 +11,14 @@ export function calculateSpacingMultiplier(
   step: number,
   config: SpacingScaleConfig
 ): number {
+  // Check for custom values first
+  if (config.mode === 'custom' && config.values) {
+    const customValue = config.values[step.toString()];
+    if (customValue !== undefined) {
+      return customValue;
+    }
+  }
+  
   switch (config.mode) {
     case 'linear':
       // Simple linear progression: 1, 2, 3, 4...
@@ -43,7 +51,15 @@ export function calculateFontMultiplier(
   step: number,
   config: FontScaleConfig
 ): number {
-  const baseStep = 1; // md is step 1
+  // Check for custom values first
+  if (config.custom) {
+    const customValue = config.custom[step.toString()];
+    if (customValue !== undefined) {
+      return customValue;
+    }
+  }
+  
+  const baseStep = 0; // base is 0 for font calculations
   
   switch (config.mode) {
     case 'ratio':
@@ -109,13 +125,11 @@ export function cleanMultiplier(value: number): number {
  * Format multiplier for CSS output
  */
 export function formatMultiplier(value: number): string {
-  const cleaned = cleanMultiplier(value);
-  
   // Remove unnecessary decimals
-  if (cleaned === Math.floor(cleaned)) {
-    return cleaned.toString();
+  if (value === Math.floor(value)) {
+    return value.toString();
   }
   
-  // Keep up to 3 decimal places
-  return cleaned.toFixed(3).replace(/\.?0+$/, '');
+  // Keep up to 4 decimal places
+  return value.toFixed(4).replace(/\.?0+$/, '');
 }

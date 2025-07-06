@@ -40,17 +40,8 @@ export const font: RuleHandler = (args?: string): CSSRule => {
         // Handle 'base' as alias for 'md'
         if (maxToken === 'base') maxToken = 'md';
         if (isToken(maxToken, 'font')) {
-          // Get the actual token value to calculate min and vw
-          const tokenValue = defaultTokens.font[maxToken as keyof typeof defaultTokens.font];
-          const maxValue = parseFloat(tokenValue);
-          if (!isNaN(maxValue)) {
-            const minValue = Number((maxValue * 0.8).toFixed(3));
-            const vwValue = Number((maxValue * 1.6).toFixed(2));
-            result['font-size'] = `clamp(${minValue}rem, ${vwValue}vw, var(--font-${maxToken}))`;
-          } else {
-            // Fallback if we can't parse the token value
-            result['font-size'] = `clamp(0.8rem, 2vw, var(--font-${maxToken}))`;
-          }
+          // Use generateFontCalc for dynamic tokens
+          result['font-size'] = `clamp(0.8rem, 2vw, ${generateFontCalc(maxToken)})`;
         } else {
           // For non-token values
           const maxValue = parseFloat(part.slice(2));
@@ -69,17 +60,8 @@ export const font: RuleHandler = (args?: string): CSSRule => {
         // Handle 'base' as alias for 'md'
         if (minToken === 'base') minToken = 'md';
         if (isToken(minToken, 'font')) {
-          // Get the actual token value to calculate max and vw
-          const tokenValue = defaultTokens.font[minToken as keyof typeof defaultTokens.font];
-          const minValue = parseFloat(tokenValue);
-          if (!isNaN(minValue)) {
-            const maxValue = Number((minValue * 1.5).toFixed(3));
-            const vwValue = Number((maxValue * 1.2).toFixed(2));
-            result['font-size'] = `clamp(var(--font-${minToken}), ${vwValue}vw, ${maxValue}rem)`;
-          } else {
-            // Fallback if we can't parse the token value
-            result['font-size'] = `clamp(var(--font-${minToken}), 2vw, 2rem)`;
-          }
+          // Use generateFontCalc for dynamic tokens
+          result['font-size'] = `clamp(${generateFontCalc(minToken)}, 2vw, 2rem)`;
         } else {
           // For non-token values
           const minValue = parseFloat(part.slice(0, -2));

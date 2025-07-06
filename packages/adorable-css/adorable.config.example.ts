@@ -5,6 +5,9 @@ import { defineConfig } from './src/core/config/adorableConfig';
  * Copy this to your project root as adorable.config.ts
  */
 export default defineConfig({
+  // Unit configuration
+  unit: 'px',             // 'px' | 'rem' - Choose between pixels or rem units
+  
   // Scale configuration
   scale: {
     // Spacing scale
@@ -35,13 +38,9 @@ export default defineConfig({
     },
   },
   
-  // Base values
-  base: {
-    spacing: '0.25rem',   // 4px
-    font: '1rem',         // 16px
-    size: '1rem',
-    container: '20rem',   // 320px
-  },
+  // Base values (automatically adjusted based on unit)
+  // When unit is 'px': spacing = 4px, font = 16px
+  // When unit is 'rem': spacing = 0.25rem, font = 1rem
   
   // Features
   features: {

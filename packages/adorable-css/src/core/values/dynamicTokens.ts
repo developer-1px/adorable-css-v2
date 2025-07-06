@@ -51,6 +51,11 @@ export function getScaleConfig(): ScaleConfig {
 export function generateSpacingCalc(
   token: string
 ): string {
+  // Special case for 0
+  if (token === '0') {
+    return '0';
+  }
+  
   // Register the token for lazy generation
   registerToken('spacing', token);
   
@@ -81,6 +86,18 @@ export function generateFontCalc(
 export function generateSizeCalc(
   token: string
 ): string {
+  // Special case for 0
+  if (token === '0') {
+    return '0';
+  }
+  
+  // Handle numeric values - these should remain unitless for now
+  // The actual unit will be applied in the CSS generation
+  const numericValue = parseInt(token);
+  if (!isNaN(numericValue) && token === numericValue.toString()) {
+    return `${numericValue}rem`; // Keep as rem for backward compatibility
+  }
+  
   // Register the token for lazy generation
   registerToken('size', token);
   

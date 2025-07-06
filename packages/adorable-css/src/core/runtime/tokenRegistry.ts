@@ -41,9 +41,18 @@ export function stopTokenCollection(): void {
  * Register a used token
  */
 export function registerToken(category: 'font' | 'spacing' | 'size' | 'container', token: string): void {
-  if (isCollecting) {
-    usedTokens[category].add(token);
-  }
+  // Always collect tokens for lazy generation
+  usedTokens[category].add(token);
+}
+
+/**
+ * Clear the token registry
+ */
+export function clearTokenRegistry(): void {
+  usedTokens.font.clear();
+  usedTokens.spacing.clear();
+  usedTokens.size.clear();
+  usedTokens.container.clear();
 }
 
 /**
@@ -51,10 +60,10 @@ export function registerToken(category: 'font' | 'spacing' | 'size' | 'container
  */
 export function getUsedTokens() {
   return {
-    font: Array.from(usedTokens.font),
-    spacing: Array.from(usedTokens.spacing),
-    size: Array.from(usedTokens.size),
-    container: Array.from(usedTokens.container),
+    font: usedTokens.font,
+    spacing: usedTokens.spacing,
+    size: usedTokens.size,
+    container: usedTokens.container,
   };
 }
 
@@ -63,90 +72,109 @@ export function getUsedTokens() {
  */
 export function generateUsedTokensCSS(config: ScaleConfig = DEFAULT_SCALE_CONFIG): string {
   const cssVars: string[] = [];
+  const unit = config.unit || 'px';
+  
+  // Base CSS variables
+  cssVars.push('  /* Base Variables */');
+  if (unit === 'px') {
+    cssVars.push('  --spacing: 4px;');
+    cssVars.push('  --font-base: 16px;');
+    cssVars.push('  --size-base: 16px;');
+    cssVars.push('  --container-base: 320px;');
+  } else {
+    cssVars.push('  --spacing: 0.25rem;');
+    cssVars.push('  --font-base: 1rem;');
+    cssVars.push('  --size-base: 1rem;');
+    cssVars.push('  --container-base: 20rem;');
+  }
   
   // Font tokens
   if (usedTokens.font.size > 0) {
-    cssVars.push('  /* Font Tokens */');
-    const fontBase = 1; // 1rem
+    cssVars.push('\n  /* Font Tokens */');
+    const fontBase = unit === 'px' ? 16 : 1; // 16px or 1rem
     const fontConfig = config.font || DEFAULT_SCALE_CONFIG.font;
     
     usedTokens.font.forEach(token => {
-      const step = getTokenStep(token);
+      const step = getTokenStep(token, 'font');
       const multiplier = calculateFontMultiplier(step, fontConfig);
-      const value = (fontBase * multiplier).toFixed(3);
-      cssVars.push(`  --font-${token}: ${value}rem;`);
+      const value = unit === 'px' 
+        ? Math.round(fontBase * multiplier)
+        : (fontBase * multiplier).toFixed(3);
+      cssVars.push(`  --font-${token}: ${value}${unit};`);
     });
   }
   
   // Spacing tokens
   if (usedTokens.spacing.size > 0) {
     cssVars.push('\n  /* Spacing Tokens */');
-    const spacingBase = 0.25; // 0.25rem
+    const spacingBase = unit === 'px' ? 4 : 0.25; // 4px or 0.25rem
     const spacingConfig = config.spacing || DEFAULT_SCALE_CONFIG.spacing;
     
     usedTokens.spacing.forEach(token => {
-      const step = getTokenStep(token);
+      const step = getTokenStep(token, 'spacing');
       const multiplier = calculateSpacingMultiplier(step, spacingConfig);
-      const value = (spacingBase * multiplier).toFixed(3);
-      cssVars.push(`  --spacing-${token}: ${value}rem;`);
+      // Use calc() for dynamic scaling with unit
+      cssVars.push(`  --spacing-${token}: calc(var(--spacing) * ${multiplier});`);
     });
   }
   
   // Size tokens
   if (usedTokens.size.size > 0) {
     cssVars.push('\n  /* Size Tokens */');
-    const sizeBase = 1; // 1rem
+    const sizeBase = unit === 'px' ? 16 : 1; // 16px or 1rem
     const sizeConfig = config.size || DEFAULT_SCALE_CONFIG.size;
     
     usedTokens.size.forEach(token => {
-      const step = getTokenStep(token);
+      const step = getTokenStep(token, 'size');
       const multiplier = calculateSizeMultiplier(step, sizeConfig);
-      const value = (sizeBase * multiplier).toFixed(3);
-      cssVars.push(`  --size-${token}: ${value}rem;`);
+      const value = unit === 'px' 
+        ? Math.round(sizeBase * multiplier)
+        : (sizeBase * multiplier).toFixed(3);
+      cssVars.push(`  --size-${token}: ${value}${unit};`);
     });
   }
   
   // Container tokens
   if (usedTokens.container.size > 0) {
     cssVars.push('\n  /* Container Tokens */');
-    const containerBase = 20; // 20rem (320px)
     
-    // Container uses hardcoded breakpoints
+    // Container uses hardcoded breakpoints in pixels
     const containerBreakpoints: Record<string, number> = {
-      'xs': 16,    // 320px
-      'sm': 24,    // 480px
-      'md': 32,    // 640px
-      'lg': 48,    // 960px
-      'xl': 64,    // 1280px
-      '2xl': 72,   // 1440px
-      '3xl': 80,   // 1600px
-      '4xl': 96,   // 1920px
-      '5xl': 112,  // 2240px
-      '6xl': 128,  // 2560px
-      '7xl': 144,  // 2880px
+      'xs': 320,
+      'sm': 480,
+      'md': 640,
+      'lg': 960,
+      'xl': 1280,
+      '2xl': 1440,
+      '3xl': 1600,
+      '4xl': 1920,
+      '5xl': 2240,
+      '6xl': 2560,
+      '7xl': 2880,
     };
     
     usedTokens.container.forEach(token => {
-      let multiplier = containerBreakpoints[token];
+      let pixels = containerBreakpoints[token];
       
-      if (!multiplier) {
+      if (!pixels) {
         // Handle numbered xl tokens
         const xlMatch = token.match(/^(\d+)xl$/);
         if (xlMatch) {
           const num = parseInt(xlMatch[1]);
-          multiplier = 32 + (num * 16);
+          pixels = 640 + (num * 320); // Progressive scaling
         } else {
-          multiplier = 32; // default to md
+          pixels = 640; // default to md
         }
       }
       
-      const value = (containerBase * multiplier / 20).toFixed(1);
-      cssVars.push(`  --container-${token}: ${value}rem;`);
+      const value = unit === 'px' ? pixels : (pixels / 16);
+      const formatted = unit === 'px' ? value.toString() : value.toFixed(1);
+      cssVars.push(`  --container-${token}: ${formatted}${unit};`);
     });
   }
   
   if (cssVars.length === 0) {
-    return '';
+    return ':root {\n}';
   }
   
   return `:root {\n${cssVars.join('\n')}\n}`;

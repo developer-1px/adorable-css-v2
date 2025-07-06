@@ -1,0 +1,43 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "packages/adorable-css/src/index.ts",
+    "packages/homepage-kit/src/app.html",
+    "packages/homepage-kit/svelte.config.js",
+    "packages/homepage-kit/vite.config.ts"
+  ],
+  "project": [
+    "packages/*/src/**/*.{ts,tsx,js,jsx,svelte}",
+    "!**/*.test.ts",
+    "!**/*.spec.ts"
+  ],
+  "ignore": [
+    "**/__tests__/**",
+    "**/dist/**",
+    "**/build/**",
+    "**/.svelte-kit/**",
+    "**/node_modules/**",
+    "docs/config/**",
+    "packages/homepage-kit/src/lib/components/ui/**",
+    "packages/homepage-kit/src/pages/**",
+    "packages/homepage-kit/src/lib/pages/**",
+    "packages/homepage-kit/src/lib/index.ts",
+    "packages/adorable-css/src/examples/**",
+    "packages/adorable-css/src/config/**"
+  ],
+  "ignoreDependencies": [
+    "knip",
+    "@types/*",
+    "eslint-*",
+    "@eslint/*",
+    "prettier",
+    "typescript",
+    "vite",
+    "vitest",
+    "tsup"
+  ],
+  "ignoreExportsUsedInFile": true,
+  "svelte": {
+    "config": "packages/homepage-kit/svelte.config.js"
+  }
+}

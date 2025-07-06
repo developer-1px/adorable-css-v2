@@ -22,7 +22,12 @@
     "version-packages": "changeset version",
     "publish-packages": "changeset publish",
     "deploy": "pnpm --filter homepage-kit run deploy:gh-pages",
-    "deploy:quick": "cd packages/homepage-kit && npx gh-pages -d build --dotfiles"
+    "deploy:quick": "cd packages/homepage-kit && npx gh-pages -d build --dotfiles",
+    "knip": "knip",
+    "knip:fix": "knip --fix",
+    "find-unused": "knip --reporter compact",
+    "depcheck": "depcheck",
+    "depcheck:all": "pnpm --recursive exec depcheck"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.0",
@@ -33,10 +38,12 @@
     "@typescript-eslint/eslint-plugin": "^8.20.0",
     "@typescript-eslint/parser": "^8.20.0",
     "@vitest/ui": "^3.2.4",
+    "depcheck": "^1.4.7",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-svelte": "^3.0.0",
     "globals": "^16.0.0",
+    "knip": "^5.61.3",
     "svelte": "^5.28.1",
     "svelte-check": "^4.1.6",
     "tsup": "^8.0.0",

@@ -132,31 +132,33 @@
   <!-- Main Content Area -->
   <main class="min-h(screen) lg:pl(280) bg(neutral-25)">
     <!-- Main Layout Container with proper top alignment -->
-    <div class="hbox(top) min-h(screen) gap(0)">
-      <!-- Centered Article Container -->
-      <div class="hbox(center) w(full) px(lg) lg:px(2xl)">
+    <div class="hbox(center/top) min-h(screen)">
+      <!-- Article Container with TOC space consideration -->
+      <div class="max-w(6xl) w(full) hbox(top) gap(4xl) px(lg) lg:px(2xl)">
         <!-- Article Content -->
-        <article class="max-w(4xl) w(full) bg(white) r(xl) shadow(sm) p(2xl) lg:p(4xl) my(lg) lg:my(2xl)">
-            <!-- Breadcrumb -->
-            <nav class="vbox gap(lg) pb(2xl)">
-              <div class="hbox(middle) gap(sm) flex-wrap">
-                <a href="/" class="body(sm) c(neutral-500) hover:c(primary) transition">Home</a>
-                <ChevronRight size="14" class="c(neutral-400)" />
-                <a href="/docs" class="body(sm) c(neutral-500) hover:c(primary) transition">Docs</a>
-                {#if currentDoc}
+        <article class="flex(1) bg(white) r(xl) shadow(sm) p(2xl) lg:p(4xl) my(lg) lg:my(2xl)">
+            <!-- Content Container with Optimal Reading Width -->
+            <div class="max-w(680) mx(auto)">
+              <!-- Breadcrumb -->
+              <nav class="vbox gap(lg) pb(2xl)">
+                <div class="hbox(middle) gap(sm) flex-wrap">
+                  <a href="/" class="body(sm) c(neutral-500) hover:c(primary) transition">Home</a>
                   <ChevronRight size="14" class="c(neutral-400)" />
-                  <span class="body(sm) bold(600) c(primary)">{currentDoc.title}</span>
-                {/if}
+                  <a href="/docs" class="body(sm) c(neutral-500) hover:c(primary) transition">Docs</a>
+                  {#if currentDoc}
+                    <ChevronRight size="14" class="c(neutral-400)" />
+                    <span class="body(sm) bold(600) c(primary)">{currentDoc.title}</span>
+                  {/if}
+                </div>
+              </nav>
+            
+              <!-- Article Content -->
+              <div class="prose(docs)">
+                <slot />
               </div>
-            </nav>
-          
-        <!-- Article -->
-        <div class="prose(docs)">
-          <slot />
-        </div>
-      
-            <!-- Pagination -->
-            <nav class="grid(2) gap(lg) pt(4xl) bt(1/neutral-100)">
+        
+              <!-- Pagination -->
+              <nav class="grid(2) gap(lg) pt(4xl) bt(1/neutral-100)">
                 {#if navigation.prev}
                   <a href={navigation.prev.href} 
                      class="p(xl) r(lg) b(1/neutral-200)
@@ -179,15 +181,15 @@
                 {:else}
                   <div></div>
                 {/if}
-            </nav>
+              </nav>
+            </div>
         </article>
-      </div>
-      
-      <!-- Table of Contents - positioned outside centered container -->
-      {#if mounted && tocItems.length > 0}
-        <aside class="hidden xl:block sticky top(100) h(fit) w(280) ml(xl) flex-shrink(0)">
-          <div class="bg(white) r(lg) shadow(sm) p(xl) my(lg)">
-            <nav class="max-h(calc(100vh-200px)) scroll(y)">
+        
+        <!-- Table of Contents -->
+        {#if mounted && tocItems.length > 0}
+          <aside class="hidden xl:block sticky top(100) h(fit) w(280) flex-shrink(0)">
+            <div class="bg(white) r(lg) shadow(sm) p(xl) my(lg)">
+              <nav class="max-h(calc(100vh-200px)) scroll(y)">
                 <h3 class="body(md) bold(600) c(primary) pb(lg)">On this page</h3>
               <ul class="vbox gap(sm)">
           {#each tocItems as item, i}
@@ -230,10 +232,11 @@
               {/if}
             {/each}
           </ul>
-            </nav>
-          </div>
-        </aside>
-      {/if}
+              </nav>
+            </div>
+          </aside>
+        {/if}
+      </div>
     </div>
   </main>
 </div>
