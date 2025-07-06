@@ -1,11 +1,29 @@
 /**
  * Dynamic token calculation system
- * Generates calc() values at runtime instead of pre-generating CSS variables
+ * Generates calc() values at runtime based on scale configuration
  */
 
-// Scale configuration - centralized to avoid hardcoding
+import { 
+  getTokenStep, 
+  DEFAULT_SCALE_CONFIG
+} from '../config/scaleConfig';
+import type { 
+  ScaleConfig,
+  SpacingScaleConfig,
+  FontScaleConfig,
+  SizeScaleConfig
+} from '../config/scaleConfig';
+import {
+  calculateSpacingMultiplier,
+  calculateFontMultiplier,
+  calculateSizeMultiplier,
+  formatMultiplier
+} from '../config/scaleFormulas';
+
+// Legacy scale configuration for backwards compatibility
 export const SCALE_CONFIG = {
   FONT_RATIO: 1.2,
+  SPACING_RATIO: 1.5,
   SIZE_RATIO: 1.25,
   CONTAINER_RATIO: 1.33,
   FONT_BASE: '1rem',
@@ -14,159 +32,138 @@ export const SCALE_CONFIG = {
   SPACING_BASE: '0.25rem'
 };
 
-// Token scale mapping
-const TOKEN_SCALE: Record<string, number> = {
-  '4xs': -5,
-  '3xs': -4,
-  '2xs': -3,
-  'xs': -2,
-  'sm': -1,
-  'md': 0,
-  'lg': 1,
-  'xl': 2,
-  // Numbered tokens: 2xl = 2+2 = 4, 3xl = 3+2 = 5, etc.
-};
+// Global scale configuration
+let globalScaleConfig: ScaleConfig = DEFAULT_SCALE_CONFIG;
 
 /**
- * Get scale position for a token
- * @param token - Token name (e.g., 'xl', '3xl', '12xl')
- * @returns Scale position relative to md (0)
+ * Set global scale configuration
  */
-function getTokenScale(token: string): number {
-  // Check if it's in the predefined scale
-  if (token in TOKEN_SCALE) {
-    return TOKEN_SCALE[token];
-  }
-  
-  // Handle numbered xl tokens (2xl, 3xl, etc.)
-  const xlMatch = token.match(/^(\d+)xl$/);
-  if (xlMatch) {
-    const num = parseInt(xlMatch[1]);
-    return num + 2; // 2xl = 4, 3xl = 5, etc.
-  }
-  
-  return 0; // Default to md
+export function setScaleConfig(config: Partial<ScaleConfig>): void {
+  globalScaleConfig = {
+    ...globalScaleConfig,
+    ...config
+  };
+}
+
+/**
+ * Get current scale configuration
+ */
+export function getScaleConfig(): ScaleConfig {
+  return globalScaleConfig;
 }
 
 /**
  * Generate dynamic spacing calc expression
  * @param token - Spacing token (e.g., 'xl', '3xl', '12xl')
- * @param baseUnit - Base spacing unit (default: 0.25rem)
+ * @param customConfig - Optional custom spacing config
  * @returns Calc expression
  */
-export function generateSpacingCalc(token: string, baseUnit = SCALE_CONFIG.SPACING_BASE): string {
-  const scale = getTokenScale(token);
+export function generateSpacingCalc(
+  token: string, 
+  customConfig?: Partial<SpacingScaleConfig>
+): string {
+  const config = { ...globalScaleConfig.spacing, ...customConfig } as SpacingScaleConfig;
+  const step = getTokenStep(token);
   
-  // Get multiplier based on progressive scale
-  // Index:       0    1    2    3    4    5    6    7     8     9     10   11   12   13   14   15   16
-  // Token:      4xs  3xs  2xs   xs   sm   md   lg   xl   2xl   3xl   4xl  5xl  6xl  7xl  8xl  9xl  10xl+
-  const multipliers = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 16, 20];
-  
-  const index = scale + 5; // Convert scale to array index (md=0 -> index=5)
-  if (index >= 0 && index < multipliers.length) {
-    const multiplier = multipliers[index];
-    if (multiplier === 1) {
-      return 'var(--spacing-base, 0.25rem)'; // For xs token
-    }
-    return `calc(var(--spacing-base, ${baseUnit}) * ${multiplier})`;
+  // md (step 1) returns base value
+  if (step === 1) {
+    return 'var(--spacing)';
   }
   
-  // For scales beyond our array, use exponential growth
-  if (index >= multipliers.length) {
-    const baseMultiplier = multipliers[multipliers.length - 1]; // Last defined multiplier (20)
-    const extraSteps = index - (multipliers.length - 1);
-    
-    // Calculate the final multiplier by applying 1.5^extraSteps
-    const finalMultiplier = baseMultiplier * Math.pow(1.5, extraSteps);
-    
-    return `calc(var(--spacing-base, ${baseUnit}) * ${finalMultiplier.toFixed(4)})`;
-  }
+  const multiplier = calculateSpacingMultiplier(step, config);
+  const formatted = formatMultiplier(multiplier);
   
-  // Fallback
-  return 'var(--spacing-base, 0.25rem)';
+  return `calc(var(--spacing) * ${formatted})`;
 }
 
 /**
  * Generate dynamic font size calc expression
  * @param token - Font size token (e.g., 'sm', 'xl', '3xl')
- * @param baseSize - Base font size (default: 1rem)
- * @param ratio - Scale ratio (default: 1.2)
+ * @param customConfig - Optional custom font config
  * @returns Calc expression
  */
-export function generateFontCalc(token: string, baseSize = SCALE_CONFIG.FONT_BASE, ratio = SCALE_CONFIG.FONT_RATIO): string {
-  const scale = getTokenScale(token);
+export function generateFontCalc(
+  token: string,
+  customConfig?: Partial<FontScaleConfig>
+): string {
+  const config = { ...globalScaleConfig.font, ...customConfig } as FontScaleConfig;
+  const step = getTokenStep(token);
   
-  if (scale === 0) {
-    return 'var(--font-base, 1rem)'; // md = base
+  // md (step 1) returns base value
+  if (step === 1) {
+    return 'var(--font-base, 1rem)';
   }
   
-  // Build single calc expression with proper CSS syntax
-  const baseVar = `var(--font-base, ${baseSize})`;
-  const ratioVar = `var(--font-ratio, ${ratio})`;
+  const multiplier = calculateFontMultiplier(step, config);
+  const formatted = formatMultiplier(multiplier);
   
-  if (scale > 0) {
-    // Positive scales: multiply by ratio multiple times
-    // calc(var(--font-base) * var(--font-ratio) * var(--font-ratio) * ...)
-    const multipliers = Array(scale).fill(ratioVar);
-    return `calc(${baseVar} * ${multipliers.join(' * ')})`;
-  } else {
-    // Negative scales: divide by ratio multiple times
-    // calc(var(--font-base) / var(--font-ratio) / var(--font-ratio) / ...)
-    const divisors = Array(Math.abs(scale)).fill(ratioVar);
-    return `calc(${baseVar} / ${divisors.join(' / ')})`;
-  }
+  return `calc(var(--font-base, 1rem) * ${formatted})`;
 }
 
 /**
  * Generate dynamic size calc expression
  * @param token - Size token
- * @param baseSize - Base size (default: 1rem) 
- * @param ratio - Scale ratio (default: 1.25)
+ * @param customConfig - Optional custom size config
  * @returns Calc expression
  */
-export function generateSizeCalc(token: string, baseSize = SCALE_CONFIG.SIZE_BASE, ratio = SCALE_CONFIG.SIZE_RATIO): string {
-  const scale = getTokenScale(token);
+export function generateSizeCalc(
+  token: string,
+  customConfig?: Partial<SizeScaleConfig>
+): string {
+  const config = { ...globalScaleConfig.size, ...customConfig } as SizeScaleConfig;
+  const step = getTokenStep(token);
   
-  if (scale === 0) {
+  // md (step 1) returns base value
+  if (step === 1) {
     return 'var(--size-base, 1rem)';
   }
   
-  // Build single calc expression with proper CSS syntax
-  const baseVar = `var(--size-base, ${baseSize})`;
-  const ratioVar = `var(--size-ratio, ${ratio})`;
+  const multiplier = calculateSizeMultiplier(step, config);
+  const formatted = formatMultiplier(multiplier);
   
-  if (scale > 0) {
-    const multipliers = Array(scale).fill(ratioVar);
-    return `calc(${baseVar} * ${multipliers.join(' * ')})`;
-  } else {
-    const divisors = Array(Math.abs(scale)).fill(ratioVar);
-    return `calc(${baseVar} / ${divisors.join(' / ')})`;
-  }
+  return `calc(var(--size-base, 1rem) * ${formatted})`;
 }
 
 /**
  * Generate dynamic container calc expression
+ * Containers use predefined breakpoint values with clean multipliers
  * @param token - Container token
- * @param baseSize - Base container size (default: 20rem)
- * @param ratio - Scale ratio (default: 1.33)
  * @returns Calc expression
  */
-export function generateContainerCalc(token: string, baseSize = SCALE_CONFIG.CONTAINER_BASE, ratio = SCALE_CONFIG.CONTAINER_RATIO): string {
-  const scale = getTokenScale(token);
+export function generateContainerCalc(token: string): string {
+  // Container breakpoints (aligned with common screen sizes)
+  const containerMultipliers: Record<string, number> = {
+    'xs': 16,    // 320px  (20rem * 16/20)
+    'sm': 24,    // 480px  (20rem * 24/20)
+    'md': 32,    // 640px  (20rem * 32/20) - base
+    'lg': 48,    // 960px  (20rem * 48/20)
+    'xl': 64,    // 1280px (20rem * 64/20)
+    '2xl': 72,   // 1440px (20rem * 72/20)
+    '3xl': 80,   // 1600px (20rem * 80/20)
+    '4xl': 96,   // 1920px (20rem * 96/20)
+    '5xl': 112,  // 2240px (20rem * 112/20)
+    '6xl': 128,  // 2560px (20rem * 128/20)
+    '7xl': 144,  // 2880px (20rem * 144/20)
+  };
   
-  if (scale === 0) {
-    return 'var(--container-base, 20rem)'; // md = 20rem (320px)
+  const multiplier = containerMultipliers[token];
+  
+  if (!multiplier) {
+    // Handle numbered xl tokens with formula
+    const xlMatch = token.match(/^(\d+)xl$/);
+    if (xlMatch) {
+      const num = parseInt(xlMatch[1]);
+      // Simple formula for larger sizes: base + (n * increment)
+      const calculated = 32 + (num * 16);
+      return `calc(var(--container-base, 20rem) * ${calculated} / 20)`;
+    }
+    return 'var(--container-base, 20rem)'; // fallback to md
   }
   
-  // Build single calc expression with proper CSS syntax
-  const baseVar = `var(--container-base, ${baseSize})`;
-  const ratioVar = `var(--container-ratio, ${ratio})`;
-  
-  if (scale > 0) {
-    const multipliers = Array(scale).fill(ratioVar);
-    return `calc(${baseVar} * ${multipliers.join(' * ')})`;
-  } else {
-    const divisors = Array(Math.abs(scale)).fill(ratioVar);
-    return `calc(${baseVar} / ${divisors.join(' / ')})`;
+  // md is the base
+  if (multiplier === 32) {
+    return 'calc(var(--container-base, 20rem) * 32 / 20)';
   }
+  
+  return `calc(var(--container-base, 20rem) * ${multiplier} / 20)`;
 }

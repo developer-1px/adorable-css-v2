@@ -10,6 +10,9 @@ export * from "./core/parser";
 export * from "./rules";
 export * from "./core/values/makeValue";
 export * from "./core/values/dynamicTokens";
+export * from "./core/values/scaleUtilities";
+export * from "./core/config/scaleConfig";
+export * from "./core/config/scaleFormulas";
 export * from "./design-system/tokens/index";
 export * from "./design-system/colors";
 export * from "./extensions";
@@ -31,6 +34,9 @@ export {
   isTokensInjected, 
   getAutoInjectConfig 
 } from "./core/runtime/auto-inject";
+
+// Export scale configuration
+export { setScaleConfig, getScaleConfig } from "./core/values/dynamicTokens";
 
 // Export color palette and plugin
 export { colorPalette, themes, setTheme, getCurrentTheme, getAvailableThemes, colorsPlugin, configureSemanticColors } from "./design-system/colors/colors";
