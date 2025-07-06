@@ -7,8 +7,8 @@ vi.mock("./parser", () => ({
   parseAdorableCSS: vi.fn(),
 }));
 
-// Mock the rules module
-vi.mock("../rules/rules", () => ({
+// Mock the 03-rules module
+vi.mock("../03-rules/03-rules", () => ({
   RULES_FOR_UNOCSS: {
     // Mock basic utilities
     block: vi.fn(() => ({ display: "block" })),
@@ -130,7 +130,7 @@ describe("generateCSSFromAdorableCSS", () => {
       } as any);
 
       const result = generateCSSFromAdorableCSS("unknown-utility");
-      expect(result).toBe(""); // Should not generate empty CSS rules
+      expect(result).toBe(""); // Should not generate empty CSS 03-rules
     });
 
     it("should handle parser errors", () => {
@@ -157,7 +157,7 @@ describe("generateCSSFromAdorableCSS", () => {
       } as any);
 
       const result = generateCSSFromAdorableCSS("unknown-function(test)");
-      expect(result).toBe(""); // Should not generate empty CSS rules
+      expect(result).toBe(""); // Should not generate empty CSS 03-rules
     });
   });
 

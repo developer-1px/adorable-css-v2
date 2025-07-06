@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { font } from '../rules/text/font';
-import { generateTokenCSS, defaultTokens, isToken, getTokenVar } from '../design-system/tokens/index';
+import { font } from '../03-rules/text/font';
+import { generateTokenCSS, defaultTokens, isToken, getTokenVar } from '../02-design_tokens/design-system/tokens/index';
 
 describe('font(base) token resolution', () => {
   it('should resolve font(base) to font-size: var(--font-md)', () => {

@@ -1,6 +1,6 @@
-import { generateCSS } from '../core/generators/generator';
+import { generateCSS } from '../01-core/generators/generator';
 
-describe('Container and max-w tokens', () => {
+describe('Container and max-w 02-design_tokens', () => {
   it('should generate container with token sizes', () => {
     const css = generateCSS(['container(sm)']);
     console.log('container(sm):', css);
@@ -24,7 +24,7 @@ describe('Container and max-w tokens', () => {
     });
   });
 
-  it('should generate max-w with container tokens', () => {
+  it('should generate max-w with container 02-design_tokens', () => {
     const testCases = [
       { input: 'max-w(sm)', expected: 'max-width:var(--container-sm' },
       { input: 'max-w(md)', expected: 'max-width:var(--container-md' },
@@ -40,8 +40,8 @@ describe('Container and max-w tokens', () => {
     });
   });
 
-  it('should generate max-w with size tokens as fallback', () => {
-    // Tokens that might not be recognized as container tokens
+  it('should generate max-w with size 02-design_tokens as fallback', () => {
+    // Tokens that might not be recognized as container 02-design_tokens
     const css = generateCSS(['max-w(4xs)']);
     console.log('max-w(4xs):', css);
     // Should fall back to size token
@@ -68,7 +68,7 @@ describe('Container and max-w tokens', () => {
     });
   });
 
-  it('should use container tokens with correct CSS variable references', () => {
+  it('should use container 02-design_tokens with correct CSS variable references', () => {
     // Test that container and max-w use CSS variables with fallback calc values
     const css1 = generateCSS(['container(lg)']);
     expect(css1).toContain('max-width:var(--container-lg, calc(20rem * 1.3300))');

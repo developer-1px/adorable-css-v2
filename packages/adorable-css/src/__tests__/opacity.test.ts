@@ -1,5 +1,5 @@
 import { describe, test, expect } from 'vitest';
-import { generateCSSFromAdorableCSS } from '../core/generators/generator';
+import { generateCSSFromAdorableCSS } from '../01-core/generators/generator';
 
 describe('Opacity Feature', () => {
   test('should generate opacity CSS', () => {

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { inset, insetX, insetY } from '../../../rules/layout/inset';
+import { inset, insetX, insetY } from '../../../03-rules/layout/inset';
 
-describe('inset rules', () => {
+describe('inset 03-rules', () => {
   describe('inset', () => {
     it('should handle single value', () => {
       expect(inset('0')).toEqual({ inset: '0px' });

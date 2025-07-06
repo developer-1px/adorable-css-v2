@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { generateCSS } from '../core/generators/generator';
-import { parseAdorableCSS } from '../core/parser/parser';
+import { generateCSS } from '../01-core/generators/generator';
+import { parseAdorableCSS } from '../01-core/parser/parser';
 
 describe('Nested Selector Feature', () => {
   describe('hbox and vbox with child selectors', () => {

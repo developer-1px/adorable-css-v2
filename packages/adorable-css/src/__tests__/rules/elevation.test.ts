@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { elevation, calculateElevation } from '../../rules/effects/elevation';
+import { elevation, calculateElevation } from '../../03-rules/effects/elevation';
 
 describe('elevation', () => {
   it('should return none shadow for elevation(0)', () => {

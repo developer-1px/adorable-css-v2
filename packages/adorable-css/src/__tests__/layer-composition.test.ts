@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { generateCSS } from '../core/generators/generator';
+import { generateCSS } from '../01-core/generators/generator';
 
 describe('Layer Composition System', () => {
   it('should place layout compositions in @layer composition', () => {
     const css = generateCSS(['hbox(pack)', 'vbox(middle)', 'grid(3)']);
     
-    expect(css).toContain('@layer base, components, composition, utilities;');
+    expect(css).toContain('@layer base, 04-components, composition, utilities;');
     expect(css).toContain('@layer composition {');
     
     const compositionMatch = css.match(/@layer composition \{([\s\S]*?)\n\}/);
@@ -28,18 +28,18 @@ describe('Layer Composition System', () => {
 
   it('should handle all layer types correctly', () => {
     const css = generateCSS([
-      'body(base)',      // components
+      'body(base)',      // 04-components
       'hbox(pack)',    // composition
       'c(white)',        // utilities
       'p(16)'           // utilities
     ]);
     
     // Check layer order declaration
-    expect(css).toContain('@layer base, components, composition, utilities;');
+    expect(css).toContain('@layer base, 04-components, composition, utilities;');
     
     // Check each layer exists
     expect(css).toContain('@layer base {');
-    expect(css).toContain('@layer components {');
+    expect(css).toContain('@layer 04-components {');
     expect(css).toContain('@layer composition {');
     expect(css).toContain('@layer utilities {');
   });

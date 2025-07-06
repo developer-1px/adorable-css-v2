@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { backdropBlur, backdropSaturate, backdropBrightness, backdropContrast, backdropGrayscale, backdropHueRotate, backdropInvert, backdropOpacity, backdropSepia } from '../../rules/effects/backdrop';
 
-describe('backdrop filter rules', () => {
+describe('backdrop filter 03-rules', () => {
   describe('backdropBlur', () => {
     it('should apply default blur', () => {
       expect(backdropBlur()).toEqual({ 'backdrop-filter': 'blur(8px)' });

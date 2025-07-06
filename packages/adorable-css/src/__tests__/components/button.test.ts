@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { btnString, iconBtnString } from '../../components/primitives/button';
+import { btnString, iconBtnString } from '../../04-components/primitives/button';
 
 describe('button component', () => {
   describe('btnString', () => {

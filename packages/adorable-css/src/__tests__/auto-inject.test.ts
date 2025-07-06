@@ -5,7 +5,7 @@ import {
   isTokensInjected,
   getAutoInjectConfig,
   resetInjectionState
-} from '../core/runtime/auto-inject';
+} from '../01-core/runtime/auto-inject';
 
 describe('Auto-inject Tokens', () => {
   beforeEach(() => {
@@ -21,10 +21,10 @@ describe('Auto-inject Tokens', () => {
     resetInjectionState();
   });
 
-  it('should inject tokens automatically', () => {
+  it('should inject 02-design_tokens automatically', () => {
     autoInjectTokens();
     
-    const style = document.getElementById('adorable-css-tokens-auto');
+    const style = document.getElementById('adorable-css-02-design_tokens-auto');
     expect(style).toBeTruthy();
     expect(style?.textContent).toContain(':root {');
     expect(style?.textContent).toContain('--spacing-xs: 0.25rem');
@@ -33,10 +33,10 @@ describe('Auto-inject Tokens', () => {
 
   it('should not inject twice', () => {
     autoInjectTokens();
-    const firstStyle = document.getElementById('adorable-css-tokens-auto');
+    const firstStyle = document.getElementById('adorable-css-02-design_tokens-auto');
     
     autoInjectTokens();
-    const secondStyle = document.getElementById('adorable-css-tokens-auto');
+    const secondStyle = document.getElementById('adorable-css-02-design_tokens-auto');
     
     expect(firstStyle).toBe(secondStyle);
   });
@@ -45,12 +45,12 @@ describe('Auto-inject Tokens', () => {
     configureAutoInject({ enabled: false });
     autoInjectTokens();
     
-    const style = document.getElementById('adorable-css-tokens-auto');
+    const style = document.getElementById('adorable-css-02-design_tokens-auto');
     expect(style).toBeFalsy();
   });
 
-  it('should use custom tokens', () => {
-    // Create custom tokens with a custom spacing value
+  it('should use custom 02-design_tokens', () => {
+    // Create custom 02-design_tokens with a custom spacing value
     const customTokens = {
       spacing: {
         custom: '999px'
@@ -60,14 +60,14 @@ describe('Auto-inject Tokens', () => {
     configureAutoInject({ tokens: customTokens });
     autoInjectTokens();
     
-    const style = document.getElementById('adorable-css-tokens-auto');
+    const style = document.getElementById('adorable-css-02-design_tokens-auto');
     expect(style?.textContent).toContain('--spacing-custom: 999px');
   });
 
   it('should inject to head by default', () => {
     autoInjectTokens();
     
-    const style = document.getElementById('adorable-css-tokens-auto');
+    const style = document.getElementById('adorable-css-02-design_tokens-auto');
     expect(style?.parentElement).toBe(document.head);
   });
 
@@ -75,7 +75,7 @@ describe('Auto-inject Tokens', () => {
     configureAutoInject({ injectTo: 'body' });
     autoInjectTokens();
     
-    const style = document.getElementById('adorable-css-tokens-auto');
+    const style = document.getElementById('adorable-css-02-design_tokens-auto');
     expect(style?.parentElement).toBe(document.body);
   });
 
@@ -98,13 +98,13 @@ describe('Auto-inject Tokens', () => {
 
   it('should dispatch custom event', () => {
     const handler = vi.fn();
-    document.addEventListener('adorablecss:tokens-injected', handler);
+    document.addEventListener('adorablecss:02-design_tokens-injected', handler);
     
     autoInjectTokens();
     
     expect(handler).toHaveBeenCalled();
     
-    document.removeEventListener('adorablecss:tokens-injected', handler);
+    document.removeEventListener('adorablecss:02-design_tokens-injected', handler);
   });
 
   it('should handle DOM ready state', () => {

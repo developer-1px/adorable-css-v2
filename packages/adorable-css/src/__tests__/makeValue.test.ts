@@ -3,13 +3,13 @@ import { makeValue, cssvar } from './makeValue';
 
 describe('makeValue with token support', () => {
   describe('cssvar function', () => {
-    it('should handle spacing tokens', () => {
+    it('should handle spacing 02-design_tokens', () => {
       expect(cssvar('lg')).toBe('var(--spacing-lg)');
       expect(cssvar('xl')).toBe('var(--spacing-xl)');
       expect(cssvar('2xl')).toBe('var(--spacing-2xl)');
     });
 
-    it('should handle font tokens', () => {
+    it('should handle font 02-design_tokens', () => {
       expect(cssvar('sm')).toBe('var(--spacing-sm)'); // sm is in both spacing and font
       expect(cssvar('md')).toBe('var(--spacing-md)');
     });
@@ -26,7 +26,7 @@ describe('makeValue with token support', () => {
   });
 
   describe('makeValue function', () => {
-    it('should process spacing tokens', () => {
+    it('should process spacing 02-design_tokens', () => {
       expect(makeValue('lg')).toBe('var(--spacing-lg)');
       expect(makeValue('xl')).toBe('var(--spacing-xl)');
     });

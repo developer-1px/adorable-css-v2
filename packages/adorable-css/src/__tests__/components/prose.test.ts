@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { prose } from '../../components/patterns/prose';
-import type { CSSRule } from '../../rules/types';
+import { prose } from '../../04-components/patterns/prose';
+import type { CSSRule } from '../../03-rules/types';
 
 describe('prose component with defineComponent', () => {
   it('should return base classes and CSS rule for default variant', () => {

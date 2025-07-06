@@ -11,8 +11,8 @@ import {
   isResponsiveClass, 
   extractBaseClass, 
   createResponsiveCSS 
-} from '../extensions/responsive/responsive-decorator';
-import { generateCSS } from '../core/parser/generator';
+} from '../05-plugins/responsive/responsive-decorator';
+import { generateCSS } from '../01-core/parser/generator';
 
 describe('Responsive Decorator Pattern', () => {
   describe('ResponsiveSelector.analyze()', () => {
@@ -104,7 +104,7 @@ describe('Responsive Decorator Pattern', () => {
   describe('ResponsiveDecoratorFactory', () => {
     const factory = new ResponsiveDecoratorFactory();
     
-    it('should create responsive rules correctly', () => {
+    it('should create responsive 03-rules correctly', () => {
       const pattern = {
         breakpoint: 'sm' as const,
         isMaxWidth: false,
@@ -123,13 +123,13 @@ describe('Responsive Decorator Pattern', () => {
     });
     
     it('should process multiple responsive classes', () => {
-      const rules = [
+      const 03-rules = [
         { className: 'hidden', cssRule: { display: 'none' } },
         { className: 'md:block', cssRule: { display: 'block' } },
         { className: '..lg:hidden', cssRule: { display: 'none' } }
       ];
       
-      const result = factory.processResponsiveClasses(rules);
+      const result = factory.processResponsiveClasses(03-rules);
       
       expect(result).toHaveLength(3);
       expect(result[0]).toEqual({ display: 'none' }); // non-responsive

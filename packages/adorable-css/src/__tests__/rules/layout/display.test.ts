@@ -2,9 +2,9 @@ import { describe, it, expect } from 'vitest';
 import { 
   block, inline, inlineBlock, inlineFlex, none, hidden, grid,
   hbox, vbox, wrap, pack, flex, flexWrap, items, justify, shrink, grow
-} from '../../../rules/layout/display';
+} from '../../../03-rules/layout/display';
 
-describe('display rules', () => {
+describe('display 03-rules', () => {
   describe('basic display utilities', () => {
     it('should apply display values', () => {
       expect(block()).toEqual({ display: 'block' });

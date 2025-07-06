@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { scrollM, scrollMt, scrollMr, scrollMb, scrollMl, scrollMx, scrollMy } from '../../../rules/layout/scroll-margin';
+import { scrollM, scrollMt, scrollMr, scrollMb, scrollMl, scrollMx, scrollMy } from '../../../03-rules/layout/scroll-margin';
 
-describe('scroll-margin rules', () => {
+describe('scroll-margin 03-rules', () => {
   describe('scrollM', () => {
     it('should handle single value', () => {
       expect(scrollM('10')).toEqual({ 'scroll-margin': '10px' });

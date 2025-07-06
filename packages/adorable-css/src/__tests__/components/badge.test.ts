@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { badgeString } from '../../components/primitives/badge';
+import { badgeString } from '../../04-components/primitives/badge';
 
 describe('badge component', () => {
   it('should return default badge styles', () => {

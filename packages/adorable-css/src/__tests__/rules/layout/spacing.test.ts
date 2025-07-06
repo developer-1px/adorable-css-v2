@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { p, px, py, pt, pb, pl, pr, m, mx, my, mt, mb, ml, mr, gap } from '../../../rules/layout/spacing';
+import { p, px, py, pt, pb, pl, pr, m, mx, my, mt, mb, ml, mr, gap } from '../../../03-rules/layout/spacing';
 
-describe('spacing rules', () => {
+describe('spacing 03-rules', () => {
   describe('padding', () => {
     it('should apply default padding', () => {
       expect(p()).toEqual({ padding: 'var(--spacing-md)' });

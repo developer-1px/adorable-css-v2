@@ -5,7 +5,7 @@ import {
   getColorScheme,
   createFromPrimaryColor,
   COLOR_SCHEMES
-} from '../design-system/colors/semantic-color-system';
+} from '../02-design_tokens/design-system/colors/semantic-color-system';
 
 describe('Semantic Color System', () => {
   describe('generateSemanticColorVariables', () => {

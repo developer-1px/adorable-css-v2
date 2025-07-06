@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { generateCSSFromAdorableCSS } from '../core/generators/generator';
+import { generateCSSFromAdorableCSS } from '../01-core/generators/generator';
 
 describe('Negative position values', () => {
-  it('should handle negative spacing tokens', () => {
+  it('should handle negative spacing 02-design_tokens', () => {
     const result = generateCSSFromAdorableCSS('right(-xs) bottom(-sm)');
     expect(result).toContain('right:calc(-1 * var(--spacing-xs))');
     expect(result).toContain('bottom:calc(-1 * var(--spacing-sm))');

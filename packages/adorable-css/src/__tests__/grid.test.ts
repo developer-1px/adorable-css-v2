@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { grid } from '../rules/layout/grid';
+import { grid } from '../03-rules/layout/grid';
 
 describe('grid rule', () => {
   test('grid() returns default grid', () => {

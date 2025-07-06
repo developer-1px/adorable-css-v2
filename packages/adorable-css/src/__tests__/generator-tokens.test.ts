@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { generateCSSWithTokens } from '../core/generators/generator';
-import { defaultTokens } from '../design-system/tokens/index';
+import { generateCSSWithTokens } from '../01-core/generators/generator';
+import { defaultTokens } from '../02-design_tokens/design-system/tokens/index';
 
 describe('generateCSSWithTokens', () => {
-  it('should include tokens by default', () => {
+  it('should include 02-design_tokens by default', () => {
     const css = generateCSSWithTokens('p(lg)');
     
     expect(css).toContain(':root {');
@@ -19,14 +19,14 @@ describe('generateCSSWithTokens', () => {
     expect(css).toContain('.c\\(red\\){color:red}');
   });
 
-  it('should exclude tokens when disabled', () => {
+  it('should exclude 02-design_tokens when disabled', () => {
     const css = generateCSSWithTokens('p(lg)', { includeTokens: false });
     
     expect(css).not.toContain(':root {');
     expect(css).toContain('.p\\(lg\\){padding:var(--spacing-lg)}');
   });
 
-  it('should use custom tokens', () => {
+  it('should use custom 02-design_tokens', () => {
     const customTokens = {
       ...defaultTokens,
       spacing: {
@@ -55,7 +55,7 @@ describe('generateCSSWithTokens', () => {
     expect(css).toContain('.p\\(lg\\){padding:var(--spacing-lg)}');
   });
 
-  it('should handle complex classes with tokens', () => {
+  it('should handle complex classes with 02-design_tokens', () => {
     const css = generateCSSWithTokens([
       'vbox(pack)',
       'gap(lg)',

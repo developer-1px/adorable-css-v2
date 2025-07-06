@@ -120,7 +120,7 @@ describe('createTokenizer', () => {
 })
 
 describe('createParser', () => {
-  it('should consume expected tokens', () => {
+  it('should consume expected 02-design_tokens', () => {
     const tokens = [
       { type: '(ident)', image: 'test' },
       { type: '(operator)', image: '(' },
@@ -133,7 +133,7 @@ describe('createParser', () => {
     expect(consume(')')).toEqual({ type: '(operator)', image: ')' })
   })
 
-  it('should throw error for unexpected tokens', () => {
+  it('should throw error for unexpected 02-design_tokens', () => {
     const tokens = [{ type: '(ident)', image: 'test' }]
     const { consume } = createParser(tokens)
     

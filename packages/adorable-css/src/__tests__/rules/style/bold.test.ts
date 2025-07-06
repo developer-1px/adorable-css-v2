@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { bold } from '../../../rules/text/bold';
+import { bold } from '../../../03-rules/text/bold';
 
 describe('bold', () => {
   it('should handle numeric font weights', () => {
@@ -14,7 +14,7 @@ describe('bold', () => {
     expect(bold('900')).toEqual({ 'font-weight': '900' });
   });
 
-  it('should handle named font weight tokens', () => {
+  it('should handle named font weight 02-design_tokens', () => {
     expect(bold('thin')).toEqual({ 'font-weight': 'var(--fontWeight-thin)' });
     expect(bold('light')).toEqual({ 'font-weight': 'var(--fontWeight-light)' });
     expect(bold('normal')).toEqual({ 'font-weight': 'var(--fontWeight-normal)' });

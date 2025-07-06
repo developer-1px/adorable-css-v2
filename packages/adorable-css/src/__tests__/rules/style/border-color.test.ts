@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { bc, btc, brc, bbc, blc } from '../../../rules/style/border-color';
+import { bc, btc, brc, bbc, blc } from '../../../03-rules/style/border-color';
 
-describe('border-color rules', () => {
+describe('border-color 03-rules', () => {
   describe('bc (border-color)', () => {
     it('should handle color values', () => {
       expect(bc('red')).toEqual({ 'border-color': 'red' });
@@ -9,7 +9,7 @@ describe('border-color rules', () => {
       expect(bc('rgb(255,0,0)')).toEqual({ 'border-color': 'rgb(255,0,0)' });
     });
 
-    it('should handle color tokens', () => {
+    it('should handle color 02-design_tokens', () => {
       expect(bc('primary')).toEqual({ 'border-color': 'var(--color-primary)' });
       expect(bc('blue-500')).toEqual({ 'border-color': 'var(--color-blue-500)' });
     });

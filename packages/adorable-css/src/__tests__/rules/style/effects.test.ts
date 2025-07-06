@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { opacity, blur, brightness, contrast, saturate, sepia, backdrop } from '../../../rules/style/effects';
+import { opacity, blur, brightness, contrast, saturate, sepia, backdrop } from '../../../03-rules/style/effects';
 
-describe('effects rules', () => {
+describe('effects 03-rules', () => {
   describe('opacity', () => {
     it('should handle opacity values', () => {
       expect(opacity('0.5')).toEqual({ opacity: '0.5' });

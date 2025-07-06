@@ -1,8 +1,8 @@
 import { describe, test, expect } from 'vitest';
 import { generateCSS } from '../index';
 
-describe('text() with font size tokens', () => {
-  test('should support font size tokens', () => {
+describe('text() with font size 02-design_tokens', () => {
+  test('should support font size 02-design_tokens', () => {
     expect(generateCSS(['text(xs)'])).toContain('font-size:var(--font-xs)');
     expect(generateCSS(['text(sm)'])).toContain('font-size:var(--font-sm)');
     expect(generateCSS(['text(md)'])).toContain('font-size:var(--font-md)');

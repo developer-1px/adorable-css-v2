@@ -1,13 +1,13 @@
 import { describe, it, expect } from 'vitest';
 import { isToken, getTokenVar, generateTokenCSS, defaultTokens } from './index';
-import { r } from '../rules/visuals/border';
-import { shadow } from '../rules/visuals/shadow';
-import { font } from '../rules/typography/font';
-import { p, m, gap } from '../rules/layout/spacing';
+import { r } from '../03-rules/visuals/border';
+import { shadow } from '../03-rules/visuals/shadow';
+import { font } from '../03-rules/typography/font';
+import { p, m, gap } from '../03-rules/layout/spacing';
 
 describe('Token System', () => {
   describe('isToken', () => {
-    it('should recognize valid tokens', () => {
+    it('should recognize valid 02-design_tokens', () => {
       expect(isToken('sm', 'radius')).toBe(true);
       expect(isToken('md', 'radius')).toBe(true);
       expect(isToken('lg', 'radius')).toBe(true);
@@ -15,7 +15,7 @@ describe('Token System', () => {
       expect(isToken('none', 'radius')).toBe(true);
     });
 
-    it('should reject invalid tokens', () => {
+    it('should reject invalid 02-design_tokens', () => {
       expect(isToken('xyz', 'radius')).toBe(false);
       expect(isToken('8', 'radius')).toBe(false);
     });
@@ -40,23 +40,23 @@ describe('Token System', () => {
   });
 
   describe('Rule Integration', () => {
-    it('border radius should use tokens', () => {
+    it('border radius should use 02-design_tokens', () => {
       expect(r('sm')).toEqual({ 'border-radius': 'var(--radius-sm)' });
       expect(r('md')).toEqual({ 'border-radius': 'var(--radius-md)' });
       expect(r('full')).toEqual({ 'border-radius': 'var(--radius-full)' });
     });
 
-    it('shadow should use tokens', () => {
+    it('shadow should use 02-design_tokens', () => {
       expect(shadow('sm')).toEqual({ 'box-shadow': 'var(--shadow-sm)' });
       expect(shadow('lg')).toEqual({ 'box-shadow': 'var(--shadow-lg)' });
     });
 
-    it('font should use tokens', () => {
+    it('font should use 02-design_tokens', () => {
       expect(font('sm')).toEqual({ 'font-size': 'var(--font-sm)' });
       expect(font('lg')).toEqual({ 'font-size': 'var(--font-lg)' });
     });
 
-    it('spacing should use tokens', () => {
+    it('spacing should use 02-design_tokens', () => {
       expect(p('sm')).toEqual({ padding: 'var(--spacing-sm)' });
       expect(m('lg')).toEqual({ margin: 'var(--spacing-lg)' });
       expect(gap('md')).toEqual({ gap: 'var(--spacing-md)' });

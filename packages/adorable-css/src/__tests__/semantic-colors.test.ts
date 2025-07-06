@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeAll } from "vitest";
-import { generateTokenCSS, semanticColors, buildSemanticColors } from "../design-system/tokens/index";
-import { generateColorPalette } from "../design-system/colors/colors";
+import { generateTokenCSS, semanticColors, buildSemanticColors } from "../02-design_tokens/design-system/tokens/index";
+import { generateColorPalette } from "../02-design_tokens/design-system/colors/colors";
 
 describe("Semantic Color CSS Variable Generation", () => {
   beforeAll(() => {

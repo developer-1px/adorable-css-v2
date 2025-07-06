@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { cardString } from '../../components/primitives/card';
+import { cardString } from '../../04-components/primitives/card';
 
 describe('card component', () => {
   it('should return default card styles', () => {

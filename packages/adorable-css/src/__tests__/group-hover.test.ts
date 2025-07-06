@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
-import { generateCSSFromAdorableCSS } from '../core/generators/generator';
-import { StateSelector, isStateClass } from '../extensions/responsive/responsive-decorator';
+import { generateCSSFromAdorableCSS } from '../01-core/generators/generator';
+import { StateSelector, isStateClass } from '../05-plugins/responsive/responsive-decorator';
 
 describe('Group Hover Feature', () => {
   test('should recognize state patterns', () => {

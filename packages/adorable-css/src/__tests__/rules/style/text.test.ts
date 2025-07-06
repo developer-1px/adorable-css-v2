@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { text } from '../../../rules/text/text';
+import { text } from '../../../03-rules/text/text';
 
 describe('text rule', () => {
   describe('text alignment', () => {
@@ -11,7 +11,7 @@ describe('text rule', () => {
     });
   });
 
-  describe('font size tokens', () => {
+  describe('font size 02-design_tokens', () => {
     it('should handle size token values', () => {
       expect(text('xs')).toEqual({ 'font-size': 'var(--font-xs)' });
       expect(text('sm')).toEqual({ 'font-size': 'var(--font-sm)' });

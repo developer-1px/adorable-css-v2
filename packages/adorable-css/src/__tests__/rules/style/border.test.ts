@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { border, bt, br, bb, bl, radius, ring } from '../../../rules/style/border';
+import { border, bt, br, bb, bl, radius, ring } from '../../../03-rules/style/border';
 
-describe('border rules', () => {
+describe('border 03-rules', () => {
   describe('border', () => {
     it('should handle simple border values', () => {
       expect(border('1')).toEqual({ border: '1px solid' });

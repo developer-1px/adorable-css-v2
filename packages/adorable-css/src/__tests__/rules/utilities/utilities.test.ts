@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { aspectRatio, float, isolation, objectFit, objectPosition, scrollBehavior, scrollSnap } from '../../../rules/utilities/utilities';
+import { aspectRatio, float, isolation, objectFit, objectPosition, scrollBehavior, scrollSnap } from '../../../03-rules/utilities/utilities';
 
-describe('utilities rules', () => {
+describe('utilities 03-rules', () => {
   describe('aspectRatio', () => {
     it('should handle common aspect ratios', () => {
       expect(aspectRatio('1:1')).toEqual({ 'aspect-ratio': '1 / 1' });

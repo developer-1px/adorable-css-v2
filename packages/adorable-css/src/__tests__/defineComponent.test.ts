@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { defineComponent } from '../components/defineComponent';
+import { defineComponent } from '../04-components/defineComponent';
 
 describe('defineComponent', () => {
   it('should return base classes when no arguments provided', () => {

@@ -7,7 +7,7 @@ import {
   generateTokenScales,
   SCALE_RATIOS,
   createTokens,
-} from '../design-system/tokens/index';
+} from '../02-design_tokens/design-system/tokens/index';
 
 describe('Scale Generator', () => {
   describe('generateTypographyScale', () => {
@@ -95,7 +95,7 @@ describe('Scale Generator', () => {
       expect(tokens.container).toBeDefined();
       expect(tokens.size).toBeDefined();
       
-      // Check static tokens
+      // Check static 02-design_tokens
       expect(tokens.lineHeight).toBeDefined();
       expect(tokens.letterSpacing).toBeDefined();
       expect(tokens.fontWeight).toBeDefined();
@@ -109,7 +109,7 @@ describe('Scale Generator', () => {
       expect(tokens.heading).toBeDefined();
     });
 
-    it('should match default tokens structure', () => {
+    it('should match default 02-design_tokens structure', () => {
       const tokens = createTokens();
       
       // Verify some key values match expectations

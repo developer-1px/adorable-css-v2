@@ -1,29 +1,29 @@
 // AdorableCSS Core - Main entry point
 
 // Import color system FIRST to initialize colorPalette before auto-inject
-import "./design-system/colors/colors";
+import "./02-design_tokens/design-system/colors/colors";
 
-// Auto-inject tokens on import (can be disabled via configureAutoInject)
-import "./core/runtime/auto-inject";
+// Auto-inject 02-design_tokens on import (can be disabled via configureAutoInject)
+import "./01-core/runtime/auto-inject";
 
-export * from "./core/parser";
-export * from "./rules";
-export * from "./core/values/makeValue";
-export * from "./core/values/scaleUtilities";
-export * from "./tokens";
-export * from "./design-system/tokens/index";
-export * from "./design-system/colors";
-export * from "./extensions";
-export * from "./core/runtime/auto-inject";
+export * from "./01-core/parser";
+export * from "./03-rules";
+export * from "./01-core/values/makeValue";
+export * from "./01-core/values/scaleUtilities";
+export * from "./02-design_tokens";
+export * from "./02-design_tokens/design-system/tokens/index";
+export * from "./02-design_tokens/design-system/colors";
+export * from "./05-plugins";
+export * from "./01-core/runtime/auto-inject";
 
 // Re-export main functions for convenience
-export { parseAdorableCSS } from "./core/parser/parser";
-export { generateCSS, generateCSSFromAdorableCSS, generateCSSWithTokens } from "./core/generators/generator";
-export type { GenerateCSSOptions } from "./core/generators/generator";
-export { resetCSS, getResetCSS } from "./core/reset";
-export { getRuleHandler, rules, RULE_GROUPS } from "./rules";
-export { defaultTokens, generateTokenCSS, isToken, getTokenVar } from "./design-system/tokens/index";
-export { createTokensPlugin, injectTokens, tokensPlugin } from "./design-system/tokens";
+export { parseAdorableCSS } from "./01-core/parser/parser";
+export { generateCSS, generateCSSFromAdorableCSS, generateCSSWithTokens } from "./01-core/generators/generator";
+export type { GenerateCSSOptions } from "./01-core/generators/generator";
+export { resetCSS, getResetCSS } from "./01-core/reset";
+export { getRuleHandler, rules, RULE_GROUPS } from "./03-rules";
+export { defaultTokens, generateTokenCSS, isToken, getTokenVar } from "./02-design_tokens/design-system/tokens/index";
+export { createTokensPlugin, injectTokens, tokensPlugin } from "./02-design_tokens/design-system/tokens";
 
 // Export auto-injection utilities
 export { 
@@ -36,7 +36,7 @@ export {
   addDynamicClasses,
   destroyDynamicStyles,
   getDynamicStyleManager
-} from "./core/runtime/auto-inject";
+} from "./01-core/runtime/auto-inject";
 
 // Export token registry utilities
 export { 
@@ -45,15 +45,15 @@ export {
   registerToken,
   getUsedTokens,
   clearTokenRegistry
-} from "./tokens/tokenRegistry";
+} from "./02-design_tokens/tokenRegistry";
 
 // Export color palette and plugin
-export { colorPalette, themes, setTheme, getCurrentTheme, getAvailableThemes, colorsPlugin, configureSemanticColors } from "./design-system/colors/colors";
+export { colorPalette, themes, setTheme, getCurrentTheme, getAvailableThemes, colorsPlugin, configureSemanticColors } from "./02-design_tokens/design-system/colors/colors";
 
 // Export animation plugin
-export { animationsPlugin, animationKeyframes, getAllKeyframes } from "./extensions/animations/animations";
+export { animationsPlugin, animationKeyframes, getAllKeyframes } from "./05-plugins/animations/animations";
 
-// Export components and defineComponent utilities
-export * from "./components/primitives";
-export { defineComponent, defineThemedComponent, getComponentDefinition } from "./components/defineComponent";
-export type { ComponentDefinition, ComponentOptions } from "./components/defineComponent";
+// Export 04-components and defineComponent utilities
+export * from "./04-components/primitives";
+export { defineComponent, defineThemedComponent, getComponentDefinition } from "./04-components/defineComponent";
+export type { ComponentDefinition, ComponentOptions } from "./04-components/defineComponent";

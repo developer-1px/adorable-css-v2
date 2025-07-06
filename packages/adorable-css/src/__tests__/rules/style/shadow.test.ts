@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { shadow, opacity } from '../../../rules/style/shadow';
+import { shadow, opacity } from '../../../03-rules/style/shadow';
 
-describe('shadow rules', () => {
+describe('shadow 03-rules', () => {
   describe('shadow', () => {
     it('should handle preset shadow values', () => {
       expect(shadow('sm')).toEqual({ 

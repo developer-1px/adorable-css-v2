@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { parseAdorableCSS } from '../core/parser/parser';
-import { generateCSSFromAdorableCSS } from '../core/generators/generator';
+import { parseAdorableCSS } from '../01-core/parser/parser';
+import { generateCSSFromAdorableCSS } from '../01-core/generators/generator';
 
 describe('Cache Performance', () => {
   it('should cache parser results', () => {

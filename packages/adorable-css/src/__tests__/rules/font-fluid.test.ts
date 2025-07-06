@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { font } from '../../rules/text/font';
+import { font } from '../../03-rules/text/font';
 
 describe('font fluid syntax', () => {
   describe('font(..token) - scale up to token', () => {

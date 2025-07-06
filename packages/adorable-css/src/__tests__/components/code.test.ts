@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { codeString } from '../../components/primitives/typography/code';
+import { codeString } from '../../04-components/primitives/typography/code';
 
 describe('code component', () => {
   it('should generate default inline code style', () => {

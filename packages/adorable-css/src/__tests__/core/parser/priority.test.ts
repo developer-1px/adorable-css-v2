@@ -33,22 +33,22 @@ describe('CSS Priority System', () => {
     expect(cardCSS).not.toContain('.card\\(gradient\\).card\\(gradient\\)');
   });
 
-  it('should sort CSS rules by priority within single class', () => {
-    // This would be a complex class with multiple rules of different priorities
+  it('should sort CSS 03-rules by priority within single class', () => {
+    // This would be a complex class with multiple 03-rules of different priorities
     // For now, test individual classes to verify the system works
     const utilityCSS = generateCSSFromAdorableCSS('c(green)');
     expect(utilityCSS).toContain('.c\\(green\\).c\\(green\\)'); // Utility gets boosted specificity
   });
 
-  it('should handle component rules with normal specificity', () => {
+  it('should handle component 03-rules with normal specificity', () => {
     const componentCSS = generateCSSFromAdorableCSS('card');
     expect(componentCSS).toContain('.card{');
-    expect(componentCSS).not.toContain('.card.card{'); // No specificity boost for components
+    expect(componentCSS).not.toContain('.card.card{'); // No specificity boost for 04-components
   });
 
   it('should demonstrate real-world CSS cascade priority', () => {
     // In real HTML: <div class="card(gradient) c(red)">
-    // Both CSS rules would be generated, but c(red) should win due to:
+    // Both CSS 03-rules would be generated, but c(red) should win due to:
     // 1. Higher specificity (.c\(red\).c\(red\) vs .card\(gradient\))
     // 2. Later in cascade (if same specificity)
     

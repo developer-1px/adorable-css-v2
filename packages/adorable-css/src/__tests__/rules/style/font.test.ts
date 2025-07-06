@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { font } from '../../../rules/text/font';
+import { font } from '../../../03-rules/text/font';
 
 describe('font', () => {
   it('should handle font size only', () => {
@@ -46,14 +46,14 @@ describe('font', () => {
     });
   });
 
-  it('should handle named line height tokens', () => {
+  it('should handle named line height 02-design_tokens', () => {
     expect(font('lg/tight')).toEqual({
       'font-size': 'var(--font-lg)',
       'line-height': 'var(--lineHeight-tight)'
     });
   });
 
-  it('should handle named letter spacing tokens', () => {
+  it('should handle named letter spacing 02-design_tokens', () => {
     expect(font('lg/1.5/tight')).toEqual({
       'font-size': 'var(--font-lg)',
       'line-height': '1.5',

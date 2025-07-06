@@ -23,7 +23,7 @@ describe('Warning System for Missing Rules', () => {
       expect(css).toBe(''); // Should return empty CSS
     });
 
-    it('should warn for multiple missing rules', () => {
+    it('should warn for multiple missing 03-rules', () => {
       const css = generateCSS(['fake-rule', 'another-fake-rule', 'hbox']); // hbox exists
       
       expect(consoleWarnSpy).toHaveBeenCalledWith(
@@ -37,10 +37,10 @@ describe('Warning System for Missing Rules', () => {
       expect(css).toContain('.hbox{');
     });
 
-    it('should not warn for existing rules', () => {
+    it('should not warn for existing 03-rules', () => {
       const css = generateCSS(['hbox', 'vbox', 'block']);
       
-      // Should not have any warning calls for these existing rules
+      // Should not have any warning calls for these existing 03-rules
       expect(consoleWarnSpy).not.toHaveBeenCalledWith(
         expect.stringContaining('Rule handler not found')
       );
@@ -49,9 +49,9 @@ describe('Warning System for Missing Rules', () => {
     });
   });
 
-  describe('Parsed but empty CSS rules', () => {
+  describe('Parsed but empty CSS 03-rules', () => {
     it('should warn when CSS generation fails despite successful parsing', () => {
-      // Test with rules that might parse but generate no CSS
+      // Test with 03-rules that might parse but generate no CSS
       const testCases = [
         'empty-result-rule',
         'void-rule', 

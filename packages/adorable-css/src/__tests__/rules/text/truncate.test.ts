@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { truncate } from '../../../rules/text/truncate';
+import { truncate } from '../../../03-rules/text/truncate';
 
 describe('truncate', () => {
   it('should apply single-line truncation when no value provided', () => {

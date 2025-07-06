@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { inputString, textareaString } from '../../components/primitives/input';
+import { inputString, textareaString } from '../../04-components/primitives/input';
 
 describe('input component', () => {
   describe('inputString', () => {

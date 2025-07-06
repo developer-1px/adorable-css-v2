@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { defineComponent, defineThemedComponent } from '../components/defineComponent-unified';
+import { defineComponent, defineThemedComponent } from '../04-components/defineComponent-unified';
 
 describe('defineComponent (unified)', () => {
   describe('basic functionality', () => {
@@ -257,7 +257,7 @@ describe('defineThemedComponent', () => {
     expect(result).toBe('bg(white) c(gray-900) shadow(lg) dark:bg(gray-800) dark:c(white) dark:shadow(2xl/black.5)');
   });
 
-  it('should handle complex themed components', () => {
+  it('should handle complex themed 04-components', () => {
     const component = defineThemedComponent({
       light: {
         base: 'r(md)',

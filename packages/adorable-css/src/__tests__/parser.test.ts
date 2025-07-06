@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { parseAdorableCSS } from '../core/parser/parser'
+import { parseAdorableCSS } from '../01-core/parser/parser'
 
 describe('parseAdorableCSS', () => {
   describe('Basic Utilities', () => {
@@ -219,7 +219,7 @@ describe('parseAdorableCSS', () => {
       expect(() => parseAdorableCSS('w((')).toThrow()
     })
 
-    it('should throw error for unexpected tokens', () => {
+    it('should throw error for unexpected 02-design_tokens', () => {
       // This should pass the parser but fail at EOF check
       try {
         parseAdorableCSS('w(300) extra')

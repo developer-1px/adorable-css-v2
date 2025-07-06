@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { transformRules } from '../rules/effects/transforms';
+import { transformRules } from '../03-rules/effects/transforms';
 
 const scale = transformRules.scale;
 
