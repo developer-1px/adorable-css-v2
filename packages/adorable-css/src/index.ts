@@ -3,18 +3,16 @@
 // Import color system FIRST to initialize colorPalette before auto-inject
 import "./02-design_tokens/design-system/colors/colors";
 
-// Auto-inject 02-design_tokens on import (can be disabled via configureAutoInject)
-import "./01-core/runtime/auto-inject";
+// Note: Auto-inject functionality moved to CDN package for browser-specific features
 
-export * from "./01-core/parser";
-export * from "./03-rules";
+export * from "./01-core/parser/index";
+export * from "./03-rules/index";
 export * from "./01-core/values/makeValue";
 export * from "./01-core/values/scaleUtilities";
-export * from "./02-design_tokens";
+export * from "./02-design_tokens/index";
 export * from "./02-design_tokens/design-system/tokens/index";
-export * from "./02-design_tokens/design-system/colors";
-export * from "./05-plugins";
-export * from "./01-core/runtime/auto-inject";
+export * from "./02-design_tokens/design-system/colors/index";
+export * from "./05-plugins/index";
 
 // Re-export main functions for convenience
 export { parseAdorableCSS } from "./01-core/parser/parser";
@@ -25,18 +23,6 @@ export { getRuleHandler, rules, RULE_GROUPS } from "./03-rules";
 export { defaultTokens, generateTokenCSS, isToken, getTokenVar } from "./02-design_tokens/design-system/tokens/index";
 export { createTokensPlugin, injectTokens, tokensPlugin } from "./02-design_tokens/design-system/tokens";
 
-// Export auto-injection utilities
-export { 
-  autoInjectTokens, 
-  configureAutoInject, 
-  isTokensInjected, 
-  getAutoInjectConfig,
-  generateUsedTokensCSS,
-  initDynamicStyles,
-  addDynamicClasses,
-  destroyDynamicStyles,
-  getDynamicStyleManager
-} from "./01-core/runtime/auto-inject";
 
 // Export token registry utilities
 export { 
@@ -44,7 +30,8 @@ export {
   stopTokenCollection,
   registerToken,
   getUsedTokens,
-  clearTokenRegistry
+  clearTokenRegistry,
+  generateUsedTokensCSS
 } from "./02-design_tokens/tokenRegistry";
 
 // Export color palette and plugin
@@ -54,6 +41,6 @@ export { colorPalette, themes, setTheme, getCurrentTheme, getAvailableThemes, co
 export { animationsPlugin, animationKeyframes, getAllKeyframes } from "./05-plugins/animations/animations";
 
 // Export 04-components and defineComponent utilities
-export * from "./04-components/primitives";
+export * from "./04-components/primitives/index";
 export { defineComponent, defineThemedComponent, getComponentDefinition } from "./04-components/defineComponent";
 export type { ComponentDefinition, ComponentOptions } from "./04-components/defineComponent";

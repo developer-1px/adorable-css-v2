@@ -1,5 +1,6 @@
 // AdorableCSS v2 - CDN Entry Point
-import { generateCSS, getDynamicStyleManager, initDynamicStyles, destroyDynamicStyles } from "adorable-css";
+import { generateCSS } from "adorable-css";
+import { getDynamicStyleManager, initDynamicStyles, destroyDynamicStyles } from "./runtime/dynamic-style-manager";
 
 // Types for browser environment
 interface AdorableCSSV2 {

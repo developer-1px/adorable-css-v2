@@ -3,8 +3,8 @@
  */
 import { getDynamicStyleManager, initDynamicStyles } from './dynamic-style-manager';
 import type { DynamicStyleManagerOptions } from './dynamic-style-manager';
-import { defaultTokens } from '../../02-design_tokens/design-system/tokens/index';
-import type { DesignTokens } from '../../02-design_tokens/design-system/tokens/index';
+import { defaultTokens } from 'adorable-css';
+import type { DesignTokens } from 'adorable-css';
 
 /**
  * Configuration for auto-injection (for backwards compatibility)
@@ -71,7 +71,7 @@ export function getAutoInjectConfig(): Readonly<AutoInjectConfig> {
 }
 
 // Export for manual token generation
-export { generateUsedTokensCSS } from '../../02-design_tokens/tokenRegistry';
+export { generateUsedTokensCSS } from 'adorable-css';
 
 // Re-export new dynamic style functions
 export { 

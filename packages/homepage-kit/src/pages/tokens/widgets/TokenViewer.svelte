@@ -122,14 +122,7 @@
   // 초기화
   generateAllTokens();
   
-  // 동적으로 컴포넌트 클래스들 추가
-  import { addDynamicClasses } from 'adorable-css';
-  import { onMount } from 'svelte';
-  
-  onMount(() => {
-    // display 컴포넌트가 사용하는 클래스들을 명시적으로 추가
-    addDynamicClasses('display(3xl)', 'display(xl)', 'display(2xl)', 'display(banner)');
-  });
+  // Note: Dynamic class addition removed as it's now handled by CDN package
 </script>
 
 <div class="min-h(screen) bg(white)">

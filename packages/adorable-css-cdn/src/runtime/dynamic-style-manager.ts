@@ -3,10 +3,8 @@
  * Unified system for auto-injecting CSS and 02-design_tokens dynamically
  */
 
-import { generateCSS } from '../generators/generator';
-import { generateUsedTokensCSS, clearTokenRegistry } from '../../02-design_tokens/tokenRegistry';
-import { generateTokenCSS, defaultTokens } from '../../02-design_tokens/design-system/tokens/index';
-import type { DesignTokens } from '../../02-design_tokens/design-system/tokens/index';
+import { generateCSS, generateUsedTokensCSS, clearTokenRegistry, generateTokenCSS, defaultTokens } from 'adorable-css';
+import type { DesignTokens } from 'adorable-css';
 
 interface DynamicStyleManagerOptions {
   enabled?: boolean;
@@ -365,19 +363,8 @@ export function destroyDynamicStyles(): void {
   destroy();
 }
 
-// Auto-initialize in browser environment
-if (typeof document !== 'undefined') {
-  const script = document.currentScript as HTMLScriptElement;
-  const autoInit = script?.getAttribute('data-auto-init') !== 'false';
-  
-  if (autoInit) {
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => initDynamicStyles());
-    } else {
-      initDynamicStyles();
-    }
-  }
-}
+// Note: Auto-initialization removed - should be handled by CDN package
+// This ensures core package remains environment-agnostic
 
 // Export types
 export type { DynamicStyleManagerOptions };
