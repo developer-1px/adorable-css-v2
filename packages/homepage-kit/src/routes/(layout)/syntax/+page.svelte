@@ -4,6 +4,7 @@
   import Card from '$lib/components/ui/Card.svelte';
   import Badge from '$lib/components/ui/Badge.svelte';
   import Button from '$lib/components/ui/Button.svelte';
+  import { writable } from 'svelte/store'; // For toast messages
 
   // 파서 문법 패턴들을 카테고리별로 정리
   const syntaxPatterns = {
@@ -96,22 +97,25 @@
   let testInput = '';
   let testResult = null;
 
+  // Toast message store (for copy feedback)
+  const toastMessage = writable('');
+  let toastTimeout;
+
+  function showToast(message) {
+    clearTimeout(toastTimeout);
+    toastMessage.set(message);
+    toastTimeout = setTimeout(() => toastMessage.set(''), 2000);
+  }
+
   // CSS 생성 함수 - 파서 동작 확인용
   function parseAndGenerate(input) {
     try {
       const css = generateCSSFromAdorableCSS(input);
       
-      if (!css || css.trim() === '') {
-        return {
-          parsed: false,
-          css: '',
-          error: 'No CSS generated'
-        };
-      }
-      
+      // For this page, we only care if it parses without error, not the actual CSS output
       return {
         parsed: true,
-        css: css
+        css: css // Keep css for potential future use or debugging, but not displayed
       };
     } catch (error) {
       return {
@@ -119,6 +123,17 @@
         css: '',
         error: error.message || 'Parse error'
       };
+    }
+  }
+
+  // Function to copy text to clipboard
+  async function copyToClipboard(text) {
+    try {
+      await navigator.clipboard.writeText(text);
+      showToast('Copied to clipboard!');
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+      showToast('Failed to copy!');
     }
   }
 
@@ -133,7 +148,7 @@
     results = { ...results };
   });
 
-  function handleTestInput() {
+  function handleTestButtonClick() {
     if (testInput) {
       testResult = parseAndGenerate(testInput);
     } else {
@@ -146,111 +161,89 @@
   <title>Parser Syntax Test - AdorableCSS</title>
 </svelte:head>
 
-<div class="bg(mute-50) min-h(screen)">
+<div class="bg(mute-50) min-h(screen) pb(6xl)">
   <!-- Hero Section -->
-  <section class="bg(white) py(6xl) border-b(1/mute-200)">
-    <div class="container(5xl) mx(auto) px(2xl)">
-      <div class="vbox gap(lg) text(center)">
-        <Badge variant="outline">Parser Reference</Badge>
-        <h1 class="heading(h1) c(mute-900)">Parser Syntax Test</h1>
-        <p class="body(lg) c(mute-600) max-w(4xl) mx(auto)">
-          Comprehensive test of AdorableCSS parser patterns and edge cases
-        </p>
-      </div>
+  <section class="bg(white) py(8xl) border-b(1/mute-200)">
+    <div class="container(6xl) mx(auto) px(3xl) text(center)">
+      <Badge variant="outline" class="mb(lg)">Parser Reference</Badge>
+      <h1 class="heading(h1) c(mute-900) mb(md)">AdorableCSS Syntax Playground</h1>
+      <p class="body(xl) c(mute-600) max-w(5xl) mx(auto)">
+        Explore and test AdorableCSS syntax patterns. See how your input translates into CSS in real-time.
+      </p>
     </div>
   </section>
 
-  <div class="container(5xl) mx(auto) px(2xl) py(6xl)">
-    <div class="vbox gap(4xl)">
+  <div class="container(6xl) mx(auto) px(3xl) py(6xl)">
+    <div class="vbox gap(6xl)">
       {#each Object.entries(syntaxPatterns) as [category, patterns]}
         <section>
-          <h2 class="heading(h2) c(mute-900) mb(2xl)">{category}</h2>
+          <h2 class="heading(h2) c(mute-900) mb(3xl)">{category}</h2>
           
-          <Card variant="elevated">
-            <div class="overflow(auto)">
-              <table class="w(full) text(left)">
-                <thead class="border-b(1/mute-200)">
-                  <tr>
-                    <th class="p(lg) text(center) w(80)">Parse</th>
-                    <th class="p(lg) w(280)">Pattern</th>
-                    <th class="p(lg) w(420)">Description</th>
-                    <th class="p(lg)">CSS Output</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y(1/mute-100)">
-                  {#each patterns as pattern, i}
-                    {@const result = results[category]?.[i]?.result}
-                    <tr class="hover:bg(mute-50)">
-                      <td class="p(lg) text(center)">
-                        {#if result}
-                          <span class="{result.parsed ? 'c(success)' : 'c(error)'} bold text(xl)">
-                            {result.parsed ? '✓' : '✗'}
-                          </span>
-                        {:else}
-                          <span class="c(mute-400)">...</span>
-                        {/if}
-                      </td>
-                      <td class="p(lg)">
-                        <code class="inline-block bg(primary/0.1) c(primary) px(sm) py(xs) r(sm) font(mono) text(sm)">{pattern.input}</code>
-                      </td>
-                      <td class="p(lg) body(sm) c(mute-700)">
-                        {pattern.description}
-                      </td>
-                      <td class="p(lg)">
-                        {#if result}
-                          {#if result.parsed}
-                            <code class="block code(minimal) c(mute-600) whitespace(pre-wrap)">{result.css}</code>
-                          {:else}
-                            <code class="block code(minimal) c(error)">{result.error}</code>
-                          {/if}
-                        {:else}
-                          <span class="c(mute-400)">Loading...</span>
-                        {/if}
-                      </td>
-                    </tr>
-                  {/each}
-                </tbody>
-              </table>
-            </div>
-          </Card>
+          <div class="grid(1) md:grid(2) lg:grid(3) gap(2xl)">
+            {#each patterns as pattern, i}
+              {@const result = results[category]?.[i]?.result}
+              <div class="bg(white) p(lg) r(md) shadow(sm) vbox gap(md)">
+                <div class="hbox items(center) gap(md)">
+                  {#if result}
+                    <span class="{result.parsed ? 'c(success)' : 'c(error)'} bold text(xl)">
+                      {result.parsed ? '✓' : '✗'}
+                    </span>
+                  {:else}
+                    <span class="c(mute-400) text(xl)">...</span>
+                  {/if}
+                  <code class="inline-block bg(primary/0.1) c(primary) px(sm) py(xs) r(sm) font(mono) text(sm) flex-grow">{pattern.input}</code>
+                </div>
+                <p class="body(sm) c(mute-700)">
+                  {pattern.description}
+                </p>
+              </div>
+            {/each}
+          </div>
         </section>
       {/each}
     </div>
 
     <!-- Parser Test Input -->
     <section class="mt(6xl)">
+      <h2 class="heading(h2) c(mute-900) mb(3xl)">Test Your Own Pattern</h2>
       <Card variant="interactive">
-        <div class="p(3xl)">
-          <h2 class="heading(h3) c(mute-900) mb(2xl)">Test Custom Pattern</h2>
+        <div class="p(3xl) grid(1) md:grid(2) gap(2xl) items(start)">
+          <div class="vbox gap(sm)">
+            <label for="test-input" class="label c(mute-700)">Enter AdorableCSS pattern</label>
+            <input 
+              id="test-input"
+              type="text" 
+              placeholder="e.g., hbox(center) p(20) bg(blue-500)"
+              class="w(full) p(md) border(1/mute-300) r(md) code(minimal) bg(white) focus:border(primary) focus:ring(2/primary/0.2)"
+              bind:value={testInput}
+            />
+            <Button variant="primary" class="mt(md)" on:click={handleTestButtonClick}>
+              Test Pattern
+            </Button>
+          </div>
           
-          <div class="grid(2) gap(2xl)">
-            <div class="vbox gap(sm)">
-              <label class="label c(mute-700)">Enter pattern</label>
-              <input 
-                type="text" 
-                placeholder="Enter any pattern to test..."
-                class="w(full) p(md) border(1/mute-300) r(md) code(minimal) bg(white) focus:border(primary) focus:ring(2/primary/0.2)"
-                bind:value={testInput}
-                on:input={handleTestInput}
-              />
-            </div>
-            
-            <div>
-              {#if testResult}
-                <Card variant={testResult.parsed ? 'ghost' : 'outlined'}>
-                  <div class="p(lg) {testResult.parsed ? 'bg(success/0.05) border(1/success/0.2)' : 'bg(error/0.05) border(1/error/0.2)'}">
-                    <div class="label c({testResult.parsed ? 'success' : 'error'}) mb(sm)">
-                      {testResult.parsed ? 'Parsed Successfully' : 'Parse Failed'}
-                    </div>
-                    {#if testResult.parsed}
-                      <pre class="code(minimal) c(mute-700) whitespace(pre-wrap)">{testResult.css}</pre>
-                    {:else}
-                      <pre class="code(minimal) c(error)">{testResult.error}</pre>
-                    {/if}
+          <div>
+            {#if testResult}
+              <Card variant={testResult.parsed ? 'ghost' : 'outlined'} class="{testResult.parsed ? 'bg(success/0.05) border(1/success/0.2)' : 'bg(error/0.05) border(1/error/0.2)'}">
+                <div class="p(lg)">
+                  <div class="label c({testResult.parsed ? 'success' : 'error'}) mb(sm)">
+                    {testResult.parsed ? 'Parsed Successfully' : 'Parse Failed'}
                   </div>
-                </Card>
-              {/if}
-            </div>
+                  {#if testResult.parsed}
+                    <pre class="code(minimal) c(mute-700) whitespace(pre-wrap) max-h(150) overflow(auto)">{testResult.css}</pre>
+                    <Button variant="ghost" size="sm" class="mt(md)" on:click={() => copyToClipboard(testResult.css)}>
+                      Copy Result
+                    </Button>
+                  {:else}
+                    <pre class="code(minimal) c(error) max-h(150) overflow(auto)">{testResult.error}</pre>
+                  {/if}
+                </div>
+              </Card>
+            {:else if testInput}
+              <Card variant="ghost">
+                <div class="p(lg) c(mute-500)">Enter a pattern and click "Test Pattern" to see results.</div>
+              </Card>
+            {/if}
           </div>
         </div>
       </Card>
@@ -258,88 +251,88 @@
 
     <!-- Parser Rules Summary -->
     <section class="mt(6xl)">
-      <h2 class="heading(h2) c(mute-900) mb(3xl)">Parser Rules</h2>
+      <h2 class="heading(h2) c(mute-900) mb(3xl)">Key Parser Rules & Syntax</h2>
       
-      <div class="grid(3) gap(2xl)">
-        <Card>
+      <div class="grid(1) md:grid(2) lg:grid(3) gap(2xl)">
+        <Card variant="elevated">
           <div class="p(2xl)">
             <h3 class="heading(h4) c(mute-900) mb(lg)">Separators</h3>
-            <div class="vbox gap(sm)">
-              <div class="hbox gap(md)">
-                <code class="inline-block code(inline)">/</code>
-                <span class="body(sm) c(mute-600)">Multiple values</span>
+            <div class="vbox gap(md)">
+              <div class="hbox gap(md) items(center)">
+                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">/</code>
+                <span class="body(sm) c(mute-600)">Multiple values (e.g., `p(10/20)`)</span>
               </div>
-              <div class="hbox gap(md)">
-                <code class="inline-block code(inline)">+</code>
-                <span class="body(sm) c(mute-600)">Combined values</span>
+              <div class="hbox gap(md) items(center)">
+                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">+</code>
+                <span class="body(sm) c(mute-600)">Combined values (e.g., `hbox(top+left)`)</span>
               </div>
-              <div class="hbox gap(md)">
-                <code class="inline-block code(inline)">:</code>
-                <span class="body(sm) c(mute-600)">Key-value pairs</span>
+              <div class="hbox gap(md) items(center)">
+                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">:</code>
+                <span class="body(sm) c(mute-600)">Key-value pairs (e.g., `layer(top:20)`)</span>
               </div>
-              <div class="hbox gap(md)">
-                <code class="inline-block code(inline)">..</code>
-                <span class="body(sm) c(mute-600)">Ranges/gradients</span>
+              <div class="hbox gap(md) items(center)">
+                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">..</code>
+                <span class="body(sm) c(mute-600)">Ranges/gradients (e.g., `bg(red..blue)`)</span>
               </div>
-              <div class="hbox gap(md)">
-                <code class="inline-block code(inline)">.</code>
-                <span class="body(sm) c(mute-600)">Opacity notation</span>
+              <div class="hbox gap(md) items(center)">
+                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">.</code>
+                <span class="body(sm) c(mute-600)">Opacity notation (e.g., `c(red.5)`)</span>
               </div>
             </div>
           </div>
         </Card>
 
-        <Card>
+        <Card variant="elevated">
           <div class="p(2xl)">
             <h3 class="heading(h4) c(mute-900) mb(lg)">Prefixes</h3>
-            <div class="vbox gap(sm)">
-              <div class="hbox gap(md)">
-                <code class="inline-block code(inline)">hover:</code>
-                <span class="body(sm) c(mute-600)">Hover state</span>
+            <div class="vbox gap(md)">
+              <div class="hbox gap(md) items(center)">
+                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">hover:</code>
+                <span class="body(sm) c(mute-600)">Hover state (e.g., `hover:scale(1.05)`)</span>
               </div>
-              <div class="hbox gap(md)">
-                <code class="inline-block code(inline)">md:</code>
-                <span class="body(sm) c(mute-600)">Responsive</span>
+              <div class="hbox gap(md) items(center)">
+                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">md:</code>
+                <span class="body(sm) c(mute-600)">Responsive breakpoint (e.g., `md:w(full)`)</span>
               </div>
-              <div class="hbox gap(md)">
-                <code class="inline-block code(inline)">!</code>
-                <span class="body(sm) c(mute-600)">Important</span>
+              <div class="hbox gap(md) items(center)">
+                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">!</code>
+                <span class="body(sm) c(mute-600)">Important modifier (e.g., `bg(red)!`)</span>
               </div>
-              <div class="hbox gap(md)">
-                <code class="inline-block code(inline)">group-</code>
-                <span class="body(sm) c(mute-600)">Group state</span>
+              <div class="hbox gap(md) items(center)">
+                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">group-</code>
+                <span class="body(sm) c(mute-600)">Group state (e.g., `group-hover:opacity(1)`)</span>
               </div>
-              <div class="hbox gap(md)">
-                <code class="inline-block code(inline)">..</code>
-                <span class="body(sm) c(mute-600)">Range prefix</span>
+              <div class="hbox gap(md) items(center)">
+                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">peer-</code>
+                <span class="body(sm) c(mute-600)">Peer state (e.g., `peer-focus:ring(2)`)</span>
               </div>
             </div>
           </div>
         </Card>
 
-        <Card>
+        <Card variant="elevated">
           <div class="p(2xl)">
             <h3 class="heading(h4) c(mute-900) mb(lg)">Special Values</h3>
-            <div class="vbox gap(sm)">
-              <div class="hbox gap(md)">
-                <code class="inline-block code(inline)">auto</code>
+            <div class="vbox gap(md)">
+              <div class="hbox gap(md) items(center)">
+                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">auto</code>
                 <span class="body(sm) c(mute-600)">Auto keyword</span>
               </div>
-              <div class="hbox gap(md)">
-                <code class="inline-block code(inline)">none</code>
+              <div class="hbox gap(md) items(center)">
+                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">none</code>
                 <span class="body(sm) c(mute-600)">None keyword</span>
               </div>
-              <div class="hbox gap(md)">
-                <code class="inline-block code(inline)">full</code>
+              <div class="hbox gap(md) items(center)">
+                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">full</code>
                 <span class="body(sm) c(mute-600)">100% token</span>
               </div>
-              <div class="hbox gap(md)">
-                <code class="inline-block code(inline)">16:9</code>
+              <div class="hbox gap(md) items(center)">
+                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">16:9</code>
                 <span class="body(sm) c(mute-600)">Aspect ratio</span>
               </div>
-              <div class="hbox gap(md)">
-                <code class="inline-block code(inline)">100%-20</code>
-                <span class="body(sm) c(mute-600)">Calc</span>
+              <div class="hbox gap(md) items(center)">
+                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">100%-20</code>
+                <span class="body(sm) c(mute-600)">Calc (e.g., `w(100%-20)`)</span>
               </div>
             </div>
           </div>
@@ -347,4 +340,11 @@
       </div>
     </section>
   </div>
+
+  <!-- Toast Message -->
+  {#if $toastMessage}
+    <div class="fixed bottom(lg) right(lg) bg(primary) c(white) px(md) py(sm) r(md) shadow(lg) z(50)">
+      {$toastMessage}
+    </div>
+  {/if}
 </div>

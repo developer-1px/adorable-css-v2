@@ -47,6 +47,7 @@
 #### 🔬 Research
 - **[background-figma-compatibility.md](3-resources/research/background-figma-compatibility.md)** - Figma 호환성 철학
 - **[token-scale-generator.md](3-resources/research/token-scale-generator.md)** - 토큰 스케일 연구
+- **[프로젝트 분석 요약](3-resources/research/project-analysis-summary.md)** - AdorableCSS v2 프로젝트 분석
 
 #### 🎓 Best Practices
 - **[technical/](3-resources/best-practices/technical/)** - 기술 사양 & 모범 사례

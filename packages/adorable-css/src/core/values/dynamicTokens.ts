@@ -12,16 +12,7 @@ import type {
 import { registerToken } from '../runtime/tokenRegistry';
 
 // Legacy scale configuration for backwards compatibility
-export const SCALE_CONFIG = {
-  FONT_RATIO: 1.2,
-  SPACING_RATIO: 1.5,
-  SIZE_RATIO: 1.25,
-  CONTAINER_RATIO: 1.33,
-  FONT_BASE: '1rem',
-  SIZE_BASE: '1rem',
-  CONTAINER_BASE: '20rem',
-  SPACING_BASE: '0.25rem'
-};
+
 
 // Global scale configuration
 let globalScaleConfig: ScaleConfig = DEFAULT_SCALE_CONFIG;
