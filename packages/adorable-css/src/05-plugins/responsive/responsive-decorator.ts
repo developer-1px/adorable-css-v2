@@ -51,36 +51,35 @@ export class MediaQueryDecorator implements CSSRuleDecorator {
   }
 }
 
-// Responsive selector analyzer
-export class ResponsiveSelector {
-  private static readonly RESPONSIVE_PATTERN = /^(\.\.)?([a-z0-9]+):(.*)/;
+// Responsive pattern analysis
+const RESPONSIVE_PATTERN = /^(\.\.)?([a-z0-9]+):(.*)/;
 
-  static analyze(className: string): ResponsivePattern | null {
-    const match = className.match(this.RESPONSIVE_PATTERN);
-    
-    if (!match) {
-      return null;
-    }
+export const analyzeResponsivePattern = (className: string): ResponsivePattern | null => {
+  const match = className.match(RESPONSIVE_PATTERN);
+  
+  if (!match) return null;
 
-    const [, maxWidthPrefix, breakpoint, selector] = match;
-    const isMaxWidth = maxWidthPrefix === '..';
-    
-    if (!(breakpoint in BREAKPOINTS)) {
-      return null;
-    }
+  const [, maxWidthPrefix, breakpoint, selector] = match;
+  const isMaxWidth = maxWidthPrefix === '..';
+  
+  if (!(breakpoint in BREAKPOINTS)) return null;
 
-    return {
-      breakpoint: breakpoint as BreakpointKey,
-      isMaxWidth,
-      selector,
-      originalClass: className
-    };
-  }
+  return {
+    breakpoint: breakpoint as BreakpointKey,
+    isMaxWidth,
+    selector,
+    originalClass: className
+  };
+};
 
-  static isResponsive(className: string): boolean {
-    return this.RESPONSIVE_PATTERN.test(className);
-  }
-}
+export const isResponsivePattern = (className: string): boolean =>
+  RESPONSIVE_PATTERN.test(className);
+
+// Backward compatibility
+export const ResponsiveSelector = {
+  analyze: analyzeResponsivePattern,
+  isResponsive: isResponsivePattern
+};
 
 // Main responsive decorator factory
 export class ResponsiveDecoratorFactory {

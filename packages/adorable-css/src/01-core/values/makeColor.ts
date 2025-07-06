@@ -3,8 +3,9 @@
  * makeColor, makeHEX, makeHLS, makeRGB 함수들을 전략 패턴으로 통합
  */
 
-import { BASE_COLOR_VALUES, SEMANTIC_COLORS, SINGLE_COLOR_DEFAULTS } from './color-data'
-import { cssvar } from './value-utils'
+import {SEMANTIC_COLORS, SINGLE_COLOR_DEFAULTS} from './color-data'
+import {cssvar} from './value-utils'
+
 
 export interface ColorProcessor {
   process(value: string): string

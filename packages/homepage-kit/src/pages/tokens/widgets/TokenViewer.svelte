@@ -185,7 +185,7 @@
 
         <!-- Tokens Display -->
         {#if categoryKey === 'font'}
-          <!-- Font tokens - table format for better readability -->
+          <!-- Font 02-design_tokens - table format for better readability -->
           <div class="border(2/gray-900) radius(lg) overflow(hidden)">
             <table class="w(full)">
               <thead class="bg(gray-900) c(white)">
@@ -216,7 +216,7 @@
           </div>
         
         {:else if categoryKey === 'spacing'}
-          <!-- Spacing tokens - horizontal visual comparison -->
+          <!-- Spacing 02-design_tokens - horizontal visual comparison -->
           <div class="border(2/gray-900) radius(lg) overflow(hidden)">
             <div class="grid" style="grid-template-columns: 120px 80px 1fr auto;">
               <!-- Header -->
@@ -251,7 +251,7 @@
           </div>
 
         {:else if categoryKey === 'size'}
-          <!-- Size tokens - visual grid with context -->
+          <!-- Size 02-design_tokens - visual grid with context -->
           <div class="grid gap(2xl)" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));">
             {#each category.tokens as token}
               <div class="vbox gap(lg) p(xl) border(2/gray-900) radius(lg) bg(white) hover:shadow(xl) hover:scale(1.02) transition group">
@@ -280,7 +280,7 @@
           </div>
 
         {:else if categoryKey === 'container'}
-          <!-- Container tokens - responsive width visualization -->
+          <!-- Container 02-design_tokens - responsive width visualization -->
           <div class="vbox gap(xl)">
             <!-- Viewport reference -->
             <div class="hbox gap(xl) items(center) p(lg) bg(gray-100) radius(lg) text(sm) c(gray-600)">
@@ -298,7 +298,7 @@
               </div>
             </div>
             
-            <!-- Container tokens -->
+            <!-- Container 02-design_tokens -->
             <div class="vbox gap(lg)">
               {#each category.tokens as token, index}
                 <div class="vbox gap(lg) p(xl) border(2/gray-900) radius(lg) bg(white) hover:shadow(lg) transition">
@@ -339,7 +339,7 @@
           </div>
 
         {:else if categoryKey === 'radius'}
-          <!-- Border Radius tokens - visual examples -->
+          <!-- Border Radius 02-design_tokens - visual examples -->
           <div class="grid gap(xl)" style="grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));">
             {#each category.tokens as token}
               <div class="vbox gap(md) p(xl) border(2/gray-900) radius(lg) bg(white) hover:shadow(lg) transition">
@@ -364,7 +364,7 @@
           </div>
 
         {:else if categoryKey === 'shadow'}
-          <!-- Shadow tokens - visual examples -->
+          <!-- Shadow 02-design_tokens - visual examples -->
           <div class="grid gap(xl)" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));">
             {#each category.tokens as token}
               <div class="vbox gap(lg) p(xl) border(2/gray-900) radius(lg) bg(white) hover:shadow(xl) transition">

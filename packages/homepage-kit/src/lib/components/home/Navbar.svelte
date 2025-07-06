@@ -5,7 +5,7 @@ import {Github, Menu, X, Search} from 'lucide-svelte'
 let menuOpen = false
 
 $: currentPath = $page.url.pathname
-$: isTokensActive = currentPath.startsWith('/tokens')
+$: isTokensActive = currentPath.startsWith('/02-design_tokens')
 $: isFoundationActive = currentPath.startsWith('/foundation')
 
 const navItems = [
@@ -42,8 +42,8 @@ const navItems = [
           <a
             href={item.href}
             class="body(sm) c(neutral-600) hover:c(neutral-900) transition py(4)"
-            class:c(neutral-900)={item.href === '/tokens' ? isTokensActive : item.href === '/foundation' ? isFoundationActive : currentPath.startsWith(item.href)}
-            class:bold(600)={item.href === '/tokens' ? isTokensActive : item.href === '/foundation' ? isFoundationActive : currentPath.startsWith(item.href)}
+            class:c(neutral-900)={item.href === '/02-design_tokens' ? isTokensActive : item.href === '/foundation' ? isFoundationActive : currentPath.startsWith(item.href)}
+            class:bold(600)={item.href === '/02-design_tokens' ? isTokensActive : item.href === '/foundation' ? isFoundationActive : currentPath.startsWith(item.href)}
           >
             {item.label}
           </a>
@@ -91,8 +91,8 @@ const navItems = [
           <a
             href={item.href}
             class="px(16) py(12) body(sm) c(neutral-600) hover:bg(neutral-50) hover:c(neutral-900) r(8) transition"
-            class:c(neutral-900)={item.href === '/tokens' ? isTokensActive : item.href === '/foundation' ? isFoundationActive : currentPath.startsWith(item.href)}
-            class:bold(600)={item.href === '/tokens' ? isTokensActive : item.href === '/foundation' ? isFoundationActive : currentPath.startsWith(item.href)}
+            class:c(neutral-900)={item.href === '/02-design_tokens' ? isTokensActive : item.href === '/foundation' ? isFoundationActive : currentPath.startsWith(item.href)}
+            class:bold(600)={item.href === '/02-design_tokens' ? isTokensActive : item.href === '/foundation' ? isFoundationActive : currentPath.startsWith(item.href)}
             on:click={() => menuOpen = false}
           >
             {item.label}

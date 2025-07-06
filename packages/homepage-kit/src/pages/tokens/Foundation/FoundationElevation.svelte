@@ -31,12 +31,12 @@
       'none': 'No shadow - completely flat',
       'xs': 'Very subtle shadow for fine details',
       'sm': 'Light shadow for small elements',
-      'md': 'Standard shadow for cards and components',
+      'md': 'Standard shadow for cards and 04-components',
       'lg': 'Prominent shadow for important elements',
       'xl': 'Strong shadow for floating elements',
       '2xl': 'Heavy shadow for major overlays',
       'inner': 'Inward shadow for pressed/inset states',
-      'card': 'Optimized shadow for card components',
+      'card': 'Optimized shadow for card 04-components',
       'hover': 'Enhanced shadow for interactive states'
     };
     return descriptionMap[name] || 'Custom shadow';

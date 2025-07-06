@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Type, Hash, Eye } from 'lucide-svelte';
   
-  // Font size tokens using the new dynamic calc() system
+  // Font size 02-design_tokens using the new dynamic calc() system
   const fontTokens = [
     { name: '4xs', size: 'text(4xs)', description: 'Tiny text', usage: 'Fine print' },
     { name: '3xs', size: 'text(3xs)', description: 'Extra small', usage: 'Captions' },

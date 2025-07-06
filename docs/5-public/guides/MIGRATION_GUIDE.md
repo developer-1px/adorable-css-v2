@@ -12,62 +12,155 @@
 
 ## 🔄 TailwindCSS에서 마이그레이션
 
-### 주요 차이점
+### 🎯 핵심 차이점 (10초 요약)
 
-| TailwindCSS | AdorableCSS | 설명 |
-|-------------|-------------|------|
-| `flex` | `hbox` | 수평 flexbox |
-| `flex-col` | `vbox` | 수직 flexbox |
-| `items-center justify-center` | `hbox(pack)` | 중앙 정렬 |
-| `gap-4` | `gap(md)` | 간격 설정 |
-| `p-4` | `p(md)` | 패딩 |
-| `text-blue-500` | `c(blue-500)` | 텍스트 색상 |
-| `bg-gradient-to-r from-purple-500 to-pink-500` | `bg(to-r/purple-500..pink-500)` | 그라데이션 |
-| `w-full` | `w(full)` | 너비 100% |
-| `text-2xl font-bold` | `heading(lg)` | 의미론적 타이포그래피 |
+| 하고 싶은 것 | TailwindCSS | AdorableCSS |
+|-------------|-------------|-------------|
+| 수평 중앙 정렬 | `flex items-center justify-center` | `hbox(pack)` |
+| 수직 중앙 정렬 | `flex flex-col items-center justify-center` | `vbox(pack)` |
+| 간격 추가 | `gap-4` | `gap(md)` |
+| 전체 너비 | `w-full` | `w(fill)` |
+| 컨테이너 | `container mx-auto px-4` | `container(xl)` |
+| 텍스트 색상 | `text-blue-500` | `c(blue-500)` |
+| 그라데이션 | `bg-gradient-to-r from-purple-500 to-pink-500` | `bg(to-r/purple-500..pink-500)` |
+| 투명도 | `text-blue-500/50` | `c(blue-500.5)` |
+| 호버 스케일 | `hover:scale-105` | `hover:scale(105)` |
+| 반응형 그리드 | `md:grid-cols-2` | `md:grid(2)` |
+| 포커스 링 | `focus:ring-2 focus:ring-blue-500` | `focus:ring(2/blue-500)` |
 
-### 일반적인 패턴 변환
+### 🚫 Tailwind 습관으로 인한 흔한 실수들
 
-#### 1. 레이아웃
+Tailwind CSS에서 AdorableCSS로 넘어올 때 자주 발생하는 실수들과 올바른 사용법을 숙지하는 것이 중요합니다.
+
+#### 1. 투명도 표기법 실수
+-   **❌ 잘못된 방법 (Tailwind 스타일)**:
+    ```html
+    <div class="bg-white/50 text-gray-900/80">
+    <div class="opacity-50">
+    ```
+-   **✅ 올바른 방법 (AdorableCSS)**:
+    ```html
+    <div class="bg(white.5) c(gray-900.8)">
+    <div class="opacity(.5)">
+    ```
+    **핵심**: AdorableCSS는 **점(.) 표기법**을 사용합니다. `/50` ❌ → `.5` ✅
+
+#### 2. CSS 함수 값 표기 실수
+-   **❌ 잘못된 방법 (백분율 변환)**:
+    ```html
+    <div class="scale-95 rotate-45">
+    ```
+-   **✅ 올바른 방법 (CSS 네이티브 값)**:
+    ```html
+    <div class="scale(.95) rotate(45deg)">
+    ```
+    **핵심**: AdorableCSS는 **CSS 네이티브 값**을 그대로 사용합니다.
+
+#### 3. Margin 사용 실수
+-   **❌ 절대 금지! (Tailwind 습관)**:
+    ```html
+    <div class="mt-4 mb-6 ml-2 mr-3">
+    ```
+-   **✅ 올바른 방법 (Gap 기반 레이아웃)**:
+    ```html
+    <div class="vbox gap(lg) p(xl)">
+      <div>Content 1</div>
+      <div>Content 2</div>
+    </div>
+    ```
+    **핵심**: AdorableCSS에서는 **margin을 절대 사용하지 않습니다**. `gap()`과 `p()`를 사용하세요.
+
+#### 4. Flexbox 클래스 실수
+-   **❌ 잘못된 방법 (Tailwind 스타일)**:
+    ```html
+    <div class="flex flex-col items-center justify-between gap-4">
+    ```
+-   **✅ 올바른 방법 (AdorableCSS)**:
+    ```html
+    <div class="vbox(center/between) gap(lg)">
+    ```
+    **핵심**: `hbox()`, `vbox()` + **Figma Auto Layout 용어**를 사용합니다.
+
+#### 5. 색상 시스템 실수
+-   **❌ 잘못된 방법 (Tailwind 숫자 체계)**:
+    ```html
+    <div class="text-gray-500 bg-blue-600 border-red-400">
+    ```
+-   **✅ 올바른 방법 (AdorableCSS 의미론적 체계)**:
+    ```html
+    <div class="c(gray-medium) bg(blue-primary) b(1/red-light)">
+    ```
+    **핵심**: 숫자보다는 **의미론적 색상명**을 우선 사용합니다.
+
+#### 6. 크기 단위 실수
+-   **❌ 잘못된 방법 (Tailwind 숫자 체계)**:
+    ```html
+    <div class="w-64 h-32 p-4">
+    ```
+-   **✅ 올바른 방법 (AdorableCSS)**:
+    ```html
+    <div class="w(2xl) h(xl) p(lg)">
+    ```
+    **핵심**: **의미론적 크기명**을 사용하여 더 직관적입니다.
+
+#### 7. 그라디언트 문법 실수
+-   **❌ 잘못된 방법 (Tailwind 복잡한 문법)**:
+    ```html
+    <div class="bg-gradient-to-r from-blue-500 to-purple-600">
+    ```
+-   **✅ 올바른 방법 (AdorableCSS)**:
+    ```html
+    <div class="bg(to-r/blue-500..purple-600)">
+    ```
+    **핵심**: **CSS 네이티브 그라디언트 문법**을 간소화했습니다.
+
+#### 8. 애니메이션 실수
+-   **❌ 잘못된 방법 (Tailwind 제한적 애니메이션)**:
+    ```html
+    <div class="animate-pulse animate-bounce">
+    ```
+-   **✅ 올바른 방법 (AdorableCSS)**:
+    ```html
+    <div class="fade-up(.8s/ease-out/delay:300ms)">
+    <div class="float(25s/ease-in-out/repeat:infinite)">
+    ```
+    **핵심**: **파라미터 조정 가능**한 애니메이션 시스템입니다.
+
+#### 9. 컴포넌트 클래스명 실수
+-   **❌ 잘못된 방법 (Tailwind 유틸리티만)**:
+    ```html
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    ```
+-   **✅ 올바른 방법 (AdorableCSS)**:
+    ```html
+    <button class="button(primary/lg)">
+    ```
+    **핵심**: **의미론적 컴포넌트**를 우선 사용하고, 필요시 유틸리티로 커스터마이징합니다.
+
+### 💡 Tailwind 개발자가 좋아할 기능
+
+1.  **더 짧은 클래스명**
+    -   `p-6` → `p(lg)`
+    -   `rounded-lg` → `r(lg)`
+    -   `shadow-md` → `shadow(md)`
+2.  **일관된 함수형 문법**
+    -   모든 유틸리티가 `name(value)` 형식
+    -   예측 가능한 패턴
+3.  **CSS @layer 자동 관리**
+    -   특이성 지옥에서 해방
+    -   `!important` 거의 불필요
+
+### 🎁 보너스: Tailwind에는 없는 것들
 
 ```html
-<!-- TailwindCSS -->
-<div class="flex items-center justify-between gap-4 p-6">
-  <div class="flex-1">Content</div>
-  <button class="px-4 py-2">Action</button>
-</div>
+<!-- 글래스모피즘 한 방에 -->
+<div class="glass(20)">
 
-<!-- AdorableCSS -->
-<div class="hbox(middle) gap(md) p(lg) justify(between)">
-  <div class="flex(1)">Content</div>
-  <button class="px(md) py(sm)">Action</button>
-</div>
-```
+<!-- 그라디언트 텍스트 -->
+<h1 class="font(4xl) bold bg-clip(text) c(135deg/#667eea..#764ba2)">
 
-#### 2. 카드 컴포넌트
-
-```html
-<!-- TailwindCSS -->
-<div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition">
-  <h3 class="text-xl font-bold mb-2">Title</h3>
-  <p class="text-gray-600">Description</p>
-</div>
-
-<!-- AdorableCSS -->
-<div class="card">
-  <h3 class="heading(md) mb(sm)">Title</h3>
-  <p class="body c(gray-600)">Description</p>
-</div>
-```
-
-#### 3. 반응형 디자인
-
-```html
-<!-- TailwindCSS -->
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-
-<!-- AdorableCSS -->
-<div class="grid(1) md:grid(2) lg:grid(3) gap(md)">
+<!-- 자동 다크모드 (준비 중) -->
+<div class="bg(white) dark:bg(gray-900)">
 ```
 
 ### 설정 파일 변환

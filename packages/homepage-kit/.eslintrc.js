@@ -24,7 +24,7 @@ module.exports = {
     },
   ],
   rules: {
-    // TypeScript specific rules
+    // TypeScript specific 03-rules
     '@typescript-eslint/no-explicit-any': 'warn',
     '@typescript-eslint/no-unused-vars': ['error', { 
       argsIgnorePattern: '^_',
@@ -34,7 +34,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     '@typescript-eslint/no-non-null-assertion': 'warn',
     
-    // General rules
+    // General 03-rules
     'no-console': ['warn', { allow: ['warn', 'error'] }],
     'no-debugger': 'error',
     'prefer-const': 'error',
@@ -42,7 +42,7 @@ module.exports = {
     'eqeqeq': ['error', 'always'],
     'curly': ['error', 'all'],
     
-    // Svelte specific rules
+    // Svelte specific 03-rules
     'svelte/no-unused-svelte-ignore': 'error',
     'svelte/no-dupe-else-if-blocks': 'error',
     'svelte/no-dupe-style-properties': 'error',

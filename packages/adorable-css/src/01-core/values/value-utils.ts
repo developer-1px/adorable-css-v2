@@ -74,8 +74,8 @@ export const px = (value: string | number) => {
   // 이미 단위가 있는 경우
   if (/[a-z%]$/i.test(v)) return value
   
-  // 숫자만 있는 경우 px 추가
-  if (/^\d+(\.\d+)?$/.test(v)) return v + 'px'
+  // 숫자만 있는 경우 px 추가 (음수 포함)
+  if (/^-?\d+(\.\d+)?$/.test(v)) return v + 'px'
   
   // CSS 함수나 키워드인 경우
   if (v.includes('(') || /^(auto|inherit|initial|unset|none|max-content|min-content|fit-content)$/.test(v)) {

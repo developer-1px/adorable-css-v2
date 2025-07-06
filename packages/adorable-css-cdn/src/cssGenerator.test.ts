@@ -22,7 +22,7 @@ describe('CDN Package Integration', () => {
   })
 
   describe('Package dependencies', () => {
-    it('should properly delegate to core package', () => {
+    it('should properly delegate to 01-core package', () => {
       // Test that both functions produce identical output
       const classes = ['vbox(pack)', 'bg(#667eea..#764ba2)', 'r(8)']
       const css1 = generateCSS(classes)

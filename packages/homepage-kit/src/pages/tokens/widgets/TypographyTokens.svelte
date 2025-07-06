@@ -81,7 +81,7 @@
     { name: 'black', value: '900', example: 'Black weight text' },
   ];
   
-  // Line height tokens
+  // Line height 02-design_tokens
   const lineHeightTokens = [
     { name: 'none', value: '1', usage: 'Headings', example: 'Tight line height for display text' },
     { name: 'tight', value: '1.25', usage: 'Display text', example: 'Slightly tighter line height' },
@@ -91,7 +91,7 @@
     { name: 'loose', value: '2', usage: 'Spacious', example: 'Extra space between lines' },
   ];
   
-  // Letter spacing tokens
+  // Letter spacing 02-design_tokens
   const letterSpacingTokens = [
     { name: 'tighter', value: '-0.05em', usage: 'Very tight', example: 'Tightly packed letters' },
     { name: 'tight', value: '-0.025em', usage: 'Tight', example: 'Slightly tight spacing' },

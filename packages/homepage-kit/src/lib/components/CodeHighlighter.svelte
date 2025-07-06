@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import Prism from 'prismjs';
   
-  // Import core languages
+  // Import 01-core languages
   import 'prismjs/components/prism-javascript';
   import 'prismjs/components/prism-typescript';
   import 'prismjs/components/prism-css';

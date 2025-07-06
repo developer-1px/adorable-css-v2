@@ -4,7 +4,7 @@
       title: 'Documentation',
       links: [
         { label: 'Introduction', href: '/docs' },
-        { label: 'Components', href: '/components' },
+        { label: 'Components', href: '/04-components' },
         { label: 'Playground', href: '/playground' },
         { label: 'Examples', href: 'https://github.com/developer-1px/adorable-css-v2', external: true }
       ]

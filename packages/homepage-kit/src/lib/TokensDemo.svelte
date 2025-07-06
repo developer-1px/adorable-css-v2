@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { defaultTokens, type DesignTokens } from '@adorable-css/core';
+  import { defaultTokens, type DesignTokens } from '@adorable-css/01-core';
   import { onMount } from 'svelte';
   
   let customTokens: DesignTokens = JSON.parse(JSON.stringify(defaultTokens));
@@ -9,17 +9,17 @@
   function updateTokens() {
     const root = document.documentElement;
     
-    // Update font size tokens
+    // Update font size 02-design_tokens
     Object.entries(customTokens.fontSize).forEach(([key, value]) => {
       root.style.setProperty(`--font-${key}`, value);
     });
     
-    // Update spacing tokens
+    // Update spacing 02-design_tokens
     Object.entries(customTokens.spacing).forEach(([key, value]) => {
       root.style.setProperty(`--spacing-${key}`, value);
     });
     
-    // Update other tokens...
+    // Update other 02-design_tokens...
     Object.entries(customTokens.borderRadius).forEach(([key, value]) => {
       root.style.setProperty(`--radius-${key}`, value);
     });
@@ -157,35 +157,35 @@
     
     {#if showCode}
       <div class="p(lg) r(lg) bg(#1e293b) c(white) overflow(auto)">
-        <pre class="font(sm/1.5)"><code>{`// Using design tokens in AdorableCSS
+        <pre class="font(sm/1.5)"><code>{`// Using design 02-design_tokens in AdorableCSS
 
-// Typography with tokens
+// Typography with 02-design_tokens
 <h1 class="font(2xl)">Large Heading</h1>
 <p class="font(md)">Body text with medium size</p>
 
-// Spacing with tokens
+// Spacing with 02-design_tokens
 <div class="p(lg) m(md) gap(sm)">Content with token-based spacing</div>
 
-// Border radius with tokens
+// Border radius with 02-design_tokens
 <button class="r(md)">Medium rounded button</button>
 <div class="r(full)">Fully rounded element</div>
 
-// Shadows with tokens
+// Shadows with 02-design_tokens
 <div class="shadow(lg)">Card with large shadow</div>
 
-// Combining tokens
+// Combining 02-design_tokens
 <div class="p(lg) r(xl) shadow(md) gap(md)">
   <h2 class="font(lg)">Card Title</h2>
   <p class="font(sm) c(#6b7280)">Card description text</p>
 </div>
 
-// Initialize tokens in your app
-import { injectTokens, defaultTokens } from '@adorable-css/core';
+// Initialize 02-design_tokens in your app
+import { injectTokens, defaultTokens } from '@adorable-css/01-core';
 
-// Use default tokens
+// Use default 02-design_tokens
 injectTokens();
 
-// Or customize tokens
+// Or customize 02-design_tokens
 const customTokens = {
   ...defaultTokens,
   fontSize: {

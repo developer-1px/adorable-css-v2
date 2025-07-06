@@ -8,7 +8,7 @@ export interface RuleInfo {
   sourceCode: string;
   examples: string[];
   cssOutput: Record<string, any>;
-  cssRules: Record<string, string>; // CSS class selector rules
+  cssRules: Record<string, string>; // CSS class selector 03-rules
 }
 
 export interface CategoryInfo {
@@ -55,7 +55,7 @@ function generateExampleOutput(handler: any, examples: string[]): Record<string,
 }
 
 /**
- * Generate CSS class rules for examples
+ * Generate CSS class 03-rules for examples
  */
 async function generateCSSRules(ruleName: string, examples: string[]): Promise<Record<string, string>> {
   const cssRules: Record<string, string> = {};
@@ -161,7 +161,7 @@ export async function inspectRule(name: string, handler: any, category: string):
 }
 
 /**
- * Get all rules organized by category with detailed inspection
+ * Get all 03-rules organized by category with detailed inspection
  */
 export async function getAllRulesInfo(): Promise<CategoryInfo[]> {
   const categories: CategoryInfo[] = [];
@@ -198,14 +198,14 @@ export async function getAllRulesInfo(): Promise<CategoryInfo[]> {
     const resolvedCategories = await Promise.all(categoryPromises);
     categories.push(...resolvedCategories.filter(cat => cat !== null));
   } catch (error) {
-    console.error('Failed to load grouped rules:', error);
+    console.error('Failed to load grouped 03-rules:', error);
   }
   
   return categories.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 /**
- * Search rules by name or content
+ * Search 03-rules by name or content
  */
 export async function searchRules(query: string): Promise<RuleInfo[]> {
   const allCategories = await getAllRulesInfo();

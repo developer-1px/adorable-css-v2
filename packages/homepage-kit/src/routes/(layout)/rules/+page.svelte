@@ -16,7 +16,7 @@
     {
       layer: 'component',
       name: 'Component Layer',
-      description: 'Pre-built UI components and patterns (Priority: 100)',
+      description: 'Pre-built UI 04-components and patterns (Priority: 100)',
       groups: []
     },
     {
@@ -99,7 +99,7 @@
     }
   }
   
-  // Count total rules
+  // Count total 03-rules
   function countRules() {
     let total = 0;
     Object.values(RULE_GROUPS).forEach(group => {

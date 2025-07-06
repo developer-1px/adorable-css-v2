@@ -3,7 +3,7 @@
  * Provides programmatic access to documentation system
  */
 
-import { docsConfig, getAllDocItems, type DocItem, type DocSection } from './docs-config';
+import type { DocsConfig } from './docs-config';
 
 // Check if we're in a server environment
 const isServer = typeof process !== 'undefined' && process.versions?.node;
@@ -38,9 +38,18 @@ export interface DocContent {
 }
 
 export interface DocSearchResult {
-  item: DocItem;
+  item: DocsConfig;
   score: number;
   highlights: string[];
+}
+
+/**
+ * Get all doc items (avoiding circular dependency)
+ */
+function getAllDocItems(): DocsConfig[] {
+  // Import here to avoid circular dependency
+  const { docsConfig } = require('./docs-config');
+  return docsConfig;
 }
 
 /**
@@ -181,8 +190,8 @@ export function searchDocs(query: string, options?: {
 /**
  * Get documentation structure as tree
  */
-export function getDocTree(): DocSection[] {
-  return docsConfig;
+export function getDocTree(): DocsConfig[] {
+  return getAllDocItems();
 }
 
 /**
@@ -222,7 +231,7 @@ export function getDocStats() {
     byCategory,
     bySection,
     tags: Array.from(allTags).sort(),
-    sections: docsConfig.map(s => s.title)
+    sections: getAllDocItems().map(s => s.title)
   };
 }
 

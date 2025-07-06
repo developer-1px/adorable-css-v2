@@ -6,7 +6,7 @@
     ChevronRight, ArrowUp
   } from 'lucide-svelte';
   
-  // Section components
+  // Section 04-components
   import OverviewSection from './sections/OverviewSection.svelte';
   import ColorSection from './sections/ColorSection.svelte';
   import TypographySection from './sections/TypographySection.svelte';

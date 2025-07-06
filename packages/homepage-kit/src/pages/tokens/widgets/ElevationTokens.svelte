@@ -29,8 +29,8 @@
     { 
       level: 1, 
       usage: 'Subtle lift', 
-      description: 'Cards, chips, or small components',
-      example: 'Card components'
+      description: 'Cards, chips, or small 04-components',
+      example: 'Card 04-components'
     },
     { 
       level: 2, 
@@ -41,7 +41,7 @@
     { 
       level: 4, 
       usage: 'Prominent surface', 
-      description: 'App bars, tabs, large components',
+      description: 'App bars, tabs, large 04-components',
       example: 'Navigation headers'
     },
     { 

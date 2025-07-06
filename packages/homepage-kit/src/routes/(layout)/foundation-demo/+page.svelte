@@ -27,7 +27,7 @@
       company: "TechCorp"
     },
     {
-      quote: "Finally, a design system that developers actually want to use. The tokens are so clear.",
+      quote: "Finally, a design system that developers actually want to use. The 02-design_tokens are so clear.",
       author: "Marcus Rodriguez", 
       role: "Frontend Engineer",
       company: "StartupCo"

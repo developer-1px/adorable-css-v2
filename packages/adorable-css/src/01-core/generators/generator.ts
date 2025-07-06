@@ -16,7 +16,7 @@ import { generateTokenCSS, defaultTokens, setTokenContext } from '../../02-desig
 import { generateUsedTokensCSS } from '../../02-design_tokens/tokenRegistry';
 import type { DesignTokens } from '../../02-design_tokens/design-system/tokens/index';
 import { createParsedSelector } from './ast-helpers';
-import { AnimationHandler } from './animation-handler';
+import { prependKeyframesIfNeeded } from './animation-handler';
 import { cssObjectToString } from './css-object-generator';
 import { createMediaQuery } from './breakpoints';
 import { extractImportanceLevel, addImportanceToSelector } from './importance-utils';
@@ -56,41 +56,69 @@ const processClassesFromStringRule = (
   visited: Set<string>,
   allCSSResults: { mainCSS: string; nestedCSS: string[]; priority?: number }[]
 ): void => {
-  for (const className of classes) {
-    if (!className) continue;
-    
+  classes.filter(Boolean).forEach(className => {
     try {
       const parsed = parseAdorableCSS(className);
-      if (parsed.value.length > 0) {
-        const selector = parsed.value[0].selector;
-        const selectorName = selector.name || selector.image;
-        const selectorArgs = selector.args?.map((arg: any) => arg.image).join('');
-        
-        // If it's a string rule, resolve recursively
-        if (priorityRegistry.hasString(selectorName)) {
-          const recursiveResult = resolveStringRule(selectorName, selectorArgs, new Set(visited));
-          allCSSResults.push(recursiveResult);
-        } else {
-          // Otherwise, generate CSS normally
-          const cssResult = generateCSSFromSelector(createParsedSelector(selector));
-          allCSSResults.push(cssResult);
-        }
-      }
+      if (parsed.value.length === 0) return;
+      
+      const selector = parsed.value[0].selector;
+      const selectorName = selector.name || selector.image;
+      const selectorArgs = selector.args?.map((arg: any) => arg.image).join('');
+      
+      const cssResult = priorityRegistry.hasString(selectorName) 
+        ? resolveStringRule(selectorName, selectorArgs, new Set(visited))
+        : generateCSSFromSelector(createParsedSelector(selector));
+      
+      allCSSResults.push(cssResult);
     } catch (e) {
       console.warn(`⚠️  AdorableCSS: Error parsing class "${className}" from string rule "${ruleName}":`, e);
     }
-  }
+  });
 };
 
 
-// Resolve string 03-rules recursively with cycle detection
+// Execute string rule handler safely
+const executeStringRuleHandler = (handler: any, args?: string, ruleName?: string): string | (string | CSSRule)[] => {
+  try {
+    return typeof handler === 'function' 
+      ? (args !== undefined ? handler(args) : handler())
+      : '';
+  } catch (e) {
+    console.warn(`⚠️  AdorableCSS: Error executing string rule "${ruleName}":`, e);
+    return '';
+  }
+};
+
+// Process array result from string rule
+const processArrayResult = (
+  result: (string | CSSRule)[],
+  ruleName: string,
+  visited: Set<string>,
+  parentSelector?: string,
+  stringRulePriority?: number
+): { mainCSS: string; nestedCSS: string[]; priority?: number }[] => {
+  const allCSSResults: { mainCSS: string; nestedCSS: string[]; priority?: number }[] = [];
+  
+  result.forEach(item => {
+    if (typeof item === 'string' && item.trim()) {
+      const classes = item.trim().split(/\s+/);
+      processClassesFromStringRule(classes, ruleName, visited, allCSSResults);
+    } else if (typeof item === 'object' && item !== null) {
+      const cssResult = cssObjectToString(item as CSSRule, parentSelector);
+      allCSSResults.push({ ...cssResult, priority: stringRulePriority });
+    }
+  });
+  
+  return allCSSResults;
+};
+
+// Resolve string rules recursively with cycle detection
 const resolveStringRule = (
   ruleName: string, 
   args?: string, 
   visited: Set<string> = new Set(),
   parentSelector?: string
 ): { mainCSS: string; nestedCSS: string[]; priority?: number } => {
-  // Check for circular dependencies
   const ruleKey = `${ruleName}(${args || ''})`;
   if (visited.has(ruleKey)) {
     console.warn(`⚠️  AdorableCSS: Circular dependency detected for string rule "${ruleKey}"`);
@@ -99,68 +127,27 @@ const resolveStringRule = (
   
   visited.add(ruleKey);
   
-  // Get string rule definition
   const stringRule = priorityRegistry.getStringRule(ruleName);
-  if (!stringRule) {
-    return { mainCSS: "", nestedCSS: [], priority: 0 };
-  }
+  if (!stringRule) return { mainCSS: "", nestedCSS: [], priority: 0 };
   
-  // Execute string rule handler to get AdorableCSS classes or mixed array
-  const handler = stringRule.handler;
-  let result: string | (string | CSSRule)[];
+  const result = executeStringRuleHandler(stringRule.handler, args, ruleName);
+  if (!result) return { mainCSS: "", nestedCSS: [], priority: stringRule.priority };
   
-  try {
-    result = typeof handler === 'function' 
-      ? (args !== undefined ? handler(args) : handler())
-      : '';
-  } catch (e) {
-    console.warn(`⚠️  AdorableCSS: Error executing string rule "${ruleName}":`, e);
-    return { mainCSS: "", nestedCSS: [], priority: stringRule.priority };
-  }
-  
-  // Handle mixed array format: [adorableCSS, rawCSS, adorableCSS, ...]
-  const allCSSResults: { mainCSS: string; nestedCSS: string[]; priority?: number }[] = [];
-  
-  if (Array.isArray(result)) {
-    // Process mixed array of AdorableCSS classes and raw CSS objects
-    for (const item of result) {
-      if (typeof item === 'string') {
-        // AdorableCSS class - parse and resolve
-        if (!item.trim()) continue;
+  const allCSSResults = Array.isArray(result) 
+    ? processArrayResult(result, ruleName, visited, parentSelector, stringRule.priority)
+    : (() => {
+        const adorableCSSString = result as string;
+        if (!adorableCSSString.trim()) return [];
         
-        const classes = item.trim().split(/\s+/);
-        processClassesFromStringRule(classes, ruleName, visited, allCSSResults);
-      } else if (typeof item === 'object' && item !== null) {
-        // Raw CSS object - convert directly
-        const cssResult = cssObjectToString(item as CSSRule, parentSelector);
-        allCSSResults.push({ 
-          ...cssResult, 
-          priority: stringRule.priority 
-        });
-      }
-    }
-  } else {
-    // Legacy string format - parse as before
-    const adorableCSSString = result as string;
-    
-    if (!adorableCSSString.trim()) {
-      return { mainCSS: "", nestedCSS: [], priority: stringRule.priority };
-    }
-    
-    // Parse the returned string into individual classes
-    const classes = adorableCSSString.trim().split(/\s+/);
-    
-    // Resolve each class recursively
-    processClassesFromStringRule(classes, ruleName, visited, allCSSResults);
-  }
-  
-  // Combine results, preserving the original string rule's priority as base
-  const mainCSSParts = allCSSResults.map(r => r.mainCSS).filter(Boolean);
-  const nestedCSSRules = allCSSResults.flatMap(r => r.nestedCSS);
+        const results: { mainCSS: string; nestedCSS: string[]; priority?: number }[] = [];
+        const classes = adorableCSSString.trim().split(/\s+/);
+        processClassesFromStringRule(classes, ruleName, visited, results);
+        return results;
+      })();
   
   return {
-    mainCSS: mainCSSParts.join(';'),
-    nestedCSS: nestedCSSRules,
+    mainCSS: allCSSResults.map(r => r.mainCSS).filter(Boolean).join(';'),
+    nestedCSS: allCSSResults.flatMap(r => r.nestedCSS),
     priority: stringRule.priority
   };
 };
@@ -190,130 +177,115 @@ const generateCSSFromSelector = (selector: ParsedSelector, parentSelector?: stri
     return { ...cssResult, priority: ruleInfo?.priority || 0 };
 };
 
-// Handle pseudo-class selector
-const handlePseudoClass = (
-  v: any,
-  rawSelector: string
-): { selector: string; cssResult: { mainCSS: string; nestedCSS: string[]; priority?: number } } => {
-  const combinator = v.combinators[0];
-  const pseudoClass = v.selector.image;
-  const targetSelector = combinator.selector;
-  const pseudoSelector = `${rawSelector}:${pseudoClass}`;
-
-  return {
-    selector: pseudoSelector,
-    cssResult: generateCSSFromSelector(createParsedSelector(targetSelector), pseudoSelector),
-  };
-};
-
-// Handle regular selector
-const handleRegularSelector = (v: any, parentSelector?: string): { mainCSS: string; nestedCSS: string[]; priority?: number } => {
+// Handle different selector types with unified interface
+const processSelectorValue = (
+  v: any, 
+  rawSelector: string, 
+  parentSelector?: string
+): { actualSelector: string; cssResult: { mainCSS: string; nestedCSS: string[]; priority?: number } } => {
+  // Pseudo-class selector
+  if (v.combinators?.length > 0 && v.combinators[0].combinator === ":") {
+    const combinator = v.combinators[0];
+    const pseudoClass = v.selector.image;
+    const targetSelector = combinator.selector;
+    const pseudoSelector = `${rawSelector}:${pseudoClass}`;
+    
+    return {
+      actualSelector: pseudoSelector,
+      cssResult: generateCSSFromSelector(createParsedSelector(targetSelector), pseudoSelector)
+    };
+  }
+  
+  // Position selector
   const selector = v.selector;
   if (selector.type === "position") {
     const positionResult = cssObjectToString({
       position: "absolute",
       left: String(px(selector.x.image)),
-      top: String(px(selector.y.image)),
+      top: String(px(selector.y.image))
     }, parentSelector);
-    return { ...positionResult, priority: 200 }; // Layout priority
+    return { actualSelector: rawSelector, cssResult: { ...positionResult, priority: 200 } };
   }
   
-  // Handle dimension-pair 02-design_tokens (e.g., 64x64)
+  // Dimension-pair selector
   if (selector.type === "(dimension-pair)") {
     const dimensionPairHandler = getRuleHandler('dimension-pair');
     if (dimensionPairHandler) {
       const result = dimensionPairHandler(selector.image);
       const cssResult = cssObjectToString(result, parentSelector);
-      return { ...cssResult, priority: 200 }; // Layout priority
+      return { actualSelector: rawSelector, cssResult: { ...cssResult, priority: 200 } };
     }
   }
   
-  return generateCSSFromSelector(createParsedSelector(selector), parentSelector);
+  // Regular selector
+  return {
+    actualSelector: rawSelector,
+    cssResult: generateCSSFromSelector(createParsedSelector(selector), parentSelector)
+  };
 };
 
 // Internal implementation
 function _generateCSSFromAdorableCSS(value: string): string {
   if (!value) return "";
   
-  // Check if this is a state class FIRST (hover:, focus:, group-hover:, etc.)
-  // This must come before responsive check as both use colon syntax
-  if (isStateClass(value)) {
-    return generateStateCSS(value);
-  }
-  
-  // Check if this is a responsive class
-  if (isResponsiveClass(value)) {
-    return generateResponsiveCSS(value);
-  }
+  // Handle special class types
+  if (isStateClass(value)) return generateStateCSS(value);
+  if (isResponsiveClass(value)) return generateResponsiveCSS(value);
   
   try {
     const result = parseAdorableCSS(value);
-    
-    // Extract importance level
     extractImportanceLevel(value);
     
     const rawSelector = "." + cssEscape(value);
     let actualSelector = addImportanceToSelector(rawSelector);
-
     const allCSSResults: { mainCSS: string; nestedCSS: string[]; priority?: number }[] = [];
-    let hasValidRules = false;
-
+    
     result.value.forEach((v: any) => {
-      const cssResult = v.combinators?.length > 0 && v.combinators[0].combinator === ":"
-        ? (() => {
-            const { selector, cssResult } = handlePseudoClass(v, rawSelector);
-            actualSelector = addImportanceToSelector(selector);
-            return cssResult;
-          })()
-        : handleRegularSelector(v, rawSelector);
-      
-      allCSSResults.push(cssResult);
-      if (cssResult.mainCSS || cssResult.nestedCSS.length > 0) {
-        hasValidRules = true;
+      const { actualSelector: newSelector, cssResult } = processSelectorValue(v, rawSelector, rawSelector);
+      if (newSelector !== rawSelector) {
+        actualSelector = addImportanceToSelector(newSelector);
       }
+      allCSSResults.push(cssResult);
     });
 
-    // Sort CSS results by priority (low to high) for proper CSS cascading
+    // Sort and combine results
     allCSSResults.sort((a, b) => (a.priority || 0) - (b.priority || 0));
-
-    // Combine all main CSS properties in priority order
-    const mainCSSParts = allCSSResults.map(r => r.mainCSS).filter(Boolean);
-    const mainCSS = mainCSSParts.join(";");
-    
-    // Collect all nested CSS 03-rules
+    const mainCSS = allCSSResults.map(r => r.mainCSS).filter(Boolean).join(";");
     const nestedCSSRules = allCSSResults.flatMap(r => r.nestedCSS);
     
-    // Warn about parsed but empty 03-rules
+    // Validation
+    const hasValidRules = allCSSResults.some(r => r.mainCSS || r.nestedCSS.length > 0);
     if (!hasValidRules && result.value.length > 0) {
       console.warn(`⚠️  AdorableCSS: Class "${value}" parsed successfully but generated no CSS`);
     }
     
-    // Don't generate empty CSS 03-rules
-    if (!mainCSS && nestedCSSRules.length === 0) {
-      return "";
-    }
+    if (!mainCSS && nestedCSSRules.length === 0) return "";
     
     // Build final CSS
-    const cssParts: string[] = [];
-    
-    // Add main rule if there are properties
-    if (mainCSS) {
-      cssParts.push(`${actualSelector}{${mainCSS}}`);
-    }
-    
-    // Add nested 03-rules
+    const cssParts = mainCSS ? [`${actualSelector}{${mainCSS}}`] : [];
     cssParts.push(...nestedCSSRules);
     
     return cleanDuplicateSelectors(cssParts.join(""));
   } catch (e) {
-    console.warn(`❌ AdorableCSS: Failed to parse "${value}"`);
-    console.warn(`   Error:`, e);
-    return ""; // Fail gracefully
+    console.warn(`❌ AdorableCSS: Failed to parse "${value}"`, e);
+    return "";
   }
 }
 
 // Export memoized version
 export const generateCSSFromAdorableCSS = createMemo(_generateCSSFromAdorableCSS);
+
+// Parse CSS properties from CSS string
+const parseCSSProperties = (cssProperties: string): Record<string, string> => {
+  const cssRule: Record<string, string> = {};
+  cssProperties.split(';').forEach(prop => {
+    if (prop.trim()) {
+      const [key, value] = prop.split(':').map(s => s.trim());
+      if (key && value) cssRule[key] = value;
+    }
+  });
+  return cssRule;
+};
 
 // Generate state CSS using decorator pattern
 function generateStateCSS(stateClassName: string): string {
@@ -325,37 +297,20 @@ function generateStateCSS(stateClassName: string): string {
     return "";
   }
 
-  // Extract base class and generate its CSS
   const baseCSS = generateCSSFromAdorableCSS(pattern.selector);
   if (!baseCSS) {
     console.warn(`⚠️  AdorableCSS: Base class "${pattern.selector}" generated no CSS for state "${cleanClassName}"`);
     return "";
   }
 
-  // Parse CSS properties
   const cssProperties = extractCSSProperties(baseCSS, cleanClassName);
   if (!cssProperties) return "";
   
-  // Create CSS rule object
-  const cssRule: { [key: string]: string } = {};
-  cssProperties.split(';').forEach(prop => {
-    if (prop.trim()) {
-      const [key, value] = prop.split(':').map(s => s.trim());
-      if (key && value) cssRule[key] = value;
-    }
-  });
-  
-  // Get the layer for the base rule
-  const ruleName = pattern.selector.split('(')[0];
-  const rule = priorityRegistry.getAnyRule(ruleName);
-  const _layer = rule ? getLayerFromPriority(rule.priority) : 'state';
-  
-  // Generate state CSS
+  const cssRule = parseCSSProperties(cssProperties);
   const fullClassSelector = "." + cssEscape(cleanClassName);
   const stateCSS = createStateCSS(cssRule, pattern, fullClassSelector);
   const result = cssObjectToString(stateCSS);
   
-  // Get CSS string and add importance
   let stateCSSString = result.nestedCSS.length > 0 ? result.nestedCSS[0] : '';
   if (importanceLevel > 0 && stateCSSString) {
     stateCSSString = stateCSSString.replace(/^(\.[^{]+)(\{)/, `${`[class]`.repeat(importanceLevel)}$1$2`);
@@ -374,92 +329,63 @@ function generateResponsiveCSS(responsiveClassName: string): string {
     return "";
   }
 
-  // Extract base class and generate its CSS
   const baseCSS = generateCSSFromAdorableCSS(pattern.selector);
   if (!baseCSS) {
     console.warn(`⚠️  AdorableCSS: Base class "${pattern.selector}" generated no CSS for responsive "${cleanClassName}"`);
     return "";
   }
 
-  // Parse CSS properties
   const cssProperties = extractCSSProperties(baseCSS, cleanClassName);
   if (!cssProperties) return "";
   
-  // Generate media query
   const mediaQuery = createMediaQuery(pattern.breakpoint, pattern.isMaxWidth);
   if (!mediaQuery) return "";
 
-  // Get the layer for the base rule
-  const basePattern = ResponsiveSelector.analyze(pattern.selector);
-  const ruleName = basePattern?.selector || pattern.selector;
-  const rule = priorityRegistry.getAnyRule(ruleName.split('(')[0]);
-  const _utilityLayer = rule ? getLayerFromPriority(rule.priority) : 'utility';
-  
-  // Build final selector with importance
   const responsiveSelector = "." + cssEscape(cleanClassName);
   const finalSelector = addImportanceToSelector(responsiveSelector);
 
-  // Wrap in media query
   return `${mediaQuery}{${finalSelector}{${cssProperties}}}`;
 }
 
-// Internal implementation
-function _generateCSS(classList: string[]): string {
-  // Remove duplicates first to avoid generating redundant CSS
-  const uniqueClasses = [...new Set(classList)];
+// Group CSS by layers based on rule priorities
+const groupCSSByLayers = (classList: string[]) => {
+  const layers = { base: [] as string[], components: [] as string[], composition: [] as string[], utilities: [] as string[] };
   
-  // Group CSS by layer
-  const layers = {
-    base: [] as string[],
-    components: [] as string[],
-    composition: [] as string[],
-    utilities: [] as string[]
-  };
-  
-  uniqueClasses.forEach(className => {
+  [...new Set(classList)].forEach(className => {
     const css = generateCSSFromAdorableCSS(className);
-    if (!css || css.trim() === "") return;
+    if (!css?.trim()) return;
     
     const ruleName = className.replace(/^(.*:)/, '').match(/^([a-zA-Z0-9-]+)/)?.[1] || '';
     const ruleInfo = getRuleWithPriority(ruleName);
-    const layer = ruleInfo?.layer || 
-                  (ruleInfo && ruleInfo.priority >= RulePriority.COMPONENT ? 'components' : 'utilities');
+    const layer = ruleInfo?.layer || (ruleInfo && ruleInfo.priority >= RulePriority.COMPONENT ? 'components' : 'utilities');
     
     layers[layer as keyof typeof layers].push(css);
   });
   
-  // Build final CSS with @layer
-  const parts: string[] = [];
+  return layers;
+};
+
+// Build layered CSS structure
+const buildLayeredCSS = (layers: ReturnType<typeof groupCSSByLayers>): string => {
+  const parts = ['@layer base, components, composition, utilities;', `@layer base {\n${resetCSS}\n}`];
   
-  // Define layer order
-  parts.push('@layer base, 04-components, composition, utilities;');
+  (['components', 'composition', 'utilities'] as const).forEach(layerName => {
+    if (layers[layerName].length > 0) {
+      parts.push(`@layer ${layerName} {\n${layers[layerName].join("\n")}\n}`);
+    }
+  });
   
-  // Add base layer with reset CSS
-  parts.push(`@layer base {\n${resetCSS}\n}`);
-  
-  // Add 04-components layer
-  if (layers.components.length > 0) {
-    parts.push(`@layer components {\n${layers.components.join("\n")}\n}`);
-  }
-  
-  // Add composition layer
-  if (layers.composition.length > 0) {
-    parts.push(`@layer composition {\n${layers.composition.join("\n")}\n}`);
-  }
-  
-  // Add utilities layer
-  if (layers.utilities.length > 0) {
-    parts.push(`@layer utilities {\n${layers.utilities.join("\n")}\n}`);
-  }
-  
-  const cssRules = cleanDuplicateSelectors(parts.join("\n"));
-  
-  // Generate used 02-design_tokens CSS and prepend to the result
+  return parts.join("\n");
+};
+
+// Internal implementation
+function _generateCSS(classList: string[]): string {
+  const layers = groupCSSByLayers(classList);
+  const cssRules = cleanDuplicateSelectors(buildLayeredCSS(layers));
   const usedTokensCSS = generateUsedTokensCSS();
   const finalCSS = usedTokensCSS + '\n\n' + cssRules;
   
-  // Include keyframes if animations are used
-  return AnimationHandler.prependKeyframesIfNeeded(finalCSS, uniqueClasses);
+  return prependKeyframesIfNeeded(finalCSS, [...new Set(classList)]);
 }
 
 // Export directly (array input, not suitable for simple memo)

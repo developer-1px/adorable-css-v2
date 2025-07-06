@@ -48,7 +48,7 @@ const AdorableCSSV2: AdorableCSSV2 = {
 
       if (failedClasses.length > 0) {
         console.warn("AdorableCSS v2: Failed to generate CSS for classes:", failedClasses);
-        console.log("These classes might need to be added to the core rules. Please report them!");
+        console.log("These classes might need to be added to the 01-core 03-rules. Please report them!");
       }
 
       console.log(`Generated CSS for ${classes.length} classes, ${failedClasses.length} failed`);
@@ -90,7 +90,7 @@ if (typeof window !== "undefined") {
 export function checkFailedClasses(classes: string[]): string[] {
   return classes.filter(className => {
     const css = generateCSS([className]);
-    // Check if CSS is empty or only contains empty rules (e.g., ".class{}")
+    // Check if CSS is empty or only contains empty 03-rules (e.g., ".class{}")
     if (!css || css.trim() === '') return true;
     
     // Check if the CSS rule is empty (only contains selector with empty braces)

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Paintbrush, Sun, Moon, Monitor, Palette, Star } from 'lucide-svelte';
-  // import { Card } from '$lib/components/ui';
+  // import { Card } from '$lib/04-components/ui';
 
   // Theme configurations
   const themes = [
@@ -267,7 +267,7 @@ const themeConfig = {
   }
 };
 
-// Usage in components
+// Usage in 04-components
 <div class="bg(surface) c(text-primary) border(1/border)">
   Theme-aware component
 </div>`}</code></pre>

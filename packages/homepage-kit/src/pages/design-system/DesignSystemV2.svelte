@@ -51,7 +51,7 @@
       title: 'Foundations',
       icon: Palette,
       items: [
-        { id: 'design-tokens', title: 'Design Tokens' },
+        { id: 'design-02-design_tokens', title: 'Design Tokens' },
         { id: 'colors', title: 'Colors' },
         { id: 'typography', title: 'Typography' },
         { id: 'spacing', title: 'Spacing' },
@@ -308,7 +308,7 @@
                 {#each [
                   { icon: Zap, title: 'Quick Start', desc: 'Get up and running in minutes' },
                   { icon: Palette, title: 'Design Tokens', desc: 'Colors, spacing, and more' },
-                  { icon: Box, title: 'Components', desc: 'Pre-built UI components' },
+                  { icon: Box, title: 'Components', desc: 'Pre-built UI 04-components' },
                   { icon: Code2, title: 'Playground', desc: 'Try it live' }
                 ] as card}
                   <button 
@@ -376,7 +376,7 @@
                   },
                   {
                     step: 3,
-                    title: 'Explore components',
+                    title: 'Explore 04-components',
                     code: '<button class="btn(primary)">Get Started</button>'
                   }
                 ] as step}
@@ -419,7 +419,7 @@
 
         <!-- Foundations Section -->
         {#if activeSection === 'foundations'}
-          {#if activeSubsection === 'design-tokens'}
+          {#if activeSubsection === 'design-02-design_tokens'}
             <section class="vbox gap(2xl)">
               <div>
                 <h1 class="font(4xl) bold c(gray-900) mb(md)">Design Tokens</h1>
@@ -463,7 +463,7 @@
                   <FileText size="20" />
                   Download as CSS
                 </button>
-                <!-- Missing: Figma tokens, Sketch file -->
+                <!-- Missing: Figma 02-design_tokens, Sketch file -->
                 <p class="font(sm) c(gray-500) self(center)">Missing: Figma/Sketch export options</p>
               </div>
             </section>

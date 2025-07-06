@@ -490,7 +490,7 @@
   function checkFailedClasses(classes: string[]): string[] {
     return classes.filter(className => {
       const css = generateCSS([className]);
-      // Check if CSS is empty or only contains empty rules (e.g., ".class{}")
+      // Check if CSS is empty or only contains empty 03-rules (e.g., ".class{}")
       if (!css || css.trim() === '') return true;
       
       // Check if the CSS rule is empty (only contains selector with empty braces)

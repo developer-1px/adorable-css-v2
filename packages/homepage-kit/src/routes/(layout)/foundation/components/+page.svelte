@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Package, Settings, Layers, Palette, Square, Type } from 'lucide-svelte';
-  // import { Card } from '$lib/components/ui';
+  // import { Card } from '$lib/04-components/ui';
 
   // Component token categories
   const componentCategories = [
@@ -95,7 +95,7 @@
   const tokenInheritance = [
     {
       level: 'Global Tokens',
-      description: 'Base design tokens',
+      description: 'Base design 02-design_tokens',
       tokens: ['spacing-md', 'color-primary', 'radius-md'],
       color: 'blue'
     },

@@ -7,14 +7,12 @@ import type { EntryGenerator } from '../../../../../.svelte-kit/types/src/routes
 
 export const entries: EntryGenerator = () => {
   // Generate entries for all docs pages from docsConfig
-  return docsConfig.flatMap(section => 
-    section.items.map(item => {
-      // Extract slug from href (remove /docs/ prefix)
-      const slug = item.href.replace('/docs/', '');
-      // For [...slug] route, we need to return the slug as a string
-      return { slug };
-    })
-  );
+  return docsConfig.map(item => {
+    // Extract slug from href (remove /docs/ prefix)
+    const slug = item.href.replace('/docs/', '');
+    // For [...slug] route, we need to return the slug as a string
+    return { slug };
+  });
 };
 
 export const prerender = true;
@@ -24,9 +22,7 @@ export async function load({ params }) {
   const href = `/docs/${slug}`;
   
   // 문서 설정에서 찾기
-  const docItem = docsConfig
-    .flatMap(section => section.items)
-    .find(item => item.href === href);
+  const docItem = docsConfig.find(item => item.href === href);
     
   if (!docItem) {
     throw error(404, '문서를 찾을 수 없습니다');

@@ -8,7 +8,7 @@
   const elevationLevels = [
     { level: 'xs', dp: '1dp', description: 'Subtle elevation for UI elements' },
     { level: 'sm', dp: '2dp', description: 'Small elevation for cards and buttons' },
-    { level: 'md', dp: '4dp', description: 'Medium elevation for raised components' },
+    { level: 'md', dp: '4dp', description: 'Medium elevation for raised 04-components' },
     { level: 'lg', dp: '8dp', description: 'Large elevation for dropdowns and tooltips' },
     { level: 'xl', dp: '16dp', description: 'Extra large elevation for modals' },
     { level: '2xl', dp: '24dp', description: 'Maximum elevation for overlays' }

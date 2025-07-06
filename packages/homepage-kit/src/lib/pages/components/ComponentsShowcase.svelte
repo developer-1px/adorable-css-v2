@@ -1,7 +1,7 @@
 <script lang="ts">
   import ComponentVariantsPreview from '$lib/components/docs/ComponentVariantsPreview.svelte';
   
-  // Import AdorableCSS components and their definitions
+  // Import AdorableCSS 04-components and their definitions
   import { 
     btnString, 
     badgeString, 

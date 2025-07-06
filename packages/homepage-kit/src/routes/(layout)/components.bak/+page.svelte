@@ -80,7 +80,7 @@
         },
         {
           name: 'input()',
-          description: 'Form input components with various states',
+          description: 'Form input 04-components with various states',
           examples: [
             { code: 'input', label: 'Default input' },
             { code: 'input(ghost)', label: 'Ghost variant' },
@@ -94,7 +94,7 @@
     },
     {
       title: 'Typography',
-      description: 'Semantic heading and text components',
+      description: 'Semantic heading and text 04-components',
       icon: Type,
       color: 'purple',
       components: [
@@ -126,7 +126,7 @@
     },
     {
       title: 'Layout',
-      description: 'Container and section components',
+      description: 'Container and section 04-components',
       icon: Layout,
       color: 'green',
       components: [
