@@ -31,7 +31,7 @@ type TokenType =
   | '(gradient)'         // blue..red
   | 'PREFIX'             // hover:, md:
   | 'IDENTIFIER'         // scale, bg, etc
-  | 'OPERATOR'           // +, -, /, ,
+  | 'OPERATOR'           // +, -, / ,
 
 // 토크나이저 사용
 const tokenizer = createTokenizer("hover:scale(1.1)");
@@ -48,6 +48,7 @@ const tokens = tokenizer.tokenize();
 #### 2단계: AST 생성
 토큰을 Abstract Syntax Tree로 변환:
 
+```typescript
 ```typescript
 interface AdorableNode {
   type: 'utility';
@@ -66,6 +67,7 @@ const ast = parseAdorableCSS("hover:md:scale(1.1)!");
 //   args: [{ type: 'value', value: '1.1' }],
 //   important: true
 // }
+```
 ```
 
 #### 3단계: CSS 생성

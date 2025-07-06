@@ -233,8 +233,8 @@
   }
 </script>
 
-<div class="vbox(center) py(9xl) container(3xl) gap(15vh)">
-  <div class="max-w(7xl) vbox gap(20vh)">
+<div class="vbox(center) py(9xl) container(xl) gap(15vh)">
+  <div class="vbox gap(20vh)">
     <!-- Header -->
     <div class="vbox gap(4xl)">
       <h1 class="display(5xl) bold(black) tracking(tighter) c(black) leading(none)">

@@ -6,28 +6,28 @@
     font: {
       title: 'Font Scale',
       description: 'Typography sizes with ratio-based scaling',
-      tokens: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'],
+      tokens: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl', '10xl', '11xl'],
       unit: 'px',
       baseToken: 'md'
     },
     spacing: {
       title: 'Spacing Scale',
       description: 'Margin, padding, gap with linear scaling',
-      tokens: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'],
+      tokens: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl'],
       unit: 'px',
       baseToken: 'md'
     },
     size: {
       title: 'Size Scale',
       description: 'Width, height, and general sizing',
-      tokens: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl'],
+      tokens: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl'],
       unit: 'px',
       baseToken: 'md'
     },
     container: {
       title: 'Container Scale',
       description: 'Breakpoints and container widths',
-      tokens: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl'],
+      tokens: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'],
       unit: 'px',
       baseToken: 'md'
     }
@@ -36,6 +36,7 @@
   // 생성된 CSS 변수들
   let generatedCSS = '';
   let tokenValues: Record<string, Record<string, string>> = {};
+  let copyButtonText = 'Copy CSS';
 
   // 토큰 생성 및 CSS 변수 추출
   function generateAllTokens() {
@@ -90,6 +91,28 @@
     </div>
   </section>
 
+  <!-- Introduction Section -->
+  <section class="py(4xl) px(5xl) bg(gray-50)">
+    <div class="max-w(4xl) mx(auto) vbox gap(2xl)">
+      <div class="grid gap(3xl)" style="grid-template-columns: 1fr 1fr;">
+        <div class="vbox gap(lg)">
+          <h2 class="text(2xl) font(bold) c(gray-900)">What are Design Tokens?</h2>
+          <p class="text(lg) c(gray-600) leading(relaxed)">
+            Design tokens are the smallest pieces of a design system. They store values like colors, 
+            typography, spacing, and sizes that ensure consistency across your entire application.
+          </p>
+        </div>
+        <div class="vbox gap(lg)">
+          <h2 class="text(2xl) font(bold) c(gray-900)">Mathematical Scaling</h2>
+          <p class="text(lg) c(gray-600) leading(relaxed)">
+            AdorableCSS uses mathematical formulas to generate harmonious scales. Font sizes follow 
+            a 1.2 ratio, while spacing uses linear progression for predictable, beautiful results.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Token System Content -->
   <div class="vbox gap(5xl) p(5xl)">
 
@@ -103,74 +126,159 @@
           <p class="text(lg) c(gray-600) max-w(3xl)">{category.description}</p>
         </div>
 
-        <!-- Tokens Grid -->
+        <!-- Tokens Display -->
         {#if categoryKey === 'font'}
-          <!-- Font tokens - text preview -->
-          <div class="grid gap(xl)" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-            {#each category.tokens as token}
-              <div class="vbox gap(md) p(xl) border(2/gray-200) radius(lg) bg(white) hover:shadow(lg) transition">
-                <div class="hbox(between) items(center)">
-                  <span class="text(md) font(bold) c(gray-900)">font-{token}</span>
-                  <span class="text(sm) c(gray-500) font(mono) bg(gray-100) px(sm) py(xs) radius(sm)">
-                    {tokenValues[categoryKey]?.[token] || 'calc(...)'}
-                  </span>
-                </div>
-                <div class="font({token}) c(gray-900) leading(tight)">
-                  The quick brown fox jumps over the lazy dog
-                </div>
-              </div>
-            {/each}
+          <!-- Font tokens - table format for better readability -->
+          <div class="border(2/gray-900) radius(lg) overflow(hidden)">
+            <table class="w(full)">
+              <thead class="bg(gray-900) c(white)">
+                <tr>
+                  <th class="text(left) p(lg) font(bold) text(sm) uppercase tracking(wider)">Token</th>
+                  <th class="text(left) p(lg) font(bold) text(sm) uppercase tracking(wider)">Value</th>
+                  <th class="text(left) p(lg) font(bold) text(sm) uppercase tracking(wider)">Preview</th>
+                </tr>
+              </thead>
+              <tbody>
+                {#each category.tokens as token, index}
+                  <tr class="border-t(1/gray-200) hover:bg(gray-50) transition">
+                    <td class="p(lg)">
+                      <code class="font(mono) text(sm) bg(gray-100) px(sm) py(xs) radius(sm) c(gray-900)">font-{token}</code>
+                    </td>
+                    <td class="p(lg)">
+                      <code class="font(mono) text(sm) c(gray-600)">{tokenValues[categoryKey]?.[token] || 'calc(...)'}</code>
+                    </td>
+                    <td class="p(lg)">
+                      <p class="font({token}) c(gray-900) leading(normal) max-w(xl)">
+                        The quick brown fox jumps over the lazy dog
+                      </p>
+                    </td>
+                  </tr>
+                {/each}
+              </tbody>
+            </table>
           </div>
         
         {:else if categoryKey === 'spacing'}
-          <!-- Spacing tokens - visual bars -->
-          <div class="vbox gap(lg)">
-            {#each category.tokens as token}
-              <div class="hbox(between) items(center) p(xl) border(2/gray-200) radius(lg) bg(white) hover:shadow(md) transition">
-                <div class="hbox gap(xl) items(center)">
-                  <span class="text(md) font(bold) c(gray-900) min-w(32)">spacing-{token}</span>
-                  <div class="bg(blue-500) h(6) radius(sm)" style="width: var(--spacing-{token}, {token === 'xs' ? '4px' : token === 'sm' ? '8px' : token === 'md' ? '12px' : token === 'lg' ? '16px' : token === 'xl' ? '20px' : '24px'}); max-width: 200px;"></div>
-                </div>
-                <span class="text(sm) c(gray-500) font(mono) bg(gray-100) px(sm) py(xs) radius(sm)">
-                  {tokenValues[categoryKey]?.[token] || 'calc(...)'}
-                </span>
+          <!-- Spacing tokens - horizontal visual comparison -->
+          <div class="border(2/gray-900) radius(lg) overflow(hidden)">
+            <div class="grid" style="grid-template-columns: 120px 80px 1fr auto;">
+              <!-- Header -->
+              <div class="grid-cols(span:4) grid grid(4) bg(gray-900) c(white) p(lg)">
+                <div class="font(bold) text(sm) uppercase tracking(wider)">Token</div>
+                <div class="font(bold) text(sm) uppercase tracking(wider)">Value</div>
+                <div class="font(bold) text(sm) uppercase tracking(wider)">Visual</div>
+                <div class="font(bold) text(sm) uppercase tracking(wider) text(right)">Usage</div>
               </div>
-            {/each}
+              
+              {#each category.tokens as token, index}
+                <div class="grid-cols(span:4) grid grid(4) items(center) p(lg) {index > 0 ? 'border-t(1/gray-200)' : ''} hover:bg(gray-50) transition">
+                  <div>
+                    <code class="font(mono) text(sm) bg(gray-100) px(sm) py(xs) radius(sm) c(gray-900)">spacing-{token}</code>
+                  </div>
+                  <div>
+                    <code class="font(mono) text(sm) c(gray-600)">{tokenValues[categoryKey]?.[token] || '...'}</code>
+                  </div>
+                  <div class="relative">
+                    <div class="bg(gray-200) h(32) radius(sm) overflow(hidden)">
+                      <div class="bg(blue-500) h(full) radius(sm) shadow(sm) relative" style="width: var(--spacing-{token});">
+                        <div class="absolute right(0) top(50%) translate-y(-50%) w(1) h(full) bg(blue-700)"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text(right)">
+                    <code class="font(mono) text(xs) c(gray-500)">p({token})</code>
+                  </div>
+                </div>
+              {/each}
+            </div>
           </div>
 
         {:else if categoryKey === 'size'}
-          <!-- Size tokens - square boxes -->
-          <div class="grid gap(xl)" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));">
+          <!-- Size tokens - visual grid with context -->
+          <div class="grid gap(2xl)" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));">
             {#each category.tokens as token}
-              <div class="vbox gap(md) items(center) p(xl) border(2/gray-200) radius(lg) bg(white) hover:shadow(lg) transition">
-                <span class="text(md) font(bold) c(gray-900)">size-{token}</span>
-                <div class="bg(green-500) radius(md) shadow(sm)" style="width: var(--size-{token}, {token === 'xs' ? '16px' : token === 'sm' ? '24px' : token === 'md' ? '32px' : token === 'lg' ? '48px' : '64px'}); height: var(--size-{token}, {token === 'xs' ? '16px' : token === 'sm' ? '24px' : token === 'md' ? '32px' : token === 'lg' ? '48px' : '64px'});"></div>
-                <span class="text(sm) c(gray-500) font(mono) bg(gray-100) px(sm) py(xs) radius(sm)">
-                  {tokenValues[categoryKey]?.[token] || 'calc(...)'}
-                </span>
+              <div class="vbox gap(lg) p(xl) border(2/gray-900) radius(lg) bg(white) hover:shadow(xl) hover:scale(1.02) transition group">
+                <!-- Token info -->
+                <div class="vbox gap(xs)">
+                  <code class="font(mono) text(sm) font(bold) c(gray-900)">size-{token}</code>
+                  <code class="font(mono) text(xs) c(gray-600)">{tokenValues[categoryKey]?.[token] || '...'}</code>
+                </div>
+                
+                <!-- Visual representation -->
+                <div class="hbox(center) items(center) h(120) bg(gray-100) radius(md) relative overflow(hidden)">
+                  <div 
+                    class="bg(green-500) radius(sm) shadow(md) group-hover:bg(green-600) transition relative"
+                    style="width: var(--size-{token}); height: var(--size-{token});"
+                  >
+                    <!-- Size indicator lines -->
+                    <div class="absolute bottom(-20) left(0) w(full) h(1) bg(gray-400)"></div>
+                    <div class="absolute right(-20) top(0) w(1) h(full) bg(gray-400)"></div>
+                  </div>
+                </div>
+                
+                <!-- Usage example -->
+                <code class="font(mono) text(xs) c(gray-500) text(center)">w({token}) h({token})</code>
               </div>
             {/each}
           </div>
 
         {:else if categoryKey === 'container'}
-          <!-- Container tokens - width bars -->
-          <div class="vbox gap(lg)">
-            {#each category.tokens as token}
-              <div class="vbox gap(md) p(xl) border(2/gray-200) radius(lg) bg(white) hover:shadow(md) transition">
-                <div class="hbox(between) items(center)">
-                  <span class="text(md) font(bold) c(gray-900)">container-{token}</span>
-                  <span class="text(sm) c(gray-500) font(mono) bg(gray-100) px(sm) py(xs) radius(sm)">
-                    {tokenValues[categoryKey]?.[token] || 'calc(...)'}
-                  </span>
-                </div>
-                <div class="bg(purple-100) h(8) radius(md) relative overflow(hidden) shadow(inner)">
-                  <div 
-                    class="bg(purple-500) h(full) radius(md) shadow(sm)" 
-                    style="width: var(--container-{token}, {token === 'xs' ? '20%' : token === 'sm' ? '30%' : token === 'md' ? '40%' : token === 'lg' ? '60%' : token === 'xl' ? '80%' : '100%'}); max-width: 100%;"
-                  ></div>
-                </div>
+          <!-- Container tokens - responsive width visualization -->
+          <div class="vbox gap(xl)">
+            <!-- Viewport reference -->
+            <div class="hbox gap(xl) items(center) p(lg) bg(gray-100) radius(lg) text(sm) c(gray-600)">
+              <div class="hbox gap(sm) items(center)">
+                <div class="w(4) h(4) bg(blue-500) radius(full)"></div>
+                <span>Mobile: 375px</span>
               </div>
-            {/each}
+              <div class="hbox gap(sm) items(center)">
+                <div class="w(4) h(4) bg(green-500) radius(full)"></div>
+                <span>Tablet: 768px</span>
+              </div>
+              <div class="hbox gap(sm) items(center)">
+                <div class="w(4) h(4) bg(purple-500) radius(full)"></div>
+                <span>Desktop: 1200px</span>
+              </div>
+            </div>
+            
+            <!-- Container tokens -->
+            <div class="vbox gap(lg)">
+              {#each category.tokens as token, index}
+                <div class="vbox gap(lg) p(xl) border(2/gray-900) radius(lg) bg(white) hover:shadow(lg) transition">
+                  <!-- Token info -->
+                  <div class="hbox(between) items(center)">
+                    <div class="hbox gap(xl) items(baseline)">
+                      <code class="font(mono) text(lg) font(bold) c(gray-900)">container-{token}</code>
+                      <code class="font(mono) text(md) c(gray-600)">{tokenValues[categoryKey]?.[token] || '...'}</code>
+                    </div>
+                    <code class="font(mono) text(sm) c(gray-500)">max-w({token})</code>
+                  </div>
+                  
+                  <!-- Visual representation with viewport markers -->
+                  <div class="relative">
+                    <div class="bg(gray-200) h(40) radius(md) relative overflow(hidden)">
+                      <!-- Container width -->
+                      <div 
+                        class="bg(purple-500) h(full) radius(md) shadow(md) relative"
+                        style="width: min(var(--container-{token}), 100%);"
+                      >
+                        <div class="absolute right(0) top(0) h(full) w(2) bg(purple-700)"></div>
+                      </div>
+                      
+                      <!-- Viewport markers -->
+                      <div class="absolute top(0) h(full) w(1) bg(blue-500.5)" style="left: 31.25%;"></div>
+                      <div class="absolute top(0) h(full) w(1) bg(green-500.5)" style="left: 64%;"></div>
+                    </div>
+                    
+                    <!-- Labels -->
+                    <div class="hbox(between) mt(xs) text(xs) c(gray-500)">
+                      <span>0</span>
+                      <span>1200px</span>
+                    </div>
+                  </div>
+                </div>
+              {/each}
+            </div>
           </div>
         {/if}
       </div>
@@ -178,50 +286,35 @@
   </div>
 
     <!-- Generated CSS Preview -->
-    <div class="vbox gap(2xl) border-t(4/black) pt(4xl)">
-      <div class="vbox gap(md)">
-        <h3 class="display(xl) font(black) tracking(tight)">Generated CSS Variables</h3>
-        <p class="text(lg) c(gray-600) max-w(3xl)">Copy these CSS variables to use in your project</p>
+    <div class="vbox gap(3xl) border-t(4/black) pt(5xl)">
+      <!-- Section Header -->
+      <div class="vbox gap(lg) text(center)">
+        <h2 class="display(xl) font(black) tracking(tight)">GENERATED CSS</h2>
+        <p class="text(xl) c(gray-600) max-w(3xl) mx(auto)">
+          Copy these CSS variables to use in your project. All values are calculated using our mathematical scaling system.
+        </p>
       </div>
-      <div class="bg(gray-900) p(2xl) radius(lg) overflow(auto) border(2/gray-200) shadow(lg)">
-        <pre class="text(sm) font(mono) c(green-300) whitespace(pre-wrap) leading(relaxed)">{generatedCSS}</pre>
+      
+      <!-- Code Preview -->
+      <div class="relative group">
+        <div class="bg(gray-900) p(3xl) radius(xl) overflow(auto) border(2/black) shadow(2xl) max-h(600)">
+          <pre class="text(sm) font(mono) c(green-400) whitespace(pre) leading(loose) selection:bg(green-400.2)">{generatedCSS}</pre>
+        </div>
+        
+        <!-- Copy Button -->
+        <button 
+          class="absolute top(xl) right(xl) px(lg) py(md) bg(white) c(gray-900) radius(md) font(mono) text(sm) font(bold) shadow(lg) hover:bg(gray-100) active:scale(0.95) transition opacity(0) group-hover:opacity(100)"
+          on:click={() => {
+            navigator.clipboard.writeText(generatedCSS);
+            copyButtonText = 'Copied!';
+            setTimeout(() => {
+              copyButtonText = 'Copy CSS';
+            }, 2000);
+          }}
+        >
+          {copyButtonText}
+        </button>
       </div>
     </div>
   </div>
 </div>
-
-<style>
-  /* CSS 변수가 아직 생성되지 않은 경우를 위한 fallback */
-  :global(:root) {
-    --spacing-xs: 4px;
-    --spacing-sm: 8px;
-    --spacing-md: 12px;
-    --spacing-lg: 16px;
-    --spacing-xl: 20px;
-    --spacing-2xl: 24px;
-    --spacing-3xl: 32px;
-    --spacing-4xl: 48px;
-    --spacing-5xl: 64px;
-    --spacing-6xl: 80px;
-    
-    --size-xs: 16px;
-    --size-sm: 24px;
-    --size-md: 32px;
-    --size-lg: 48px;
-    --size-xl: 64px;
-    --size-2xl: 80px;
-    --size-3xl: 96px;
-    --size-4xl: 128px;
-    --size-5xl: 160px;
-    --size-6xl: 192px;
-    
-    --container-xs: 20%;
-    --container-sm: 30%;
-    --container-md: 40%;
-    --container-lg: 60%;
-    --container-xl: 80%;
-    --container-2xl: 90%;
-    --container-3xl: 95%;
-    --container-4xl: 100%;
-  }
-</style>

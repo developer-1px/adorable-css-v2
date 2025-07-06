@@ -15,17 +15,6 @@
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 
-	/* Dynamic token base values and ratios */
-	--spacing: 0.25rem;
-	--font-base: 1rem;
-	--size-base: 1rem;
-	--container-base: 20rem;
-	
-	/* Scale ratios for calc formulas */
-	--font-ratio: 1.2;
-	--spacing-ratio: 1.5;
-	--size-ratio: 1.25;
-	--container-ratio: 1.33;
 }
 
 code {

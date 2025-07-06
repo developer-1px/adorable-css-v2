@@ -114,7 +114,9 @@
       "Bash(npm run lint)",
       "Bash(npx vite build:*)",
       "Bash(pnpm tsx:*)",
-      "Bash(pnpm find-unused:*)"
+      "Bash(pnpm find-unused:*)",
+      "Bash(pnpm knip:*)",
+      "Bash(npx knip:*)"
     ],
     "deny": []
   }

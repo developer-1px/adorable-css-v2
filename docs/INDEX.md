@@ -5,9 +5,9 @@
 ## 🚀 빠른 시작
 
 ### 🆕 처음 시작하는 분
-1. **[🎨 디자인 철학](2-areas/design-system/DESIGN_PHILOSOPHY.md)** - AdorableCSS가 해결하는 문제
-2. **[📖 디자인 시스템 가이드](2-areas/design-system/DESIGN_SYSTEM_OVERVIEW.md)** - 실사용 방법
-3. **[📚 API 레퍼런스](2-areas/documentation/REFERENCE.md)** - 완전한 문법 가이드
+1. **[🎨 디자인 철학](/docs/5-public/mdx/00-background.md)** - AdorableCSS가 해결하는 문제
+2. **[📖 AdorableCSS 개요](/docs/5-public/mdx/01-overview.md)** - AdorableCSS의 핵심 개념과 실사용 방법
+3. **[📚 문법 가이드](/docs/5-public/mdx/11-syntax-guide.md)** - 완전한 문법 가이드
 
 ### 🔄 마이그레이션 하는 분
 - **[제품 전략](1-projects/planning/PRODUCT_STRATEGY.md)** - 로드맵과 비전
@@ -17,40 +17,40 @@
 
 ## 📋 PARA 체계별 문서 구성
 
-### 🎯 [1-projects/](1-projects/) - 진행 중인 프로젝트
+### 🎯 [1-projects/](/docs/1-projects/) - 진행 중인 프로젝트
 > 명확한 마감일과 결과물이 있는 작업들
 
 #### 🚧 Active (현재 진행)
-- **[mdx/](5-public/mdx/)** - 웹사이트용 문서 시스템
+- **[AdorableCSS 문서 시스템 개요](/docs/5-public/mdx/01-overview.md)** - 웹사이트용 문서 시스템
 
 #### 📋 Planning (계획 단계)
-- **[PRODUCT_STRATEGY.md](1-projects/planning/PRODUCT_STRATEGY.md)** - 제품 전략 및 로드맵
-- **[strategy/](1-projects/planning/strategy/)** - 마케팅 & 기술 메시징
+- **[제품 전략 및 로드맵](/docs/1-projects/planning/PRODUCT_STRATEGY.md)** - AdorableCSS v2 제품 전략
+- **[마케팅 & 기술 메시징 전략](/docs/1-projects/planning/strategy/TECH_MESSAGING.md)** - AdorableCSS v2 마케팅 및 기술 메시징
 
-### 🏠 [2-areas/](2-areas/) - 지속 관리 영역
+### 🏠 [2-areas/](/docs/2-areas/) - 지속 관리 영역
 > 지속적으로 관리해야 하는 책임 영역들
 
 #### 🎨 Design System
-- **[DESIGN_PHILOSOPHY.md](2-areas/design-system/DESIGN_PHILOSOPHY.md)** - 핵심 철학 & 원칙
-- **[DESIGN_SYSTEM_OVERVIEW.md](2-areas/design-system/DESIGN_SYSTEM_OVERVIEW.md)** - 실사용 가이드
+- **[디자인 철학](/docs/2-areas/design-system/DESIGN_PHILOSOPHY.md)** - AdorableCSS의 핵심 디자인 철학 및 원칙
+- **[디자인 시스템 개요](/docs/2-areas/design-system/DESIGN_SYSTEM_OVERVIEW.md)** - AdorableCSS 디자인 시스템의 실사용 가이드
 
 #### 📖 Documentation  
-- **[REFERENCE.md](2-areas/documentation/REFERENCE.md)** - 완전한 API 레퍼런스
+- **[API 레퍼런스](/docs/2-areas/documentation/REFERENCE.md)** - AdorableCSS의 완전한 API 레퍼런스
 
 #### 👥 Community
-- **[development/](2-areas/community/development/)** - 개발 프로세스 & 실수 분석
-- **[onboarding/](2-areas/community/onboarding/)** - 신규 사용자 & AI 도구 온보딩
+- **[개발 프로세스 및 실수 분석](/docs/2-areas/community/development/CONTRIBUTING.md)** - 개발 프로세스 및 흔한 실수 분석
+- **[신규 사용자 및 AI 도구 온보딩](/docs/2-areas/community/onboarding/CLAUDE-ONBOARDING.md)** - 신규 사용자 및 AI 도구 온보딩 가이드
 
-### 📚 [3-resources/](3-resources/) - 참고 자료
+### 📚 [3-resources/](/docs/3-resources/) - 참고 자료
 > 미래에 참고할 수 있는 지식과 정보
 
 #### 🔬 Research
-- **[background-figma-compatibility.md](3-resources/research/background-figma-compatibility.md)** - Figma 호환성 철학
-- **[token-scale-generator.md](3-resources/research/token-scale-generator.md)** - 토큰 스케일 연구
-- **[프로젝트 분석 요약](3-resources/research/project-analysis-summary.md)** - AdorableCSS v2 프로젝트 분석
+- **[Figma 호환성 철학 연구](/docs/3-resources/research/background-figma-compatibility.md)** - Figma 호환성 철학
+- **[토큰 스케일 생성 연구](/docs/3-resources/research/token-scale-generator.md)** - 토큰 스케일 연구
+- **[프로젝트 분석 요약](/docs/3-resources/research/project-analysis-summary.md)** - AdorableCSS v2 프로젝트 분석
 
 #### 🎓 Best Practices
-- **[technical/](3-resources/best-practices/technical/)** - 기술 사양 & 모범 사례
+- **[기술 사양 및 모범 사례](/docs/3-resources/best-practices/technical/)** - 기술 사양 & 모범 사례
 
 ### 📦 [4-archive/](4-archive/) - 보관함
 > 완료되었거나 더 이상 관련 없는 항목들
