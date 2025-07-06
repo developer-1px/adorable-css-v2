@@ -21,11 +21,8 @@ const usedTokens = {
  */
 export function startTokenCollection(): void {
   // Collection is now always active for lazy generation
-  // Clear previous collections
-  usedTokens.font.clear();
-  usedTokens.spacing.clear();
-  usedTokens.size.clear();
-  usedTokens.container.clear();
+  // DO NOT clear existing tokens - we want to accumulate them
+  // for proper lazy generation across multiple generateCSS calls
 }
 
 /**
