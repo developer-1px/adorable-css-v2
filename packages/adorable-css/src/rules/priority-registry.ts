@@ -17,16 +17,18 @@ export const register = (
   name: string, 
   handler: RuleHandler | KeywordRuleHandler, 
   priority: RulePriority, 
-  description?: string
+  description?: string,
+  layer?: 'base' | 'components' | 'composition' | 'utilities'
 ): void => {
-  rules.set(name, { handler, priority, description });
+  rules.set(name, { handler, priority, description, layer });
 };
 
 export const registerString = (
   name: string, 
   handlerOrDefinition: StringRuleHandler | KeywordStringRuleHandler | StringRuleDefinition, 
   priority?: RulePriority, 
-  description?: string
+  description?: string,
+  layer?: 'base' | 'components' | 'composition' | 'utilities'
 ): void => {
   if (typeof handlerOrDefinition === 'object' && 'handler' in handlerOrDefinition) {
     stringRules.set(name, handlerOrDefinition);
@@ -35,7 +37,8 @@ export const registerString = (
       handler: handlerOrDefinition as StringRuleHandler | KeywordStringRuleHandler,
       priority: priority!,
       description,
-      isStringRule: true
+      isStringRule: true,
+      layer
     });
   }
 };

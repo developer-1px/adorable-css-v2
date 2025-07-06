@@ -64,102 +64,72 @@ export function getUsedTokens() {
 
 // Helper functions for generating CSS variables for each token category
 
-function _generateFontVars(config: ScaleConfig, unit: 'rem' | 'px'): string[] {
-  const vars: string[] = [];
-  if (usedTokens.font.size > 0) {
-    vars.push('\n  /* Font Tokens */');
-    const fontBase = unit === 'px' ? 16 : 1;
-    const fontConfig = config.font || DEFAULT_SCALE_CONFIG.font;
-    
-    usedTokens.font.forEach(token => {
-      const step = getTokenStep(token, 'font');
-      const multiplier = calculateMultiplier(step, fontConfig, 'font');
-      const value = unit === 'px' 
-        ? Math.round(fontBase * multiplier)
-        : parseFloat((fontBase * multiplier).toFixed(3));
-      vars.push(`  --font-${token}: ${formatMultiplier(value)}${unit};`);
-    });
-  }
-  return vars;
-}
-
-function _generateSpacingVars(config: ScaleConfig, unit: 'rem' | 'px'): string[] {
-  const vars: string[] = [];
-  if (usedTokens.spacing.size > 0) {
-    vars.push('\n  /* Spacing Tokens */');
-    const spacingBase = unit === 'px' ? 4 : 0.25; // 4px or 0.25rem
-    const spacingConfig = config.spacing || DEFAULT_SCALE_CONFIG.spacing;
-    
-    usedTokens.spacing.forEach(token => {
-      const step = getTokenStep(token, 'spacing');
-      const multiplier = calculateMultiplier(step, spacingConfig, 'spacing');
-      const value = unit === 'px' 
-        ? Math.round(spacingBase * multiplier)
-        : parseFloat((spacingBase * multiplier).toFixed(3));
-      vars.push(`  --spacing-${token}: ${formatMultiplier(value)}${unit};`);
-    });
-  }
-  return vars;
-}
-
-function _generateSizeVars(config: ScaleConfig, unit: 'rem' | 'px'): string[] {
-  const vars: string[] = [];
-  if (usedTokens.size.size > 0) {
-    vars.push('\n  /* Size Tokens */');
-    const sizeBase = unit === 'px' ? 16 : 1;
-    const sizeConfig = config.size || DEFAULT_SCALE_CONFIG.size;
-    
-    usedTokens.size.forEach(token => {
-      const step = getTokenStep(token, 'size');
-      const multiplier = calculateMultiplier(step, sizeConfig, 'size');
-      const value = unit === 'px' 
-        ? Math.round(sizeBase * multiplier)
-        : parseFloat((sizeBase * multiplier).toFixed(3));
-      vars.push(`  --size-${token}: ${formatMultiplier(value)}${unit};`);
-    });
-  }
-  return vars;
-}
-
-function _generateContainerVars(_config: ScaleConfig, unit: 'rem' | 'px'): string[] {
-  const vars: string[] = [];
-  if (usedTokens.container.size > 0) {
-    vars.push('\n  /* Container Tokens */');
-    
-    // Container uses hardcoded breakpoints in pixels
+// Common helper to calculate token value
+function _calculateTokenValue(
+  category: 'font' | 'spacing' | 'size' | 'container',
+  token: string,
+  config: ScaleConfig,
+  unit: 'rem' | 'px'
+): number {
+  if (category === 'container') {
     const containerBreakpoints: Record<string, number> = {
-      'xs': 320,
-      'sm': 480,
-      'md': 640,
-      'lg': 960,
-      'xl': 1280,
-      '2xl': 1440,
-      '3xl': 1600,
-      '4xl': 1920,
-      '5xl': 2240,
-      '6xl': 2560,
-      '7xl': 2880,
+      'xs': 320, 'sm': 480, 'md': 640, 'lg': 960, 'xl': 1280,
+      '2xl': 1440, '3xl': 1600, '4xl': 1920, '5xl': 2240,
+      '6xl': 2560, '7xl': 2880,
     };
     
-    usedTokens.container.forEach(token => {
-      let pixels = containerBreakpoints[token];
-      
-      if (!pixels) {
-        // Handle numbered xl tokens
-        const xlMatch = token.match(/^(\d+)xl$/);
-        if (xlMatch) {
-          const num = parseInt(xlMatch[1]);
-          pixels = 640 + (num * 320); // Progressive scaling
-        } else {
-          pixels = 640; // default to md
-        }
-      }
-      
-      const value = unit === 'px' ? pixels : (pixels / 16);
-      const formatted = unit === 'px' ? value.toString() : value.toFixed(1);
-      vars.push(`  --container-${token}: ${formatted}${unit};`);
+    let pixels = containerBreakpoints[token];
+    if (!pixels) {
+      const xlMatch = token.match(/^(\d+)xl$/);
+      pixels = xlMatch ? 640 + (parseInt(xlMatch[1]) * 320) : 640;
+    }
+    return unit === 'px' ? pixels : pixels / 16;
+  }
+
+  const baseValues = {
+    font: unit === 'px' ? 16 : 1,
+    spacing: unit === 'px' ? 4 : 0.25,
+    size: unit === 'px' ? 16 : 1,
+  };
+  
+  const base = baseValues[category as keyof typeof baseValues];
+  const categoryConfig = config[category] || DEFAULT_SCALE_CONFIG[category];
+  const step = getTokenStep(token, category);
+  const multiplier = calculateMultiplier(step, categoryConfig!, category);
+  
+  return unit === 'px' 
+    ? Math.round(base * multiplier)
+    : parseFloat((base * multiplier).toFixed(3));
+}
+
+// Generic token variable generator
+function _generateTokenVars(
+  category: 'font' | 'spacing' | 'size' | 'container',
+  config: ScaleConfig,
+  unit: 'rem' | 'px'
+): string[] {
+  const vars: string[] = [];
+  const tokens = usedTokens[category];
+  
+  if (tokens.size > 0) {
+    const titles = {
+      font: 'Font Tokens',
+      spacing: 'Spacing Tokens',
+      size: 'Size Tokens',
+      container: 'Container Tokens',
+    };
+    
+    vars.push(`\n  /* ${titles[category]} */`);
+    
+    tokens.forEach(token => {
+      const value = _calculateTokenValue(category, token, config, unit);
+      const formatted = category === 'container' && unit !== 'px' 
+        ? value.toFixed(1) 
+        : formatMultiplier(value);
+      vars.push(`  --${category}-${token}: ${formatted}${unit};`);
     });
   }
+  
   return vars;
 }
 
@@ -170,15 +140,31 @@ export function generateUsedTokensCSS(config: ScaleConfig = DEFAULT_SCALE_CONFIG
   const cssVars: string[] = [];
   const unit = config.unit || 'px';
   
-  // Generate vars for each category using helper functions
-  cssVars.push(..._generateFontVars(config, unit));
-  cssVars.push(..._generateSpacingVars(config, unit));
-  cssVars.push(..._generateSizeVars(config, unit));
-  cssVars.push(..._generateContainerVars(config, unit));
+  // Generate vars for each category
+  const categories: Array<'font' | 'spacing' | 'size' | 'container'> = ['font', 'spacing', 'size', 'container'];
+  categories.forEach(category => {
+    cssVars.push(..._generateTokenVars(category, config, unit));
+  });
   
   if (cssVars.length === 0) {
     return ':root {\n}';
   }
   
   return `:root {\n${cssVars.join('\n')}\n}`;
+}
+
+/**
+ * Get token value for a specific token
+ */
+export function getTokenValue(
+  category: 'font' | 'spacing' | 'size' | 'container',
+  token: string,
+  config: ScaleConfig = DEFAULT_SCALE_CONFIG
+): string {
+  const unit = config.unit || 'px';
+  const value = _calculateTokenValue(category, token, config, unit);
+  const formatted = category === 'container' && unit !== 'px' 
+    ? value.toFixed(1) 
+    : formatMultiplier(value);
+  return `${formatted}${unit}`;
 }

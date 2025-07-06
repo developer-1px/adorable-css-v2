@@ -1,0 +1,9 @@
+// Pattern rules - centralized exports
+export { heroRules } from './hero';
+export { sectionRules } from './section';
+export { referenceRules } from './reference';
+export { docsRules } from './docs';
+export { featureCardRules } from './feature-card';
+export { typographyHelperRules } from './typography-helpers';
+export { containerRules } from './container';
+export { proseRules } from './prose';

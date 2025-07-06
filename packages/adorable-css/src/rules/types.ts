@@ -26,6 +26,7 @@ export interface RuleDefinition {
   handler: RuleHandler | KeywordRuleHandler;
   priority: RulePriority;
   description?: string;
+  layer?: 'base' | 'components' | 'composition' | 'utilities';
 }
 
 // String rule definition
@@ -34,6 +35,7 @@ export interface StringRuleDefinition {
   priority: RulePriority;
   description?: string;
   isStringRule: true; // Type discriminator
+  layer?: 'base' | 'components' | 'composition' | 'utilities';
 }
 
 

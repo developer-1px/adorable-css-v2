@@ -6,19 +6,13 @@
 import { RulePriority } from './types';
 import type { RuleHandler, KeywordRuleHandler } from './types';
 
-// Import all rule modules
-import { displayRules } from './layout/display';
-import { sizeRules } from './layout/size';
-import { spacingRules } from './layout/spacing';
-import { gridRules } from './layout/grid';
-import { overflowRules } from './layout/overflow';
-import { insetRules } from './layout/inset';
-import { scrollMt, scrollMb, scrollMl, scrollMr, scrollM } from './layout/scroll-margin';
-
-import { typographyRules } from './style';
-import { visualRules } from './style';
+// Import all rule modules - centralized from index files
+import { 
+  displayRules, sizeRules, spacingRules, gridRules, 
+  overflowRules, insetRules, scrollMt, scrollMb, scrollMl, scrollMr, scrollM 
+} from './layout';
+import { typographyRules, visualRules } from './style';
 import { colorRules } from '../design-system/colors/colors';
-
 import { positionCategoryRules } from './position';
 import { interactionRules } from './interaction';
 import { utilityRules } from './utilities/utilities';
@@ -26,38 +20,21 @@ import { effectsRules } from './effects';
 
 // Extensions
 import { 
-  glowRules, 
-  glassRules, 
-  figmaComponents, 
-  // responsiveRules, // Spec'd out 
-  containerRules, 
-  animationRules,
-  proseRules,
-  glassmorphismRules
+  glowRules, glassRules, figmaComponents, 
+  animationRules, glassmorphismRules
 } from '../extensions';
 
 // Components
-import { heroRules } from '../components/patterns/hero';
-import { sectionRules } from '../components/patterns/section';
-import { referenceRules } from '../components/patterns/reference';
-import { docsRules } from '../components/patterns/docs';
-import { buttonRules } from '../components/primitives';
-import { headingRules } from '../components/primitives';
-import { displayTextRules } from '../components/primitives';
-import { titleRules } from '../components/primitives';
-import { bodyRules } from '../components/primitives';
-import { labelRules } from '../components/primitives';
-import { captionRules } from '../components/primitives';
-import { cardRules } from '../components/primitives';
-import { inputRules } from '../components/primitives';
-import { badgeRules } from '../components/primitives';
-import { iconBoxRules } from '../components/primitives';
-import { codeBlockRules } from '../components/primitives';
-import { codeRule } from '../components/primitives';
-import { menuRules } from '../components/primitives';
-import { menuItemRules } from '../components/primitives';
-import { featureCardRules } from '../components/patterns/feature-card';
-import { typographyHelperRules } from '../components/patterns/typography-helpers';
+import {
+  buttonRules, headingRules, displayTextRules, titleRules,
+  bodyRules, labelRules, captionRules, cardRules, inputRules,
+  badgeRules, iconBoxRules, codeBlockRules, codeRule,
+  menuRules, menuItemRules
+} from '../components/primitives';
+import {
+  heroRules, sectionRules, referenceRules, docsRules,
+  featureCardRules, typographyHelperRules, containerRules, proseRules
+} from '../components/patterns';
 
 // Type definitions for rule groups
 export interface RuleSubgroup {
@@ -71,6 +48,7 @@ export interface RuleGroupDefinition {
   priority: RulePriority;
   subgroups: Record<string, RuleSubgroup>;
   type?: 'css' | 'string';
+  layer?: 'base' | 'components' | 'composition' | 'utilities';
 }
 
 export interface RuleDefinitions {
@@ -95,6 +73,7 @@ export const RULE_GROUPS: RuleDefinitions = {
   text: {
     name: 'Text',
     priority: RulePriority.UTILITY,
+    layer: 'utilities',
     subgroups: {
       typography: {
         name: 'Typography',
@@ -113,6 +92,7 @@ export const RULE_GROUPS: RuleDefinitions = {
   position: {
     name: 'Position',
     priority: RulePriority.LAYOUT,
+    layer: 'utilities',
     subgroups: {
       position: {
         name: 'Position & Layer',
@@ -125,6 +105,7 @@ export const RULE_GROUPS: RuleDefinitions = {
   autoLayout: {
     name: 'Layout',
     priority: RulePriority.LAYOUT,
+    layer: 'composition',
     subgroups: {
       autoLayout: {
         name: 'Auto Layout',
@@ -164,6 +145,7 @@ export const RULE_GROUPS: RuleDefinitions = {
   visual: {
     name: 'Visual',
     priority: RulePriority.UTILITY,
+    layer: 'utilities',
     subgroups: {
       colors: {
         name: 'Fill',
@@ -193,6 +175,7 @@ export const RULE_GROUPS: RuleDefinitions = {
   css: {
     name: 'CSS',
     priority: RulePriority.UTILITY,
+    layer: 'utilities',
     subgroups: {
       margin: {
         name: 'Margin',
@@ -260,6 +243,7 @@ export const RULE_GROUPS: RuleDefinitions = {
   interaction: {
     name: 'Interaction',
     priority: RulePriority.UTILITY,
+    layer: 'utilities',
     subgroups: {
       states: {
         name: 'States',
@@ -276,6 +260,7 @@ export const RULE_GROUPS: RuleDefinitions = {
   utilities: {
     name: 'Utilities',
     priority: RulePriority.UTILITY,
+    layer: 'utilities',
     subgroups: {
       misc: {
         name: 'Miscellaneous',
@@ -300,6 +285,7 @@ export const RULE_GROUPS: RuleDefinitions = {
   components: {
     name: 'Components',
     priority: RulePriority.COMPONENT,
+    layer: 'components',
     subgroups: {
       patterns: {
         name: 'Patterns',
@@ -322,28 +308,28 @@ export const RULE_GROUPS: RuleDefinitions = {
 
 // String-based component rules (handled separately due to different type)
 export const STRING_RULE_GROUPS = {
-  hero: { rules: heroRules, priority: RulePriority.COMPONENT },
-  section: { rules: sectionRules, priority: RulePriority.COMPONENT },
-  reference: { rules: referenceRules, priority: RulePriority.COMPONENT },
-  docs: { rules: docsRules, priority: RulePriority.COMPONENT },
-  button: { rules: buttonRules, priority: RulePriority.COMPONENT },
-  heading: { rules: headingRules, priority: RulePriority.COMPONENT },
-  display: { rules: displayTextRules, priority: RulePriority.COMPONENT },
-  title: { rules: titleRules, priority: RulePriority.COMPONENT },
-  body: { rules: bodyRules, priority: RulePriority.COMPONENT },
-  label: { rules: labelRules, priority: RulePriority.COMPONENT },
-  caption: { rules: captionRules, priority: RulePriority.COMPONENT },
-  card: { rules: cardRules, priority: RulePriority.COMPONENT },
-  input: { rules: inputRules, priority: RulePriority.COMPONENT },
-  badge: { rules: badgeRules, priority: RulePriority.COMPONENT },
-  iconBox: { rules: iconBoxRules, priority: RulePriority.COMPONENT },
-  codeBlock: { rules: codeBlockRules, priority: RulePriority.COMPONENT },
-  code: { rules: codeRule, priority: RulePriority.COMPONENT },
-  menu: { rules: menuRules, priority: RulePriority.COMPONENT },
-  menuItem: { rules: menuItemRules, priority: RulePriority.COMPONENT },
-  featureCard: { rules: featureCardRules, priority: RulePriority.COMPONENT },
-  typographyHelpers: { rules: typographyHelperRules, priority: RulePriority.COMPONENT },
-  prose: { rules: proseRules, priority: RulePriority.COMPONENT },
+  hero: { rules: heroRules, priority: RulePriority.COMPONENT, layer: 'components' as const },
+  section: { rules: sectionRules, priority: RulePriority.COMPONENT, layer: 'components' as const },
+  reference: { rules: referenceRules, priority: RulePriority.COMPONENT, layer: 'components' as const },
+  docs: { rules: docsRules, priority: RulePriority.COMPONENT, layer: 'components' as const },
+  button: { rules: buttonRules, priority: RulePriority.COMPONENT, layer: 'components' as const },
+  heading: { rules: headingRules, priority: RulePriority.COMPONENT, layer: 'components' as const },
+  display: { rules: displayTextRules, priority: RulePriority.COMPONENT, layer: 'components' as const },
+  title: { rules: titleRules, priority: RulePriority.COMPONENT, layer: 'components' as const },
+  body: { rules: bodyRules, priority: RulePriority.COMPONENT, layer: 'components' as const },
+  label: { rules: labelRules, priority: RulePriority.COMPONENT, layer: 'components' as const },
+  caption: { rules: captionRules, priority: RulePriority.COMPONENT, layer: 'components' as const },
+  card: { rules: cardRules, priority: RulePriority.COMPONENT, layer: 'components' as const },
+  input: { rules: inputRules, priority: RulePriority.COMPONENT, layer: 'components' as const },
+  badge: { rules: badgeRules, priority: RulePriority.COMPONENT, layer: 'components' as const },
+  iconBox: { rules: iconBoxRules, priority: RulePriority.COMPONENT, layer: 'components' as const },
+  codeBlock: { rules: codeBlockRules, priority: RulePriority.COMPONENT, layer: 'components' as const },
+  code: { rules: codeRule, priority: RulePriority.COMPONENT, layer: 'components' as const },
+  menu: { rules: menuRules, priority: RulePriority.COMPONENT, layer: 'components' as const },
+  menuItem: { rules: menuItemRules, priority: RulePriority.COMPONENT, layer: 'components' as const },
+  featureCard: { rules: featureCardRules, priority: RulePriority.COMPONENT, layer: 'components' as const },
+  typographyHelpers: { rules: typographyHelperRules, priority: RulePriority.COMPONENT, layer: 'components' as const },
+  prose: { rules: proseRules, priority: RulePriority.COMPONENT, layer: 'components' as const },
 };
 
 /**

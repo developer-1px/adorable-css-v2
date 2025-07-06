@@ -9,19 +9,20 @@ import {
 Object.entries(RULE_GROUPS).forEach(([, group]) => {
   Object.entries(group.subgroups).forEach(([, subgroup]) => {
     Object.entries(subgroup.rules).forEach(([ruleName, handler]) => {
-      // Register rule
-      priorityRegistry.register(ruleName, handler, group.priority, `${subgroup.name} utility`);
+      // Register rule with layer information
+      priorityRegistry.register(ruleName, handler, group.priority, `${subgroup.name} utility`, group.layer);
     });
   });
 });
 
 // Register string-based component rules
-Object.entries(STRING_RULE_GROUPS).forEach(([, { rules, priority }]) => {
-  Object.entries(rules).forEach(([ruleName, handler]) => {
+Object.entries(STRING_RULE_GROUPS).forEach(([, ruleGroup]) => {
+  Object.entries(ruleGroup.rules).forEach(([ruleName, handler]) => {
     priorityRegistry.registerString(ruleName, {
       handler,
-      priority,
-      isStringRule: true
+      priority: ruleGroup.priority,
+      isStringRule: true,
+      layer: ruleGroup.layer
     });
   });
 });

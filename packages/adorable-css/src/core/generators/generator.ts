@@ -420,17 +420,12 @@ function _generateCSS(classList: string[]): string {
     const css = generateCSSFromAdorableCSS(className);
     if (!css || css.trim() === "") return;
     
-    // Determine layer based on class pattern
-    // Components: body(), heading(), button(), etc.
-    // Composition: hbox(), vbox(), grid(), layer(), etc. (layout compositions)
-    // Utilities: Everything else (c(), p(), m(), etc.)
-    if (/^(body|heading|title|label|caption|button|card|container|section|prose|glass|glow|interactive)\(/.test(className)) {
-      layers.components.push(css);
-    } else if (/^(hbox|vbox|grid|layer|stack|center|between|around|evenly)\(/.test(className)) {
-      layers.composition.push(css);
-    } else {
-      layers.utilities.push(css);
-    }
+    const ruleName = className.replace(/^(.*:)/, '').match(/^([a-zA-Z0-9-]+)/)?.[1] || '';
+    const ruleInfo = getRuleWithPriority(ruleName);
+    const layer = ruleInfo?.layer || 
+                  (ruleInfo && ruleInfo.priority >= RulePriority.COMPONENT ? 'components' : 'utilities');
+    
+    layers[layer as keyof typeof layers].push(css);
   });
   
   // Build final CSS with @layer
