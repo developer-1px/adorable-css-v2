@@ -14,7 +14,7 @@ export interface SimpleScaleConfig {
  * @returns CSS variables string
  */
 export function generateFontScaleVariables(config: SimpleScaleConfig): string {
-  const { base, ratio, steps } = config;
+  const { ratio, steps } = config;
   const baseIndex = steps.indexOf('md') !== -1 ? steps.indexOf('md') : steps.indexOf('base');
   
   const variables: string[] = [];
@@ -43,7 +43,7 @@ export interface SimpleSpacingScaleConfig extends SimpleScaleConfig {
  * @returns CSS variables string
  */
 export function generateSpacingScaleVariables(config: SimpleSpacingScaleConfig): string {
-  const { base, ratio, steps, mode = 'linear' } = config;
+  const { ratio, steps, mode = 'linear' } = config;
   const baseIndex = steps.indexOf('md') !== -1 ? steps.indexOf('md') : steps.indexOf('base');
   
   const variables: string[] = [];

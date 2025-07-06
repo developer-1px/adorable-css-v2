@@ -32,8 +32,17 @@ export {
   autoInjectTokens, 
   configureAutoInject, 
   isTokensInjected, 
-  getAutoInjectConfig 
+  getAutoInjectConfig,
+  generateUsedTokensCSS
 } from "./core/runtime/auto-inject";
+
+// Export token registry utilities
+export { 
+  startTokenCollection,
+  stopTokenCollection,
+  registerToken,
+  getUsedTokens
+} from "./core/runtime/tokenRegistry";
 
 // Export scale configuration
 export { setScaleConfig, getScaleConfig } from "./core/values/dynamicTokens";

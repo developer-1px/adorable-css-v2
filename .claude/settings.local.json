@@ -112,7 +112,8 @@
       "Bash(npx unimported:*)",
       "Bash(npx ts-prune:*)",
       "Bash(npm run lint)",
-      "Bash(npx vite build:*)"
+      "Bash(npx vite build:*)",
+      "Bash(pnpm tsx:*)"
     ],
     "deny": []
   }

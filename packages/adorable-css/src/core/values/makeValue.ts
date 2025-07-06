@@ -171,7 +171,7 @@ export const px = (value: string | number) => {
   if (+value === +value) return value + 'px'
   
   // If it's not a valid value pattern, reject it
-  if (!v.match(/^[\w\-\.%]+$/)) return '0'
+  if (!v.match(/^[\w\-.%]+$/)) return '0'
   
   return value
 }
