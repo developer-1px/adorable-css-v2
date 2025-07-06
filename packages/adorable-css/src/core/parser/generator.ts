@@ -13,6 +13,7 @@ import {
   createStateCSS
 } from "../../extensions/responsive/responsive-decorator";
 import { generateTokenCSS, defaultTokens, setTokenContext } from '../../design-system/tokens/index';
+import { generateUsedTokensCSS } from '../../tokens/tokenRegistry';
 import type { DesignTokens } from '../../design-system/tokens/index';
 import { createParsedSelector } from '../generators/ast-helpers';
 import { AnimationHandler } from '../generators/animation-handler';
@@ -347,7 +348,7 @@ function generateStateCSS(stateClassName: string): string {
   // Get the layer for the base rule
   const ruleName = pattern.selector.split('(')[0];
   const rule = priorityRegistry.getAnyRule(ruleName);
-  rule ? getLayerFromPriority(rule.priority) : 'state';
+  const _layer = rule ? getLayerFromPriority(rule.priority) : 'state';
   
   // Generate state CSS
   const fullClassSelector = "." + cssEscape(cleanClassName);
@@ -392,7 +393,7 @@ function generateResponsiveCSS(responsiveClassName: string): string {
   const basePattern = ResponsiveSelector.analyze(pattern.selector);
   const ruleName = basePattern?.selector || pattern.selector;
   const rule = priorityRegistry.getAnyRule(ruleName.split('(')[0]);
-  rule ? getLayerFromPriority(rule.priority) : 'utility';
+  const _utilityLayer = rule ? getLayerFromPriority(rule.priority) : 'utility';
   
   // Build final selector with importance
   const responsiveSelector = "." + cssEscape(cleanClassName);
@@ -458,8 +459,12 @@ function _generateCSS(classList: string[]): string {
   
   const cssRules = cleanDuplicateSelectors(parts.join("\n"));
   
+  // Generate used tokens CSS and prepend to the result
+  const usedTokensCSS = generateUsedTokensCSS();
+  const finalCSS = usedTokensCSS + '\n\n' + cssRules;
+  
   // Include keyframes if animations are used
-  return AnimationHandler.prependKeyframesIfNeeded(cssRules, uniqueClasses);
+  return AnimationHandler.prependKeyframesIfNeeded(finalCSS, uniqueClasses);
 }
 
 // Export directly (array input, not suitable for simple memo)

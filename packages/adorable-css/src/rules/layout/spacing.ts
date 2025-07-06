@@ -1,7 +1,7 @@
 import type { CSSRule, RuleHandler } from "../types";
 import { px as toPx, pxWithClamp } from '../../core/values/makeValue';
 import { isToken } from '../../design-system/tokens/index';
-import { generateSpacingCalc } from '../../core/values/dynamicTokens';
+import { generateSpacingCalc } from '../../tokens/dynamicTokens';
 
 type Prefix = "" | "x" | "y" | "t" | "b" | "l" | "r";
 

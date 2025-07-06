@@ -1,7 +1,7 @@
 import type { CSSRule, RuleHandler } from '../types';
 import { px } from '../../core/values/makeValue';
 import { isToken } from '../../design-system/tokens/index';
-import { generateFontCalc } from '../../core/values/dynamicTokens';
+import { generateFontCalc } from '../../tokens/dynamicTokens';
 
 const aligns = ['left', 'center', 'right', 'justify', 'start', 'end'];
 const transforms = ['uppercase', 'lowercase', 'capitalize'];

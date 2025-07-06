@@ -1,8 +1,8 @@
 // Auto-inject tokens when AdorableCSS is imported
 import { defaultTokens, generateTokenCSS } from '../../design-system/tokens/index';
 import type { DesignTokens } from '../../design-system/tokens/index';
-import { startTokenCollection, stopTokenCollection, generateUsedTokensCSS } from './tokenRegistry';
-import { getScaleConfig } from '../values/dynamicTokens';
+import { startTokenCollection, stopTokenCollection, generateUsedTokensCSS } from '../../tokens/tokenRegistry';
+import { getScaleConfig } from '../../tokens/dynamicTokens';
 
 let isInjected = false;
 
@@ -156,4 +156,4 @@ if (typeof document !== 'undefined' && config.enabled) {
 }
 
 // Export for manual token generation
-export { generateUsedTokensCSS } from './tokenRegistry';
+export { generateUsedTokensCSS } from '../../tokens/tokenRegistry';

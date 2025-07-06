@@ -3,9 +3,9 @@
  * Tracks used tokens and generates CSS variables on demand
  */
 
-import type { ScaleConfig } from '../config/scaleConfig';
-import { getTokenStep, DEFAULT_SCALE_CONFIG } from '../config/scaleConfig';
-import { calculateFontMultiplier, calculateSpacingMultiplier, calculateSizeMultiplier } from '../config/scaleFormulas';
+import type { ScaleConfig } from './scaleConfig';
+import { getTokenStep, DEFAULT_SCALE_CONFIG } from './scaleConfig';
+import { calculateMultiplier, formatMultiplier } from './scaleFormulas';
 
 // Global registry to track used tokens
 const usedTokens = {
@@ -71,32 +71,35 @@ function _generateFontVars(config: ScaleConfig, unit: 'rem' | 'px'): string[] {
   const vars: string[] = [];
   if (usedTokens.font.size > 0) {
     vars.push('\n  /* Font Tokens */');
-    const fontBase = unit === 'px' ? 16 : 1; // 16px or 1rem
+    const fontBase = unit === 'px' ? 16 : 1;
     const fontConfig = config.font || DEFAULT_SCALE_CONFIG.font;
     
     usedTokens.font.forEach(token => {
       const step = getTokenStep(token, 'font');
-      const multiplier = calculateFontMultiplier(step, fontConfig);
+      const multiplier = calculateMultiplier(step, fontConfig, 'font');
       const value = unit === 'px' 
         ? Math.round(fontBase * multiplier)
-        : (fontBase * multiplier).toFixed(3);
-      vars.push(`  --font-${token}: ${value}${unit};`);
+        : parseFloat((fontBase * multiplier).toFixed(3));
+      vars.push(`  --font-${token}: ${formatMultiplier(value)}${unit};`);
     });
   }
   return vars;
 }
 
-function _generateSpacingVars(config: ScaleConfig, _unit: 'rem' | 'px'): string[] {
+function _generateSpacingVars(config: ScaleConfig, unit: 'rem' | 'px'): string[] {
   const vars: string[] = [];
   if (usedTokens.spacing.size > 0) {
     vars.push('\n  /* Spacing Tokens */');
+    const spacingBase = unit === 'px' ? 4 : 0.25; // 4px or 0.25rem
     const spacingConfig = config.spacing || DEFAULT_SCALE_CONFIG.spacing;
     
     usedTokens.spacing.forEach(token => {
       const step = getTokenStep(token, 'spacing');
-      const multiplier = calculateSpacingMultiplier(step, spacingConfig);
-      // Use calc() for dynamic scaling with unit
-      vars.push(`  --spacing-${token}: calc(var(--spacing) * ${multiplier});`);
+      const multiplier = calculateMultiplier(step, spacingConfig, 'spacing');
+      const value = unit === 'px' 
+        ? Math.round(spacingBase * multiplier)
+        : parseFloat((spacingBase * multiplier).toFixed(3));
+      vars.push(`  --spacing-${token}: ${formatMultiplier(value)}${unit};`);
     });
   }
   return vars;
@@ -106,16 +109,16 @@ function _generateSizeVars(config: ScaleConfig, unit: 'rem' | 'px'): string[] {
   const vars: string[] = [];
   if (usedTokens.size.size > 0) {
     vars.push('\n  /* Size Tokens */');
-    const sizeBase = unit === 'px' ? 16 : 1; // 16px or 1rem
+    const sizeBase = unit === 'px' ? 16 : 1;
     const sizeConfig = config.size || DEFAULT_SCALE_CONFIG.size;
     
     usedTokens.size.forEach(token => {
       const step = getTokenStep(token, 'size');
-      const multiplier = calculateSizeMultiplier(step, sizeConfig);
+      const multiplier = calculateMultiplier(step, sizeConfig, 'size');
       const value = unit === 'px' 
         ? Math.round(sizeBase * multiplier)
-        : (sizeBase * multiplier).toFixed(3);
-      vars.push(`  --size-${token}: ${value}${unit};`);
+        : parseFloat((sizeBase * multiplier).toFixed(3));
+      vars.push(`  --size-${token}: ${formatMultiplier(value)}${unit};`);
     });
   }
   return vars;
@@ -169,20 +172,6 @@ function _generateContainerVars(_config: ScaleConfig, unit: 'rem' | 'px'): strin
 export function generateUsedTokensCSS(config: ScaleConfig = DEFAULT_SCALE_CONFIG): string {
   const cssVars: string[] = [];
   const unit = config.unit || 'px';
-  
-  // Base CSS variables
-  cssVars.push('  /* Base Variables */');
-  if (unit === 'px') {
-    cssVars.push('  --spacing: 4px;');
-    cssVars.push('  --font-base: 16px;');
-    cssVars.push('  --size-base: 16px;');
-    cssVars.push('  --container-base: 320px;');
-  } else {
-    cssVars.push('  --spacing: 0.25rem;');
-    cssVars.push('  --font-base: 1rem;');
-    cssVars.push('  --size-base: 1rem;');
-    cssVars.push('  --container-base: 20rem;');
-  }
   
   // Generate vars for each category using helper functions
   cssVars.push(..._generateFontVars(config, unit));

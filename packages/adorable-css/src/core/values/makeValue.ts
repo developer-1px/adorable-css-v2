@@ -1,6 +1,6 @@
 import { colorPalette } from '../../design-system/colors/colors'
 import { isToken } from '../../design-system/tokens/index'
-import { generateSpacingCalc, generateFontCalc, generateSizeCalc } from './dynamicTokens'
+import { generateSpacingCalc, generateFontCalc, generateSizeCalc } from '../../tokens/dynamicTokens'
 
 // Base colors with actual hex values for gradient generation
 const baseColorValues: Record<string, string> = {

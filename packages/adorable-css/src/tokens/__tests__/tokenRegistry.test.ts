@@ -5,7 +5,7 @@ import {
   generateUsedTokensCSS,
   getUsedTokens 
 } from '../tokenRegistry'
-import { DEFAULT_SCALE_CONFIG } from '../../config/scaleConfig'
+import { DEFAULT_SCALE_CONFIG } from '../scaleConfig'
 
 describe('tokenRegistry', () => {
   beforeEach(() => {
@@ -48,9 +48,9 @@ describe('tokenRegistry', () => {
       
       const css = generateUsedTokensCSS()
       
-      expect(css).toContain('--spacing-sm: calc(var(--spacing) * 2)')
-      expect(css).toContain('--spacing-md: calc(var(--spacing) * 3)')
-      expect(css).toContain('--spacing-lg: calc(var(--spacing) * 4)')
+      expect(css).toContain('--spacing-sm: 8px')
+      expect(css).toContain('--spacing-md: 12px')
+      expect(css).toContain('--spacing-lg: 16px')
     })
 
     it('should generate CSS for used font tokens', () => {
@@ -72,15 +72,13 @@ describe('tokenRegistry', () => {
       
       const css = generateUsedTokensCSS()
       
-      expect(css).toContain('--spacing-12xl: calc(var(--spacing) * 16)')
+      expect(css).toContain('--spacing-12xl: 64px')
       expect(css).toContain('--font-20xl:')
     })
 
-    it('should generate CSS with base variables when no tokens are used', () => {
+    it('should generate empty CSS when no tokens are used', () => {
       const css = generateUsedTokensCSS()
-      expect(css).toContain(':root {')
-      expect(css).toContain('/* Base Variables */')
-      expect(css).toContain('--spacing: 4px;')
+      expect(css).toBe(':root {\n}')
     })
 
     it('should use custom scale config', () => {
@@ -109,12 +107,9 @@ describe('tokenRegistry', () => {
       }
       
       const css = generateUsedTokensCSS(remConfig)
-      expect(css).toContain('--spacing: 0.25rem;')
-      expect(css).toContain('--font-base: 1rem;')
-      expect(css).toContain('--font-md:')
-      expect(css).toContain('rem;')
-      expect(css).toContain('--size-xl:')
-      expect(css).toContain('rem;')
+      expect(css).toContain('--font-md: 1rem;')
+      expect(css).toContain('--spacing-lg: 1rem;')
+      expect(css).toContain('--size-xl: 2.441rem;')
     })
   })
 })

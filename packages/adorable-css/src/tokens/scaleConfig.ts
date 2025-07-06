@@ -5,26 +5,22 @@
 
 export type ScaleMode = 'linear' | 'exponential' | 'ratio' | 'custom';
 
-export interface SpacingScaleConfig {
+/**
+ * Unified scale configuration interface
+ */
+export interface TokenScaleConfig {
   mode: ScaleMode;
   base?: number;      // Base value for md
-  factor?: number;    // Factor for exponential/ratio modes
+  ratio?: number;     // Ratio for ratio/exponential modes (e.g., 1.25, 1.333, 1.618)
+  factor?: number;    // Factor for exponential modes
   formula?: (step: number) => number;  // Custom formula
-  values?: Record<string, number>;  // Custom values for specific steps
+  values?: Record<string, number>;     // Custom values for specific steps
 }
 
-export interface FontScaleConfig {
-  mode: 'ratio' | 'modular' | 'custom';
-  ratio: number;      // 1.25 (Major Third), 1.333 (Perfect Fourth), 1.618 (Golden Ratio)
-  formula?: (step: number) => number;
-  custom?: Record<string, number>;  // Custom values for specific steps
-}
-
-export interface SizeScaleConfig {
-  mode: 'ratio' | 'linear' | 'custom';
-  ratio: number;
-  formula?: (step: number) => number;
-}
+// Legacy interfaces for backwards compatibility
+export type SpacingScaleConfig = TokenScaleConfig;
+export type FontScaleConfig = TokenScaleConfig;
+export type SizeScaleConfig = TokenScaleConfig;
 
 export interface ScaleConfig {
   spacing?: SpacingScaleConfig;

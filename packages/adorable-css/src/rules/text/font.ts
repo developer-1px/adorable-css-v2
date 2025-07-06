@@ -1,7 +1,7 @@
 import type { CSSRule, RuleHandler } from '../types';
 import { px, percentToEm, makeNumber, makeClamp, makeRangeClamp, pxWithClamp } from '../../core/values/makeValue';
-import { isToken, getTokenVar, defaultTokens } from '../../design-system/tokens/index';
-import { generateFontCalc } from '../../core/values/dynamicTokens';
+import { isToken, getTokenVar } from '../../design-system/tokens/index';
+import { generateFontCalc } from '../../tokens/dynamicTokens';
 
 export const font: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
@@ -40,8 +40,16 @@ export const font: RuleHandler = (args?: string): CSSRule => {
         // Handle 'base' as alias for 'md'
         if (maxToken === 'base') maxToken = 'md';
         if (isToken(maxToken, 'font')) {
-          // Use generateFontCalc for dynamic tokens
-          result['font-size'] = `clamp(0.8rem, 2vw, ${generateFontCalc(maxToken)})`;
+          // Calculate proper clamp using responsive typography formula
+          // Assume: min size = 1rem at 320px viewport, max size = token value at 1200px viewport
+          const minSize = 1; // 1rem
+          const minWidth = 320; // px
+          const _maxWidth = 1200; // px
+          // We'll use a ratio to estimate max size (tokens are usually larger)
+          const slope = 0.00227; // (2.5 - 1) / (1200 - 320) = 1.5 / 880
+          const yIntercept = -minWidth * slope + minSize; // -320 * 0.00227 + 1 = 0.274
+          const preferredValue = `${yIntercept.toFixed(3)}rem + ${(slope * 100).toFixed(3)}vw`;
+          result['font-size'] = `clamp(${minSize}rem, ${preferredValue}, ${generateFontCalc(maxToken)})`;
         } else {
           // For non-token values
           const maxValue = parseFloat(part.slice(2));
@@ -60,8 +68,16 @@ export const font: RuleHandler = (args?: string): CSSRule => {
         // Handle 'base' as alias for 'md'
         if (minToken === 'base') minToken = 'md';
         if (isToken(minToken, 'font')) {
-          // Use generateFontCalc for dynamic tokens
-          result['font-size'] = `clamp(${generateFontCalc(minToken)}, 2vw, 2rem)`;
+          // Calculate proper clamp using responsive typography formula
+          // Scale from token value to a reasonable max (6rem) between 320px-1200px
+          const maxSize = 6; // 6rem
+          const minWidth = 320; // px
+          const _maxWidth = 1200; // px
+          // For scaling up from a token, use a more aggressive slope
+          const slope = 0.00568; // (6 - 1) / (1200 - 320) = 5 / 880
+          const yIntercept = -minWidth * slope + maxSize; // -320 * 0.00568 + 6 = 4.18
+          const preferredValue = `${yIntercept.toFixed(3)}rem + ${(slope * 100).toFixed(3)}vw`;
+          result['font-size'] = `clamp(${generateFontCalc(minToken)}, ${preferredValue}, ${maxSize}rem)`;
         } else {
           // For non-token values
           const minValue = parseFloat(part.slice(0, -2));

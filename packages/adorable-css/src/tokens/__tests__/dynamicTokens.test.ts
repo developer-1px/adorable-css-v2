@@ -4,7 +4,7 @@ import {
   generateFontCalc,
   generateSizeCalc 
 } from '../dynamicTokens'
-import { clearTokenRegistry, getUsedTokens } from '../../runtime/tokenRegistry'
+import { clearTokenRegistry, getUsedTokens } from '../tokenRegistry'
 
 describe('dynamicTokens', () => {
   beforeEach(() => {

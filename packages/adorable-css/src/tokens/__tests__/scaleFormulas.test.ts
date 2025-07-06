@@ -41,13 +41,13 @@ describe('scaleFormulas', () => {
       expect(calculateSpacingMultiplier(1, config)).toBe(0.5)
       expect(calculateSpacingMultiplier(2, config)).toBe(1)
       expect(calculateSpacingMultiplier(3, config)).toBe(2)
-      expect(calculateSpacingMultiplier(4, config)).toBe(4) // Falls back to linear
+      expect(calculateSpacingMultiplier(4, config)).toBeCloseTo(1.953125, 4) // Falls back to ratio
     })
   })
 
   describe('calculateFontMultiplier', () => {
     it('should calculate font multipliers with ratio', () => {
-      const config = { ratio: 1.25 }
+      const config = { mode: 'ratio' as const, ratio: 1.25 }
       
       expect(calculateFontMultiplier(-2, config)).toBeCloseTo(0.64, 2)
       expect(calculateFontMultiplier(-1, config)).toBeCloseTo(0.8, 2)
@@ -58,8 +58,9 @@ describe('scaleFormulas', () => {
 
     it('should use custom font values when provided', () => {
       const config = { 
+        mode: 'custom' as const,
         ratio: 1.25,
-        custom: { '-1': 0.875, '0': 1, '1': 1.125 } 
+        values: { '-1': 0.875, '0': 1, '1': 1.125 } 
       }
       
       expect(calculateFontMultiplier(-1, config)).toBe(0.875)

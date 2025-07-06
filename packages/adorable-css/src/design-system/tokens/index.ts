@@ -13,7 +13,7 @@ import {
   generateFontCalc, 
   generateSizeCalc, 
   generateContainerCalc 
-} from '../../core/values/dynamicTokens';
+} from '../../tokens/dynamicTokens';
 
 // Semantic color configuration
 export interface SemanticColorConfig {

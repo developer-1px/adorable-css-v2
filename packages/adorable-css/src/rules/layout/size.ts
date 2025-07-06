@@ -1,7 +1,7 @@
 import type { CSSRule, RuleHandler } from '../types';
 import { px, pxWithClamp } from '../../core/values/makeValue';
 import { isToken } from '../../design-system/tokens/index';
-import { generateSizeCalc, generateContainerCalc } from '../../core/values/dynamicTokens';
+import { generateSizeCalc, generateContainerCalc } from '../../tokens/dynamicTokens';
 
 // Width utilities
 export const w: RuleHandler = (args?: string): CSSRule => {
