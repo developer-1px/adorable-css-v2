@@ -45,28 +45,19 @@ export const SCALE_RATIOS = {
 
 /**
  * Generate a modular scale based on configuration
+ * Note: This is now primarily used for validation, not for generating CSS values
  */
-export function generateScale(config: ScaleConfig): Record<ScaleStep, string> {
-  const { base, ratio, unit = 'rem', precision = 3, clamp } = config;
-  const mdIndex = SCALE_STEPS.indexOf('md');
+export function generateScale(_config: ScaleConfig): Record<ScaleStep, string> {
+  // const mdIndex = SCALE_STEPS.indexOf('md'); // Not used anymore
   const scale: Partial<Record<ScaleStep, string>> = {};
 
-  SCALE_STEPS.forEach((step, index) => {
+  SCALE_STEPS.forEach((step) => {
     // Calculate position relative to md (0)
-    const n = index - mdIndex;
+    // const n = index - mdIndex; // Not used anymore since we just store token names
     
-    // Calculate raw value using exponential scale
-    let value = base * Math.pow(ratio, n);
-    
-    // Apply clamping if specified
-    if (clamp) {
-      if (clamp.min !== undefined) value = Math.max(value, clamp.min);
-      if (clamp.max !== undefined) value = Math.min(value, clamp.max);
-    }
-    
-    // Convert to specified unit
-    const formattedValue = formatValue(value, unit, precision);
-    scale[step] = formattedValue;
+    // Simply store the token name as placeholder
+    // Actual calc() generation happens at runtime in dynamicTokens.ts
+    scale[step] = step;
   });
 
   return scale as Record<ScaleStep, string>;
@@ -74,82 +65,23 @@ export function generateScale(config: ScaleConfig): Record<ScaleStep, string> {
 
 /**
  * Generate spacing scale with various patterns
+ * Note: This is now primarily used for validation, not for generating CSS values
  */
-export function generateSpacingScale(config: SpacingConfig): Record<ScaleStep, string> {
-  const { baseUnit, scale, unit = 'rem' } = config;
+export function generateSpacingScale(_config: SpacingConfig): Record<ScaleStep, string> {
   const result: Partial<Record<ScaleStep, string>> = {};
   
-  // Get multipliers based on scale type
-  const multipliers = getSpacingMultipliers(scale);
-  
-  SCALE_STEPS.forEach((step, index) => {
-    if (index < multipliers.length) {
-      const value = baseUnit * multipliers[index];
-      result[step] = formatValue(value, unit);
-    }
+  // Simply store token names as placeholders
+  // Actual calc() generation happens at runtime in dynamicTokens.ts
+  SCALE_STEPS.forEach((step) => {
+    result[step] = step;
   });
   
   return result as Record<ScaleStep, string>;
 }
 
-/**
- * Get spacing multipliers based on scale type
- */
-function getSpacingMultipliers(scale: SpacingConfig['scale']): number[] {
-  if (Array.isArray(scale)) {
-    return scale;
-  }
-  
-  switch (scale) {
-    case 'linear':
-      // Simple linear progression: 0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4, 6, 8, 12, 16, 20, 24, 32, 40
-      return [0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4, 6, 8, 12, 16, 20, 24, 32, 40];
-      
-    case 'fibonacci':
-      // Fibonacci-like progression: 0.5, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610
-      return [0.5, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610].map(n => n / 5);
-      
-    case 'progressive':
-      // Tighter at small sizes, looser at large (IBM Carbon inspired)
-      return [0.25, 0.5, 0.75, 1, 1.25, 1.5, 2, 2.5, 3, 4, 5, 6, 8, 10, 12, 16];
-      
-    case 'exponential':
-      // Exponential growth
-      return Array.from({ length: 16 }, (_, i) => {
-        const n = i - 5; // md is at index 5
-        return Math.pow(1.5, n);
-      });
-      
-    default:
-      return [];
-  }
-}
+// Removed unused function getSpacingMultipliers - now using dynamic calc() system
 
-/**
- * Format value with unit conversion
- */
-function formatValue(value: number, unit: string, precision = 3): string {
-  let convertedValue: number;
-  
-  switch (unit) {
-    case 'rem':
-    case 'em':
-      convertedValue = value / 16; // Convert px to rem/em
-      break;
-    case 'px':
-    default:
-      convertedValue = value;
-      break;
-  }
-  
-  // Round to specified precision
-  const rounded = Math.round(convertedValue * Math.pow(10, precision)) / Math.pow(10, precision);
-  
-  // Remove trailing zeros
-  const formatted = rounded.toString();
-  
-  return `${formatted}${unit}`;
-}
+// Removed unused function formatValue - now using dynamic calc() system
 
 /**
  * Preset configurations for common use cases
@@ -258,8 +190,27 @@ export function generateTokenScales(config: TokenSystemConfig = defaultScaleConf
   return {
     font: scales.fontSize || generateScale(config.typography || defaultScaleConfig.typography!),
     spacing: scales.spacing || generateSpacingScale(config.spacing || defaultScaleConfig.spacing!),
-    size: scales.size || generateScale(config.sizing || defaultScaleConfig.sizing!),
-    container: generateScale(containerConfig)
+    size: {
+      ...(scales.size || generateScale(config.sizing || defaultScaleConfig.sizing!)),
+      // Special sizes
+      'auto': 'auto',
+      'full': '100%',
+      'screen': '100vw',
+      'min': 'min-content',
+      'max': 'max-content',
+      'fit': 'fit-content'
+    } as any,
+    container: {
+      ...generateScale(containerConfig),
+      // Special container values
+      'auto': 'auto',
+      'full': '100%',
+      'screen': '100vw',
+      'min': 'min-content',
+      'max': 'max-content',
+      'fit': 'fit-content',
+      'prose': '65ch'
+    } as any
   };
 }
 

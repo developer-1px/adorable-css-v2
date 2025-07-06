@@ -5,201 +5,22 @@ import type { RuleHandler, CSSRule } from '../../rules/types';
 
 // Animation keyframes definitions
 export const animationKeyframes = {
-  'fade-up': `
-    @keyframes fade-up {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  `,
-  'fade-down': `
-    @keyframes fade-down {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  `,
-  'fade-left': `
-    @keyframes fade-left {
-      from {
-        opacity: 0;
-        transform: translateX(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-  `,
-  'fade-right': `
-    @keyframes fade-right {
-      from {
-        opacity: 0;
-        transform: translateX(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-  `,
-  'fade-in': `
-    @keyframes fade-in {
-      from {
-        opacity: 0;
-      }
-      to {
-        opacity: 1;
-      }
-    }
-  `,
-  'scale-up': `
-    @keyframes scale-up {
-      from {
-        opacity: 0;
-        transform: scale(0.95);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-  `,
-  'scale-down': `
-    @keyframes scale-down {
-      from {
-        opacity: 0;
-        transform: scale(1.05);
-      }
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-  `,
-  'slide-up': `
-    @keyframes slide-up {
-      from {
-        transform: translateY(100%);
-      }
-      to {
-        transform: translateY(0);
-      }
-    }
-  `,
-  'slide-down': `
-    @keyframes slide-down {
-      from {
-        transform: translateY(-100%);
-      }
-      to {
-        transform: translateY(0);
-      }
-    }
-  `,
-  'bounce-in': `
-    @keyframes bounce-in {
-      0% {
-        opacity: 0;
-        transform: scale(0.8);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1.02);
-      }
-      70% {
-        transform: scale(0.98);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
-      }
-    }
-  `,
-  'float': `
-    @keyframes float {
-      0%, 100% {
-        transform: translate(0, 0) scale(1);
-      }
-      25% {
-        transform: translate(40px, -60px) scale(1.02);
-      }
-      50% {
-        transform: translate(-30px, 40px) scale(0.98);
-      }
-      75% {
-        transform: translate(50px, 20px) scale(1.01);
-      }
-    }
-  `,
-  'float-slow': `
-    @keyframes float-slow {
-      0%, 100% {
-        transform: translate(0, 0) scale(1);
-      }
-      33% {
-        transform: translate(30px, -30px) scale(1.05);
-      }
-      66% {
-        transform: translate(-20px, 20px) scale(0.95);
-      }
-    }
-  `,
-  'float-reverse': `
-    @keyframes float-reverse {
-      0%, 100% {
-        transform: translate(0, 0) scale(1);
-      }
-      33% {
-        transform: translate(-30px, 30px) scale(0.95);
-      }
-      66% {
-        transform: translate(20px, -20px) scale(1.05);
-      }
-    }
-  `,
-  'pulse': `
-    @keyframes pulse {
-      0%, 100% {
-        opacity: 1;
-      }
-      50% {
-        opacity: 0.5;
-      }
-    }
-  `,
-  'slide-in': `
-    @keyframes slide-in {
-      from {
-        width: 0;
-      }
-      to {
-        width: 100%;
-      }
-    }
-  `,
-  'fade-in-up': `
-    @keyframes fade-in-up {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  `
+  'fade-up': '@keyframes fade-up{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}',
+  'fade-down': '@keyframes fade-down{from{opacity:0;transform:translateY(-30px)}to{opacity:1;transform:translateY(0)}}',
+  'fade-left': '@keyframes fade-left{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}',
+  'fade-right': '@keyframes fade-right{from{opacity:0;transform:translateX(30px)}to{opacity:1;transform:translateX(0)}}',
+  'fade-in': '@keyframes fade-in{from{opacity:0}to{opacity:1}}',
+  'scale-up': '@keyframes scale-up{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}',
+  'scale-down': '@keyframes scale-down{from{opacity:0;transform:scale(1.05)}to{opacity:1;transform:scale(1)}}',
+  'slide-up': '@keyframes slide-up{from{transform:translateY(100%)}to{transform:translateY(0)}}',
+  'slide-down': '@keyframes slide-down{from{transform:translateY(-100%)}to{transform:translateY(0)}}',
+  'bounce-in': '@keyframes bounce-in{0%{opacity:0;transform:scale(.8)}50%{opacity:1;transform:scale(1.02)}70%{transform:scale(.98)}100%{opacity:1;transform:scale(1)}}',
+  'float': '@keyframes float{0%,100%{transform:translate(0,0)scale(1)}25%{transform:translate(40px,-60px)scale(1.02)}50%{transform:translate(-30px,40px)scale(.98)}75%{transform:translate(50px,20px)scale(1.01)}}',
+  'float-slow': '@keyframes float-slow{0%,100%{transform:translate(0,0)scale(1)}33%{transform:translate(30px,-30px)scale(1.05)}66%{transform:translate(-20px,20px)scale(.95)}}',
+  'float-reverse': '@keyframes float-reverse{0%,100%{transform:translate(0,0)scale(1)}33%{transform:translate(-30px,30px)scale(.95)}66%{transform:translate(20px,-20px)scale(1.05)}}',
+  'pulse': '@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}',
+  'slide-in': '@keyframes slide-in{from{width:0}to{width:100%}}',
+  'fade-in-up': '@keyframes fade-in-up{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}'
 };
 
 // Get all keyframes as CSS string
@@ -214,9 +35,9 @@ const easingFunctions: Record<string, string> = {
   'ease-out': 'ease-out',
   'ease-in-out': 'ease-in-out',
   'linear': 'linear',
-  'bounce': 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-  'elastic': 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
-  'smooth': 'cubic-bezier(0.4, 0, 0.2, 1)'
+  'bounce': 'cubic-bezier(.68,-.55,.265,1.55)',
+  'elastic': 'cubic-bezier(.68,-.55,.265,1.55)',
+  'smooth': 'cubic-bezier(.4,0,.2,1)'
 };
 
 // Parse animation value using AdorableCSS slash notation
@@ -230,7 +51,7 @@ function parseAnimationValue(value: string): {
   fillMode: string;
 } {
   const result = {
-    duration: '0.8s',
+    duration: '.8s',
     delay: '0s', 
     easing: 'ease-out',
     iteration: '1',
@@ -245,9 +66,9 @@ function parseAnimationValue(value: string): {
   parts.forEach(part => {
     const trimmed = part.trim();
     
-    // Duration (e.g., 0.8s, 500ms, 1.2s)
-    if (trimmed.match(/^\d+(\.\d+)?(ms|s)$/)) {
-      result.duration = trimmed;
+    // Duration (e.g., .8s, 500ms, 1.2s)
+    if (trimmed.match(/^\d*\.?\d+(ms|s)$/)) {
+      result.duration = trimmed.startsWith('0.') ? trimmed.substring(1) : trimmed;
     }
     // Delay with colon notation (e.g., delay:300ms, delay:1s)
     else if (trimmed.startsWith('delay:')) {

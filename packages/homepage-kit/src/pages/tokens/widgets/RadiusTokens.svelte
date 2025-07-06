@@ -45,10 +45,10 @@
   <!-- Enhanced Section Header -->
   <div class="text(center) relative">
     <!-- Floating decoration -->
-    <div class="absolute top(-20px) left(50%) translate-x(-50%) w(200px) h(1px) bg(to-r/transparent..orange-300..transparent) opacity(60)"></div>
+    <div class="absolute top(-xl) left(50%) translate-x(-50%) w(lg) h(xs) bg(to-r/transparent..orange-300..transparent) opacity(60)"></div>
     
     <div class="hbox(pack) gap(md) mb(xl)">
-      <div class="p(md) r(full) bg(to-br/orange-100..amber-100) border(1px/orange-200)">
+      <div class="p(md) r(full) bg(to-br/orange-100..amber-100) border(xs/orange-200)">
         <Circle size="24" class="c(orange-600)" />
       </div>
       <h2 class="display(lg) c(to-r/orange-600..amber-600)">Border Radius</h2>
@@ -75,8 +75,8 @@
   </div>
 
   <!-- Quick Radius Scale Overview -->
-  <div class="bg(white) r(3xl) shadow(xl) shadow(orange-100.3) overflow(hidden) border(1px/gray-100)">
-    <div class="bg(to-r/orange-50..amber-50) p(2xl) border-b(1px/orange-100)">
+  <div class="bg(white) r(3xl) shadow(xl) shadow(orange-100.3) overflow(hidden) border(xs/gray-100)">
+    <div class="bg(to-r/orange-50..amber-50) p(2xl) border-b(xs/orange-100)">
       <div class="hbox(between/middle) mb(xl)">
         <div>
           <h3 class="heading(h2) c(gray-900) mb(sm)">Radius Scale</h3>
@@ -96,7 +96,7 @@
           {#each radiusVariants as { key, value }}
             <div class="vbox(center) gap(sm)">
               <!-- Visual square with radius -->
-              <div class="w(48px) h(48px) bg(to-br/orange-400..amber-500) r({key}) shadow(md) hover:shadow(lg) transition"></div>
+              <div class="w(4xl) h(4xl) bg(to-br/orange-400..amber-500) r({key}) shadow(md) hover:shadow(lg) transition"></div>
               <!-- Label -->
               <div class="text(xs) c(gray-600) font(mono)">{key}</div>
               <div class="text(xs) c(gray-500) font(mono)">{value}</div>

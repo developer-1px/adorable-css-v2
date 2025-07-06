@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { headingString } from '../../components/primitives/heading';
+import { headingString } from '../../components/primitives/typography/heading';
 
 describe('heading component size variants', () => {
   it('should apply default size when no argument', () => {
@@ -37,7 +37,7 @@ describe('heading component size variants', () => {
     const result = headingString('display/gradient');
     console.log('heading(display/gradient):', result);
     expect(result).toContain('font(..6xl/1/-4%)');
-    expect(result).toContain('c(gradient(135deg/indigo-600..purple-600..pink-600))');
+    expect(result).toContain('c(135deg/indigo-600..purple-600..pink-600)');
   });
 
   it('should handle variant/size combination', () => {

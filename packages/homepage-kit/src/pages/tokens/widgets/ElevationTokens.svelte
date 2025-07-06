@@ -99,11 +99,11 @@
     </p>
     <div class="hbox gap(md) text(sm)">
       <div class="hbox(middle) gap(xs)">
-        <span class="w(8px) h(8px) r(full) bg(purple-600)"></span>
+        <span class="w(sm) h(sm) r(full) bg(purple-600)"></span>
         <span class="c(purple-700)">Key Shadow: Directional depth</span>
       </div>
       <div class="hbox(middle) gap(xs)">
-        <span class="w(8px) h(8px) r(full) bg(purple-400)"></span>
+        <span class="w(sm) h(sm) r(full) bg(purple-400)"></span>
         <span class="c(purple-700)">Ambient Shadow: Soft depth</span>
       </div>
     </div>
@@ -152,8 +152,8 @@
             </div>
 
             <!-- Visual demonstration -->
-            <div class="relative h(80px) bg(gray-50) r(lg) overflow(hidden) hbox(pack) items(center)">
-              <div class="w(60px) h(60px) bg(white) r(lg) elevation({level}) hbox(pack) items(center)">
+            <div class="relative h(4xl) bg(gray-50) r(lg) overflow(hidden) hbox(pack) items(center)">
+              <div class="w(3xl) h(3xl) bg(white) r(lg) elevation({level}) hbox(pack) items(center)">
                 <span class="text(xs) c(gray-500) font(bold)">{level}</span>
               </div>
             </div>
@@ -224,7 +224,7 @@
       <!-- Do's -->
       <div class="vbox gap(md)">
         <h4 class="font(md) bold c(green-700) hbox(middle) gap(xs)">
-          <span class="w(12px) h(12px) r(full) bg(green-500)"></span>
+          <span class="w(md) h(md) r(full) bg(green-500)"></span>
           Do's
         </h4>
         <ul class="vbox gap(sm) text(sm) c(green-800)">
@@ -250,7 +250,7 @@
       <!-- Don'ts -->
       <div class="vbox gap(md)">
         <h4 class="font(md) bold c(red-700) hbox(middle) gap(xs)">
-          <span class="w(12px) h(12px) r(full) bg(red-500)"></span>
+          <span class="w(md) h(md) r(full) bg(red-500)"></span>
           Don'ts
         </h4>
         <ul class="vbox gap(sm) text(sm) c(red-800)">

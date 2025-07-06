@@ -1,6 +1,7 @@
 import type { CSSRule, RuleHandler } from '../types';
 import { px, percentToEm, makeNumber, makeClamp, makeRangeClamp, pxWithClamp } from '../../core/values/makeValue';
 import { isToken, getTokenVar, defaultTokens } from '../../design-system/tokens/index';
+import { generateFontCalc } from '../../core/values/dynamicTokens';
 
 export const font: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
@@ -15,7 +16,7 @@ export const font: RuleHandler = (args?: string): CSSRule => {
   // Handle 'base' as alias for 'md'
   const tokenName = args === 'base' ? 'md' : args;
   if (isToken(tokenName, 'font')) {
-    return { 'font-size': getTokenVar('font', tokenName) };
+    return { 'font-size': generateFontCalc(tokenName) };
   }
   
   const parts = args.split('/');
@@ -113,9 +114,18 @@ export const font: RuleHandler = (args?: string): CSSRule => {
       // Handle 'base' as alias for 'md'
       const tokenName = part === 'base' ? 'md' : part;
       if (isToken(tokenName, 'font')) {
-        result['font-size'] = getTokenVar('font', tokenName);
+        result['font-size'] = generateFontCalc(tokenName);
       } else {
-        result['font-size'] = String(pxWithClamp(part));
+        // Check if it's a font family name first
+        const fontFamilyKeywords = ['mono', 'sans', 'serif', 'system', 'inter', 'sf-mono'];
+        if (fontFamilyKeywords.includes(part)) {
+          const familyResult = fontFamily(part);
+          Object.assign(result, familyResult);
+        } else if (part.match(/^\d+(\.\d+)?(px|rem|em|%)?$/)) {
+          // Only process as font-size if it looks like a valid size value
+          result['font-size'] = String(pxWithClamp(part));
+        }
+        // Otherwise ignore the value (don't set any CSS property)
       }
       return;
     }

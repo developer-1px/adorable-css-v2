@@ -1,12 +1,13 @@
 import type { CSSRule, RuleHandler } from "../types";
 import { px as toPx, pxWithClamp } from '../../core/values/makeValue';
-import { isToken, getTokenVar } from '../../design-system/tokens/index';
+import { isToken } from '../../design-system/tokens/index';
+import { generateSpacingCalc } from '../../core/values/dynamicTokens';
 
 type Prefix = "" | "x" | "y" | "t" | "b" | "l" | "r";
 
 const makeSpacingRule = (type: 'padding' | 'margin', prefix: Prefix): RuleHandler => (args?: string): CSSRule => {
   const prop = type;
-  const def = getTokenVar('spacing', 'md');
+  const def = generateSpacingCalc('md'); // Use dynamic calc instead of CSS var
   
   if (!args) {
     if (prefix === "") return { [prop]: def };
@@ -19,7 +20,18 @@ const makeSpacingRule = (type: 'padding' | 'margin', prefix: Prefix): RuleHandle
     return prefix === "x" ? { "padding-left": "0.6em", "padding-right": "0.6em" } : { "padding-top": "0.2em", "padding-bottom": "0.2em" };
   }
   
-  const vals = args.split("/").map(v => isToken(v, 'spacing') ? getTokenVar('spacing', v) : String(pxWithClamp(v)));
+  const vals = args.split("/").map(v => {
+    if (isToken(v, 'spacing')) {
+      return generateSpacingCalc(v);
+    } else {
+      const processed = String(pxWithClamp(v));
+      // Reject invalid tokens that return themselves
+      if (processed === v && !v.match(/^\d+(\.\d+)?(px|rem|em|%)?$/)) {
+        return '0'; // Default to 0 for invalid values
+      }
+      return processed;
+    }
+  });
   
   if (prefix === "") {
     if (vals.length === 1) return { [prop]: vals[0] };
@@ -52,9 +64,9 @@ export const mr = makeSpacingRule('margin', 'r');
 
 // Gap
 export const gap: RuleHandler = (args?: string): CSSRule => {
-  if (!args) return { gap: getTokenVar('spacing', 'md') };
+  if (!args) return { gap: generateSpacingCalc('md') }; // Use dynamic calc
   if (args === 'auto') return { gap: 'auto', 'justify-content': 'space-between', 'align-content': 'space-between' };
-  return { gap: isToken(args, 'spacing') ? getTokenVar('spacing', args) : String(toPx(args)) };
+  return { gap: isToken(args, 'spacing') ? generateSpacingCalc(args) : String(toPx(args)) };
 };
 
 export const spacingRules = { p, px, py, pt, pb, pl, pr, gap, m, mx, my, mt, mb, ml, mr };

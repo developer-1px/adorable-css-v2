@@ -1,6 +1,7 @@
 import type { CSSRule, RuleHandler } from '../types';
 import { px, pxWithClamp } from '../../core/values/makeValue';
-import { isToken, getTokenVar } from '../../design-system/tokens/index';
+import { isToken } from '../../design-system/tokens/index';
+import { generateSizeCalc, generateContainerCalc } from '../../core/values/dynamicTokens';
 
 // Width utilities
 export const w: RuleHandler = (args?: string): CSSRule => {
@@ -16,14 +17,9 @@ export const w: RuleHandler = (args?: string): CSSRule => {
   if (args === 'screen') return { width: '100vw' };
   if (args === 'fit') return { width: 'fit-content' }; // Standard fit-content
   
-  // Check for container tokens first (for width utilities)
-  if (isToken(args, 'container')) {
-    return { width: getTokenVar('container', args) };
-  }
-  
-  // Fallback to size tokens for backward compatibility
+  // size tokens for backward compatibility
   if (isToken(args, 'size')) {
-    return { width: getTokenVar('size', args) };
+    return { width: generateSizeCalc(args) };
   }
   
   // w(300) or w(50%) with clamp support: w(sm..lg), w(300..800), w(clamp(300px,50vw,800px))
@@ -44,14 +40,9 @@ export const h: RuleHandler = (args?: string): CSSRule => {
   if (args === 'screen') return { height: '100vh' };
   if (args === 'fit') return { height: 'fit-content' }; // Standard fit-content
   
-  // Check for container tokens first (for height utilities)
-  if (isToken(args, 'container')) {
-    return { height: getTokenVar('container', args) };
-  }
-  
-  // Fallback to size tokens for backward compatibility
+  // size tokens for backward compatibility
   if (isToken(args, 'size')) {
-    return { height: getTokenVar('size', args) };
+    return { height: generateSizeCalc(args) };
   }
   
   // h(200) or h(50%) with clamp support: h(sm..lg), h(200..600), h(clamp(200px,30vh,600px))
@@ -69,12 +60,12 @@ export const minW: RuleHandler = (args?: string): CSSRule => {
   
   // Check for container tokens first
   if (isToken(args, 'container')) {
-    return { 'min-width': getTokenVar('container', args) };
+    return { 'min-width': generateContainerCalc(args) };
   }
   
   // Fallback to size tokens for backward compatibility
   if (isToken(args, 'size')) {
-    return { 'min-width': getTokenVar('size', args) };
+    return { 'min-width': generateSizeCalc(args) };
   }
   
   return { 'min-width': String(pxWithClamp(args)) };
@@ -92,12 +83,12 @@ export const maxW: RuleHandler = (args?: string): CSSRule => {
   
   // Check for container tokens first
   if (isToken(args, 'container')) {
-    return { 'max-width': getTokenVar('container', args) };
+    return { 'max-width': generateContainerCalc(args) };
   }
   
   // Fallback to size tokens for backward compatibility
   if (isToken(args, 'size')) {
-    return { 'max-width': getTokenVar('size', args) };
+    return { 'max-width': generateSizeCalc(args) };
   }
   
   return { 'max-width': String(pxWithClamp(args)) };
@@ -114,12 +105,12 @@ export const minH: RuleHandler = (args?: string): CSSRule => {
   
   // Check for container tokens first
   if (isToken(args, 'container')) {
-    return { 'min-height': getTokenVar('container', args) };
+    return { 'min-height': generateContainerCalc(args) };
   }
   
   // Fallback to size tokens for backward compatibility
   if (isToken(args, 'size')) {
-    return { 'min-height': getTokenVar('size', args) };
+    return { 'min-height': generateSizeCalc(args) };
   }
   
   return { 'min-height': String(pxWithClamp(args)) };
@@ -137,12 +128,12 @@ export const maxH: RuleHandler = (args?: string): CSSRule => {
   
   // Check for container tokens first
   if (isToken(args, 'container')) {
-    return { 'max-height': getTokenVar('container', args) };
+    return { 'max-height': generateContainerCalc(args) };
   }
   
   // Fallback to size tokens for backward compatibility
   if (isToken(args, 'size')) {
-    return { 'max-height': getTokenVar('size', args) };
+    return { 'max-height': generateSizeCalc(args) };
   }
   
   return { 'max-height': String(pxWithClamp(args)) };
@@ -196,7 +187,7 @@ export const size: RuleHandler = (args?: string): CSSRule => {
   
   // Check for size tokens
   if (isToken(args, 'size')) {
-    const tokenValue = getTokenVar('size', args);
+    const tokenValue = generateSizeCalc(args);
     return {
       width: tokenValue,
       height: tokenValue

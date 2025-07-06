@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { prose } from '../../components/patterns/prose';
-import { headingString } from '../../components/primitives/heading';
+import { headingString } from '../../components/primitives/typography/heading';
 
 describe('prose heading integration', () => {
   it('should test heading component directly', () => {

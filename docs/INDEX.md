@@ -1,160 +1,147 @@
-# 📚 AdorableCSS v2 Documentation
+# 📚 AdorableCSS Documentation
 
-> 사용자 여정에 따른 문서 가이드
+> **PARA 정리법**을 적용한 행동 지향적 문서 체계
 
-## 🎯 빠른 네비게이션
+## 🚀 빠른 시작
 
 ### 🆕 처음 시작하는 분
-1. **[🤔 Why AdorableCSS?](/docs/why-adorablecss)** - 왜 AdorableCSS인가?
-2. **[🚀 Quick Start](/docs/getting-started)** - 5분 안에 시작하기
-3. **[🎯 Cheat Sheet](/docs/cheat-sheet)** - 한 장으로 보는 핵심 문법
+1. **[🎨 디자인 철학](2-areas/design-system/DESIGN_PHILOSOPHY.md)** - AdorableCSS가 해결하는 문제
+2. **[📖 디자인 시스템 가이드](2-areas/design-system/DESIGN_SYSTEM_OVERVIEW.md)** - 실사용 방법
+3. **[📚 API 레퍼런스](2-areas/documentation/REFERENCE.md)** - 완전한 문법 가이드
 
 ### 🔄 마이그레이션 하는 분
-1. **[💙 TailwindCSS 사용자를 위한 10초 가이드](https://github.com/developer-1px/adorable-css-v2/blob/main/packages/homepage-kit/docs/TAILWIND_USERS.md)**
-2. **[🔄 전체 마이그레이션 가이드](/docs/migration-guide)**
-3. **[🍳 Cookbook](/docs/cookbook)** - 실무 레시피
-
-### 📚 깊이 있게 배우는 분
-1. **[📖 API Reference](/docs/reference)** - 전체 API 문서
-2. **[🎨 핵심 개념 시각화](https://github.com/developer-1px/adorable-css-v2/blob/main/docs/technical/CORE_CONCEPTS_VISUAL.md)**
-3. **[🎯 기능 추적](https://github.com/developer-1px/adorable-css-v2/blob/main/packages/homepage-kit/docs/features.md)**
-
-### 👥 팀/프로젝트 관리
-1. **[👥 팀 온보딩](/docs/team-onboarding)** - 새 팀원 가이드
-2. **[🚀 프로젝트 설정](/docs/project-setup)** - 초기 설정
-3. **[🏆 모범 사례](/docs/best-practices)** - 대규모 프로젝트
-4. **[🔌 통합 가이드](/docs/integration)** - 도구 통합
-
-### 🆘 문제 해결
-1. **[🔧 Troubleshooting](/docs/troubleshooting)** - 문제 해결 가이드
-2. **[🚀 성능 최적화](https://github.com/developer-1px/adorable-css-v2/blob/main/packages/homepage-kit/docs/guides/performance.md)**
-3. **[🤝 기여 가이드](https://github.com/developer-1px/adorable-css-v2/blob/main/packages/homepage-kit/docs/CONTRIBUTING.md)**
+- **[제품 전략](1-projects/planning/PRODUCT_STRATEGY.md)** - 로드맵과 비전
+- **[기술 사양](3-resources/best-practices/technical/)** - 구현 세부사항
 
 ---
 
-## 📁 전체 문서 구조
+## 📋 PARA 체계별 문서 구성
 
-### 🎯 Strategy (전략)
-핵심 비전, 제품 전략, 시장 분석 관련 문서들
+### 🎯 [1-projects/](1-projects/) - 진행 중인 프로젝트
+> 명확한 마감일과 결과물이 있는 작업들
 
-- **[PRODUCT_STRATEGY.md](https://github.com/developer-1px/adorable-css-v2/blob/main/docs/PRODUCT_STRATEGY.md)** - 📋 **메인 전략 문서**  
-  *핵심 비전, 로드맵, CSS Framework 완결성 전략*
-  
-- **[TECH_PITCH.md](https://github.com/developer-1px/adorable-css-v2/blob/main/docs/strategy/TECH_PITCH.md)** - 🎤 기술 피치 문서  
-  *AdorableCSS v2의 기술적 차별점과 비전*
-  
-- **[TECH_MESSAGING.md](https://github.com/developer-1px/adorable-css-v2/blob/main/docs/strategy/TECH_MESSAGING.md)** - 💬 기술 메시징  
-  *기술적 커뮤니케이션 전략*
-  
+#### 🚧 Active (현재 진행)
+- **[mdx/](5-public/mdx/)** - 웹사이트용 문서 시스템
 
-### 🔧 Technical (기술)
-기술 스펙, 구현 세부사항, 개발 가이드
+#### 📋 Planning (계획 단계)
+- **[PRODUCT_STRATEGY.md](1-projects/planning/PRODUCT_STRATEGY.md)** - 제품 전략 및 로드맵
+- **[strategy/](1-projects/planning/strategy/)** - 마케팅 & 기술 메시징
 
-- **[REFERENCE.md](/docs/reference)** - 📖 **API 레퍼런스**  
-  *전체 유틸리티 클래스 및 문법 가이드*
-  
-- **[CORE_CONCEPTS_VISUAL.md](https://github.com/developer-1px/adorable-css-v2/blob/main/docs/technical/CORE_CONCEPTS_VISUAL.md)** - 🎨 핵심 개념 시각화  
-  *Figma-first 개념과 시각적 설명*
-  
-- **[SYNTAX_UPDATES.md](https://github.com/developer-1px/adorable-css-v2/blob/main/docs/technical/SYNTAX_UPDATES.md)** - 🔄 문법 업데이트  
-  *최신 문법 변경사항 및 업데이트 내역*
+### 🏠 [2-areas/](2-areas/) - 지속 관리 영역
+> 지속적으로 관리해야 하는 책임 영역들
 
-### 🎨 Brand (브랜드)
-브랜드 아이덴티티, 디자인 언어, 시각적 가이드라인
+#### 🎨 Design System
+- **[DESIGN_PHILOSOPHY.md](2-areas/design-system/DESIGN_PHILOSOPHY.md)** - 핵심 철학 & 원칙
+- **[DESIGN_SYSTEM_OVERVIEW.md](2-areas/design-system/DESIGN_SYSTEM_OVERVIEW.md)** - 실사용 가이드
 
+#### 📖 Documentation  
+- **[REFERENCE.md](2-areas/documentation/REFERENCE.md)** - 완전한 API 레퍼런스
 
-### 🌐 Background (배경)
-프로젝트의 철학과 배경에 대한 깊이 있는 문서
+#### 👥 Community
+- **[development/](2-areas/community/development/)** - 개발 프로세스 & 실수 분석
+- **[onboarding/](2-areas/community/onboarding/)** - 신규 사용자 & AI 도구 온보딩
 
-- **[background-figma-compatibility.md](https://github.com/developer-1px/adorable-css-v2/blob/main/docs/background-figma-compatibility.md)** - 🔄 Figma 호환성 문제  
-  *Design to Code, Code to Design의 본질적 문제와 해결 방향*
+### 📚 [3-resources/](3-resources/) - 참고 자료
+> 미래에 참고할 수 있는 지식과 정보
 
-### 👩‍💻 Development (개발)
-개발 과정, 실수 분석, 개선 방향
+#### 🔬 Research
+- **[background-figma-compatibility.md](3-resources/research/background-figma-compatibility.md)** - Figma 호환성 철학
+- **[token-scale-generator.md](3-resources/research/token-scale-generator.md)** - 토큰 스케일 연구
 
-- **[ADORABLE_CSS_MISTAKES.md](https://github.com/developer-1px/adorable-css-v2/blob/main/docs/development/ADORABLE_CSS_MISTAKES.md)** - ⚠️ 실수 분석  
-  *개발 과정에서의 실수와 교훈, 개선 방향*
-  
-- **[features.md](https://github.com/developer-1px/adorable-css-v2/blob/main/packages/homepage-kit/docs/features.md)** - 🎯 기능 추적  
-  *완료, 진행 중, 계획된 모든 기능 추적*
-  
-- **[CONTRIBUTING.md](https://github.com/developer-1px/adorable-css-v2/blob/main/packages/homepage-kit/docs/CONTRIBUTING.md)** - 🤝 기여 가이드  
-  *프로젝트 기여 방법과 개발 환경 설정*
+#### 🎓 Best Practices
+- **[technical/](3-resources/best-practices/technical/)** - 기술 사양 & 모범 사례
 
-### 📚 Guides (가이드)
-사용자를 위한 실용적인 가이드
+### 📦 [4-archive/](4-archive/) - 보관함
+> 완료되었거나 더 이상 관련 없는 항목들
 
-- **[MIGRATION_GUIDE.md](/docs/migration-guide)** - 🔄 마이그레이션 가이드  
-  *TailwindCSS, CSS-in-JS에서 전환하는 방법*
-  
-- **[performance.md](https://github.com/developer-1px/adorable-css-v2/blob/main/packages/homepage-kit/docs/guides/performance.md)** - 🚀 성능 최적화  
-  *프로덕션 최적화 및 성능 모범 사례*
-  
-- **[TEAM_ONBOARDING.md](/docs/team-onboarding)** - 👥 팀 온보딩  
-  *새로운 팀원을 위한 1일차 가이드*
-  
-- **[PROJECT_SETUP.md](/docs/project-setup)** - 🚀 프로젝트 설정  
-  *새 프로젝트에서 AdorableCSS 시작하기*
-  
-- **[BEST_PRACTICES.md](/docs/best-practices)** - 🏆 모범 사례  
-  *대규모 프로젝트에서의 베스트 프랙티스*
-  
-- **[INTEGRATION_GUIDE.md](/docs/integration)** - 🔌 통핥 가이드  
-  *다른 도구들과의 조화로운 공존*
+#### ✅ Completed Projects
+- **[CLEANUP_SUMMARY.md](4-archive/completed-projects/CLEANUP_SUMMARY.md)** - 문서 정리 완료
 
-## 🌟 하이라이트
-
-### 🆕 신규 문서
-- **[Why AdorableCSS?](/docs/why-adorablecss)** - 비즈니스 가치와 철학
-- **[Quick Start](/docs/getting-started)** - 5분 퀵스타트 가이드
-- **[Cheat Sheet](/docs/cheat-sheet)** - 한 눈에 보는 문법
-- **[TailwindCSS 사용자 가이드](https://github.com/developer-1px/adorable-css-v2/blob/main/packages/homepage-kit/docs/TAILWIND_USERS.md)** - 10초 비교
-- **[Cookbook](/docs/cookbook)** - 실무 패턴 모음
-- **[Troubleshooting](/docs/troubleshooting)** - 문제 해결
-
-### 🔗 빠른 링크
-- **[🎮 Playground](/playground)** - 실시간 테스트
-- **[🎨 Components](/components)** - 컴포넌트 갈러리
-- **[🎯 Tokens](/tokens)** - 디자인 토큰
-- **[📦 Rules](/rules)** - 모든 유틸리티
-
-## 📋 Document Status
-
-| 문서 | 상태 | 최종 업데이트 | 중요도 |
-|------|------|---------------|--------|
-| PRODUCT_STRATEGY.md | ✅ 최신 | 2025-01-27 | 🔥 HIGH |
-| REFERENCE.md | ✅ 최신 | - | 🔥 HIGH |
-| CORE_CONCEPTS_VISUAL.md | ✅ 최신 | - | 🔶 MEDIUM |
-| SYNTAX_UPDATES.md | ✅ 최신 | 2025-01-27 | 🔶 MEDIUM |
-| TECH_PITCH.md | ✅ 최신 | - | 🔶 MEDIUM |
-| TECH_MESSAGING.md | ✅ 최신 | - | 🔶 MEDIUM |
-| design-system-analysis.md | ✅ 최신 | - | 🔶 MEDIUM |
-| ADORABLE_CSS_MISTAKES.md | ✅ 최신 | - | 🟡 LOW |
-| features.md | ✅ 최신 | 2024-12-27 | 🔥 HIGH |
-| CONTRIBUTING.md | ✅ 최신 | 2024-12-27 | 🔶 MEDIUM |
-| MIGRATION_GUIDE.md | ✅ 최신 | 2024-12-27 | 🔥 HIGH |
-| performance.md | ✅ 최신 | 2024-12-27 | 🔶 MEDIUM |
-| WHY_ADORABLECSS.md | ✅ 최신 | 2024-12-27 | 🔥 HIGH |
-| QUICK_START.md | ✅ 최신 | 2024-12-27 | 🔥 HIGH |
-| CHEAT_SHEET.md | ✅ 최신 | 2024-12-27 | 🔥 HIGH |
-| TAILWIND_USERS.md | ✅ 최신 | 2024-12-27 | 🔥 HIGH |
-| COOKBOOK.md | ✅ 최신 | 2024-12-27 | 🔶 MEDIUM |
-| troubleshooting.md | ✅ 최신 | 2024-12-27 | 🔶 MEDIUM |
-| TEAM_ONBOARDING.md | ✅ 최신 | 2024-12-27 | 🔥 HIGH |
-| PROJECT_SETUP.md | ✅ 최신 | 2024-12-27 | 🔥 HIGH |
-| BEST_PRACTICES.md | ✅ 최신 | 2024-12-27 | 🔥 HIGH |
-| INTEGRATION_GUIDE.md | ✅ 최신 | 2024-12-27 | 🔶 MEDIUM |
-| background-figma-compatibility.md | ✅ 최신 | 2025-07-04 | 🔥 HIGH |
-
-## 🔄 Document Updates
-
-문서 업데이트 시 다음 사항을 준수해주세요:
-
-1. **INDEX.md 업데이트**: 새 문서 추가 시 반드시 이 인덱스에 등록
-2. **상태 업데이트**: Document Status 테이블의 최종 업데이트 날짜 갱신
-3. **카테고리 분류**: 적절한 폴더에 문서 배치
-4. **링크 검증**: 모든 내부 링크가 정상 작동하는지 확인
+#### 🗂 Deprecated
+- 구버전 문서들 및 레거시 시스템
 
 ---
 
-**"Write CSS the way you think in Figma"** - AdorableCSS v2
+## 🧭 사용자별 네비게이션
+
+### 👨‍💻 개발자
+1. **시작**: [디자인 철학](2-areas/design-system/DESIGN_PHILOSOPHY.md)
+2. **구현**: [API 레퍼런스](2-areas/documentation/REFERENCE.md)
+3. **고급**: [기술 사양](3-resources/best-practices/technical/)
+
+### 🎨 디자이너
+1. **철학**: [Figma 호환성](3-resources/research/background-figma-compatibility.md)
+2. **가이드**: [디자인 시스템](2-areas/design-system/DESIGN_SYSTEM_OVERVIEW.md)
+
+### 👥 팀 리더
+1. **전략**: [제품 로드맵](1-projects/planning/PRODUCT_STRATEGY.md)
+2. **관리**: [진행 중인 프로젝트](1-projects/)
+
+### 🤝 기여자
+1. **온보딩**: [신규 사용자 가이드](2-areas/community/onboarding/)
+2. **프로세스**: [개발 가이드](2-areas/community/development/)
+3. **표준**: [모범 사례](3-resources/best-practices/)
+
+### 🤖 AI 도구 (Claude, Copilot 등)
+1. **필수**: [Claude 온보딩](2-areas/community/onboarding/CLAUDE-ONBOARDING.md)
+2. **원칙**: [핵심 원칙](2-areas/community/onboarding/CORE-PRINCIPLES.md)
+3. **예제**: [올바른 사용법](2-areas/community/onboarding/WRONG-VS-RIGHT.md)
+
+---
+
+## 🔍 검색 가이드
+
+### 문서 유형별
+- **📋 정책/전략** → 1-projects/planning/
+- **📖 사용법** → 2-areas/documentation/  
+- **🎨 디자인** → 2-areas/design-system/
+- **🔬 연구** → 3-resources/research/
+- **📚 과거자료** → 4-archive/
+
+### 긴급도별
+- **🚨 지금 필요** → 2-areas/ (Areas)
+- **📅 곧 필요** → 1-projects/ (Projects)  
+- **💡 나중에 참고** → 3-resources/ (Resources)
+- **📜 역사적 가치** → 4-archive/ (Archive)
+
+---
+
+## 🔄 PARA 관리 프로세스
+
+### 정기 리뷰 일정
+- **Projects**: 매주 금요일
+- **Areas**: 매월 첫째 주
+- **Resources**: 분기별
+- **Archive**: 반기별 (6월, 12월)
+
+### 문서 생애주기
+```
+Ideas → Projects → Areas → Resources → Archive
+```
+
+### 분류 기준
+- **"이것이 특정 결과물로 이어지는가?"** → Projects
+- **"이것을 지속적으로 관리해야 하는가?"** → Areas  
+- **"나중에 참고할 가치가 있는가?"** → Resources
+- **"더 이상 활성화된 관심사가 아닌가?"** → Archive
+
+---
+
+## 📊 문서 현황 대시보드
+
+| 카테고리 | 문서 수 | 최근 업데이트 | 담당자 |
+|----------|---------|---------------|--------|
+| 1-projects | 3개 | 2025-07-05 | 개발팀 |
+| 2-areas | 4개 | 2025-07-05 | 전체팀 |
+| 3-resources | 5개 | 2025-07-05 | 연구팀 |
+| 4-archive | 다수 | - | - |
+
+---
+
+**Last Updated**: 2025-07-05  
+**Next Review**: 2025-07-12 (Projects)  
+**Documentation System**: PARA Method by Tiago Forte
+
+---
+
+> 💡 **PARA 철학**: 모든 정보는 행동 가능성에 따라 분류됩니다. 당장 행동해야 할 것부터 미래에 참고할 것까지, 명확한 우선순위를 제공합니다.

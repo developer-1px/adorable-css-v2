@@ -47,7 +47,7 @@
     for (let i = sections.length - 1; i >= 0; i--) {
       const section = sections[i];
       const element = document.getElementById(section.id);
-      if (element && element.offsetTop - 100 <= scrollPosition) {
+      if (element && element.offsetTop - 64 <= scrollPosition) {
         activeSection = section.id;
         break;
       }
@@ -72,9 +72,9 @@
     <div class="absolute inset(0) bg(to-tl/pink-50..transparent_60%..amber-50)"></div>
     
     <!-- Floating orbs for depth -->
-    <div class="absolute w(600px) h(600px) r(full) bg(radial-gradient/indigo-200.3..transparent) blur(3xl) top(-200px) left(-200px)"></div>
-    <div class="absolute w(500px) h(500px) r(full) bg(radial-gradient/purple-200.3..transparent) blur(3xl) bottom(-150px) right(-150px)"></div>
-    <div class="absolute w(400px) h(400px) r(full) bg(radial-gradient/pink-200.3..transparent) blur(3xl) top(50%) left(50%) translate(-50%,-50%)"></div>
+    <div class="absolute w(6xl) h(6xl) r(full) bg(radial-gradient/indigo-200.3..transparent) blur(3xl) top(-xl) left(-xl)"></div>
+    <div class="absolute w(5xl) h(5xl) r(full) bg(radial-gradient/purple-200.3..transparent) blur(3xl) bottom(-lg) right(-lg)"></div>
+    <div class="absolute w(4xl) h(4xl) r(full) bg(radial-gradient/pink-200.3..transparent) blur(3xl) top(50%) left(50%) translate(-50%,-50%)"></div>
   </div>
   
   <!-- Header with refined design -->
@@ -82,9 +82,9 @@
     <div class="container(7xl) mx(auto)">
       <!-- Decorative element -->
       <div class="hbox(pack) gap(xs) mb(xl)">
-        <span class="inline-block w(40px) h(1px) bg(to-r/transparent..indigo-400)"></span>
+        <span class="inline-block w(3xl) h(xs) bg(to-r/transparent..indigo-400)"></span>
         <span class="text(xs) uppercase tracking(0.2em) c(indigo-600) font(medium)">Design System</span>
-        <span class="inline-block w(40px) h(1px) bg(to-l/transparent..indigo-400)"></span>
+        <span class="inline-block w(3xl) h(xs) bg(to-l/transparent..indigo-400)"></span>
       </div>
       
       <h1 class="font(4xl) bold(800) text(center) letter-spacing(-0.035em) c(gray-900) mb(lg)">
@@ -99,7 +99,7 @@
   </header>
   
   <!-- Navigation with glass morphism -->
-  <nav class="sticky top(0) z(50) bg(white.85) backdrop-blur(xl) border-b(1px/gray-200.5)">
+  <nav class="sticky top(0) z(50) bg(white.85) backdrop-blur(xl) border-b(xs/gray-200.5)">
     <div class="container(7xl) mx(auto) px(xl)">
       <div class="hbox gap(xs) py(md) overflow-x(auto) scrollbar-none">
         {#each sections as section}
@@ -122,37 +122,37 @@
   <main class="relative z(10)" bind:this={scrollContainer}>
     <div class="container(7xl) mx(auto) px(xl) py(3xl)">
       <!-- Typography Section -->
-      <section id="typography" class="mb(6xl) scroll-mt(100px)">
+      <section id="typography" class="mb(6xl) scroll-mt(8xl)">
         <TypographyTokens />
       </section>
       
       <!-- Spacing Section -->
-      <section id="spacing" class="mb(6xl) scroll-mt(100px)">
+      <section id="spacing" class="mb(6xl) scroll-mt(8xl)">
         <SpacingTokens />
       </section>
       
       <!-- Colors Section -->
-      <section id="colors" class="mb(6xl) scroll-mt(100px)">
+      <section id="colors" class="mb(6xl) scroll-mt(8xl)">
         <ColorTokens />
       </section>
       
       <!-- Border Radius Section -->
-      <section id="radius" class="mb(6xl) scroll-mt(100px)">
+      <section id="radius" class="mb(6xl) scroll-mt(8xl)">
         <RadiusTokens />
       </section>
       
       <!-- Shadows Section -->
-      <section id="shadows" class="mb(6xl) scroll-mt(100px)">
+      <section id="shadows" class="mb(6xl) scroll-mt(8xl)">
         <ShadowTokens />
       </section>
       
       <!-- Elevation Section -->
-      <section id="elevation" class="mb(6xl) scroll-mt(100px)">
+      <section id="elevation" class="mb(6xl) scroll-mt(8xl)">
         <ElevationTokens />
       </section>
       
       <!-- Effects Section -->
-      <section id="effects" class="scroll-mt(100px)">
+      <section id="effects" class="scroll-mt(8xl)">
         <EffectsTokens />
       </section>
     </div>

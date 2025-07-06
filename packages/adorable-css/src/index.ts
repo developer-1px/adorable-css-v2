@@ -9,6 +9,7 @@ import "./core/runtime/auto-inject";
 export * from "./core/parser";
 export * from "./rules";
 export * from "./core/values/makeValue";
+export * from "./core/values/dynamicTokens";
 export * from "./design-system/tokens/index";
 export * from "./design-system/colors";
 export * from "./extensions";

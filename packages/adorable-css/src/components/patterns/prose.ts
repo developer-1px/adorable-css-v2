@@ -157,7 +157,7 @@ const proseDefinition: ComponentDefinition = {
     },
     
     marketing: {
-      'h1': 'font(..5xl/1/-4%) bold(black) tracking(tight) c(gradient(to-br/primary..primary-700))',
+      'h1': 'font(..5xl/1/-4%) bold(black) tracking(tight) c(to-br/primary..primary-700)',
       'h2': 'font(..4xl/1.1/-3%) c(primary)',
       'h3': 'font(..3xl/1.2/-2%) c(primary-800)',
       'p': 'font(lg) lh(1.75) c(neutral-700)',

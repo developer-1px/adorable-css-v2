@@ -13,6 +13,7 @@ export interface SemanticColorSystemConfig {
   secondary: string | SemanticColorFamily;
   accent: string | SemanticColorFamily;
   mute: string | SemanticColorFamily;
+  surface: string | SemanticColorFamily;
   success: string | SemanticColorFamily;
   warning: string | SemanticColorFamily;
   error: string | SemanticColorFamily;
@@ -82,7 +83,7 @@ export function generateSemanticColorVariables(
   } = options || {};
   
   // Process each semantic color
-  const semanticColors = ['primary', 'secondary', 'accent', 'mute', 'success', 'warning', 'error', 'info'] as const;
+  const semanticColors = ['primary', 'secondary', 'accent', 'mute', 'surface', 'success', 'warning', 'error', 'info'] as const;
   
   for (const colorName of semanticColors) {
     const colorConfig = config[colorName];
@@ -118,7 +119,7 @@ export function generateSemanticColorVariables(
   if (includeSurfaceColors) {
     cssLines.push('\n  /* Surface colors */');
     cssLines.push('  --surface-base: var(--white);');
-    cssLines.push('  --surface-subtle: var(--mute-50);');
+    cssLines.push('  --surface-subtle: var(--surface-50);');
     cssLines.push('  --surface-accent: var(--primary-50);');
     cssLines.push('  --surface-inverse: var(--mute-900);');
   }
@@ -159,7 +160,7 @@ export function buildSemanticColorConfig(
 ): Record<string, string> {
   const result: Record<string, string> = {};
   
-  const semanticColors = ['primary', 'secondary', 'accent', 'mute', 'success', 'warning', 'error', 'info'] as const;
+  const semanticColors = ['primary', 'secondary', 'accent', 'mute', 'surface', 'success', 'warning', 'error', 'info'] as const;
   
   for (const colorName of semanticColors) {
     const colorConfig = config[colorName];
@@ -185,6 +186,7 @@ export const COLOR_SCHEMES = {
     secondary: 'slate-600',
     accent: 'violet-500',
     mute: 'gray-500',
+    surface: 'gray-100',
     success: 'emerald-600',
     warning: 'amber-500',
     error: 'red-600',
@@ -198,6 +200,7 @@ export const COLOR_SCHEMES = {
     secondary: 'slate-600',
     accent: 'cyan-500',
     mute: 'gray-500',
+    surface: 'slate-100',
     success: 'green-600',
     warning: 'yellow-500',
     error: 'red-600',
@@ -211,6 +214,7 @@ export const COLOR_SCHEMES = {
     secondary: 'pink-600',
     accent: 'fuchsia-500',
     mute: 'gray-500',
+    surface: 'purple-50',
     success: 'teal-600',
     warning: 'orange-500',
     error: 'rose-600',
@@ -224,6 +228,7 @@ export const COLOR_SCHEMES = {
     secondary: 'teal-600',
     accent: 'lime-500',
     mute: 'stone-500',
+    surface: 'green-50',
     success: 'emerald-600',
     warning: 'yellow-600',
     error: 'red-600',
@@ -237,6 +242,7 @@ export const COLOR_SCHEMES = {
     secondary: 'gray-700',
     accent: 'gray-600',
     mute: 'gray-400',
+    surface: 'gray-100',
     success: 'gray-700',
     warning: 'gray-600',
     error: 'gray-800',
@@ -279,6 +285,7 @@ export function createFromPrimaryColor(
     secondary: `${secondaryFamily}-600`,
     accent: `${accentFamily}-500`,
     mute: 'gray-500',
+    surface: 'gray-100',
     success: 'emerald-600',
     warning: 'amber-500',
     error: 'red-600',

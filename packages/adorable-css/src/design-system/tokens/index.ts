@@ -1,6 +1,6 @@
 // Modern Design Token System for AdorableCSS v2
 
-// Re-export semantic design system
+// Re-export semantic design system (still needed for colors)
 export * from '../semantic-system';
 
 import { 
@@ -8,25 +8,15 @@ import {
   getColorScheme,
   type SemanticColorSystemConfig 
 } from '../colors/semantic-color-system';
-
-// Import scale generator
 import { 
-  generateTokenScales, 
-  defaultScaleConfig,
-  type TokenScaleConfig,
-  SCALE_RATIOS
-} from './scale-generator';
+  generateSpacingCalc, 
+  generateFontCalc, 
+  generateSizeCalc, 
+  generateContainerCalc 
+} from '../../core/values/dynamicTokens';
 
-// Export scale generator utilities for external use
-export { 
-  generateTokenScales, 
-  SCALE_RATIOS, 
-  type TokenScaleConfig,
-  generateTypographyScale,
-  generateSpacingScale,
-  generateContainerScale,
-  generateSizeScale,
-} from './scale-generator';
+// NOTE: Scale generators are now replaced by dynamic calc() system
+// Only keeping minimal imports for legacy compatibility
 
 // Semantic color configuration
 export interface SemanticColorConfig {
@@ -34,6 +24,7 @@ export interface SemanticColorConfig {
   secondary?: string;    // e.g. "gray-500"
   accent?: string;       // e.g. "sky-500"
   mute?: string;         // e.g. "gray-400"
+  surface?: string;      // e.g. "gray-100"
   brand?: string;        // e.g. "#8b5cf6..#ec4899" for gradient
   success?: string;      // e.g. "green-500"
   warning?: string;      // e.g. "amber-500"
@@ -48,6 +39,7 @@ export const semanticColors: SemanticColorConfig = {
   secondary: "slate-600",    // Secondary - sophisticated slate  
   accent: "violet-500",      // Accent color - complementary violet
   mute: "gray-500",          // Muted elements - neutral gray
+  surface: "gray-100",       // Surface colors - light gray
   brand: "indigo-600..violet-500",  // Brand gradient - indigo to violet
   success: "emerald-600",    // Success states - emerald green
   warning: "amber-500",      // Warning states - warm amber
@@ -55,148 +47,17 @@ export const semanticColors: SemanticColorConfig = {
   info: "sky-500"            // Info states - sky blue
 };
 
-// CONSISTENCY ENFORCING TEXT HIERARCHY - USE THESE ONLY
-export const textHierarchy = {
-  'text-primary': 'gray-900',    // Main headings, important text
-  'text-secondary': 'gray-700',  // Subheadings, secondary content  
-  'text-tertiary': 'gray-600',   // Body text, descriptions
-  'text-subtle': 'gray-500',     // Captions, labels, placeholders
-  'text-brand': 'brand'          // Brand colored text (sparingly)
-} as const;
+// NOTE: Legacy hierarchy scales removed - use dynamic calc() system instead
+// Example: text(lg), gap(xl), font(2xl), etc.
 
-// CONSISTENCY ENFORCING BACKGROUND HIERARCHY - USE THESE ONLY
-export const backgroundHierarchy = {
-  'bg-primary': 'white',         // Main content areas
-  'bg-secondary': 'gray-50',     // Alternate sections
-  'bg-tertiary': 'gray-100',     // Cards, elevated content
-  'bg-subtle': 'gray-200',       // Borders, dividers
-  'bg-brand': 'brand'            // Brand backgrounds (sparingly)
-} as const;
-
-// CONSISTENCY ENFORCING TYPOGRAPHY SCALE - USE THESE ONLY
-// Semantic font sizes with clear purpose
-export const typographyScale = {
-  'text-xs': 'xs',      // 12px - labels, captions, fine print
-  'text-sm': 'sm',      // 14px - small body text, secondary content
-  'text-md': 'md',      // 16px - primary body text (default)
-  'text-lg': 'lg',      // 18px - large body text, small headings
-  'text-xl': 'xl',      // 20px - subheadings
-  'text-2xl': '2xl',    // 24px - section headings  
-  'text-3xl': '3xl',    // 30px - page headings
-  'text-4xl': '4xl',    // 36px - hero headings
-  'text-5xl': '5xl',    // 48px - large hero
-  'text-6xl': '6xl'     // 60px - display text
-} as const;
-
-// CONSISTENCY ENFORCING FONT WEIGHTS - USE THESE ONLY
-export const fontWeights = {
-  'weight-normal': 'normal',  // 400 - body text
-  'weight-medium': 'medium',  // 500 - emphasized text
-  'weight-semi': 'semi',      // 600 - subheadings
-  'weight-bold': 'bold',      // 700 - headings
-  'weight-black': 'black'     // 900 - hero text
-} as const;
-
-// CONSISTENCY ENFORCING SPACING SCALE - USE THESE ONLY
-export const spacingScale = {
-  'space-xs': 'xs',      // 4px - tight spacing
-  'space-sm': 'sm',      // 8px - small gaps
-  'space-md': 'md',      // 12px - standard spacing
-  'space-lg': 'lg',      // 16px - comfortable spacing
-  'space-xl': 'xl',      // 20px - large spacing
-  'space-2xl': '2xl',    // 24px - section spacing
-  'space-3xl': '3xl',    // 32px - large section spacing
-  'space-4xl': '4xl'     // 48px - page-level spacing
-} as const;
-
+// Simplified DesignTokens interface for dynamic calc() system
+// Most scale-based tokens are now calculated dynamically
 export interface DesignTokens {
-  font: {
-    '3xs': string;
-    '2xs': string;
-    xs: string;
-    sm: string;
-    md: string;
-    lg: string;
-    xl: string;
-    '2xl': string;
-    '3xl': string;
-    '4xl': string;
-    '5xl': string;
-    '6xl': string;
-    '7xl': string;
-    '8xl': string;
-    '9xl': string;
-  };
-  spacing: {
-    // Semantic spacing tokens for better control
-    xs: string;
-    sm: string;
-    md: string;
-    lg: string;
-    xl: string;
-    '2xl': string;
-    '3xl': string;
-    '4xl': string;
-    '5xl': string;
-    '6xl': string;
-    '7xl': string;
-    '8xl': string;
-    '9xl': string;
-  };
-  size: {
-    // Icon and small element sizes (for size() utility)
-    '4xs': string;
-    '3xs': string;
-    '2xs': string;
-    xs: string;
-    sm: string;
-    md: string;
-    lg: string;
-    xl: string;
-    '2xl': string;
-    
-    // Legacy container sizes (deprecated, use container tokens)
-    '3xl': string;
-    '4xl': string;
-    '5xl': string;
-    '6xl': string;
-    '7xl': string;
-    '8xl': string;
-    '9xl': string;
-    
-    // Special sizes
-    'auto': string;
-    'full': string;
-    'screen': string;
-    'min': string;
-    'max': string;
-    'fit': string;
-  };
-  container: {
-    // Container width/height tokens (for w/h/max-w/max-h utilities)
-    xs: string;
-    sm: string;
-    md: string;
-    lg: string;
-    xl: string;
-    '2xl': string;
-    '3xl': string;
-    '4xl': string;
-    '5xl': string;
-    '6xl': string;
-    '7xl': string;
-    '8xl': string;
-    '9xl': string;
-    
-    // Special container values
-    'auto': string;
-    'full': string;
-    'screen': string;
-    'min': string;
-    'max': string;
-    'fit': string;
-    'prose': string;
-  };
+  // Dynamic tokens - values calculated at runtime
+  font: Record<string, string>;
+  spacing: Record<string, string>;
+  size: Record<string, string>;
+  container: Record<string, string>;
   lineHeight: {
     none: string;
     tight: string;
@@ -254,6 +115,7 @@ export interface DesignTokens {
     secondary: string;
     accent: string;
     mute: string;
+    surface: string;
     brand: string;
     'brand-start': string;
     'brand-end': string;
@@ -363,16 +225,14 @@ export interface DesignTokens {
   };
 }
 
-// Create tokens with custom scale configuration
-export function createTokens(scaleConfig: TokenScaleConfig = defaultScaleConfig): DesignTokens {
-  const scales = generateTokenScales(scaleConfig);
-  
+// Create tokens - simplified for dynamic calc() system
+export function createTokens(): DesignTokens {
   return {
-    // Generated scales
-    font: scales.font,
-    spacing: scales.spacing,
-    size: scales.size,
-    container: scales.container,
+    // Dynamic tokens - empty as they're calculated at runtime
+    font: {},
+    spacing: {},
+    size: {},
+    container: {},
     
     // Static token values that don't need generation
     lineHeight: {
@@ -431,6 +291,7 @@ export function createTokens(scaleConfig: TokenScaleConfig = defaultScaleConfig)
       secondary: '',
       accent: '',
       mute: '',
+      surface: '',
       brand: '',
       'brand-start': '',
       'brand-end': '',
@@ -537,7 +398,7 @@ export function createTokens(scaleConfig: TokenScaleConfig = defaultScaleConfig)
 }
 
 // Modern token values based on industry best practices
-export const defaultTokens: DesignTokens = createTokens(defaultScaleConfig);
+export const defaultTokens: DesignTokens = createTokens();
 
 // Color palette for resolving semantic colors
 // This will be populated by the color system
@@ -666,32 +527,57 @@ export function isToken(value: string, category: keyof DesignTokens): boolean {
     }
   }
   
+  // For dynamic scale-based tokens, check if they match valid patterns
+  if (category === 'font' || category === 'spacing' || category === 'size' || category === 'container') {
+    // Check for xl pattern (2xl, 3xl, 10xl, 15xl, etc.)
+    if (value.match(/^\d+xl$/)) {
+      return true;
+    }
+    
+    // Check for basic size tokens (xs, sm, md, lg, xl)
+    if (['4xs', '3xs', '2xs', 'xs', 'sm', 'md', 'lg', 'xl'].includes(value)) {
+      return true;
+    }
+  }
+  
   return false;
 }
 
 // Get CSS variable name for token
 export function getTokenVar(category: keyof DesignTokens, token: string): string {
+  // For dynamic tokens, use the generator functions instead of CSS variables
+  if (category === 'spacing') {
+    return generateSpacingCalc(token);
+  }
+  if (category === 'font') {
+    return generateFontCalc(token);
+  }
+  if (category === 'size') {
+    return generateSizeCalc(token);
+  }
+  if (category === 'container') {
+    return generateContainerCalc(token);
+  }
+  
+  // For static tokens, get the actual value instead of CSS variable
+  if (category === 'fontWeight' || category === 'lineHeight' || category === 'letterSpacing' || 
+      category === 'radius' || category === 'shadow' || category === 'opacity' || 
+      category === 'zIndex' || category === 'duration' || category === 'ease') {
+    const tokens = currentTokenContext[category];
+    if (tokens && typeof tokens === 'object' && token in tokens) {
+      return (tokens as any)[token];
+    }
+  }
+  
   return `var(--${category}-${token})`;
 }
 
 // Generate CSS variables from tokens
-export function generateTokenCSS(tokens: DesignTokens = defaultTokens): string {
+export function generateTokenCSS(_tokens: DesignTokens = defaultTokens): string {
   const cssVars: string[] = [];
   
-  function processTokens(obj: any, prefix = '') {
-    for (const [key, value] of Object.entries(obj)) {
-      const fullKey = prefix ? `${prefix}-${key}` : key;
-      
-      if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
-        // Handle nested objects like colors.gray
-        processTokens(value, fullKey);
-      } else {
-        cssVars.push(`  --${fullKey}: ${value};`);
-      }
-    }
-  }
-  
-  processTokens(tokens);
+  // Don't generate any static token CSS variables anymore
+  // Everything should be dynamic calc() or actual values
   
   // Add full color palette as CSS variables (gray-100, purple-500, etc.)
   if (colorPalette && Object.keys(colorPalette).length > 0) {
@@ -721,6 +607,8 @@ export function generateTokenCSS(tokens: DesignTokens = defaultTokens): string {
   /* Semantic Color System */
 ${semanticColorVars}`;
   
+  // No more static token variables - everything is dynamic calc()
+  // Just return color variables and semantic mappings
   return `:root {\n${cssVars.join('\n')}\n${semanticMappings}\n}`;
 }
 

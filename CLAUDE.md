@@ -19,4 +19,5 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 2. **Priority 2 (3개월)**: CSS-only 인터랙션, 고급 애니메이션, 타이포그래피
 3. **Priority 3 (3개월)**: 접근성, Print, 최신 CSS 기능
 
-[... rest of the existing content remains unchanged ...]
+### 🚫 Common Mistakes
+- **Memory**: `transform(scale-105)` 문법은 없음. CSS 표준 문법을 따라야 함

@@ -1,7 +1,7 @@
 <script>
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
-  import { docsConfig, getDocNavigation, findDocByHref } from '$lib/docs-config.js';
+  import { docsConfig, getDocNavigation, findDocByHref } from '@docs/config';
   import { ChevronRight } from 'lucide-svelte';
 
   let mounted = false;

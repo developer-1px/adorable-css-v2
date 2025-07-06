@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { headingString } from '../../components/primitives/heading';
+import { headingString } from '../../components/primitives/typography/heading';
 
 describe('heading component', () => {
   it('should return default heading styles', () => {

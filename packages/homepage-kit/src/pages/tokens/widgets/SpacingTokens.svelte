@@ -73,7 +73,7 @@
             <div class="vbox(center) gap(sm)">
               <!-- Visual bar -->
               <div class="bg(to-br/green-400..emerald-500) r(sm) shadow(sm)" 
-                   style="width: 12px; height: {value}; min-height: 4px; max-height: 80px;"></div>
+                   style="width: sm; height: {value}; min-height: xs; max-height: 6xl;"></div>
               <!-- Label -->
               <div class="text(xs) c(gray-600) font(mono)">{key}</div>
               <div class="text(xs) c(gray-500) font(mono)">{value}</div>
@@ -94,48 +94,48 @@
     
     <div class="grid(3) gap(2xl)">
       <!-- Micro spacing -->
-      <div class="bg(white) r(xl) p(xl) shadow(lg) border(1px/green-100)">
+      <div class="bg(white) r(xl) p(xl) shadow(lg) border(xs/green-100)">
         <h4 class="heading(h4) c(gray-900) mb(lg) hbox(middle) gap(sm)">
           <Box size="16" class="c(green-500)" />
           Micro Spacing
         </h4>
         <div class="vbox gap(md)">
-          <div class="p(xs) bg(green-50) border(1px/green-200) r(lg)">
+          <div class="p(xs) bg(green-50) border(xs/green-200) r(lg)">
             <div class="text(sm) c(gray-700)">p(xs) - Tight elements</div>
           </div>
-          <div class="p(sm) bg(green-50) border(1px/green-200) r(lg)">
+          <div class="p(sm) bg(green-50) border(xs/green-200) r(lg)">
             <div class="text(sm) c(gray-700)">p(sm) - Form controls</div>
           </div>
         </div>
       </div>
       
       <!-- Component spacing -->
-      <div class="bg(white) r(xl) p(xl) shadow(lg) border(1px/emerald-100)">
+      <div class="bg(white) r(xl) p(xl) shadow(lg) border(xs/emerald-100)">
         <h4 class="heading(h4) c(gray-900) mb(lg) hbox(middle) gap(sm)">
           <Layers size="16" class="c(emerald-500)" />
           Component
         </h4>
         <div class="vbox gap(md)">
-          <div class="p(md) bg(emerald-50) border(1px/emerald-200) r(lg)">
+          <div class="p(md) bg(emerald-50) border(xs/emerald-200) r(lg)">
             <div class="text(sm) c(gray-700)">p(md) - Cards, panels</div>
           </div>
-          <div class="p(lg) bg(emerald-50) border(1px/emerald-200) r(lg)">
+          <div class="p(lg) bg(emerald-50) border(xs/emerald-200) r(lg)">
             <div class="text(sm) c(gray-700)">p(lg) - Content areas</div>
           </div>
         </div>
       </div>
       
       <!-- Layout spacing -->
-      <div class="bg(white) r(xl) p(xl) shadow(lg) border(1px/green-100)">
+      <div class="bg(white) r(xl) p(xl) shadow(lg) border(xs/green-100)">
         <h4 class="heading(h4) c(gray-900) mb(lg) hbox(middle) gap(sm)">
           <Grid size="16" class="c(green-600)" />
           Layout
         </h4>
         <div class="vbox gap(md)">
-          <div class="p(xl) bg(green-50) border(1px/green-200) r(lg)">
+          <div class="p(xl) bg(green-50) border(xs/green-200) r(lg)">
             <div class="text(sm) c(gray-700)">p(xl) - Sections</div>
           </div>
-          <div class="p(2xl) bg(green-50) border(1px/green-200) r(lg)">
+          <div class="p(2xl) bg(green-50) border(xs/green-200) r(lg)">
             <div class="text(sm) c(gray-700)">p(2xl) - Containers</div>
           </div>
         </div>
@@ -160,9 +160,9 @@
       </div>
       
       <!-- Live spacing demo -->
-      <div class="bg(white.05) backdrop-blur(md) r(2xl) p(3xl) border(1px/white.1)">
+      <div class="bg(white.05) backdrop-blur(md) r(2xl) p(3xl) border(xs/white.1)">
         <div class="grid(3) gap(2xl) max-w(4xl) mx(auto)">
-          <div class="vbox gap(lg) p(2xl) bg(white.05) backdrop-blur(md) r(xl) border(1px/white.1) text(center)">
+          <div class="vbox gap(lg) p(2xl) bg(white.05) backdrop-blur(md) r(xl) border(xs/white.1) text(center)">
             <div class="p(lg) r(full) bg(white.1) mx(auto) mb(lg)">
               <Ruler size="24" class="c(white)" />
             </div>
@@ -172,7 +172,7 @@
             </div>
           </div>
           
-          <div class="vbox gap(lg) p(2xl) bg(white.05) backdrop-blur(md) r(xl) border(1px/white.1) text(center)">
+          <div class="vbox gap(lg) p(2xl) bg(white.05) backdrop-blur(md) r(xl) border(xs/white.1) text(center)">
             <div class="p(lg) r(full) bg(white.1) mx(auto) mb(lg)">
               <Grid size="24" class="c(white)" />
             </div>
@@ -182,7 +182,7 @@
             </div>
           </div>
           
-          <div class="vbox gap(lg) p(2xl) bg(white.05) backdrop-blur(md) r(xl) border(1px/white.1) text(center)">
+          <div class="vbox gap(lg) p(2xl) bg(white.05) backdrop-blur(md) r(xl) border(xs/white.1) text(center)">
             <div class="p(lg) r(full) bg(white.1) mx(auto) mb(lg)">
               <Layers size="24" class="c(white)" />
             </div>

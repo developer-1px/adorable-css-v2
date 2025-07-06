@@ -156,7 +156,11 @@ export function extractBaseClass(responsiveClassName: string): string {
 export function debugResponsivePattern(className: string): void {
   const pattern = ResponsiveSelector.analyze(className);
   if (pattern) {
+    // Pattern found - debugging can be added here if needed
+    return;
   } else {
+    // No pattern found - debugging can be added here if needed
+    return;
   }
 }
 

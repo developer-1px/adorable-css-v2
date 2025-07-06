@@ -32,7 +32,9 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "lint": "eslint 'src/**/*.{ts,tsx}' --fix",
+    "lint:check": "eslint 'src/**/*.{ts,tsx}'"
   },
   "keywords": [
     "css",
@@ -55,6 +57,9 @@
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
+    "@typescript-eslint/eslint-plugin": "^8.20.0",
+    "@typescript-eslint/parser": "^8.20.0",
+    "eslint": "^9.18.0",
     "tsup": "^8.0.0",
     "typescript": "^5.6.3",
     "vitest": "^3.2.4"

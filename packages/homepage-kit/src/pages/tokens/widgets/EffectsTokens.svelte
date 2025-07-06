@@ -52,7 +52,7 @@
   <!-- Enhanced Section Header -->
   <div class="text(center) relative">
     <!-- Floating decoration -->
-    <div class="absolute top(-20px) left(50%) translate-x(-50%) w(200px) h(1px) bg(to-r/transparent..primary-300..transparent) opacity(60)"></div>
+    <div class="absolute top(-lg) left(50%) translate-x(-50%) w(12xl) h(xs) bg(to-r/transparent..primary-300..transparent) opacity(60)"></div>
     
     <div class="hbox(pack) gap(md) mb(xl)">
       <div class="p(md) r(full) bg(to-br/primary-100..primary-200) b(1/primary-200)">
@@ -116,7 +116,7 @@
             
             <div class="hbox gap(2xl) items(center)">
               <!-- Meta info -->
-              <div class="min-w(240px)">
+              <div class="min-w(15xl)">
                 <div class="hbox(middle) gap(md) mb(sm)">
                   <div class="px(md) py(sm) r(full) bg(to-r/primary..primary-700) text(white) text(xs) bold uppercase tracking(wide)">
                     timing
@@ -130,8 +130,8 @@
               </div>
               
               <!-- Animation demo -->
-              <div class="flex(1) relative h(80px) bg(primary-50) r(xl) b(1/primary-200) overflow(hidden)">
-                <div class="absolute left(md) top(50%) translate-y(-50%) w(40px) h(40px) bg(to-br/primary..primary-600) r(lg) shadow(lg) 
+              <div class="flex(1) relative h(4xl) bg(primary-50) r(xl) b(1/primary-200) overflow(hidden)">
+                <div class="absolute left(md) top(50%) translate-y(-50%) w(2xl) h(2xl) bg(to-br/primary..primary-600) r(lg) shadow(lg) 
                            group-hover:translate-x(calc(100vw - 400px)) transition-transform duration({key}) ease(out)"></div>
                 <div class="absolute right(md) top(50%) translate-y(-50%) text(xs) c(primary) font(mono)">
                   {key}
@@ -192,7 +192,7 @@
               </div>
               
               <!-- Curve visualization -->
-              <div class="h(120px) bg(blue-50) r(xl) border(1px/blue-200) relative overflow(hidden)">
+              <div class="h(6xl) bg(blue-50) r(xl) border(1px/blue-200) relative overflow(hidden)">
                 <!-- Grid background -->
                 <div class="absolute inset(0)" style="background-image: 
                      linear-gradient(rgba(59, 130, 246, 0.1) 1px, transparent 1px),

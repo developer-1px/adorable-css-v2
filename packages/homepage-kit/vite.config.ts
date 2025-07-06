@@ -16,11 +16,18 @@ export default defineConfig({
 			outdir: './src/lib/paraglide'
 		})
 	],
+	ssr: {
+		noExternal: ['@docs/config']
+	},
+	define: {
+		global: 'globalThis'
+	},
 	resolve: {
 		alias: {
 			'adorable-css': path.resolve(__dirname, '../adorable-css/src'),
 			'adorable-css-cdn': path.resolve(__dirname, '../adorable-css-cdn/src'),
-			'@': path.resolve(__dirname, './src')
+			'@': path.resolve(__dirname, './src'),
+			'@docs': path.resolve(__dirname, '../../docs')
 		}
 	},
 	// Enable debug mode

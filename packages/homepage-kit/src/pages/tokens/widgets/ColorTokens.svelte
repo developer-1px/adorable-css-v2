@@ -83,7 +83,7 @@
     <div class="grid(2) md:grid(3) gap(xl)">
       {#each featuredGradients as gradient}
         <button 
-          class="group relative h(160px) r(xl) {gradient.class} shadow(lg) hover:shadow(2xl) 
+          class="group relative h(lg) r(xl) {gradient.class} shadow(lg) hover:shadow(2xl) 
                  hover:scale(1.02) transition-all cursor-pointer overflow(hidden)"
           on:click={() => copyColor(gradient.value)}
         >
@@ -118,7 +118,7 @@
     
     <div class="grid(3) gap(xl)">
       <button 
-        class="group relative h(160px) r(xl) bg(135deg/purple-500..pink-500) shadow(lg) hover:shadow(2xl) 
+        class="group relative h(lg) r(xl) bg(135deg/purple-500..pink-500) shadow(lg) hover:shadow(2xl) 
                hover:scale(1.02) transition-all cursor-pointer overflow(hidden)"
         on:click={() => copyColor('brand')}
       >
@@ -141,7 +141,7 @@
       <div class="vbox gap(md)">
         <h4 class="font(medium) c(gray-800)">Brand Start</h4>
         <button 
-          class="h(100px) w(full) r(lg) shadow(md) hover:shadow(lg) transition cursor-pointer border(none)"
+          class="h(md) w(full) r(lg) shadow(md) hover:shadow(lg) transition cursor-pointer border(none)"
           style="background: {brandStartColor}"
           on:click={() => copyColor('purple-500')}
         ></button>
@@ -151,7 +151,7 @@
       <div class="vbox gap(md)">
         <h4 class="font(medium) c(gray-800)">Brand End</h4>
         <button 
-          class="h(100px) w(full) r(lg) shadow(md) hover:shadow(lg) transition cursor-pointer border(none)"
+          class="h(md) w(full) r(lg) shadow(md) hover:shadow(lg) transition cursor-pointer border(none)"
           style="background: {brandEndColor}"
           on:click={() => copyColor('pink-500')}
         ></button>

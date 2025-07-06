@@ -380,7 +380,7 @@
       <div class="hbox gap(md) overflow-x(auto) pb(md)">
         {#each boldWeights as weight}
           <div 
-            class="group p(lg) r(lg) hover:bg(neutral-50) transition cursor(pointer) bg(neutral-50) hover:bg(neutral-100) min-w(140px) text(center)"
+            class="group p(lg) r(lg) hover:bg(neutral-50) transition cursor(pointer) bg(neutral-50) hover:bg(neutral-100) min-w(xs) text(center)"
             on:click={() => copyCode(`bold(${weight.name})`)}
           >
             <div class="body(lg) bold({weight.name}) c(neutral-800) pb(md)">
@@ -546,7 +546,7 @@
 
   <!-- Copy Feedback -->
   {#if copiedCode}
-    <div class="fixed bottom(20) right(20) bg(success) c(white) px(lg) py(md) r(lg) shadow(xl) animate(fade-in-up)">
+    <div class="fixed bottom(xl) right(xl) bg(success) c(white) px(lg) py(md) r(lg) shadow(xl) animate(fade-in-up)">
       Copied: {copiedCode}
     </div>
   {/if}
@@ -556,7 +556,7 @@
   @keyframes fade-in-up {
     from {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(xl);
     }
     to {
       opacity: 1;

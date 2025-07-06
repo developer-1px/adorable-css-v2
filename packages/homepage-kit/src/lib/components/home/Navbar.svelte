@@ -6,12 +6,14 @@ let menuOpen = false
 
 $: currentPath = $page.url.pathname
 $: isTokensActive = currentPath.startsWith('/tokens')
+$: isFoundationActive = currentPath.startsWith('/foundation')
 
 const navItems = [
   {href: '/docs', label: 'Docs'},
   {href: '/syntax', label: 'Syntax'},
   {href: '/rules', label: 'Rules'},
   {href: '/tokens', label: 'Tokens'},
+  {href: '/foundation', label: 'Foundation'},
   {href: '/components', label: 'Components'},
   {href: '/design-system', label: 'Design System'},
   {href: '/playground', label: 'Playground'},
@@ -40,8 +42,8 @@ const navItems = [
           <a
             href={item.href}
             class="body(sm) c(neutral-600) hover:c(neutral-900) transition py(4)"
-            class:c(neutral-900)={item.href === '/tokens' ? isTokensActive : currentPath.startsWith(item.href)}
-            class:bold(600)={item.href === '/tokens' ? isTokensActive : currentPath.startsWith(item.href)}
+            class:c(neutral-900)={item.href === '/tokens' ? isTokensActive : item.href === '/foundation' ? isFoundationActive : currentPath.startsWith(item.href)}
+            class:bold(600)={item.href === '/tokens' ? isTokensActive : item.href === '/foundation' ? isFoundationActive : currentPath.startsWith(item.href)}
           >
             {item.label}
           </a>
@@ -89,8 +91,8 @@ const navItems = [
           <a
             href={item.href}
             class="px(16) py(12) body(sm) c(neutral-600) hover:bg(neutral-50) hover:c(neutral-900) r(8) transition"
-            class:c(neutral-900)={item.href === '/tokens' ? isTokensActive : currentPath.startsWith(item.href)}
-            class:bold(600)={item.href === '/tokens' ? isTokensActive : currentPath.startsWith(item.href)}
+            class:c(neutral-900)={item.href === '/tokens' ? isTokensActive : item.href === '/foundation' ? isFoundationActive : currentPath.startsWith(item.href)}
+            class:bold(600)={item.href === '/tokens' ? isTokensActive : item.href === '/foundation' ? isFoundationActive : currentPath.startsWith(item.href)}
             on:click={() => menuOpen = false}
           >
             {item.label}

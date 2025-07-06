@@ -1,7 +1,7 @@
 import { error } from '@sveltejs/kit';
 import { readFile } from 'fs/promises';
 import { join, resolve } from 'path';
-import { docsConfig } from '$lib/docs-config';
+import { docsConfig } from '@docs/config';
 import { processMarkdownIt } from '$lib/mdx/markdown-it-processor.js';
 import type { EntryGenerator } from '../../../../../.svelte-kit/types/src/routes';
 

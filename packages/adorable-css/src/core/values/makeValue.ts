@@ -1,5 +1,6 @@
 import { colorPalette } from '../../design-system/colors/colors'
 import { isToken } from '../../design-system/tokens/index'
+import { generateSpacingCalc, generateFontCalc, generateSizeCalc } from './dynamicTokens'
 
 // Base colors with actual hex values for gradient generation
 const baseColorValues: Record<string, string> = {
@@ -104,23 +105,23 @@ export const cssvar = (value: string | number) => {
   // CSS 변수 처리
   if (strValue.startsWith('--')) return `var(${value})`;
   
-  // 토큰 처리
-  // spacing tokens
+  // 토큰 처리 - 동적으로 calc() 생성
+  // spacing tokens - generate calc instead of CSS variable
   if (isToken(strValue, 'spacing')) {
-    return `var(--spacing-${strValue})`;
+    return generateSpacingCalc(strValue);
   }
   
-  // font tokens
+  // font tokens - generate calc instead of CSS variable
   if (isToken(strValue, 'font')) {
-    return `var(--font-${strValue})`;
+    return generateFontCalc(strValue);
   }
   
-  // size tokens
+  // size tokens - generate calc instead of CSS variable
   if (isToken(strValue, 'size')) {
-    return `var(--size-${strValue})`;
+    return generateSizeCalc(strValue);
   }
   
-  // color tokens
+  // color tokens - still use CSS variables
   if (isToken(strValue, 'colors')) {
     return `var(--colors-${strValue})`;
   }
@@ -139,22 +140,22 @@ export const px = (value: string | number) => {
 
   // --css-var
   if (v.startsWith('--')) return cssvar('' + value)
+  
+  // Handle spacing tokens - use dynamic calc
+  if (isToken(v, 'spacing')) {
+    return generateSpacingCalc(v)
+  }
+  
+  // Handle size tokens - use dynamic calc
+  if (isToken(v, 'size')) {
+    return generateSizeCalc(v)
+  }
 
-  // Handle numeric XL tokens (e.g., 6xl, 7xl)
+  // Handle XL tokens - check if it's a valid token pattern
   const xlMatch = v.match(/^(\d+)xl$/);
   if (xlMatch) {
-    const multiplier = parseInt(xlMatch[1]);
-    // Base xl = 24px, so 2xl = 32px, 3xl = 40px, 4xl = 48px, 5xl = 64px, 6xl = 96px
-    let calculatedValue: number;
-    if (multiplier <= 5) {
-      // Linear progression for 1-5: xl=24, 2xl=32, 3xl=40, 4xl=48, 5xl=64
-      const values = [0, 24, 32, 40, 48, 64];
-      calculatedValue = values[multiplier] || multiplier * 16;
-    } else {
-      // Exponential growth after 5xl
-      calculatedValue = 64 + (multiplier - 5) * 32;
-    }
-    return calculatedValue + 'px';
+    // Always generate calc for xl tokens
+    return generateSpacingCalc(v);
   }
 
   // 1/6
@@ -167,7 +168,12 @@ export const px = (value: string | number) => {
   }
 
   // number
-  return +value === +value ? value + 'px' : value
+  if (+value === +value) return value + 'px'
+  
+  // If it's not a valid value pattern, reject it
+  if (!v.match(/^[\w\-\.%]+$/)) return '0'
+  
+  return value
 }
 
 export const deg = (value: string | number) => {
@@ -248,6 +254,7 @@ export const makeColor = (value = 'transparent') => {
     'secondary': 'secondary-500',
     'accent': 'accent-500',
     'mute': 'mute-500',
+    'surface': 'surface-500',
     'success': 'success-500',
     'warning': 'warning-500',
     'error': 'error-500',
@@ -323,7 +330,7 @@ export const makeColor = (value = 'transparent') => {
     const cssVar = `var(--${defaultColorName})`
     if (alpha) {
       // Use modern CSS color-mix for alpha blending
-      const alphaPercent = alpha.includes('.') ? parseFloat(alpha) * 100 : parseFloat(alpha) * 10
+      const alphaPercent = alpha.includes('.') ? parseFloat(alpha) * 100 : parseFloat(alpha)
       return `color-mix(in srgb, ${cssVar} ${alphaPercent}%, transparent)`
     }
     return cssVar
@@ -334,7 +341,7 @@ export const makeColor = (value = 'transparent') => {
     const cssVar = `var(--${colorName})`
     if (alpha) {
       // Use modern CSS color-mix for alpha blending
-      const alphaPercent = alpha.includes('.') ? parseFloat(alpha) * 100 : parseFloat(alpha) * 10
+      const alphaPercent = alpha.includes('.') ? parseFloat(alpha) * 100 : parseFloat(alpha)
       return `color-mix(in srgb, ${cssVar} ${alphaPercent}%, transparent)`
     }
     return cssVar

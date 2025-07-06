@@ -9,7 +9,7 @@ import { font, fontFamily } from "../text/font";
 import { text, textShadow } from "../text/text";
 import { c } from "../text/color";
 import { bold } from "../text/bold";
-import { typographyUtilityRules } from "../text/typography-utils";
+import { typographyUtilityRules } from "../text/text-misc";
 import { listRules } from "../text/list";
 import { responsiveTypographyRules } from "./responsive-typography";
 

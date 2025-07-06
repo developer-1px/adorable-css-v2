@@ -110,7 +110,9 @@
       "Bash(pnpm --filter adorable-css test src/**/*.test.ts --run)",
       "Bash(pnpm --filter adorable-css lint)",
       "Bash(npx unimported:*)",
-      "Bash(npx ts-prune:*)"
+      "Bash(npx ts-prune:*)",
+      "Bash(npm run lint)",
+      "Bash(npx vite build:*)"
     ],
     "deny": []
   }

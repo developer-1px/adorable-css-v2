@@ -1,6 +1,7 @@
 import type { CSSRule, RuleHandler } from '../types';
 import { px } from '../../core/values/makeValue';
-import { isToken, getTokenVar } from '../../design-system/tokens/index';
+import { isToken } from '../../design-system/tokens/index';
+import { generateFontCalc } from '../../core/values/dynamicTokens';
 
 const aligns = ['left', 'center', 'right', 'justify', 'start', 'end'];
 const transforms = ['uppercase', 'lowercase', 'capitalize'];
@@ -73,7 +74,7 @@ export const text: RuleHandler = (v?: string): CSSRule => {
   if (v === 'pre-wrap') return { 'white-space': 'pre-wrap' };
   if (v === 'pre-line') return { 'white-space': 'pre-line' };
   
-  return isToken(v, 'font') ? { 'font-size': getTokenVar('font', v) } : {};
+  return isToken(v, 'font') ? { 'font-size': generateFontCalc(v) } : {};
 };
 
 export const textShadow: RuleHandler = (v?: string): CSSRule => {

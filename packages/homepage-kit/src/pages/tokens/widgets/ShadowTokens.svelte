@@ -44,7 +44,7 @@
         {#each shadows as { key, value }, index}
           <div class="group relative flex(1) min-w(0)">
             <!-- Shadow card -->
-            <div class="bg(white) h(180px) w(full) shadow({key}) 
+            <div class="bg(white) h(9xl) w(full) shadow({key}) 
                         hover:shadow(2xl) transition-all duration-300 
                         hover:translate-y(-8px) hover:z(10) cursor-pointer
                         border-y(1px/gray-100) 
@@ -66,7 +66,7 @@
             
             <!-- Connecting line to show progression -->
             {#if index < shadows.length - 1}
-              <div class="absolute top(50%) right(-1px) w(1px) h(30px) bg(gray-200) z(1) translate-y(-50%)"></div>
+              <div class="absolute top(50%) right(-1px) w(xs) h(xl) bg(gray-200) z(1) translate-y(-50%)"></div>
             {/if}
           </div>
         {/each}
@@ -84,7 +84,7 @@
                      group-hover:bg(to-t/indigo-600..indigo-400)"
               style="height: {index * 15}%; max-height: 100%"
             >
-              <div class="absolute -top(20px) left(50%) translate-x(-50%) text(xs) c(gray-600) whitespace-nowrap">
+              <div class="absolute -top(lg) left(50%) translate-x(-50%) text(xs) c(gray-600) whitespace-nowrap">
                 {index * 4}dp
               </div>
             </div>
@@ -103,7 +103,7 @@
         <div class="bg(white) r(xl) p(xl) shadow(sm) 
                     group-hover:shadow(xl) transition-all duration-300 
                     group-hover:translate-y(-4px) group-hover:rotate(-1deg)">
-          <MousePointer class="size(32px) c(indigo-600) mb(lg) mx(auto)" />
+          <MousePointer class="size(2xl) c(indigo-600) mb(lg) mx(auto)" />
           <h4 class="font(lg) bold c(gray-900) text(center) mb(sm)">Hover Effect</h4>
           <p class="text(sm) c(gray-600) text(center)">Smooth elevation on hover</p>
         </div>
@@ -113,7 +113,7 @@
         <div class="bg(white) r(xl) p(xl) shadow(md) 
                     group-hover:shadow(2xl) transition-all duration-500 
                     group-hover:scale(1.05)">
-          <Sparkles class="size(32px) c(purple-600) mb(lg) mx(auto)" />
+          <Sparkles class="size(2xl) c(purple-600) mb(lg) mx(auto)" />
           <h4 class="font(lg) bold c(gray-900) text(center) mb(sm)">Scale & Shadow</h4>
           <p class="text(sm) c(gray-600) text(center)">Combined transformations</p>
         </div>
@@ -123,7 +123,7 @@
         <div class="bg(white) r(xl) p(xl) shadow(lg) 
                     group-hover:shadow(none) transition-all duration-300 
                     group-hover:border(2px/indigo-500)">
-          <Layers class="size(32px) c(pink-600) mb(lg) mx(auto)" />
+          <Layers class="size(2xl) c(pink-600) mb(lg) mx(auto)" />
           <h4 class="font(lg) bold c(gray-900) text(center) mb(sm)">Press Effect</h4>
           <p class="text(sm) c(gray-600) text(center)">Depth reduction on hover</p>
         </div>
@@ -169,25 +169,25 @@
       <h4 class="font(lg) bold c(gray-800) mb(xl) text(center)">Shadow & Elevation Combinations</h4>
       <div class="grid(4) gap(lg)">
         <div class="text(center)">
-          <div class="size(80px) r(lg) bg(white) shadow(sm) shadow(gray-300.5) hbox(center/middle) mx(auto) mb(md)">
+          <div class="size(4xl) r(lg) bg(white) shadow(sm) shadow(gray-300.5) hbox(center/middle) mx(auto) mb(md)">
             <span class="text(lg) font(bold) c(gray-700)">Soft</span>
           </div>
           <code class="text(xs) c(gray-600)">shadow(sm) shadow(gray-300.5)</code>
         </div>
         <div class="text(center)">
-          <div class="size(80px) r(lg) bg(white) shadow(md) shadow(indigo-200.3) hbox(center/middle) mx(auto) mb(md)">
+          <div class="size(4xl) r(lg) bg(white) shadow(md) shadow(indigo-200.3) hbox(center/middle) mx(auto) mb(md)">
             <span class="text(lg) font(bold) c(indigo-700)">Color</span>
           </div>
           <code class="text(xs) c(gray-600)">shadow(md) shadow(indigo-200.3)</code>
         </div>
         <div class="text(center)">
-          <div class="size(80px) r(lg) bg(gradient(white..gray-50)) shadow(lg) hbox(center/middle) mx(auto) mb(md)">
+          <div class="size(4xl) r(lg) bg(gradient(white..gray-50)) shadow(lg) hbox(center/middle) mx(auto) mb(md)">
             <span class="text(lg) font(bold) c(gray-700)">Raised</span>
           </div>
           <code class="text(xs) c(gray-600)">shadow(lg)</code>
         </div>
         <div class="text(center)">
-          <div class="size(80px) r(lg) bg(white) shadow(2xl) shadow(purple-200.4) hbox(center/middle) mx(auto) mb(md)">
+          <div class="size(4xl) r(lg) bg(white) shadow(2xl) shadow(purple-200.4) hbox(center/middle) mx(auto) mb(md)">
             <span class="text(lg) font(bold) c(purple-700)">Drama</span>
           </div>
           <code class="text(xs) c(gray-600)">shadow(2xl) shadow(purple-200.4)</code>

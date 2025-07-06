@@ -20,23 +20,25 @@ const flexbox = (dir: string, align?: string, justify?: string): CSSRule => ({
 
 const parseAlign = (v: string) => v ? { 
   top: 'flex-start', middle: 'center', bottom: 'flex-end', fill: 'stretch', stretch: 'stretch',
-  left: 'flex-start', center: 'center', right: 'flex-end', end: 'flex-end'
+  left: 'flex-start', center: 'center', right: 'flex-end', end: 'flex-end',
+  baseline: 'baseline'
 }[v] : undefined;
 
 const parseJustify = (v: string) => v ? {
   left: 'flex-start', right: 'flex-end', center: 'center', end: 'flex-end',
   top: 'flex-start', middle: 'center', bottom: 'flex-end',
-  between: 'space-between', around: 'space-around', evenly: 'space-evenly'
+  between: 'space-between', around: 'space-around', evenly: 'space-evenly',
+  baseline: 'baseline'
 }[v] : undefined;
 
 export const hbox: RuleHandler = (v = '') => {
   if (v === 'pack') return flexbox('row', 'center', 'center');
   const vals = v.split(/[+/]/);
-  const align = vals.find(x => ['top', 'middle', 'bottom', 'fill', 'end'].includes(x));
+  const align = vals.find(x => ['top', 'middle', 'bottom', 'fill', 'end', 'baseline'].includes(x));
   const justify = vals.find(x => ['left', 'right', 'center', 'end', 'between', 'around', 'evenly'].includes(x));
   
   // Default to flex-start/flex-start if no alignment specified
-  const defaultAlign = align ? parseAlign(align) : 'flex-start';
+  const defaultAlign = align ? parseAlign(align) : 'center';
   const defaultJustify = justify ? parseJustify(justify) : 'flex-start';
   
   return {
@@ -54,8 +56,8 @@ export const vbox: RuleHandler = (v = '') => {
   };
   
   const vals = v.split(/[+/]/);
-  const align = vals.find(x => ['left', 'center', 'right', 'fill', 'stretch', 'end'].includes(x));
-  const justify = vals.find(x => ['top', 'middle', 'bottom', 'around', 'between', 'evenly'].includes(x));
+  const align = vals.find(x => ['left', 'center', 'right', 'fill', 'stretch', 'end', 'baseline'].includes(x));
+  const justify = vals.find(x => ['top', 'middle', 'bottom', 'around', 'between', 'evenly', 'baseline'].includes(x));
   
   // Default to stretch/flex-start if no alignment specified
   const defaultAlign = align ? parseAlign(align) : 'stretch';
@@ -69,11 +71,12 @@ export const vbox: RuleHandler = (v = '') => {
       case 'right': return 'right';
       case 'fill':
       case 'stretch': return 'justify';
+      case 'baseline': return undefined; // baseline doesn't affect text-align
       default: return undefined;
     }
   };
   
-  const textAlign = align ? getTextAlign(align) : undefined;
+  const textAlign = align ? getTextAlign(align) : 'justify'
   
   return {
     ...flexbox('column', defaultAlign, defaultJustify),
