@@ -31,7 +31,11 @@ export {
   configureAutoInject, 
   isTokensInjected, 
   getAutoInjectConfig,
-  generateUsedTokensCSS
+  generateUsedTokensCSS,
+  initDynamicStyles,
+  addDynamicClasses,
+  destroyDynamicStyles,
+  getDynamicStyleManager
 } from "./core/runtime/auto-inject";
 
 // Export token registry utilities

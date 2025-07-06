@@ -67,6 +67,11 @@
         registerToken(category as any, token);
       });
     });
+    
+    // display 컴포넌트가 사용하는 추가 토큰 등록 (6xl~11xl)
+    ['6xl', '7xl', '8xl', '9xl', '10xl', '11xl'].forEach(token => {
+      registerToken('font', token);
+    });
 
     // CSS 생성
     const config = { ...DEFAULT_SCALE_CONFIG, unit: 'px' };
@@ -116,6 +121,15 @@
 
   // 초기화
   generateAllTokens();
+  
+  // 동적으로 컴포넌트 클래스들 추가
+  import { addDynamicClasses } from 'adorable-css';
+  import { onMount } from 'svelte';
+  
+  onMount(() => {
+    // display 컴포넌트가 사용하는 클래스들을 명시적으로 추가
+    addDynamicClasses('display(3xl)', 'display(xl)', 'display(2xl)', 'display(banner)');
+  });
 </script>
 
 <div class="min-h(screen) bg(white)">

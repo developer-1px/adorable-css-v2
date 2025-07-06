@@ -122,6 +122,13 @@ const makeGridTemplateRule =
   (property: "grid-template-columns" | "grid-template-rows"): RuleHandler =>
   (value?: string): CSSRule => {
     if (!value) return {};
+    
+    // Handle span:N syntax for grid-column span
+    if (value.startsWith('span:')) {
+      const span = value.replace('span:', '');
+      return { 'grid-column': `span ${span} / span ${span}` };
+    }
+    
     return { [property]: `repeat(${value}, minmax(0, 1fr))` };
   };
 

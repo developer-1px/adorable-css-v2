@@ -1,5 +1,5 @@
 // AdorableCSS v2 - CDN Entry Point
-import { generateCSS } from "adorable-css";
+import { generateCSS, getDynamicStyleManager, initDynamicStyles, destroyDynamicStyles } from "adorable-css";
 
 // Types for browser environment
 interface AdorableCSSV2 {
@@ -25,132 +25,17 @@ const AdorableCSSV2: AdorableCSSV2 = {
       return;
     }
 
-    const { watch = true, target, debug = false } = options;
+    const { watch = true, debug = false } = options;
 
-    // Create or get style element
-    let styleElement = document.getElementById(
-      "adorable-css-v2-styles"
-    ) as HTMLStyleElement;
-    if (!styleElement) {
-      styleElement = document.createElement("style");
-      styleElement.id = "adorable-css-v2-styles";
-      styleElement.setAttribute("data-adorable-css-v2", "true");
-
-      // Insert before other stylesheets to allow overrides
-      const head = document.head;
-      const firstStylesheet = head.querySelector(
-        'style, link[rel="stylesheet"]'
-      );
-      if (firstStylesheet) {
-        head.insertBefore(styleElement, firstStylesheet);
-      } else {
-        head.appendChild(styleElement);
-      }
-    }
-
-    if (!watch) return;
-
-    const classList = new Set<string>();
-
-    const updateStyles = () => {
-      const classArray = [...classList];
-      const css = generateCSS(classArray);
-      styleElement.innerHTML = css;
-
-      if (debug) {
-        // Check which classes failed to generate CSS
-        const failedClasses = checkFailedClasses(classArray);
-
-        if (failedClasses.length > 0) {
-          console.warn("AdorableCSS v2: Failed to generate CSS for classes:", failedClasses);
-          console.log("These classes might need to be added to the core rules. Please report them!");
-        }
-
-        console.log("AdorableCSS v2: Updated styles for classes:", classArray);
-        console.log(`Generated ${classArray.length} classes, ${failedClasses.length} failed`);
-      }
-    };
-
-    const processElement = (element: Element) => {
-      element.classList.forEach((className) => {
-        if (!classList.has(className)) {
-          classList.add(className);
-        }
-      });
-    };
-
-    const scanForClasses = (root: Element = document.documentElement) => {
-      let hasNewClasses = false;
-
-      // Process root element
-      const rootClassCount = classList.size;
-      processElement(root);
-      if (classList.size > rootClassCount) hasNewClasses = true;
-
-      // Process all descendants
-      const elements = root.querySelectorAll("*");
-      elements.forEach((element) => {
-        const beforeCount = classList.size;
-        processElement(element);
-        if (classList.size > beforeCount) hasNewClasses = true;
-      });
-
-      if (hasNewClasses) {
-        updateStyles();
-      }
-    };
-
-    // Initial scan
-    scanForClasses();
-
-    // Watch for changes
-    const observer = new MutationObserver((mutations) => {
-      let shouldUpdate = false;
-
-      mutations.forEach((mutation) => {
-        if (
-          mutation.type === "attributes" &&
-          mutation.attributeName === "class"
-        ) {
-          const beforeCount = classList.size;
-          processElement(mutation.target as Element);
-          if (classList.size > beforeCount) shouldUpdate = true;
-        }
-
-        if (mutation.type === "childList") {
-          mutation.addedNodes.forEach((node) => {
-            if (node.nodeType === Node.ELEMENT_NODE) {
-              const beforeCount = classList.size;
-              scanForClasses(node as Element);
-              if (classList.size > beforeCount) shouldUpdate = true;
-            }
-          });
-        }
-      });
-
-      if (shouldUpdate) {
-        updateStyles();
-      }
+    // Initialize dynamic style manager
+    initDynamicStyles({
+      enabled: watch,
+      debug: debug,
+      watchInterval: 50 // Faster updates for CDN
     });
-
-    const targetElement =
-      typeof target === "string"
-        ? document.querySelector(target) || document.documentElement
-        : target || document.documentElement;
-
-    observer.observe(targetElement, {
-      childList: true,
-      subtree: true,
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-
-    // Store observer for cleanup
-    (window as any).__adorableCSSV2Observer = observer;
-    (window as any).__adorableCSSV2StyleElement = styleElement;
 
     if (debug) {
-      console.log("AdorableCSS v2: Initialized and watching for class changes");
+      console.log("AdorableCSS v2: Initialized with dynamic style management");
     }
   },
 
@@ -174,20 +59,9 @@ const AdorableCSSV2: AdorableCSSV2 = {
 
   destroy: () => {
     if (typeof window === "undefined") return;
-
-    // Clean up observer
-    const observer = (window as any).__adorableCSSV2Observer;
-    if (observer) {
-      observer.disconnect();
-      delete (window as any).__adorableCSSV2Observer;
-    }
-
-    // Remove style element
-    const styleElement = (window as any).__adorableCSSV2StyleElement;
-    if (styleElement && styleElement.parentNode) {
-      styleElement.parentNode.removeChild(styleElement);
-      delete (window as any).__adorableCSSV2StyleElement;
-    }
+    
+    // Use the new destroy function
+    destroyDynamicStyles();
   },
 };
 
