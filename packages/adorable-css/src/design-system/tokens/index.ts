@@ -69,6 +69,16 @@ export interface DesignTokens {
     white: string;
     black: string;
   };
+  // Keep some common static tokens to prevent errors
+  fontWeight?: Record<string, string>;
+  lineHeight?: Record<string, string>;
+  letterSpacing?: Record<string, string>;
+  radius?: Record<string, string>;
+  shadow?: Record<string, string>;
+  opacity?: Record<string, string>;
+  zIndex?: Record<string, string>;
+  duration?: Record<string, string>;
+  ease?: Record<string, string>;
 }
 
 // Create tokens - simplified for dynamic calc() system
@@ -89,6 +99,106 @@ export function createTokens(): DesignTokens {
       info: '',
       white: '#ffffff',
       black: '#000000',
+    },
+    // Static tokens to prevent breaking changes
+    fontWeight: {
+      thin: '100',
+      extralight: '200',
+      light: '300',
+      normal: '400',
+      medium: '500',
+      semi: '600',
+      bold: '700',
+      extra: '800',
+      black: '900',
+    },
+    lineHeight: {
+      none: '1',
+      tight: '1.25',
+      snug: '1.375',
+      normal: '1.5',
+      relaxed: '1.625',
+      loose: '2',
+    },
+    letterSpacing: {
+      tighter: '-0.05em',
+      tight: '-0.025em',
+      normal: '0',
+      wide: '0.025em',
+      wider: '0.05em',
+      widest: '0.1em',
+    },
+    radius: {
+      none: '0',
+      xs: '0.125rem',
+      sm: '0.25rem',
+      md: '0.5rem',
+      lg: '0.75rem',
+      xl: '1rem',
+      '2xl': '1.5rem',
+      '3xl': '2rem',
+      '4xl': '3rem',
+      full: '9999px',
+    },
+    shadow: {
+      none: 'none',
+      xs: '0 1px 2px 0 rgb(0 0 0 / 0.05)',
+      sm: '0 2px 4px -1px rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04)',
+      md: '0 4px 8px -2px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.04)',
+      lg: '0 10px 20px -3px rgb(0 0 0 / 0.08), 0 4px 8px -3px rgb(0 0 0 / 0.04)',
+      xl: '0 20px 40px -4px rgb(0 0 0 / 0.1), 0 8px 16px -4px rgb(0 0 0 / 0.04)',
+      '2xl': '0 32px 64px -6px rgb(0 0 0 / 0.14), 0 16px 32px -6px rgb(0 0 0 / 0.04)',
+      inner: 'inset 0 2px 4px 0 rgb(0 0 0 / 0.06)',
+      card: '0 4px 12px -2px rgb(0 0 0 / 0.08), 0 2px 6px -2px rgb(0 0 0 / 0.04)',
+      hover: '0 12px 24px -4px rgb(0 0 0 / 0.12), 0 6px 12px -4px rgb(0 0 0 / 0.06)',
+    },
+    opacity: {
+      '0': '0',
+      '5': '0.05',
+      '10': '0.1',
+      '20': '0.2',
+      '25': '0.25',
+      '30': '0.3',
+      '40': '0.4',
+      '50': '0.5',
+      '60': '0.6',
+      '70': '0.7',
+      '75': '0.75',
+      '80': '0.8',
+      '90': '0.9',
+      '95': '0.95',
+      '100': '1',
+    },
+    zIndex: {
+      hide: '-1',
+      auto: 'auto',
+      base: '0',
+      docked: '10',
+      dropdown: '1000',
+      sticky: '1100',
+      banner: '1200',
+      overlay: '1300',
+      modal: '1400',
+      popover: '1500',
+      skipLink: '1600',
+      toast: '1700',
+      tooltip: '1800',
+    },
+    duration: {
+      instant: '0ms',
+      fast: '150ms',
+      normal: '300ms',
+      slow: '500ms',
+      slower: '750ms',
+      slowest: '1000ms',
+    },
+    ease: {
+      linear: 'linear',
+      in: 'cubic-bezier(0.4, 0, 1, 1)',
+      out: 'cubic-bezier(0, 0, 0.2, 1)',
+      'in-out': 'cubic-bezier(0.4, 0, 0.2, 1)',
+      back: 'cubic-bezier(0.175, 0.885, 0.32, 1.275)',
+      bounce: 'cubic-bezier(0.68, -0.55, 0.265, 1.55)',
     },
   };
 }
@@ -224,6 +334,14 @@ export function isToken(value: string, category: string): boolean {
            value.match(/^\w+-\d+$/) !== null; // e.g. blue-500
   }
   
+  // For static tokens, check if they exist in the token context
+  if (category === 'fontWeight' || category === 'lineHeight' || category === 'letterSpacing' || 
+      category === 'radius' || category === 'shadow' || category === 'opacity' || 
+      category === 'zIndex' || category === 'duration' || category === 'ease') {
+    const tokens = currentTokenContext[category];
+    return !!(tokens && typeof tokens === 'object' && value in tokens);
+  }
+  
   return false;
 }
 
@@ -248,7 +366,17 @@ export function getTokenVar(category: string, token: string): string {
     return `var(--${token})`;
   }
   
-  // For other static values, return CSS variable
+  // For static tokens, get the actual value instead of CSS variable
+  if (category === 'fontWeight' || category === 'lineHeight' || category === 'letterSpacing' || 
+      category === 'radius' || category === 'shadow' || category === 'opacity' || 
+      category === 'zIndex' || category === 'duration' || category === 'ease') {
+    const tokens = currentTokenContext[category];
+    if (tokens && typeof tokens === 'object' && token in tokens) {
+      return (tokens as any)[token];
+    }
+  }
+  
+  // For other values, return CSS variable
   return `var(--${category}-${token})`;
 }
 
