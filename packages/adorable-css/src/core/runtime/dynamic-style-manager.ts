@@ -3,7 +3,7 @@
  * Unified system for auto-injecting CSS and tokens dynamically
  */
 
-import { generateCSS } from '../parser/generator';
+import { generateCSS } from '../generators/generator';
 import { generateUsedTokensCSS, clearTokenRegistry } from '../../tokens/tokenRegistry';
 import { generateTokenCSS, defaultTokens } from '../../design-system/tokens/index';
 import type { DesignTokens } from '../../design-system/tokens/index';

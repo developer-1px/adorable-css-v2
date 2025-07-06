@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { generateCSSWithTokens } from '../core/parser/generator';
+import { generateCSSWithTokens } from '../core/generators/generator';
 
 describe('font(base) integration test', () => {
   it('should generate CSS for font(base) with tokens', () => {

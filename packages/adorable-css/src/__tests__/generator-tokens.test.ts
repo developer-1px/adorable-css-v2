@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { generateCSSWithTokens } from '../core/parser/generator';
+import { generateCSSWithTokens } from '../core/generators/generator';
 import { defaultTokens } from '../design-system/tokens/index';
 
 describe('generateCSSWithTokens', () => {

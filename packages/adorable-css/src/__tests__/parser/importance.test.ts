@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { generateCSSFromAdorableCSS } from '../../core/parser/generator';
+import { generateCSSFromAdorableCSS } from '../../core/generators/generator';
 import { parseAdorableCSS } from '../../core/parser/parser';
 
 describe('Importance (!) feature', () => {

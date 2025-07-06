@@ -1,4 +1,4 @@
-import { generateCSS } from '../core/parser/generator';
+import { generateCSS } from '../core/generators/generator';
 
 describe('Container and max-w tokens', () => {
   it('should generate container with token sizes', () => {

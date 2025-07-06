@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { generateCSS } from '../core/parser/generator';
+import { generateCSS } from '../core/generators/generator';
 
 describe('Layer Composition System', () => {
   it('should place layout compositions in @layer composition', () => {

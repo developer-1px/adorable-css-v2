@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { generateCSSFromAdorableCSS } from '../core/parser/generator';
+import { generateCSSFromAdorableCSS } from '../core/generators/generator';
 
 describe('Negative position values', () => {
   it('should handle negative spacing tokens', () => {

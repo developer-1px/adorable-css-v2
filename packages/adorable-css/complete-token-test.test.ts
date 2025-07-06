@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { clearTokenRegistry, generateUsedTokensCSS, getUsedTokens } from './src/tokens/tokenRegistry';
-import { generateCSS, generateCSSFromAdorableCSS } from './src/core/parser/generator';
+import { generateCSS, generateCSSFromAdorableCSS } from './src/core/generators/generator';
 
 describe('Complete Token Generation Test', () => {
   beforeEach(() => {

@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { clearTokenRegistry, generateUsedTokensCSS } from './src/tokens/tokenRegistry';
-import { generateCSS } from './src/core/parser/generator';
+import { generateCSS } from './src/core/generators/generator';
 
 describe('Final Font Token Diagnosis', () => {
   beforeEach(() => {

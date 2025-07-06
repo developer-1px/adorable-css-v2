@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { priorityRegistry } from '../rules/priority-registry';
-import { generateCSSFromAdorableCSS } from '../core/parser/generator';
+import { generateCSSFromAdorableCSS } from '../core/generators/generator';
 import { RulePriority } from '../rules/types';
 
 describe('String Rules System', () => {

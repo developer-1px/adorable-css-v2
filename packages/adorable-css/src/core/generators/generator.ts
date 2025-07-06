@@ -1,9 +1,9 @@
-import { parseAdorableCSS } from "./parser";
+import { parseAdorableCSS } from "../parser/parser";
 import { getRuleHandler, getRuleWithPriority } from "../../rules";
 import { priorityRegistry } from "../../rules/priority-registry";
 import type { CSSRule, ParsedSelector } from "../../rules/types";
 import { RulePriority } from "../../rules/types";
-import { cssEscape, cleanDuplicateSelectors } from "./cssEscape";
+import { cssEscape, cleanDuplicateSelectors } from "../parser/cssEscape";
 import { px } from '../values/makeValue';
 import { 
   ResponsiveSelector, 
@@ -15,11 +15,11 @@ import {
 import { generateTokenCSS, defaultTokens, setTokenContext } from '../../design-system/tokens/index';
 import { generateUsedTokensCSS } from '../../tokens/tokenRegistry';
 import type { DesignTokens } from '../../design-system/tokens/index';
-import { createParsedSelector } from '../generators/ast-helpers';
-import { AnimationHandler } from '../generators/animation-handler';
-import { cssObjectToString } from '../generators/css-object-generator';
-import { createMediaQuery } from '../generators/breakpoints';
-import { extractImportanceLevel, addImportanceToSelector } from '../generators/importance-utils';
+import { createParsedSelector } from './ast-helpers';
+import { AnimationHandler } from './animation-handler';
+import { cssObjectToString } from './css-object-generator';
+import { createMediaQuery } from './breakpoints';
+import { extractImportanceLevel, addImportanceToSelector } from './importance-utils';
 import { createMemo } from '../utils/memo';
 import { resetCSS } from '../reset';
 
