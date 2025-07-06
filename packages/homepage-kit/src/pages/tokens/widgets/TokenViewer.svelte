@@ -1,33 +1,47 @@
 <script lang="ts">
-  import { registerToken, generateUsedTokensCSS, clearTokenRegistry, DEFAULT_SCALE_CONFIG } from 'adorable-css';
+  import { registerToken, generateUsedTokensCSS, clearTokenRegistry, DEFAULT_SCALE_CONFIG, defaultTokens } from 'adorable-css';
   
   // 모든 토큰 카테고리 정의
   const categories = {
     font: {
       title: 'Font Scale',
       description: 'Typography sizes with ratio-based scaling',
-      tokens: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl', '10xl', '11xl'],
+      tokens: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'],
       unit: 'px',
       baseToken: 'md'
     },
     spacing: {
       title: 'Spacing Scale',
       description: 'Margin, padding, gap with linear scaling',
-      tokens: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl'],
+      tokens: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'],
       unit: 'px',
       baseToken: 'md'
     },
     size: {
       title: 'Size Scale',
       description: 'Width, height, and general sizing',
-      tokens: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl'],
+      tokens: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'],
       unit: 'px',
+      baseToken: 'md'
+    },
+    radius: {
+      title: 'Border Radius Scale',
+      description: 'Corner radius for rounded elements',
+      tokens: ['none', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', 'full'],
+      unit: 'px',
+      baseToken: 'md'
+    },
+    shadow: {
+      title: 'Shadow Scale',
+      description: 'Box shadow depth and intensity',
+      tokens: ['none', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl'],
+      unit: '',
       baseToken: 'md'
     },
     container: {
       title: 'Container Scale',
       description: 'Breakpoints and container widths',
-      tokens: ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl'],
+      tokens: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
       unit: 'px',
       baseToken: 'md'
     }
@@ -44,6 +58,11 @@
     
     // 모든 토큰 등록
     Object.entries(categories).forEach(([category, config]) => {
+      // radius와 shadow는 토큰이 아니라 디자인 시스템의 일부이므로 다르게 처리
+      if (category === 'radius' || category === 'shadow') {
+        // AdorableCSS의 디자인 토큰 시스템에서 처리됨
+        return;
+      }
       config.tokens.forEach(token => {
         registerToken(category as any, token);
       });
@@ -51,7 +70,22 @@
 
     // CSS 생성
     const config = { ...DEFAULT_SCALE_CONFIG, unit: 'px' };
-    generatedCSS = generateUsedTokensCSS(config);
+    let dynamicCSS = generateUsedTokensCSS(config);
+    
+    // radius와 shadow 토큰도 CSS에 추가
+    const radiusTokens = Object.entries(defaultTokens.radius || {})
+      .map(([key, value]) => `  --radius-${key}: ${value};`)
+      .join('\n');
+    
+    const shadowTokens = Object.entries(defaultTokens.shadow || {})
+      .map(([key, value]) => `  --shadow-${key}: ${value};`)
+      .join('\n');
+    
+    // 전체 CSS 조합
+    generatedCSS = dynamicCSS.replace(
+      ':root {',
+      `:root {\n\n  /* Border Radius Tokens */\n${radiusTokens}\n\n  /* Shadow Tokens */\n${shadowTokens}`
+    );
     
     // 토큰 값 파싱
     parseTokenValues();
@@ -62,11 +96,20 @@
     
     Object.keys(categories).forEach(category => {
       tokenValues[category] = {};
-      const regex = new RegExp(`--${category}-([^:]+): ([^;]+);`, 'g');
-      let match;
       
-      while ((match = regex.exec(generatedCSS)) !== null) {
-        tokenValues[category][match[1]] = match[2];
+      if (category === 'radius') {
+        // radius는 defaultTokens에서 가져옴
+        tokenValues[category] = defaultTokens.radius || {};
+      } else if (category === 'shadow') {
+        // shadow는 defaultTokens에서 가져옴
+        tokenValues[category] = defaultTokens.shadow || {};
+      } else {
+        const regex = new RegExp(`--${category}-([^:]+): ([^;]+);`, 'g');
+        let match;
+        
+        while ((match = regex.exec(generatedCSS)) !== null) {
+          tokenValues[category][match[1]] = match[2];
+        }
       }
     });
   }
@@ -279,6 +322,56 @@
                 </div>
               {/each}
             </div>
+          </div>
+
+        {:else if categoryKey === 'radius'}
+          <!-- Border Radius tokens - visual examples -->
+          <div class="grid gap(xl)" style="grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));">
+            {#each category.tokens as token}
+              <div class="vbox gap(md) p(xl) border(2/gray-900) radius(lg) bg(white) hover:shadow(lg) transition">
+                <!-- Token info -->
+                <div class="vbox gap(xs) text(center)">
+                  <code class="font(mono) text(sm) font(bold) c(gray-900)">radius-{token}</code>
+                  <code class="font(mono) text(xs) c(gray-600)">{tokenValues[categoryKey]?.[token] || '...'}</code>
+                </div>
+                
+                <!-- Visual example -->
+                <div class="hbox(center) items(center)">
+                  <div 
+                    class="w(80) h(80) bg(blue-500) shadow(md)"
+                    style="border-radius: {tokenValues[categoryKey]?.[token] || '8px'};"
+                  ></div>
+                </div>
+                
+                <!-- Usage -->
+                <code class="font(mono) text(xs) c(gray-500) text(center)">r({token})</code>
+              </div>
+            {/each}
+          </div>
+
+        {:else if categoryKey === 'shadow'}
+          <!-- Shadow tokens - visual examples -->
+          <div class="grid gap(xl)" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));">
+            {#each category.tokens as token}
+              <div class="vbox gap(lg) p(xl) border(2/gray-900) radius(lg) bg(white) hover:shadow(xl) transition">
+                <!-- Token info -->
+                <div class="vbox gap(xs) text(center)">
+                  <code class="font(mono) text(sm) font(bold) c(gray-900)">shadow-{token}</code>
+                  <code class="font(mono) text(xs) c(gray-500) max-w(full) truncate px(sm)">{tokenValues[categoryKey]?.[token] || '...'}</code>
+                </div>
+                
+                <!-- Visual example -->
+                <div class="hbox(center) items(center) py(xl)">
+                  <div 
+                    class="w(100) h(100) bg(white) radius(lg) border(1/gray-200)"
+                    style="box-shadow: {tokenValues[categoryKey]?.[token] || '0 4px 6px rgba(0,0,0,0.1)'};"
+                  ></div>
+                </div>
+                
+                <!-- Usage -->
+                <code class="font(mono) text(xs) c(gray-500) text(center)">shadow({token})</code>
+              </div>
+            {/each}
           </div>
         {/if}
       </div>
