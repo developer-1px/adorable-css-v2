@@ -4,7 +4,7 @@ import {
   hbox, vbox, wrap, pack, flex, flexWrap, items, justify, shrink, grow
 } from '../../../03-rules/layout/display';
 
-describe('display 03-rules', () => {
+describe('display rules', () => { // Clarified describe block name
   describe('basic display utilities', () => {
     it('should apply display values', () => {
       expect(block()).toEqual({ display: 'block' });
@@ -14,6 +14,10 @@ describe('display 03-rules', () => {
       expect(none()).toEqual({ display: 'none' });
       expect(hidden()).toEqual({ display: 'none' });
       expect(grid()).toEqual({ display: 'grid' });
+    });
+
+    it('should return empty object for invalid display values', () => { // Added new test case
+      expect(block('invalid')).toEqual({});
     });
   });
 
@@ -98,6 +102,10 @@ describe('display 03-rules', () => {
         'align-items': 'center'
       });
     });
+
+    it('should return empty object for invalid hbox arguments', () => { // Added new test case
+      expect(hbox('invalid')).toEqual({});
+    });
   });
 
   describe('vbox (vertical flexbox)', () => {
@@ -161,6 +169,10 @@ describe('display 03-rules', () => {
         'align-items': 'stretch'
       });
     });
+
+    it('should return empty object for invalid vbox arguments', () => { // Added new test case
+      expect(vbox('invalid')).toEqual({});
+    });
   });
 
   describe('other flexbox utilities', () => {
@@ -175,6 +187,10 @@ describe('display 03-rules', () => {
         'align-items': 'center',
         'justify-content': 'center'
       });
+    });
+
+    it('should return empty object for invalid pack arguments', () => { // Added new test case
+      expect(pack('invalid')).toEqual({});
     });
   });
 
@@ -213,6 +229,30 @@ describe('display 03-rules', () => {
       expect(grow('1')).toEqual({ 'flex-grow': '1' });
       expect(grow('0')).toEqual({ 'flex-grow': '0' });
       expect(grow()).toEqual({});
+    });
+
+    it('should return empty object for invalid flex arguments', () => { // Added new test case
+      expect(flex('invalid')).toEqual({});
+    });
+
+    it('should return empty object for invalid flexWrap arguments', () => { // Added new test case
+      expect(flexWrap('invalid')).toEqual({});
+    });
+
+    it('should return empty object for invalid items arguments', () => { // Added new test case
+      expect(items('invalid')).toEqual({});
+    });
+
+    it('should return empty object for invalid justify arguments', () => { // Added new test case
+      expect(justify('invalid')).toEqual({});
+    });
+
+    it('should return empty object for invalid shrink arguments', () => { // Added new test case
+      expect(shrink('invalid')).toEqual({});
+    });
+
+    it('should return empty object for invalid grow arguments', () => { // Added new test case
+      expect(grow('invalid')).toEqual({});
     });
   });
 });

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { inset, insetX, insetY } from '../../../03-rules/layout/inset';
 
-describe('inset 03-rules', () => {
+describe('inset rules', () => { // Clarified describe block name
   describe('inset', () => {
     it('should handle single value', () => {
       expect(inset('0')).toEqual({ inset: '0px' });
@@ -23,6 +23,10 @@ describe('inset 03-rules', () => {
     it('should return empty object for no value', () => {
       expect(inset()).toEqual({});
     });
+
+    it('should return empty object for invalid values', () => { // Added new test case
+      expect(inset('invalid')).toEqual({});
+    });
   });
 
   describe('insetX', () => {
@@ -40,6 +44,10 @@ describe('inset 03-rules', () => {
     it('should return empty object for no value', () => {
       expect(insetX()).toEqual({});
     });
+
+    it('should return empty object for invalid values', () => { // Added new test case
+      expect(insetX('invalid')).toEqual({});
+    });
   });
 
   describe('insetY', () => {
@@ -56,6 +64,10 @@ describe('inset 03-rules', () => {
 
     it('should return empty object for no value', () => {
       expect(insetY()).toEqual({});
+    });
+
+    it('should return empty object for invalid values', () => { // Added new test case
+      expect(insetY('invalid')).toEqual({});
     });
   });
 });

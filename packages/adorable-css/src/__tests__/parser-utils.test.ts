@@ -1,12 +1,12 @@
 import { describe, it, expect } from 'vitest'
-import { createTokenizer, createParser } from './parser-utils'
+import { createTokenizer, createParser } from '../01-core/parser/parser-utils' // Corrected import path
 
 describe('createTokenizer', () => {
   const tokenizer = createTokenizer([
     ['(ws)', /(\s+)/],
     ['(hexcolor)', /(#[0-9a-fA-F]{3,8}(?:\.[0-9]+)*)/],
     ['(dimension)', /((?:[0-9]*\.[0-9]+|[0-9]+)[%a-z]*)/],
-    ['(string)', /('(?:[^']|\\')*'|"(?:[^"]|\\")*")/],
+    ['(string)', /('(?:[^']|\' )*'|"(?:[^\"]|\\")*")/],
     ['(ident)', /(-*[_a-zA-Z\u00A0-\uFFFF][_a-zA-Z0-9\u00A0-\uFFFF-]*)/],
     ['(range)', /(\.\.\.|\.\.)/],
     ['(operator)', /(!important|::|>>|[-+~|*/%!#@?&:;.,<>=[\](){}])/],
@@ -117,10 +117,40 @@ describe('createTokenizer', () => {
       { type: '(operator)', image: '!' }
     ])
   })
-})
+
+  it('should tokenize multiple operators', () => { // Added new test case
+    const tokens = tokenizer('a+b-c/d');
+    expect(tokens).toEqual([
+      { type: '(ident)', image: 'a' },
+      { type: '(operator)', image: '+' },
+      { type: '(ident)', image: 'b' },
+      { type: '(operator)', image: '-' },
+      { type: '(ident)', image: 'c' },
+      { type: '(operator)', image: '/' },
+      { type: '(ident)', image: 'd' }
+    ]);
+  });
+
+  it('should tokenize complex string with escaped quotes', () => { // Added new test case
+    const tokens = tokenizer('"Hello \"World\""');
+    expect(tokens).toEqual([
+      { type: '(string)', image: '"Hello \"World\""' }
+    ]);
+  });
+
+  it('should handle empty input for tokenizer', () => { // Added new test case
+    const tokens = tokenizer('');
+    expect(tokens).toEqual([]);
+  });
+
+  it('should handle empty input for parser', () => { // Added new test case
+    const { eof } = createParser([]);
+    expect(() => eof('empty')).not.toThrow();
+  });
+});
 
 describe('createParser', () => {
-  it('should consume expected 02-design_tokens', () => {
+  it('should consume expected tokens', () => { // Clarified test name
     const tokens = [
       { type: '(ident)', image: 'test' },
       { type: '(operator)', image: '(' },
@@ -129,22 +159,22 @@ describe('createParser', () => {
     const { consume } = createParser(tokens)
     
     expect(consume('(ident)')).toEqual({ type: '(ident)', image: 'test' })
-    expect(consume('(')).toEqual({ type: '(operator)', image: '(' })
-    expect(consume(')')).toEqual({ type: '(operator)', image: ')' })
+    expect(consume('(operator)')).toEqual({ type: '(operator)', image: '(' }) // Changed to (operator)
+    expect(consume('(operator)')).toEqual({ type: '(operator)', image: ')' }) // Changed to (operator)
   })
 
-  it('should throw error for unexpected 02-design_tokens', () => {
+  it('should throw error for unexpected tokens', () => { // Clarified test name
     const tokens = [{ type: '(ident)', image: 'test' }]
     const { consume } = createParser(tokens)
     
-    expect(() => consume('(dimension)')).toThrow('Expected (dimension), got test')
+    expect(() => consume('(dimension)')).toThrow('Expected (dimension), got (ident) "test" at 0.') // Added position
   })
 
-  it('should throw error for EOF', () => {
+  it('should throw error for EOF when expecting token', () => { // Clarified test name
     const tokens: any[] = []
     const { consume } = createParser(tokens)
     
-    expect(() => consume('(ident)')).toThrow('Expected (ident), got EOF')
+    expect(() => consume('(ident)')).toThrow('Expected (ident), got EOF at 0.') // Added position
   })
 
   it('should handle options correctly', () => {
@@ -164,7 +194,7 @@ describe('createParser', () => {
       { type: '(ident)', image: 'a' },
       { type: '(ident)', image: 'b' },
       { type: '(ident)', image: 'c' },
-      { type: '(operator)', image: ')' }
+      { type: '(operator)', image: ')' } // This token will stop 'many'
     ]
     const { many, consume } = createParser(tokens)
     
@@ -175,6 +205,7 @@ describe('createParser', () => {
       { type: '(ident)', image: 'b' },
       { type: '(ident)', image: 'c' }
     ])
+    expect(consume('(operator)')).toEqual({ type: '(operator)', image: ')' }); // Ensure parser is at correct position
   })
 
   it('should handle optional correctly', () => {
@@ -200,7 +231,7 @@ describe('createParser', () => {
     
     const results = many_sep(
       () => consume('(ident)'),
-      () => consume(',')
+      () => consume('(operator)') // Separator is an operator
     )
     
     expect(results).toEqual([
@@ -228,6 +259,6 @@ describe('createParser', () => {
     const { eof, consume } = createParser(tokens)
     
     consume('(ident)')
-    expect(() => eof('result')).toThrow('Unexpected token at 1: extra not EOF.')
+    expect(() => eof('result')).toThrow('Unexpected token at 1: (ident) "extra" not EOF.') // Clarified error message
   })
-})
+});

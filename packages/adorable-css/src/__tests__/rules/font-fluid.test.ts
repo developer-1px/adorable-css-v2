@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { font } from '../../03-rules/text/font';
+import { font } from '../../../03-rules/text/font';
 
 describe('font fluid syntax', () => {
   describe('font(..token) - scale up to token', () => {
@@ -7,18 +7,21 @@ describe('font fluid syntax', () => {
       const result = font('..5xl');
       expect(result['font-size']).toMatch(/clamp\(/);
       expect(result['font-size']).toContain('var(--font-5xl)');
+      expect(result['font-size']).toContain('vw'); // Ensure viewport unit is present
     });
 
     it('should handle font(..lg)', () => {
       const result = font('..lg');
       expect(result['font-size']).toMatch(/clamp\(/);
       expect(result['font-size']).toContain('var(--font-lg)');
+      expect(result['font-size']).toContain('vw'); // Ensure viewport unit is present
     });
 
     it('should handle font(..5xl/tight)', () => {
       const result = font('..5xl/tight');
       expect(result['font-size']).toMatch(/clamp\(/);
       expect(result['font-size']).toContain('var(--font-5xl)');
+      expect(result['font-size']).toContain('vw'); // Ensure viewport unit is present
       expect(result['line-height']).toBe('var(--lineHeight-tight)');
     });
 
@@ -26,6 +29,7 @@ describe('font fluid syntax', () => {
       const result = font('..5xl/1.2/-2%');
       expect(result['font-size']).toMatch(/clamp\(/);
       expect(result['font-size']).toContain('var(--font-5xl)');
+      expect(result['font-size']).toContain('vw'); // Ensure viewport unit is present
       expect(result['line-height']).toBe('1.2');
       expect(result['letter-spacing']).toBe('-0.02em');
     });
@@ -36,6 +40,7 @@ describe('font fluid syntax', () => {
       const result = font('3xl..');
       expect(result['font-size']).toMatch(/clamp\(/);
       expect(result['font-size']).toContain('var(--font-3xl)');
+      expect(result['font-size']).toContain('vw'); // Ensure viewport unit is present
     });
 
     it('should handle font(base..)', () => {
@@ -43,12 +48,14 @@ describe('font fluid syntax', () => {
       expect(result['font-size']).toMatch(/clamp\(/);
       // base is alias for md
       expect(result['font-size']).toContain('var(--font-md)');
+      expect(result['font-size']).toContain('vw'); // Ensure viewport unit is present
     });
 
     it('should handle font(2xl../relaxed)', () => {
       const result = font('2xl../relaxed');
       expect(result['font-size']).toMatch(/clamp\(/);
       expect(result['font-size']).toContain('var(--font-2xl)');
+      expect(result['font-size']).toContain('vw'); // Ensure viewport unit is present
       expect(result['line-height']).toBe('var(--lineHeight-relaxed)');
     });
   });
@@ -69,16 +76,45 @@ describe('font fluid syntax', () => {
     it('should handle font(sm..lg)', () => {
       const result = font('sm..lg');
       expect(result['font-size']).toMatch(/clamp\(/);
+      expect(result['font-size']).toContain('var(--font-sm)'); // Ensure min token is present
+      expect(result['font-size']).toContain('var(--font-lg)'); // Ensure max token is present
+      expect(result['font-size']).toContain('vw'); // Ensure viewport unit is present
     });
 
     it('should handle font(1rem..2rem)', () => {
       const result = font('1rem..2rem');
       expect(result['font-size']).toMatch(/clamp\(/);
+      expect(result['font-size']).toContain('1rem');
+      expect(result['font-size']).toContain('2rem');
+      expect(result['font-size']).toContain('vw'); // Ensure viewport unit is present
     });
 
     it('should handle font(sm..4vw..lg)', () => {
       const result = font('sm..4vw..lg');
       expect(result['font-size']).toMatch(/clamp\(/);
+      expect(result['font-size']).toContain('var(--font-sm)');
+      expect(result['font-size']).toContain('4vw');
+      expect(result['font-size']).toContain('var(--font-lg)');
     });
+  });
+
+  it('should return empty object for invalid fluid font arguments', () => { // Added new test case
+    const result = font('..invalid');
+    expect(result).toEqual({});
+  });
+
+  it('should return empty object for invalid range values', () => { // Added new test case
+    const result = font('invalid..invalid');
+    expect(result).toEqual({});
+  });
+
+  it('should return empty object for invalid arguments with line-height', () => { // Added new test case
+    const result = font('lg/invalid');
+    expect(result).toEqual({});
+  });
+
+  it('should return empty object for invalid arguments with letter-spacing', () => { // Added new test case
+    const result = font('lg/1.5/invalid');
+    expect(result).toEqual({});
   });
 });

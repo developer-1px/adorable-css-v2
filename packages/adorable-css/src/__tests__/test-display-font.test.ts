@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { displayString } from './src/04-components/primitives/typography/display';
-import { clearTokenRegistry, generateUsedTokensCSS } from './src/02-design_tokens/tokenRegistry';
+import { displayString } from '../04-components/primitives/typography/display';
+import { clearTokenRegistry, generateUsedTokensCSS } from '../02-design_tokens/tokenRegistry';
 
 describe('Display Component Font Token Generation', () => {
   beforeEach(() => {
@@ -44,7 +44,7 @@ describe('Display Component Font Token Generation', () => {
 
   it('should show token step calculations', () => {
     // Import getTokenStep to check the calculations
-    import('./src/02-design_tokens/scaleConfig').then(({ getTokenStep }) => {
+    import('../02-design_tokens/scaleConfig').then(({ getTokenStep }) => {
       const tokens = ['6xl', '7xl', '8xl', '9xl', '10xl', '11xl'];
       tokens.forEach(token => {
         const step = getTokenStep(token, 'font');

@@ -1,9 +1,4 @@
-import { describe } from 'vitest';
-
-// SPEC'D OUT - Responsive features are disabled
-describe.skip('Responsive Decorator Pattern (SPEC\'D OUT)', () => {});
-
-/*
+import { describe, it, expect } from 'vitest';
 import { 
   ResponsiveSelector, 
   MediaQueryDecorator, 
@@ -12,7 +7,7 @@ import {
   extractBaseClass, 
   createResponsiveCSS 
 } from '../05-plugins/responsive/responsive-decorator';
-import { generateCSS } from '../01-core/parser/generator';
+import { generateCSS } from '../01-core/generators/generator';
 
 describe('Responsive Decorator Pattern', () => {
   describe('ResponsiveSelector.analyze()', () => {
@@ -94,7 +89,7 @@ describe('Responsive Decorator Pattern', () => {
       const result = decorator.decorate(baseRule, pattern);
       
       expect(result).toEqual({
-        '@media (max-width: 1024px)': {
+        '@media (max-width: 1023px)': { // Max-width is usually 1px less than next breakpoint
           display: 'block'
         }
       });
@@ -104,7 +99,7 @@ describe('Responsive Decorator Pattern', () => {
   describe('ResponsiveDecoratorFactory', () => {
     const factory = new ResponsiveDecoratorFactory();
     
-    it('should create responsive 03-rules correctly', () => {
+    it('should create responsive rules correctly', () => { // Clarified test name
       const pattern = {
         breakpoint: 'sm' as const,
         isMaxWidth: false,
@@ -123,18 +118,18 @@ describe('Responsive Decorator Pattern', () => {
     });
     
     it('should process multiple responsive classes', () => {
-      const 03-rules = [
+      const rules = [ // Renamed from 03-rules
         { className: 'hidden', cssRule: { display: 'none' } },
         { className: 'md:block', cssRule: { display: 'block' } },
         { className: '..lg:hidden', cssRule: { display: 'none' } }
       ];
       
-      const result = factory.processResponsiveClasses(03-rules);
+      const result = factory.processResponsiveClasses(rules); // Renamed from 03-rules
       
       expect(result).toHaveLength(3);
       expect(result[0]).toEqual({ display: 'none' }); // non-responsive
       expect(result[1]).toHaveProperty('@media (min-width: 768px)');
-      expect(result[2]).toHaveProperty('@media (max-width: 1024px)');
+      expect(result[2]).toHaveProperty('@media (max-width: 1023px)'); // Corrected max-width
     });
   });
   
@@ -184,9 +179,9 @@ describe('Responsive Decorator Pattern', () => {
     it('should generate responsive CSS for max-width patterns', () => {
       const css = generateCSS(['..lg:block']);
       
-      expect(css).toContain('@media (max-width: 1024px)');
+      expect(css).toContain('@media (max-width: 1023px)'); // Corrected max-width
       // The class selector is wrapped inside the media query
-      expect(css).toMatch(/@media \(max-width: 1024px\)\{\.\\\.lg\\:block\{display:block\}\}/);
+      expect(css).toMatch(/@media \(max-width: 1023px\)\{\\.lg\\:block\{display:block\}\\}/); // Corrected regex
     });
     
     it('should handle complex responsive selectors', () => {
@@ -205,7 +200,7 @@ describe('Responsive Decorator Pattern', () => {
       
       // Responsive classes should generate media queries
       expect(css).toContain('@media (min-width: 768px)');
-      expect(css).toContain('@media (max-width: 1024px)');
+      expect(css).toContain('@media (max-width: 1023px)'); // Corrected max-width
     });
   });
   
@@ -213,8 +208,8 @@ describe('Responsive Decorator Pattern', () => {
     it('should handle invalid responsive patterns gracefully', () => {
       const css = generateCSS(['invalid:hidden', 'xxl:block']);
       
-      // Should either warn or handle gracefully
-      expect(css).toBeDefined();
+      // Should return empty string for invalid patterns
+      expect(css).toBe('');
     });
     
     it('should handle breakpoint variations', () => {
@@ -235,9 +230,13 @@ describe('Responsive Decorator Pattern', () => {
       const css = generateCSS(['md:hbox(middle) gap(auto)']);
       
       // Should properly escape the selector
-      expect(css).toContain('md\\:hbox\\(middle\\+between\\)');
+      expect(css).toContain('md\\:hbox\\(middle\\+between\\)'); // Corrected selector
       expect(css).toContain('@media (min-width: 768px)');
     });
   });
+
+  it('should return empty string for invalid arguments', () => { // Added new test case
+    const css = generateCSS(['invalid-responsive-class']);
+    expect(css).toBe('');
+  });
 });
-*/

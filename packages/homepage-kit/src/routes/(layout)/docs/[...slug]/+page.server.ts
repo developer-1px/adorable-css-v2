@@ -1,13 +1,13 @@
 import { error } from '@sveltejs/kit';
 import { readFile } from 'fs/promises';
 import { join, resolve } from 'path';
-import { docsConfig } from '@docs/config';
+import { docsConfig, getAllDocItems } from '@docs/config';
 import { processMarkdownIt } from '$lib/mdx/markdown-it-processor.js';
-import type { EntryGenerator } from '../../../../../.svelte-kit/types/src/routes';
 
-export const entries: EntryGenerator = () => {
+export const entries = () => {
   // Generate entries for all docs pages from docsConfig
-  return docsConfig.map(item => {
+  const allDocs = getAllDocItems();
+  return allDocs.map(item => {
     // Extract slug from href (remove /docs/ prefix)
     const slug = item.href.replace('/docs/', '');
     // For [...slug] route, we need to return the slug as a string
@@ -22,7 +22,8 @@ export async function load({ params }) {
   const href = `/docs/${slug}`;
   
   // 문서 설정에서 찾기
-  const docItem = docsConfig.find(item => item.href === href);
+  const allDocs = getAllDocItems();
+  const docItem = allDocs.find(item => item.href === href);
     
   if (!docItem) {
     throw error(404, '문서를 찾을 수 없습니다');
@@ -34,7 +35,7 @@ export async function load({ params }) {
       const monorepoRoot = resolve(process.cwd(), '../..');
       const filePath = docItem.source.startsWith('/')
         ? join(monorepoRoot, docItem.source)
-        : resolve(process.cwd(), docItem.source);
+        : resolve(process.cwd(), '../../docs/', docItem.source);
       
       const content = await readFile(filePath, 'utf-8');
       

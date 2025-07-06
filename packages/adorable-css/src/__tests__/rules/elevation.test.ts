@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { elevation, calculateElevation } from '../../03-rules/effects/elevation';
+import { elevation, calculateElevation } from '../../../03-rules/effects/elevation';
 
 describe('elevation', () => {
   it('should return none shadow for elevation(0)', () => {
@@ -16,7 +16,7 @@ describe('elevation', () => {
     expect(result2['box-shadow']).toContain('rgba(0, 0, 0, 0.112)');
   });
 
-  it('should increase shadows progressively', () => {
+  it('should increase shadows progressively with higher levels', () => { // Clarified test name
     const calc4 = calculateElevation(4);
     const calc8 = calculateElevation(8);
     const calc16 = calculateElevation(16);
@@ -36,14 +36,14 @@ describe('elevation', () => {
     expect(calc8.ambientOpacity).toBeLessThan(calc4.ambientOpacity);
   });
 
-  it('should cap at level 24', () => {
+  it('should cap elevation level at 24', () => { // Clarified test name
     const result24 = elevation('24');
     const result50 = elevation('50');
     
     expect(result24).toEqual(result50);
   });
 
-  it('should handle invalid inputs', () => {
+  it('should handle invalid inputs by returning none shadow', () => { // Clarified test name
     expect(elevation()).toEqual({ 'box-shadow': 'none' });
     expect(elevation('invalid')).toEqual({ 'box-shadow': 'none' });
     expect(elevation('-5')).toEqual({ 'box-shadow': 'none' });
@@ -68,5 +68,13 @@ describe('elevation', () => {
       expect(calc.keyY).toBeLessThanOrEqual(level);
       expect(calc.ambientY).toBe(level);
     });
+  });
+
+  it('should return none shadow for non-numeric input', () => { // Added new test case
+    expect(elevation('abc')).toEqual({ 'box-shadow': 'none' });
+  });
+
+  it('should return none shadow for negative numeric input', () => { // Added new test case
+    expect(elevation('-10')).toEqual({ 'box-shadow': 'none' });
   });
 });

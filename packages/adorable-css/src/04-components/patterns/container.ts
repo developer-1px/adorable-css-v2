@@ -1,6 +1,5 @@
 import type { RuleHandler, CSSRule } from '../../03-rules/types';
 import { isToken, getTokenVar } from '../../02-design_tokens/design-system/tokens/index';
-import { generateContainerCalc } from '../../02-design_tokens/dynamicTokens';
 
 const paddingMap: Record<string, string> = {
   '0': '0',

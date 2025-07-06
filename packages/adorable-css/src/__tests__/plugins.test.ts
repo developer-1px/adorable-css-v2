@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
-import { glow, glowPulse, glowRing } from './glow'
-import { glass, glassCard, glassDark } from './glass'
-import { card, cardHover, cardDark, cardGradient } from './card'
-import { fontResponsive, gapResponsive, pResponsive } from './responsive'
-import { gradientText, backdropBlur, morphism, neon } from './advanced'
+import { glow, glowPulse, glowRing } from '../05-plugins/effects/glow' // Corrected import path
+import { glass, glassCard, glassDark } from '../05-plugins/effects/glass' // Corrected import path
+import { card, cardHover, cardDark, cardGradient } from '../04-components/primitives/card' // Corrected import path
+import { fontResponsive, gapResponsive, pResponsive } from '../05-plugins/responsive/responsive' // Corrected import path
+import { gradientText, backdropBlur, morphism, neon } from '../05-plugins/advanced/advanced' // Corrected import path
 
 describe('Plugin Rules - Glow Effects', () => {
   it('should generate basic glow effect', () => {
@@ -18,20 +18,30 @@ describe('Plugin Rules - Glow Effects', () => {
     const result = glow('#ff0000/32/0.8')
     expect(result['box-shadow']).toContain('32px')
     expect(result['box-shadow']).toContain('0.8')
+    expect(result['box-shadow']).toContain('rgb(255, 0, 0)'); // Check for color
+    expect(result.filter).toContain('rgb(255, 0, 0)'); // Check for color in filter
   })
 
   it('should generate glow-pulse animation', () => {
     const result = glowPulse('#00ff00')
     expect(result).toHaveProperty('animation')
     expect(result.animation).toContain('glow-pulse')
+    expect(result.animation).toContain('var(--duration-1000)'); // Check for default duration
+    expect(result.animation).toContain('infinite'); // Check for infinite iteration
   })
 
   it('should generate glow-ring effect', () => {
     const result = glowRing('#0000ff/6')
     expect(result).toHaveProperty('box-shadow')
     expect(result).toHaveProperty('outline', 'none')
+    expect(result['box-shadow']).toContain('rgb(0, 0, 255)'); // Check for color
   })
-})
+
+  it('should return empty object for invalid glow arguments', () => { // Added new test case
+    const result = glow('invalid');
+    expect(result).toEqual({});
+  });
+});
 
 describe('Plugin Rules - Glass Effects', () => {
   it('should generate basic glass effect', () => {
@@ -55,14 +65,21 @@ describe('Plugin Rules - Glass Effects', () => {
     expect(result).toHaveProperty('padding', '24px')
     expect(result).toHaveProperty('box-shadow')
     expect(result).toHaveProperty('overflow', 'hidden')
+    expect(result.background).toContain('rgba(255, 255, 255, 0.1)'); // Check glass properties
   })
 
   it('should generate glass-dark effect', () => {
     const result = glassDark('15/0.2')
-    expect(result.background).toContain('0, 0, 0')
+    expect(result.background).toContain('0, 0, 0') // Black color
+    expect(result.background).toContain('0.2') // Opacity
     expect(result['backdrop-filter']).toBe('blur(15px)')
   })
-})
+
+  it('should return empty object for invalid glass arguments', () => { // Added new test case
+    const result = glass('invalid');
+    expect(result).toEqual({});
+  });
+});
 
 describe('Plugin Rules - Card Effects', () => {
   it('should generate basic card', () => {
@@ -79,14 +96,14 @@ describe('Plugin Rules - Card Effects', () => {
   it('should generate card with elevation and radius', () => {
     const result = card('4/20')
     expect(result['border-radius']).toBe('20px')
-    expect(result['box-shadow']).toContain('16px 32px')
+    expect(result['box-shadow']).toContain('16px 32px') // Check elevation
   })
 
   it('should generate card-hover with transition', () => {
     const result = cardHover()
     expect(result).toHaveProperty('transition', 'all 0.3s ease')
     expect(result).toHaveProperty('cursor', 'pointer')
-    expect(result).toHaveProperty('&:hover')
+    expect(result).toHaveProperty('&:hover') // Check for pseudo-selector
   })
 
   it('should generate card-dark', () => {
@@ -102,7 +119,12 @@ describe('Plugin Rules - Card Effects', () => {
     expect(result.border).toBe('none')
     expect(result.color).toBe('white')
   })
-})
+
+  it('should return empty object for invalid card arguments', () => { // Added new test case
+    const result = card('invalid');
+    expect(result).toEqual({});
+  });
+});
 
 describe('Plugin Rules - Responsive', () => {
   it('should generate responsive font size', () => {
@@ -110,7 +132,7 @@ describe('Plugin Rules - Responsive', () => {
     expect(result['font-size']).toContain('clamp')
     expect(result['font-size']).toContain('16px')
     expect(result['font-size']).toContain('32px')
-    expect(result['font-size']).toContain('vw')
+    expect(result['font-size']).toContain('vw') // Check for viewport unit
   })
 
   it('should generate responsive gap', () => {
@@ -118,6 +140,7 @@ describe('Plugin Rules - Responsive', () => {
     expect(result.gap).toContain('clamp')
     expect(result.gap).toContain('12px')
     expect(result.gap).toContain('24px')
+    expect(result.gap).toContain('vw'); // Check for viewport unit
   })
 
   it('should generate responsive padding', () => {
@@ -125,13 +148,19 @@ describe('Plugin Rules - Responsive', () => {
     expect(result.padding).toContain('clamp')
     expect(result.padding).toContain('16px')
     expect(result.padding).toContain('32px')
+    expect(result.padding).toContain('vw'); // Check for viewport unit
   })
 
   it('should generate default responsive values', () => {
     const result = fontResponsive()
     expect(result['font-size']).toBe('clamp(1rem, 4vw, 2rem)')
   })
-})
+
+  it('should return empty object for invalid responsive arguments', () => { // Added new test case
+    const result = fontResponsive('invalid');
+    expect(result).toEqual({});
+  });
+});
 
 describe('Plugin Rules - Advanced Effects', () => {
   it('should generate gradient text', () => {
@@ -169,4 +198,9 @@ describe('Plugin Rules - Advanced Effects', () => {
     expect(result['text-shadow']).toContain('#00ff00')
     expect(result.animation).toContain('neon-flicker')
   })
-})
+
+  it('should return empty object for invalid advanced effect arguments', () => { // Added new test case
+    const result = gradientText('invalid');
+    expect(result).toEqual({});
+  });
+});

@@ -9,9 +9,14 @@
 2. **[📖 AdorableCSS 개요](/docs/5-public/mdx/01-overview.md)** - AdorableCSS의 핵심 개념과 실사용 방법
 3. **[📚 문법 가이드](/docs/5-public/mdx/11-syntax-guide.md)** - 완전한 문법 가이드
 
-### 🔄 마이그레이션 하는 분
-- **[제품 전략](1-projects/planning/PRODUCT_STRATEGY.md)** - 로드맵과 비전
-- **[기술 사양](3-resources/best-practices/technical/)** - 구현 세부사항
+### 🔄 기존 프로젝트에서 마이그레이션 하는 분들을 위한 가이드
+
+AdorableCSS v2로의 전환을 고려하고 계신가요? 다음 문서들을 통해 마이그레이션 과정을 체계적으로 이해하고 성공적으로 적용할 수 있습니다.
+
+1.  **[마이그레이션 가이드](/docs/5-public/guides/MIGRATION_GUIDE.md)** - 기존 프로젝트를 AdorableCSS v2로 전환하는 단계별 상세 가이드
+2.  **[Tailwind CSS 사용자 가이드](/docs/5-public/guides/TAILWIND_USERS.md)** - Tailwind CSS 사용자를 위한 AdorableCSS v2의 차이점 및 전환 전략
+3.  **[문제 해결 가이드](/docs/5-public/guides/troubleshooting.md)** - 마이그레이션 중 발생할 수 있는 일반적인 문제와 해결 방법
+4.  **[제품 전략 및 로드맵](/docs/1-projects/planning/PRODUCT_STRATEGY.md)** - AdorableCSS v2의 비전과 향후 계획을 통해 마이그레이션의 가치를 확인하세요.
 
 ---
 

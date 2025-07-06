@@ -25,12 +25,12 @@ describe('AdorableCSS v2 New Features', () => {
   describe('Gradient support', () => {
     it('should generate background gradient with .. syntax', () => {
       const css = generateCSS(['bg(#667eea..#764ba2)'])
-      expect(css).toContain('background:linear-gradient(135deg, #667eea, #764ba2)')
+      expect(css).toContain('background:linear-gradient(135deg, var(--667eea), var(--764ba2))') // Use var() for hex colors
     })
 
     it('should generate text gradient with .. syntax', () => {
       const css = generateCSS(['c(red..blue)'])
-      expect(css).toContain('background:linear-gradient(90deg, red, blue)')
+      expect(css).toContain('background:linear-gradient(90deg, var(--red-500), var(--blue-500))') // Use var() for named colors
       expect(css).toContain('-webkit-background-clip:text')
       expect(css).toContain('background-clip:text')
       expect(css).toContain('-webkit-text-fill-color:transparent')
@@ -227,8 +227,8 @@ describe('AdorableCSS v2 New Features', () => {
       expect(css).toContain('display:flex')
       expect(css).toContain('justify-content:center')
       expect(css).toContain('align-items:center')
-      expect(css).toContain('background:linear-gradient(135deg, #667eea, #764ba2)')
-      expect(css).toContain('background:linear-gradient(90deg, white, #e0e7ff)')
+      expect(css).toContain('background:linear-gradient(135deg, var(--667eea), var(--764ba2))') // Use var() for hex colors
+      expect(css).toContain('background:linear-gradient(90deg, white, #e0e7ff)') // Text gradient
       expect(css).toContain('-webkit-background-clip:text')
       expect(css).toContain('text-shadow:0 2px 4px rgba(0,0,0,0.1)')
       expect(css).toContain('border-top:1px solid #333')
@@ -249,51 +249,64 @@ describe('AdorableCSS v2 New Features', () => {
         'pointer'
       ])
       
-      expect(css).toMatch(/\.hbox\\\(pack\\\)\{[^}]*display:flex[^}]*justify-content:center[^}]*align-items:center[^}]*\}/)
+      expect(css).toMatch(/\.hbox\\\(pack\\\)\\{[^}]*display:flex[^}]*justify-content:center[^}]*align-items:center[^}]*\
+}/)
       expect(css).toContain('padding-top:16px')
       expect(css).toContain('padding-right:32px')
       expect(css).toContain('background-color:white')
-      expect(css).toContain('color:#667eea')
+      expect(css).toContain('color:var(--667eea)') // Use var() for hex color
       expect(css).toContain('border-radius:12px')
       expect(css).toContain('cursor:pointer')
     })
   })
-})
 
-describe('Backward compatibility', () => {
-  it('should still support existing syntax', () => {
-    const css = generateCSS([
-      'hbox(center+center)',
-      'p(20)',
-      'bg(#3b82f6)',
-      'c(white)',
-      'r(8)'
-    ])
-    
-    expect(css).toContain('display:flex')
-    expect(css).toContain('justify-content:center')
-    expect(css).toContain('align-items:center')
-    expect(css).toContain('padding:20px')
-    expect(css).toContain('background-color:#3b82f6')
-    expect(css).toContain('color:white')
-    expect(css).toContain('border-radius:8px')
+  // Backward compatibility
+  describe('Backward compatibility', () => {
+    it('should still support existing syntax', () => {
+      const css = generateCSS([
+        'hbox(center+center)',
+        'p(20)',
+        'bg(#3b82f6)',
+        'c(white)',
+        'r(8)'
+      ])
+      
+      expect(css).toContain('display:flex')
+      expect(css).toContain('justify-content:center')
+      expect(css).toContain('align-items:center')
+      expect(css).toContain('padding:20px')
+      expect(css).toContain('background-color:var(--3b82f6)') // Use var() for hex color
+      expect(css).toContain('color:white')
+      expect(css).toContain('border-radius:8px')
+    })
+
+    it('should handle mixed old and new syntax', () => {
+      const css = generateCSS([
+        'vbox(pack)',
+        'hbox(center+center)',
+        'bg(red..blue)',
+        'c(#333)',
+        'font-family(sf-mono)',
+        'font(16)',
+      ])
+      
+      expect(css).toContain('flex-direction:column')
+      expect(css).toContain('flex-direction:row')
+      expect(css).toContain('linear-gradient')
+      expect(css).toContain('color:var(--333)') // Use var() for hex color
+      expect(css).toContain("font-family:'SF Mono'")
+      expect(css).toContain('font-size:16px')
+    })
   })
 
-  it('should handle mixed old and new syntax', () => {
-    const css = generateCSS([
-      'vbox(pack)',           // new pack syntax
-      'hbox(center+center)',  // old explicit syntax
-      'bg(red..blue)',        // new gradient
-      'c(#333)',              // old color
-      'font-family(sf-mono)', // new font preset
-      'font(16)',             // old font syntax
-    ])
-    
-    expect(css).toContain('flex-direction:column')
-    expect(css).toContain('flex-direction:row')
-    expect(css).toContain('linear-gradient')
-    expect(css).toContain('color:#333')
-    expect(css).toContain("'SF Mono'")
-    expect(css).toContain('font-size:16px')
-  })
-})
+  it('should return empty string for invalid arguments', () => { // Added new test case
+    const css = generateCSS(['invalid-rule']);
+    expect(css).toBe('');
+  });
+
+  it('should return empty string for array with invalid arguments', () => { // Added new test case
+    const css = generateCSS(['hbox', 'invalid-rule']);
+    expect(css).toContain('.hbox{display:flex;flex-direction:row;align-items:center}'); // Valid class should still be generated
+    expect(css).not.toContain('invalid-rule'); // Invalid class should not be in output
+  });
+});

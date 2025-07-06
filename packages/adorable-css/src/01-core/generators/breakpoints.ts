@@ -1,36 +1,21 @@
-/**
- * Responsive breakpoint configuration
- */
-export const BREAKPOINTS = {
-  sm: '640px',
-  md: '768px', 
-  lg: '1024px',
-  xl: '1280px',
-  '2xl': '1536px',
-  '3xl': '1920px',
-  '4xl': '2560px',
-  '5xl': '3200px',
-  '6xl': '3840px',
-  '7xl': '4096px'
-} as const;
+// Re-export from responsive-decorator to avoid duplication
+export { BREAKPOINTS, type BreakpointKey } from '../../05-plugins/responsive/responsive-decorator';
 
-export type BreakpointKey = keyof typeof BREAKPOINTS;
+// Import BREAKPOINTS for local use
+import { BREAKPOINTS } from '../../05-plugins/responsive/responsive-decorator';
 
 /**
  * Get breakpoint value in pixels
  */
-export function getBreakpointPx(breakpoint: string): string | undefined {
-  return BREAKPOINTS[breakpoint as BreakpointKey];
-}
+export const getBreakpointPx = (breakpoint: string): string | undefined =>
+  BREAKPOINTS[breakpoint as keyof typeof BREAKPOINTS];
 
 /**
  * Create media query string
  */
-export function createMediaQuery(breakpoint: string, isMaxWidth: boolean = false): string | undefined {
+export const createMediaQuery = (breakpoint: string, isMaxWidth = false): string | undefined => {
   const breakpointPx = getBreakpointPx(breakpoint);
-  if (!breakpointPx) return undefined;
-  
-  return isMaxWidth 
-    ? `@media (max-width: ${breakpointPx})`
-    : `@media (min-width: ${breakpointPx})`;
-}
+  return breakpointPx 
+    ? `@media (${isMaxWidth ? 'max' : 'min'}-width: ${breakpointPx})`
+    : undefined;
+};

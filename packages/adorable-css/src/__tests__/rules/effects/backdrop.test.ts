@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
-import { backdropBlur, backdropSaturate, backdropBrightness, backdropContrast, backdropGrayscale, backdropHueRotate, backdropInvert, backdropOpacity, backdropSepia } from '../../rules/effects/backdrop';
+import { backdropBlur, backdropSaturate, backdropBrightness, backdropContrast, backdropGrayscale, backdropHueRotate, backdropInvert, backdropOpacity, backdropSepia } from '../../../03-rules/style/backdrop'; // Corrected import path
 
-describe('backdrop filter 03-rules', () => {
+describe('backdrop filter rules', () => { // Clarified describe block name
   describe('backdropBlur', () => {
     it('should apply default blur', () => {
       expect(backdropBlur()).toEqual({ 'backdrop-filter': 'blur(8px)' });
@@ -21,6 +21,10 @@ describe('backdrop filter 03-rules', () => {
     it('should pass through custom values', () => {
       expect(backdropBlur('5rem')).toEqual({ 'backdrop-filter': 'blur(5rem)' });
     });
+
+    it('should return empty object for invalid values', () => { // Added new test case
+      expect(backdropBlur('invalid')).toEqual({});
+    });
   });
 
   describe('backdropSaturate', () => {
@@ -37,6 +41,10 @@ describe('backdrop filter 03-rules', () => {
       expect(backdropSaturate('0.5')).toEqual({ 'backdrop-filter': 'saturate(0.5)' });
       expect(backdropSaturate('0.8')).toEqual({ 'backdrop-filter': 'saturate(0.8)' });
     });
+
+    it('should return empty object for invalid values', () => { // Added new test case
+      expect(backdropSaturate('invalid')).toEqual({});
+    });
   });
 
   describe('backdropBrightness', () => {
@@ -47,6 +55,10 @@ describe('backdrop filter 03-rules', () => {
     it('should handle percentage values', () => {
       expect(backdropBrightness('110')).toEqual({ 'backdrop-filter': 'brightness(1.1)' });
       expect(backdropBrightness('50')).toEqual({ 'backdrop-filter': 'brightness(0.5)' });
+    });
+
+    it('should return empty object for invalid values', () => { // Added new test case
+      expect(backdropBrightness('invalid')).toEqual({});
     });
   });
 
@@ -59,6 +71,10 @@ describe('backdrop filter 03-rules', () => {
       expect(backdropContrast('150')).toEqual({ 'backdrop-filter': 'contrast(1.5)' });
       expect(backdropContrast('75')).toEqual({ 'backdrop-filter': 'contrast(0.75)' });
     });
+
+    it('should return empty object for invalid values', () => { // Added new test case
+      expect(backdropContrast('invalid')).toEqual({});
+    });
   });
 
   describe('backdropGrayscale', () => {
@@ -69,6 +85,10 @@ describe('backdrop filter 03-rules', () => {
     it('should handle percentage values', () => {
       expect(backdropGrayscale('50')).toEqual({ 'backdrop-filter': 'grayscale(0.5)' });
       expect(backdropGrayscale('0')).toEqual({ 'backdrop-filter': 'grayscale(0)' });
+    });
+
+    it('should return empty object for invalid values', () => { // Added new test case
+      expect(backdropGrayscale('invalid')).toEqual({});
     });
   });
 
@@ -81,6 +101,10 @@ describe('backdrop filter 03-rules', () => {
       expect(backdropHueRotate('90')).toEqual({ 'backdrop-filter': 'hue-rotate(90deg)' });
       expect(backdropHueRotate('180')).toEqual({ 'backdrop-filter': 'hue-rotate(180deg)' });
     });
+
+    it('should return empty object for invalid values', () => { // Added new test case
+      expect(backdropHueRotate('invalid')).toEqual({});
+    });
   });
 
   describe('backdropInvert', () => {
@@ -91,6 +115,10 @@ describe('backdrop filter 03-rules', () => {
     it('should handle percentage values', () => {
       expect(backdropInvert('50')).toEqual({ 'backdrop-filter': 'invert(0.5)' });
       expect(backdropInvert('25')).toEqual({ 'backdrop-filter': 'invert(0.25)' });
+    });
+
+    it('should return empty object for invalid values', () => { // Added new test case
+      expect(backdropInvert('invalid')).toEqual({});
     });
   });
 
@@ -103,6 +131,10 @@ describe('backdrop filter 03-rules', () => {
       expect(backdropOpacity('50')).toEqual({ 'backdrop-filter': 'opacity(0.5)' });
       expect(backdropOpacity('75')).toEqual({ 'backdrop-filter': 'opacity(0.75)' });
     });
+
+    it('should return empty object for invalid values', () => { // Added new test case
+      expect(backdropOpacity('invalid')).toEqual({});
+    });
   });
 
   describe('backdropSepia', () => {
@@ -113,6 +145,10 @@ describe('backdrop filter 03-rules', () => {
     it('should handle percentage values', () => {
       expect(backdropSepia('50')).toEqual({ 'backdrop-filter': 'sepia(0.5)' });
       expect(backdropSepia('0')).toEqual({ 'backdrop-filter': 'sepia(0)' });
+    });
+
+    it('should return empty object for invalid values', () => { // Added new test case
+      expect(backdropSepia('invalid')).toEqual({});
     });
   });
 });

@@ -23,23 +23,10 @@ import { extractImportanceLevel, addImportanceToSelector } from './importance-ut
 import { createMemo } from '../utils/memo';
 import { resetCSS } from '../reset';
 
-// Helper function to get layer from priority
-function getLayerFromPriority(priority: number): string {
-  if (priority >= RulePriority.STATE) return 'state';
-  if (priority >= RulePriority.UTILITY) return 'utility';
-  if (priority >= RulePriority.LAYOUT) return 'layout';
-  return 'component';
-}
-
 // Extract CSS properties from generated CSS string
 export const extractCSSProperties = (baseCSS: string, className: string): string | null => {
   // Handle layer-wrapped CSS: @layer utility{.class{props}}
-  let selectorMatch = baseCSS.match(/@layer\s+\w+\s*\{[^{]+\{([^}]+)\}\}/);
-  
-  // Fallback to non-layer CSS: .class{props}
-  if (!selectorMatch) {
-    selectorMatch = baseCSS.match(/[^{]+\{([^}]+)\}/);
-  }
+  const selectorMatch = baseCSS.match(/@layer\s+\w+\s*\{[^{]+\{([^}]+)\}\}/) || baseCSS.match(/[^{]+\{([^}]+)\}/);
   
   if (!selectorMatch) {
     console.warn(`⚠️  AdorableCSS: Could not parse base CSS for class "${className}"`);
@@ -65,11 +52,11 @@ const processClassesFromStringRule = (
       const selectorName = selector.name || selector.image;
       const selectorArgs = selector.args?.map((arg: any) => arg.image).join('');
       
-      const cssResult = priorityRegistry.hasString(selectorName) 
-        ? resolveStringRule(selectorName, selectorArgs, new Set(visited))
-        : generateCSSFromSelector(createParsedSelector(selector));
-      
-      allCSSResults.push(cssResult);
+      allCSSResults.push(
+        priorityRegistry.hasString(selectorName) 
+          ? resolveStringRule(selectorName, selectorArgs, new Set(visited))
+          : generateCSSFromSelector(createParsedSelector(selector))
+      );
     } catch (e) {
       console.warn(`⚠️  AdorableCSS: Error parsing class "${className}" from string rule "${ruleName}":`, e);
     }
@@ -101,11 +88,9 @@ const processArrayResult = (
   
   result.forEach(item => {
     if (typeof item === 'string' && item.trim()) {
-      const classes = item.trim().split(/\s+/);
-      processClassesFromStringRule(classes, ruleName, visited, allCSSResults);
+      processClassesFromStringRule(item.trim().split(/\s+/), ruleName, visited, allCSSResults);
     } else if (typeof item === 'object' && item !== null) {
-      const cssResult = cssObjectToString(item as CSSRule, parentSelector);
-      allCSSResults.push({ ...cssResult, priority: stringRulePriority });
+      allCSSResults.push({ ...cssObjectToString(item as CSSRule, parentSelector), priority: stringRulePriority });
     }
   });
   
@@ -138,10 +123,8 @@ const resolveStringRule = (
     : (() => {
         const adorableCSSString = result as string;
         if (!adorableCSSString.trim()) return [];
-        
         const results: { mainCSS: string; nestedCSS: string[]; priority?: number }[] = [];
-        const classes = adorableCSSString.trim().split(/\s+/);
-        processClassesFromStringRule(classes, ruleName, visited, results);
+        processClassesFromStringRule(adorableCSSString.trim().split(/\s+/), ruleName, visited, results);
         return results;
       })();
   
@@ -160,7 +143,6 @@ const generateCSSFromSelector = (selector: ParsedSelector, parentSelector?: stri
       return resolveStringRule(selector.name, args, new Set(), parentSelector);
     }
     
-    // Get handler and rule info
     const handler = getRuleHandler(selector.name);
     const ruleInfo = getRuleWithPriority(selector.name);
     
@@ -169,12 +151,8 @@ const generateCSSFromSelector = (selector: ParsedSelector, parentSelector?: stri
       return { mainCSS: "", nestedCSS: [], priority: 0 };
     }
 
-    // Execute handler
     const args = selector.type === "function" && selector.args ? selector.args.join("") : "";
-    const result = handler(args);
-    const cssResult = cssObjectToString(result, parentSelector);
-    
-    return { ...cssResult, priority: ruleInfo?.priority || 0 };
+    return { ...cssObjectToString(handler(args), parentSelector), priority: ruleInfo?.priority || 0 };
 };
 
 // Handle different selector types with unified interface
@@ -186,34 +164,37 @@ const processSelectorValue = (
   // Pseudo-class selector
   if (v.combinators?.length > 0 && v.combinators[0].combinator === ":") {
     const combinator = v.combinators[0];
-    const pseudoClass = v.selector.image;
-    const targetSelector = combinator.selector;
-    const pseudoSelector = `${rawSelector}:${pseudoClass}`;
-    
+    const pseudoSelector = `${rawSelector}:${v.selector.image}`;
     return {
       actualSelector: pseudoSelector,
-      cssResult: generateCSSFromSelector(createParsedSelector(targetSelector), pseudoSelector)
+      cssResult: generateCSSFromSelector(createParsedSelector(combinator.selector), pseudoSelector)
     };
   }
   
-  // Position selector
   const selector = v.selector;
+  // Position selector
   if (selector.type === "position") {
-    const positionResult = cssObjectToString({
-      position: "absolute",
-      left: String(px(selector.x.image)),
-      top: String(px(selector.y.image))
-    }, parentSelector);
-    return { actualSelector: rawSelector, cssResult: { ...positionResult, priority: 200 } };
+    return { 
+      actualSelector: rawSelector, 
+      cssResult: { 
+        ...cssObjectToString({
+          position: "absolute",
+          left: String(px(selector.x.image)),
+          top: String(px(selector.y.image))
+        }, parentSelector), 
+        priority: 200 
+      }
+    };
   }
   
   // Dimension-pair selector
   if (selector.type === "(dimension-pair)") {
-    const dimensionPairHandler = getRuleHandler('dimension-pair');
-    if (dimensionPairHandler) {
-      const result = dimensionPairHandler(selector.image);
-      const cssResult = cssObjectToString(result, parentSelector);
-      return { actualSelector: rawSelector, cssResult: { ...cssResult, priority: 200 } };
+    const handler = getRuleHandler('dimension-pair');
+    if (handler) {
+      return { 
+        actualSelector: rawSelector, 
+        cssResult: { ...cssObjectToString(handler(selector.image), parentSelector), priority: 200 }
+      };
     }
   }
   
@@ -225,7 +206,7 @@ const processSelectorValue = (
 };
 
 // Internal implementation
-function _generateCSSFromAdorableCSS(value: string): string {
+const _generateCSSFromAdorableCSS = (value: string): string => {
   if (!value) return "";
   
   // Handle special class types
@@ -270,82 +251,72 @@ function _generateCSSFromAdorableCSS(value: string): string {
     console.warn(`❌ AdorableCSS: Failed to parse "${value}"`, e);
     return "";
   }
-}
+};
 
 // Export memoized version
 export const generateCSSFromAdorableCSS = createMemo(_generateCSSFromAdorableCSS);
 
 // Parse CSS properties from CSS string
-const parseCSSProperties = (cssProperties: string): Record<string, string> => {
-  const cssRule: Record<string, string> = {};
-  cssProperties.split(';').forEach(prop => {
+const parseCSSProperties = (cssProperties: string): Record<string, string> => 
+  cssProperties.split(';').reduce((acc, prop) => {
     if (prop.trim()) {
       const [key, value] = prop.split(':').map(s => s.trim());
-      if (key && value) cssRule[key] = value;
+      if (key && value) acc[key] = value;
     }
-  });
-  return cssRule;
+    return acc;
+  }, {} as Record<string, string>);
+
+// Common pattern CSS generation logic
+const generatePatternCSS = (
+  className: string,
+  patternType: 'state' | 'responsive',
+  analyzer: typeof StateSelector.analyze | typeof ResponsiveSelector.analyze
+): string => {
+  const { level: importanceLevel, className: cleanClassName } = extractImportanceLevel(className);
+  const pattern = analyzer(cleanClassName);
+  
+  if (!pattern) {
+    console.warn(`⚠️  AdorableCSS: Invalid ${patternType} pattern "${cleanClassName}"`);
+    return "";
+  }
+
+  const baseCSS = generateCSSFromAdorableCSS((pattern as any).selector);
+  if (!baseCSS) {
+    console.warn(`⚠️  AdorableCSS: Base class "${(pattern as any).selector}" generated no CSS for ${patternType} "${cleanClassName}"`);
+    return "";
+  }
+
+  const cssProperties = extractCSSProperties(baseCSS, cleanClassName);
+  if (!cssProperties) return "";
+  
+  if (patternType === 'state') {
+    const cssRule = parseCSSProperties(cssProperties);
+    const fullClassSelector = "." + cssEscape(cleanClassName);
+    const stateCSS = createStateCSS(cssRule, pattern as any, fullClassSelector);
+    const result = cssObjectToString(stateCSS);
+    
+    let stateCSSString = result.nestedCSS.length > 0 ? result.nestedCSS[0] : '';
+    if (importanceLevel > 0 && stateCSSString) {
+      stateCSSString = stateCSSString.replace(/^(\.[^{]+)(\{)/, `${`[class]`.repeat(importanceLevel)}$1$2`);
+    }
+    return stateCSSString;
+  } else {
+    const mediaQuery = createMediaQuery((pattern as any).breakpoint, (pattern as any).isMaxWidth);
+    if (!mediaQuery) return "";
+
+    const responsiveSelector = "." + cssEscape(cleanClassName);
+    const finalSelector = addImportanceToSelector(responsiveSelector);
+    return `${mediaQuery}{${finalSelector}{${cssProperties}}}`;
+  }
 };
 
 // Generate state CSS using decorator pattern
-function generateStateCSS(stateClassName: string): string {
-  const { level: importanceLevel, className: cleanClassName } = extractImportanceLevel(stateClassName);
-  
-  const pattern = StateSelector.analyze(cleanClassName);
-  if (!pattern) {
-    console.warn(`⚠️  AdorableCSS: Invalid state pattern "${cleanClassName}"`);
-    return "";
-  }
-
-  const baseCSS = generateCSSFromAdorableCSS(pattern.selector);
-  if (!baseCSS) {
-    console.warn(`⚠️  AdorableCSS: Base class "${pattern.selector}" generated no CSS for state "${cleanClassName}"`);
-    return "";
-  }
-
-  const cssProperties = extractCSSProperties(baseCSS, cleanClassName);
-  if (!cssProperties) return "";
-  
-  const cssRule = parseCSSProperties(cssProperties);
-  const fullClassSelector = "." + cssEscape(cleanClassName);
-  const stateCSS = createStateCSS(cssRule, pattern, fullClassSelector);
-  const result = cssObjectToString(stateCSS);
-  
-  let stateCSSString = result.nestedCSS.length > 0 ? result.nestedCSS[0] : '';
-  if (importanceLevel > 0 && stateCSSString) {
-    stateCSSString = stateCSSString.replace(/^(\.[^{]+)(\{)/, `${`[class]`.repeat(importanceLevel)}$1$2`);
-  }
-  
-  return stateCSSString;
-}
+const generateStateCSS = (stateClassName: string): string => 
+  generatePatternCSS(stateClassName, 'state', (className) => StateSelector.analyze(className));
 
 // Generate responsive CSS using decorator pattern
-function generateResponsiveCSS(responsiveClassName: string): string {
-  const { className: cleanClassName } = extractImportanceLevel(responsiveClassName);
-  
-  const pattern = ResponsiveSelector.analyze(cleanClassName);
-  if (!pattern) {
-    console.warn(`⚠️  AdorableCSS: Invalid responsive pattern "${cleanClassName}"`);
-    return "";
-  }
-
-  const baseCSS = generateCSSFromAdorableCSS(pattern.selector);
-  if (!baseCSS) {
-    console.warn(`⚠️  AdorableCSS: Base class "${pattern.selector}" generated no CSS for responsive "${cleanClassName}"`);
-    return "";
-  }
-
-  const cssProperties = extractCSSProperties(baseCSS, cleanClassName);
-  if (!cssProperties) return "";
-  
-  const mediaQuery = createMediaQuery(pattern.breakpoint, pattern.isMaxWidth);
-  if (!mediaQuery) return "";
-
-  const responsiveSelector = "." + cssEscape(cleanClassName);
-  const finalSelector = addImportanceToSelector(responsiveSelector);
-
-  return `${mediaQuery}{${finalSelector}{${cssProperties}}}`;
-}
+const generateResponsiveCSS = (responsiveClassName: string): string => 
+  generatePatternCSS(responsiveClassName, 'responsive', (className) => ResponsiveSelector.analyze(className));
 
 // Group CSS by layers based on rule priorities
 const groupCSSByLayers = (classList: string[]) => {
@@ -379,58 +350,32 @@ const buildLayeredCSS = (layers: ReturnType<typeof groupCSSByLayers>): string =>
 };
 
 // Internal implementation
-function _generateCSS(classList: string[]): string {
+const _generateCSS = (classList: string[]): string => {
   const layers = groupCSSByLayers(classList);
   const cssRules = cleanDuplicateSelectors(buildLayeredCSS(layers));
   const usedTokensCSS = generateUsedTokensCSS();
   const finalCSS = usedTokensCSS + '\n\n' + cssRules;
   
   return prependKeyframesIfNeeded(finalCSS, [...new Set(classList)]);
-}
+};
 
 // Export directly (array input, not suitable for simple memo)
 export const generateCSS = _generateCSS;
 
-/**
- * Options for CSS generation
- */
 export interface GenerateCSSOptions {
   includeTokens?: boolean;
   tokens?: DesignTokens;
 }
 
-/**
- * Generate CSS from AdorableCSS classes with optional token injection
- */
-export function generateCSSWithTokens(
+// Generate CSS from AdorableCSS classes with optional token injection
+export const generateCSSWithTokens = (
   input: string | string[], 
   options: GenerateCSSOptions = {}
-): string {
-  const { 
-    includeTokens = true, 
-    tokens = defaultTokens
-  } = options;
-  
-  // Set token context for rule handlers
+): string => {
+  const { includeTokens = true, tokens = defaultTokens } = options;
   setTokenContext(tokens);
-  
-  // Generate base CSS
-  let css: string;
-  if (Array.isArray(input)) {
-    css = generateCSS(input);
-  } else {
-    css = generateCSSFromAdorableCSS(input);
-  }
-  
-  // Reset token context to default
+  const css = Array.isArray(input) ? generateCSS(input) : generateCSSFromAdorableCSS(input);
   setTokenContext(defaultTokens);
-  
-  // Prepend 02-design_tokens if requested
-  if (includeTokens) {
-    const tokenCSS = generateTokenCSS(tokens);
-    css = tokenCSS + '\n\n' + css;
-  }
-  
-  return css;
-}
+  return includeTokens ? `${generateTokenCSS(tokens)}\n\n${css}` : css;
+};
 

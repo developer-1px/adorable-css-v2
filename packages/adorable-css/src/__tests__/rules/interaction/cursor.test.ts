@@ -36,4 +36,8 @@ describe('cursor rule', () => {
   it('should return empty object for no value', () => {
     expect(cursor()).toEqual({});
   });
+
+  it('should return empty object for invalid cursor values', () => { // Added new test case
+    expect(cursor('invalid')).toEqual({});
+  });
 });

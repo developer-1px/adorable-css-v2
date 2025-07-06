@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { scrollM, scrollMt, scrollMr, scrollMb, scrollMl, scrollMx, scrollMy } from '../../../03-rules/layout/scroll-margin';
 
-describe('scroll-margin 03-rules', () => {
+describe('scroll-margin rules', () => { // Clarified describe block name
   describe('scrollM', () => {
     it('should handle single value', () => {
       expect(scrollM('10')).toEqual({ 'scroll-margin': '10px' });
@@ -17,6 +17,10 @@ describe('scroll-margin 03-rules', () => {
 
     it('should return empty object for no value', () => {
       expect(scrollM()).toEqual({});
+    });
+
+    it('should return empty object for invalid values', () => { // Added new test case
+      expect(scrollM('invalid')).toEqual({});
     });
   });
 
@@ -47,6 +51,10 @@ describe('scroll-margin 03-rules', () => {
       expect(scrollMb()).toEqual({});
       expect(scrollMl()).toEqual({});
     });
+
+    it('should return empty object for invalid directional values', () => { // Added new test case
+      expect(scrollMt('invalid')).toEqual({});
+    });
   });
 
   describe('axis scroll margins', () => {
@@ -75,6 +83,10 @@ describe('scroll-margin 03-rules', () => {
     it('should return empty object for no value', () => {
       expect(scrollMx()).toEqual({});
       expect(scrollMy()).toEqual({});
+    });
+
+    it('should return empty object for invalid axis values', () => { // Added new test case
+      expect(scrollMx('invalid')).toEqual({});
     });
   });
 });
