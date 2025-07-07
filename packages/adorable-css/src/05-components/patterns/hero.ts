@@ -123,7 +123,7 @@ export const heroBackgroundString: StringRuleHandler = (args?: string): string |
   const backgrounds: Record<string, (string | CSSRule)[]> = {
     // Modern gradient mesh
     gradient: [
-      'absolute inset(0) z(0)',
+      "layer z(0)",
       {
         'background': `
           radial-gradient(at 27% 37%, hsla(215, 98%, 61%, 1) 0px, transparent 0%),
@@ -140,7 +140,7 @@ export const heroBackgroundString: StringRuleHandler = (args?: string): string |
     
     // Subtle dots pattern
     dots: [
-      'absolute inset(0) z(0)',
+      "layer z(0)",
       {
         'background-image': `radial-gradient(circle at 1px 1px, var(--gray-400) 1px, transparent 1px)`,
         'background-size': '40px 40px',
@@ -151,7 +151,7 @@ export const heroBackgroundString: StringRuleHandler = (args?: string): string |
     
     // Grid pattern
     grid: [
-      'absolute inset(0) z(0)',
+      "layer z(0)",
       {
         'background-image': `
           linear-gradient(var(--gray-200) 1px, transparent 1px),
@@ -164,7 +164,7 @@ export const heroBackgroundString: StringRuleHandler = (args?: string): string |
     
     // Noise texture
     noise: [
-      'absolute inset(0) z(0)',
+      "layer z(0)",
       {
         'opacity': '0.03',
         'background': `

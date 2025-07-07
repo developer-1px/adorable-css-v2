@@ -6,20 +6,20 @@ export const labelDefinition: ComponentDefinition = {
   base: 'c(gray-700) transition(color/200ms) select(none)',
   
   sizes: {
-    xs: 'font(xs/1.3) bold(medium) tracking(0.01em)',
-    sm: 'font(sm/1.3) bold(medium)',
-    base: 'font(sm/1.3) bold(semi)',
-    lg: 'font(base/1.3) bold(semi)',
-    xl: 'font(lg/1.3) bold(semi)',
+    xs: 'text(xs/1.3) font(medium) tracking(0.01em)',
+    sm: 'text(sm/1.3) font(medium)',
+    base: 'text(sm/1.3) font(semi)',
+    lg: 'text(base/1.3) font(semi)',
+    xl: 'text(lg/1.3) font(semi)',
     
     // UI-specific sizes
-    button: 'font(sm/1) bold(semi) tracking(0.01em)',
-    input: 'font(sm/1.4) bold(medium) mb(xs)',
-    tab: 'font(sm/1) bold(medium) tracking(0.02em)',
-    badge: 'font(xs/1) bold(semi) tracking(0.02em) uppercase',
-    tooltip: 'font(xs/1.3) bold(normal)',
+    button: 'text(sm/1) font(semi) tracking(0.01em)',
+    input: 'text(sm/1.4) font(medium) mb(xs)',
+    tab: 'text(sm/1) font(medium) tracking(0.02em)',
+    badge: 'text(xs/1) font(semi) tracking(0.02em) uppercase',
+    tooltip: 'text(xs/1.3) font(normal)',
     
-    default: 'font(sm/1.3) bold(semi)' // Default to base
+    default: 'text(sm/1.3) font(semi)' // Default to base
   },
   
   variants: {
@@ -33,11 +33,11 @@ export const labelDefinition: ComponentDefinition = {
     danger: 'c(red-700)',
     
     // Style variants
-    strong: 'bold(bold) c(gray-900)',
+    strong: 'font(bold) c(gray-900)',
     subtle: 'c(gray-500)',
     
     // Typography variants
-    mono: 'font(mono) bold(normal)',
+    mono: 'text(mono) font(normal)',
     
     // Case variants
     uppercase: 'uppercase tracking(widest)',
@@ -45,8 +45,8 @@ export const labelDefinition: ComponentDefinition = {
     
     // Functional variants
     required: 'after:content("*") after:c(red-500) after:ml(xs)',
-    optional: 'after:content("(optional)") after:c(gray-400) after:ml(xs) after:font(xs) after:normal-case',
-    helper: 'c(gray-500) font(xs/1.4)',
+    optional: 'after:content("(optional)") after:c(gray-400) after:ml(xs) after:text(xs) after:normal-case',
+    helper: 'c(gray-500) text(xs/1.4)',
     
     // Interactive variants
     clickable: 'cursor(pointer) hover:c(gray-900) active:scale(0.95)'

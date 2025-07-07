@@ -138,7 +138,7 @@ describe('AdorableCSS Syntax Tests', () => {
         'lg:col-span(2)',
         'hover:shadow(md)',
         'c(gray-700)',
-        'font(2xl/1)',
+        'text(2xl/1)',
         'leading(1.6)'
       ];
       

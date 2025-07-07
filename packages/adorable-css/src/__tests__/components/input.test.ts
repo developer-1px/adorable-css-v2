@@ -6,7 +6,7 @@ describe('input component', () => {
     it('should return default input styles', () => {
       const result = inputString();
       expect(result).toContain('flex h(40) w(full) r(md) px(12) py(8)');
-      expect(result).toContain('font(sm) c(gray-900) bg(transparent)');
+      expect(result).toContain('text(sm) c(gray-900) bg(transparent)');
       expect(result).toContain('outline(none) transition-all placeholder:c(gray-500)');
       expect(result).toContain('border(1/gray-200)'); // default variant
     });
@@ -56,7 +56,7 @@ describe('input component', () => {
   describe('textareaString', () => {
     it('should return default textarea styles', () => {
       const result = textareaString();
-      expect(result).toContain('flex w(full) r(md) font(sm) c(gray-900)');
+      expect(result).toContain('flex w(full) r(md) text(sm) c(gray-900)');
       expect(result).toContain('bg(transparent) resize(vertical)');
       expect(result).toContain('min-h(120) py(12) px(12)'); // default size
       expect(result).toContain('border(1/gray-200)');

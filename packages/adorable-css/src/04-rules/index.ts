@@ -19,7 +19,6 @@ import * as overflowHandlers from './figma/layout/overflow';
 import * as gridHandlers from './figma/layout/grid';
 import { colorHandlers } from './figma/fill/color';
 import * as backgroundHandlers from './figma/fill/background';
-import * as fontHandlers from './figma/text/font';
 import * as textHandlers from './figma/text/text';
 import * as truncateHandlers from './figma/text/truncate';
 import * as borderHandlers from './figma/style/border';
@@ -35,7 +34,7 @@ import * as pointerEventsHandlers from './misc-css/pointer-events';
 import * as transitionHandlers from './misc-css/transition';
 import * as animationHandlers from './misc-css/animation';
 import * as glassmorphismHandlers from './figma/effects/glassmorphism';
-import { registerComponentsAsRule2 } from '../05-components/register-components';
+// Import using dynamic import to avoid circular dependencies
 
 /**
  * Initialize all Rule2 handlers
@@ -53,7 +52,6 @@ export function initializeRule2Handlers(): void {
     size: sizeHandlers.size,  // width + height
     
     // Typography compositions  
-    font: fontHandlers.font,  // font-size + line-height + letter-spacing
     truncate: truncateHandlers.truncate,  // overflow + text-overflow + white-space
   };
   registerRule2(compositionDefs, 'composition');
@@ -94,18 +92,23 @@ export function initializeRule2Handlers(): void {
     // Color
     c: colorHandlers.c,
     
-    // Font
-    bold: fontHandlers.bold,
-    italic: fontHandlers.italic,
+    // Typography & Text properties (unified)
+    text: textHandlers.text,  // Universal text handler
+    font: textHandlers.font,  // font-weight
+    italic: textHandlers.italic,
     
-    // Text
-    text: textHandlers.text,
+    // Text properties shortcuts
     underline: textHandlers.underline,
     overline: textHandlers.overline,
     strike: textHandlers.strike,
     uppercase: textHandlers.uppercase,
     lowercase: textHandlers.lowercase,
     capitalize: textHandlers.capitalize,
+    nowrap: textHandlers.nowrap,
+    wrap: textHandlers.wrap,
+    pre: textHandlers.pre,
+    'pre-wrap': textHandlers.preWrap,
+    'pre-line': textHandlers.preLine,
     tracking: trackingHandlers.tracking,
     leading: leadingHandlers.leading,
     whitespace: whitespaceHandlers.whitespace,
@@ -258,6 +261,6 @@ export function initializeRule2Handlers(): void {
   };
   registerRule2(utilityDefs, 'utilities');
   
-  // Register all components as Rule2 handlers
-  registerComponentsAsRule2();
+  // Components will be registered separately to avoid circular dependencies
+  // Use registerComponentsAsRule2() from the main entry point if needed
 }

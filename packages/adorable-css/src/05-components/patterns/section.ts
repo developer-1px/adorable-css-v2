@@ -89,7 +89,7 @@ export const rhythmString: StringRuleHandler = (args?: string): string => {
 };
 
 export const leadString: StringRuleHandler = (): string => {
-  return 'font(lg) leading(1.7) c(gray-600) max-w(65ch) mx(auto)';
+  return 'text(lg) leading(1.7) c(gray-600) max-w(65ch) mx(auto)';
 };
 
 // Export string-based 03-rules

@@ -10,10 +10,10 @@ describe('Complete Token Generation Test', () => {
   it('should register 02-design_tokens when generating CSS for individual classes', () => {
     // Test individual classes that use font 02-design_tokens
     const classes = [
-      'font(8xl)',
-      'font(9xl)',
-      'font(10xl)',
-      'font(11xl)'
+      'text(8xl)',
+      'text(9xl)',
+      'text(10xl)',
+      'text(11xl)'
     ];
     
     classes.forEach(className => {
@@ -42,10 +42,10 @@ describe('Complete Token Generation Test', () => {
   it('should register 02-design_tokens when generating CSS for multiple classes together', () => {
     // Test multiple classes at once
     const classes = [
-      'font(8xl)',
-      'font(9xl)', 
-      'font(10xl)',
-      'font(11xl)',
+      'text(8xl)',
+      'text(9xl)',
+      'text(10xl)',
+      'text(11xl)',
       'p(4xl)',
       'm(2xl)'
     ];
@@ -66,8 +66,8 @@ describe('Complete Token Generation Test', () => {
     // Test styles similar to what display component generates
     const classes = [
       'balance',
-      'font(8xl/1/-3.5%)',
-      'bold(black)',
+      'text(8xl/1/-3.5%)',
+      'font(black)',
       'tracking(-0.04em)'
     ];
     

@@ -23,9 +23,16 @@ export class DefaultClampProcessor implements ClampProcessor {
         const [min, preferred, max] = parts.map(part => {
           // Apply appropriate value transformation
           if (part.match(/^\d+(\.\d+)?(px|rem|em|vh|vw|%)$/)) return part
-          if (part.match(/^\d+xl$/)) return px(part)
-          if (checkIsToken(part, 'spacing') || checkIsToken(part, 'font') || checkIsToken(part, 'size')) return cssvar(part)
-          return px(part)
+          
+          // Check for font tokens explicitly (including xl variants)
+          const fontTokens = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl'];
+          if (fontTokens.includes(part) || /^\d+xl$/.test(part)) {
+            return `var(--font-${part})`;
+          }
+          
+          // For other tokens, try cssvar transformation
+          const transformed = cssvar(part)
+          return transformed !== part ? transformed : px(part)
         })
         return `clamp(${min}, ${preferred}, ${max})`
       }

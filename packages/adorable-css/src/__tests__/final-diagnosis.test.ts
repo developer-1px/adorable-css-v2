@@ -10,15 +10,15 @@ describe('Final Font Token Diagnosis', () => {
   it('should verify that font-8xl and above are generated correctly', () => {
     // Test all large font 02-design_tokens individually and together
     const classes = [
-      'font(6xl)',
-      'font(7xl)', 
-      'font(8xl)',
-      'font(9xl)',
-      'font(10xl)',
-      'font(11xl)',
-      'font(12xl)',
-      'font(15xl)',
-      'font(20xl)'
+      'text(6xl)',
+      'text(7xl)', 
+      'text(8xl)',
+      'text(9xl)',
+      'text(10xl)',
+      'text(11xl)',
+      'text(12xl)',
+      'text(15xl)',
+      'text(20xl)'
     ];
     
     console.log('Testing font token generation...');
@@ -27,7 +27,7 @@ describe('Final Font Token Diagnosis', () => {
     
     // Verify all 02-design_tokens are present
     classes.forEach(className => {
-      const tokenName = className.replace('font(', '').replace(')', '');
+      const tokenName = className.replace('text(', '').replace(')', '');
       expect(css).toContain(`--font-${tokenName}`);
       console.log(`✓ --font-${tokenName} found in CSS`);
     });
@@ -37,8 +37,8 @@ describe('Final Font Token Diagnosis', () => {
     // Test exactly what display(2xl) generates
     const displayClasses = [
       'balance', 
-      'font(8xl/1/-3.5%)', 
-      'bold(black)', 
+      'text(8xl/1/-3.5%)', 
+      'font(black)', 
       'tracking(-0.04em)'
     ];
     

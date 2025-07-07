@@ -265,7 +265,7 @@ export const paddingRule2: Rule2Handler = (node) => {
 ### Component Definition Pattern
 ```typescript
 defineComponent('button', {
-  base: 'hbox(pack) px(md) py(sm) r(md) font(label/base)',
+  base: 'hbox(pack) px(md) py(sm) r(md) text(label/normal) font(medium)',
   variants: {
     primary: 'bg(primary) c(white)',
     secondary: 'bg(gray-100) c(gray-900)'
@@ -296,6 +296,55 @@ defineComponent('button', {
 - Use dot notation for opacity: `bg(white.5)` not `bg(white/50)`
 - No margin utilities - use gap and spacing components
 - Prefer semantic tokens over raw values
+
+### New AI-Friendly Typography Syntax (v2.0)
+**Important Change**: AdorableCSS v2 has unified text handling for AI clarity:
+
+The `text()` function is now a universal handler for:
+- Typography (font-size, line-height, letter-spacing)
+- Text properties (alignment, transform, decoration, white-space)
+- Combined properties using `+` operator
+
+**Examples:**
+```css
+/* Typography */
+text(16px)           → font-size: 16px
+text(lg)             → font-size: var(--font-lg)
+text(16px/1.5)       → font-size: 16px; line-height: 1.5
+text(lg/1.2/-2%)     → font-size: var(--font-lg); line-height: 1.2; letter-spacing: -0.02em
+
+/* Responsive Typography with Clamp */
+text(sm..6xl)        → font-size: clamp(var(--font-sm), 4vw, var(--font-6xl))
+text(lg..32px)       → font-size: clamp(var(--font-lg), 4vw, 32px)
+text(16px..4vw..48px) → font-size: clamp(16px, 4vw, 48px)
+
+/* Text Properties */
+text(center)         → text-align: center
+text(uppercase)      → text-transform: uppercase
+text(nowrap)         → white-space: nowrap
+text(underline)      → text-decoration: underline
+
+/* Combined Properties */
+text(nowrap+center)  → white-space: nowrap; text-align: center
+text(uppercase+underline) → text-transform: uppercase; text-decoration: underline
+
+/* Mixed Usage */
+text(lg/1.5/center)  → font-size: var(--font-lg); line-height: 1.5; text-align: center
+text(16px/1.4/nowrap+right) → font-size: 16px; line-height: 1.4; white-space: nowrap; text-align: right
+text(sm..2xl/1.5/tight) → font-size: clamp(var(--font-sm), 4vw, var(--font-2xl)); line-height: 1.5; letter-spacing: -0.025em
+
+/* Font Weight (separate) */
+font(600)            → font-weight: 600
+font(bold)           → font-weight: 700
+font(semibold)       → font-weight: 600
+```
+
+**Why this change?**
+- AI systems can now use one intuitive function for all text needs
+- `text()` handles everything text-related (size, spacing, alignment, etc.)
+- `font()` is dedicated to font-weight only, reducing confusion
+- The `+` operator allows combining multiple properties naturally
+- Better alignment with how AI thinks about text styling
 
 ### Git Workflow
 - Main branch is `main`

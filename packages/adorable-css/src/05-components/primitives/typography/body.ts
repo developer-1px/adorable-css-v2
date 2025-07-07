@@ -6,19 +6,19 @@ export const bodyDefinition: ComponentDefinition = {
   base: 'c(gray-800) transition(color/200ms)',
   
   sizes: {
-    xs: 'font(xs/1.6) bold(normal)',
-    sm: 'font(sm/1.6) bold(normal)',
-    base: 'font(base/1.6) bold(normal)',
-    lg: 'font(lg/1.6) bold(normal)',
-    xl: 'font(xl/1.7) bold(normal)',
+    xs: 'text(xs/1.6) font(normal)',
+    sm: 'text(sm/1.6) font(normal)',
+    base: 'text(base/1.6) font(normal)',
+    lg: 'text(lg/1.6) font(normal)',
+    xl: 'text(xl/1.7) font(normal)',
     
     // Reading-optimized sizes
-    article: 'font(base/1.7) bold(normal) max-w(prose)',
-    prose: 'font(lg/1.8) bold(normal) max-w(prose)',
-    compact: 'font(sm/1.5) bold(normal)',
-    relaxed: 'font(base/1.8) bold(normal)',
+    article: 'text(base/1.7) font(normal) max-w(prose)',
+    prose: 'text(lg/1.8) font(normal) max-w(prose)',
+    compact: 'text(sm/1.5) font(normal)',
+    relaxed: 'text(base/1.8) font(normal)',
     
-    default: 'font(base/1.6) bold(normal)' // Default to base
+    default: 'text(base/1.6) font(normal)' // Default to base
   },
   
   variants: {
@@ -36,15 +36,15 @@ export const bodyDefinition: ComponentDefinition = {
     light: 'c(gray-500)',
     
     // Typography variants
-    serif: 'font(serif/1.7)',
-    mono: 'font(mono/1.5) bg(gray-100) px(xs) py(2) r(sm)',
+    serif: 'text(serif/1.7)',
+    mono: 'text(mono/1.5) bg(gray-100) px(xs) py(2) r(sm)',
     
     // Readability variants
-    contrast: 'c(gray-900) bold(medium)',
+    contrast: 'c(gray-900) font(medium)',
     soft: 'c(gray-600)',
     
     // Special variants
-    lead: 'font(lg/1.7) c(gray-700)',
+    lead: 'text(lg/1.7) c(gray-700)',
     quote: 'italic pl(lg) border-l(4/gray-300)',
     highlight: 'bg(yellow-200) px(xs) r(sm)'
   },
@@ -63,13 +63,13 @@ export const bodyDefinition: ComponentDefinition = {
     // Mono variant adjustments
     {
       variant: 'mono',
-      class: 'font(mono) text-wrap(nowrap)'
+      class: 'text(mono) text-wrap(nowrap)'
     },
     // Quote variant with size adjustments
     {
       variant: 'quote',
       size: ['lg', 'xl'],
-      class: 'font(xl/1.7) pl(xl)'
+      class: 'text(xl/1.7) pl(xl)'
     }
   ],
   

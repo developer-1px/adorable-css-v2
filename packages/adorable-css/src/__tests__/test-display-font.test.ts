@@ -7,13 +7,13 @@ describe('Display Component Font Token Generation', () => {
     clearTokenRegistry();
   });
 
-  it('should generate font 02-design_tokens for display(2xl) that uses font(8xl)', () => {
+  it('should generate font 02-design_tokens for display(2xl) that uses text(8xl)', () => {
     // Generate display with 2xl size
     const result = displayString('2xl');
     console.log('display(2xl) result:', result);
     
-    // The display component uses font(8xl) for size 2xl
-    expect(result).toContain('font(8xl');
+    // The display component uses text(8xl) for size 2xl
+    expect(result).toContain('text(8xl');
     
     // Check if the token was registered and generate CSS
     const css = generateUsedTokensCSS();

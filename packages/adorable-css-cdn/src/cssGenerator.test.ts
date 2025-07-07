@@ -15,7 +15,7 @@ describe('CDN Package Integration', () => {
 
   describe('generateClass function (legacy)', () => {
     it('should provide backward compatibility', () => {
-      const css = generateClass(['c(red)', 'font(16)'])
+      const css = generateClass(['c(red)', 'text(16)'])
       expect(css).toContain('color:red')
       expect(css).toContain('font-size:16px')
     })

@@ -2,9 +2,9 @@ import { describe, it, expect } from 'vitest';
 import { font } from '../04-rules/03-rules_deprecated/text/font';
 import { generateTokenCSS, defaultTokens, isToken, getTokenVar } from '../02-design_tokens/design-system/tokens/index';
 
-describe('font(base) token resolution', () => {
-  it('should resolve font(base) to font-size: var(--font-md)', () => {
-    const result = font('base');
+describe('text(base) token resolution', () => {
+  it('should resolve text(base) to font-size: var(--font-md)', () => {
+    const result = text('base');
     expect(result).toEqual({ 'font-size': 'var(--font-md)' });
   });
 
@@ -29,16 +29,16 @@ describe('font(base) token resolution', () => {
     expect(defaultTokens.font.md).toBe('1rem');
   });
 
-  it('should handle font(base) with line height', () => {
-    const result = font('base/1.5');
+  it('should handle text(base) with line height', () => {
+    const result = text('base/1.5');
     expect(result).toEqual({ 
       'font-size': 'var(--font-md)',
       'line-height': '1.5'
     });
   });
 
-  it('should handle font(base) with line height and letter spacing', () => {
-    const result = font('base/1.5/0.05em');
+  it('should handle text(base) with line height and letter spacing', () => {
+    const result = text('base/1.5/0.05em');
     expect(result).toEqual({ 
       'font-size': 'var(--font-md)',
       'line-height': '1.5',
@@ -46,25 +46,25 @@ describe('font(base) token resolution', () => {
     });
   });
 
-  it('should handle font(base) with fluid syntax: font(..base)', () => {
-    const result = font('..base');
+  it('should handle text(base) with fluid syntax: text(..base)', () => {
+    const result = text('..base');
     // Should generate clamp with base (md) as the max value
     expect(result).toHaveProperty('font-size');
     expect(result['font-size']).toContain('clamp(');
     expect(result['font-size']).toContain('var(--font-md)');
   });
 
-  it('should handle font(base) with fluid syntax: font(base..)', () => {
-    const result = font('base..');
+  it('should handle text(base) with fluid syntax: text(base..)', () => {
+    const result = text('base..');
     // Should generate clamp with base (md) as the min value
     expect(result).toHaveProperty('font-size');
     expect(result['font-size']).toContain('clamp(');
     expect(result['font-size']).toContain('var(--font-md)');
   });
 
-  it('should verify that font(md) and font(base) produce the same result', () => {
-    const baseResult = font('base');
-    const mdResult = font('md');
+  it('should verify that text(md) and text(base) produce the same result', () => {
+    const baseResult = text('base');
+    const mdResult = text('md');
     expect(baseResult).toEqual(mdResult);
   });
 });

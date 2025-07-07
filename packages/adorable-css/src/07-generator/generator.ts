@@ -13,16 +13,25 @@ import {defaultTokens, generateTokenCSS, generateUsedTokensCSS, setTokenContext}
 import {getRule2Definition, initializeRule2Handlers} from '../04-rules/index'
 
 // Plugins
-import {isResponsiveClass, isStateClass} from "../06-plugins/responsive/responsive-decorator"
+import {isResponsiveClass, isStateClass, StateSelector, createStateCSS, extractStateBaseClass} from "../06-plugins/responsive/responsive-decorator"
 
-// Initialize Rule2 handlers when module loads
-initializeRule2Handlers();
+// Initialize Rule2 handlers lazily to avoid circular dependencies
+let rule2Initialized = false;
+function ensureRule2Initialized() {
+  if (!rule2Initialized) {
+    initializeRule2Handlers();
+    rule2Initialized = true;
+  }
+}
 
 // Entry point: Parse user input and generate CSS
 export const generateCSSWithTokens = (
   classList: string[], 
   options: { includeTokens?: boolean; tokens?: DesignTokens } = {}
 ): string => {
+  // Ensure Rule2 handlers are initialized
+  ensureRule2Initialized();
+  
   const { includeTokens = true, tokens = defaultTokens } = options;
   
   setTokenContext(tokens);
@@ -34,6 +43,9 @@ export const generateCSSWithTokens = (
 
 // Generate CSS from array of classes with layer system
 export const generateCSS = (classList: string[]): string => {
+  // Ensure Rule2 handlers are initialized
+  ensureRule2Initialized();
+  
   // Group CSS by layer
   const layerGroups: Record<string, string[]> = {
     base: [],
@@ -69,6 +81,11 @@ export const generateCSS = (classList: string[]): string => {
 // Generate CSS with layer information
 function generateClassWithLayer(value: string): { css: string; layer: string } | null {
   if (!value || isResponsiveClass(value)) return null;
+  
+  // Handle state classes (hover:, group-hover:, focus:, etc.)
+  if (isStateClass(value)) {
+    return generateStateClass(value);
+  }
   
   try {
     const importanceInfo = extractImportanceLevel(value);
@@ -111,8 +128,70 @@ function generateClassWithLayer(value: string): { css: string; layer: string } |
   }
 }
 
+// Generate CSS for state classes (hover:, group-hover:, focus:, etc.)
+function generateStateClass(value: string): { css: string; layer: string } | null {
+  const statePattern = StateSelector.analyze(value);
+  if (!statePattern) return null;
+  
+  try {
+    // Extract the base class (e.g., "c(red-500)" from "group-hover:c(red-500)")
+    const baseClass = statePattern.selector;
+    const importanceInfo = extractImportanceLevel(baseClass);
+    setImportanceLevel(importanceInfo.level);
+    
+    // Parse the base class to get CSS properties
+    const parseResult = parseAdorableCSS(importanceInfo.className);
+    
+    // Determine layer based on the first rule
+    let layer = 'utilities'; // default layer
+    if (parseResult.value.length > 0) {
+      const firstNode = parseResult.value[0];
+      const ruleName = firstNode.selector?.name || firstNode.selector?.image || firstNode.image;
+      const rule2Definition = getRule2Definition(ruleName);
+      if (rule2Definition?.layer) {
+        layer = rule2Definition.layer;
+      }
+    }
+    
+    // Generate CSS properties for the base class
+    const cssProperties: Record<string, string> = {};
+    parseResult.value.forEach((node: any) => {
+      const css = generateCSSFromRule2(node);
+      if (css) {
+        // Parse the CSS string to extract properties
+        const lines = css.split(';').filter(Boolean);
+        lines.forEach(line => {
+          const [property, ...valueParts] = line.split(':');
+          if (property && valueParts.length > 0) {
+            cssProperties[property.trim()] = valueParts.join(':').trim();
+          }
+        });
+      }
+    });
+    
+    // Create the state selector
+    const baseSelector = "." + cssEscape(value);
+    const stateCSS = createStateCSS(cssProperties, statePattern, baseSelector);
+    
+    // Convert the state CSS object to string
+    const cssString = Object.entries(stateCSS).map(([selector, properties]) => {
+      const propString = Object.entries(properties as Record<string, string>)
+        .map(([prop, val]) => `${prop}:${val}`)
+        .join(';');
+      return `${selector}{${propString}}`;
+    }).join('');
+    
+    return cssString ? { css: cssString, layer } : null;
+  } catch (_) {
+    return null;
+  }
+}
+
 // Generate CSS from single class (memoized for performance)
 export const generateClass = createMemo((value: string): string => {
+  // Ensure Rule2 handlers are initialized
+  ensureRule2Initialized();
+  
   const result = generateClassWithLayer(value);
   return result?.css || "";
 });

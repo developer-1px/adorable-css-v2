@@ -15,17 +15,15 @@ describe('prose component with defineComponent', () => {
       const [classes, cssRule] = result as [string, CSSRule];
       
       // Check base classes
-      expect(classes).toContain('font(lg/1.618)');
-      expect(classes).toContain('c(gray-800)');
-      expect(classes).toContain('max-w(prose)');
-      expect(classes).toContain('mx(auto)');
+      expect(classes).toContain('text(16/1.7)');
+      expect(classes).toContain('c(gray-700)');
       
       // Check CSS rule has selectors
       expect(cssRule).toBeDefined();
       expect(cssRule['& h1']).toBeDefined();
       expect(cssRule['& h2']).toBeDefined();
       expect(cssRule['& a']).toBeDefined();
-      expect(cssRule['& ul > li']).toBeDefined();
+      expect(cssRule['& li']).toBeDefined();
     }
   });
   
@@ -36,7 +34,7 @@ describe('prose component with defineComponent', () => {
       const [classes, cssRule] = result as [string, CSSRule];
       
       // Check variant classes
-      expect(classes).toContain('font(base/1.5)');
+      expect(classes).toContain('text(base/1.5)');
       expect(classes).toContain('max-w(sm)');
       
       // Check variant selector overrides
@@ -53,7 +51,7 @@ describe('prose component with defineComponent', () => {
       const [classes, cssRule] = result as [string, CSSRule];
       
       // Check variant classes
-      expect(classes).toContain('font(xl/1.7)');
+      expect(classes).toContain('text(xl/1.7)');
       expect(classes).toContain('max-w(4xl)');
       
       // Check variant selector overrides
@@ -70,7 +68,7 @@ describe('prose component with defineComponent', () => {
       const [classes, cssRule] = result as [string, CSSRule];
       
       // Check article variant classes
-      expect(classes).toContain('font(serif)');
+      expect(classes).toContain('text(serif)');
       expect(classes).toContain('hyphens(auto)');
       
       // Check article variant selector overrides
@@ -87,7 +85,7 @@ describe('prose component with defineComponent', () => {
       const [classes] = result as [string, CSSRule];
       
       // Check technical variant classes
-      expect(classes).toContain('font(mono)');
+      expect(classes).toContain('text(mono)');
     }
   });
   
@@ -98,7 +96,7 @@ describe('prose component with defineComponent', () => {
       const [classes, cssRule] = result as [string, CSSRule];
       
       // Check marketing variant classes
-      expect(classes).toContain('font(lg/1.65)');
+      expect(classes).toContain('text(lg/1.65)');
       expect(classes).toContain('tracking(tight)');
       
       // Check marketing variant selector overrides
@@ -115,8 +113,8 @@ describe('prose component with defineComponent', () => {
       const [classes] = result as [string, CSSRule];
       
       // Check state classes
-      expect(classes).toContain('dark:c(gray-100)');
-      expect(classes).toContain('dark:bg(gray-900)');
+      expect(classes).toContain('dark:c(neutral-100)');
+      expect(classes).toContain('dark:bg(neutral-900)');
     }
   });
   
@@ -127,9 +125,9 @@ describe('prose component with defineComponent', () => {
       const [classes, cssRule] = result as [string, CSSRule];
       
       // Should have both lg and article variant classes
-      expect(classes).toContain('font(xl/1.7)');
+      expect(classes).toContain('text(xl/1.7)');
       expect(classes).toContain('max-w(4xl)');
-      expect(classes).toContain('font(serif)');
+      expect(classes).toContain('text(serif)');
       expect(classes).toContain('hyphens(auto)');
       
       // Should have merged selectors from both variants

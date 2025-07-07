@@ -7,6 +7,19 @@ import "./02-design_tokens/design-system/colors/colors";
 import { initializeRule2Handlers } from "./04-rules/index";
 initializeRule2Handlers();
 
+// Register components after Rule2 handlers are initialized
+// Note: Components registration is deferred to avoid circular dependencies
+try {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const { registerComponentsAsRule2 } = require("./05-components/register-components");
+  registerComponentsAsRule2();
+} catch (_e) {
+  // Component registration failed - continue without components
+  if (typeof console !== 'undefined') {
+    console.warn('AdorableCSS: Component registration failed, components may not work correctly');
+  }
+}
+
 // Note: Auto-inject functionality moved to CDN package for browser-specific features
 
 export * from "./01-core/parser/index";

@@ -83,9 +83,9 @@ describe('defineComponent', () => {
     const component = defineComponent({
       base: 'text',
       sizes: {
-        xs: 'font(xs)',
-        sm: 'font(sm)',
-        md: 'font(base)'
+        xs: 'text(xs)',
+        sm: 'text(sm)',
+        md: 'text(base)'
       },
       variants: {
         muted: 'c(gray-600)',
@@ -98,7 +98,7 @@ describe('defineComponent', () => {
     });
     
     const result = component();
-    expect(result).toBe('text font(base) c(gray-600)');
+    expect(result).toBe('text text(base) c(gray-600)');
   });
 
   it('should handle arguments in any order', () => {
@@ -124,13 +124,13 @@ describe('defineComponent with compounds', () => {
     const component = defineComponent({
       base: 'r(full) inline-flex',
       compounds: {
-        'primary/sm': 'bg(blue-500) font(xs) px(2)',
+        'primary/sm': 'bg(blue-500) text(xs) px(2)',
         'primary/lg': 'bg(blue-600) fonr(lg) px(4)'
       }
     });
     
     const result = component('primary/sm');
-    expect(result).toBe('r(full) inline-flex bg(blue-500) font(xs) px(2)');
+    expect(result).toBe('r(full) inline-flex bg(blue-500) text(xs) px(2)');
   });
 
   it('should apply wildcard patterns for variants', () => {
@@ -170,7 +170,7 @@ describe('defineComponent with compounds', () => {
     const component = defineComponent({
       base: 'badge',
       sizes: {
-        sm: 'font(xs)',
+        sm: 'text(xs)',
         lg: 'fonr(lg)'
       },
       compounds: {

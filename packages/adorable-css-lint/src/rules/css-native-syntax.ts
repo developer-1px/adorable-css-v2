@@ -88,13 +88,8 @@ export const cssNativeSyntax: AdorableCSSRuleDefinition = {
         context.report({
           node,
           messageId: 'invalidTransform',
-          data: { fix },
-          fix(fixer) {
-            return fixer.replaceTextRange(
-              [start, start + className.length],
-              fix
-            );
-          }
+          data: { fix }
+          // auto-fix 제거
         });
         return;
       }
@@ -118,14 +113,8 @@ export const cssNativeSyntax: AdorableCSSRuleDefinition = {
             data: {
               value,
               fix: result.fix
-            },
-            fix(fixer) {
-              const fixedClassName = `${name}(${result.fix})`;
-              return fixer.replaceTextRange(
-                [start, start + className.length],
-                fixedClassName
-              );
             }
+            // auto-fix 제거
           });
         }
       }

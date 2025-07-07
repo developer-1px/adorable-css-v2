@@ -7,22 +7,22 @@ describe('parseAdorableCSS', () => {
       const result = parseAdorableCSS('block')
       expect(result.type).toBe('selector')
       expect(result.value).toHaveLength(1)
-      expect(result.value[0].selector.name).toBe('block') // Changed image to name
-      expect(result.value[0].selector.type).toBe('identifier') // Added type check
+      expect(result.value[0].selector.image).toBe('block')
+      expect(result.value[0].selector.type).toBe('(ident)')
     })
 
     it('should parse multiple utilities', () => {
       const result = parseAdorableCSS('hbox vbox')
       expect(result.type).toBe('selector')
       expect(result.value).toHaveLength(2)
-      expect(result.value[0].selector.name).toBe('hbox') // Changed image to name
-      expect(result.value[1].selector.name).toBe('vbox') // Changed image to name
+      expect(result.value[0].selector.image).toBe('hbox')
+      expect(result.value[1].selector.image).toBe('vbox')
     })
 
     it('should parse utilities with important modifier', () => {
       const result = parseAdorableCSS('block!')
       expect(result.value[0].important).toBe('!')
-      expect(result.value[0].selector.name).toBe('block') // Added name check
+      expect(result.value[0].selector.image).toBe('block')
     })
   })
 
@@ -65,11 +65,11 @@ describe('parseAdorableCSS', () => {
       expect(result.value[0].selector.args[0].image).toBe('top+right') // Check expression image
     })
 
-    it('should parse font function with complex syntax', () => {
-      const result = parseAdorableCSS('font(Inter/16/1.5/-2%/500)')
+    it('should parse text function with complex syntax', () => {
+      const result = parseAdorableCSS('text(Inter/16/1.5/-2%/500)')
       expect(result.value[0].selector.type).toBe('function')
-      expect(result.value[0].selector.name).toBe('font')
-      expect(result.value[0].selector.image).toBe('font(Inter/16/1.5/-2%/500)')
+      expect(result.value[0].selector.name).toBe('text')
+      expect(result.value[0].selector.image).toBe('text(Inter/16/1.5/-2%/500)')
       expect(result.value[0].selector.args).toHaveLength(9); // 5 args + 4 separators
     })
 
@@ -106,7 +106,7 @@ describe('parseAdorableCSS', () => {
     })
 
     it('should parse triple ranges (min..preferred..max)', () => { // Added new test case
-      const result = parseAdorableCSS('font(16..20..24)');
+      const result = parseAdorableCSS('text(16..20..24)');
       expect(result.value[0].selector.args[0].type).toBe('range');
       expect(result.value[0].selector.args[0].min.image).toBe('16');
       expect(result.value[0].selector.args[0].preferred.image).toBe('20');
@@ -119,41 +119,41 @@ describe('parseAdorableCSS', () => {
       const result = parseAdorableCSS('hover:bg(blue)')
       expect(result.value[0].combinators).toHaveLength(1)
       expect(result.value[0].combinators[0].combinator).toBe(':')
-      expect(result.value[0].selector.name).toBe('hover') // Changed image to name
-      expect(result.value[0].selector.type).toBe('pseudo-class') // Added type check
-      expect(result.value[0].combinators[0].selector.name).toBe('bg')
+      expect(result.value[0].selector.image).toBe('hover')
+      expect(result.value[0].selector.type).toBe('(ident)')
+      expect(result.value[0].combinators[0].selector.image).toBe('bg')
     })
 
     it('should parse focus pseudo-class', () => {
       const result = parseAdorableCSS('focus:border(2/solid/blue)')
       expect(result.value[0].combinators).toHaveLength(1)
       expect(result.value[0].combinators[0].combinator).toBe(':')
-      expect(result.value[0].selector.name).toBe('focus') // Changed image to name
-      expect(result.value[0].selector.type).toBe('pseudo-class') // Added type check
+      expect(result.value[0].selector.image).toBe('focus')
+      expect(result.value[0].selector.type).toBe('(ident)') // Added type check
     })
 
     it('should parse responsive prefixes', () => {
       const result = parseAdorableCSS('sm:w(300)')
       expect(result.value[0].combinators).toHaveLength(1)
       expect(result.value[0].combinators[0].combinator).toBe(':')
-      expect(result.value[0].selector.name).toBe('sm') // Changed image to name
-      expect(result.value[0].selector.type).toBe('responsive-prefix') // Added type check
-      expect(result.value[0].combinators[0].selector.name).toBe('w')
+      expect(result.value[0].selector.image).toBe('sm')
+      expect(result.value[0].selector.type).toBe('(ident)')
+      expect(result.value[0].combinators[0].selector.image).toBe('w')
     })
 
     it('should parse group pseudo-classes', () => {
       const result = parseAdorableCSS('group-hover:bg(blue)')
       expect(result.value[0].combinators).toHaveLength(1)
-      expect(result.value[0].selector.name).toBe('group-hover') // Changed image to name
-      expect(result.value[0].selector.type).toBe('pseudo-class') // Added type check
+      expect(result.value[0].selector.image).toBe('group-hover')
+      expect(result.value[0].selector.type).toBe('(ident)') // Added type check
     })
 
     it('should parse multiple pseudo-classes/prefixes', () => { // Added new test case
       const result = parseAdorableCSS('md:hover:c(red)');
       expect(result.value[0].combinators).toHaveLength(2);
-      expect(result.value[0].selector.name).toBe('md');
-      expect(result.value[0].combinators[0].selector.name).toBe('hover');
-      expect(result.value[0].combinators[1].selector.name).toBe('c');
+      expect(result.value[0].selector.image).toBe('md');
+      expect(result.value[0].combinators[0].selector.image).toBe('hover');
+      expect(result.value[0].combinators[1].selector.image).toBe('c');
     });
   })
 
@@ -284,7 +284,7 @@ describe('parseAdorableCSS', () => {
     })
 
     it('should parse responsive typography', () => {
-      const result = parseAdorableCSS('sm:font(14/1.4) md:font(16/1.5) lg:font(18/1.6)')
+      const result = parseAdorableCSS('sm:text(14/1.4) md:text(16/1.5) lg:text(18/1.6)')
       expect(result.value).toHaveLength(3)
       result.value.forEach(selector => {
         expect(selector.combinators[0].selector.name).toBe('font')

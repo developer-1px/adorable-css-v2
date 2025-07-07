@@ -65,13 +65,8 @@ export const opacityDotSyntax: AdorableCSSRuleDefinition = {
           data: {
             property: name,
             fix
-          },
-          fix(fixer) {
-            return fixer.replaceTextRange(
-              [start, start + className.length],
-              fix
-            );
           }
+          // auto-fix 제거
         });
       }
       

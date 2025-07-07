@@ -6,19 +6,19 @@ export const titleDefinition: ComponentDefinition = {
   base: 'c(gray-900) transition(color/200ms)',
   
   sizes: {
-    xs: 'font(sm/1.4) bold(medium)',
-    sm: 'font(base/1.4) bold(medium)',
-    base: 'font(lg/1.4) bold(semi)',
-    lg: 'font(xl/1.4) bold(semi)',
-    xl: 'font(2xl/1.3) bold(bold)',
-    '2xl': 'font(3xl/1.3) bold(bold)',
+    xs: 'text(sm/1.4) font(medium)',
+    sm: 'text(base/1.4) font(medium)',
+    base: 'text(lg/1.4) font(semi)',
+    lg: 'text(xl/1.4) font(semi)',
+    xl: 'text(2xl/1.3) font(bold)',
+    '2xl': 'text(3xl/1.3) font(bold)',
     
     // Component-specific sizes
-    card: 'font(lg/1.4) bold(semi) mb(sm)',
-    modal: 'font(xl/1.3) bold(semi) mb(md)',
-    section: 'font(2xl/1.3) bold(bold) mb(lg)',
+    card: 'text(lg/1.4) font(semi) mb(sm)',
+    modal: 'text(xl/1.3) font(semi) mb(md)',
+    section: 'text(2xl/1.3) font(bold) mb(lg)',
     
-    default: 'font(lg/1.4) bold(semi)' // Default to base
+    default: 'text(lg/1.4) font(semi)' // Default to base
   },
   
   variants: {
@@ -35,8 +35,8 @@ export const titleDefinition: ComponentDefinition = {
     gradient: 'c(to-r/blue-600..purple-600)',
     
     // Typography variants
-    serif: 'font(serif)',
-    mono: 'font(mono)',
+    serif: 'text(serif)',
+    mono: 'text(mono)',
     
     // Truncation variants
     truncate: 'truncate',

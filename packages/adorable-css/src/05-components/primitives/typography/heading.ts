@@ -7,14 +7,14 @@ export const headingDefinition: ComponentDefinition = {
   
   sizes: {
     // VitePress-inspired typography without margins
-    h1: 'font(..5xl/1.1/-3%) bold',
-    h2: 'font(2xl/tight/-1%) bold',
-    h3: 'font(xl/snug) bold(semi)',
-    h4: 'font(lg/relaxed) bold(semi)',
-    h5: 'font(md/relaxed) bold(semi)',
-    h6: 'font(sm/relaxed/widest) bold(semi) uppercase',
+    h1: 'text(..5xl/1.1/-3%) bold',
+    h2: 'text(2xl/tight/-1%) bold',
+    h3: 'text(xl/snug) font(semi)',
+    h4: 'text(lg/relaxed) font(semi)',
+    h5: 'text(md/relaxed) font(semi)',
+    h6: 'text(sm/relaxed/widest) font(semi) uppercase',
 
-    default: 'font(3xl/1.3/-1.5%) bold(semi)' // Default to h1-like style
+    default: 'text(3xl/1.3/-1.5%) font(semi)' // Default to h1-like style
   },
   
   variants: {
@@ -32,8 +32,8 @@ export const headingDefinition: ComponentDefinition = {
     rainbow: 'c(to-r/red-500..yellow-500..green-500..blue-500..purple-500)',
     
     // Typography variants
-    serif: 'font(serif)',
-    mono: 'font(mono)',
+    serif: 'text(serif)',
+    mono: 'text(mono)',
     
     // Special variants
     underline: 'relative after:content("") after:absolute after:bottom(0) after:left(0) after:w(full) after:h(3) after:bg(to-r/purple-400..pink-400) after:r(full)',
@@ -52,13 +52,13 @@ export const headingDefinition: ComponentDefinition = {
     {
       variant: 'serif',
       size: ['h1', 'h2', 'h3', 'display', 'hero'],
-      class: 'font(serif/1.2/-2%)'
+      class: 'text(serif/1.2/-2%)'
     },
     // Mono variants get tighter spacing
     {
       variant: 'mono',
       size: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
-      class: 'font(mono)'
+      class: 'text(mono)'
     }
   ],
   

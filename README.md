@@ -88,8 +88,8 @@ pnpm add adorable-css
 <div class="hbox(pack) gap(16) p(24) r(12) bg(white) shadow(md)">
   <img class="size(48) r(full)" src="avatar.jpg" />
   <div class="vbox gap(4)">
-    <h3 class="font(title/lg) c(gray-900)">김철수</h3>
-    <p class="font(body/sm) c(gray-600)">프론트엔드 개발자</p>
+    <h3 class="text(title/lg) c(gray-900)">김철수</h3>
+    <p class="text(body/sm) c(gray-600)">프론트엔드 개발자</p>
   </div>
 </div>
 ```
@@ -102,8 +102,8 @@ import 'adorable-css'
 function Card({ title, description }) {
   return (
     <div className="vbox w(fill) p(xl) r(lg) bg(white) shadow(md) gap(lg)">
-      <h3 className="font(title/lg) c(gray-900)">{title}</h3>
-      <p className="font(body/base) c(gray-600)">{description}</p>
+      <h3 className="text(title/lg) c(gray-900)">{title}</h3>
+      <p className="text(body/base) c(gray-600)">{description}</p>
       <button className="hbox(pack) h(md) px(lg) r(md) bg(primary) c(white) hover:bg(primary-600)">
         자세히 보기
       </button>
@@ -147,15 +147,15 @@ w(320..768)       /* 최소-최대 */
 
 ```css
 /* 6가지 타이포그래피 역할 */
-font(display/lg)  /* 디스플레이 텍스트 */
-font(heading/h2)  /* 제목 */
-font(title/lg)    /* UI 타이틀 */
-font(body/base)   /* 본문 */
-font(label/sm)    /* 레이블 */
-font(caption/xs)  /* 캡션 */
+text(display/lg)  /* 디스플레이 텍스트 */
+text(heading/h2)  /* 제목 */
+text(title/lg)    /* UI 타이틀 */
+text(body/base)   /* 본문 */
+text(label/sm)    /* 레이블 */
+text(caption/xs)  /* 캡션 */
 
 /* 통합 문법 */
-font(lg/1.5/-2%)  /* 크기/행간/자간 */
+text(lg/1.5/-2%)  /* 크기/행간/자간 */
 ```
 
 ### 색상 - OKLCH 기반
@@ -225,11 +225,11 @@ dark:c(white)
 <article class="vbox w(fill) bg(white) r(xl) shadow(lg) clip">
   <img class="w(fill) h(200) object(cover)" src="..." />
   <div class="vbox p(xl) gap(md)">
-    <h3 class="font(title/lg) c(gray-900)">카드 제목</h3>
-    <p class="font(body/base) c(gray-600) line-clamp(3)">
+    <h3 class="text(title/lg) c(gray-900)">카드 제목</h3>
+    <p class="text(body/base) c(gray-600) line-clamp(3)">
       카드 설명 텍스트가 들어갑니다...
     </p>
-    <button class="hbox(pack) w(fit) px(lg) py(sm) r(md) bg(primary) c(white) hover:bg(primary-600) transition">
+    <button class="hbox(pack) w(hug) px(lg) py(sm) r(md) bg(primary) c(white) hover:bg(primary-600) transition">
       더보기
     </button>
   </div>
@@ -240,7 +240,7 @@ dark:c(white)
 
 ```html
 <nav class="hbox(between+middle) w(fill) h(64) px(xl) bg(white) shadow(sm)">
-  <a class="font(title/lg) c(gray-900) bold">로고</a>
+  <a class="text(title/lg) c(gray-900) bold">로고</a>
   <ul class="hbox gap(xl) hidden md:flex">
     <li><a class="c(gray-600) hover:c(primary) transition">홈</a></li>
     <li><a class="c(gray-600) hover:c(primary) transition">소개</a></li>

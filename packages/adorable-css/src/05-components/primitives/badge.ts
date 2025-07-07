@@ -3,13 +3,13 @@ import type { ComponentDefinition } from '../defineComponent-unified';
 
 // Badge component definition
 export const badgeDefinition: ComponentDefinition = {
-  base: 'hbox(pack) bold(medium) r(sm) py(2) transition',
+  base: 'hbox(pack) font(medium) r(sm) py(2) transition',
   
   sizes: {
     xs: 'px(xs) py(1) text(2xs)',
-    sm: 'px(sm) font(xs)',
-    default: 'px(md) py(xs) font(sm)',
-    lg: 'px(lg) py(sm) font(sm)'
+    sm: 'px(sm) text(xs)',
+    default: 'px(md) py(xs) text(sm)',
+    lg: 'px(lg) py(sm) text(sm)'
   },
   
   variants: {

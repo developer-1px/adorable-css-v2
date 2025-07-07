@@ -6,19 +6,19 @@ export const captionDefinition: ComponentDefinition = {
   base: 'c(gray-500) transition(color/200ms)',
   
   sizes: {
-    xs: 'font(xs/1.5) bold(normal)',
-    sm: 'font(sm/1.5) bold(normal)',
-    base: 'font(sm/1.5) bold(normal)',
-    lg: 'font(base/1.5) bold(normal)',
+    xs: 'text(xs/1.5) font(normal)',
+    sm: 'text(sm/1.5) font(normal)',
+    base: 'text(sm/1.5) font(normal)',
+    lg: 'text(base/1.5) font(normal)',
     
     // Context-specific sizes
-    figure: 'font(sm/1.5) bold(normal) mt(sm) text(center)',
-    table: 'font(xs/1.4) bold(normal) mb(xs)',
-    form: 'font(xs/1.4) bold(normal) mt(xs)',
-    hint: 'font(xs/1.4) bold(normal) italic',
-    timestamp: 'font(xs/1.3) bold(normal) tracking(0.01em)',
+    figure: 'text(sm/1.5) font(normal) mt(sm) text(center)',
+    table: 'text(xs/1.4) font(normal) mb(xs)',
+    form: 'text(xs/1.4) font(normal) mt(xs)',
+    hint: 'text(xs/1.4) font(normal) italic',
+    timestamp: 'text(xs/1.3) font(normal) tracking(0.01em)',
     
-    default: 'font(sm/1.5) bold(normal)' // Default to base
+    default: 'text(sm/1.5) font(normal)' // Default to base
   },
   
   variants: {
@@ -38,8 +38,8 @@ export const captionDefinition: ComponentDefinition = {
     dark: 'c(gray-600)',
     
     // Typography variants
-    serif: 'font(serif) italic',
-    mono: 'font(mono) font-size(0.9em) c(gray-600)',
+    serif: 'text(serif) italic',
+    mono: 'text(mono) font-size(0.9em) c(gray-600)',
     
     // Functional variants
     error: 'c(red-600) flex items(center) gap(xs)',
@@ -67,7 +67,7 @@ export const captionDefinition: ComponentDefinition = {
     {
       size: 'form',
       variant: ['error', 'help', 'note'],
-      class: 'font(xs)'
+      class: 'text(xs)'
     },
     // Timestamps are often inline
     {

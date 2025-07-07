@@ -3,12 +3,12 @@ import type { ComponentDefinition } from '../defineComponent-unified';
 
 // Button component definition
 export const buttonDefinition: ComponentDefinition = {
-  base: 'hbox(pack) gap(8) cursor(pointer) select(none) font(medium) whitespace(nowrap) r(md) transition-all',
+  base: 'hbox(pack) gap(8) cursor(pointer) select(none) text(medium) whitespace(nowrap) r(md) transition-all',
   
   sizes: {
-    sm: 'h(36) px(12) font(xs) r(md)',
-    default: 'h(40) px(16) py(8) font(sm)',
-    lg: 'h(44) px(32) font(sm) r(md)',
+    sm: 'h(36) px(12) text(xs) r(md)',
+    default: 'h(40) px(16) py(8) text(sm)',
+    lg: 'h(44) px(32) text(sm) r(md)',
     icon: 'h(40) w(40) p(0)'
   },
   

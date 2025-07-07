@@ -26,44 +26,57 @@ import { codeBlockRules } from './primitives/code-block';
 import { tableRules } from './primitives/table';
 import { proseRules } from './patterns/prose';
 import { containerRules } from './patterns/container';
+import { sectionRules } from './patterns/section';
 
 /**
- * Expand utility classes into actual CSS properties
+ * Expand utility classes into actual CSS properties using main generator
  */
 function expandUtilityClasses(classes: string): string {
   if (!classes) return '';
   
-  const cssProperties: string[] = [];
-  const classNames = classes.trim().split(/\s+/);
-  
-  for (const className of classNames) {
-    if (!className) continue;
+  try {
+    // Use the main CSS generator to process the classes
+    const classNames = classes.trim().split(/\s+/).filter(Boolean);
+    const css = generateCSS(classNames);
     
-    try {
-      // Parse each utility class
-      const parsed = parseAdorableCSS(className);
+    // Extract just the CSS properties from the generated CSS
+    // Find the class definition and extract the properties
+    const match = css.match(/\{([^}]+)\}/);
+    if (match && match[1]) {
+      // Clean up the CSS properties
+      return match[1]
+        .replace(/\s*;\s*/g, '; ')
+        .replace(/^\s+|\s+$/g, '')
+        .replace(/;\s*$/, '');
+    }
+  } catch (e) {
+    console.warn('Failed to expand utility classes:', classes, e);
+  }
+  
+  return '';
+}
+
+/**
+ * Convert CSS rule object to CSS string with proper selector replacement
+ */
+function cssRuleToString(cssRule: Record<string, any>, parentClassName: string): string {
+  const cssChunks: string[] = [];
+  
+  for (const [selector, properties] of Object.entries(cssRule)) {
+    if (typeof properties === 'object' && properties !== null) {
+      const propertyStrings = Object.entries(properties)
+        .map(([prop, value]) => `${prop}: ${value}`)
+        .join('; ');
       
-      parsed.value.forEach((node: any) => {
-        const selector = node.selector || node;
-        const ruleName = selector.type === 'function' ? selector.name : selector.image;
-        
-        // Skip pseudo-classes for now (hover:, focus:, etc.)
-        if (className.includes(':')) return;
-        
-        const rule2Definition = getRule2Definition(ruleName);
-        if (rule2Definition) {
-          const css = rule2Definition.handler(node);
-          if (css) {
-            cssProperties.push(css);
-          }
-        }
-      });
-    } catch (e) {
-      // Skip invalid classes
+      if (propertyStrings) {
+        // Replace & with the actual parent class name
+        const processedSelector = selector.replace(/^&\s*/, `.${parentClassName} `);
+        cssChunks.push(`${processedSelector} { ${propertyStrings}; }`);
+      }
     }
   }
   
-  return cssProperties.join(';');
+  return cssChunks.join('\n');
 }
 
 /**
@@ -79,16 +92,33 @@ function convertToRule2Handler(name: string, componentHandler: (args?: string) =
     // Call the component handler to get expanded classes
     const result = componentHandler(args);
     
-    // Get the class string
-    let classes = '';
+    // Handle different result types
     if (typeof result === 'string') {
-      classes = result;
-    } else if (Array.isArray(result) && result.length >= 1) {
-      classes = result[0];
+      // Simple string result - expand utility classes
+      return expandUtilityClasses(result);
+    } else if (Array.isArray(result)) {
+      // Array result - first element is classes, second might be CSS rule object
+      const [classes, cssRule] = result;
+      let css = '';
+      
+      // Expand utility classes from the first element
+      if (typeof classes === 'string') {
+        css += expandUtilityClasses(classes);
+      }
+      
+      // Add CSS rules from the second element (for selectors)
+      if (cssRule && typeof cssRule === 'object') {
+        const selectorCSS = cssRuleToString(cssRule, name + '\\(' + args + '\\)');
+        if (selectorCSS) {
+          css += (css ? '\n' : '') + selectorCSS;
+        }
+      }
+      
+      return css;
     }
     
-    // Expand utility classes into CSS properties
-    return expandUtilityClasses(classes);
+    // Fallback for other types
+    return '';
   });
 }
 
@@ -131,6 +161,7 @@ export function registerComponentsAsRule2(): void {
     // Pattern components
     ...proseRules,
     ...containerRules,
+    ...sectionRules,
   };
   
   // Convert each component to Rule2 handler and register

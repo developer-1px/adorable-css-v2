@@ -1,4 +1,5 @@
 import { parseAdorableCSS } from '../01-core/parser/parser';
+import { generateCSS } from '../07-generator/generator';
 
 // Type definitions
 type CSSRule = Record<string, string | Record<string, any>>;
@@ -35,7 +36,7 @@ export interface ComponentDefinition {
     [key: string]: string | undefined;
   };
   
-  // Nested selectors (e.g., 'h1': 'font(5xl) bold(850)')
+  // Nested selectors (e.g., 'h1': 'text(5xl) font(850)')
   // Automatically converted to '& h1' unless already prefixed with &
   selectors?: Record<string, string>;
   
@@ -147,7 +148,7 @@ export function getComponentDefinition(
  * const badge = defineComponent({
  *   base: 'inline-flex rounded-full',
  *   sizes: {
- *     sm: 'px(2) font(xs)',
+ *     sm: 'px(2) text(xs)',
  *     lg: 'px(4) fonr(lg)'
  *   },
  *   variants: {
@@ -200,44 +201,89 @@ function processSelector(selector: string): string {
 }
 
 /**
- * Convert AdorableCSS classes to actual CSS object
+ * Convert AdorableCSS classes to actual CSS properties
  * @param adorableCSS - The AdorableCSS string to convert
- * @param visited - Set of visited 04-components to prevent recursion
+ * @param visited - Set of visited components to prevent recursion
+ * @param depth - Current recursion depth
  */
-function adorableCSSToCSS(adorableCSS: string, visited: Set<string> = new Set()): CSSRule {
+function adorableCSSToCSS(adorableCSS: string, visited: Set<string> = new Set(), depth: number = 0): CSSRule {
   if (!adorableCSS) return {};
   
-  // Split classes and process each one
-  const classes = adorableCSS.trim().split(/\s+/);
+  // Prevent infinite recursion with depth limit
+  const MAX_RECURSION_DEPTH = 10;
+  if (depth > MAX_RECURSION_DEPTH) {
+    console.warn(`Maximum recursion depth (${MAX_RECURSION_DEPTH}) exceeded for AdorableCSS: "${adorableCSS}"`);
+    return {};
+  }
+  
+  // Prevent circular dependencies by tracking visited classes
+  const classKey = `${adorableCSS}@${depth}`;
+  if (visited.has(classKey)) {
+    console.warn(`Circular dependency detected for AdorableCSS: "${adorableCSS}" at depth ${depth}`);
+    return {};
+  }
+  
+  // Add current class to visited set
+  const newVisited = new Set(visited);
+  newVisited.add(classKey);
+  
+  try {
+    // Add timeout mechanism for CSS generation
+    const startTime = Date.now();
+    const TIMEOUT_MS = 5000; // 5 second timeout
+    
+    // Generate CSS using the main generator
+    const cssString = generateCSS([adorableCSS]);
+    
+    // Check if generation took too long
+    const elapsed = Date.now() - startTime;
+    if (elapsed > TIMEOUT_MS) {
+      console.warn(`CSS generation timeout (${elapsed}ms) for AdorableCSS: "${adorableCSS}"`);
+      return {};
+    }
+    
+    // Parse the generated CSS to extract properties
+    return parseCSSStringToObject(cssString);
+  } catch (e) {
+    console.warn(`Failed to process AdorableCSS "${adorableCSS}" at depth ${depth}:`, e);
+    return {};
+  }
+}
+
+/**
+ * Parse CSS string into a CSS object with properties
+ * This extracts CSS properties from the generated CSS string
+ */
+function parseCSSStringToObject(cssString: string): CSSRule {
   const cssObject: CSSRule = {};
   
-  for (const className of classes) {
-    if (!className) continue;
+  if (!cssString.trim()) return cssObject;
+  
+  // Remove CSS selectors and extract just the properties
+  // This is a simplified parser that works with the generator output
+  const lines = cssString.split('\n');
+  const currentProperties: Record<string, string> = {};
+  
+  for (const line of lines) {
+    const trimmed = line.trim();
     
-    try {
-      const parsed = parseAdorableCSS(className);
-      if (parsed.value.length > 0) {
-        const selector = parsed.value[0].selector;
-        const selectorName = selector.name || selector.image;
-        const selectorArgs = selector.args?.map((arg: any) => arg.image).join('');
-        
-        // Check for circular dependency
-        const componentKey = `${selectorName}(${selectorArgs || ''})`;
-        if (visited.has(componentKey)) {
-          console.warn(`⚠️  AdorableCSS: Circular dependency detected for component "${componentKey}"`);
-          continue;
-        }
-        
-        // For now, skip processing individual classes in defineComponent
-        // This is a simplified version that doesn't process nested components
-        // TODO: Implement proper Rule2-based processing here if needed
+    // Skip empty lines, comments, and selectors
+    if (!trimmed || trimmed.startsWith('/*') || trimmed.startsWith('@') || trimmed.endsWith('{') || trimmed === '}') {
+      continue;
+    }
+    
+    // Extract CSS property-value pairs
+    if (trimmed.includes(':') && trimmed.endsWith(';')) {
+      const [property, ...valueParts] = trimmed.split(':');
+      const value = valueParts.join(':').replace(';', '').trim();
+      
+      if (property && value) {
+        currentProperties[property.trim()] = value;
       }
-    } catch (e) {
-      console.warn(`Failed to process AdorableCSS class "${className}":`, e);
     }
   }
   
-  return cssObject;
+  return currentProperties;
 }
 
 export function defineComponent(
@@ -321,7 +367,7 @@ export function defineComponent(
         const visited = new Set<string>();
         Object.entries(definition.selectors).forEach(([selector, adorableCSS]) => {
           const processedSelector = processSelector(selector);
-          const cssObject = adorableCSSToCSS(adorableCSS, visited);
+          const cssObject = adorableCSSToCSS(adorableCSS, visited, 0);
           if (Object.keys(cssObject).length > 0) {
             cssRule[processedSelector] = cssObject;
           }
@@ -333,7 +379,7 @@ export function defineComponent(
         const visited = new Set<string>();
         Object.entries(definition.variantSelectors[variant]).forEach(([selector, adorableCSS]) => {
           const processedSelector = processSelector(selector);
-          const cssObject = adorableCSSToCSS(adorableCSS, visited);
+          const cssObject = adorableCSSToCSS(adorableCSS, visited, 0);
           if (Object.keys(cssObject).length > 0) {
             // If selector already exists, merge the properties
             if (cssRule[processedSelector]) {

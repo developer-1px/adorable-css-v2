@@ -38,10 +38,10 @@ describe('Spacing tokens bug fix verification', () => {
   
   it('should preserve font token behavior (should remain negative for small sizes)', () => {
     const css = generateCSS([
-      'font(4xs)',
-      'font(3xs)',
-      'font(2xs)', 
-      'font(xs)'
+      'text(4xs)',
+      'text(3xs)',
+      'text(2xs)', 
+      'text(xs)'
     ]);
     
     console.log('Font tokens CSS:', css);
@@ -61,7 +61,7 @@ describe('Spacing tokens bug fix verification', () => {
       'p(2xs)',
       'r(sm)',
       'bg(gray-100)',
-      'font(2xs)'
+      'text(2xs)'
     ]);
     
     console.log('Component usage CSS:', css);

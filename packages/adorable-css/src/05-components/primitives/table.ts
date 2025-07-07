@@ -8,7 +8,7 @@ export const table: StringRuleHandler = () => {
   return [
     'w(fill)',
     'border-collapse(collapse)',
-    'font(sm)',
+    'text(sm)',
     'bg(white)',
     'r(lg)',
     'overflow(hidden)',
@@ -59,7 +59,7 @@ export const tableWrapper: StringRuleHandler = () => {
 // Table variants
 export const tableCompact: StringRuleHandler = () => {
   return [
-    'font(xs)',
+    'text(xs)',
     {
       '& th, & td': {
         'padding': 'var(--spacing-sm)'

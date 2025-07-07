@@ -45,7 +45,7 @@ export const semanticColors: SemanticColorConfig = {
 };
 
 // NOTE: Legacy hierarchy scales removed - use dynamic calc() system instead
-// Example: fonr(lg), gap(xl), font(2xl), etc.
+// Example: fonr(lg), gap(xl), text(2xl), etc.
 
 // Simplified DesignTokens interface for dynamic calc() system
 export interface DesignTokens {

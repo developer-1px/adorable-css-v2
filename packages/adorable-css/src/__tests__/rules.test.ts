@@ -242,7 +242,7 @@ describe('AdorableCSS v2 New Features', () => {
         'bg(white)',
         'c(#667eea)',
         'r(12)',
-        'font(16)',
+        'text(16)',
         'bold',
         'shadow(lg)',
         'gap(8)',
@@ -287,7 +287,7 @@ describe('AdorableCSS v2 New Features', () => {
         'bg(red..blue)',
         'c(#333)',
         'font-family(sf-mono)',
-        'font(16)',
+        'text(16)',
       ])
       
       expect(css).toContain('flex-direction:column')

@@ -52,8 +52,8 @@ describe('Token System', () => {
     });
 
     it('font should use 02-design_tokens', () => {
-      expect(font('sm')).toEqual({ 'font-size': 'var(--font-sm)' });
-      expect(font('lg')).toEqual({ 'font-size': 'var(--font-lg)' });
+      expect(text('sm')).toEqual({ 'font-size': 'var(--font-sm)' });
+      expect(text('lg')).toEqual({ 'font-size': 'var(--font-lg)' });
     });
 
     it('spacing should use 02-design_tokens', () => {
@@ -65,7 +65,7 @@ describe('Token System', () => {
     it('should handle numeric values', () => {
       expect(r('8')).toEqual({ 'border-radius': '8px' });
       expect(p('20')).toEqual({ padding: '20px' });
-      expect(font('16')).toEqual({ 'font-size': '16px' });
+      expect(text('16')).toEqual({ 'font-size': '16px' });
     });
   });
 });

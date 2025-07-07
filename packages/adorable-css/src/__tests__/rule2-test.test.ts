@@ -46,7 +46,7 @@ describe('Rule2 Performance System', () => {
   });
 
   it('should use Rule2 handler for font', () => {
-    const css = generateClass('font(xl)');
+    const css = generateClass('text(xl)');
     expect(css).toContain('font-size:');
     expect(css).toContain('var(--font-xl)');
   });

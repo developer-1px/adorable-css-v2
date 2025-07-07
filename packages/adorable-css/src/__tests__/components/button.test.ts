@@ -6,18 +6,18 @@ describe('button component', () => {
     it('should return default button styles', () => {
       const result = btnString();
       expect(result).toContain('hbox(center+center)');
-      expect(result).toContain('h(40) px(16) py(8) font(sm)'); // default size
+      expect(result).toContain('h(40) px(16) py(8) text(sm)'); // default size
       expect(result).toContain('bg(gray-900) c(white) border(transparent)'); // default variant
     });
 
     it('should apply small size', () => {
       const result = btnString('sm');
-      expect(result).toContain('h(36) px(12) font(xs) r(md)');
+      expect(result).toContain('h(36) px(12) text(xs) r(md)');
     });
 
     it('should apply large size', () => {
       const result = btnString('lg');
-      expect(result).toContain('h(44) px(32) font(sm) r(md)');
+      expect(result).toContain('h(44) px(32) text(sm) r(md)');
     });
 
     it('should apply icon size', () => {
@@ -69,7 +69,7 @@ describe('button component', () => {
 
     it('should combine variant and size', () => {
       const result = btnString('secondary/lg');
-      expect(result).toContain('h(44) px(32) font(sm)');
+      expect(result).toContain('h(44) px(32) text(sm)');
       expect(result).toContain('bg(white) c(gray-900) border(1/gray-200)');
     });
   });

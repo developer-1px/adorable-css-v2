@@ -31,7 +31,7 @@ export interface DocContent {
   title: string;
   description?: string;
   content: string;
-  frontmatter?: Record<string, any>;
+  frontmatter?: Record<string, unknown>;
   path: string;
   category?: 'public' | 'internal' | 'api';
   tags?: string[];
@@ -48,6 +48,7 @@ export interface DocSearchResult {
  */
 function getAllDocItems(): DocsConfig[] {
   // Import here to avoid circular dependency
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { docsConfig } = require('./docs-config');
   return docsConfig;
 }
@@ -274,7 +275,7 @@ export async function validateDocs(): Promise<{
         if (!existsSync(filePath)) {
           errors.push(`Missing source file: ${doc.source} (${doc.title})`);
         }
-      } catch (error) {
+      } catch (_error) {
         warnings.push(`Cannot validate file existence on client: ${doc.source}`);
       }
     }
@@ -298,8 +299,8 @@ export async function validateDocs(): Promise<{
 }
 
 // Helper function to parse frontmatter
-function parseFrontmatter(content: string): Record<string, any> {
-  const result: Record<string, any> = {};
+function parseFrontmatter(content: string): Record<string, unknown> {
+  const result: Record<string, unknown> = {};
   const lines = content.split('\n');
   
   for (const line of lines) {

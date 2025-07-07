@@ -69,7 +69,7 @@ describe('defineComponent (unified)', () => {
       const component = defineComponent({
         base: 'btn',
         sizes: {
-          sm: 'font(sm)',
+          sm: 'text(sm)',
           lg: 'fonr(lg)'
         },
         variants: {
@@ -121,12 +121,12 @@ describe('defineComponent (unified)', () => {
       const component = defineComponent({
         base: 'r(md)',
         compounds: {
-          'primary/sm': 'bg(blue-500) font(xs) px(2)',
+          'primary/sm': 'bg(blue-500) text(xs) px(2)',
           'primary/lg': 'bg(blue-600) fonr(lg) px(4)'
         }
       });
       
-      expect(component('primary/sm')).toBe('r(md) bg(blue-500) font(xs) px(2)');
+      expect(component('primary/sm')).toBe('r(md) bg(blue-500) text(xs) px(2)');
       expect(component('primary/lg')).toBe('r(md) bg(blue-600) fonr(lg) px(4)');
     });
 

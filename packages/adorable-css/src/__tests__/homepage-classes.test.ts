@@ -232,15 +232,15 @@ describe('Homepage Classes Test - 실제 사용된 클래스들 검증', () => {
       expect(css).toContain('text-align:center')
     })
 
-    it('should generate bold(700) - 폰트 굵기', () => {
-      const css = generateCSS(['bold(700)'])
-      console.log('Generated CSS for bold(700):', css)
+    it('should generate font(700) - 폰트 굵기', () => {
+      const css = generateCSS(['font(700)'])
+      console.log('Generated CSS for font(700):', css)
       expect(css).toContain('font-weight:700')
     })
 
-    it('should generate font(xl/1.6) - 폰트 사이즈와 라인 높이', () => {
-      const css = generateCSS(['font(xl/1.6)'])
-      console.log('Generated CSS for font(xl/1.6):', css)
+    it('should generate text(xl/1.6) - 폰트 사이즈와 라인 높이', () => {
+      const css = generateCSS(['text(xl/1.6)'])
+      console.log('Generated CSS for text(xl/1.6):', css)
       expect(css).toContain('font-size')
       expect(css).toContain('line-height:1.6')
     })

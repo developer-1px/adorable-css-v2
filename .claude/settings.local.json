@@ -120,7 +120,10 @@
       "Bash(pnpm eslint:*)",
       "Bash(chmod:*)",
       "Bash(./fix-imports.sh)",
-      "Bash(../../fix-imports.sh)"
+      "Bash(../../fix-imports.sh)",
+      "Bash(pnpm --filter adorable-css-lint build)",
+      "Bash(gtimeout:*)",
+      "Bash(timeout:*)"
     ],
     "deny": []
   }

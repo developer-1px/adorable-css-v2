@@ -34,7 +34,7 @@ describe("AdorableCSS Integration Tests", () => {
       const complexUtilities = [
         "hbox(pack)",
         "vbox(middle)",
-        "font(Inter/16/1.5)",
+        "text(Inter/16/1.5)",
       ];
 
       complexUtilities.forEach((utility) => {
@@ -71,7 +71,7 @@ describe("AdorableCSS Integration Tests", () => {
         "sm:w(300)",
         "md:p(32)",
         "lg:hbox",
-        "xl:font(18/1.6)",
+        "xl:text(18/1.6)",
       ];
 
       responsiveUtilities.forEach((utility) => {
@@ -114,7 +114,7 @@ describe("AdorableCSS Integration Tests", () => {
     });
 
     it("should handle typography patterns", () => {
-      const typographyCode = "font(Inter/16/1.5/-2%) c(#333) text(center)";
+      const typographyCode = "text(Inter/16/1.5/-2%) c(#333) text(center)";
 
       expect(() => parseAdorableCSS(typographyCode)).not.toThrow();
       expect(() => generateClass(typographyCode)).not.toThrow();

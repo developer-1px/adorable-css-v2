@@ -76,17 +76,8 @@ export const noMargin: AdorableCSSRuleDefinition = {
           data: {
             className,
             suggestion
-          },
-          fix(fixer) {
-            // 간단한 자동 수정 예시
-            if (name === 'mb' || name === 'mt') {
-              return fixer.replaceTextRange(
-                [start, start + className.length],
-                `/* TODO: ${className}를 vbox gap()으로 변경 */`
-              );
-            }
-            return null;
           }
+          // auto-fix 제거
         });
       }
     }

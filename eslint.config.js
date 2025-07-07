@@ -45,7 +45,9 @@ export default ts.config(
 		rules: {
 			'adorable-css/no-margin': 'error',
 			'adorable-css/css-native-syntax': 'error',
-			'adorable-css/opacity-dot-syntax': 'error'
+			'adorable-css/opacity-dot-syntax': 'error',
+			'adorable-css/box-pack-syntax': 'warn',
+			'adorable-css/use-layer-instead-of-absolute-inset': 'warn'
 		}
 	},
 	{

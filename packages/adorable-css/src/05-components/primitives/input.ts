@@ -3,7 +3,7 @@ import type { ComponentDefinition } from '../defineComponent-unified';
 
 // Input component definition
 export const inputDefinition: ComponentDefinition = {
-  base: 'flex h(40) w(full) r(md) px(12) py(8) font(sm) c(gray-900) bg(transparent) outline(none) transition-all placeholder:c(gray-500)',
+  base: 'flex h(40) w(full) r(md) px(12) py(8) text(sm) c(gray-900) bg(transparent) outline(none) transition-all placeholder:c(gray-500)',
 
   variants: {
     default: 'border(1/gray-200) hover:border(gray-300) focus:border(gray-900) focus:ring(1/gray-900) disabled:cursor(not-allowed) disabled:opacity(50) disabled:bg(gray-50)',
@@ -24,7 +24,7 @@ export const inputString = defineComponent(inputDefinition);
 
 // Textarea component definition
 export const textareaDefinition: ComponentDefinition = {
-  base: 'flex w(full) r(md) font(sm) c(gray-900) bg(transparent) resize(vertical) outline(none) transition-all lh(1.5) placeholder:c(gray-500) border(1/gray-200) hover:border(gray-300) focus:border(gray-900) focus:ring(1/gray-900) disabled:cursor(not-allowed) disabled:opacity(50) disabled:bg(gray-50) disabled:resize(none)',
+  base: 'flex w(full) r(md) text(sm) c(gray-900) bg(transparent) resize(vertical) outline(none) transition-all lh(1.5) placeholder:c(gray-500) border(1/gray-200) hover:border(gray-300) focus:border(gray-900) focus:ring(1/gray-900) disabled:cursor(not-allowed) disabled:opacity(50) disabled:bg(gray-50) disabled:resize(none)',
   
   sizes: {
     sm: 'min-h(80) py(8) px(12)',

@@ -6,30 +6,30 @@ export const displayDefinition: ComponentDefinition = {
   base: 'balance',
   
   sizes: {
-    xs: 'font(3xl/1.2/-1%) bold(bold)',
-    sm: 'font(4xl/1.2/-1.5%) bold(bold)',
-    base: 'font(5xl/1.1/-2%) bold(extra)',
-    lg: 'font(6xl/1.1/-2.5%) bold(extra)',
-    xl: 'font(7xl/1/-3%) bold(black)',
-    '2xl': 'font(8xl/1/-3.5%) bold(black)',
-    '3xl': 'font(9xl/1/-4%) bold(black)',
-    '4xl': 'font(10xl/1/-4.5%) bold(black)',
-    '5xl': 'font(11xl/0.9/-5%) bold(black)',
+    xs: 'text(3xl/1.2/-1%) font(bold)',
+    sm: 'text(4xl/1.2/-1.5%) font(bold)',
+    base: 'text(5xl/1.1/-2%) font(extra)',
+    lg: 'text(6xl/1.1/-2.5%) font(extra)',
+    xl: 'text(7xl/1/-3%) font(black)',
+    '2xl': 'text(8xl/1/-3.5%) font(black)',
+    '3xl': 'text(9xl/1/-4%) font(black)',
+    '4xl': 'text(10xl/1/-4.5%) font(black)',
+    '5xl': 'text(11xl/0.9/-5%) font(black)',
     
     // Contextual sizes
-    hero: 'font(..6xl/1/-3%) bold(black) mb(2xl)',
-    banner: 'font(..7xl/1/-3.5%) bold(black) mb(3xl)',
-    splash: 'font(..8xl/0.9/-4%) bold(black) mb(4xl)',
+    hero: 'text(..6xl/1/-3%) font(black) mb(2xl)',
+    banner: 'text(..7xl/1/-3.5%) font(black) mb(3xl)',
+    splash: 'text(..8xl/0.9/-4%) font(black) mb(4xl)',
     
-    default: 'font(5xl/1.1/-2%) bold(extra)' // Default to base
+    default: 'text(5xl/1.1/-2%) font(extra)' // Default to base
   },
   
   variants: {
     default: '',
     
     // Weight variants
-    light: 'bold(light)',
-    thin: 'bold(thin)',
+    light: 'font(light)',
+    thin: 'font(thin)',
     
     // Color variants
     muted: 'c(gray-700)',
@@ -41,8 +41,8 @@ export const displayDefinition: ComponentDefinition = {
     chrome: 'c(180deg/gray-300..gray-600..gray-300)',
     
     // Typography variants
-    serif: 'font(serif)',
-    mono: 'font(mono) bold(medium)',
+    serif: 'text(serif)',
+    mono: 'text(mono) font(medium)',
     
     // Effect variants
     shadow: 'text-shadow(2xl)',
