@@ -15,13 +15,12 @@ const navItems = [
   {href: '/tokens', label: 'Tokens'},
   {href: '/foundation', label: 'Foundation'},
   {href: '/components', label: 'Components'},
-  {href: '/design-system', label: 'Design System'},
   {href: '/playground', label: 'Playground'},
   {href: '/showroom', label: 'Showroom'}
 ]
 </script>
 
-<nav class="fixed! layer(top) z(50) bg(white) border-b(1/neutral-200)">
+<nav class="fixed layer(top) z(50) bg(white) bb(1/neutral-200)">
   <div class="hbox(middle) gap(auto) h(60) px(24) lg:px(32) max-w(1400px) mx(auto)">
     <!-- Logo -->
     <a href="/" class="hbox(middle) gap(8) c(neutral-900) hover:c(neutral-700) transition">
@@ -85,7 +84,7 @@ const navItems = [
 
   <!-- Mobile Navigation -->
   {#if menuOpen}
-    <div class="absolute top(60) left(0) right(0) bg(white) border-b(1/neutral-200) shadow(lg) lg:hidden">
+    <div class="absolute top(60) left(0) right(0) bg(white) bb(1/neutral-200) shadow(lg) lg:hidden">
       <div class="vbox p(16)">
         {#each navItems as item}
           <a

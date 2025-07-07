@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest'
-import { glow, glowPulse, glowRing } from '../05-plugins/effects/glow' // Corrected import path
-import { glass, glassCard, glassDark } from '../05-plugins/effects/glass' // Corrected import path
-import { card, cardHover, cardDark, cardGradient } from '../04-components/primitives/card' // Corrected import path
-import { fontResponsive, gapResponsive, pResponsive } from '../05-plugins/responsive/responsive' // Corrected import path
-import { gradientText, backdropBlur, morphism, neon } from '../05-plugins/advanced/advanced' // Corrected import path
+import { glow, glowPulse, glowRing } from '../06-plugins/effects/glow' // Corrected import path
+import { glass, glassCard, glassDark } from '../06-plugins/effects/glass' // Corrected import path
+import { card, cardHover, cardDark, cardGradient } from '../05-components/primitives/card' // Corrected import path
+import { fontResponsive, gapResponsive, pResponsive } from '../06-plugins/responsive/responsive' // Corrected import path
+import { gradientText, backdropBlur, morphism, neon } from '../06-plugins/advanced/advanced' // Corrected import path
 
 describe('Plugin Rules - Glow Effects', () => {
   it('should generate basic glow effect', () => {

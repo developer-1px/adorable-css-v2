@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { displayString } from '../04-components/primitives/typography/display';
+import { displayString } from '../05-components/primitives/typography/display';
 import { clearTokenRegistry, generateUsedTokensCSS } from '../02-design_tokens/tokenRegistry';
 
 describe('Display Component Font Token Generation', () => {

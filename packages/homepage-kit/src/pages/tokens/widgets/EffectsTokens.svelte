@@ -67,16 +67,16 @@
     <!-- Stats row -->
     <div class="hbox(pack) gap(2xl) mt(2xl) text(center)">
       <div class="vbox gap(xs)">
-        <div class="text(2xl) bold c(primary)">{durationVariants.length}</div>
-        <div class="text(sm) c(gray-500)">Duration Steps</div>
+        <div class="font(2xl) bold c(primary)">{durationVariants.length}</div>
+        <div class="font(sm) c(gray-500)">Duration Steps</div>
       </div>
       <div class="vbox gap(xs)">
-        <div class="text(2xl) bold c(primary-600)">{easeVariants.length}</div>
-        <div class="text(sm) c(gray-500)">Easing Curves</div>
+        <div class="font(2xl) bold c(primary-600)">{easeVariants.length}</div>
+        <div class="font(sm) c(gray-500)">Easing Curves</div>
       </div>
       <div class="vbox gap(xs)">
-        <div class="text(2xl) bold c(primary-500)">∞</div>
-        <div class="text(sm) c(gray-500)">Combinations</div>
+        <div class="font(2xl) bold c(primary-500)">∞</div>
+        <div class="font(sm) c(gray-500)">Combinations</div>
       </div>
     </div>
   </div>
@@ -104,7 +104,7 @@
             <!-- Copy indicator -->
             <div class="absolute top(md) right(md) opacity(0) group-hover:opacity(100) transition-all duration-300">
               {#if copiedCode === `duration(${key})`}
-                <div class="px(sm) py(xs) r(full) bg(primary-100) c(primary-700) text(xs) bold">
+                <div class="px(sm) py(xs) r(full) bg(primary-100) c(primary-700) font(xs) bold">
                   ✓ Copied!
                 </div>
               {:else}
@@ -118,22 +118,22 @@
               <!-- Meta info -->
               <div class="min-w(15xl)">
                 <div class="hbox(middle) gap(md) mb(sm)">
-                  <div class="px(md) py(sm) r(full) bg(to-r/primary..primary-700) text(white) text(xs) bold uppercase tracking(wide)">
+                  <div class="px(md) py(sm) r(full) bg(to-r/primary..primary-700) text(white) font(xs) bold uppercase tracking(wide)">
                     timing
                   </div>
-                  <code class="text(sm) px(md) py(sm) r(lg) bg(neutral-900) c(white) font(mono) group-hover:bg(primary) transition">
+                  <code class="font(sm) px(md) py(sm) r(lg) bg(neutral-900) c(white) font(mono) group-hover:bg(primary) transition">
                     duration({key})
                   </code>
                 </div>
-                <div class="text(xs) c(gray-500) font(mono) mb(sm)">{value}</div>
-                <div class="text(sm) c(gray-700)">{usage}</div>
+                <div class="font(xs) c(gray-500) font(mono) mb(sm)">{value}</div>
+                <div class="font(sm) c(gray-700)">{usage}</div>
               </div>
               
               <!-- Animation demo -->
               <div class="flex(1) relative h(4xl) bg(primary-50) r(xl) b(1/primary-200) overflow(hidden)">
                 <div class="absolute left(md) top(50%) translate-y(-50%) w(2xl) h(2xl) bg(to-br/primary..primary-600) r(lg) shadow(lg) 
                            group-hover:translate-x(calc(100vw - 400px)) transition-transform duration({key}) ease(out)"></div>
-                <div class="absolute right(md) top(50%) translate-y(-50%) text(xs) c(primary) font(mono)">
+                <div class="absolute right(md) top(50%) translate-y(-50%) font(xs) c(primary) font(mono)">
                   {key}
                 </div>
               </div>
@@ -167,7 +167,7 @@
             <!-- Copy indicator -->
             <div class="absolute top(md) right(md) opacity(0) group-hover:opacity(100) transition-all duration-300">
               {#if copiedCode === `ease(${key})`}
-                <div class="px(sm) py(xs) r(full) bg(primary-100) c(primary-700) text(xs) bold">
+                <div class="px(sm) py(xs) r(full) bg(primary-100) c(primary-700) font(xs) bold">
                   ✓ Copied!
                 </div>
               {:else}
@@ -181,14 +181,14 @@
               <!-- Header -->
               <div class="hbox(between/middle)">
                 <div class="hbox(middle) gap(md)">
-                  <div class="px(md) py(sm) r(full) bg(to-r/blue-600..indigo-600) text(white) text(xs) bold uppercase tracking(wide)">
+                  <div class="px(md) py(sm) r(full) bg(to-r/blue-600..indigo-600) text(white) font(xs) bold uppercase tracking(wide)">
                     curve
                   </div>
-                  <code class="text(sm) px(md) py(sm) r(lg) bg(gray-900) c(white) font(mono) group-hover:bg(blue-600) transition">
+                  <code class="font(sm) px(md) py(sm) r(lg) bg(gray-900) c(white) font(mono) group-hover:bg(blue-600) transition">
                     ease({key})
                   </code>
                 </div>
-                <div class="text(xs) c(gray-400) uppercase tracking(wide)">Curve {index + 1}</div>
+                <div class="font(xs) c(gray-400) uppercase tracking(wide)">Curve {index + 1}</div>
               </div>
               
               <!-- Curve visualization -->
@@ -205,14 +205,14 @@
                 
                 <!-- Curve info -->
                 <div class="absolute bottom(md) right(md)">
-                  <div class="text(xs) c(blue-600) font(mono) bg(white.8) px(sm) py(xs) r(md)">{value}</div>
+                  <div class="font(xs) c(blue-600) font(mono) bg(white.8) px(sm) py(xs) r(md)">{value}</div>
                 </div>
               </div>
               
               <!-- Usage info -->
               <div class="pt(lg) border-t(1px/gray-200)">
-                <div class="text(xs) c(gray-500) uppercase tracking(wide) mb(xs)">Best for</div>
-                <div class="text(sm) c(gray-700)">{usage}</div>
+                <div class="font(xs) c(gray-500) uppercase tracking(wide) mb(xs)">Best for</div>
+                <div class="font(sm) c(gray-700)">{usage}</div>
               </div>
             </div>
           </div>

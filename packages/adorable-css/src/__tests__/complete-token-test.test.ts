@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { clearTokenRegistry, generateUsedTokensCSS, getUsedTokens } from '../02-design_tokens/tokenRegistry';
-import { generateCSS, generateCSSFromAdorableCSS } from '../01-core/generators/generator';
+import { generateCSS, generateClass } from '../07-generator/generator';
 
 describe('Complete Token Generation Test', () => {
   beforeEach(() => {
@@ -17,7 +17,7 @@ describe('Complete Token Generation Test', () => {
     ];
     
     classes.forEach(className => {
-      const css = generateCSSFromAdorableCSS(className);
+      const css = generateClass(className);
       console.log(`${className} -> CSS: ${css}`);
     });
     
@@ -80,7 +80,7 @@ describe('Complete Token Generation Test', () => {
 
   it('should show what the display component actually generates', () => {
     // Import and test the actual display component
-    import('../04-components/primitives/typography/display').then(({ displayString }) => {
+    import('../05-components/primitives/typography/display').then(({ displayString }) => {
       const result = displayString('2xl');
       console.log('display(2xl) actual result:', result);
       

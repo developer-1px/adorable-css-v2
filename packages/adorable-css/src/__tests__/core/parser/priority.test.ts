@@ -1,11 +1,11 @@
 import { describe, it, expect } from 'vitest';
-import { generateCSSFromAdorableCSS } from './generator';
+import { generateClass } from './generator';
 
 describe('CSS Priority System', () => {
   it('should allow c (utility) to override card (component) color', () => {
     // Test color override
-    const cCSS = generateCSSFromAdorableCSS('c(red)');
-    const cardCSS = generateCSSFromAdorableCSS('card(gradient)');
+    const cCSS = generateClass('c(red)');
+    const cardCSS = generateClass('card(gradient)');
     
     // c should have higher specificity selector
     expect(cCSS).toContain('.c\\(red\\).c\\(red\\)');
@@ -22,8 +22,8 @@ describe('CSS Priority System', () => {
   it('should demonstrate priority ordering in multi-class scenarios', () => {
     // In real usage, both classes would be applied to same element
     // CSS cascade should make c(red) win due to higher specificity
-    const cCSS = generateCSSFromAdorableCSS('c(blue)');
-    const cardCSS = generateCSSFromAdorableCSS('card(gradient)');
+    const cCSS = generateClass('c(blue)');
+    const cardCSS = generateClass('card(gradient)');
     
     // Verify that c has boosted specificity
     expect(cCSS).toContain('.c\\(blue\\).c\\(blue\\)');
@@ -36,12 +36,12 @@ describe('CSS Priority System', () => {
   it('should sort CSS 03-rules by priority within single class', () => {
     // This would be a complex class with multiple 03-rules of different priorities
     // For now, test individual classes to verify the system works
-    const utilityCSS = generateCSSFromAdorableCSS('c(green)');
+    const utilityCSS = generateClass('c(green)');
     expect(utilityCSS).toContain('.c\\(green\\).c\\(green\\)'); // Utility gets boosted specificity
   });
 
   it('should handle component 03-rules with normal specificity', () => {
-    const componentCSS = generateCSSFromAdorableCSS('card');
+    const componentCSS = generateClass('card');
     expect(componentCSS).toContain('.card{');
     expect(componentCSS).not.toContain('.card.card{'); // No specificity boost for 04-components
   });
@@ -52,8 +52,8 @@ describe('CSS Priority System', () => {
     // 1. Higher specificity (.c\(red\).c\(red\) vs .card\(gradient\))
     // 2. Later in cascade (if same specificity)
     
-    const cardCSS = generateCSSFromAdorableCSS('card(gradient)');
-    const cCSS = generateCSSFromAdorableCSS('c(red)');
+    const cardCSS = generateClass('card(gradient)');
+    const cCSS = generateClass('c(red)');
     
     // Demonstrate the specificity difference
     console.log('CSS Cascade Example:');

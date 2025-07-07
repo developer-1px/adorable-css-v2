@@ -3,7 +3,7 @@ import {
   italic, overline, underline, lineThrough, strike, del,
   sansSerif, serif, monospace, cursive, fantasy, systemUi,
   smallCaps, lowercase, uppercase, capitalize 
-} from '../../../03-rules/text/typography-utils';
+} from '../../../04-rules/03-rules_deprecated/text/typography-utils';
 
 describe('typography utilities', () => {
   describe('font-style', () => {

@@ -50,17 +50,17 @@
       </h1>
       
       <!-- Secondary Text - Text Hierarchy -->
-      <p class="text(2xl) c(gray-600) max-w(3xl) leading(relaxed) font(light)">
+      <p class="font(2xl) c(gray-600) max-w(3xl) leading(relaxed) font(light)">
         Build consistent, scalable interfaces using only typography, color, and spacing foundations
       </p>
       
       <!-- CTA Section - Using spacing and text hierarchy -->
       <div class="vbox gap(3xl)">
-        <div class="px(4xl) py(2xl) bg(black) c(white) font(black) tracking(wider) uppercase text(lg)">
+        <div class="px(4xl) py(2xl) bg(black) c(white) font(black) tracking(wider) uppercase fonr(lg)">
           GET STARTED
         </div>
         
-        <div class="text(md) c(gray-500) font(medium) tracking(wide) uppercase">
+        <div class="font(md) c(gray-500) font(medium) tracking(wide) uppercase">
           No custom components needed
         </div>
       </div>
@@ -86,7 +86,7 @@
           <div class="vbox gap(4xl) {index !== features.length - 1 ? 'pb(8xl)' : ''}">
             <!-- Status - Clean Typography -->
             <div class="text(center)">
-              <div class="text(sm) font(black) uppercase tracking(widest) c(gray-400)">
+              <div class="font(sm) font(black) uppercase tracking(widest) c(gray-400)">
                 {String(index + 1).padStart(2, '0')} — {feature.status.toUpperCase()}
               </div>
             </div>
@@ -113,19 +113,19 @@
       <div class="grid(2) gap(8xl)">
         <div class="text(center) vbox gap(3xl)">
           <div class="display(5xl) font(black) c(black) leading(none)">15+</div>
-          <div class="text(lg) c(gray-500) uppercase tracking(widest) font(medium)">FONT SIZES</div>
+          <div class="fonr(lg) c(gray-500) uppercase tracking(widest) font(medium)">FONT SIZES</div>
         </div>
         <div class="text(center) vbox gap(3xl)">
           <div class="display(5xl) font(black) c(black) leading(none)">9</div>
-          <div class="text(lg) c(gray-500) uppercase tracking(widest) font(medium)">FONT WEIGHTS</div>
+          <div class="fonr(lg) c(gray-500) uppercase tracking(widest) font(medium)">FONT WEIGHTS</div>
         </div>
         <div class="text(center) vbox gap(3xl)">
           <div class="display(5xl) font(black) c(black) leading(none)">13+</div>
-          <div class="text(lg) c(gray-500) uppercase tracking(widest) font(medium)">SPACING UNITS</div>
+          <div class="fonr(lg) c(gray-500) uppercase tracking(widest) font(medium)">SPACING UNITS</div>
         </div>
         <div class="text(center) vbox gap(3xl)">
           <div class="display(5xl) font(black) c(black) leading(none)">4</div>
-          <div class="text(lg) c(gray-500) uppercase tracking(widest) font(medium)">COLOR LEVELS</div>
+          <div class="fonr(lg) c(gray-500) uppercase tracking(widest) font(medium)">COLOR LEVELS</div>
         </div>
       </div>
     </div>
@@ -146,7 +146,7 @@
         {#each testimonials as testimonial, index}
           <div class="vbox gap(4xl) text(center)">
             <!-- Quote Number -->
-            <div class="text(sm) font(black) uppercase tracking(widest) c(gray-600)">
+            <div class="font(sm) font(black) uppercase tracking(widest) c(gray-600)">
               {String(index + 1).padStart(2, '0')}
             </div>
             
@@ -157,10 +157,10 @@
             
             <!-- Author Info - Text Hierarchy + Spacing -->
             <div class="vbox gap(md)">
-              <div class="text(lg) c(white) font(medium) tracking(wide) uppercase">
+              <div class="fonr(lg) c(white) font(medium) tracking(wide) uppercase">
                 {testimonial.author}
               </div>
-              <div class="text(md) c(gray-400) font(light)">
+              <div class="font(md) c(gray-400) font(light)">
                 {testimonial.role} at {testimonial.company}
               </div>
             </div>
@@ -185,12 +185,12 @@
       </div>
       
       <!-- Single CTA -->
-      <div class="px(5xl) py(3xl) bg(black) c(white) font(black) tracking(widest) uppercase text(lg)">
+      <div class="px(5xl) py(3xl) bg(black) c(white) font(black) tracking(widest) uppercase fonr(lg)">
         DOWNLOAD FOUNDATION
       </div>
       
       <!-- Secondary Action -->
-      <div class="text(md) c(gray-400) font(medium) tracking(wide) uppercase">
+      <div class="font(md) c(gray-400) font(medium) tracking(wide) uppercase">
         View Documentation →
       </div>
     </div>
@@ -202,28 +202,28 @@
       <!-- Links -->
       <div class="vbox gap(4xl)">
         <div class="hbox(center) gap(6xl)">
-          <div class="text(md) c(gray-400) font(medium) tracking(wide) uppercase hover:c(black)">
+          <div class="font(md) c(gray-400) font(medium) tracking(wide) uppercase hover:c(black)">
             Typography
           </div>
-          <div class="text(md) c(gray-400) font(medium) tracking(wide) uppercase hover:c(black)">
+          <div class="font(md) c(gray-400) font(medium) tracking(wide) uppercase hover:c(black)">
             Colors
           </div>
-          <div class="text(md) c(gray-400) font(medium) tracking(wide) uppercase hover:c(black)">
+          <div class="font(md) c(gray-400) font(medium) tracking(wide) uppercase hover:c(black)">
             Spacing
           </div>
-          <div class="text(md) c(gray-400) font(medium) tracking(wide) uppercase hover:c(black)">
+          <div class="font(md) c(gray-400) font(medium) tracking(wide) uppercase hover:c(black)">
             Elevation
           </div>
         </div>
         
         <div class="hbox(center) gap(6xl)">
-          <div class="text(md) c(gray-400) font(medium) tracking(wide) uppercase hover:c(black)">
+          <div class="font(md) c(gray-400) font(medium) tracking(wide) uppercase hover:c(black)">
             Documentation
           </div>
-          <div class="text(md) c(gray-400) font(medium) tracking(wide) uppercase hover:c(black)">
+          <div class="font(md) c(gray-400) font(medium) tracking(wide) uppercase hover:c(black)">
             Examples
           </div>
-          <div class="text(md) c(gray-400) font(medium) tracking(wide) uppercase hover:c(black)">
+          <div class="font(md) c(gray-400) font(medium) tracking(wide) uppercase hover:c(black)">
             GitHub
           </div>
         </div>
@@ -231,10 +231,10 @@
       
       <!-- Copyright -->
       <div class="vbox gap(2xl)">
-        <div class="text(xs) c(gray-400) font(medium) tracking(widest) uppercase">
+        <div class="font(xs) c(gray-400) font(medium) tracking(widest) uppercase">
           Built with Foundation Only
         </div>
-        <div class="text(xs) c(gray-300) font(light)">
+        <div class="font(xs) c(gray-300) font(light)">
           © 2024 Foundation Demo
         </div>
       </div>

@@ -28,7 +28,7 @@
       <h2 class="display(lg) {gradient ? `c(to-r/${iconColor}..${iconColor.replace('indigo', 'purple')})` : 'c(gray-900)'}">{title}</h2>
     </div>
     
-    <p class="text(lg) c(gray-600) max-w(2xl) mx(auto) {gradient ? 'leading(relaxed)' : ''}">
+    <p class="fonr(lg) c(gray-600) max-w(2xl) mx(auto) {gradient ? 'leading(relaxed)' : ''}">
       {description}
     </p>
     
@@ -37,8 +37,8 @@
       <div class="hbox(pack) gap(2xl) mt(2xl) text(center)">
         {#each stats as stat}
           <div class="vbox gap(xs)">
-            <div class="text(2xl) bold c({stat.color || iconColor})">{stat.value}</div>
-            <div class="text(sm) c(gray-500)">{stat.label}</div>
+            <div class="font(2xl) bold c({stat.color || iconColor})">{stat.value}</div>
+            <div class="font(sm) c(gray-500)">{stat.label}</div>
           </div>
         {/each}
       </div>

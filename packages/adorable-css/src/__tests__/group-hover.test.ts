@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest';
-import { generateCSSFromAdorableCSS } from '../01-core/generators/generator';
-import { StateSelector, isStateClass } from '../05-plugins/responsive/responsive-decorator';
+import { generateClass } from '../07-generator/generator';
+import { StateSelector, isStateClass } from '../06-plugins/responsive/responsive-decorator';
 
 describe('Group Hover Feature', () => {
   test('should recognize state patterns', () => {
@@ -24,7 +24,7 @@ describe('Group Hover Feature', () => {
   });
   
   test('should generate base CSS first', () => {
-    const baseCSS = generateCSSFromAdorableCSS('c(red-500)');
+    const baseCSS = generateClass('c(red-500)');
     console.log('Base CSS for c(red-500):', baseCSS);
     
     expect(baseCSS).not.toBe('');
@@ -32,7 +32,7 @@ describe('Group Hover Feature', () => {
   });
 
   test('should generate group-hover CSS correctly', () => {
-    const css = generateCSSFromAdorableCSS('group-hover:c(red-500)');
+    const css = generateClass('group-hover:c(red-500)');
     console.log('Generated group-hover CSS:', css);
     
     expect(css).toContain('.group:hover');
@@ -40,7 +40,7 @@ describe('Group Hover Feature', () => {
   });
 
   test('should generate regular hover CSS correctly', () => {
-    const css = generateCSSFromAdorableCSS('hover:c(blue-500)');
+    const css = generateClass('hover:c(blue-500)');
     console.log('Generated hover CSS:', css);
     
     expect(css).toContain(':hover');
@@ -48,7 +48,7 @@ describe('Group Hover Feature', () => {
   });
 
   test('should handle group-focus CSS correctly', () => {
-    const css = generateCSSFromAdorableCSS('group-focus:bg(gray-100)');
+    const css = generateClass('group-focus:bg(gray-100)');
     console.log('Generated group-focus CSS:', css);
     
     expect(css).toContain('.group:focus');

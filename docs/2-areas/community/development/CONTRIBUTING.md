@@ -176,7 +176,7 @@ git push origin feat/your-feature-name
 // src/__tests__/rules/spacing/padding.test.ts
 describe('padding rule', () => {
   it('should generate correct CSS', () => {
-    const css = generateCSSFromAdorableCSS('p(20)');
+    const css = generateClass('p(20)');
     expect(css).toBe('.p\\(20\\) { padding: 20px; }');
   });
 });

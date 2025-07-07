@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { parseAdorableCSS, generateCSSFromAdorableCSS } from 'adorable-css';
+  import { parseAdorableCSS, generateClass } from 'adorable-css';
   import CodeHighlighter from '../components/CodeHighlighter.svelte';
   import Code from '../components/Code.svelte';
   import { 
@@ -21,7 +21,7 @@
     try {
       error = '';
       result = parseAdorableCSS(input);
-      css = generateCSSFromAdorableCSS(input);
+      css = generateClass(input);
     } catch (e: any) {
       error = e.message;
       result = null;

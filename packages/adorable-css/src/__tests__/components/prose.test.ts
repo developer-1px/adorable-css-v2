@@ -1,6 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { prose } from '../../04-components/patterns/prose';
-import type { CSSRule } from '../../03-rules/types';
+import { prose } from '../../05-components/patterns/prose';
+// Type definitions
+type CSSRule = Record<string, string | Record<string, any>>;
+export type RuleHandler = (args: string) => CSSRule;
+export type KeywordRuleHandler = () => CSSRule;
 
 describe('prose component with defineComponent', () => {
   it('should return base classes and CSS rule for default variant', () => {

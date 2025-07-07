@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Copy, Check, ChevronDown, ChevronRight } from 'lucide-svelte';
-  import { generateCSS, generateCSSFromAdorableCSS, RULE_GROUPS } from 'adorable-css';
+  import { generateCSS, generateClass } from 'adorable-css';
+  import { getAllRule2Handlers, initializeRule2Handlers } from 'adorable-css/04-rules';
   import Badge from '$lib/components/ui/Badge.svelte';
   import Card from '$lib/components/ui/Card.svelte';
   import Button from '$lib/components/ui/Button.svelte';
@@ -11,58 +12,51 @@
   let liveError = '';
   let expandedGroups: Record<string, boolean> = {};
   
-  // @layer 순서대로 그룹 재구성
-  const LAYER_GROUPS = [
+  // Initialize Rule2 handlers
+  initializeRule2Handlers();
+  
+  // Rule2 groups organized by category
+  const RULE2_GROUPS = [
     {
-      layer: 'component',
-      name: 'Component Layer',
-      description: 'Pre-built UI 04-components and patterns (Priority: 100)',
-      groups: []
+      category: 'Layout',
+      description: 'Figma-native spacing, sizing and positioning',
+      rules: ['p', 'pt', 'pr', 'pb', 'pl', 'px', 'py', 'gap', 'gap-x', 'gap-y', 'w', 'h', 'size', 'min-w', 'max-w', 'min-h', 'max-h', 'hbox', 'vbox', 'pack', 'wrap']
     },
     {
-      layer: 'layout', 
-      name: 'Layout Layer',
-      description: 'Layout, spacing, and sizing utilities (Priority: 200)',
-      groups: []
+      category: 'Typography', 
+      description: 'Figma-native font and text styling utilities',
+      rules: ['font', 'bold', 'italic', 'uppercase', 'lowercase', 'capitalize', 'underline', 'overline', 'strike', 'text', 'truncate']
     },
     {
-      layer: 'utility',
-      name: 'Utility Layer', 
-      description: 'Visual styling and typography utilities (Priority: 300)',
-      groups: []
+      category: 'Colors',
+      description: 'Text and background color utilities', 
+      rules: ['c', 'bg']
     },
     {
-      layer: 'state',
-      name: 'State Layer',
-      description: 'Interactive states and pseudo-classes (Priority: 400)',
-      groups: []
+      category: 'Visual',
+      description: 'Border, radius, opacity and visual effects',
+      rules: ['b', 'r', 'border', 'bt', 'br', 'bb', 'bl', 'opacity', 'blur', 'brightness', 'contrast', 'saturate', 'sepia', 'backdrop']
+    },
+    {
+      category: 'CSS Advanced',
+      description: 'Essential CSS features not in Figma but necessary for web development',
+      rules: ['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my', 'wrap', 'pre', 'pre-wrap', 'pre-line']
     }
   ];
   
-  // RULE_GROUPS를 priority 기준으로 LAYER_GROUPS에 분배
-  function organizeByLayer() {
-    Object.entries(RULE_GROUPS).forEach(([key, group]) => {
-      const priority = group.priority;
-      let targetLayer;
-      
-      if (priority === 100) {
-        targetLayer = LAYER_GROUPS.find(l => l.layer === 'component');
-      } else if (priority === 200) {
-        targetLayer = LAYER_GROUPS.find(l => l.layer === 'layout');
-      } else if (priority === 300) {
-        targetLayer = LAYER_GROUPS.find(l => l.layer === 'utility');
-      } else if (priority === 400) {
-        targetLayer = LAYER_GROUPS.find(l => l.layer === 'state');
-      }
-      
-      if (targetLayer) {
-        targetLayer.groups.push({ key, ...group });
-      }
+  // Get all Rule2 handlers
+  function getAllRule2Rules() {
+    const handlers = getAllRule2Handlers();
+    const rulesByCategory: Record<string, string[]> = {};
+    
+    RULE2_GROUPS.forEach(group => {
+      rulesByCategory[group.category] = group.rules.filter(rule => handlers.has(rule));
     });
+    
+    return rulesByCategory;
   }
   
-  // 초기화
-  organizeByLayer();
+  $: rule2Rules = getAllRule2Rules();
   
   function copyToClipboard(text: string) {
     navigator.clipboard.writeText(text);
@@ -99,18 +93,13 @@
     }
   }
   
-  // Count total 03-rules
-  function countRules() {
-    let total = 0;
-    Object.values(RULE_GROUPS).forEach(group => {
-      Object.values(group.subgroups).forEach(subgroup => {
-        total += Object.keys(subgroup.rules).length;
-      });
-    });
-    return total;
+  // Count total Rule2 rules
+  function countRule2Rules() {
+    const handlers = getAllRule2Handlers();
+    return handlers.size;
   }
   
-  $: totalRules = countRules();
+  $: totalRules = countRule2Rules();
 </script>
 
 <div class="min-h(100vh) bg(white)">
@@ -121,31 +110,27 @@
         <!-- Hero Content -->
         <div class="vbox(center) gap(lg) max-w(4xl)">
           <Badge variant="outline">
-            <span class="c(white)">{totalRules} Rules Available</span>
+            <span class="c(white)">{totalRules} Rule2 Performance Rules</span>
           </Badge>
           <h1 class="display(lg) c(white)">
-            AdorableCSS Rule Reference
+            AdorableCSS Rule2 Reference
           </h1>
           <p class="body(base) c(white.8) max-w(4xl)">
-            Complete API reference for all AdorableCSS rules. Organized by CSS @layer cascade for predictable styling without specificity battles.
+            Complete reference for AdorableCSS Rule2 performance-optimized handlers. These rules process AST directly for maximum performance.
           </p>
           
-          <!-- @layer Visual -->
+          <!-- Rule2 Performance Visual -->
           <div class="hbox(center) gap(md) flex-wrap">
             <Badge size="lg">
-              <span class="c(white)">@component</span>
+              <span class="c(white)">AST Direct</span>
             </Badge>
             <span class="c(white.6)">→</span>
             <Badge size="lg">
-              <span class="c(white)">@layout</span>
+              <span class="c(white)">No Conversion</span>
             </Badge>
             <span class="c(white.6)">→</span>
             <Badge size="lg">
-              <span class="c(white)">@utility</span>
-            </Badge>
-            <span class="c(white.6)">→</span>
-            <Badge size="lg">
-              <span class="c(white)">@state</span>
+              <span class="c(white)">CSS String</span>
             </Badge>
           </div>
         </div>
@@ -204,269 +189,359 @@
     <!-- Left Navigation -->
     <nav class="hidden lg:block fixed top(60) left(0) w(280) h(calc(100vh-60px)) bg(white) scroll(y) overscroll-behavior(contain) z(40)">
       <div class="p(xl) pb(lg)">
-        <h2 class="title(md) c(mute-900)">Quick Navigation</h2>
-        <p class="caption c(mute-600) pt(xs)">Jump to any rule category</p>
+        <h2 class="title(md) c(mute-900)">Rule2 Navigation</h2>
+        <p class="caption c(mute-600) pt(xs)">Performance-optimized rules</p>
       </div>
       
       <div class="p(lg) vbox gap(xl)">
-        {#each LAYER_GROUPS as layerGroup}
-          {#if layerGroup.groups.length > 0}
-            <div class="vbox gap(sm)">
-              <div class="px(md) py(sm) bg(mute-100) r(md)">
-                <h3 class="caption(xs) c(mute-700) uppercase letter-spacing(widest) bold">@{layerGroup.layer}</h3>
-              </div>
-              
-              <div class="vbox gap(xs)">
-                {#each layerGroup.groups as group}
-                  <div>
-                    <button
-                      class="w(full) hbox(middle) gap(sm) px(md) py(sm) r(md) cursor(pointer) hover:bg(mute-50) transition-colors"
-                      on:click={() => toggleGroup(group.name)}
-                    >
-                      {#if expandedGroups[group.name]}
-                        <ChevronDown size="16" class="c(mute-500)" />
-                      {:else}
-                        <ChevronRight size="16" class="c(mute-500)" />
-                      {/if}
-                      <h4 class="body(sm) c(mute-800) flex(1) text(left)">
-                        {group.name}
-                      </h4>
-                    </button>
-                    
-                    {#if expandedGroups[group.name]}
-                      <ul class="vbox gap(xs) pl(xl) pt(xs)">
-                        {#each Object.entries(group.subgroups) as [subgroupKey, subgroup]}
-                          <li>
-                            <a 
-                              href="#{layerGroup.layer}-{group.name}-{subgroup.name}"
-                              class="block py(xs) px(md) r(md) transition-all
-                                     c(mute-600) hover:bg(mute-50) hover:c(mute-900)"
-                            >
-                              <div class="hbox(middle) gap(sm)">
-                                <span class="body(sm) flex(1)">{subgroup.name}</span>
-                                <span class="caption(xs) c(mute-500)">{Object.keys(subgroup.rules).length}</span>
-                              </div>
-                            </a>
-                          </li>
-                        {/each}
-                      </ul>
-                    {/if}
-                  </div>
-                {/each}
-              </div>
+        {#each RULE2_GROUPS as group}
+          <div class="vbox gap(sm)">
+            <div class="px(md) py(sm) bg(mute-100) r(md)">
+              <h3 class="caption(xs) c(mute-700) uppercase letter-spacing(widest) bold">{group.category}</h3>
             </div>
-          {/if}
+            
+            <div class="vbox gap(xs)">
+              <a 
+                href="#{group.category.toLowerCase()}"
+                class="block py(xs) px(md) r(md) transition-all
+                       c(mute-600) hover:bg(mute-50) hover:c(mute-900)"
+              >
+                <div class="hbox(middle) gap(sm)">
+                  <span class="body(sm) flex(1)">{group.category}</span>
+                  <span class="caption(xs) c(mute-500)">{rule2Rules[group.category]?.length || 0}</span>
+                </div>
+              </a>
+            </div>
+          </div>
         {/each}
       </div>
     </nav>
     
     <!-- Main Content -->
     <main class="ml(0) lg:ml(280) min-h(100vh) bg(white)">
-      <div class="px(xl) lg:px(3xl) py(3xl) max-w(4xl)">
+      <div class="px(xl) lg:px(3xl) py(3xl) max-w(6xl)">
 
-      <!-- Rules by Layer -->
+      <!-- Rule2 Categories -->
       <div class="vbox gap(8xl)">
-        {#each LAYER_GROUPS as layerGroup}
-          {#if layerGroup.groups.length > 0}
-            <section>
-              <!-- Layer Header -->
-              <div class="vbox gap(2xl)">
-                <div class="vbox(center) gap(lg)">
-                  <Badge size="lg" variant="secondary">
-                    @layer {layerGroup.layer}
-                  </Badge>
-                  <h2 class="heading(h1) c(mute-900)">{layerGroup.name}</h2>
-                  <p class="body(xl) c(mute-600) max-w(4xl)">
-                    {layerGroup.description}
-                  </p>
-                </div>
-                
-                <!-- Group Cards for this Layer -->
-                <div class="grid(1) md:grid(2) lg:grid(3) gap(xl)">
-                  {#each layerGroup.groups as group}
-                    <Card variant="interactive">
-                      <div class="p(2xl)">
-                        <div class="vbox gap(xl)">
-                          <div class="vbox gap(sm)">
-                            <h3 class="heading(h3) c(mute-900)">{group.name}</h3>
-                            <p class="body(sm) c(mute-600)">
-                              {group.metadata?.description || `${group.name} utilities`}
-                            </p>
-                          </div>
-                          
-                          <!-- Subgroup Pills -->
-                          <div class="hbox gap(sm) flex-wrap">
-                            {#each Object.entries(group.subgroups).slice(0, 4) as [key, subgroup]}
-                              <Badge variant="outline" size="sm">
-                                {subgroup.name}
-                              </Badge>
-                            {/each}
-                            {#if Object.keys(group.subgroups).length > 4}
-                              <Badge variant="outline" size="sm">
-                                +{Object.keys(group.subgroups).length - 4} more
-                              </Badge>
-                            {/if}
-                          </div>
-                          
-                          <!-- Rule Count -->
-                          <div class="hbox(middle) gap(sm)">
-                            <div class="w(8) h(8) r(full) bg(mute-200)"></div>
-                            <p class="caption c(mute-700)">
-                              {Object.values(group.subgroups).reduce((sum, sg) => sum + Object.keys(sg.rules).length, 0)} rules
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    </Card>
-                  {/each}
+        {#each RULE2_GROUPS as group}
+          <section id="{group.category.toLowerCase()}">
+            <!-- Category Header -->
+            <div class="vbox gap(2xl)">
+              <div class="vbox(center) gap(lg)">
+                <Badge size="lg" variant="secondary">
+                  Rule2 Performance
+                </Badge>
+                <h2 class="heading(h1) c(mute-900)">{group.category}</h2>
+                <p class="body(xl) c(mute-600) max-w(4xl)">
+                  {group.description}
+                </p>
+              </div>
+              
+              <!-- Performance Info Card -->
+              <div class="p(2xl) bg(primary.05) r(xl)">
+                <div class="hbox(middle) gap(2xl)">
+                  <div class="vbox gap(sm)">
+                    <h3 class="heading(h3) c(primary-900)">Performance Optimized</h3>
+                    <p class="body(sm) c(primary-700)">
+                      Rule2 handlers process AST directly without string conversions for maximum performance.
+                    </p>
+                  </div>
+                  <div class="vbox gap(xs)">
+                    <div class="hbox gap(lg)">
+                      <Badge size="sm">AST Direct</Badge>
+                      <Badge size="sm">No Object Conversion</Badge>
+                      <Badge size="sm">CSS String Output</Badge>
+                    </div>
+                  </div>
                 </div>
               </div>
               
-              <!-- Detailed Rules Tables -->
-              <div class="vbox gap(4xl) pt(4xl)">
-                {#each layerGroup.groups as group}
-                  <div class="vbox gap(3xl)">
-                    <!-- Group Section Header -->
-                    <div class="vbox gap(lg) pb(xl)">
-                      <h3 class="heading(h2) c(mute-900)">{group.name}</h3>
-                      <p class="body(lg) c(mute-600)">
-                        {group.metadata?.description || `${group.name} utilities`}
-                      </p>
+              <!-- Special text() rule examples -->
+              {#if group.category === 'Typography'}
+                <div class="p(2xl) bg(accent.05) r(xl)">
+                  <div class="vbox gap(xl)">
+                    <h3 class="heading(h3) c(accent-900)">text() Rule Combinations</h3>
+                    <p class="body(sm) c(accent-700)">
+                      The text() rule supports multiple combinations for flexible text styling and layout.
+                    </p>
+                    
+                    <div class="grid(1) md:grid(2) gap(lg)">
+                      <div class="vbox gap(md)">
+                        <h4 class="label(sm) c(accent-800)">Alignment</h4>
+                        <div class="vbox gap(xs)">
+                          <code class="mono caption c(accent-700)">text(left)</code>
+                          <code class="mono caption c(accent-700)">text(center)</code>
+                          <code class="mono caption c(accent-700)">text(right)</code>
+                          <code class="mono caption c(accent-700)">text(justify)</code>
+                        </div>
+                      </div>
+                      
+                      <div class="vbox gap(md)">
+                        <h4 class="label(sm) c(accent-800)">Transform & Decoration</h4>
+                        <div class="vbox gap(xs)">
+                          <code class="mono caption c(accent-700)">text(uppercase)</code>
+                          <code class="mono caption c(accent-700)">text(lowercase)</code>
+                          <code class="mono caption c(accent-700)">text(capitalize)</code>
+                          <code class="mono caption c(accent-700)">text(underline)</code>
+                        </div>
+                      </div>
+                      
+                      <div class="vbox gap(md)">
+                        <h4 class="label(sm) c(accent-800)">White Space</h4>
+                        <div class="vbox gap(xs)">
+                          <code class="mono caption c(accent-700)">text(nowrap)</code>
+                          <code class="mono caption c(accent-700)">text(wrap)</code>
+                          <code class="mono caption c(accent-700)">text(pre)</code>
+                          <code class="mono caption c(accent-700)">text(pre-wrap)</code>
+                        </div>
+                      </div>
+                      
+                      <div class="vbox gap(md)">
+                        <h4 class="label(sm) c(accent-800)">Layout (Figma-like)</h4>
+                        <div class="vbox gap(xs)">
+                          <code class="mono caption c(accent-700)">text(top)</code>
+                          <code class="mono caption c(accent-700)">text(middle)</code>
+                          <code class="mono caption c(accent-700)">text(bottom)</code>
+                          <code class="mono caption c(accent-700)">text(pack)</code>
+                        </div>
+                      </div>
                     </div>
                     
-                    <!-- Subgroups -->
-                    <div class="vbox gap(3xl)">
-                      {#each Object.entries(group.subgroups) as [subgroupKey, subgroup]}
-                        <div id="{layerGroup.layer}-{group.name}-{subgroup.name}" class="scroll-mt(100)">
-                          <!-- Subgroup Header -->
-                          <div class="vbox gap(sm)">
-                            <h4 class="heading(h3) c(mute-800)">{subgroup.name}</h4>
-                            <div class="hbox(middle) gap(lg)">
-                              <Badge variant="outline" size="sm">
-                                {Object.keys(subgroup.rules).length} rules
-                              </Badge>
-                              <p class="caption c(mute-600)">
-                                @layer {layerGroup.layer} • Priority {group.priority}
-                              </p>
-                            </div>
-                          </div>
-                  
-                          <!-- Visual Examples for Key Rules -->
-                          {#if subgroup.name === 'Layout' || subgroup.name === 'Colors' || subgroup.name === 'Typography' || subgroup.name === 'Spacing'}
-                            <div class="p(2xl) bg(mute-50) r(xl)">
-                              <div class="vbox gap(xl)">
-                                <h5 class="label(sm) c(mute-700) uppercase letter-spacing(wide)">Visual Examples</h5>
-                                <div class="grid(2) md:grid(3) gap(lg)">
-                                  {#each Object.entries(subgroup.rules).slice(0, 6) as [ruleName, handler]}
-                                    {#if ruleName.includes('primary') || ruleName.includes('lg') || ruleName.includes('center') || ruleName.includes('gap') || ruleName.includes('p(') || ruleName.includes('heading')}
-                                      <div class="card(elevated/sm) p(lg)">
-                                        <div class="vbox gap(md)">
-                                          <code class="mono caption(xs) c(mute-700)">{ruleName}</code>
-                                          <div class="min-h(48) hbox(center) bg(white) r(md) relative">
-                                            <!-- Visual demo based on rule type -->
-                                            {#if ruleName.includes('c(') && ruleName.includes('primary')}
-                                              <div class="{ruleName} body(sm)">Colored text</div>
-                                            {:else if ruleName.includes('bg(') && ruleName.includes('primary')}
-                                              <div class="{ruleName} p(md) r(md) c(white)">Background</div>
-                                            {:else if ruleName.includes('p(') || ruleName.includes('gap(')}
-                                              <div class="{ruleName} bg(mute-100) r(md) hbox">
-                                                <div class="w(24) h(24) bg(mute-300) r(sm)"></div>
-                                                <div class="w(24) h(24) bg(mute-300) r(sm)"></div>
-                                              </div>
-                                            {:else if ruleName.includes('hbox') || ruleName.includes('vbox')}
-                                              <div class="{ruleName} gap(sm) p(md) bg(mute-100) r(md)">
-                                                <div class="w(20) h(20) bg(primary) r(sm)"></div>
-                                                <div class="w(20) h(20) bg(primary) r(sm)"></div>
-                                                <div class="w(20) h(20) bg(primary) r(sm)"></div>
-                                              </div>
-                                            {:else if ruleName.includes('w(') || ruleName.includes('h(')}
-                                              <div class="{ruleName} bg(accent.2) r(md) min-h(24)"></div>
-                                            {:else if ruleName.includes('heading') || ruleName.includes('font')}
-                                              <div class="{ruleName} c(mute-900)">Typography</div>
-                                            {:else}
-                                              <div class="{ruleName} p(sm) bg(mute-100) r(md) min-w(48) min-h(24)"></div>
-                                            {/if}
-                                          </div>
-                                        </div>
-                                      </div>
-                                    {/if}
-                                  {/each}
-                                </div>
-                              </div>
-                            </div>
-                          {/if}
-
-                          <!-- Rules Table -->
-                          <div class="overflow-x(auto) r(xl) bg(white)">
-                            <table class="w(full)">
-                              <thead>
-                                <tr class="bg(mute-50)">
-                                  <th class="text(left) p(lg) label(sm) c(mute-700) w(240)">Rule</th>
-                                  <th class="text(left) p(lg) label(sm) c(mute-700)">CSS Output</th>
-                                  <th class="text(left) p(lg) label(sm) c(mute-700) w(120)">Preview</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                {#each Object.entries(subgroup.rules) as [ruleName, handler], i}
-                                  <tr class="{i % 2 === 0 ? 'bg(white)' : 'bg(mute-50.5)'} 
-                                             hover:bg(primary.05) transition-colors duration(150)">
-                                    <!-- Rule Name -->
-                                    <td class="p(lg)">
-                                      <button
-                                        class="hbox(middle) gap(sm) cursor(pointer) group"
-                                        on:click={() => copyToClipboard(ruleName)}
-                                        title="Click to copy {ruleName}"
-                                      >
-                                        <code class="mono bold c(mute-900) body(sm)">{ruleName}</code>
-                                        {#if copiedRule === ruleName}
-                                          <Check size="16" class="c(success)" />
-                                        {:else}
-                                          <Copy size="14" class="c(mute-400) group-hover:c(mute-600) transition" />
-                                        {/if}
-                                      </button>
-                                    </td>
-                                    
-                                    <!-- CSS Output -->
-                                    <td class="p(lg)">
-                                      <code class="body(sm) font(mono) c(mute-700) block whitespace(pre-wrap)">{generateCSSFromAdorableCSS(ruleName)}</code>
-                                    </td>
-                                    
-                                    <!-- Mini Preview -->
-                                    <td class="p(lg)">
-                                      <div class="w(80) h(32) hbox(center) r(md) bg(mute-50) relative overflow(hidden)">
-                                        {#if ruleName.includes('c(') && (ruleName.includes('primary') || ruleName.includes('error') || ruleName.includes('success'))}
-                                          <div class="{ruleName} body(sm)">Aa</div>
-                                        {:else if ruleName.includes('bg(') && (ruleName.includes('primary') || ruleName.includes('error') || ruleName.includes('success'))}
-                                          <div class="{ruleName} w(full) h(full) r(sm)"></div>
-                                        {:else if ruleName.includes('p(') || ruleName.includes('gap(')}
-                                          <div class="{ruleName} bg(primary.1) r(sm) hbox">
-                                            <div class="w(8) h(8) bg(primary) r(xs)"></div>
-                                            <div class="w(8) h(8) bg(primary) r(xs)"></div>
-                                          </div>
-                                        {:else if ruleName.includes('hbox') || ruleName.includes('vbox')}
-                                          <div class="{ruleName} gap(xs)">
-                                            <div class="w(6) h(6) bg(accent) r(xs)"></div>
-                                            <div class="w(6) h(6) bg(accent) r(xs)"></div>
-                                            <div class="w(6) h(6) bg(accent) r(xs)"></div>
-                                          </div>
-                                        {:else}
-                                          <div class="{ruleName} w(12) h(12) bg(mute-300) r(xs)"></div>
-                                        {/if}
-                                      </div>
-                                    </td>
-                                  </tr>
-                                {/each}
-                              </tbody>
-                            </table>
-                          </div>
-                        </div>
-                      {/each}
+                    <div class="vbox gap(md)">
+                      <h4 class="label(sm) c(accent-800)">Powerful Combinations</h4>
+                      <div class="grid(1) md:grid(2) gap(sm)">
+                        <code class="mono caption c(accent-700) p(sm) bg(white) r(md)">text(center+nowrap)</code>
+                        <code class="mono caption c(accent-700) p(sm) bg(white) r(md)">text(right+uppercase)</code>
+                        <code class="mono caption c(accent-700) p(sm) bg(white) r(md)">text(center+middle)</code>
+                        <code class="mono caption c(accent-700) p(sm) bg(white) r(md)">text(left+underline)</code>
+                      </div>
                     </div>
                   </div>
-                {/each}
+                </div>
+              {/if}
+            </div>
+            
+            <!-- Rules Table -->
+            <div class="vbox gap(2xl) pt(4xl)">
+              <div class="overflow-x(auto) r(xl) bg(white) shadow(sm)">
+                <table class="w(full)">
+                  <thead>
+                    <tr class="bg(mute-50)">
+                      <th class="text(left) p(lg) label(sm) c(mute-700) w(240)">Rule Name</th>
+                      <th class="text(left) p(lg) label(sm) c(mute-700)">Example Usage</th>
+                      <th class="text(left) p(lg) label(sm) c(mute-700)">CSS Output</th>
+                      <th class="text(left) p(lg) label(sm) c(mute-700) w(120)">Preview</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {#each rule2Rules[group.category] || [] as ruleName, i}
+                      <tr class="{i % 2 === 0 ? 'bg(white)' : 'bg(mute-50.5)'} 
+                                 hover:bg(primary.05) transition-colors duration(150)">
+                        <!-- Rule Name -->
+                        <td class="p(lg)">
+                          <button
+                            class="hbox(middle) gap(sm) cursor(pointer) group"
+                            on:click={() => copyToClipboard(ruleName)}
+                            title="Click to copy {ruleName}"
+                          >
+                            <code class="mono bold c(mute-900) body(sm)">{ruleName}</code>
+                            {#if copiedRule === ruleName}
+                              <Check size="16" class="c(success)" />
+                            {:else}
+                              <Copy size="14" class="c(mute-400) group-hover:c(mute-600) transition" />
+                            {/if}
+                          </button>
+                        </td>
+                        
+                        <!-- Example Usage -->
+                        <td class="p(lg)">
+                          <code class="body(sm) font(mono) c(mute-600)">
+                            {#if group.category === 'Layout'}
+                              {#if ruleName.startsWith('p')}
+                                {ruleName}(xl) {ruleName}(20/30)
+                              {:else if ruleName === 'w' || ruleName === 'h'}
+                                {ruleName}(full) {ruleName}(200) {ruleName}(fill)
+                              {:else if ruleName === 'size'}
+                                size(32) size(16:9) size(320x200)
+                              {:else if ruleName.startsWith('min-') || ruleName.startsWith('max-')}
+                                {ruleName}(full) {ruleName}(lg)
+                              {:else if ruleName === 'hbox' || ruleName === 'vbox'}
+                                {ruleName}() {ruleName}(pack) {ruleName}(center+middle)
+                              {:else if ruleName === 'pack' || ruleName === 'wrap'}
+                                {ruleName}()
+                              {:else if ruleName.startsWith('m')}
+                                {ruleName}(lg) {ruleName}(auto)
+                              {:else}
+                                {ruleName}(md)
+                              {/if}
+                            {:else if group.category === 'Typography'}
+                              {#if ruleName === 'font'}
+                                font(xl) font(16/1.5/-2%)
+                              {:else if ruleName === 'bold'}
+                                bold() bold(600)
+                              {:else if ruleName === 'text'}
+                                text(center) text(left+nowrap) text(center+middle)
+                              {:else if ruleName === 'truncate'}
+                                truncate() truncate(2) truncate(3)
+                              {:else}
+                                {ruleName}()
+                              {/if}
+                            {:else if group.category === 'Colors'}
+                              {#if ruleName === 'c'}
+                                c(primary) c(red-500)
+                              {:else if ruleName === 'bg'}
+                                bg(primary) bg(blue-500)
+                              {:else}
+                                {ruleName}(primary)
+                              {/if}
+                            {:else if group.category === 'Visual'}
+                              {#if ruleName === 'b' || ruleName === 'border'}
+                                {ruleName}() {ruleName}(2) {ruleName}(1/solid/red)
+                              {:else if ruleName === 'r'}
+                                r() r(lg) r(8/16/8/16)
+                              {:else if ruleName.startsWith('b') && ruleName.length === 2}
+                                {ruleName}(1/solid/blue)
+                              {:else if ruleName === 'opacity'}
+                                opacity(0.5) opacity(0.8)
+                              {:else if ['blur', 'brightness', 'contrast'].includes(ruleName)}
+                                {ruleName}(4) {ruleName}(1.2)
+                              {:else}
+                                {ruleName}(value)
+                              {/if}
+                            {:else if group.category === 'CSS Advanced'}
+                              {#if ruleName.startsWith('m')}
+                                {ruleName}(lg) {ruleName}(auto)
+                              {:else if ruleName === 'wrap'}
+                                text(wrap) (via text rule)
+                              {:else if ruleName.startsWith('pre')}
+                                text({ruleName}) (via text rule)
+                              {:else}
+                                {ruleName}(value)
+                              {/if}
+                            {:else}
+                              {ruleName}(value)
+                            {/if}
+                          </code>
+                        </td>
+                        
+                        <!-- CSS Output -->
+                        <td class="p(lg)">
+                          <code class="body(sm) font(mono) c(mute-700) block whitespace(pre-wrap)">
+                            {#if group.category === 'Layout'}
+                              {#if ruleName.startsWith('p')}
+                                {generateClass(`${ruleName}(xl)`)}
+                              {:else if ruleName === 'w' || ruleName === 'h'}
+                                {generateClass(`${ruleName}(full)`)}
+                              {:else if ruleName === 'size'}
+                                {generateClass('size(32)')}
+                              {:else if ruleName.startsWith('min-') || ruleName.startsWith('max-')}
+                                {generateClass(`${ruleName}(full)`)}
+                              {:else if ruleName === 'hbox' || ruleName === 'vbox'}
+                                {generateClass(`${ruleName}()`)}
+                              {:else if ruleName === 'pack' || ruleName === 'wrap'}
+                                {generateClass(`${ruleName}()`)}
+                              {:else if ruleName.startsWith('m')}
+                                {generateClass(`${ruleName}(lg)`)}
+                              {:else}
+                                {generateClass(`${ruleName}(md)`)}
+                              {/if}
+                            {:else if group.category === 'Typography'}
+                              {#if ruleName === 'font'}
+                                {generateClass('font(xl)')}
+                              {:else if ruleName === 'bold'}
+                                {generateClass('bold()')}
+                              {:else if ruleName === 'truncate'}
+                                {generateClass('truncate()')}
+                              {:else}
+                                {generateClass(`${ruleName}()`)}
+                              {/if}
+                            {:else if group.category === 'Colors'}
+                              {generateClass(`${ruleName}(primary)`)}
+                            {:else if group.category === 'Visual'}
+                              {#if ruleName === 'b' || ruleName === 'border'}
+                                {generateClass(`${ruleName}()`)}
+                              {:else if ruleName === 'r'}
+                                {generateClass('r()')}
+                              {:else if ruleName.startsWith('b') && ruleName.length === 2}
+                                {generateClass(`${ruleName}(1/solid/blue)`)}
+                              {:else if ruleName === 'opacity'}
+                                {generateClass('opacity(0.5)')}
+                              {:else}
+                                {generateClass(`${ruleName}(4)`)}
+                              {/if}
+                            {:else}
+                              {generateClass(`${ruleName}(value)`)}
+                            {/if}
+                          </code>
+                        </td>
+                        
+                        <!-- Mini Preview -->
+                        <td class="p(lg)">
+                          <div class="w(80) h(32) hbox(center) r(md) bg(mute-50) relative overflow(hidden)">
+                            {#if group.category === 'Colors'}
+                              <div class="{ruleName}(primary) body(sm)">Aa</div>
+                            {:else if group.category === 'Layout' && ruleName.startsWith('p')}
+                              <div class="{ruleName}(lg) bg(primary.1) r(sm) hbox">
+                                <div class="w(8) h(8) bg(primary) r(xs)"></div>
+                              </div>
+                            {:else if group.category === 'Layout' && (ruleName === 'w' || ruleName === 'h')}
+                              <div class="{ruleName}(24) bg(primary.1) r(sm)">
+                                <div class="w(full) h(full) bg(primary) r(xs)"></div>
+                              </div>
+                            {:else if group.category === 'Layout' && ruleName === 'size'}
+                              <div class="size(24) bg(primary.1) r(sm)">
+                                <div class="w(full) h(full) bg(primary) r(xs)"></div>
+                              </div>
+                            {:else if group.category === 'Layout' && (ruleName.startsWith('min-') || ruleName.startsWith('max-'))}
+                              <div class="bg(primary.1) r(sm) p(xs)">
+                                <div class="w(16) h(16) bg(primary) r(xs)"></div>
+                              </div>
+                            {:else if group.category === 'Layout' && (ruleName === 'hbox' || ruleName === 'vbox')}
+                              <div class="{ruleName}() gap(xs) bg(primary.1) r(sm) p(xs)">
+                                <div class="w(8) h(8) bg(primary) r(xs)"></div>
+                                <div class="w(8) h(8) bg(primary) r(xs)"></div>
+                              </div>
+                            {:else if group.category === 'Layout' && (ruleName === 'pack' || ruleName === 'wrap')}
+                              <div class="{ruleName}() gap(xs) bg(primary.1) r(sm) p(xs)">
+                                <div class="w(6) h(6) bg(primary) r(xs)"></div>
+                                <div class="w(6) h(6) bg(primary) r(xs)"></div>
+                              </div>
+                            {:else if group.category === 'Layout' && ruleName.startsWith('m')}
+                              <div class="{ruleName}(md) bg(primary.1) r(sm)">
+                                <div class="w(12) h(12) bg(primary) r(xs)"></div>
+                              </div>
+                            {:else if group.category === 'Typography'}
+                              {#if ruleName === 'truncate'}
+                                <div class="truncate() body(sm) c(mute-900) w(60)">Long text that will be truncated with ellipsis</div>
+                              {:else}
+                                <div class="{ruleName === 'font' ? 'font(lg)' : `${ruleName}()`} body(sm) c(mute-900)">Aa</div>
+                              {/if}
+                            {:else if group.category === 'Visual'}
+                              {#if ruleName === 'b' || ruleName === 'border'}
+                                <div class="{ruleName}() w(20) h(20) bg(primary.1) r(xs)"></div>
+                              {:else if ruleName === 'r'}
+                                <div class="r(lg) w(20) h(20) bg(primary) r(xs)"></div>
+                              {:else if ruleName.startsWith('b') && ruleName.length === 2}
+                                <div class="{ruleName}(2/solid/primary) w(20) h(20) bg(primary.1) r(xs)"></div>
+                              {:else if ruleName === 'opacity'}
+                                <div class="opacity(0.5) w(20) h(20) bg(primary) r(xs)"></div>
+                              {:else if ['blur', 'brightness', 'contrast'].includes(ruleName)}
+                                <div class="{ruleName}(2) w(20) h(20) bg(primary) r(xs)">Fx</div>
+                              {:else}
+                                <div class="w(20) h(20) bg(primary) r(xs)"></div>
+                              {/if}
+                            {:else}
+                              <div class="w(12) h(12) bg(mute-300) r(xs)"></div>
+                            {/if}
+                          </div>
+                        </td>
+                      </tr>
+                    {/each}
+                  </tbody>
+                </table>
               </div>
-            </section>
-          {/if}
+            </div>
+          </section>
         {/each}
       </div>
     

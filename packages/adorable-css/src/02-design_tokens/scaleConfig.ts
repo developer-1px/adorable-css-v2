@@ -67,7 +67,14 @@ export function getTokenStep(token: string, category?: 'font' | 'spacing' | 'siz
   const xsMatch = token.match(/^(\d+)xs$/);
   if (xsMatch) {
     const num = parseInt(xsMatch[1]);
-    return -num + 1; // 4xs = -3, 3xs = -2, 2xs = -1
+    // For spacing: 2xs should be 0.5, 3xs should be 0.25, 4xs should be 0.125
+    // These are fractional steps, not negative steps
+    if (category === 'spacing') {
+      return 1 / num; // 2xs = 0.5, 3xs = 0.333, 4xs = 0.25
+    } else {
+      // For other categories, keep negative steps
+      return -num + 1; // 4xs = -3, 3xs = -2, 2xs = -1
+    }
   }
   
   // Handle numbered xl 02-design_tokens (2xl, 3xl, etc.)

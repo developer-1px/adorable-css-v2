@@ -67,7 +67,7 @@
     <div class="p(2xl)">
       <!-- Horizontal Visual Scale -->
       <div class="bg(gray-50) r(2xl) p(2xl) mb(2xl)">
-        <h4 class="text(sm) bold c(gray-700) mb(lg) uppercase tracking(wide)">Visual Scale</h4>
+        <h4 class="font(sm) bold c(gray-700) mb(lg) uppercase tracking(wide)">Visual Scale</h4>
         <div class="hbox(center/middle) gap(lg) items(end)">
           {#each spacingVariants as { key, value }}
             <div class="vbox(center) gap(sm)">
@@ -75,12 +75,84 @@
               <div class="bg(to-br/green-400..emerald-500) r(sm) shadow(sm)" 
                    style="width: sm; height: {value}; min-height: xs; max-height: 6xl;"></div>
               <!-- Label -->
-              <div class="text(xs) c(gray-600) font(mono)">{key}</div>
-              <div class="text(xs) c(gray-500) font(mono)">{value}</div>
+              <div class="font(xs) c(gray-600) font(mono)">{key}</div>
+              <div class="font(xs) c(gray-500) font(mono)">{value}</div>
             </div>
           {/each}
         </div>
-        <p class="text(xs) c(gray-500) text(center) mt(lg)">Click spacing examples in the playground below to copy usage</p>
+        <p class="font(xs) c(gray-500) text(center) mt(lg)">Click spacing examples in the playground below to copy usage</p>
+      </div>
+    </div>
+  </TokenCard>
+
+  <!-- Gap Visual Demo Section -->
+  <TokenCard
+    title="Gap in Action"
+    subtitle="See spacing tokens applied as flexbox and grid gaps"
+    gradient={true}
+    gradientColors="blue-50..indigo-50"
+    shadowColor="blue-100.3"
+  >
+    <div class="p(2xl)">
+      <div class="grid(2) gap(2xl)">
+        <!-- Flexbox Gap Demo -->
+        <div class="vbox gap(lg)">
+          <h4 class="font(sm) bold c(gray-700) mb(md) uppercase tracking(wide) hbox(middle) gap(sm)">
+            <Box size="16" class="c(blue-500)" />
+            Flexbox Gap
+          </h4>
+          <div class="vbox gap(md)">
+            {#each ['xs', 'sm', 'md', 'lg', 'xl'] as spacing}
+              <div class="p(lg) bg(blue-50) r(lg) border(xs/blue-200)">
+                <div class="font(xs) c(blue-600) mb(sm) font(mono)">gap({spacing})</div>
+                <div class="hbox gap({spacing})">
+                  <div class="w(48) h(32) bg(blue-400) r(sm)"></div>
+                  <div class="w(48) h(32) bg(blue-400) r(sm)"></div>
+                  <div class="w(48) h(32) bg(blue-400) r(sm)"></div>
+                  <div class="w(48) h(32) bg(blue-400) r(sm)"></div>
+                </div>
+              </div>
+            {/each}
+          </div>
+        </div>
+        
+        <!-- Grid Gap Demo -->
+        <div class="vbox gap(lg)">
+          <h4 class="font(sm) bold c(gray-700) mb(md) uppercase tracking(wide) hbox(middle) gap(sm)">
+            <Grid size="16" class="c(indigo-500)" />
+            Grid Gap
+          </h4>
+          <div class="vbox gap(md)">
+            {#each ['xs', 'sm', 'md', 'lg', 'xl'] as spacing}
+              <div class="p(lg) bg(indigo-50) r(lg) border(xs/indigo-200)">
+                <div class="font(xs) c(indigo-600) mb(sm) font(mono)">gap({spacing})</div>
+                <div class="grid(3) gap({spacing})">
+                  <div class="w(full) h(24) bg(indigo-400) r(sm)"></div>
+                  <div class="w(full) h(24) bg(indigo-400) r(sm)"></div>
+                  <div class="w(full) h(24) bg(indigo-400) r(sm)"></div>
+                  <div class="w(full) h(24) bg(indigo-400) r(sm)"></div>
+                  <div class="w(full) h(24) bg(indigo-400) r(sm)"></div>
+                  <div class="w(full) h(24) bg(indigo-400) r(sm)"></div>
+                </div>
+              </div>
+            {/each}
+          </div>
+        </div>
+      </div>
+      
+      <!-- Gap Auto Demo (Space Between) -->
+      <div class="mt(2xl) p(xl) bg(violet-50) r(xl) border(xs/violet-200)">
+        <h4 class="font(sm) bold c(gray-700) mb(md) uppercase tracking(wide) hbox(middle) gap(sm)">
+          <Layers size="16" class="c(violet-500)" />
+          Gap Auto (Space Between)
+        </h4>
+        <div class="font(xs) c(violet-600) mb(sm) font(mono)">gap(auto) → justify-content: space-between</div>
+        <div class="hbox gap(auto) p(lg) bg(white) r(lg) border(xs/violet-200)">
+          <div class="w(64) h(32) bg(violet-400) r(sm)"></div>
+          <div class="w(64) h(32) bg(violet-400) r(sm)"></div>
+          <div class="w(64) h(32) bg(violet-400) r(sm)"></div>
+        </div>
+        <p class="font(xs) c(gray-500) mt(sm)">Perfect for navigation bars, toolbars, and evenly distributed content</p>
       </div>
     </div>
   </TokenCard>
@@ -89,7 +161,7 @@
   <div class="bg(to-br/slate-50..gray-50) r(3xl) p(3xl) border(1px/gray-200)">
     <div class="text(center) mb(3xl)">
       <h3 class="heading(h2) c(gray-900) mb(sm)">Spacing Playground</h3>
-      <p class="text(lg) c(gray-600)">See how different spacing values affect layout and visual hierarchy</p>
+      <p class="fonr(lg) c(gray-600)">See how different spacing values affect layout and visual hierarchy</p>
     </div>
     
     <div class="grid(3) gap(2xl)">
@@ -101,10 +173,10 @@
         </h4>
         <div class="vbox gap(md)">
           <div class="p(xs) bg(green-50) border(xs/green-200) r(lg)">
-            <div class="text(sm) c(gray-700)">p(xs) - Tight elements</div>
+            <div class="font(sm) c(gray-700)">p(xs) - Tight elements</div>
           </div>
           <div class="p(sm) bg(green-50) border(xs/green-200) r(lg)">
-            <div class="text(sm) c(gray-700)">p(sm) - Form controls</div>
+            <div class="font(sm) c(gray-700)">p(sm) - Form controls</div>
           </div>
         </div>
       </div>
@@ -117,10 +189,10 @@
         </h4>
         <div class="vbox gap(md)">
           <div class="p(md) bg(emerald-50) border(xs/emerald-200) r(lg)">
-            <div class="text(sm) c(gray-700)">p(md) - Cards, panels</div>
+            <div class="font(sm) c(gray-700)">p(md) - Cards, panels</div>
           </div>
           <div class="p(lg) bg(emerald-50) border(xs/emerald-200) r(lg)">
-            <div class="text(sm) c(gray-700)">p(lg) - Content areas</div>
+            <div class="font(sm) c(gray-700)">p(lg) - Content areas</div>
           </div>
         </div>
       </div>
@@ -133,10 +205,10 @@
         </h4>
         <div class="vbox gap(md)">
           <div class="p(xl) bg(green-50) border(xs/green-200) r(lg)">
-            <div class="text(sm) c(gray-700)">p(xl) - Sections</div>
+            <div class="font(sm) c(gray-700)">p(xl) - Sections</div>
           </div>
           <div class="p(2xl) bg(green-50) border(xs/green-200) r(lg)">
-            <div class="text(sm) c(gray-700)">p(2xl) - Containers</div>
+            <div class="font(sm) c(gray-700)">p(2xl) - Containers</div>
           </div>
         </div>
       </div>
@@ -167,7 +239,7 @@
               <Ruler size="24" class="c(white)" />
             </div>
             <div class="heading(h4) c(white)">Consistent</div>
-            <div class="text(sm) c(white.8) leading(relaxed)">
+            <div class="font(sm) c(white.8) leading(relaxed)">
               Mathematical progression ensures perfect visual rhythm across all screen sizes
             </div>
           </div>
@@ -177,7 +249,7 @@
               <Grid size="24" class="c(white)" />
             </div>
             <div class="heading(h4) c(white)">Responsive</div>
-            <div class="text(sm) c(white.8) leading(relaxed)">
+            <div class="font(sm) c(white.8) leading(relaxed)">
               Adapts beautifully from mobile to desktop while maintaining proportional relationships
             </div>
           </div>
@@ -187,7 +259,7 @@
               <Layers size="24" class="c(white)" />
             </div>
             <div class="heading(h4) c(white)">Semantic</div>
-            <div class="text(sm) c(white.8) leading(relaxed)">
+            <div class="font(sm) c(white.8) leading(relaxed)">
               Each step has clear purpose and context, making design decisions effortless
             </div>
           </div>

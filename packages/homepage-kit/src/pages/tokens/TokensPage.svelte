@@ -83,7 +83,7 @@
       <!-- Decorative element -->
       <div class="hbox(pack) gap(xs) mb(xl)">
         <span class="inline-block w(3xl) h(xs) bg(to-r/transparent..indigo-400)"></span>
-        <span class="text(xs) uppercase tracking(0.2em) c(indigo-600) font(medium)">Design System</span>
+        <span class="font(xs) uppercase tracking(0.2em) c(indigo-600) font(medium)">Design System</span>
         <span class="inline-block w(3xl) h(xs) bg(to-l/transparent..indigo-400)"></span>
       </div>
       
@@ -99,12 +99,12 @@
   </header>
   
   <!-- Navigation with glass morphism -->
-  <nav class="sticky top(0) z(50) bg(white.85) backdrop-blur(xl) border-b(xs/gray-200.5)">
+  <nav class="sticky top(0) z(50) bg(white.85) backdrop-blur(xl) bb(xs/gray-200.5)">
     <div class="container(7xl) mx(auto) px(xl)">
       <div class="hbox gap(xs) py(md) overflow-x(auto) scrollbar-none">
         {#each sections as section}
           <button
-            class="px(xl) py(sm) r(lg) font(medium) text(sm) transition-all whitespace-nowrap hbox(middle) gap(xs)
+            class="px(xl) py(sm) r(lg) font(medium) font(sm) transition-all whitespace-nowrap hbox(middle) gap(xs)
                    {activeSection === section.id 
                      ? 'bg(indigo-600) c(white) shadow(lg) shadow(indigo-200)' 
                      : 'hover:bg(gray-100) c(gray-700) hover:c(gray-900)'}"

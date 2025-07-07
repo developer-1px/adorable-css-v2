@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { cursor } from '../../../03-rules/interaction/cursor';
+import { cursor } from '../../../04-rules/03-rules_deprecated/interaction/cursor';
 
 describe('cursor rule', () => {
   it('should handle common cursor values', () => {

@@ -12,12 +12,12 @@
 
 <div class="bg(white) r(2xl) shadow(xl) shadow({shadowColor}) {gradient ? '' : 'p(2xl)'} {$$props.class || ''}">
   {#if gradient}
-    <div class="bg(to-r/{gradientColors}) p(2xl) border-b(1px/{iconColor.replace('400', '100')})">
+    <div class="bg(to-r/{gradientColors}) p(2xl) bb(1px/{iconColor.replace('400', '100')})">
       <div class="hbox(between/middle) mb(xl)">
         <div>
           <h3 class="heading(h2) c(neutral-900) mb(xs)">{title}</h3>
           {#if subtitle}
-            <p class="text(sm) c(neutral-600)">{subtitle}</p>
+            <p class="font(sm) c(neutral-600)">{subtitle}</p>
           {/if}
         </div>
         {#if icon}
@@ -34,7 +34,7 @@
       <div>
         <h3 class="heading(h2) c(neutral-900) mb(xs)">{title}</h3>
         {#if subtitle}
-          <p class="text(sm) c(neutral-600)">{subtitle}</p>
+          <p class="font(sm) c(neutral-600)">{subtitle}</p>
         {/if}
       </div>
       {#if icon}

@@ -71,38 +71,6 @@ AdorableCSS는 다양한 `transform` 관련 유틸리티를 제공하여 복잡�
 </fieldset>
 ```
 
-## 🔄 Svelte Each 블록 실수: 성능과 안정성의 핵심
-
-Svelte의 `#each` 블록에서 `key`를 사용하지 않으면, 리스트의 항목이 변경될 때 Svelte가 어떤 항목이 추가, 제거, 또는 순서가 변경되었는지 효율적으로 추적하기 어렵습니다. 이는 불필요한 DOM 조작으로 이어져 성능 저하를 유발하고, 때로는 예상치 못한 UI 버그를 발생시킬 수 있습니다. 
-
-### ❌ 잘못된 each 블록: 비효율적인 DOM 업데이트
-
-```svelte
-<!-- ESLint 오류: 키가 없음 -->
-{#each items as item}
-  <div>{item.name}</div>
-{/each}
-
-{#each Object.entries(data) as [key, value]}
-  <div>{key}: {value}</div>
-{/each}
-```
-
-### ✅ key가 있는 each 블록: 최적화된 DOM 관리
-
-고유한 `key`를 제공하면 Svelte는 리스트 항목의 변화를 정확히 감지하고, 최소한의 DOM 조작으로 UI를 업데이트하여 성능을 최적화하고 안정성을 높입니다.
-
-```svelte
-<!-- 고유한 키 사용 -->
-{#each items as item (item.id)}
-  <div>{item.name}</div>
-{/each}
-
-{#each Object.entries(data) as [key, value] (key)}
-  <div>{key}: {value}</div>
-{/each}
-```
-
 ## 📏 크기 관련 실수: 디자인 시스템의 일관성 유지
 
 AdorableCSS는 수학적 스케일 시스템을 기반으로 디자인 토큰을 제공합니다. 픽셀 값을 직접 하드코딩하는 것은 이러한 디자인 시스템의 일관성을 깨뜨리고, 추후 디자인 변경 시 모든 값을 수동으로 수정해야 하는 비효율성을 초래합니다.
@@ -138,6 +106,7 @@ AdorableCSS는 CSS 속성을 직접 사용하는 대신, 추상화된 유틸리�
 border-b(4/black)
 focus:outline(0)
 transition-transform
+text-align(center)
 ```
 
 ### ✅ AdorableCSS 토큰/유틸리티 사용: 간결하고 강력한 스타일링
@@ -148,6 +117,7 @@ AdorableCSS의 유틸리티와 토큰을 사용하면 코드가 더 간결해지
 border-b(sm/black)
 outline(0)
 transition(transform)
+text(center)
 ```
 
 ## 🚀 개발 팁: AdorableCSS를 100% 활용하는 방법
@@ -166,3 +136,5 @@ transition(transform)
 4.  **ESLint**: 코드 에디터의 ESLint 경고 및 오류를 통해 코드 품질과 잠재적인 접근성 문제를 사전에 발견하고 수정합니다.
 
 이 문서는 AdorableCSS 사용 시 자주 발생하는 실수들을 정리하고, 그 원인과 해결책을 제시하여 여러분의 개발 경험을 향상시키는 데 목적이 있습니다.
+
+

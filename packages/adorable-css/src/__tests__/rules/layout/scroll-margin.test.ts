@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { scrollM, scrollMt, scrollMr, scrollMb, scrollMl, scrollMx, scrollMy } from '../../../03-rules/layout/scroll-margin';
+import { scrollM, scrollMt, scrollMr, scrollMb, scrollMl, scrollMx, scrollMy } from '../../../04-rules/03-rules_deprecated/layout/scroll-margin';
 
 describe('scroll-margin rules', () => { // Clarified describe block name
   describe('scrollM', () => {

@@ -115,12 +115,12 @@
 
 <!-- Permanent Indicator -->
 <div class="class-inspector fixed bottom(lg) right(lg) z(100)">
-  <div class="{isModifierKeyPressed ? 'bg(green-600) c(white)' : 'bg(gray-700) c(gray-300)'} px(md) py(sm) r(md) shadow(lg) text(xs) transition-all duration-200 hbox gap(xs) items(center)">
-    <span class="text(xs)">Class Inspector:</span>
-    <kbd class="bg({isModifierKeyPressed ? 'green-500' : 'gray-600'}) c(white) px(xs) py(xxs) r(xs) font(mono) text(xxs) transition-all duration-200">
+  <div class="{isModifierKeyPressed ? 'bg(green-600) c(white)' : 'bg(gray-700) c(gray-300)'} px(md) py(sm) r(md) shadow(lg) font(xs) transition-all duration-200 hbox gap(xs) items(center)">
+    <span class="font(xs)">Class Inspector:</span>
+    <kbd class="bg({isModifierKeyPressed ? 'green-500' : 'gray-600'}) c(white) px(xs) py(2xs) r(xs) font(mono) text(2xs) transition-all duration-200">
       {navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'}
     </kbd>
-    <span class="text(xs)">+ hover</span>
+    <span class="font(xs)">+ hover</span>
   </div>
 </div>
 
@@ -128,15 +128,15 @@
 {#if isModifierKeyPressed && classString && inspectedElement}
   <div 
     class="class-inspector fixed z(200) bg(gray-900) c(white) px(sm) py(xs) r(sm) 
-           shadow(lg) font(mono) text(xs) max-w(600px) overflow(hidden) hbox gap(xs) items(center)"
+           shadow(lg) font(mono) font(xs) max-w(600px) overflow(hidden) hbox gap(xs) items(center)"
     style="left: {labelX}px; top: {labelY}px;"
     in:fade="{{ duration: 200 }}"
   >
     {#if copied}
       <Check size="12" class="c(green-400) shrink(0)" />
-      <span class="c(green-400) text(xs)">Copied!</span>
+      <span class="c(green-400) font(xs)">Copied!</span>
     {:else}
-      <span class="truncate text(xs)">{classString || 'No classes'}</span>
+      <span class="truncate font(xs)">{classString || 'No classes'}</span>
       <button 
         class="p(xs) hover:bg(gray-700) r(xs) transition shrink(0)"
         on:click={copyClasses}

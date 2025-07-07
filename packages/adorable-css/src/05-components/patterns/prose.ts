@@ -4,75 +4,75 @@ import type { ComponentDefinition } from '../defineComponent';
 // VitePress-inspired prose component with refined typography
 const proseDefinition: ComponentDefinition = {
   // Base typography with optimal reading experience
-  base: 'font(16/1.6) c(neutral-700)',
+  base: 'font(16/1.7) c(gray-700)',
   
   selectors: {
     // Typography hierarchy using heading component with margin
-    'h1': 'heading(h1) mt(0) mb(2xl)',
-    'h2': 'heading(h2) mt(5xl) mb(lg) pb(sm) border-b(1/neutral-200)',
-    'h3': 'heading(h3) mt(3xl) mb(md)',
-    'h4': 'heading(h4) mt(2xl) mb(sm)',
-    'h5': 'heading(h5) mt(lg) mb(sm)',
-    'h6': 'heading(h6) mt(lg) mb(sm)',
+    'h1': 'display(2xl) font(black) tracking(tight) c(gray-900) mt(0) mb(2xl)',
+    'h2': 'display(xl) font(black) tracking(tight) c(gray-900) mt(5xl) mb(lg) pb(sm) bb(2/gray-900)',
+    'h3': 'font(xl) font(bold) c(gray-900) mt(3xl) mb(md)',
+    'h4': 'font(lg) font(bold) c(gray-900) mt(2xl) mb(sm)',
+    'h5': 'font(md) font(bold) c(gray-900) mt(lg) mb(sm)',
+    'h6': 'font(sm) font(bold) c(gray-900) mt(lg) mb(sm)',
     
-    // Body & inline elements - VitePress inspired
-    'p': 'font(16/1.7) mb(16) c(neutral-700)',
-    'strong': 'bold(600) c(primary)',
-    'em': 'italic',
-    'mark': 'bg(warning.2) px(4) py(1) r(2)',
+    // Body & inline elements - Bold minimal inspired
+    'p': 'font(16/1.7) mb(lg) c(gray-700)',
+    'strong': 'font(bold) c(gray-900)',
+    'em': 'italic c(gray-600)',
+    'mark': 'bg(yellow-200) px(xs) py(2xs) r(sm) c(gray-900)',
     
-    // Links - VitePress style
-    'a': 'c(primary) decoration(underline) decoration(primary.3) underline-offset(2) transition(all/150ms)',
-    'a:hover': 'c(primary-700) decoration(primary-700.6)',
-    'a:active': 'c(primary-800)',
+    // Links - Bold minimal style
+    'a': 'c(gray-900) font(medium) decoration(underline) decoration(gray-400) underline-offset(4) transition',
+    'a:hover': 'c(gray-900) decoration(gray-900)',
+    'a:active': 'c(gray-800)',
     
-    // Lists - VitePress style
-    'ul, ol': 'my(16) pl(20)',
+    // Lists - Bold minimal style
+    'ul, ol': 'my(lg) pl(xl)',
     'ul': 'list(disc)',
     'ol': 'list(decimal)',
-    'li': 'mb(4) pl(8)',
-    'li > ul, li > ol': 'my(8)',
-    'li > p': 'mb(8)',
+    'li': 'mb(sm) pl(sm) c(gray-700)',
+    'li > ul, li > ol': 'my(sm)',
+    'li > p': 'mb(sm)',
     'li > p:last-child': 'mb(0)',
     
 
-    // Blockquotes - VitePress style
-    'blockquote': 'my(16) pl(16) border-l(4/neutral-300) c(neutral-600) italic',
-    'blockquote p': 'mb(8)',
+    // Blockquotes - Bold minimal style
+    'blockquote': 'my(xl) p(xl) border-l(4/gray-900) bg(gray-50) r(md) italic',
+    'blockquote p': 'mb(sm) c(gray-800) font(lg)',
     'blockquote p:last-child': 'mb(0)',
-    'blockquote cite': 'block mt(8) font(14) not-italic c(neutral-500)',
-    'blockquote cite::before': 'content("—") mr(4)',
+    'blockquote cite': 'block mt(md) font(sm) not-italic c(gray-600) font(medium)',
+    'blockquote cite::before': 'content("—") mr(sm)',
     
-    // Tables - VitePress style
-    'table': 'w(full) my(16) border-collapse text(left)',
-    'thead': 'border-b(2/neutral-300)',
-    'th': 'px(12) py(8) font(14) bold(600) c(primary) text(left)',
-    'td': 'px(12) py(8) border-b(1/neutral-200)',
-    'tbody tr:last-child td': 'border-b(0)',
-    'tbody tr:hover': 'bg(neutral-50)',
+    // Tables - Bold minimal style
+    'table': 'w(full) my(xl) border-collapse border(2/gray-900) r(lg) overflow(hidden)',
+    'thead': 'bg(gray-900) c(white)',
+    'th': 'px(lg) py(md) font(sm) font(bold) uppercase tracking(wider) text(left)',
+    'td': 'px(lg) py(md) border-t(1/gray-200) font(sm)',
+    'tbody tr:last-child td': 'border-t(1/gray-200)',
+    'tbody tr:hover': 'bg(gray-50)',
     
-    // Media & visual elements - VitePress style
-    'hr': 'my(32) border(0) h(1) bg(neutral-200)',
-    'img': 'max-w(full) h(auto) r(8) my(16)',
-    'figure': 'my(24)',
-    'figure img': 'mx(auto) mb(8)',
-    'figcaption': 'text(center) font(14) c(neutral-600) mt(8)',
+    // Media & visual elements - Bold minimal style
+    'hr': 'my(4xl) border(0) h(2) bg(gray-900)',
+    'img': 'max-w(full) h(auto) r(lg) border(2/gray-900) shadow(lg) my(xl)',
+    'figure': 'my(2xl)',
+    'figure img': 'mx(auto) mb(md)',
+    'figcaption': 'text(center) font(sm) c(gray-600) font(medium) mt(md)',
     
-    // Code & interactive elements - Light theme
-    'code': 'px(4) py(1) bg(neutral-50) r(4) border(1/neutral-200) font(sm) break-words',
-    'pre': 'my(16) p(16) c(neutral-900) r(8) border(1/neutral-200) overflow-x(auto) font(mono) font(xs)',
+    // Code & interactive elements - Bold minimal theme
+    'code': 'px(sm) py(xs) bg(gray-100) r(sm) border(1/gray-300) font(mono) font(sm) c(gray-900) break-words',
+    'pre': 'my(xl) p(xl) bg(gray-900) c(white) r(lg) border(2/gray-900) overflow-x(auto) font(mono) font(sm) shadow(lg)',
     'pre code': 'p(0) bg(transparent) c(inherit) border(0)',
-    'kbd': 'inline-block px(6) py(1) bg(neutral-100) border(1/neutral-300) r(4) shadow(sm) font(mono) font(12) c(neutral-700)',
-    'abbr[title]': 'decoration(dotted) underline-offset(2) cursor(help)',
+    'kbd': 'inline-block px(sm) py(xs) bg(gray-200) border(2/gray-300) r(sm) shadow(md) font(mono) font(xs) c(gray-900)',
+    'abbr[title]': 'decoration(dotted) underline-offset(2) cursor(help) c(gray-700)',
     
     // Structured content
-    'dl': 'my(lg)',
-    'dt': 'bold(medium) mt(lg) mb(xs) c(primary)',
-    'dd': 'ml(lg) c(neutral-700)',
+    'dl': 'my(xl)',
+    'dt': 'font(bold) mt(lg) mb(sm) c(gray-900)',
+    'dd': 'ml(xl) c(gray-700) mb(md)',
     
-    'details': 'my(lg) p(md) bg(neutral-50) r(lg) group',
-    'summary': 'bold(medium) cursor(pointer) select(none) list(none)',
-    'details[open] summary': 'mb(md)',
+    'details': 'my(xl) p(lg) bg(gray-50) r(lg) border(2/gray-200) group',
+    'summary': 'font(bold) cursor(pointer) select(none) list(none) c(gray-900)',
+    'details[open] summary': 'mb(lg) pb(lg) bb(2/gray-200)',
     
     // Utility classes
     '> *:first-child': 'mt(0)',
@@ -127,7 +127,7 @@ const proseDefinition: ComponentDefinition = {
     
     docs: {
       'h1': 'scroll-mt(80) mt(0) mb(2xl)',
-      'h2': 'scroll-mt(80) mt(5xl) mb(lg) pb(sm) border-b(1/neutral-200)',
+      'h2': 'scroll-mt(80) mt(5xl) mb(lg) pb(sm) bb(1/neutral-200)',
       'h3': 'scroll-mt(80) mt(3xl) mb(md)',
       'h4': 'scroll-mt(80) mt(2xl) mb(sm)',
       'a[href^="#"]': 'c(primary) decoration(none)',

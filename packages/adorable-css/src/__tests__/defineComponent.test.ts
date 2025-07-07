@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { defineComponent } from '../04-components/defineComponent';
+import { defineComponent } from '../05-components/defineComponent';
 
 describe('defineComponent', () => {
   it('should return base classes when no arguments provided', () => {
@@ -124,13 +124,13 @@ describe('defineComponent with compounds', () => {
     const component = defineComponent({
       base: 'r(full) inline-flex',
       compounds: {
-        'primary/sm': 'bg(blue-500) text(xs) px(2)',
-        'primary/lg': 'bg(blue-600) text(lg) px(4)'
+        'primary/sm': 'bg(blue-500) font(xs) px(2)',
+        'primary/lg': 'bg(blue-600) fonr(lg) px(4)'
       }
     });
     
     const result = component('primary/sm');
-    expect(result).toBe('r(full) inline-flex bg(blue-500) text(xs) px(2)');
+    expect(result).toBe('r(full) inline-flex bg(blue-500) font(xs) px(2)');
   });
 
   it('should apply wildcard patterns for variants', () => {
@@ -170,8 +170,8 @@ describe('defineComponent with compounds', () => {
     const component = defineComponent({
       base: 'badge',
       sizes: {
-        sm: 'text(xs)',
-        lg: 'text(lg)'
+        sm: 'font(xs)',
+        lg: 'fonr(lg)'
       },
       compounds: {
         '*/sm': 'px(2) py(0.5)',
@@ -180,6 +180,6 @@ describe('defineComponent with compounds', () => {
     });
     
     const result = component('lg');
-    expect(result).toBe('badge text(lg) px(4) py(2)');
+    expect(result).toBe('badge fonr(lg) px(4) py(2)');
   });
 });

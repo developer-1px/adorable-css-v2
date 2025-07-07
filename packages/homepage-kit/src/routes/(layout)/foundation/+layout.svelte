@@ -44,12 +44,12 @@
 
 <div class="min-h(screen) bg(white)">
   <!-- Header Section -->
-  <header class="border-b(1/gray-200)">
+  <header class="bb(1/gray-200)">
     <div class="vbox(center) px(3xl) py(4xl)">
       <div class="max-w(6xl) vbox gap(3xl) text(center)">
         <div class="vbox gap(lg)">
           <h1 class="display(2xl) font(black) tracking(tight)">Foundation</h1>
-          <p class="text(lg) c(gray-600) max-w(3xl)">
+          <p class="fonr(lg) c(gray-600) max-w(3xl)">
             Core design tokens and principles that form the foundation of consistent, 
             scalable interfaces across all platforms and products.
           </p>
@@ -93,9 +93,9 @@
             class="group flex(1) p(2xl) border-r(1/gray-200) hover:bg(gray-50) transition-all"
           >
             <div class="vbox gap(sm)">
-              <div class="text(sm) c(gray-500) uppercase tracking(wide)">← Previous</div>
+              <div class="font(sm) c(gray-500) uppercase tracking(wide)">← Previous</div>
               <div class="title(lg) font(bold) group-hover:c(black) transition">{prevPage.name}</div>
-              <div class="text(sm) c(gray-600)">{prevPage.description}</div>
+              <div class="font(sm) c(gray-600)">{prevPage.description}</div>
             </div>
           </a>
         {:else}
@@ -109,9 +109,9 @@
             class="group flex(1) p(2xl) hover:bg(gray-50) transition-all text(right)"
           >
             <div class="vbox gap(sm) items(end)">
-              <div class="text(sm) c(gray-500) uppercase tracking(wide)">Next →</div>
+              <div class="font(sm) c(gray-500) uppercase tracking(wide)">Next →</div>
               <div class="title(lg) font(bold) group-hover:c(black) transition">{nextPage.name}</div>
-              <div class="text(sm) c(gray-600)">{nextPage.description}</div>
+              <div class="font(sm) c(gray-600)">{nextPage.description}</div>
             </div>
           </a>
         {:else}

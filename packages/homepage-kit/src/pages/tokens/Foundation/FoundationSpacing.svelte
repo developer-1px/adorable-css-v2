@@ -144,7 +144,7 @@
     <div class="text(center) vbox gap(lg)">
       <h2 class="display(xl) font(black) tracking(tight)">Grid & Spacing Foundation</h2>
       <div class="vbox(center)">
-        <p class="text(lg) c(gray-600) max-w(3xl)">Layout system for creating consistent spacing and responsive grids</p>
+        <p class="fonr(lg) c(gray-600) max-w(3xl)">Layout system for creating consistent spacing and responsive grids</p>
       </div>
     </div>
 
@@ -157,13 +157,13 @@
       
       <div class="vbox gap(2xl) p(3xl) bg(gray-50) r(lg)">
         {#each spacingScales as spacing}
-          <div class="vbox gap(lg) border-b(1/gray-200) pb(2xl)">
+          <div class="vbox gap(lg) bb(1/gray-200) pb(2xl)">
             <div class="hbox(between) items(baseline)">
               <div class="hbox gap(xl) items(baseline)">
                 <code class="text(base) font(mono) font(bold) uppercase tracking(wider) w(3xl)">{spacing.name}</code>
                 <div class="vbox gap(xs)">
-                  <code class="text(sm) font(mono) c(gray-600)">{spacing.value}</code>
-                  <code class="text(xs) font(mono) c(gray-500)">{spacing.class}</code>
+                  <code class="font(sm) font(mono) c(gray-600)">{spacing.value}</code>
+                  <code class="font(xs) font(mono) c(gray-500)">{spacing.class}</code>
                 </div>
               </div>
               <span class="caption(sm) c(gray-500) italic">{spacing.usage}</span>
@@ -174,7 +174,7 @@
               <div class="hbox gap(lg)">
                 <!-- Gap example -->
                 <div class="vbox gap(xs)">
-                  <code class="text(xs) font(mono) c(gray-500)">gap({spacing.name})</code>
+                  <code class="font(xs) font(mono) c(gray-500)">gap({spacing.name})</code>
                   <div class="hbox {spacing.class}">
                     <div class="w(xl) h(xl) bg(blue-200) r(sm)"></div>
                     <div class="w(xl) h(xl) bg(blue-200) r(sm)"></div>
@@ -184,7 +184,7 @@
                 
                 <!-- Padding example -->
                 <div class="vbox gap(xs)">
-                  <code class="text(xs) font(mono) c(gray-500)">p({spacing.name})</code>
+                  <code class="font(xs) font(mono) c(gray-500)">p({spacing.name})</code>
                   <div class="bg(green-100) r(sm) w(fit)">
                     <div class="{spacing.paddingClass}">
                       <div class="w(xl) h(xl) bg(green-300) r(sm)"></div>
@@ -193,7 +193,7 @@
                 </div>
               </div>
               
-              <div class="text(sm) c(gray-600)">{spacing.description}</div>
+              <div class="font(sm) c(gray-600)">{spacing.description}</div>
             </div>
           </div>
         {/each}
@@ -209,13 +209,13 @@
       
       <div class="vbox gap(2xl) p(3xl) bg(gray-50) r(lg)">
         {#each containerScales.slice(0, 10) as container}
-          <div class="vbox gap(lg) border-b(1/gray-200) pb(2xl)">
+          <div class="vbox gap(lg) bb(1/gray-200) pb(2xl)">
             <div class="hbox(between) items(baseline)">
               <div class="hbox gap(xl) items(baseline)">
                 <code class="text(base) font(mono) font(bold) uppercase tracking(wider) w(3xl)">{container.name}</code>
                 <div class="vbox gap(xs)">
-                  <code class="text(sm) font(mono) c(gray-600)">{container.value}</code>
-                  <code class="text(xs) font(mono) c(gray-500)">{container.class}</code>
+                  <code class="font(sm) font(mono) c(gray-600)">{container.value}</code>
+                  <code class="font(xs) font(mono) c(gray-500)">{container.class}</code>
                 </div>
               </div>
               <span class="caption(sm) c(gray-500) italic">{container.usage}</span>
@@ -225,13 +225,13 @@
             <div class="vbox gap(md)">
               <div class="w(full) bg(gray-200) r(sm) h(2xl) relative">
                 <div class="{container.class} bg(blue-200) h(full) r(sm) relative">
-                  <div class="absolute inset(0) hbox(center) text(xs) font(mono) c(gray-700)">
+                  <div class="absolute inset(0) hbox(center) font(xs) font(mono) c(gray-700)">
                     {container.value}
                   </div>
                 </div>
               </div>
               
-              <div class="text(sm) c(gray-600)">{container.description}</div>
+              <div class="font(sm) c(gray-600)">{container.description}</div>
             </div>
           </div>
         {/each}
@@ -247,7 +247,7 @@
       
       <div class="vbox gap(2xl) p(3xl) bg(gray-50) r(lg)">
         {#each gridPatterns as grid}
-          <div class="vbox gap(lg) border-b(1/gray-200) pb(2xl)">
+          <div class="vbox gap(lg) bb(1/gray-200) pb(2xl)">
             <div class="hbox(between) items(baseline)">
               <div class="hbox gap(xl) items(baseline)">
                 <code class="text(base) font(mono) font(bold) uppercase tracking(wider)">{grid.name}</code>
@@ -258,19 +258,19 @@
             <!-- Visual Example -->
             <div class="vbox gap(md)">
               <div class="{grid.name} gap(sm)">
-                <div class="bg(purple-200) r(sm) h(2xl) hbox(center) text(xs) font(mono)">1</div>
-                <div class="bg(purple-200) r(sm) h(2xl) hbox(center) text(xs) font(mono)">2</div>
-                <div class="bg(purple-200) r(sm) h(2xl) hbox(center) text(xs) font(mono)">3</div>
+                <div class="bg(purple-200) r(sm) h(2xl) hbox(center) font(xs) font(mono)">1</div>
+                <div class="bg(purple-200) r(sm) h(2xl) hbox(center) font(xs) font(mono)">2</div>
+                <div class="bg(purple-200) r(sm) h(2xl) hbox(center) font(xs) font(mono)">3</div>
                 {#if grid.name.includes('4') || grid.name.includes('12')}
-                  <div class="bg(purple-200) r(sm) h(2xl) hbox(center) text(xs) font(mono)">4</div>
+                  <div class="bg(purple-200) r(sm) h(2xl) hbox(center) font(xs) font(mono)">4</div>
                 {/if}
                 {#if grid.name.includes('auto')}
-                  <div class="bg(purple-200) r(sm) h(2xl) hbox(center) text(xs) font(mono)">4</div>
-                  <div class="bg(purple-200) r(sm) h(2xl) hbox(center) text(xs) font(mono)">5</div>
+                  <div class="bg(purple-200) r(sm) h(2xl) hbox(center) font(xs) font(mono)">4</div>
+                  <div class="bg(purple-200) r(sm) h(2xl) hbox(center) font(xs) font(mono)">5</div>
                 {/if}
               </div>
               
-              <div class="text(sm) c(gray-600)">{grid.description}</div>
+              <div class="font(sm) c(gray-600)">{grid.description}</div>
             </div>
           </div>
         {/each}
@@ -286,7 +286,7 @@
       
       <div class="vbox gap(2xl) p(3xl) bg(gray-50) r(lg)">
         {#each layoutUtilities as layout}
-          <div class="vbox gap(lg) border-b(1/gray-200) pb(2xl)">
+          <div class="vbox gap(lg) bb(1/gray-200) pb(2xl)">
             <div class="hbox(between) items(baseline)">
               <div class="hbox gap(xl) items(baseline)">
                 <code class="text(base) font(mono) font(bold) uppercase tracking(wider)">{layout.name}</code>
@@ -297,12 +297,12 @@
             <!-- Visual Example -->
             <div class="vbox gap(md)">
               <div class="{layout.name} gap(sm) bg(gray-100) p(md) r(sm) min-h(4xl)">
-                <div class="bg(orange-200) r(sm) p(sm) text(xs) font(mono)">Item 1</div>
-                <div class="bg(orange-200) r(sm) p(sm) text(xs) font(mono)">Item 2</div>
-                <div class="bg(orange-200) r(sm) p(sm) text(xs) font(mono)">Item 3</div>
+                <div class="bg(orange-200) r(sm) p(sm) font(xs) font(mono)">Item 1</div>
+                <div class="bg(orange-200) r(sm) p(sm) font(xs) font(mono)">Item 2</div>
+                <div class="bg(orange-200) r(sm) p(sm) font(xs) font(mono)">Item 3</div>
               </div>
               
-              <div class="text(sm) c(gray-600)">{layout.description}</div>
+              <div class="font(sm) c(gray-600)">{layout.description}</div>
             </div>
           </div>
         {/each}

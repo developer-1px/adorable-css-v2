@@ -2,6 +2,7 @@ import prettier from 'eslint-config-prettier';
 import { includeIgnoreFile } from '@eslint/compat';
 import js from '@eslint/js';
 import svelte from 'eslint-plugin-svelte';
+import adorableCssPlugin from './packages/adorable-css-lint/dist/index.mjs';
 import globals from 'globals';
 import { fileURLToPath } from 'node:url';
 import ts from 'typescript-eslint';
@@ -33,6 +34,18 @@ export default ts.config(
 			}],
 			'no-unused-expressions': 'error',
 			'no-unused-labels': 'error'
+		}
+	},
+	// AdorableCSS lint rules
+	{
+		files: ['**/*.jsx', '**/*.tsx', '**/*.js', '**/*.ts', '**/*.svelte'],
+		plugins: {
+			'adorable-css': adorableCssPlugin
+		},
+		rules: {
+			'adorable-css/no-margin': 'error',
+			'adorable-css/css-native-syntax': 'error',
+			'adorable-css/opacity-dot-syntax': 'error'
 		}
 	},
 	{

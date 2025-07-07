@@ -1,10 +1,10 @@
 import { describe, it, expect } from 'vitest';
-import { generateCSSFromAdorableCSS } from '../../core/parser/generator';
-import { makeColor } from '../../core/values/makeValue';
+import { generateClass } from '../../core/parser/generator';
+import { makeColor } from '../../../03-values/makeValue';
 
 describe('Gradient Bug Debug', () => {
   it('should handle c(135deg/purple-500..pink-500) correctly', () => {
-    const css = generateCSSFromAdorableCSS('c(135deg/purple-500..pink-500)');
+    const css = generateClass('c(135deg/purple-500..pink-500)');
     console.log('Generated CSS:', css);
     
     // Should NOT contain rgb(135deg/purple-500)
@@ -43,7 +43,7 @@ describe('Gradient Bug Debug', () => {
     }
     
     // Test the actual generation
-    const css = generateCSSFromAdorableCSS('c(135deg/purple-500..pink-500)');
+    const css = generateClass('c(135deg/purple-500..pink-500)');
     console.log('Full CSS output:', css);
   });
 });

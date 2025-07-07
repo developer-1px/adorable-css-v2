@@ -13,11 +13,11 @@ export {
 // export * from './responsive/responsive'; // Spec'd out
 
 // Re-export 04-components
-export { glowRules } from '../04-components/features/glow';
-export { glassRules } from '../04-components/features/glass';
-export { figmaComponents } from '../04-components/features/figma';
-export { containerRules } from '../04-components/patterns/container';
-export { proseRules } from '../04-components/patterns/prose';
+export { glowRules } from '../05-components/features/glow';
+export { glassRules } from '../05-components/features/glass';
+export { figmaComponents } from '../05-components/features/figma';
+export { containerRules } from '../05-components/patterns/container';
+export { proseRules } from '../05-components/patterns/prose';
 
 // Export animations as animationRules for backward compatibility
 export { animationRules } from './animations/animations';

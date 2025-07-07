@@ -8,7 +8,7 @@ export const inputDefinition: ComponentDefinition = {
   variants: {
     default: 'border(1/gray-200) hover:border(gray-300) focus:border(gray-900) focus:ring(1/gray-900) disabled:cursor(not-allowed) disabled:opacity(50) disabled:bg(gray-50)',
     ghost: 'bg(gray-100) border(1/transparent) hover:bg(gray-200) focus:bg(white) focus:border(gray-900) focus:ring(1/gray-900) disabled:cursor(not-allowed) disabled:opacity(50)',
-    underlined: 'px(0) r(0) border(none) border-b(1/gray-300) hover:border-b(gray-400) focus:border-b(2/gray-900) focus:pb(7) disabled:cursor(not-allowed) disabled:opacity(50) disabled:border-b(gray-200)',
+    underlined: 'px(0) r(0) border(none) bb(1/gray-300) hover:bb(gray-400) focus:bb(2/gray-900) focus:pb(7) disabled:cursor(not-allowed) disabled:opacity(50) disabled:bb(gray-200)',
     error: 'border(1/red-500) hover:border(red-600) focus:border(red-500) focus:ring(1/red-500) disabled:cursor(not-allowed) disabled:opacity(50) disabled:bg(gray-50) disabled:border(red-300)'
   },
   

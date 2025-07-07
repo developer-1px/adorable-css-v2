@@ -1,6 +1,6 @@
 // AdorableCSS v2 - CDN Entry Point
 import { generateCSS } from "adorable-css";
-import { getDynamicStyleManager, initDynamicStyles, destroyDynamicStyles } from "./runtime/dynamic-style-manager";
+import { initDynamicStyles, destroyDynamicStyles } from "./runtime/dynamic-style-manager";
 
 // Types for browser environment
 interface AdorableCSSV2 {
@@ -84,7 +84,7 @@ if (typeof window !== "undefined") {
   }
 
   // Make available globally
-  (window as any).AdorableCSSV2 = AdorableCSSV2;
+  (window as unknown as Record<string, unknown>).AdorableCSSV2 = AdorableCSSV2;
 }
 
 // Utility function to check which classes fail to generate CSS
@@ -122,5 +122,5 @@ export function analyzeClasses(classes: string[]): {
 
 // Export for module systems
 export default AdorableCSSV2;
-export { generateCSS, generateCSS as generateCSSFromAdorableCSS };
+export { generateCSS, generateCSS as generateClass };
 export type { AdorableCSSOptions };

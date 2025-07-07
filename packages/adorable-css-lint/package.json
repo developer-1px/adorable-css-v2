@@ -1,0 +1,53 @@
+{
+  "name": "eslint-plugin-adorable-css",
+  "version": "0.1.0",
+  "description": "ESLint plugin for AdorableCSS framework rules and best practices",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:ui": "vitest --ui",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint src --ext .ts",
+    "lint:fix": "eslint src --ext .ts --fix"
+  },
+  "keywords": [
+    "eslint",
+    "plugin",
+    "adorable-css",
+    "css-framework",
+    "linting"
+  ],
+  "author": "AdorableCSS Team",
+  "license": "MIT",
+  "peerDependencies": {
+    "eslint": "^8.0.0 || ^9.0.0"
+  },
+  "devDependencies": {
+    "@types/eslint": "^8.56.0",
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.56.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0"
+  },
+  "dependencies": {
+    "@typescript-eslint/utils": "^6.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/adorable-css-v2.git",
+    "directory": "packages/adorable-css-lint"
+  }
+}

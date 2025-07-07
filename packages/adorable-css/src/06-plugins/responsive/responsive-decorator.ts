@@ -75,7 +75,7 @@ export const analyzeResponsivePattern = (className: string): ResponsivePattern |
 };
 
 export const isResponsivePattern = (className: string): boolean =>
-  RESPONSIVE_PATTERN.test(className);
+  analyzeResponsivePattern(className) !== null;
 
 // Backward compatibility
 export const ResponsiveSelector = {

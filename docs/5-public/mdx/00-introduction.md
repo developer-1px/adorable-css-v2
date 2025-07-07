@@ -139,7 +139,7 @@ group-hover:visible /* 부모 요소 hover 시 자식 요소 표시 */
 
 ## 아키텍처 개요: 견고하고 유연한 기반
 
-AdorableCSS는 고성능과 확장성을 염두에 두고 설계되었습니다.
+AdorableCSS는 고성능과 확장성을 염두에 두고 설계되었습니다. AdorableCSS의 파서 시스템, 규칙 시스템, 확장 시스템에 대한 더 자세한 내용은 [기술 아키텍처 문서](/docs/5-public/mdx/07-technical-architecture.md)를 참조하세요.
 
 ### 1. Parser 시스템
 고성능 토크나이저와 AST(추상 구문 트리) 기반 파서를 사용하여 복잡한 표현식과 함수 호출을 효율적으로 처리합니다.
@@ -158,20 +158,6 @@ AdorableCSS는 고성능과 확장성을 염두에 두고 설계되었습니다.
 
 ### 3. 확장 시스템
 플러그인 아키텍처를 통해 사용자가 쉽게 커스텀 규칙, 키프레임, 테마 등을 추가하여 AdorableCSS를 프로젝트의 요구사항에 맞춰 확장할 수 있습니다.
-
-```typescript
-// 커스텀 규칙 추가 예시
-registerRule('my-effect', (value) => ({
-  // CSS 속성 정의
-  transform: `translateY(${value})`
-}));
-
-// 커스텀 키프레임 등록 예시
-registerKeyframes('my-animation', {
-  '0%': { opacity: 0 },
-  '100%': { opacity: 1 }
-});
-```
 
 ## 철학: Gap-based Layout - Margin 없는 세상
 
@@ -212,6 +198,8 @@ AdorableCSS는 런타임 오버헤드 없이 최적의 성능을 제공하도록
 
 ## 실제 사례
 
+AdorableCSS를 사용하면 복잡한 CSS를 간결하고 의미 있는 코드로 변환할 수 있습니다. 다음은 TailwindCSS와 비교한 간단한 예시입니다. 더 많은 실제 사례는 [AdorableCSS Cookbook](/docs/5-public/COOKBOOK.md)에서 확인하실 수 있습니다.
+
 ### Before (TailwindCSS)
 ```html
 <div class="min-h-screen bg-gray-50 flex items-center justify-center px-4 sm:px-6 lg:px-8">
@@ -234,63 +222,81 @@ AdorableCSS는 런타임 오버헤드 없이 최적의 성능을 제공하도록
 </div>
 ```
 
-**코드 길이: 50% 감소**  
-**가독성: 200% 향상**  
+**코드 길이: 50% 감소**
+**가독성: 200% 향상**
 **의미 전달: 명확함**
 
-## 시작하기
+## 시작하기: AdorableCSS와 함께하는 첫걸음
 
-### 30초 체험
+### 설치
 ```bash
-# CDN으로 바로 시작
-<link rel="stylesheet" href="https://unpkg.com/adorable-css/dist/adorable.css">
+npm install adorable-css
 ```
 
-### 점진적 도입
+### 기본 사용 예시
+
+AdorableCSS는 빌드 타임에 클래스 이름을 기반으로 CSS를 생성합니다. 이는 런타임 오버헤드 없이 최적화된 CSS를 제공합니다.
+
 ```javascript
-// 기존 프로젝트에 추가
-import 'adorable-css'
+import { generateCSS } from 'adorable-css';
 
-// Tailwind와 함께 사용 가능!
+// HTML/JSX에서 사용된 클래스 이름을 기반으로 CSS 생성
+const css = generateCSS([
+  'hbox(middle)',
+  'p(lg)',
+  'bg(white)',
+  'shadow(md)',
+  'hover:shadow(lg)'
+]);
+
+console.log(css);
+/*
+.hbox\(middle\) {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.p\(lg\) {
+  padding: var(--spacing-lg);
+}
+.bg\(white\) {
+  background-color: #fff;
+}
+.shadow\(md\) {
+  box-shadow: var(--shadow-md);
+}
+.hover\:shadow\(lg\):hover {
+  box-shadow: var(--shadow-lg);
+}
+*/
 ```
 
-### 팀 설득하기
-1. 작은 컴포넌트부터 AdorableCSS로 작성
-2. 코드 리뷰에서 가독성 차이 보여주기
-3. 개발 속도 측정 및 공유
+### HTML/프레임워크에서 사용
 
-## 자주 묻는 질문
+생성된 CSS를 프로젝트에 포함시키고, HTML/JSX에서 AdorableCSS 클래스를 사용합니다.
 
-**Q: Tailwind와 뭐가 다른가요?**  
-A: 철학이 다릅니다. Tailwind는 "유틸리티 우선", AdorableCSS는 "사고방식 우선"입니다.
+```html
+<div class="card() p(lg) hover:shadow(lg)">
+  <h2 class="heading(h2) mb(md)">제목</h2>
+  <p class="text(gray-600) line-height(1.6)">
+    이것은 AdorableCSS를 사용하여 스타일링된 예시입니다.
+    디자이너의 의도를 그대로 코드로 옮겨, 빠르고 효율적인 개발이 가능합니다.
+  </p>
+</div>
+```
 
-**Q: 프로덕션에서 사용할 수 있나요?**  
-A: 네! 이미 여러 프로덕션 환경에서 사용 중입니다.
+## 다음 단계
 
-**Q: 번들 크기는 어떤가요?**  
-A: Core: 34KB (gzipped), 대부분의 프로젝트에서 Tailwind보다 작습니다.
+AdorableCSS의 강력한 기능과 철학에 대해 더 깊이 알아보세요:
 
-**Q: 커스터마이징이 가능한가요?**  
-A: 네! 토큰 시스템, 플러그인, 커스텀 규칙 모두 지원합니다.
-
-## 결론
-
-AdorableCSS는 단순한 CSS Framework가 아닙니다.  
-**디자이너와 개발자를 연결하는 다리**입니다.
-
-> "Write CSS the way you think in Figma"
-
----
-
-### 🔗 다음 단계
-
--   [Quick Start](/docs/quick-start) - AdorableCSS를 프로젝트에 적용하는 방법
--   [Figma-First CSS Utility](/docs/figma-first-css-utility) - Figma 개념과 AdorableCSS 클래스 매핑 상세 가이드
--   [Design Token](/docs/design-token) - 디자인 토큰 시스템의 작동 방식과 활용법
--   [Layout](/docs/layout) - `hbox`, `vbox` 등 레이아웃 시스템 심층 분석
--   [Component](/docs/component) - 디자인 시스템 컴포넌트를 코드로 구현하는 방법
--   [Syntax Guide](/docs/syntax-guide) - AdorableCSS의 모든 유틸리티 클래스 문법 참조
--   [TailwindCSS에서 마이그레이션](/docs/migration-guide)
+-   [Quick Start](/docs/5-public/getting-started/QUICK_START.md) - AdorableCSS를 프로젝트에 적용하는 방법
+-   [Figma-First CSS Utility](/docs/5-public/mdx/02-figma-first-css-utility.md) - Figma 개념과 AdorableCSS 클래스 매핑 상세 가이드
+-   [Design Token](/docs/5-public/mdx/03-design-token.md) - 디자인 토큰 시스템의 작동 방식과 활용법
+-   [Layout](/docs/5-public/mdx/04-layout.md) - `hbox`, `vbox` 등 레이아웃 시스템 심층 분석
+-   [Component](/docs/5-public/mdx/05-component.md) - 디자인 시스템 컴포넌트를 코드로 구현하는 방법
+-   [Syntax Guide](/docs/5-public/mdx/11-syntax-guide.md) - AdorableCSS의 모든 유틸리티 클래스 문법 참조
+-   [TailwindCSS에서 마이그레이션](/docs/5-public/guides/MIGRATION_GUIDE.md)
 -   [커뮤니티 참여하기](https://github.com/adorablecss/adorable-css-v2/discussions)
 -   [데모 영상 보기](https://youtube.com/adorablecss) (준비 중)
 

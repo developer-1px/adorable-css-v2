@@ -50,11 +50,11 @@
     
     <!-- Dynamic Display Component -->
     <div class="vbox gap(2xl) p(3xl) bg(white) r(xl) shadow(xl) border(2/black)">
-      <h2 class="text(2xl) font(bold) mb(xl)">Display Component Sizes</h2>
+      <h2 class="font(2xl) font(bold) mb(xl)">Display Component Sizes</h2>
       
       <!-- Show current class -->
       <div class="p(xl) bg(gray-100) r(lg) text(center)">
-        <p class="text(sm) c(gray-600) mb(md)">Current class: <code class="font(mono) bg(white) px(sm) py(xs) r(sm)">{testClasses[currentClass]}</code></p>
+        <p class="font(sm) c(gray-600) mb(md)">Current class: <code class="font(mono) bg(white) px(sm) py(xs) r(sm)">{testClasses[currentClass]}</code></p>
         <div class={testClasses[currentClass]}>
           The quick brown fox
         </div>
@@ -62,10 +62,10 @@
       
       <!-- All display sizes -->
       <div class="vbox gap(lg) mt(2xl)">
-        <h3 class="text(lg) font(semibold)">All Display Sizes:</h3>
+        <h3 class="fonr(lg) font(semibold)">All Display Sizes:</h3>
         {#each testClasses as className}
           <div class="p(lg) bg(gray-50) r(md) hover:bg(gray-100) transition">
-            <code class="font(mono) text(sm) c(gray-600)">{className}</code>
+            <code class="font(mono) font(sm) c(gray-600)">{className}</code>
             <div class={className}>
               The quick brown fox jumps over the lazy dog
             </div>
@@ -76,23 +76,23 @@
     
     <!-- Notice about CDN -->
     <div class="vbox gap(xl) p(3xl) bg(blue-50) r(xl) border(2/blue-200)">
-      <h2 class="text(2xl) font(bold) c(blue-900)">Dynamic Styles in CDN</h2>
-      <p class="text(lg) c(blue-800)">
+      <h2 class="font(2xl) font(bold) c(blue-900)">Dynamic Styles in CDN</h2>
+      <p class="fonr(lg) c(blue-800)">
         The dynamic style injection feature (including <code class="font(mono) bg(white) px(sm) py(xs) r(sm)">addDynamicClasses</code>) 
         has been moved to the CDN package for better separation of concerns.
       </p>
       <div class="vbox gap(md) mt(lg)">
         <div class="hbox gap(sm) items(center)">
           <div class="w(3) h(3) bg(blue-500) r(full)"></div>
-          <span class="text(sm) c(blue-700)">Core package: Pure CSS generation and token management</span>
+          <span class="font(sm) c(blue-700)">Core package: Pure CSS generation and token management</span>
         </div>
         <div class="hbox gap(sm) items(center)">
           <div class="w(3) h(3) bg(blue-500) r(full)"></div>
-          <span class="text(sm) c(blue-700)">CDN package: Browser-specific features like dynamic injection</span>
+          <span class="font(sm) c(blue-700)">CDN package: Browser-specific features like dynamic injection</span>
         </div>
         <div class="hbox gap(sm) items(center)">
           <div class="w(3) h(3) bg(blue-500) r(full)"></div>
-          <span class="text(sm) c(blue-700)">Use CDN version for dynamic style management in browsers</span>
+          <span class="font(sm) c(blue-700)">Use CDN version for dynamic style management in browsers</span>
         </div>
       </div>
     </div>

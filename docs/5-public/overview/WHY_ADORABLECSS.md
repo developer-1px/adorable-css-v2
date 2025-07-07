@@ -127,6 +127,8 @@ name(key:value)
 
 ## 🎯 실제 사례
 
+AdorableCSS를 사용하면 복잡한 CSS를 간결하고 의미 있는 코드로 변환할 수 있습니다. 더 많은 실제 사례는 [AdorableCSS Cookbook](/docs/5-public/COOKBOOK.md)에서 확인하실 수 있습니다.
+
 ### Before (TailwindCSS)
 ```html
 <div class="min-h-screen bg-gray-50 flex items-center justify-center px-4 sm:px-6 lg:px-8">
@@ -199,8 +201,8 @@ AdorableCSS는 단순한 CSS Framework가 아닙니다.
 
 ### 🔗 다음 단계
 
-- 🎮 **[5분 안에 시작하기](/docs/getting-started)**
-- 🔄 **[TailwindCSS에서 마이그레이션](/docs/migration-tailwind)**
+- 🎮 **[5분 안에 시작하기](/docs/5-public/getting-started/QUICK_START.md)**
+- 🔄 **[TailwindCSS에서 마이그레이션](/docs/5-public/guides/MIGRATION_GUIDE.md)**
 - 💬 **[커뮤니티 참여하기](https://github.com/adorablecss/adorable-css-v2/discussions)**
 - 📺 **[데모 영상 보기](https://youtube.com/adorablecss)** (준비 중)
 

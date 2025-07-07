@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { inset, insetX, insetY } from '../../../03-rules/layout/inset';
+import { inset, insetX, insetY } from '../../../04-rules/03-rules_deprecated/layout/inset';
 
 describe('inset rules', () => { // Clarified describe block name
   describe('inset', () => {

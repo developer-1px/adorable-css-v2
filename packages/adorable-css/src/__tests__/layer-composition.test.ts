@@ -1,16 +1,16 @@
 import { describe, it, expect } from 'vitest';
-import { generateCSS } from '../01-core/generators/generator';
+import { generateCSS } from '../07-generator/generator';
 
 describe('Layer Composition System', () => {
   it('should place layout compositions in @layer composition', () => {
     const css = generateCSS(['hbox(pack)', 'vbox(middle)', 'grid(3)']);
     
-    expect(css).toContain('@layer base, 04-components, composition, utilities;');
-    expect(css).toContain('@layer composition {');
+    expect(css).toContain('@layer base,components,composition,utilities;');
+    expect(css).toContain('@layer composition{');
     
-    const compositionMatch = css.match(/@layer composition \{([\s\S]*?)\n\}/);
+    const compositionMatch = css.match(/@layer composition\{([\s\S]*?)\}/);
     expect(compositionMatch).toBeTruthy();
-    expect(compositionMatch![1]).toContain('.hbox\\(center\\)');
+    expect(compositionMatch![1]).toContain('.hbox\\(pack\\)');
     expect(compositionMatch![1]).toContain('.vbox\\(middle\\)');
     expect(compositionMatch![1]).toContain('.grid\\(3\\)');
   });
@@ -35,19 +35,19 @@ describe('Layer Composition System', () => {
     ]);
     
     // Check layer order declaration
-    expect(css).toContain('@layer base, 04-components, composition, utilities;');
+    expect(css).toContain('@layer base,components,composition,utilities;');
     
     // Check each layer exists
-    expect(css).toContain('@layer base {');
-    expect(css).toContain('@layer 04-components {');
-    expect(css).toContain('@layer composition {');
-    expect(css).toContain('@layer utilities {');
+    expect(css).toContain('@layer base{');
+    expect(css).toContain('@layer components{');
+    expect(css).toContain('@layer composition{');
+    expect(css).toContain('@layer utilities{');
   });
 
   it('should place layer() utility in composition layer', () => {
     const css = generateCSS(['layer(fill)', 'layer(top/10)']);
     
-    const compositionMatch = css.match(/@layer composition \{([\s\S]*?)\n\}/);
+    const compositionMatch = css.match(/@layer composition\{([\s\S]*?)\}/);
     expect(compositionMatch).toBeTruthy();
     expect(compositionMatch![1]).toContain('.layer\\(fill\\)');
     expect(compositionMatch![1]).toContain('.layer\\(top\\/10\\)');

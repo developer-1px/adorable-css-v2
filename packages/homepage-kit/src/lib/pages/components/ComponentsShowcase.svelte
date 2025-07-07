@@ -20,7 +20,7 @@
 
 <div class="min-h(screen) bg(gray-50)">
   <!-- Header -->
-  <header class="pt(4xl) pb(2xl) px(2xl) bg(white) border-b(1/gray-200)">
+  <header class="pt(4xl) pb(2xl) px(2xl) bg(white) bb(1/gray-200)">
     <div class="max-w(full)">
       <h1 class="display(lg) text(center) mb(lg)">
         Component Showcase

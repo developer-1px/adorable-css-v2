@@ -67,11 +67,11 @@ md.renderer.rules.tr_open = () => {
 };
 
 md.renderer.rules.th_open = () => {
-	return '<th class="bg(neutral-100) px(md) py(sm) text(left) font(semi) c(gray-900) border-b(2/neutral-200)">';
+	return '<th class="bg(neutral-100) px(md) py(sm) text(left) font(semi) c(gray-900) bb(2/neutral-200)">';
 };
 
 md.renderer.rules.td_open = () => {
-	return '<td class="px(md) py(sm) border-b(1/neutral-100)">';
+	return '<td class="px(md) py(sm) bb(1/neutral-100)">';
 };
 
 // 인용구
@@ -82,7 +82,7 @@ md.renderer.rules.blockquote_open = () => {
 // 인라인 코드
 md.renderer.rules.code_inline = (tokens, idx) => {
 	const content = tokens[idx].content;
-	return `<code class="bg(neutral-50) c(primary-700) px(xs) py(0.5) r(sm) border(1/neutral-200) font(mono) text(sm)">${md.utils.escapeHtml(content)}</code>`;
+	return `<code class="bg(neutral-50) c(primary-700) px(xs) py(0.5) r(sm) border(1/neutral-200) font(mono) font(sm)">${md.utils.escapeHtml(content)}</code>`;
 };
 
 /**

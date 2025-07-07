@@ -59,7 +59,7 @@
     <div class="text(center) vbox gap(lg)">
       <h2 class="display(xl) font(black) tracking(tight)">Spacing Scale</h2>
       <div class="vbox(center)">
-        <p class="text(lg) c(gray-600) max-w(2xl)">Generate consistent spacing system for layouts</p>
+        <p class="fonr(lg) c(gray-600) max-w(2xl)">Generate consistent spacing system for layouts</p>
       </div>
     </div>
   
@@ -76,7 +76,7 @@
           bind:value={baseUnit}
           min="2"
           max="16"
-          class="w(12xl) text(3xl) font(mono) font(bold) border(0) border-b(xs/black) bg(transparent) pb(lg) focus:outline(0)"
+          class="w(12xl) font(3xl) font(mono) font(bold) border(0) bb(xs/black) bg(transparent) pb(lg) focus:outline(0)"
         />
         <p class="caption c(gray-600)">Smallest spacing unit (typically xs or sm)</p>
       </div>
@@ -86,7 +86,7 @@
         <label class="title(lg) font(bold)">Progression Type</label>
         <select 
           bind:value={scaleType}
-          class="w(25xl) text(xl) font(mono) font(bold) border(0) border-b(xs/black) bg(transparent) pb(lg) focus:outline(0)"
+          class="w(25xl) text(xl) font(mono) font(bold) border(0) bb(xs/black) bg(transparent) pb(lg) focus:outline(0)"
         >
           {#each scaleTypes as type}
             <option value={type.value}>{type.name} - {type.desc}</option>
@@ -129,7 +129,7 @@
       {#each Object.entries(spacingScale) as [step, value]}
         <div class="vbox gap(lg)">
           <div class="hbox(between) items(baseline)">
-            <code class="text(lg) font(mono) font(bold) uppercase tracking(wider)">{step}</code>
+            <code class="fonr(lg) font(mono) font(bold) uppercase tracking(wider)">{step}</code>
             <code class="text(base) font(mono) c(gray-600)">{value}</code>
           </div>
           <div class="h(xl) bg(black) r(xs) transition-all" style="width: {value}; max-width: 100%;"></div>

@@ -17,13 +17,13 @@ pnpm add adorable-css
 ### Basic Usage
 
 ```typescript
-import { parseAdorableCSS, generateCSSFromAdorableCSS } from 'adorable-css'
+import { parseAdorableCSS, generateClass } from 'adorable-css'
 
 // Parse AdorableCSS syntax
 const parsed = parseAdorableCSS('hbox gap(16) p(20)')
 
 // Generate CSS
-const css = generateCSSFromAdorableCSS('hbox gap(16) p(20)')
+const css = generateClass('hbox gap(16) p(20)')
 // Result: .hbox{display:flex} .gap\(16\){gap:16px} .p\(20\){padding:20px}
 ```
 

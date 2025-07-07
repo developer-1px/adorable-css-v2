@@ -90,7 +90,7 @@
           <div class="absolute inset(0) bg(black.0) group-hover:bg(black.1) transition"></div>
           <div class="absolute bottom(0) left(0) right(0) p(xl) text(left)">
             <h4 class="font(lg) bold c(white) mb(xs) drop-shadow-lg">{gradient.name}</h4>
-            <code class="text(xs) c(white.8) bg(black.2) px(sm) py(xs) r(md) inline-block backdrop-blur(sm)">
+            <code class="font(xs) c(white.8) bg(black.2) px(sm) py(xs) r(md) inline-block backdrop-blur(sm)">
               {gradient.value}
             </code>
           </div>
@@ -111,7 +111,7 @@
     <div class="hbox(between/middle) mb(xl)">
       <div>
         <h3 class="heading(h2) c(gray-900) mb(xs)">Brand Identity</h3>
-        <p class="text(sm) c(gray-600)">Primary brand gradient</p>
+        <p class="font(sm) c(gray-600)">Primary brand gradient</p>
       </div>
       <Droplet size="20" class="c(purple-500)" />
     </div>
@@ -125,7 +125,7 @@
         <div class="absolute inset(0) bg(black.0) group-hover:bg(black.1) transition"></div>
         <div class="absolute bottom(0) left(0) right(0) p(xl) text(left)">
           <h4 class="font(lg) bold c(white) mb(xs) drop-shadow-lg">Brand</h4>
-          <code class="text(xs) c(white.8) bg(black.2) px(sm) py(xs) r(md) inline-block backdrop-blur(sm)">
+          <code class="font(xs) c(white.8) bg(black.2) px(sm) py(xs) r(md) inline-block backdrop-blur(sm)">
             purple-500..pink-500
           </code>
         </div>
@@ -145,7 +145,7 @@
           style="background: {brandStartColor}"
           on:click={() => copyColor('purple-500')}
         ></button>
-        <code class="text(sm) c(gray-600)">purple-500</code>
+        <code class="font(sm) c(gray-600)">purple-500</code>
       </div>
       
       <div class="vbox gap(md)">
@@ -155,18 +155,18 @@
           style="background: {brandEndColor}"
           on:click={() => copyColor('pink-500')}
         ></button>
-        <code class="text(sm) c(gray-600)">pink-500</code>
+        <code class="font(sm) c(gray-600)">pink-500</code>
       </div>
     </div>
   </div>
 
   <!-- Full Spectrum -->
   <div class="bg(white) r(2xl) shadow(xl) shadow(gray-200.5) overflow(hidden)">
-    <div class="p(2xl) border-b(1px/gray-100)">
+    <div class="p(2xl) bb(1px/gray-100)">
       <div class="hbox(between/middle) mb(xl)">
         <div>
           <h3 class="heading(h2) c(gray-900) mb(xs)">Full Color Spectrum</h3>
-          <p class="text(sm) c(gray-600)">Complete palette with all shades</p>
+          <p class="font(sm) c(gray-600)">Complete palette with all shades</p>
         </div>
         <Sun size="20" class="c(amber-500)" />
       </div>
@@ -207,7 +207,7 @@
                           {/if}
                         </div>
                         <div class="absolute bottom(4) left(0) right(0) text(center)">
-                          <span class="text(2xs) c({parseInt(shade) >= 600 ? 'white.8' : 'black.6'}) font(medium)">{shade}</span>
+                          <span class="font(2xs) c({parseInt(shade) >= 600 ? 'white.8' : 'black.6'}) font(medium)">{shade}</span>
                         </div>
                       </div>
                     </button>
@@ -223,7 +223,7 @@
   <!-- Semantic Colors -->
   <div class="bg(white) r(2xl) shadow(xl) shadow(gray-200.5) p(2xl)">
     <h3 class="heading(h2) c(gray-900) mb(xs)">Semantic Colors</h3>
-    <p class="text(sm) c(gray-600) mb(2xl)">Meaningful colors for UI communication</p>
+    <p class="font(sm) c(gray-600) mb(2xl)">Meaningful colors for UI communication</p>
     
     <div class="grid(2) lg:grid(4) gap(lg)">
       {#each Object.entries(semanticColors) as [semanticName, config]}
@@ -239,9 +239,9 @@
               style="background: {colorValue}"
             ></div>
             <div class="vbox gap(xs)">
-              <code class="text(sm) c(gray-900) font(bold)">{semanticName}</code>
-              <p class="text(xs) c(gray-600)">{config.label}</p>
-              <code class="text(xs) c(gray-500)">{config.base}</code>
+              <code class="font(sm) c(gray-900) font(bold)">{semanticName}</code>
+              <p class="font(xs) c(gray-600)">{config.label}</p>
+              <code class="font(xs) c(gray-500)">{config.base}</code>
             </div>
             <div class="absolute top(md) right(md) opacity(0) group-hover:opacity(100) transition">
               {#if copiedColor === semanticName}
@@ -262,28 +262,28 @@
     <div class="grid(3) gap(2xl) max-w(4xl) mx(auto)">
       <div class="text(center)">
         <div class="size(80px) r(full) bg(white.2) hbox(center/middle) mx(auto) mb(lg)">
-          <span class="text(2xl)">🎨</span>
+          <span class="font(2xl)">🎨</span>
         </div>
         <h4 class="font(lg) bold mb(sm)">Use Semantic Colors</h4>
-        <p class="text(sm) opacity(0.9)">
+        <p class="font(sm) opacity(0.9)">
           primary, success, warning, error for consistent meaning
         </p>
       </div>
       <div class="text(center)">
         <div class="size(80px) r(full) bg(white.2) hbox(center/middle) mx(auto) mb(lg)">
-          <span class="text(2xl)">🌈</span>
+          <span class="font(2xl)">🌈</span>
         </div>
         <h4 class="font(lg) bold mb(sm)">OKLCH Gradients</h4>
-        <p class="text(sm) opacity(0.9)">
+        <p class="font(sm) opacity(0.9)">
           Smooth, perceptually uniform gradients between any colors
         </p>
       </div>
       <div class="text(center)">
         <div class="size(80px) r(full) bg(white.2) hbox(center/middle) mx(auto) mb(lg)">
-          <span class="text(2xl)">♿</span>
+          <span class="font(2xl)">♿</span>
         </div>
         <h4 class="font(lg) bold mb(sm)">Accessible Contrast</h4>
-        <p class="text(sm) opacity(0.9)">
+        <p class="font(sm) opacity(0.9)">
           500+ shades on white, 400- shades on black backgrounds
         </p>
       </div>

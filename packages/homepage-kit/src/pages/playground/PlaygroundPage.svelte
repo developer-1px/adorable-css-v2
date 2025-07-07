@@ -6,43 +6,43 @@
   <div class="vbox(pack) gap(2xl)">
     <!-- Hero Section -->
     <div class="vbox(pack) gap(lg) text(center)">
-      <h1 class="heading(display/xl) bold bg-clip(text) c(135deg/#667eea..#764ba2)">
+      <h1 class="heading(3xl) bold(700) c(primary)">
         Welcome to AdorableCSS
       </h1>
-      <p class="body(xl) c(neutral-600) max-w(2xl) line-height(relaxed)">
+      <p class="body(xl) c(neutral-600) max-w(2xl)">
         A modern CSS framework with intuitive syntax inspired by Figma
       </p>
     </div>
 
     <!-- Feature Cards -->
-    <div class="grid grid-cols(1) md:grid-cols(3) gap(xl) w(full)">
-      <div class="bg(white) p(xl) r(2xl) shadow(lg) hover:shadow(xl) transition group hover:translate-y(-4px)">
-        <div class="size(60px) bg(135deg/#667eea..#764ba2) r(full) hbox(pack) mb(lg) group-hover:rotate(360) transition duration(1000)">
-          <span class="heading(h3)">🎨</span>
+    <div class="grid(3) gap(xl) w(full)">
+      <div class="bg(white) p(xl) r(2xl) shadow(lg) hover:shadow(xl) transition">
+        <div class="size(60px) bg(primary) r(full) hbox(center/middle) mb(lg)">
+          <span class="heading(lg) c(white)">🎨</span>
         </div>
-        <h3 class="title(xl) bold mb(sm)">Beautiful Design</h3>
+        <h3 class="title(xl) bold(600) mb(sm)">Beautiful Design</h3>
         <p class="c(neutral-600)">Craft stunning interfaces with ease</p>
       </div>
       
-      <div class="bg(white) p(xl) r(2xl) shadow(lg) hover:shadow(xl) transition group hover:translate-y(-4px)">
-        <div class="size(60px) bg(135deg/#f093fb..#f5576c) r(full) hbox(pack) mb(lg) group-hover:rotate(360) transition duration(1000)">
-          <span class="heading(h3)">⚡</span>
+      <div class="bg(white) p(xl) r(2xl) shadow(lg) hover:shadow(xl) transition">
+        <div class="size(60px) bg(success) r(full) hbox(center/middle) mb(lg)">
+          <span class="heading(lg) c(white)">⚡</span>
         </div>
-        <h3 class="title(xl) bold mb(sm)">Lightning Fast</h3>
+        <h3 class="title(xl) bold(600) mb(sm)">Lightning Fast</h3>
         <p class="c(neutral-600)">Optimized for performance</p>
       </div>
       
-      <div class="bg(white) p(xl) r(2xl) shadow(lg) hover:shadow(xl) transition group hover:translate-y(-4px)">
-        <div class="size(60px) bg(135deg/#4facfe..#00f2fe) r(full) hbox(pack) mb(lg) group-hover:rotate(360) transition duration(1000)">
-          <span class="heading(h3)">🚀</span>
+      <div class="bg(white) p(xl) r(2xl) shadow(lg) hover:shadow(xl) transition">
+        <div class="size(60px) bg(info) r(full) hbox(center/middle) mb(lg)">
+          <span class="heading(lg) c(white)">🚀</span>
         </div>
-        <h3 class="title(xl) bold mb(sm)">Developer Friendly</h3>
+        <h3 class="title(xl) bold(600) mb(sm)">Developer Friendly</h3>
         <p class="c(neutral-600)">Intuitive syntax you'll love</p>
       </div>
     </div>
 
     <!-- CTA Button -->
-    <button class="px(2xl) py(lg) bg(135deg/#667eea..#764ba2) c(white) r(full) title(lg) semi shadow(xl) hover:shadow(2xl) hover:translate-y(-2px) transition cursor(pointer)">
+    <button class="px(2xl) py(lg) bg(primary) c(white) r(full) title(lg) bold(600) shadow(xl) hover:shadow(2xl) transition cursor(pointer)">
       Get Started →
     </button>
   </div>
@@ -68,30 +68,30 @@
     },
     {
       name: 'Login Form',
-      code: `<div class="hbox(fill) min-h(screen) bg(135deg/#667eea..#764ba2)">
-  <div class="glass(30/0.1/white) p(2xl) r(2xl) w(400px) shadow(2xl)">
-    <h2 class="heading(h3) bold text(center) mb(xl)">Welcome Back</h2>
+      code: `<div class="hbox(center/middle) min-h(screen) bg(primary) p(xl)">
+  <div class="glassmorphism(lg) p(2xl) r(2xl) w(400px) shadow(2xl)">
+    <h2 class="heading(xl) bold(600) text(center) mb(xl) c(white)">Welcome Back</h2>
     
     <form class="vbox gap(lg)">
       <div class="vbox gap(sm)">
-        <label class="caption(sm) bold(500) c(gray-700)">Email</label>
+        <label class="caption(sm) bold(500) c(white)">Email</label>
         <input type="email" placeholder="you@example.com" 
-          class="w(full) px(lg) py(md) r(lg) b(1/gray-300) focus:b(2/blue-500) transition" />
+          class="w(full) px(lg) py(md) r(lg) border(1/white.3) bg(white.2) c(white) placeholder:c(white.7) focus:border(white) transition" />
       </div>
       
       <div class="vbox gap(sm)">
-        <label class="caption(sm) bold(500) c(gray-700)">Password</label>
+        <label class="caption(sm) bold(500) c(white)">Password</label>
         <input type="password" placeholder="••••••••" 
-          class="w(full) px(lg) py(md) r(lg) b(1/gray-300) focus:b(2/blue-500) transition" />
+          class="w(full) px(lg) py(md) r(lg) border(1/white.3) bg(white.2) c(white) placeholder:c(white.7) focus:border(white) transition" />
       </div>
       
-      <button class="w(full) py(md) bg(135deg/#667eea..#764ba2) c(white) r(lg) bold(500) hover:opacity(0.9) transition">
+      <button class="w(full) py(md) bg(white) c(primary) r(lg) bold(500) hover:bg(white.9) transition">
         Sign In
       </button>
       
-      <p class="text(center) caption(sm) c(gray-600)">
+      <p class="text(center) caption(sm) c(white.8)">
         Don't have an account? 
-        <a href="#" class="c(info-600) hover:underline">Sign up</a>
+        <a href="#" class="c(white) hover:underline">Sign up</a>
       </p>
     </form>
   </div>
@@ -370,6 +370,142 @@
             Deploy globally with automatic scaling and load balancing.
           </p>
         </div>
+      </div>
+    </div>
+  </div>
+</div>`
+    },
+    {
+      name: 'Modern Showcase',
+      code: `<div class="min-h(screen) bg(neutral-50) py(3xl)">
+  <div class="container(xl)">
+    <!-- Header with Animation -->
+    <div class="text(center) mb(3xl) slide-up(0.6s/ease-out)">
+      <h1 class="heading(3xl) bold(700) c(primary) mb(lg)">
+        AdorableCSS v2 Showcase
+      </h1>
+      <p class="body(lg) c(neutral-600) max-w(2xl) mx(auto)">
+        Experience the power of our modern CSS framework with grid layouts, glassmorphism, and smooth animations.
+      </p>
+    </div>
+
+    <!-- Grid Layout Showcase -->
+    <div class="mb(3xl)">
+      <h2 class="title(xl) bold(600) mb(xl) text(center)">Grid Patterns</h2>
+      
+      <!-- 4x3 Grid -->
+      <div class="grid(4x3) gap(lg) mb(2xl) min-h(300px)">
+        <div class="bg(primary) glassmorphism(sm) hbox(center/middle) r(lg) transition hover:scale(105)">
+          <span class="c(white) bold(600)">4x3 Grid</span>
+        </div>
+        <div class="bg(success) hbox(center/middle) r(lg) transition hover:scale(105)">
+          <span class="c(white) bold(600)">Item 2</span>
+        </div>
+        <div class="bg(warning) hbox(center/middle) r(lg) transition hover:scale(105)">
+          <span class="c(white) bold(600)">Item 3</span>
+        </div>
+        <div class="bg(error) hbox(center/middle) r(lg) transition hover:scale(105)">
+          <span class="c(white) bold(600)">Item 4</span>
+        </div>
+        <div class="bg(info) hbox(center/middle) r(lg) transition hover:scale(105)">
+          <span class="c(white) bold(600)">Item 5</span>
+        </div>
+        <div class="bg(neutral-600) hbox(center/middle) r(lg) transition hover:scale(105)">
+          <span class="c(white) bold(600)">Item 6</span>
+        </div>
+        <div class="bg(primary) opacity(0.7) hbox(center/middle) r(lg) transition hover:scale(105)">
+          <span class="c(white) bold(600)">Item 7</span>
+        </div>
+        <div class="bg(success) opacity(0.7) hbox(center/middle) r(lg) transition hover:scale(105)">
+          <span class="c(white) bold(600)">Item 8</span>
+        </div>
+        <div class="bg(warning) opacity(0.7) hbox(center/middle) r(lg) transition hover:scale(105)">
+          <span class="c(white) bold(600)">Item 9</span>
+        </div>
+        <div class="bg(error) opacity(0.7) hbox(center/middle) r(lg) transition hover:scale(105)">
+          <span class="c(white) bold(600)">Item 10</span>
+        </div>
+        <div class="bg(info) opacity(0.7) hbox(center/middle) r(lg) transition hover:scale(105)">
+          <span class="c(white) bold(600)">Item 11</span>
+        </div>
+        <div class="bg(neutral-600) opacity(0.7) hbox(center/middle) r(lg) transition hover:scale(105)">
+          <span class="c(white) bold(600)">Item 12</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Glassmorphism Cards -->
+    <div class="mb(3xl)">
+      <h2 class="title(xl) bold(600) mb(xl) text(center)">Glassmorphism Effects</h2>
+      
+      <div class="grid(3) gap(xl) relative">
+        <!-- Background for glassmorphism -->
+        <div class="layer(-1) inset(0) bg(primary) r(2xl)"></div>
+        
+        <div class="glassmorphism(sm) p(xl) r(xl) text(center)">
+          <h3 class="title(lg) bold(600) mb(md) c(white)">Small Glass</h3>
+          <p class="c(white.8)">Subtle glassmorphism effect with light blur</p>
+        </div>
+        
+        <div class="glassmorphism(md) p(xl) r(xl) text(center)">
+          <h3 class="title(lg) bold(600) mb(md) c(white)">Medium Glass</h3>
+          <p class="c(white.8)">Medium glassmorphism with balanced blur</p>
+        </div>
+        
+        <div class="glassmorphism(lg) p(xl) r(xl) text(center)">
+          <h3 class="title(lg) bold(600) mb(md) c(white)">Large Glass</h3>
+          <p class="c(white.8)">Strong glassmorphism with heavy blur</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Animation Cards -->
+    <div class="mb(3xl)">
+      <h2 class="title(xl) bold(600) mb(xl) text(center)">Floating Animations</h2>
+      
+      <div class="hbox(center) gap(2xl) flex-wrap">
+        <div class="bg(white) p(xl) r(2xl) shadow(lg) w(250px) text(center) float(6s/ease-in-out/repeat:infinite)">
+          <div class="size(60px) bg(primary) r(full) hbox(center/middle) mx(auto) mb(lg)">
+            <span class="heading(lg) c(white)">🎨</span>
+          </div>
+          <h3 class="title(lg) bold(600) mb(sm)">Design</h3>
+          <p class="c(neutral-600) caption">Beautiful and intuitive</p>
+        </div>
+        
+        <div class="bg(white) p(xl) r(2xl) shadow(lg) w(250px) text(center) float(8s/ease-in-out/repeat:infinite)">
+          <div class="size(60px) bg(success) r(full) hbox(center/middle) mx(auto) mb(lg)">
+            <span class="heading(lg) c(white)">⚡</span>
+          </div>
+          <h3 class="title(lg) bold(600) mb(sm)">Performance</h3>
+          <p class="c(neutral-600) caption">Lightning fast execution</p>
+        </div>
+        
+        <div class="bg(white) p(xl) r(2xl) shadow(lg) w(250px) text(center) float(10s/ease-in-out/repeat:infinite)">
+          <div class="size(60px) bg(info) r(full) hbox(center/middle) mx(auto) mb(lg)">
+            <span class="heading(lg) c(white)">🚀</span>
+          </div>
+          <h3 class="title(lg) bold(600) mb(sm)">Developer Experience</h3>
+          <p class="c(neutral-600) caption">Joy to work with</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Interactive Components -->
+    <div class="text(center)">
+      <h2 class="title(xl) bold(600) mb(xl)">Interactive Elements</h2>
+      
+      <div class="hbox(center) gap(lg) flex-wrap">
+        <button class="px(xl) py(lg) bg(primary) c(white) r(lg) bold(600) shadow(md) hover:shadow(xl) hover:translate-y(-2px) transition">
+          Primary Button
+        </button>
+        
+        <button class="px(xl) py(lg) bg(white) c(primary) border(2/primary) r(lg) bold(600) shadow(md) hover:shadow(xl) hover:bg(primary) hover:c(white) transition">
+          Outline Button
+        </button>
+        
+        <button class="px(xl) py(lg) glassmorphism(md) c(primary) r(lg) bold(600) shadow(md) hover:shadow(xl) transition">
+          Glass Button
+        </button>
       </div>
     </div>
   </div>

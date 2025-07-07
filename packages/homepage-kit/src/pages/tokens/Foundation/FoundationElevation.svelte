@@ -59,7 +59,7 @@
     <div class="text(center) vbox gap(lg)">
       <h2 class="display(xl) font(black) tracking(tight)">Elevation Foundation</h2>
       <div class="vbox(center)">
-        <p class="text(lg) c(gray-600) max-w(3xl)">Shadow system for creating depth and hierarchy in your interface</p>
+        <p class="fonr(lg) c(gray-600) max-w(3xl)">Shadow system for creating depth and hierarchy in your interface</p>
       </div>
     </div>
 
@@ -72,13 +72,13 @@
       
       <div class="vbox gap(2xl) p(3xl) bg(gray-50) r(lg)">
         {#each shadowScales as shadow}
-          <div class="vbox gap(lg) border-b(1/gray-200) pb(2xl)">
+          <div class="vbox gap(lg) bb(1/gray-200) pb(2xl)">
             <div class="hbox(between) items(baseline)">
               <div class="hbox gap(xl) items(baseline)">
                 <code class="text(base) font(mono) font(bold) uppercase tracking(wider) w(3xl)">{shadow.name}</code>
                 <div class="vbox gap(xs)">
-                  <code class="text(sm) font(mono) c(gray-600)">{shadow.class}</code>
-                  <code class="text(xs) font(mono) c(gray-500) max-w(18xl) truncate">{shadow.value}</code>
+                  <code class="font(sm) font(mono) c(gray-600)">{shadow.class}</code>
+                  <code class="font(xs) font(mono) c(gray-500) max-w(18xl) truncate">{shadow.value}</code>
                 </div>
               </div>
               <span class="caption(sm) c(gray-500) italic">{shadow.usage}</span>
@@ -92,8 +92,8 @@
                 <div class="w(2xl) h(2xl) bg(gray-200) r(md)"></div>
               </div>
               <div class="vbox gap(xs)">
-                <div class="text(md) font(medium)">{shadow.name} Shadow</div>
-                <div class="text(sm) c(gray-600)">{shadow.description}</div>
+                <div class="font(md) font(medium)">{shadow.name} Shadow</div>
+                <div class="font(sm) c(gray-600)">{shadow.description}</div>
               </div>
             </div>
           </div>
@@ -116,19 +116,19 @@
             <div class="p(lg) bg(white) r(lg) shadow(sm)">
               <div class="vbox gap(sm)">
                 <div class="title(sm)">Small Card</div>
-                <div class="text(sm) c(gray-600)">shadow(sm) for basic cards</div>
+                <div class="font(sm) c(gray-600)">shadow(sm) for basic cards</div>
               </div>
             </div>
             <div class="p(lg) bg(white) r(lg) shadow(md)">
               <div class="vbox gap(sm)">
                 <div class="title(sm)">Standard Card</div>
-                <div class="text(sm) c(gray-600)">shadow(md) for prominent cards</div>
+                <div class="font(sm) c(gray-600)">shadow(md) for prominent cards</div>
               </div>
             </div>
             <div class="p(lg) bg(white) r(lg) shadow(lg)">
               <div class="vbox gap(sm)">
                 <div class="title(sm)">Feature Card</div>
-                <div class="text(sm) c(gray-600)">shadow(lg) for important cards</div>
+                <div class="font(sm) c(gray-600)">shadow(lg) for important cards</div>
               </div>
             </div>
           </div>
@@ -141,13 +141,13 @@
             <div class="p(lg) bg(white) r(lg) shadow(xl)">
               <div class="vbox gap(sm)">
                 <div class="title(sm)">Modal Dialog</div>
-                <div class="text(sm) c(gray-600)">shadow(xl) for modals</div>
+                <div class="font(sm) c(gray-600)">shadow(xl) for modals</div>
               </div>
             </div>
             <div class="p(lg) bg(white) r(lg) shadow(2xl)">
               <div class="vbox gap(sm)">
                 <div class="title(sm)">Large Overlay</div>
-                <div class="text(sm) c(gray-600)">shadow(2xl) for major overlays</div>
+                <div class="font(sm) c(gray-600)">shadow(2xl) for major overlays</div>
               </div>
             </div>
           </div>
@@ -160,13 +160,13 @@
             <button class="p(lg) bg(white) r(lg) shadow(sm) hover:shadow(hover) transition-shadow">
               <div class="vbox gap(sm)">
                 <div class="title(sm)">Hover Effect</div>
-                <div class="text(sm) c(gray-600)">shadow(hover) on hover</div>
+                <div class="font(sm) c(gray-600)">shadow(hover) on hover</div>
               </div>
             </button>
             <div class="p(lg) bg(gray-50) r(lg) shadow(inner)">
               <div class="vbox gap(sm)">
                 <div class="title(sm)">Pressed State</div>
-                <div class="text(sm) c(gray-600)">shadow(inner) for inset</div>
+                <div class="font(sm) c(gray-600)">shadow(inner) for inset</div>
               </div>
             </div>
           </div>

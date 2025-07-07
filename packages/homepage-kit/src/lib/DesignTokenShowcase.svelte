@@ -21,7 +21,7 @@
     
     <!-- Typography Showcase -->
     <Card className="clip fade-up(0.8s/ease-out/delay:100ms)">
-      <CardHeader className="bg(--colors-gray-100) border-b(1/--colors-gray-200)">
+      <CardHeader className="bg(--colors-gray-100) bb(1/--colors-gray-200)">
         <CardTitle>Typography Scale</CardTitle>
       </CardHeader>
       <CardContent className="vbox gap(sm) py(md)">

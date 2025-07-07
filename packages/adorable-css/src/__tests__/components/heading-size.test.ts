@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { headingString } from '../../04-components/primitives/typography/heading';
+import { headingString } from '../../05-components/primitives/typography/heading';
 
 describe('heading component size variants', () => {
   it('should apply default size when no argument', () => {

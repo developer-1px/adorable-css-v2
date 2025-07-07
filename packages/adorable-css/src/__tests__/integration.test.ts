@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { parseAdorableCSS } from "./parser";
-import { generateCSSFromAdorableCSS } from "./generator";
+import { generateClass } from "./generator";
 
 describe("AdorableCSS Integration Tests", () => {
   describe("End-to-end parsing and generation", () => {
@@ -9,7 +9,7 @@ describe("AdorableCSS Integration Tests", () => {
 
       utilities.forEach((utility) => {
         expect(() => parseAdorableCSS(utility)).not.toThrow();
-        expect(() => generateCSSFromAdorableCSS(utility)).not.toThrow();
+        expect(() => generateClass(utility)).not.toThrow();
       });
     });
 
@@ -26,7 +26,7 @@ describe("AdorableCSS Integration Tests", () => {
 
       functionUtilities.forEach((utility) => {
         expect(() => parseAdorableCSS(utility)).not.toThrow();
-        expect(() => generateCSSFromAdorableCSS(utility)).not.toThrow();
+        expect(() => generateClass(utility)).not.toThrow();
       });
     });
 
@@ -39,7 +39,7 @@ describe("AdorableCSS Integration Tests", () => {
 
       complexUtilities.forEach((utility) => {
         expect(() => parseAdorableCSS(utility)).not.toThrow();
-        expect(() => generateCSSFromAdorableCSS(utility)).not.toThrow();
+        expect(() => generateClass(utility)).not.toThrow();
       });
     });
 
@@ -48,7 +48,7 @@ describe("AdorableCSS Integration Tests", () => {
 
       rangeUtilities.forEach((utility) => {
         expect(() => parseAdorableCSS(utility)).not.toThrow();
-        expect(() => generateCSSFromAdorableCSS(utility)).not.toThrow();
+        expect(() => generateClass(utility)).not.toThrow();
       });
     });
 
@@ -62,7 +62,7 @@ describe("AdorableCSS Integration Tests", () => {
 
       pseudoUtilities.forEach((utility) => {
         expect(() => parseAdorableCSS(utility)).not.toThrow();
-        expect(() => generateCSSFromAdorableCSS(utility)).not.toThrow();
+        expect(() => generateClass(utility)).not.toThrow();
       });
     });
 
@@ -76,7 +76,7 @@ describe("AdorableCSS Integration Tests", () => {
 
       responsiveUtilities.forEach((utility) => {
         expect(() => parseAdorableCSS(utility)).not.toThrow();
-        expect(() => generateCSSFromAdorableCSS(utility)).not.toThrow();
+        expect(() => generateClass(utility)).not.toThrow();
       });
     });
   });
@@ -86,7 +86,7 @@ describe("AdorableCSS Integration Tests", () => {
       const layoutCode = "hbox(pack) gap(16) p(20)";
 
       expect(() => parseAdorableCSS(layoutCode)).not.toThrow();
-      expect(() => generateCSSFromAdorableCSS(layoutCode)).not.toThrow();
+      expect(() => generateClass(layoutCode)).not.toThrow();
 
       const parsed = parseAdorableCSS(layoutCode);
       expect(parsed.value).toHaveLength(3);
@@ -96,7 +96,7 @@ describe("AdorableCSS Integration Tests", () => {
       const responsiveCode = "sm:w(300) md:w(400) lg:w(500)";
 
       expect(() => parseAdorableCSS(responsiveCode)).not.toThrow();
-      expect(() => generateCSSFromAdorableCSS(responsiveCode)).not.toThrow();
+      expect(() => generateClass(responsiveCode)).not.toThrow();
 
       const parsed = parseAdorableCSS(responsiveCode);
       expect(parsed.value).toHaveLength(3);
@@ -107,7 +107,7 @@ describe("AdorableCSS Integration Tests", () => {
         "hover:bg(blue) hover:c(white) focus:outline(2/solid/blue)";
 
       expect(() => parseAdorableCSS(interactiveCode)).not.toThrow();
-      expect(() => generateCSSFromAdorableCSS(interactiveCode)).not.toThrow();
+      expect(() => generateClass(interactiveCode)).not.toThrow();
 
       const parsed = parseAdorableCSS(interactiveCode);
       expect(parsed.value).toHaveLength(3);
@@ -117,7 +117,7 @@ describe("AdorableCSS Integration Tests", () => {
       const typographyCode = "font(Inter/16/1.5/-2%) c(#333) text(center)";
 
       expect(() => parseAdorableCSS(typographyCode)).not.toThrow();
-      expect(() => generateCSSFromAdorableCSS(typographyCode)).not.toThrow();
+      expect(() => generateClass(typographyCode)).not.toThrow();
 
       const parsed = parseAdorableCSS(typographyCode);
       expect(parsed.value).toHaveLength(3);
@@ -127,7 +127,7 @@ describe("AdorableCSS Integration Tests", () => {
       const positionCode = "absolute z(100)";
 
       expect(() => parseAdorableCSS(positionCode)).not.toThrow();
-      expect(() => generateCSSFromAdorableCSS(positionCode)).not.toThrow();
+      expect(() => generateClass(positionCode)).not.toThrow();
 
       const parsed = parseAdorableCSS(positionCode);
       expect(parsed.value).toHaveLength(2);
@@ -195,7 +195,7 @@ describe("AdorableCSS Integration Tests", () => {
       unknownUtilities.forEach((utility) => {
         // Parser should handle these, generator should return empty or error
         try {
-          const result = generateCSSFromAdorableCSS(utility);
+          const result = generateClass(utility);
           // Should either succeed with empty CSS or throw
           expect(typeof result).toBe("string");
         } catch (error) {
@@ -224,7 +224,7 @@ describe("AdorableCSS Integration Tests", () => {
       const complexNested = "bg(#ff0000)";
 
       expect(() => parseAdorableCSS(complexNested)).not.toThrow();
-      expect(() => generateCSSFromAdorableCSS(complexNested)).not.toThrow();
+      expect(() => generateClass(complexNested)).not.toThrow();
     });
   });
 
@@ -248,17 +248,17 @@ describe("AdorableCSS Integration Tests", () => {
 
   describe("CSS generation integration", () => {
     it("should generate valid CSS for known utilities", () => {
-      expect(generateCSSFromAdorableCSS("w(300)")).toBe(
+      expect(generateClass("w(300)")).toBe(
         ".w\\(300\\){width:300px}"
       );
-      expect(generateCSSFromAdorableCSS("shadow(lg)")).toBe(
+      expect(generateClass("shadow(lg)")).toBe(
         ".shadow\\(lg\\){box-shadow:var(--shadow-lg)}"
       );
-      expect(generateCSSFromAdorableCSS("grid")).toBe(".grid{display:grid}");
-      expect(generateCSSFromAdorableCSS("grid-cols(3)")).toBe(
+      expect(generateClass("grid")).toBe(".grid{display:grid}");
+      expect(generateClass("grid-cols(3)")).toBe(
         ".grid-cols\\(3\\){grid-template-columns:repeat(3, minmax(0, 1fr))}"
       );
-      expect(generateCSSFromAdorableCSS("absolute")).toBe(
+      expect(generateClass("absolute")).toBe(
         ".absolute{position:absolute}"
       );
     });

@@ -1,4 +1,8 @@
-import type { RuleHandler, CSSRule } from '../../../03-rules/types';
+// Type definitions
+type CSSRule = Record<string, string | Record<string, any>>;
+export type RuleHandler = (args: string) => CSSRule;
+export type KeywordRuleHandler = () => CSSRule;
+export type StringRuleHandler = (args?: string) => string | (string | CSSRule)[];
 
 /**
  * Semantic color utilities

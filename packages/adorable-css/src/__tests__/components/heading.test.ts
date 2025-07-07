@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { headingString } from '../../04-components/primitives/typography/heading';
+import { headingString } from '../../05-components/primitives/typography/heading';
 
 describe('heading component', () => {
   it('should return default heading styles', () => {
@@ -11,13 +11,13 @@ describe('heading component', () => {
   it('should apply h1 size', () => {
     const result = headingString('h1');
     expect(result).toContain('font(5xl) bold(bold) lh(1.1) tracking(-2.5%)');
-    expect(result).toContain('sm:text(6xl)');
+    expect(result).toContain('sm:font(6xl)');
   });
 
   it('should apply h2 size', () => {
     const result = headingString('h2');
     expect(result).toContain('pb(2) font(4xl) bold(semi) tracking(-2%)');
-    expect(result).toContain('border-b(1/gray-200)');
+    expect(result).toContain('bb(1/gray-200)');
   });
 
   it('should apply h3 size with gradient and underline', () => {

@@ -97,7 +97,7 @@
       <strong>ambient light</strong> (soft shadows) to create realistic depth perception. 
       Each level provides a specific use case for interface hierarchy.
     </p>
-    <div class="hbox gap(md) text(sm)">
+    <div class="hbox gap(md) font(sm)">
       <div class="hbox(middle) gap(xs)">
         <span class="w(sm) h(sm) r(full) bg(purple-600)"></span>
         <span class="c(purple-700)">Key Shadow: Directional depth</span>
@@ -125,12 +125,12 @@
           <!-- Copy feedback -->
           <div class="absolute top(md) right(md) opacity(0) group-hover:opacity(100) transition-opacity">
             {#if copiedIndex === index}
-              <div class="hbox(middle) gap(xs) px(sm) py(xs) bg(green-100) c(green-700) r(md) text(xs) font(medium)">
+              <div class="hbox(middle) gap(xs) px(sm) py(xs) bg(green-100) c(green-700) r(md) font(xs) font(medium)">
                 <Check size="12" />
                 <span>Copied!</span>
               </div>
             {:else}
-              <div class="hbox(middle) gap(xs) px(sm) py(xs) bg(gray-100) c(gray-600) r(md) text(xs) font(medium)">
+              <div class="hbox(middle) gap(xs) px(sm) py(xs) bg(gray-100) c(gray-600) r(md) font(xs) font(medium)">
                 <Copy size="12" />
                 <span>Copy</span>
               </div>
@@ -142,10 +142,10 @@
             <!-- Level indicator -->
             <div class="hbox(middle) gap(auto) items(center)">
               <div class="hbox(middle) gap(sm)">
-                <code class="px(sm) py(xs) bg(purple-100) c(purple-700) r(md) font(mono) text(sm) font(bold)">
+                <code class="px(sm) py(xs) bg(purple-100) c(purple-700) r(md) font(mono) font(sm) font(bold)">
                   elevation({level})
                 </code>
-                <span class="text(xs) c(gray-500) font(medium) uppercase tracking(0.1em)">
+                <span class="font(xs) c(gray-500) font(medium) uppercase tracking(0.1em)">
                   Level {level}
                 </span>
               </div>
@@ -154,15 +154,15 @@
             <!-- Visual demonstration -->
             <div class="relative h(4xl) bg(gray-50) r(lg) overflow(hidden) hbox(pack) items(center)">
               <div class="w(3xl) h(3xl) bg(white) r(lg) elevation({level}) hbox(pack) items(center)">
-                <span class="text(xs) c(gray-500) font(bold)">{level}</span>
+                <span class="font(xs) c(gray-500) font(bold)">{level}</span>
               </div>
             </div>
 
             <!-- Usage info -->
             <div class="vbox gap(xs)">
               <h4 class="font(md) bold c(gray-900)">{usage}</h4>
-              <p class="text(sm) c(gray-600) line-height(1.5)">{description}</p>
-              <p class="text(xs) c(purple-600) font(medium)">Example: {example}</p>
+              <p class="font(sm) c(gray-600) line-height(1.5)">{description}</p>
+              <p class="font(xs) c(purple-600) font(medium)">Example: {example}</p>
             </div>
           </div>
         </div>
@@ -178,7 +178,7 @@
       <!-- Basic usage -->
       <div class="vbox gap(sm)">
         <h4 class="font(md) bold c(gray-800)">Basic Usage</h4>
-        <div class="p(md) bg(gray-900) r(lg) font(mono) text(sm) c(gray-100)">
+        <div class="p(md) bg(gray-900) r(lg) font(mono) font(sm) c(gray-100)">
           <div class="vbox gap(xs)">
             <div><span class="c(gray-500)">&lt;!-- Card component --&gt;</span></div>
             <div><span class="c(blue-400)">&lt;div</span> <span class="c(green-400)">class</span>=<span class="c(yellow-300)">"p(xl) bg(white) r(lg) elevation(2)"</span><span class="c(blue-400)">&gt;</span></div>
@@ -191,7 +191,7 @@
       <!-- Interactive states -->
       <div class="vbox gap(sm)">
         <h4 class="font(md) bold c(gray-800)">Interactive States</h4>
-        <div class="p(md) bg(gray-900) r(lg) font(mono) text(sm) c(gray-100)">
+        <div class="p(md) bg(gray-900) r(lg) font(mono) font(sm) c(gray-100)">
           <div class="vbox gap(xs)">
             <div><span class="c(gray-500)">&lt;!-- Button with hover elevation --&gt;</span></div>
             <div><span class="c(blue-400)">&lt;button</span> <span class="c(green-400)">class</span>=<span class="c(yellow-300)">"elevation(2) hover:elevation(4) transition"</span><span class="c(blue-400)">&gt;</span></div>
@@ -204,7 +204,7 @@
       <!-- Component combinations -->
       <div class="vbox gap(sm)">
         <h4 class="font(md) bold c(gray-800)">Component Combinations</h4>
-        <div class="p(md) bg(gray-900) r(lg) font(mono) text(sm) c(gray-100)">
+        <div class="p(md) bg(gray-900) r(lg) font(mono) font(sm) c(gray-100)">
           <div class="vbox gap(xs)">
             <div><span class="c(gray-500)">&lt;!-- Modal dialog --&gt;</span></div>
             <div><span class="c(blue-400)">&lt;div</span> <span class="c(green-400)">class</span>=<span class="c(yellow-300)">"bg(white) r(2xl) p(2xl) elevation(8) max-w(md)"</span><span class="c(blue-400)">&gt;</span></div>
@@ -227,7 +227,7 @@
           <span class="w(md) h(md) r(full) bg(green-500)"></span>
           Do's
         </h4>
-        <ul class="vbox gap(sm) text(sm) c(green-800)">
+        <ul class="vbox gap(sm) font(sm) c(green-800)">
           <li class="hbox gap(sm)">
             <span class="c(green-500)">•</span>
             <span>Use consistent elevation levels across similar components</span>
@@ -253,7 +253,7 @@
           <span class="w(md) h(md) r(full) bg(red-500)"></span>
           Don'ts
         </h4>
-        <ul class="vbox gap(sm) text(sm) c(red-800)">
+        <ul class="vbox gap(sm) font(sm) c(red-800)">
           <li class="hbox gap(sm)">
             <span class="c(red-500)">•</span>
             <span>Don't use too many different elevation levels</span>

@@ -45,7 +45,7 @@ export const semanticColors: SemanticColorConfig = {
 };
 
 // NOTE: Legacy hierarchy scales removed - use dynamic calc() system instead
-// Example: text(lg), gap(xl), font(2xl), etc.
+// Example: fonr(lg), gap(xl), font(2xl), etc.
 
 // Simplified DesignTokens interface for dynamic calc() system
 export interface DesignTokens {
@@ -328,7 +328,7 @@ export function isToken(value: string, category: string): boolean {
   }
   
   // For colors, check if it's in our semantic colors or looks like a color token
-  if (category === 'colors') {
+  if (category === 'color' || category === 'colors') {
     return value in currentTokenContext.colors || 
            colorPalette[value] !== undefined ||
            value.match(/^\w+-\d+$/) !== null; // e.g. blue-500
@@ -419,20 +419,3 @@ ${semanticColorVars}`;
   // Just return color variables and semantic mappings
   return `:root {\n${cssVars.join('\n')}\n${semanticMappings}\n}`;
 }
-
-// Inject design 02-design_tokens into the document
-export function injectTokens(tokens: DesignTokens = defaultTokens): void {
-  if (typeof document === 'undefined') return;
-  
-  const existingStyle = document.getElementById('adorable-css-02-design_tokens');
-  if (existingStyle) {
-    existingStyle.remove();
-  }
-  
-  const style = document.createElement('style');
-  style.id = 'adorable-css-02-design_tokens';
-  style.textContent = generateTokenCSS(tokens);
-  document.head.appendChild(style);
-}
-
-// Note: Semantic color functions are already exported above

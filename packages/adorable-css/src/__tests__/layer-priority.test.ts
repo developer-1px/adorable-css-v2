@@ -1,32 +1,32 @@
 import { describe, it, expect } from 'vitest';
-import { generateCSS } from '../01-core/generators/generator';
+import { generateCSS } from '../07-generator/generator';
 
 describe('Layer Priority System', () => {
-  it('should wrap component styles in @layer 04-components', () => {
+  it('should wrap component styles in @layer components', () => {
     const css = generateCSS(['body(base)']);
-    expect(css).toContain('@layer base, 04-components, utilities;');
-    expect(css).toContain('@layer 04-components {');
+    expect(css).toContain('@layer base,components,composition,utilities;');
+    expect(css).toContain('@layer components{');
     expect(css).toContain('.body\\(base\\)');
   });
 
   it('should wrap utility styles in @layer utilities', () => {
     const css = generateCSS(['c(white)']);
-    expect(css).toContain('@layer base, 04-components, utilities;');
-    expect(css).toContain('@layer utilities {');
+    expect(css).toContain('@layer base,components,composition,utilities;');
+    expect(css).toContain('@layer utilities{');
     expect(css).toContain('.c\\(white\\)');
   });
 
-  it('should place both 04-components and utilities in correct layers', () => {
+  it('should place both components and utilities in correct layers', () => {
     const css = generateCSS(['body(base)', 'c(white)', 'p(16)']);
     
     // Check layer declaration
-    expect(css).toContain('@layer base, 04-components, utilities;');
+    expect(css).toContain('@layer base,components,composition,utilities;');
     
-    // Check 04-components layer contains body
-    expect(css).toMatch(/@layer components \{[^}]*body\\\\?\(base\\\\?\)/);
+    // Check components layer contains body
+    expect(css).toMatch(/@layer components\{[^}]*body\\\\?\(base\\\\?\)/);
     
     // Check utilities layer contains c and p
-    const utilitiesMatch = css.match(/@layer utilities \{([\s\S]*?)\n\}/);
+    const utilitiesMatch = css.match(/@layer utilities\{([\s\S]*?)\}/);
     expect(utilitiesMatch).toBeTruthy();
     expect(utilitiesMatch![1]).toContain('.c\\(white\\)');
     expect(utilitiesMatch![1]).toContain('.p\\(16\\)');
@@ -51,7 +51,7 @@ describe('Layer Priority System', () => {
       'title(md)'
     ]);
     
-    expect(css).toContain('@layer 04-components {');
+    expect(css).toContain('@layer components{');
     expect(css).toContain('.body\\(base\\)');
     expect(css).toContain('.heading\\(lg\\)');
     expect(css).toContain('.title\\(md\\)');

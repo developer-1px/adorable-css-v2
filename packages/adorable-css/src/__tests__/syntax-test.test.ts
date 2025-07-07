@@ -5,7 +5,7 @@ import { generateCSS } from '../parser/generator';
 describe('AdorableCSS Syntax Tests', () => {
   describe('Border Syntax', () => {
     it('should parse border without width (default)', () => {
-      const classes = ['border(gray-300)', 'border-b(gray-200)', 'border-l(purple-600)', 'border-t(gray-400)'];
+      const classes = ['border(gray-300)', 'bb(gray-200)', 'border-l(purple-600)', 'border-t(gray-400)'];
       
       classes.forEach(className => {
         const result = parseAdorableCSS(className);
@@ -18,7 +18,7 @@ describe('AdorableCSS Syntax Tests', () => {
     it('should generate correct CSS for border syntax', () => {
       const testCases = [
         { input: 'border(gray-300)', expected: 'border' },
-        { input: 'border-b(gray-200)', expected: 'border-bottom' },
+        { input: 'bb(gray-200)', expected: 'border-bottom' },
         { input: 'border-l(purple-600)', expected: 'border-left' },
         { input: 'border-t(gray-400)', expected: 'border-top' },
         { input: 'border-r(red-500)', expected: 'border-right' }
@@ -104,7 +104,7 @@ describe('AdorableCSS Syntax Tests', () => {
         'z(100)',
         'bg(white.95)',
         'backdrop-blur(16px)',
-        'border-b(gray-200)',
+        'bb(gray-200)',
         'shadow(sm)',
         'container(6xl)',
         'hbox(middle) gap(auto)',

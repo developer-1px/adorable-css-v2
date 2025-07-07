@@ -8,11 +8,21 @@ import type { StringRuleHandler } from '../defineComponent-unified';
 // String-based section 04-components (new approach)
 export const sectionString: StringRuleHandler = (args?: string): string => {
   if (!args) {
-    // Default section - relative, full width, responsive padding
-    return 'relative w(100%) py(clamp-section-default)';
+    // Default section - medium width, centered
+    return 'max-w(768px) mx(auto) px(lg)';
   }
   
   const sectionVariants: Record<string, string> = {
+    // Content width variants (Medium.com style)
+    text: 'max-w(620px) mx(auto) px(lg)',        // Text reading optimized
+    narrow: 'max-w(620px) mx(auto) px(lg)',      // Alias for text
+    medium: 'max-w(768px) mx(auto) px(lg)',      // Default content
+    wide: 'max-w(1024px) mx(auto) px(lg)',       // Wide content
+    breakout: 'max-w(1200px) mx(auto) px(lg)',   // Slightly breaking out
+    full: 'w(full) px(lg)',                      // Full width
+    canvas: 'w(full)',                           // No padding, full canvas
+    
+    // Legacy variants (maintain backwards compatibility)
     large: 'relative w(100%) py(clamp-section-large)',
     compact: 'relative w(100%) py(clamp-section-compact)', 
     feature: 'relative w(100%) pt(clamp-feature-top) pb(clamp-feature-bottom)',
@@ -20,7 +30,7 @@ export const sectionString: StringRuleHandler = (args?: string): string => {
     gallery: 'relative w(100%) py(clamp-section-default) clip'
   };
   
-  return sectionVariants[args] || 'relative w(100%) py(clamp-section-default)';
+  return sectionVariants[args] || 'max-w(768px) mx(auto) px(lg)';
 };
 
 export const containString: StringRuleHandler = (args?: string): string => {

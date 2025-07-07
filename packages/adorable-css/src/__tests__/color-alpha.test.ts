@@ -1,6 +1,6 @@
 import { describe, test, expect } from 'vitest'
-import { makeColor } from '../01-core/values/makeValue'
-import { bg } from '../03-rules/style/background'
+import { makeColor } from '../03-values/makeValue'
+import { bg } from '../04-rules/03-rules_deprecated/style/background'
 
 describe('Color Alpha Support', () => {
   test('should support basic color with alpha', () => {

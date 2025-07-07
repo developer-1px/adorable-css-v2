@@ -230,7 +230,7 @@
                     <div class="caption c(gray-700)">Default Tokens:</div>
                     <div class="vbox gap(xs)">
                       {#each Object.entries(component.tokens) as [property, value]}
-                        <div class="hbox(between) items(center) py(xs) border-b(1/gray-100)">
+                        <div class="hbox(between) items(center) py(xs) bb(1/gray-100)">
                           <span class="caption c(gray-600)">{property}:</span>
                           <code class="mono caption bg(gray-50) px(xs) r(xs)">{value}</code>
                         </div>

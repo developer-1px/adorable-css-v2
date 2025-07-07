@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { inputString, textareaString } from '../../04-components/primitives/input';
+import { inputString, textareaString } from '../../05-components/primitives/input';
 
 describe('input component', () => {
   describe('inputString', () => {
@@ -31,10 +31,10 @@ describe('input component', () => {
 
     it('should apply underlined variant', () => {
       const result = inputString('underlined');
-      expect(result).toContain('px(0) r(0) border(none) border-b(1/gray-300)');
-      expect(result).toContain('hover:border-b(gray-400)');
-      expect(result).toContain('focus:border-b(2/gray-900) focus:pb(7)');
-      expect(result).toContain('disabled:border-b(gray-200)');
+      expect(result).toContain('px(0) r(0) border(none) bb(1/gray-300)');
+      expect(result).toContain('hover:bb(gray-400)');
+      expect(result).toContain('focus:bb(2/gray-900) focus:pb(7)');
+      expect(result).toContain('disabled:bb(gray-200)');
     });
 
     it('should apply error variant', () => {

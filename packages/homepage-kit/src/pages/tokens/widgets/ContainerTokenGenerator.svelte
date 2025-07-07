@@ -52,7 +52,7 @@
         min="320"
         max="1920"
         step="80"
-        class="w(full) text(2xl) font(mono) font(bold) border(0) border-b(xs/black) bg(transparent) pb(sm) focus:outline(0)"
+        class="w(full) font(2xl) font(mono) font(bold) border(0) bb(xs/black) bg(transparent) pb(sm) focus:outline(0)"
       />
     </div>
     
@@ -60,7 +60,7 @@
       <label class="block title(base) font(bold)">Scale Ratio</label>
       <select 
         bind:value={scaleRatio}
-        class="w(full) text(lg) font(mono) font(bold) border(0) border-b(xs/black) bg(transparent) pb(sm) focus:outline(0)"
+        class="w(full) fonr(lg) font(mono) font(bold) border(0) bb(xs/black) bg(transparent) pb(sm) focus:outline(0)"
       >
         {#each commonRatios as ratio}
           <option value={ratio.value}>{ratio.name}</option>
@@ -99,8 +99,8 @@
       {#each Object.entries(containerScale) as [step, value]}
         <div class="vbox gap(sm)">
           <div class="hbox(between) items(center)">
-            <code class="text(sm) font(mono) font(bold) uppercase tracking(wider)">{step}</code>
-            <code class="text(sm) font(mono) c(gray-600)">{value}</code>
+            <code class="font(sm) font(mono) font(bold) uppercase tracking(wider)">{step}</code>
+            <code class="font(sm) font(mono) c(gray-600)">{value}</code>
           </div>
           <div 
             class="h(lg) bg(gray-900) r(sm) min-w(full)"

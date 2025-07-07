@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { font } from '../03-rules/text/font';
+import { font } from '../04-rules/03-rules_deprecated/text/font';
 import { generateTokenCSS, defaultTokens, isToken, getTokenVar } from '../02-design_tokens/design-system/tokens/index';
 
 describe('font(base) token resolution', () => {

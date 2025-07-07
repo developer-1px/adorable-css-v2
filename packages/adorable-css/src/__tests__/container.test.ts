@@ -1,4 +1,4 @@
-import { generateCSS } from '../01-core/generators/generator';
+import { generateCSS } from '../07-generator/generator';
 
 describe('Container and max-w 02-design_tokens', () => {
   it('should generate container with token sizes', () => {

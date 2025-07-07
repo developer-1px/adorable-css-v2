@@ -148,7 +148,7 @@
     <div class="hbox items(center) justify(between) gap(16) flex-wrap">
       <div>
         <h3 class="heading(h3) mb(8)">{componentName} Variants</h3>
-        <p class="text(sm) c(neutral-600)">
+        <p class="font(sm) c(neutral-600)">
           {totalVariants} variant{totalVariants !== 1 ? 's' : ''} × 
           {totalSizes} size{totalSizes !== 1 ? 's' : ''} = 
           {combinations.length} combination{combinations.length !== 1 ? 's' : ''}
@@ -162,7 +162,7 @@
           bind:checked={showCode}
           class="w(16) h(16) r(4) cursor(pointer)"
         />
-        <span class="text(sm) c(neutral-700)">Show code</span>
+        <span class="font(sm) c(neutral-700)">Show code</span>
       </label>
     </div>
     
@@ -205,7 +205,7 @@
       <!-- Advanced Filters -->
       <div class="hbox gap(16) flex-wrap items(center)">
         <div class="hbox items(center) gap(8)">
-          <label class="text(sm) c(neutral-600) bold(medium)">Variant:</label>
+          <label class="font(sm) c(neutral-600) bold(medium)">Variant:</label>
           <select 
             bind:value={selectedVariant}
             class="input(ghost) h(32) px(12) py(4) font(sm) min-w(120)"
@@ -224,7 +224,7 @@
         </div>
         
         <div class="hbox items(center) gap(8)">
-          <label class="text(sm) c(neutral-600) bold(medium)">Size:</label>
+          <label class="font(sm) c(neutral-600) bold(medium)">Size:</label>
           <select 
             bind:value={selectedSize}
             class="input(ghost) h(32) px(12) py(4) font(sm) min-w(120)"
@@ -242,7 +242,7 @@
           </select>
         </div>
         
-        <div class="text(sm) c(neutral-500)">
+        <div class="font(sm) c(neutral-500)">
           Showing {filteredExamples.length} of {allExamples.length} examples
         </div>
       </div>
@@ -251,7 +251,7 @@
   
   <!-- Definition details -->
   {#if definition.states || definition.compounds}
-    <div class="hbox gap(16) flex-wrap text(sm)">
+    <div class="hbox gap(16) flex-wrap font(sm)">
       {#if definition.states}
         <div class="hbox items(center) gap(8)">
           <span class="c(neutral-500)">States:</span>
@@ -279,7 +279,7 @@
       <div class="bg(white) border(1/neutral-200) r(lg) p(12) vbox gap(8) group hover:shadow(md) transition">
         {#if !hideLabels}
           <div class="hbox items(center) justify(between) gap(4)">
-            <span class="text(2xs) c(neutral-500) uppercase tracking(wide) truncate">
+            <span class="font(2xs) c(neutral-500) uppercase tracking(wide) truncate">
               {example.label}
             </span>
             <button
@@ -335,10 +335,10 @@
         
         {#if showCode}
           <div class="vbox gap(4)">
-            <code class="text(xs) c(neutral-600) bg(neutral-100) p(8) r(4) font(mono) break(all)">
+            <code class="font(xs) c(neutral-600) bg(neutral-100) p(8) r(4) font(mono) break(all)">
               {componentName.toLowerCase()}({example.args ? `'${example.args}'` : ''})
             </code>
-            <code class="text(xs) c(neutral-500) bg(neutral-50) p(8) r(4) font(mono) break(all) whitespace(pre-wrap)">
+            <code class="font(xs) c(neutral-500) bg(neutral-50) p(8) r(4) font(mono) break(all) whitespace(pre-wrap)">
               {componentFunction(example.args)}
             </code>
           </div>

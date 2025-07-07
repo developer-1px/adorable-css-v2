@@ -51,7 +51,7 @@
         bind:value={baseRadius}
         min="1"
         max="32"
-        class="w(full) text(2xl) font(mono) font(bold) border(0) border-b(xs/black) bg(transparent) pb(sm) focus:outline(0)"
+        class="w(full) font(2xl) font(mono) font(bold) border(0) bb(xs/black) bg(transparent) pb(sm) focus:outline(0)"
       />
     </div>
     
@@ -59,7 +59,7 @@
       <label class="block title(base) font(bold)">Scale Ratio</label>
       <select 
         bind:value={scaleRatio}
-        class="w(full) text(lg) font(mono) font(bold) border(0) border-b(xs/black) bg(transparent) pb(sm) focus:outline(0)"
+        class="w(full) fonr(lg) font(mono) font(bold) border(0) bb(xs/black) bg(transparent) pb(sm) focus:outline(0)"
       >
         {#each commonRatios as ratio}
           <option value={ratio.value}>{ratio.name}</option>
@@ -102,8 +102,8 @@
             style="border-radius: {value}"
           ></div>
           <div class="text(center)">
-            <div class="text(sm) font(mono) font(bold) uppercase tracking(wider)">{step}</div>
-            <div class="text(xs) font(mono) c(gray-600)">{value}</div>
+            <div class="font(sm) font(mono) font(bold) uppercase tracking(wider)">{step}</div>
+            <div class="font(xs) font(mono) c(gray-600)">{value}</div>
           </div>
         </div>
       {/each}

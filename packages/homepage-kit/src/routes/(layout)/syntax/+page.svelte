@@ -1,12 +1,9 @@
 <script>
   import { onMount } from 'svelte';
-  import { generateCSSFromAdorableCSS } from 'adorable-css';
-  import Card from '$lib/components/ui/Card.svelte';
-  import Badge from '$lib/components/ui/Badge.svelte';
-  import Button from '$lib/components/ui/Button.svelte';
-  import { writable } from 'svelte/store'; // For toast messages
+  import { generateClass } from 'adorable-css';
+  import { Copy, Check } from 'lucide-svelte';
 
-  // 파서 문법 패턴들을 카테고리별로 정리
+  // 문법 패턴들을 카테고리별로 정리
   const syntaxPatterns = {
     'Basic Syntax': [
       { input: 'relative', description: 'Keyword rule without arguments' },
@@ -19,7 +16,7 @@
     ],
     'Multiple Values': [
       { input: 'p(10/20)', description: 'Slash separator' },
-      { input: 'border(1/solid/mute-200)', description: 'Multiple slash values' },
+      { input: 'border(1/solid/gray-200)', description: 'Multiple slash values' },
       { input: 'p(10/20/30/40)', description: 'Four values' },
       { input: 'font(16/1.5)', description: 'Numeric slash values' },
       { input: 'font(lg/1.6/-1%)', description: 'Token slash values' }
@@ -28,7 +25,7 @@
       { input: 'hbox(top+left)', description: 'Plus operator (combine values)' },
       { input: 'layer(top:20)', description: 'Colon separator (key:value)' },
       { input: 'layer(center)', description: 'Single position value' },
-      { input: 'layer(top:10/left:20)', description: 'Multiple key-value pairs (slash separated)' },
+      { input: 'layer(top:10/left:20)', description: 'Multiple key-value pairs' },
       { input: 'layer(fill/20)', description: 'Combined position and z-index' }
     ],
     'Gradients & Ranges': [
@@ -36,7 +33,7 @@
       { input: 'bg(purple-500..pink-500)', description: 'Color gradient' },
       { input: 'bg(90deg/red..blue)', description: 'Directional gradient' },
       { input: 'bg(135deg/purple-500..pink-500)', description: 'Angle gradient' },
-      { input: 'bg(to-tr/red..blue)', description: 'Keyword direction gradient' },
+      { input: 'bg(to-tr/red..blue)', description: 'Keyword direction' },
       { input: 'c(45deg/purple-500..pink-500)', description: 'Text gradient' }
     ],
     'Opacity Notation': [
@@ -44,7 +41,7 @@
       { input: 'bg(black.1)', description: 'Dot opacity (10%)' },
       { input: 'c(blue-500.05)', description: 'Dot opacity (5%)' },
       { input: 'bg(primary.8)', description: 'Token with opacity' },
-      { input: 'border(1/mute-200.5)', description: 'Border with opacity' }
+      { input: 'border(1/gray-200.5)', description: 'Border with opacity' }
     ],
     'Calculations': [
       { input: 'w(100%-20)', description: 'Percentage minus pixels' },
@@ -64,7 +61,7 @@
       { input: 'sm:hidden', description: 'Small breakpoint' },
       { input: 'md:w(full)', description: 'Medium breakpoint' },
       { input: 'lg:grid(4)', description: 'Large breakpoint' },
-      { input: 'xl:text(2xl)', description: 'Extra large breakpoint' },
+      { input: 'xl:font(2xl)', description: 'Extra large breakpoint' },
       { input: '..md:hidden', description: 'Up to medium' },
       { input: 'md..lg:block', description: 'Between medium and large' }
     ],
@@ -78,7 +75,7 @@
     ],
     'Nested & Combined': [
       { input: 'hover:md:scale(1.1)', description: 'State + responsive' },
-      { input: 'md:hover:bg(mute-100)', description: 'Responsive + state' },
+      { input: 'md:hover:bg(gray-100)', description: 'Responsive + state' },
       { input: 'group-hover:opacity(1)', description: 'Group hover' },
       { input: 'peer-focus:ring(2)', description: 'Peer focus' },
       { input: 'w(full)!', description: 'Rule with important' }
@@ -93,109 +90,70 @@
     ]
   };
 
-  let results = {};
-  let testInput = '';
-  let testResult = null;
-
-  // Toast message store (for copy feedback)
-  const toastMessage = writable('');
-  let toastTimeout;
-
-  function showToast(message) {
-    clearTimeout(toastTimeout);
-    toastMessage.set(message);
-    toastTimeout = setTimeout(() => toastMessage.set(''), 2000);
-  }
-
-  // CSS 생성 함수 - 파서 동작 확인용
-  function parseAndGenerate(input) {
-    try {
-      const css = generateCSSFromAdorableCSS(input);
-      
-      // For this page, we only care if it parses without error, not the actual CSS output
-      return {
-        parsed: true,
-        css: css // Keep css for potential future use or debugging, but not displayed
-      };
-    } catch (error) {
-      return {
-        parsed: false,
-        css: '',
-        error: error.message || 'Parse error'
-      };
-    }
-  }
-
-  // Function to copy text to clipboard
+  let copiedItems = new Set();
+  
   async function copyToClipboard(text) {
     try {
       await navigator.clipboard.writeText(text);
-      showToast('Copied to clipboard!');
+      copiedItems.add(text);
+      copiedItems = new Set(copiedItems);
+      setTimeout(() => {
+        copiedItems.delete(text);
+        copiedItems = new Set(copiedItems);
+      }, 2000);
     } catch (err) {
       console.error('Failed to copy: ', err);
-      showToast('Failed to copy!');
-    }
-  }
-
-  onMount(async () => {
-    // 모든 패턴의 파싱 결과 생성
-    Object.keys(syntaxPatterns).forEach(category => {
-      results[category] = syntaxPatterns[category].map(pattern => ({
-        ...pattern,
-        result: parseAndGenerate(pattern.input)
-      }));
-    });
-    results = { ...results };
-  });
-
-  function handleTestButtonClick() {
-    if (testInput) {
-      testResult = parseAndGenerate(testInput);
-    } else {
-      testResult = null;
     }
   }
 </script>
 
 <svelte:head>
-  <title>Parser Syntax Test - AdorableCSS</title>
+  <title>Syntax Cheat Sheet - AdorableCSS</title>
 </svelte:head>
 
-<div class="bg(mute-50) min-h(screen) pb(6xl)">
-  <!-- Hero Section -->
-  <section class="bg(white) py(8xl) border-b(1/mute-200)">
-    <div class="container(6xl) mx(auto) px(3xl) text(center)">
-      <Badge variant="outline" class="mb(lg)">Parser Reference</Badge>
-      <h1 class="heading(h1) c(mute-900) mb(md)">AdorableCSS Syntax Playground</h1>
-      <p class="body(xl) c(mute-600) max-w(5xl) mx(auto)">
-        Explore and test AdorableCSS syntax patterns. See how your input translates into CSS in real-time.
-      </p>
+<div class="min-h(screen) bg(white)">
+  <!-- Header -->
+  <div class="bg(white) bb(2/gray-900) py(4xl)">
+    <div class="container(5xl) mx(auto) px(3xl)">
+      <h1 class="display(3xl) font(black) tracking(tight) c(gray-900) mb(md)">Syntax Cheat Sheet</h1>
+      <p class="font(lg) c(gray-600) max-w(3xl)">Complete reference guide for AdorableCSS syntax patterns</p>
     </div>
-  </section>
+  </div>
 
-  <div class="container(6xl) mx(auto) px(3xl) py(6xl)">
-    <div class="vbox gap(6xl)">
+  <div class="container(5xl) mx(auto) px(3xl) py(4xl)">
+    <div class="vbox gap(4xl)">
       {#each Object.entries(syntaxPatterns) as [category, patterns]}
         <section>
-          <h2 class="heading(h2) c(mute-900) mb(3xl)">{category}</h2>
+          <h2 class="display(xl) font(black) tracking(tight) c(gray-900) mb(xl) pb(sm) bb(2/gray-900)">{category}</h2>
           
-          <div class="grid(1) md:grid(2) lg:grid(3) gap(2xl)">
-            {#each patterns as pattern, i}
-              {@const result = results[category]?.[i]?.result}
-              <div class="bg(white) p(lg) r(md) shadow(sm) vbox gap(md)">
-                <div class="hbox items(center) gap(md)">
-                  {#if result}
-                    <span class="{result.parsed ? 'c(success)' : 'c(error)'} bold text(xl)">
-                      {result.parsed ? '✓' : '✗'}
-                    </span>
-                  {:else}
-                    <span class="c(mute-400) text(xl)">...</span>
-                  {/if}
-                  <code class="inline-block bg(primary/0.1) c(primary) px(sm) py(xs) r(sm) font(mono) text(sm) flex-grow">{pattern.input}</code>
+          <!-- Table Format -->
+          <div class="border(2/gray-900) bg(white) r(md) overflow(hidden)">
+            <div class="hbox border-b(2/gray-900) bg(gray-50)">
+              <div class="px(md) py(sm) font(xs) font(bold) tracking(wide) uppercase c(gray-900) w(200px)">Syntax</div>
+              <div class="px(md) py(sm) font(xs) font(bold) tracking(wide) uppercase c(gray-900) flex(1) border-l(2/gray-900)">Description</div>
+              <div class="px(md) py(sm) font(xs) font(bold) tracking(wide) uppercase c(gray-900) w(60px) border-l(2/gray-900) text(center)">Copy</div>
+            </div>
+            {#each patterns as pattern}
+              <div class="hbox border-b(1/gray-200) hover:bg(gray-50) transition">
+                <div class="px(md) py(md) w(200px) vbox(center/start)">
+                  <code class="font(mono) font(xs) px(xs) py(2xs) bg(gray-100) c(gray-900) r(xs) break-all">{pattern.input}</code>
                 </div>
-                <p class="body(sm) c(mute-700)">
-                  {pattern.description}
-                </p>
+                <div class="px(md) py(md) flex(1) border-l(1/gray-200) vbox(center/start)">
+                  <span class="font(xs) c(gray-700) leading(relaxed)">{pattern.description}</span>
+                </div>
+                <div class="px(md) py(md) w(60px) border-l(1/gray-200) hbox(center/middle)">
+                  <button 
+                    class="p(xs) r(sm) border(1/gray-300) hover:bg(gray-100) transition hbox(center/middle)"
+                    on:click={() => copyToClipboard(pattern.input)}
+                    title="Copy to clipboard"
+                  >
+                    {#if copiedItems.has(pattern.input)}
+                      <Check size="14" class="c(green-600)" />
+                    {:else}
+                      <Copy size="14" class="c(gray-600)" />
+                    {/if}
+                  </button>
+                </div>
               </div>
             {/each}
           </div>
@@ -203,148 +161,92 @@
       {/each}
     </div>
 
-    <!-- Parser Test Input -->
-    <section class="mt(6xl)">
-      <h2 class="heading(h2) c(mute-900) mb(3xl)">Test Your Own Pattern</h2>
-      <Card variant="interactive">
-        <div class="p(3xl) grid(1) md:grid(2) gap(2xl) items(start)">
-          <div class="vbox gap(sm)">
-            <label for="test-input" class="label c(mute-700)">Enter AdorableCSS pattern</label>
-            <input 
-              id="test-input"
-              type="text" 
-              placeholder="e.g., hbox(center) p(20) bg(blue-500)"
-              class="w(full) p(md) border(1/mute-300) r(md) code(minimal) bg(white) focus:border(primary) focus:ring(2/primary/0.2)"
-              bind:value={testInput}
-            />
-            <Button variant="primary" class="mt(md)" on:click={handleTestButtonClick}>
-              Test Pattern
-            </Button>
-          </div>
-          
-          <div>
-            {#if testResult}
-              <Card variant={testResult.parsed ? 'ghost' : 'outlined'} class="{testResult.parsed ? 'bg(success/0.05) border(1/success/0.2)' : 'bg(error/0.05) border(1/error/0.2)'}">
-                <div class="p(lg)">
-                  <div class="label c({testResult.parsed ? 'success' : 'error'}) mb(sm)">
-                    {testResult.parsed ? 'Parsed Successfully' : 'Parse Failed'}
-                  </div>
-                  {#if testResult.parsed}
-                    <pre class="code(minimal) c(mute-700) whitespace(pre-wrap) max-h(150) overflow(auto)">{testResult.css}</pre>
-                    <Button variant="ghost" size="sm" class="mt(md)" on:click={() => copyToClipboard(testResult.css)}>
-                      Copy Result
-                    </Button>
-                  {:else}
-                    <pre class="code(minimal) c(error) max-h(150) overflow(auto)">{testResult.error}</pre>
-                  {/if}
-                </div>
-              </Card>
-            {:else if testInput}
-              <Card variant="ghost">
-                <div class="p(lg) c(mute-500)">Enter a pattern and click "Test Pattern" to see results.</div>
-              </Card>
-            {/if}
+    <!-- Quick Reference Symbols -->
+    <section class="bg(gray-50) border(2/gray-900) p(3xl)">
+      <h2 class="display(xl) font(black) tracking(tight) c(gray-900) mb(xl)">Quick Reference</h2>
+      
+      <div class="grid(1) sm:grid(2) lg:grid(3) gap(xl)">
+        <!-- Separators -->
+        <div class="vbox gap(md)">
+          <h3 class="font(base) font(bold) c(gray-900)">Separators</h3>
+          <div class="vbox gap(xs)">
+            <div class="hbox gap(sm) items(center)">
+              <code class="font(mono) font(bold) px(xs) py(2xs) bg(gray-200) c(gray-900) r(xs) min-w(24px) text(center)">/</code>
+              <span class="font(xs) c(gray-700)">Multiple values</span>
+            </div>
+            <div class="hbox gap(sm) items(center)">
+              <code class="font(mono) font(bold) px(xs) py(2xs) bg(gray-200) c(gray-900) r(xs) min-w(24px) text(center)">+</code>
+              <span class="font(xs) c(gray-700)">Combined values</span>
+            </div>
+            <div class="hbox gap(sm) items(center)">
+              <code class="font(mono) font(bold) px(xs) py(2xs) bg(gray-200) c(gray-900) r(xs) min-w(24px) text(center)">:</code>
+              <span class="font(xs) c(gray-700)">Key-value pairs</span>
+            </div>
+            <div class="hbox gap(sm) items(center)">
+              <code class="font(mono) font(bold) px(xs) py(2xs) bg(gray-200) c(gray-900) r(xs) min-w(24px) text(center)">..</code>
+              <span class="font(xs) c(gray-700)">Gradients/ranges</span>
+            </div>
+            <div class="hbox gap(sm) items(center)">
+              <code class="font(mono) font(bold) px(xs) py(2xs) bg(gray-200) c(gray-900) r(xs) min-w(24px) text(center)">.</code>
+              <span class="font(xs) c(gray-700)">Opacity notation</span>
+            </div>
           </div>
         </div>
-      </Card>
-    </section>
 
-    <!-- Parser Rules Summary -->
-    <section class="mt(6xl)">
-      <h2 class="heading(h2) c(mute-900) mb(3xl)">Key Parser Rules & Syntax</h2>
-      
-      <div class="grid(1) md:grid(2) lg:grid(3) gap(2xl)">
-        <Card variant="elevated">
-          <div class="p(2xl)">
-            <h3 class="heading(h4) c(mute-900) mb(lg)">Separators</h3>
-            <div class="vbox gap(md)">
-              <div class="hbox gap(md) items(center)">
-                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">/</code>
-                <span class="body(sm) c(mute-600)">Multiple values (e.g., `p(10/20)`)</span>
-              </div>
-              <div class="hbox gap(md) items(center)">
-                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">+</code>
-                <span class="body(sm) c(mute-600)">Combined values (e.g., `hbox(top+left)`)</span>
-              </div>
-              <div class="hbox gap(md) items(center)">
-                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">:</code>
-                <span class="body(sm) c(mute-600)">Key-value pairs (e.g., `layer(top:20)`)</span>
-              </div>
-              <div class="hbox gap(md) items(center)">
-                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">..</code>
-                <span class="body(sm) c(mute-600)">Ranges/gradients (e.g., `bg(red..blue)`)</span>
-              </div>
-              <div class="hbox gap(md) items(center)">
-                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">.</code>
-                <span class="body(sm) c(mute-600)">Opacity notation (e.g., `c(red.5)`)</span>
-              </div>
+        <!-- Prefixes -->
+        <div class="vbox gap(md)">
+          <h3 class="font(base) font(bold) c(gray-900)">Prefixes</h3>
+          <div class="vbox gap(xs)">
+            <div class="hbox gap(sm) items(center)">
+              <code class="font(mono) font(bold) px(xs) py(2xs) bg(gray-200) c(gray-900) r(xs) min-w(40px) text(center)">hover:</code>
+              <span class="font(xs) c(gray-700)">Hover state</span>
+            </div>
+            <div class="hbox gap(sm) items(center)">
+              <code class="font(mono) font(bold) px(xs) py(2xs) bg(gray-200) c(gray-900) r(xs) min-w(40px) text(center)">md:</code>
+              <span class="font(xs) c(gray-700)">Responsive</span>
+            </div>
+            <div class="hbox gap(sm) items(center)">
+              <code class="font(mono) font(bold) px(xs) py(2xs) bg(gray-200) c(gray-900) r(xs) min-w(40px) text(center)">group-</code>
+              <span class="font(xs) c(gray-700)">Group state</span>
+            </div>
+            <div class="hbox gap(sm) items(center)">
+              <code class="font(mono) font(bold) px(xs) py(2xs) bg(gray-200) c(gray-900) r(xs) min-w(40px) text(center)">peer-</code>
+              <span class="font(xs) c(gray-700)">Peer state</span>
+            </div>
+            <div class="hbox gap(sm) items(center)">
+              <code class="font(mono) font(bold) px(xs) py(2xs) bg(gray-200) c(gray-900) r(xs) min-w(40px) text(center)">!</code>
+              <span class="font(xs) c(gray-700)">Important</span>
             </div>
           </div>
-        </Card>
+        </div>
 
-        <Card variant="elevated">
-          <div class="p(2xl)">
-            <h3 class="heading(h4) c(mute-900) mb(lg)">Prefixes</h3>
-            <div class="vbox gap(md)">
-              <div class="hbox gap(md) items(center)">
-                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">hover:</code>
-                <span class="body(sm) c(mute-600)">Hover state (e.g., `hover:scale(1.05)`)</span>
-              </div>
-              <div class="hbox gap(md) items(center)">
-                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">md:</code>
-                <span class="body(sm) c(mute-600)">Responsive breakpoint (e.g., `md:w(full)`)</span>
-              </div>
-              <div class="hbox gap(md) items(center)">
-                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">!</code>
-                <span class="body(sm) c(mute-600)">Important modifier (e.g., `bg(red)!`)</span>
-              </div>
-              <div class="hbox gap(md) items(center)">
-                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">group-</code>
-                <span class="body(sm) c(mute-600)">Group state (e.g., `group-hover:opacity(1)`)</span>
-              </div>
-              <div class="hbox gap(md) items(center)">
-                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">peer-</code>
-                <span class="body(sm) c(mute-600)">Peer state (e.g., `peer-focus:ring(2)`)</span>
-              </div>
+        <!-- Special Values -->
+        <div class="vbox gap(md)">
+          <h3 class="font(base) font(bold) c(gray-900)">Special Values</h3>
+          <div class="vbox gap(xs)">
+            <div class="hbox gap(sm) items(center)">
+              <code class="font(mono) font(bold) px(xs) py(2xs) bg(gray-200) c(gray-900) r(xs) min-w(36px) text(center)">auto</code>
+              <span class="font(xs) c(gray-700)">Auto keyword</span>
+            </div>
+            <div class="hbox gap(sm) items(center)">
+              <code class="font(mono) font(bold) px(xs) py(2xs) bg(gray-200) c(gray-900) r(xs) min-w(36px) text(center)">full</code>
+              <span class="font(xs) c(gray-700)">100% token</span>
+            </div>
+            <div class="hbox gap(sm) items(center)">
+              <code class="font(mono) font(bold) px(xs) py(2xs) bg(gray-200) c(gray-900) r(xs) min-w(36px) text(center)">16:9</code>
+              <span class="font(xs) c(gray-700)">Aspect ratio</span>
+            </div>
+            <div class="hbox gap(sm) items(center)">
+              <code class="font(mono) font(bold) px(xs) py(2xs) bg(gray-200) c(gray-900) r(xs) min-w(36px) text(center)">-10</code>
+              <span class="font(xs) c(gray-700)">Negative value</span>
+            </div>
+            <div class="hbox gap(sm) items(center)">
+              <code class="font(mono) font(bold) px(xs) py(2xs) bg(gray-200) c(gray-900) r(xs) min-w(36px) text(center)">calc()</code>
+              <span class="font(xs) c(gray-700)">CSS calc</span>
             </div>
           </div>
-        </Card>
-
-        <Card variant="elevated">
-          <div class="p(2xl)">
-            <h3 class="heading(h4) c(mute-900) mb(lg)">Special Values</h3>
-            <div class="vbox gap(md)">
-              <div class="hbox gap(md) items(center)">
-                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">auto</code>
-                <span class="body(sm) c(mute-600)">Auto keyword</span>
-              </div>
-              <div class="hbox gap(md) items(center)">
-                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">none</code>
-                <span class="body(sm) c(mute-600)">None keyword</span>
-              </div>
-              <div class="hbox gap(md) items(center)">
-                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">full</code>
-                <span class="body(sm) c(mute-600)">100% token</span>
-              </div>
-              <div class="hbox gap(md) items(center)">
-                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">16:9</code>
-                <span class="body(sm) c(mute-600)">Aspect ratio</span>
-              </div>
-              <div class="hbox gap(md) items(center)">
-                <code class="inline-block code(inline) bg(mute-200) px(sm) py(xs) r(sm)">100%-20</code>
-                <span class="body(sm) c(mute-600)">Calc (e.g., `w(100%-20)`)</span>
-              </div>
-            </div>
-          </div>
-        </Card>
+        </div>
       </div>
     </section>
   </div>
-
-  <!-- Toast Message -->
-  {#if $toastMessage}
-    <div class="fixed bottom(lg) right(lg) bg(primary) c(white) px(md) py(sm) r(md) shadow(lg) z(50)">
-      {$toastMessage}
-    </div>
-  {/if}
 </div>

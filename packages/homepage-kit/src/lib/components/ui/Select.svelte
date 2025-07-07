@@ -10,7 +10,7 @@
   >
     <slot />
   </select>
-  <svg class="absolute right(12) top(1/2) translate-y(-1/2) size(16) c(gray-500) pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+  <svg class="absolute right(12) top(50%) translate-y(-1/2) size(16) c(gray-500) pointer-events-none" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
     <polyline points="6 9 12 15 18 9"></polyline>
   </svg>
 </div>

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { shadow, opacity } from '../../../03-rules/style/shadow';
+import { shadow, opacity } from '../../../04-rules/03-rules_deprecated/style/shadow';
 
 describe('shadow 03-rules', () => {
   describe('shadow', () => {

@@ -5,19 +5,19 @@
   const fontTokens = [
     { name: '4xs', size: 'text(4xs)', description: 'Tiny text', usage: 'Fine print' },
     { name: '3xs', size: 'text(3xs)', description: 'Extra small', usage: 'Captions' },
-    { name: '2xs', size: 'text(2xs)', description: 'Very small', usage: 'Helper text' },
-    { name: 'xs', size: 'text(xs)', description: 'Small text', usage: 'Labels' },
-    { name: 'sm', size: 'text(sm)', description: 'Small body', usage: 'Secondary text' },
-    { name: 'md', size: 'text(md)', description: 'Base size', usage: 'Body text' },
-    { name: 'lg', size: 'text(lg)', description: 'Large text', usage: 'Emphasis' },
+    { name: '2xs', size: 'font(2xs)', description: 'Very small', usage: 'Helper text' },
+    { name: 'xs', size: 'font(xs)', description: 'Small text', usage: 'Labels' },
+    { name: 'sm', size: 'font(sm)', description: 'Small body', usage: 'Secondary text' },
+    { name: 'md', size: 'font(md)', description: 'Base size', usage: 'Body text' },
+    { name: 'lg', size: 'fonr(lg)', description: 'Large text', usage: 'Emphasis' },
     { name: 'xl', size: 'text(xl)', description: 'Extra large', usage: 'Subheadings' },
-    { name: '2xl', size: 'text(2xl)', description: 'Double XL', usage: 'Headings' },
-    { name: '3xl', size: 'text(3xl)', description: 'Triple XL', usage: 'Large headings' },
-    { name: '4xl', size: 'text(4xl)', description: 'Quad XL', usage: 'Display text' },
-    { name: '5xl', size: 'text(5xl)', description: 'Penta XL', usage: 'Hero text' },
-    { name: '6xl', size: 'text(6xl)', description: 'Hexa XL', usage: 'Giant text' },
-    { name: '7xl', size: 'text(7xl)', description: 'Septa XL', usage: 'Massive text' },
-    { name: '8xl', size: 'text(8xl)', description: 'Octa XL', usage: 'Enormous text' },
+    { name: '2xl', size: 'font(2xl)', description: 'Double XL', usage: 'Headings' },
+    { name: '3xl', size: 'font(3xl)', description: 'Triple XL', usage: 'Large headings' },
+    { name: '4xl', size: 'font(4xl)', description: 'Quad XL', usage: 'Display text' },
+    { name: '5xl', size: 'font(5xl)', description: 'Penta XL', usage: 'Hero text' },
+    { name: '6xl', size: 'font(6xl)', description: 'Hexa XL', usage: 'Giant text' },
+    { name: '7xl', size: 'font(7xl)', description: 'Septa XL', usage: 'Massive text' },
+    { name: '8xl', size: 'font(8xl)', description: 'Octa XL', usage: 'Enormous text' },
   ];
   
   let copiedToken = '';
@@ -105,9 +105,9 @@
       <div class="vbox gap(md)">
         <h4 class="title(sm) c(white)">Usage</h4>
         <p class="body(sm) c(white.9)">
-          Simply use: <code class="bg(white.2) px(xs) r(sm)">text(lg)</code>, 
-          <code class="bg(white.2) px(xs) r(sm)">text(2xl)</code>, 
-          <code class="bg(white.2) px(xs) r(sm)">text(6xl)</code>
+          Simply use: <code class="bg(white.2) px(xs) r(sm)">fonr(lg)</code>,
+          <code class="bg(white.2) px(xs) r(sm)">font(2xl)</code>,
+          <code class="bg(white.2) px(xs) r(sm)">font(6xl)</code>
         </p>
       </div>
     </div>

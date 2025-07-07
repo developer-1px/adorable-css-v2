@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { backdropBlur, backdropSaturate, backdropBrightness, backdropContrast, backdropGrayscale, backdropHueRotate, backdropInvert, backdropOpacity, backdropSepia } from '../../../03-rules/style/backdrop'; // Corrected import path
+import { backdropBlur, backdropSaturate, backdropBrightness, backdropContrast, backdropGrayscale, backdropHueRotate, backdropInvert, backdropOpacity, backdropSepia } from '../../../04-rules/03-rules_deprecated/style/backdrop'; // Corrected import path
 
 describe('backdrop filter rules', () => { // Clarified describe block name
   describe('backdropBlur', () => {

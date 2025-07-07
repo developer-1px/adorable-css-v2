@@ -45,7 +45,7 @@
         step="2"
         class="w(full)"
       />
-      <div class="text(lg) font(mono) font(bold) text(center)">{elevation}px</div>
+      <div class="fonr(lg) font(mono) font(bold) text(center)">{elevation}px</div>
     </div>
     
     <div class="vbox gap(lg)">
@@ -58,7 +58,7 @@
         step="0.01"
         class="w(full)"
       />
-      <div class="text(lg) font(mono) font(bold) text(center)">{opacity.toFixed(2)}</div>
+      <div class="fonr(lg) font(mono) font(bold) text(center)">{opacity.toFixed(2)}</div>
     </div>
     
     <div class="vbox gap(lg)">
@@ -71,7 +71,7 @@
         step="1"
         class="w(full)"
       />
-      <div class="text(lg) font(mono) font(bold) text(center)">{blur}px</div>
+      <div class="fonr(lg) font(mono) font(bold) text(center)">{blur}px</div>
     </div>
   </div>
   
@@ -95,8 +95,8 @@
             style="box-shadow: {value}"
           ></div>
           <div class="text(center)">
-            <div class="text(sm) font(mono) font(bold) uppercase tracking(wider)">{step}</div>
-            <div class="text(xs) font(mono) c(gray-600) max-w(5xl) break(words)">{value}</div>
+            <div class="font(sm) font(mono) font(bold) uppercase tracking(wider)">{step}</div>
+            <div class="font(xs) font(mono) c(gray-600) max-w(5xl) break(words)">{value}</div>
           </div>
         </div>
       {/each}

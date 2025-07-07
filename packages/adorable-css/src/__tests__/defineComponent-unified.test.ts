@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { defineComponent, defineThemedComponent } from '../04-components/defineComponent-unified';
+import { defineComponent, defineThemedComponent } from '../05-components/defineComponent-unified';
 
 describe('defineComponent (unified)', () => {
   describe('basic functionality', () => {
@@ -69,8 +69,8 @@ describe('defineComponent (unified)', () => {
       const component = defineComponent({
         base: 'btn',
         sizes: {
-          sm: 'text(sm)',
-          lg: 'text(lg)'
+          sm: 'font(sm)',
+          lg: 'fonr(lg)'
         },
         variants: {
           primary: 'bg(blue-600)',
@@ -86,7 +86,7 @@ describe('defineComponent (unified)', () => {
       });
       
       const result = component('primary/lg');
-      expect(result).toBe('btn text(lg) bg(blue-600) uppercase tracking(wide)');
+      expect(result).toBe('btn fonr(lg) bg(blue-600) uppercase tracking(wide)');
     });
 
     it('should apply compound variants with array matches', () => {
@@ -121,13 +121,13 @@ describe('defineComponent (unified)', () => {
       const component = defineComponent({
         base: 'r(md)',
         compounds: {
-          'primary/sm': 'bg(blue-500) text(xs) px(2)',
-          'primary/lg': 'bg(blue-600) text(lg) px(4)'
+          'primary/sm': 'bg(blue-500) font(xs) px(2)',
+          'primary/lg': 'bg(blue-600) fonr(lg) px(4)'
         }
       });
       
-      expect(component('primary/sm')).toBe('r(md) bg(blue-500) text(xs) px(2)');
-      expect(component('primary/lg')).toBe('r(md) bg(blue-600) text(lg) px(4)');
+      expect(component('primary/sm')).toBe('r(md) bg(blue-500) font(xs) px(2)');
+      expect(component('primary/lg')).toBe('r(md) bg(blue-600) fonr(lg) px(4)');
     });
 
     it('should apply wildcard patterns', () => {

@@ -109,7 +109,7 @@
     <div class="text(center) vbox gap(lg)">
       <h2 class="display(xl) font(black) tracking(tight)">Color Foundation</h2>
       <div class="vbox(center)">
-        <p class="text(lg) c(gray-600) max-w(3xl)">Semantic color system for consistent UI communication</p>
+        <p class="fonr(lg) c(gray-600) max-w(3xl)">Semantic color system for consistent UI communication</p>
       </div>
     </div>
 
@@ -134,7 +134,7 @@
                     <h4 class="title(lg) font(bold) capitalize">{name}</h4>
                     <p class="caption c(gray-600)">{props.usage}</p>
                   </div>
-                  <code class="text(sm) font(mono) c(gray-600)">{props.value}</code>
+                  <code class="font(sm) font(mono) c(gray-600)">{props.value}</code>
                 </div>
                 
                 <!-- Color Preview -->
@@ -146,7 +146,7 @@
                           class="w(3xl) h(3xl) r(md) border(1/gray-300)"
                           style="background-color: {color}"
                         ></div>
-                        <span class="text(xs) font(mono) c(gray-500)">{variant}</span>
+                        <span class="font(xs) font(mono) c(gray-500)">{variant}</span>
                       </div>
                     {/each}
                   {:else}
@@ -155,7 +155,7 @@
                         class="w(4xl) h(4xl) r(lg) border(1/gray-300)"
                         style="background-color: {props.value}"
                       ></div>
-                      <span class="text(sm) font(mono) c(gray-600)">{name}</span>
+                      <span class="font(sm) font(mono) c(gray-600)">{name}</span>
                     </div>
                   {/if}
                 </div>

@@ -1,22 +1,22 @@
 import { describe, it, expect } from 'vitest';
-import { badgeString } from '../../04-components/primitives/badge';
+import { badgeString } from '../../05-components/primitives/badge';
 
 describe('badge component', () => {
   it('should return default badge styles', () => {
     const result = badgeString();
     expect(result).toContain('hbox(pack) bold(medium) r(sm)');
-    expect(result).toContain('px(md) py(xs) text(sm)'); // default size
+    expect(result).toContain('px(md) py(xs) font(sm)'); // default size
     expect(result).toContain('bg(neutral-100) c(neutral-700) b(1/neutral-200)'); // default variant
   });
 
   it('should apply small size', () => {
     const result = badgeString('sm');
-    expect(result).toContain('px(sm) text(xs)');
+    expect(result).toContain('px(sm) font(xs)');
   });
 
   it('should apply large size', () => {
     const result = badgeString('lg');
-    expect(result).toContain('px(lg) py(sm) text(sm)');
+    expect(result).toContain('px(lg) py(sm) font(sm)');
   });
 
   it('should apply primary variant', () => {
@@ -61,7 +61,7 @@ describe('badge component', () => {
 
   it('should combine variant and size', () => {
     const result = badgeString('primary/sm');
-    expect(result).toContain('px(sm) text(xs)');
+    expect(result).toContain('px(sm) font(xs)');
     expect(result).toContain('bg(primary) c(white) hover:bg(primary-700)');
   });
 
@@ -89,7 +89,7 @@ describe('badge component', () => {
 
   it('should handle sm/muted combination', () => {
     const result = badgeString('sm/muted');
-    expect(result).toContain('px(sm) text(xs)');
+    expect(result).toContain('px(sm) font(xs)');
     expect(result).toContain('bg(neutral-100) c(neutral-600) b(1/neutral-200)');
   });
 });

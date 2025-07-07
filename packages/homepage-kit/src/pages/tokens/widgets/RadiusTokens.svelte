@@ -60,23 +60,23 @@
     <!-- Stats row -->
     <div class="hbox(pack) gap(2xl) mt(2xl) text(center)">
       <div class="vbox gap(xs)">
-        <div class="text(2xl) bold c(orange-600)">{radiusVariants.length}</div>
-        <div class="text(sm) c(gray-500)">Radius Steps</div>
+        <div class="font(2xl) bold c(orange-600)">{radiusVariants.length}</div>
+        <div class="font(sm) c(gray-500)">Radius Steps</div>
       </div>
       <div class="vbox gap(xs)">
-        <div class="text(2xl) bold c(amber-600)">∞</div>
-        <div class="text(sm) c(gray-500)">From Sharp to Round</div>
+        <div class="font(2xl) bold c(amber-600)">∞</div>
+        <div class="font(sm) c(gray-500)">From Sharp to Round</div>
       </div>
       <div class="vbox gap(xs)">
-        <div class="text(2xl) bold c(orange-500)">✓</div>
-        <div class="text(sm) c(gray-500)">Perfect Curves</div>
+        <div class="font(2xl) bold c(orange-500)">✓</div>
+        <div class="font(sm) c(gray-500)">Perfect Curves</div>
       </div>
     </div>
   </div>
 
   <!-- Quick Radius Scale Overview -->
   <div class="bg(white) r(3xl) shadow(xl) shadow(orange-100.3) overflow(hidden) border(xs/gray-100)">
-    <div class="bg(to-r/orange-50..amber-50) p(2xl) border-b(xs/orange-100)">
+    <div class="bg(to-r/orange-50..amber-50) p(2xl) bb(xs/orange-100)">
       <div class="hbox(between/middle) mb(xl)">
         <div>
           <h3 class="heading(h2) c(gray-900) mb(sm)">Radius Scale</h3>
@@ -91,19 +91,19 @@
     <div class="p(2xl)">
       <!-- Horizontal Visual Scale -->
       <div class="bg(gray-50) r(2xl) p(2xl) mb(2xl)">
-        <h4 class="text(sm) bold c(gray-700) mb(lg) uppercase tracking(wide)">Visual Scale</h4>
+        <h4 class="font(sm) bold c(gray-700) mb(lg) uppercase tracking(wide)">Visual Scale</h4>
         <div class="hbox(center/middle) gap(xl) items(center)">
           {#each radiusVariants as { key, value }}
             <div class="vbox(center) gap(sm)">
               <!-- Visual square with radius -->
               <div class="w(4xl) h(4xl) bg(to-br/orange-400..amber-500) r({key}) shadow(md) hover:shadow(lg) transition"></div>
               <!-- Label -->
-              <div class="text(xs) c(gray-600) font(mono)">{key}</div>
-              <div class="text(xs) c(gray-500) font(mono)">{value}</div>
+              <div class="font(xs) c(gray-600) font(mono)">{key}</div>
+              <div class="font(xs) c(gray-500) font(mono)">{value}</div>
             </div>
           {/each}
         </div>
-        <p class="text(xs) c(gray-500) text(center) mt(lg)">See radius applied to different UI components in the playground below</p>
+        <p class="font(xs) c(gray-500) text(center) mt(lg)">See radius applied to different UI components in the playground below</p>
       </div>
     </div>
   </div>
@@ -112,7 +112,7 @@
   <div class="bg(to-br/slate-50..gray-50) r(3xl) p(3xl) border(1px/gray-200)">
     <div class="text(center) mb(3xl)">
       <h3 class="heading(h2) c(gray-900) mb(sm)">Radius in Context</h3>
-      <p class="text(lg) c(gray-600)">See how different radius values work across various UI components</p>
+      <p class="fonr(lg) c(gray-600)">See how different radius values work across various UI components</p>
     </div>
     
     <div class="grid(3) gap(2xl)">
@@ -129,7 +129,7 @@
           <div class="px(md) py(sm) bg(orange-50) border(1px/orange-200) r(md)">
             Input r(md)
           </div>
-          <span class="px(sm) py(xs) bg(orange-100) c(orange-700) r(lg) text(sm) inline-block">
+          <span class="px(sm) py(xs) bg(orange-100) c(orange-700) r(lg) font(sm) inline-block">
             Badge r(lg)
           </span>
         </div>
@@ -143,13 +143,13 @@
         </h4>
         <div class="vbox gap(md)">
           <div class="p(md) bg(amber-50) border(1px/amber-200) r(lg)">
-            <div class="text(sm) c(gray-700)">Card r(lg)</div>
+            <div class="font(sm) c(gray-700)">Card r(lg)</div>
           </div>
           <div class="p(lg) bg(amber-50) border(1px/amber-200) r(xl)">
-            <div class="text(sm) c(gray-700)">Panel r(xl)</div>
+            <div class="font(sm) c(gray-700)">Panel r(xl)</div>
           </div>
           <div class="p(xl) bg(amber-50) border(1px/amber-200) r(2xl)">
-            <div class="text(sm) c(gray-700)">Container r(2xl)</div>
+            <div class="font(sm) c(gray-700)">Container r(2xl)</div>
           </div>
         </div>
       </div>
@@ -162,7 +162,7 @@
         </h4>
         <div class="vbox gap(md) items(start)">
           <div class="w(40px) h(40px) bg(orange-200) r(full) hbox(center/middle)">
-            <span class="text(xs) font(mono)">full</span>
+            <span class="font(xs) font(mono)">full</span>
           </div>
           <div class="px(lg) py(sm) bg(orange-100) c(orange-700) r(full)">
             Pill Button
@@ -197,7 +197,7 @@
               <Square size="24" class="c(white)" />
             </div>
             <div class="heading(h4) c(white)">Purposeful</div>
-            <div class="text(sm) c(white.8) leading(relaxed)">
+            <div class="font(sm) c(white.8) leading(relaxed)">
               Each radius value serves a specific purpose in the interface hierarchy
             </div>
           </div>
@@ -207,7 +207,7 @@
               <RectangleHorizontal size="24" class="c(white)" />
             </div>
             <div class="heading(h4) c(white)">Harmonious</div>
-            <div class="text(sm) c(white.8) leading(relaxed)">
+            <div class="font(sm) c(white.8) leading(relaxed)">
               Consistent scaling creates visual harmony across all component sizes
             </div>
           </div>
@@ -217,7 +217,7 @@
               <Zap size="24" class="c(white)" />
             </div>
             <div class="heading(h4) c(white)">Modern</div>
-            <div class="text(sm) c(white.8) leading(relaxed)">
+            <div class="font(sm) c(white.8) leading(relaxed)">
               Contemporary radius values that feel fresh and approachable
             </div>
           </div>

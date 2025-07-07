@@ -43,8 +43,8 @@ import 'adorable-css'
 
 ```javascript
 // 1. 콘솔에서 직접 테스트
-import { generateCSSFromAdorableCSS } from 'adorable-css'
-console.log(generateCSSFromAdorableCSS('your-class'))
+import { generateClass } from 'adorable-css'
+console.log(generateClass('your-class'))
 
 // 2. 파서 결과 확인
 // 빈 문자열이 반환되면 파싱 실패

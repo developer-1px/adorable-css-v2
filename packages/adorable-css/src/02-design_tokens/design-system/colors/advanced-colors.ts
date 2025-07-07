@@ -1,7 +1,11 @@
 // Advanced OKLCH Color System - Based on the Showroom implementation
 // Provides scientific color generation with theme adjustments
 
-import type { CSSRule, RuleHandler } from '../../../03-rules/types';
+// Type definitions
+type CSSRule = Record<string, string | Record<string, any>>;
+export type RuleHandler = (args: string) => CSSRule;
+export type KeywordRuleHandler = () => CSSRule;
+export type StringRuleHandler = (args?: string) => string | (string | CSSRule)[];
 
 // OKLCH Color Space
 export interface OKLCH {

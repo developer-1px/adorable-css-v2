@@ -22,7 +22,7 @@
       <Sun size="24" class="c(indigo-600)" />
       <h2 class="display(lg) c(gray-900)">Shadows & Elevation</h2>
     </div>
-    <p class="text(lg) c(gray-600) max-w(2xl) mx(auto)">
+    <p class="fonr(lg) c(gray-600) max-w(2xl) mx(auto)">
       A refined shadow system that creates depth and hierarchy. 
       From subtle elevation to dramatic effects for memorable interfaces.
     </p>
@@ -33,7 +33,7 @@
     <div class="hbox(between/middle) mb(3xl)">
       <div>
         <h3 class="heading(h2) c(gray-900) mb(xs)">Shadow Scale</h3>
-        <p class="text(sm) c(gray-600)">Progressive elevation system - hover to feel the depth</p>
+        <p class="font(sm) c(gray-600)">Progressive elevation system - hover to feel the depth</p>
       </div>
       <Layers size="20" class="c(gray-400)" />
     </div>
@@ -55,7 +55,7 @@
                 <div class="font(xl) md:font(2xl) bold c(indigo-600) mb(xs)">
                   {key === 'none' ? '0' : key}
                 </div>
-                <code class="text(2xs) md:text(xs) px(xs) md:px(sm) py(xs) r(md) bg(indigo-50) c(indigo-700) inline-block">
+                <code class="font(2xs) md:font(xs) px(xs) md:px(sm) py(xs) r(md) bg(indigo-50) c(indigo-700) inline-block">
                   shadow({key})
                 </code>
               </div>
@@ -84,7 +84,7 @@
                      group-hover:bg(to-t/indigo-600..indigo-400)"
               style="height: {index * 15}%; max-height: 100%"
             >
-              <div class="absolute -top(lg) left(50%) translate-x(-50%) text(xs) c(gray-600) whitespace-nowrap">
+              <div class="absolute -top(lg) left(50%) translate-x(-50%) font(xs) c(gray-600) whitespace-nowrap">
                 {index * 4}dp
               </div>
             </div>
@@ -105,7 +105,7 @@
                     group-hover:translate-y(-4px) group-hover:rotate(-1deg)">
           <MousePointer class="size(2xl) c(indigo-600) mb(lg) mx(auto)" />
           <h4 class="font(lg) bold c(gray-900) text(center) mb(sm)">Hover Effect</h4>
-          <p class="text(sm) c(gray-600) text(center)">Smooth elevation on hover</p>
+          <p class="font(sm) c(gray-600) text(center)">Smooth elevation on hover</p>
         </div>
       </div>
       
@@ -115,7 +115,7 @@
                     group-hover:scale(1.05)">
           <Sparkles class="size(2xl) c(purple-600) mb(lg) mx(auto)" />
           <h4 class="font(lg) bold c(gray-900) text(center) mb(sm)">Scale & Shadow</h4>
-          <p class="text(sm) c(gray-600) text(center)">Combined transformations</p>
+          <p class="font(sm) c(gray-600) text(center)">Combined transformations</p>
         </div>
       </div>
       
@@ -125,7 +125,7 @@
                     group-hover:border(2px/indigo-500)">
           <Layers class="size(2xl) c(pink-600) mb(lg) mx(auto)" />
           <h4 class="font(lg) bold c(gray-900) text(center) mb(sm)">Press Effect</h4>
-          <p class="text(sm) c(gray-600) text(center)">Depth reduction on hover</p>
+          <p class="font(sm) c(gray-600) text(center)">Depth reduction on hover</p>
         </div>
       </div>
     </div>
@@ -136,7 +136,7 @@
     <div class="hbox(between/middle) mb(3xl)">
       <div>
         <h3 class="heading(h2) c(gray-900) mb(xs)">Elevation System</h3>
-        <p class="text(sm) c(gray-600)">Material-inspired elevation using shadow tokens</p>
+        <p class="font(sm) c(gray-600)">Material-inspired elevation using shadow tokens</p>
       </div>
       <Layers size="20" class="c(gray-400)" />
     </div>
@@ -154,10 +154,10 @@
               <div class="font(2xl) bold c(indigo-600) mb(xs)">
                 {elevation.dp}
               </div>
-              <code class="text(xs) px(sm) py(xs) r(md) bg(indigo-50) c(indigo-700) inline-block mb(sm)">
+              <code class="font(xs) px(sm) py(xs) r(md) bg(indigo-50) c(indigo-700) inline-block mb(sm)">
                 shadow({elevation.level})
               </code>
-              <p class="text(2xs) c(gray-600)">{elevation.description}</p>
+              <p class="font(2xs) c(gray-600)">{elevation.description}</p>
             </div>
           </div>
         </div>
@@ -170,27 +170,27 @@
       <div class="grid(4) gap(lg)">
         <div class="text(center)">
           <div class="size(4xl) r(lg) bg(white) shadow(sm) shadow(gray-300.5) hbox(center/middle) mx(auto) mb(md)">
-            <span class="text(lg) font(bold) c(gray-700)">Soft</span>
+            <span class="fonr(lg) font(bold) c(gray-700)">Soft</span>
           </div>
-          <code class="text(xs) c(gray-600)">shadow(sm) shadow(gray-300.5)</code>
+          <code class="font(xs) c(gray-600)">shadow(sm) shadow(gray-300.5)</code>
         </div>
         <div class="text(center)">
           <div class="size(4xl) r(lg) bg(white) shadow(md) shadow(indigo-200.3) hbox(center/middle) mx(auto) mb(md)">
-            <span class="text(lg) font(bold) c(indigo-700)">Color</span>
+            <span class="fonr(lg) font(bold) c(indigo-700)">Color</span>
           </div>
-          <code class="text(xs) c(gray-600)">shadow(md) shadow(indigo-200.3)</code>
+          <code class="font(xs) c(gray-600)">shadow(md) shadow(indigo-200.3)</code>
         </div>
         <div class="text(center)">
           <div class="size(4xl) r(lg) bg(gradient(white..gray-50)) shadow(lg) hbox(center/middle) mx(auto) mb(md)">
-            <span class="text(lg) font(bold) c(gray-700)">Raised</span>
+            <span class="fonr(lg) font(bold) c(gray-700)">Raised</span>
           </div>
-          <code class="text(xs) c(gray-600)">shadow(lg)</code>
+          <code class="font(xs) c(gray-600)">shadow(lg)</code>
         </div>
         <div class="text(center)">
           <div class="size(4xl) r(lg) bg(white) shadow(2xl) shadow(purple-200.4) hbox(center/middle) mx(auto) mb(md)">
-            <span class="text(lg) font(bold) c(purple-700)">Drama</span>
+            <span class="fonr(lg) font(bold) c(purple-700)">Drama</span>
           </div>
-          <code class="text(xs) c(gray-600)">shadow(2xl) shadow(purple-200.4)</code>
+          <code class="font(xs) c(gray-600)">shadow(2xl) shadow(purple-200.4)</code>
         </div>
       </div>
     </div>
@@ -206,27 +206,27 @@
         <div class="grid(6) gap(lg) text(center)">
           <div>
             <div class="badge(sm/primary) mb(sm)">0dp</div>
-            <p class="text(xs) opacity(0.8)">Surface</p>
+            <p class="font(xs) opacity(0.8)">Surface</p>
           </div>
           <div>
             <div class="badge(sm/primary) mb(sm)">1dp</div>
-            <p class="text(xs) opacity(0.8)">Card</p>
+            <p class="font(xs) opacity(0.8)">Card</p>
           </div>
           <div>
             <div class="badge(sm/primary) mb(sm)">2dp</div>
-            <p class="text(xs) opacity(0.8)">Button</p>
+            <p class="font(xs) opacity(0.8)">Button</p>
           </div>
           <div>
             <div class="badge(sm/primary) mb(sm)">4dp</div>
-            <p class="text(xs) opacity(0.8)">App Bar</p>
+            <p class="font(xs) opacity(0.8)">App Bar</p>
           </div>
           <div>
             <div class="badge(sm/primary) mb(sm)">8dp</div>
-            <p class="text(xs) opacity(0.8)">Menu</p>
+            <p class="font(xs) opacity(0.8)">Menu</p>
           </div>
           <div>
             <div class="badge(sm/primary) mb(sm)">24dp</div>
-            <p class="text(xs) opacity(0.8)">Dialog</p>
+            <p class="font(xs) opacity(0.8)">Dialog</p>
           </div>
         </div>
       </div>
@@ -235,20 +235,20 @@
       <div class="grid(2) gap(xl)">
         <div class="bg(white.1) r(lg) p(lg) backdrop-blur(sm)">
           <h5 class="font(lg) bold mb(md)">🎨 Color Shadows</h5>
-          <p class="text(sm) opacity(0.9) mb(md)">
+          <p class="font(sm) opacity(0.9) mb(md)">
             Add color to shadows for more vibrant, modern designs
           </p>
-          <code class="text(xs) bg(white.1) px(sm) py(xs) r(md) block">
+          <code class="font(xs) bg(white.1) px(sm) py(xs) r(md) block">
             shadow(xl) shadow(purple-200.4)
           </code>
         </div>
         
         <div class="bg(white.1) r(lg) p(lg) backdrop-blur(sm)">
           <h5 class="font(lg) bold mb(md)">🚀 Interactive States</h5>
-          <p class="text(sm) opacity(0.9) mb(md)">
+          <p class="font(sm) opacity(0.9) mb(md)">
             Use shadow transitions for hover and active states
           </p>
-          <code class="text(xs) bg(white.1) px(sm) py(xs) r(md) block">
+          <code class="font(xs) bg(white.1) px(sm) py(xs) r(md) block">
             shadow(sm) hover:shadow(xl)
           </code>
         </div>
@@ -257,7 +257,7 @@
       <!-- Best Practices -->
       <div class="bg(gradient(to-r/purple-600..pink-600)) r(lg) p(lg)">
         <h5 class="font(lg) bold mb(md)">✨ Best Practices</h5>
-        <ul class="vbox gap(sm) text(sm)">
+        <ul class="vbox gap(sm) font(sm)">
           <li class="opacity(0.9)">• Use consistent elevation across similar components</li>
           <li class="opacity(0.9)">• Higher elevation = more importance or temporary state</li>
           <li class="opacity(0.9)">• Combine shadows with transforms for realistic depth</li>

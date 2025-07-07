@@ -6,8 +6,8 @@ import {
   isResponsiveClass, 
   extractBaseClass, 
   createResponsiveCSS 
-} from '../05-plugins/responsive/responsive-decorator';
-import { generateCSS } from '../01-core/generators/generator';
+} from '../06-plugins/responsive/responsive-decorator';
+import { generateCSS } from '../07-generator/generator';
 
 describe('Responsive Decorator Pattern', () => {
   describe('ResponsiveSelector.analyze()', () => {

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { animation } from '../../../03-rules/style/animation';
+import { animation } from '../../../04-rules/03-rules_deprecated/style/animation';
 
 describe('animation rule', () => {
   it('should handle predefined animations', () => {

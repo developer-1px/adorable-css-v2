@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { isToken, getTokenVar, generateTokenCSS, defaultTokens } from './index';
-import { r } from '../03-rules/visuals/border';
-import { shadow } from '../03-rules/visuals/shadow';
-import { font } from '../03-rules/typography/font';
-import { p, m, gap } from '../03-rules/layout/spacing';
+import { r } from '../04-rules/03-rules_deprecated/visuals/border';
+import { shadow } from '../04-rules/03-rules_deprecated/visuals/shadow';
+import { font } from '../04-rules/03-rules_deprecated/typography/font';
+import { p, m, gap } from '../04-rules/03-rules_deprecated/layout/spacing';
 
 describe('Token System', () => {
   describe('isToken', () => {
@@ -32,10 +32,10 @@ describe('Token System', () => {
   describe('generateTokenCSS', () => {
     it('should generate CSS variables', () => {
       const css = generateTokenCSS(defaultTokens);
-      expect(css).toContain(':root {');
-      expect(css).toContain('--radius-sm: 0.25rem;');
-      expect(css).toContain('--font-lg: 1.25rem;');
-      expect(css).toContain('--spacing-md: 0.75rem;');
+      expect(css).toContain(':root{');
+      expect(css).toContain('--radius-sm:0.25rem;');
+      expect(css).toContain('--font-lg:1.25rem;');
+      expect(css).toContain('--spacing-md:0.75rem;');
     });
   });
 

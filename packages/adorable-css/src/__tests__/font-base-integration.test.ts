@@ -1,9 +1,9 @@
 import { describe, it, expect } from 'vitest';
-import { generateCSSWithTokens } from '../01-core/generators/generator';
+import { generateCSSWithTokens } from '../07-generator/generator';
 
 describe('font(base) integration test', () => {
   it('should generate CSS for font(base) with 02-design_tokens', () => {
-    const css = generateCSSWithTokens('font(base)');
+    const css = generateCSSWithTokens(['font(base)']);
     
     // Should include the CSS variable for font-md
     expect(css).toContain('--font-md: 1rem');
@@ -13,7 +13,7 @@ describe('font(base) integration test', () => {
   });
 
   it('should generate CSS for font(base/1.5) with 02-design_tokens', () => {
-    const css = generateCSSWithTokens('font(base/1.5)');
+    const css = generateCSSWithTokens(['font(base/1.5)']);
     
     // Should include the CSS variable for font-md
     expect(css).toContain('--font-md: 1rem');
@@ -23,7 +23,7 @@ describe('font(base) integration test', () => {
   });
 
   it('should generate CSS for font(base/1.5/0.02em) with 02-design_tokens', () => {
-    const css = generateCSSWithTokens('font(base/1.5/0.02em)');
+    const css = generateCSSWithTokens(['font(base/1.5/0.02em)']);
     
     // Should include the CSS variable for font-md
     expect(css).toContain('--font-md: 1rem');

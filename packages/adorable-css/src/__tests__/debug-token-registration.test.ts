@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { clearTokenRegistry, generateUsedTokensCSS, getUsedTokens } from '../02-design_tokens/tokenRegistry';
-import { font } from '../03-rules/text/font';
+import { font } from '../04-rules/figma/text/font';
 import { parseAdorableCSS } from '../01-core/parser/parser';
 
 describe('Token Registration Debug', () => {

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { bc, btc, brc, bbc, blc } from '../../../03-rules/style/border-color';
+import { bc, btc, brc, bbc, blc } from '../../../04-rules/03-rules_deprecated/style/border-color';
 
 describe('border-color 03-rules', () => {
   describe('bc (border-color)', () => {

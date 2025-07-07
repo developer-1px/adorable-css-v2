@@ -133,7 +133,7 @@
                 <h3 class="heading(h3) c(mute-900)">Recent Messages</h3>
                 <div class="vbox gap(lg)">
                   {#each [1, 2, 3] as i}
-                    <div class="hbox gap(lg) pb(lg) border-b(1/mute-100)">
+                    <div class="hbox gap(lg) pb(lg) bb(1/mute-100)">
                       <div class="w(40) h(40) r(full) bg(primary.1) flex-shrink(0)"></div>
                       <div class="vbox gap(xs) flex(1) min-w(0)">
                         <div class="hbox(middle) gap(sm)">

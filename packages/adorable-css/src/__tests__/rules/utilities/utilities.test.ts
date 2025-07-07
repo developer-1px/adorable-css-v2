@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { aspectRatio, float, isolation, objectFit, objectPosition, scrollBehavior, scrollSnap } from '../../../03-rules/utilities/utilities';
+import { aspectRatio, float, isolation, objectFit, objectPosition, scrollBehavior, scrollSnap } from '../../../04-rules/03-rules_deprecated/utilities/utilities';
 
 describe('utilities 03-rules', () => {
   describe('aspectRatio', () => {

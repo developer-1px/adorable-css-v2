@@ -3,7 +3,7 @@
  * Unified system for auto-injecting CSS and 02-design_tokens dynamically
  */
 
-import { generateCSS, generateUsedTokensCSS, clearTokenRegistry, generateTokenCSS, defaultTokens } from 'adorable-css';
+import { generateCSS, clearTokenRegistry, defaultTokens } from 'adorable-css';
 import type { DesignTokens } from 'adorable-css';
 
 interface DynamicStyleManagerOptions {
@@ -15,9 +15,8 @@ interface DynamicStyleManagerOptions {
 
 // Module-level state
 let enabled = true;
-let tokens: DesignTokens = defaultTokens;
+let _tokens: DesignTokens = defaultTokens;
 let styleElement: HTMLStyleElement | null = null;
-let tokensElement: HTMLStyleElement | null = null;
 let observer: MutationObserver | null = null;
 const classCache: Set<string> = new Set();
 let debug = false;
@@ -25,25 +24,10 @@ let updateTimer: number | null = null;
 let watchInterval = 100; // ms
 
 /**
- * Create style elements for CSS and tokens
+ * Create style elements for CSS
  */
 const createStyleElements = (): void => {
   const head = document.head;
-  
-  // Create tokens style element
-  tokensElement = document.getElementById('adorable-css-02-design_tokens-dynamic') as HTMLStyleElement;
-  if (!tokensElement) {
-    tokensElement = document.createElement('style');
-    tokensElement.id = 'adorable-css-02-design_tokens-dynamic';
-    tokensElement.setAttribute('data-adorable-css', 'tokens');
-    
-    // Insert at the beginning of head
-    if (head.firstChild) {
-      head.insertBefore(tokensElement, head.firstChild);
-    } else {
-      head.appendChild(tokensElement);
-    }
-  }
 
   // Create main CSS style element
   styleElement = document.getElementById('adorable-css-styles-dynamic') as HTMLStyleElement;
@@ -52,9 +36,9 @@ const createStyleElements = (): void => {
     styleElement.id = 'adorable-css-styles-dynamic';
     styleElement.setAttribute('data-adorable-css', 'styles');
     
-    // Insert after tokens
-    if (tokensElement.nextSibling) {
-      head.insertBefore(styleElement, tokensElement.nextSibling);
+    // Insert at the beginning of head
+    if (head.firstChild) {
+      head.insertBefore(styleElement, head.firstChild);
     } else {
       head.appendChild(styleElement);
     }
@@ -151,13 +135,8 @@ const updateStyles = (): void => {
     styleElement.textContent = css;
   }
 
-  // Generate and update tokens
-  const baseTokensCSS = generateTokenCSS(tokens);
-  const usedTokensCSS = generateUsedTokensCSS();
-  
-  if (tokensElement) {
-    tokensElement.textContent = baseTokensCSS + '\n\n' + usedTokensCSS;
-  }
+  // No longer generating token CSS separately
+  // Tokens are included in the main CSS generation
 
   if (debug) {
     console.log(`AdorableCSS: Updated ${classes.length} classes`);
@@ -168,7 +147,7 @@ const updateStyles = (): void => {
     document.dispatchEvent(new CustomEvent('adorablecss:styles-updated', {
       detail: { 
         classCount: classes.length,
-        hasTokens: !!usedTokensCSS
+        hasTokens: css.includes(':root') || css.includes('--')
       }
     }));
   }
@@ -241,10 +220,6 @@ const clear = (): void => {
   if (styleElement) {
     styleElement.textContent = '';
   }
-  
-  if (tokensElement) {
-    tokensElement.textContent = '';
-  }
 };
 
 /**
@@ -266,10 +241,6 @@ const destroy = (): void => {
     styleElement = null;
   }
 
-  if (tokensElement?.parentNode) {
-    tokensElement.parentNode.removeChild(tokensElement);
-    tokensElement = null;
-  }
 
   classCache.clear();
 };
@@ -288,7 +259,7 @@ const updateConfig = (options: Partial<DynamicStyleManagerOptions>): void => {
   }
   
   if (options.tokens !== undefined) {
-    tokens = options.tokens;
+    _tokens = options.tokens;
   }
   
   if (options.debug !== undefined) {
@@ -315,7 +286,7 @@ const updateConfig = (options: Partial<DynamicStyleManagerOptions>): void => {
  */
 const initConfig = (options: DynamicStyleManagerOptions = {}): void => {
   enabled = options.enabled ?? true;
-  tokens = options.tokens ?? defaultTokens;
+  _tokens = options.tokens ?? defaultTokens;
   debug = options.debug ?? false;
   watchInterval = options.watchInterval ?? 100;
 };

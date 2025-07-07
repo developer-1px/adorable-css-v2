@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import { generateCSS, generateCSSFromAdorableCSS, checkFailedClasses, analyzeClasses } from './index'
+import { generateCSS, generateClass, checkFailedClasses, analyzeClasses } from './index'
 
 describe('CDN Package Integration', () => {
   describe('generateCSS function', () => {
@@ -13,9 +13,9 @@ describe('CDN Package Integration', () => {
     })
   })
 
-  describe('generateCSSFromAdorableCSS function (legacy)', () => {
+  describe('generateClass function (legacy)', () => {
     it('should provide backward compatibility', () => {
-      const css = generateCSSFromAdorableCSS(['c(red)', 'font(16)'])
+      const css = generateClass(['c(red)', 'font(16)'])
       expect(css).toContain('color:red')
       expect(css).toContain('font-size:16px')
     })
@@ -26,7 +26,7 @@ describe('CDN Package Integration', () => {
       // Test that both functions produce identical output
       const classes = ['vbox(pack)', 'bg(#667eea..#764ba2)', 'r(8)']
       const css1 = generateCSS(classes)
-      const css2 = generateCSSFromAdorableCSS(classes)
+      const css2 = generateClass(classes)
       
       expect(css1).toBe(css2)
       expect(css1).toContain('flex-direction:column')

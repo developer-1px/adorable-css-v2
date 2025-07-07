@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { generateCSS } from '../01-core/generators/generator';
+import { generateCSS } from '../07-generator/generator';
 import { parseAdorableCSS } from '../01-core/parser/parser';
 
 describe('Nested Selector Feature', () => {

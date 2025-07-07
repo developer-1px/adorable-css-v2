@@ -6,6 +6,7 @@
 import type { ScaleConfig } from './scaleConfig';
 import { getTokenStep, DEFAULT_SCALE_CONFIG } from './scaleConfig';
 import { calculateMultiplier, formatMultiplier } from './scaleFormulas';
+import { colorPalette } from './design-system/colors/colors';
 
 // Global registry to track used 02-design_tokens
 const usedTokens = {
@@ -13,6 +14,7 @@ const usedTokens = {
   spacing: new Set<string>(),
   size: new Set<string>(),
   container: new Set<string>(),
+  color: new Set<string>(),
 };
 
 
@@ -35,7 +37,7 @@ export function stopTokenCollection(): void {
 /**
  * Register a used token
  */
-export function registerToken(category: 'font' | 'spacing' | 'size' | 'container', token: string): void {
+export function registerToken(category: 'font' | 'spacing' | 'size' | 'container' | 'color', token: string): void {
   // Always collect 02-design_tokens for lazy generation
   usedTokens[category].add(token);
 }
@@ -48,6 +50,7 @@ export function clearTokenRegistry(): void {
   usedTokens.spacing.clear();
   usedTokens.size.clear();
   usedTokens.container.clear();
+  usedTokens.color.clear();
 }
 
 /**
@@ -119,14 +122,12 @@ function _generateTokenVars(
       container: 'Container Tokens',
     };
     
-    vars.push(`\n  /* ${titles[category]} */`);
-    
     tokens.forEach(token => {
       const value = _calculateTokenValue(category, token, config, unit);
       const formatted = category === 'container' && unit !== 'px' 
         ? value.toFixed(1) 
         : formatMultiplier(value);
-      vars.push(`  --${category}-${token}: ${formatted}${unit};`);
+      vars.push(`--${category}-${token}:${formatted}${unit}`);
     });
   }
   
@@ -146,25 +147,18 @@ export function generateUsedTokensCSS(config: ScaleConfig = DEFAULT_SCALE_CONFIG
     cssVars.push(..._generateTokenVars(category, config, unit));
   });
   
-  if (cssVars.length === 0) {
-    return ':root {\n}';
+  // Add color tokens
+  if (usedTokens.color.size > 0) {
+    usedTokens.color.forEach(colorName => {
+      if (colorPalette[colorName]) {
+        cssVars.push(`--${colorName}:${colorPalette[colorName]}`);
+      }
+    });
   }
   
-  return `:root {\n${cssVars.join('\n')}\n}`;
-}
-
-/**
- * Get token value for a specific token
- */
-export function getTokenValue(
-  category: 'font' | 'spacing' | 'size' | 'container',
-  token: string,
-  config: ScaleConfig = DEFAULT_SCALE_CONFIG
-): string {
-  const unit = config.unit || 'px';
-  const value = _calculateTokenValue(category, token, config, unit);
-  const formatted = category === 'container' && unit !== 'px' 
-    ? value.toFixed(1) 
-    : formatMultiplier(value);
-  return `${formatted}${unit}`;
+  if (cssVars.length === 0) {
+    return ':root{}';
+  }
+  
+  return `:root{\n${cssVars.join(';\n')}}\n`;
 }

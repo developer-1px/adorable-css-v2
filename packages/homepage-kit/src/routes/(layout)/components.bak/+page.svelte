@@ -250,7 +250,7 @@
 
 <div class="min-h(screen) bg(gray-50)">
   <!-- Header -->
-  <header class="bg(white) border-b(1/gray-200) sticky top(0) z(50)">
+  <header class="bg(white) bb(1/gray-200) sticky top(0) z(50)">
     <div class="container(7xl) mx(auto) px(xl) py(lg)">
       <div class="hbox(between/middle)">
         <div>
@@ -282,14 +282,14 @@
                 <svelte:component this={category.icon} size="24" class="c({category.color}-500)" />
                 <h2 class="heading(h2) c(gray-900)">{category.title}</h2>
               </div>
-              <p class="c(gray-600) text(lg)">{category.description}</p>
+              <p class="c(gray-600) fonr(lg)">{category.description}</p>
             </div>
 
             <!-- Components in Category -->
             <div class="vbox gap(2xl)">
               {#each category.components as component}
                 <div class="bg(white) r(xl) border(1/gray-200) overflow(hidden)">
-                  <div class="p(xl) border-b(1/gray-100)">
+                  <div class="p(xl) bb(1/gray-100)">
                     <h3 class="heading(h3) c(gray-900) mb(sm) font(mono)">{component.name}</h3>
                     <p class="c(gray-600)">{component.description}</p>
                   </div>
@@ -426,7 +426,7 @@
           <div class="vbox gap(2xl) p(2xl) r(xl) bg(to-br/purple-50..blue-50) border(1/purple-200)">
             <div class="vbox gap(md)">
               <h2 class="heading(h2) c(gray-900)">🎨 Modern UI Components</h2>
-              <p class="text(lg) c(gray-600)">
+              <p class="fonr(lg) c(gray-600)">
                 shadcn/ui에서 영감을 받은 완전한 컴포넌트 라이브러리를 AdorableCSS로 구현했습니다.
               </p>
             </div>

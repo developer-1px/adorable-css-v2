@@ -1,0 +1,23 @@
+import { rule2, extractValue } from '../../../01-core/ast-utils';
+import { transformValue } from '../../../03-values/value-transform';
+import { addDeg, processTransform, getOrigin } from './transform-utils';
+
+export const transform = rule2((s) => s.args?.length ? `transform:${s.args.map(arg => processTransform(extractValue(arg))).join(' ')}` : '');
+export const scale = rule2((s) => { const v = extractValue(s.args?.[0]); return v ? (v.includes('/') ? `transform:scale(${v.replace('/', ', ')})` : `transform:scale(${v})`) : ''; });
+export const scaleX = rule2((s) => `transform:scaleX(${extractValue(s.args?.[0]) || '1'})`);
+export const scaleY = rule2((s) => `transform:scaleY(${extractValue(s.args?.[0]) || '1'})`);
+export const rotate = rule2((s) => { const v = extractValue(s.args?.[0]); return v ? `transform:rotate(${addDeg(v)})` : ''; });
+export const rotateX = rule2((s) => `transform:rotateX(${addDeg(extractValue(s.args?.[0]) || '0')})`);
+export const rotateY = rule2((s) => `transform:rotateY(${addDeg(extractValue(s.args?.[0]) || '0')})`);
+export const rotateZ = rule2((s) => `transform:rotateZ(${addDeg(extractValue(s.args?.[0]) || '0')})`);
+export const translate = rule2((s) => { const v = extractValue(s.args?.[0]); return v ? (v.includes('/') ? `transform:translate(${v.split('/').map(transformValue).join(', ')})` : `transform:translate(${transformValue(v)})`) : ''; });
+export const translateX = rule2((s) => `transform:translateX(${transformValue(extractValue(s.args?.[0]) || '0')})`);
+export const translateY = rule2((s) => `transform:translateY(${transformValue(extractValue(s.args?.[0]) || '0')})`);
+export const translateZ = rule2((s) => `transform:translateZ(${transformValue(extractValue(s.args?.[0]) || '0')})`);
+export const skew = rule2((s) => { const v = extractValue(s.args?.[0]); return v ? (v.includes('/') ? `transform:skew(${v.split('/').map(addDeg).join(', ')})` : `transform:skew(${addDeg(v)})`) : ''; });
+export const skewX = rule2((s) => `transform:skewX(${addDeg(extractValue(s.args?.[0]) || '0')})`);
+export const skewY = rule2((s) => `transform:skewY(${addDeg(extractValue(s.args?.[0]) || '0')})`);
+export const transformOrigin = rule2((s) => `transform-origin:${getOrigin(extractValue(s.args?.[0]) || 'center')}`);
+export const transformStyle = rule2((s) => `transform-style:${extractValue(s.args?.[0]) || 'flat'}`);
+export const perspective = rule2((s) => { const v = extractValue(s.args?.[0]); return v ? (v === 'none' ? 'perspective:none' : `perspective:${transformValue(v)}`) : ''; });
+export const perspectiveOrigin = rule2((s) => `perspective-origin:${getOrigin(extractValue(s.args?.[0]) || 'center')}`);

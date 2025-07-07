@@ -18,13 +18,21 @@ export const grid = rule2((s) => {
     return 'display:grid';
   }
   
-  // Extract the first argument (column count)
+  // Extract the first argument (column count or pattern)
   const firstArg = args[0];
-  const cols = firstArg.image || firstArg.value || firstArg;
+  const pattern = firstArg.image || firstArg.value || firstArg;
+  const patternStr = String(pattern);
+  
+  // Handle NxM patterns like "4x3", "3x2", etc.
+  const gridMatch = patternStr.match(/^(\d+)x(\d+)$/);
+  if (gridMatch) {
+    const [, cols, rows] = gridMatch;
+    return `display:grid;grid-template-columns:repeat(${cols}, 1fr);grid-template-rows:repeat(${rows}, 1fr)`;
+  }
   
   // If it's a number, create that many columns
-  if (/^\d+$/.test(String(cols))) {
-    return `display:grid;grid-template-columns:repeat(${cols}, 1fr)`;
+  if (/^\d+$/.test(patternStr)) {
+    return `display:grid;grid-template-columns:repeat(${patternStr}, 1fr)`;
   }
   
   // Otherwise return just grid display

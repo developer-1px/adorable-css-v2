@@ -72,7 +72,7 @@ export const labelDefinition: ComponentDefinition = {
     // Tab labels need hover states
     {
       size: 'tab',
-      class: 'px(md) py(sm) border-b(2/transparent) hover:border-b(gray-300)'
+      class: 'px(md) py(sm) bb(2/transparent) hover:bb(gray-300)'
     }
   ],
   

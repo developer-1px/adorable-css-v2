@@ -233,67 +233,140 @@
   }
 </script>
 
-<div class="vbox(center) py(9xl) container(xl) gap(15vh)">
-  <div class="vbox gap(20vh)">
-    <!-- Header -->
-    <div class="vbox gap(4xl)">
-      <h1 class="display(5xl) bold(black) tracking(tighter) c(black) leading(none)">
-        TYPOGRAPHY
-      </h1>
-      
-      <p class="text(2xl) c(mute) bold(light) leading(relaxed) max-w(5xl)">
-        A comprehensive type system designed for clarity, hierarchy, and accessibility across all digital interfaces
-      </p>
-      
-      <!-- Stats -->
-      <div class="hbox gap(8xl) pt(4xl)">
-        <div class="vbox gap(2xl)">
-          <div class="display(4xl) bold(black) c(black) leading(none)">{fontSizeTokens.length}</div>
-          <div class="text(md) c(mute) uppercase tracking(widest) bold(medium)">FONT SIZES</div>
-        </div>
-        <div class="vbox gap(2xl)">
-          <div class="display(4xl) bold(black) c(black) leading(none)">{Object.keys(defaultTokens.fontWeight).length}</div>
-          <div class="text(md) c(mute) uppercase tracking(widest) bold(medium)">WEIGHTS</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Typography Components Overview -->
-    <section class="vbox gap(6xl)">
-      <div class="vbox gap(3xl) pb(6xl)">
-        <h2 class="display(3xl) bold(black) c(black) tracking(tight) leading(none)">
-          TYPOGRAPHY<br>SYSTEM
-        </h2>
-        <p class="text(lg) c(mute) bold(light) max-w(4xl)">
-          Seven specialized components with comprehensive scales and variants
+<!-- Documentation Page Container -->
+<div class="prose(documentation) max-w(none) mx(auto) py(6xl)">
+  <div class="container(7xl) mx(auto) px(3xl)">
+    
+    <!-- Header Section -->
+    <header class="vbox gap(4xl) mb(8xl) text(center)">
+      <div class="vbox gap(lg)">
+        <h1 class="display(3xl) bold(black) tracking(tight) c(gray-900)">
+          Typography Foundation
+        </h1>
+        
+        <p class="body(xl) c(gray-600) max-w(4xl) mx(auto) leading(relaxed)">
+          A comprehensive typography system built on design tokens, semantic hierarchy, 
+          and accessibility principles. From micro-interactions to large displays, 
+          every text element serves a purpose.
         </p>
       </div>
       
-      <div class="vbox gap(12xl)">
+      <!-- Quick Stats -->
+      <div class="hbox(center) gap(6xl) pt(3xl)">
+        <div class="vbox gap(sm) text(center)">
+          <div class="title(2xl) bold(700) c(primary)">{fontSizeTokens.length}</div>
+          <div class="caption(sm) uppercase tracking(wide) c(gray-500)">Font Sizes</div>
+        </div>
+        <div class="vbox gap(sm) text(center)">
+          <div class="title(2xl) bold(700) c(primary)">{Object.keys(defaultTokens.fontWeight).length}</div>
+          <div class="caption(sm) uppercase tracking(wide) c(gray-500)">Font Weights</div>
+        </div>
+        <div class="vbox gap(sm) text(center)">
+          <div class="title(2xl) bold(700) c(primary)">7</div>
+          <div class="caption(sm) uppercase tracking(wide) c(gray-500)">Components</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Table of Contents -->
+    <nav class="vbox gap(lg) p(3xl) bg(gray-50) r(lg) mb(6xl)">
+      <h2 class="title(lg) bold(600) c(gray-900)">목차 (Table of Contents)</h2>
+      <div class="grid(2) gap(2xl)">
+        <div class="vbox gap(md)">
+          <a href="#overview" class="body(base) c(blue-600) hover:c(blue-800) transition">1. Typography System Overview</a>
+          <a href="#components" class="body(base) c(blue-600) hover:c(blue-800) transition">2. Typography Components</a>
+          <a href="#scale" class="body(base) c(blue-600) hover:c(blue-800) transition">3. Font Scale & Tokens</a>
+          <a href="#hierarchy" class="body(base) c(blue-600) hover:c(blue-800) transition">4. Text Hierarchy</a>
+        </div>
+        <div class="vbox gap(md)">
+          <a href="#examples" class="body(base) c(blue-600) hover:c(blue-800) transition">5. Real-world Examples</a>
+          <a href="#guidelines" class="body(base) c(blue-600) hover:c(blue-800) transition">6. Usage Guidelines</a>
+          <a href="#accessibility" class="body(base) c(blue-600) hover:c(blue-800) transition">7. Accessibility</a>
+          <a href="#implementation" class="body(base) c(blue-600) hover:c(blue-800) transition">8. Implementation</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Overview Section -->
+    <section id="overview" class="vbox gap(4xl) mb(8xl)">
+      <div class="vbox gap(lg)">
+        <h2 class="heading(2xl) bold(700) c(gray-900) tracking(tight)">Typography System Overview</h2>
+        <p class="body(lg) c(gray-600) leading(relaxed)">
+          우리의 타이포그래피 시스템은 7개의 전문화된 컴포넌트를 기반으로 구축되었습니다. 
+          각 컴포넌트는 특정한 목적과 사용 사례를 가지며, 일관된 계층구조와 가독성을 제공합니다.
+        </p>
+      </div>
+      
+      <div class="vbox gap(3xl) p(3xl) bg(blue-50) border(1/blue-200) r(lg)">
+        <h3 class="title(lg) bold(600) c(blue-900)">💡 Design Principles</h3>
+        <div class="grid(2) gap(3xl)">
+          <div class="vbox gap(lg)">
+            <h4 class="title(base) bold(600) c(gray-900)">Semantic Hierarchy</h4>
+            <p class="body(base) c(gray-700)">각 텍스트 요소는 명확한 의미와 역할을 가집니다.</p>
+            
+            <h4 class="title(base) bold(600) c(gray-900)">Mathematical Scale</h4>
+            <p class="body(base) c(gray-700)">수학적 비율을 기반으로 한 일관된 크기 체계입니다.</p>
+          </div>
+          <div class="vbox gap(lg)">
+            <h4 class="title(base) bold(600) c(gray-900)">Accessibility First</h4>
+            <p class="body(base) c(gray-700)">모든 사용자가 쉽게 읽을 수 있도록 설계되었습니다.</p>
+            
+            <h4 class="title(base) bold(600) c(gray-900)">Token-based</h4>
+            <p class="body(base) c(gray-700)">디자인 토큰을 통해 일관성과 유지보수성을 보장합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Typography Components Overview -->
+    <section id="components" class="vbox gap(6xl) mb(8xl)">
+      <div class="vbox gap(lg)">
+        <h2 class="heading(2xl) bold(700) c(gray-900) tracking(tight)">
+          Typography Components
+        </h2>
+        <p class="body(lg) c(gray-600) leading(relaxed) max-w(4xl)">
+          7개의 전문화된 타이포그래피 컴포넌트로 모든 텍스트 요구사항을 충족합니다. 
+          각 컴포넌트는 고유한 목적과 다양한 크기, 변형을 제공합니다.
+        </p>
+      </div>
+      
+      <div class="vbox gap(6xl)">
         {#each typographyComponents as component, index}
-          <div class="vbox gap(6xl) pb(12xl) {index !== typographyComponents.length - 1 ? 'border-b(2/mute.10)' : ''}">
+          <div class="vbox gap(4xl) p(4xl) bg(white) border(1/gray-200) r(xl) shadow(sm)">
             <!-- Component Header -->
-            <div class="hbox(baseline) gap(4xl)">
-              <div class="text(xs) bold(black) uppercase tracking(widest) c(mute) w(6xl)">
-                {String(index + 1).padStart(2, '0')}
-              </div>
-              <div class="vbox gap(lg)">
-                <h3 class="display(lg) bold(black) c(black) tracking(tight)">
-                  {component.name.toUpperCase()}
+            <div class="vbox gap(lg)">
+              <div class="hbox(baseline) gap(lg)">
+                <span class="caption(sm) bold(600) uppercase tracking(wide) c(gray-500) bg(gray-100) px(md) py(xs) r(md)">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <h3 class="title(xl) bold(700) c(gray-900)">
+                  {component.name}
                 </h3>
-                <p class="text(md) c(secondary) bold(light)">
-                  {component.description}
-                </p>
+              </div>
+              <p class="body(base) c(gray-600)">
+                {component.description}
+              </p>
+              
+              <!-- Usage Info -->
+              <div class="hbox gap(2xl)">
+                <div class="vbox gap(xs)">
+                  <span class="caption(xs) uppercase tracking(wide) c(gray-500)">사용 예시</span>
+                  <code class="code(sm) c(blue-600)">{component.example}</code>
+                </div>
+                <div class="vbox gap(xs)">
+                  <span class="caption(xs) uppercase tracking(wide) c(gray-500)">주요 용도</span>
+                  <span class="caption(sm) c(gray-700)">{component.usage}</span>
+                </div>
               </div>
             </div>
             
             <!-- Sizes Scale -->
-            <div class="vbox gap(3xl)">
-              <h4 class="title(md) bold uppercase tracking(wide)">SIZES</h4>
-              <div class="vbox gap(2xl)">
-                {#each component.sizes as size}
-                  <div class="hbox gap(4xl)">
-                    <code class="text(sm) font(mono) c(mute) w(6xl)">{size}</code>
+            <div class="vbox gap(lg)">
+              <h4 class="title(base) bold(600) c(gray-900)">크기 변형 (Sizes)</h4>
+              <div class="grid(1) gap(lg) p(lg) bg(gray-50) r(md)">
+                {#each component.sizes.slice(0, 6) as size}
+                  <div class="hbox(baseline) gap(lg) py(xs)">
+                    <code class="code(xs) c(gray-500) w(4xl) text(right)">{size}</code>
                     {#if component.name === 'Display'}
                       <div class="display({size}) c(gray-900)">Display {size}</div>
                     {:else if component.name === 'Heading'}
@@ -311,16 +384,19 @@
                     {/if}
                   </div>
                 {/each}
+                {#if component.sizes.length > 6}
+                  <div class="caption(sm) c(gray-500) italic">... 및 {component.sizes.length - 6}개 추가 크기</div>
+                {/if}
               </div>
             </div>
             
             <!-- Variants -->
-            <div class="vbox gap(3xl)">
-              <h4 class="title(md) bold uppercase tracking(wide)">VARIANTS</h4>
-              <div class="grid(3) gap(3xl)">
-                {#each component.variants as variant}
-                  <div class="vbox gap(lg)">
-                    <code class="text(xs) font(mono) c(mute)">{variant}</code>
+            <div class="vbox gap(lg)">
+              <h4 class="title(base) bold(600) c(gray-900)">스타일 변형 (Variants)</h4>
+              <div class="grid(3) gap(lg)">
+                {#each component.variants.slice(0, 9) as variant}
+                  <div class="vbox gap(xs) p(md) bg(gray-50) r(md)">
+                    <code class="code(xs) c(gray-500)">{variant}</code>
                     {#if component.name === 'Display'}
                       <div class="display(lg) display({variant})">Display</div>
                     {:else if component.name === 'Heading'}
@@ -328,16 +404,19 @@
                     {:else if component.name === 'Title'}
                       <div class="title(lg) title({variant})">Title Text</div>
                     {:else if component.name === 'Body'}
-                      <p class="body(base) body({variant})">Body text with {variant} variant</p>
+                      <p class="body(base) body({variant})">Body text</p>
                     {:else if component.name === 'Label'}
                       <span class="label(base) label({variant})">Label</span>
                     {:else if component.name === 'Caption'}
-                      <span class="caption(base) caption({variant})">Caption text</span>
+                      <span class="caption(base) caption({variant})">Caption</span>
                     {:else if component.name === 'Code'}
                       <code class="code(base) code({variant})">code</code>
                     {/if}
                   </div>
                 {/each}
+                {#if component.variants.length > 9}
+                  <div class="caption(sm) c(gray-500) italic">... 및 {component.variants.length - 9}개 추가 변형</div>
+                {/if}
               </div>
             </div>
           </div>
@@ -345,14 +424,15 @@
       </div>
     </section>
 
-    <!-- Type Scale -->
-    <section class="vbox gap(8xl) pt(10vh)">
-      <div class="vbox gap(3xl) pb(6xl)">
-        <h2 class="display(3xl) bold(black) c(black) tracking(tight) leading(none)">
-          TYPE SCALE
+    <!-- Font Scale & Tokens -->
+    <section id="scale" class="vbox gap(6xl) mb(8xl)">
+      <div class="vbox gap(lg)">
+        <h2 class="heading(2xl) bold(700) c(gray-900) tracking(tight)">
+          Font Scale & Design Tokens
         </h2>
-        <p class="text(lg) c(mute) bold(light) max-w(4xl)">
-          Mathematical progression from {fontSizeTokens.length} font sizes
+        <p class="body(lg) c(gray-600) leading(relaxed) max-w(4xl)">
+          수학적 비율을 기반으로 한 {fontSizeTokens.length}개의 폰트 크기와 
+          {Object.keys(defaultTokens.fontWeight).length}개의 폰트 굵기로 구성된 토큰 시스템입니다.
         </p>
       </div>
       
@@ -363,11 +443,11 @@
           <div class="vbox gap(2xl)">
             {#each fontSizes as fontSize}
               <div class="hbox(baseline) gap(4xl)">
-                <code class="text(xs) font(mono) c(mute) w(4xl)">{fontSize.name}</code>
+                <code class="font(xs) font(mono) c(mute) w(4xl)">{fontSize.name}</code>
                 <div class="{fontSize.class} c(black) leading(tight)">
                   Aa
                 </div>
-                <code class="text(xs) font(mono) c(mute.60)" style="font-size: 0.65rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 300px;">{fontSize.value}</code>
+                <code class="font(xs) font(mono) c(mute.60)" style="font-size: 0.65rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 300px;">{fontSize.value}</code>
               </div>
             {/each}
           </div>
@@ -379,11 +459,11 @@
           <div class="vbox gap(2xl)">
             {#each fontWeights as fontWeight}
               <div class="hbox(center) gap(4xl)">
-                <code class="text(xs) font(mono) c(mute) w(5xl)">{fontWeight.name}</code>
-                <div class="text(2xl) {fontWeight.class} c(black)">
+                <code class="font(xs) font(mono) c(mute) w(5xl)">{fontWeight.name}</code>
+                <div class="font(2xl) {fontWeight.class} c(black)">
                   Aa
                 </div>
-                <code class="text(xs) font(mono) c(mute.60)">{fontWeight.value}</code>
+                <code class="font(xs) font(mono) c(mute.60)">{fontWeight.value}</code>
               </div>
             {/each}
           </div>
@@ -391,22 +471,45 @@
       </div>
     </section>
 
-    <!-- Typography Combinations -->
-    <section class="vbox gap(8xl) pt(10vh)">
-      <div class="vbox gap(3xl) pb(6xl)">
-        <h2 class="display(3xl) bold(black) c(black) tracking(tight) leading(none)">
-          TYPOGRAPHY<br>COMBINATIONS
+    <!-- Text Hierarchy -->
+    <section id="hierarchy" class="vbox gap(6xl) mb(8xl)">
+      <div class="vbox gap(lg)">
+        <h2 class="heading(2xl) bold(700) c(gray-900) tracking(tight)">
+          Text Hierarchy & Color System
         </h2>
-        <p class="text(lg) c(mute) bold(light) max-w(4xl)">
-          Real-world examples combining multiple typography components and variants
+        <p class="body(lg) c(gray-600) leading(relaxed) max-w(4xl)">
+          명확한 정보 계층구조를 위한 텍스트 색상 시스템입니다. 
+          각 색상은 특정한 의미와 중요도를 나타냅니다.
         </p>
       </div>
       
-      <div class="vbox gap(12xl)">
+      <div class="grid(2) gap(3xl)">
+        {#each textHierarchy as textType}
+          <div class="hbox(baseline) gap(lg) p(lg) bg(white) border(1/gray-200) r(md)">
+            <code class="code(xs) c(gray-500) w(8xl)">{textType.token}</code>
+            <div class="{textType.class} body(base)">{textType.name}</div>
+            <span class="caption(xs) c(gray-500)">({textType.usage})</span>
+          </div>
+        {/each}
+      </div>
+    </section>
+
+    <!-- Real-world Examples -->
+    <section id="examples" class="vbox gap(6xl) mb(8xl)">
+      <div class="vbox gap(lg)">
+        <h2 class="heading(2xl) bold(700) c(gray-900) tracking(tight)">
+          Real-world Examples
+        </h2>
+        <p class="body(lg) c(gray-600) leading(relaxed) max-w(4xl)">
+          다양한 타이포그래피 컴포넌트를 조합한 실제 사용 사례들입니다.
+        </p>
+      </div>
+      
+      <div class="vbox gap(4xl)">
         <!-- Hero Section -->
-        <div class="vbox gap(6xl) p(6xl) bg(surface) r(2xl)">
-          <div class="text(xs) bold(black) uppercase tracking(widest) c(mute.50)">
-            01 — HERO SECTION
+        <div class="vbox gap(3xl) p(3xl) bg(gray-50) border(1/gray-200) r(lg)">
+          <div class="caption(sm) bold(600) uppercase tracking(wide) c(gray-500)">
+            01. Hero Section Example
           </div>
           
           <div class="vbox gap(4xl)">
@@ -435,9 +538,9 @@
         </div>
         
         <!-- Product Feature -->
-        <div class="vbox gap(6xl) p(6xl) bg(black) c(white) r(2xl)">
-          <div class="text(xs) bold(black) uppercase tracking(widest) c(mute.50)">
-            02 — PRODUCT FEATURE
+        <div class="vbox gap(3xl) p(3xl) bg(gray-900) c(white) r(lg)">
+          <div class="caption(sm) bold(600) uppercase tracking(wide) c(gray-400)">
+            02. Product Feature Example
           </div>
           
           <div class="grid(2) gap(6xl)">
@@ -469,9 +572,9 @@ import {'{'}
         </div>
         
         <!-- Blog Post -->
-        <div class="vbox gap(6xl) p(6xl) bg(surface) r(2xl)">
-          <div class="text(xs) bold(black) uppercase tracking(widest) c(mute.50)">
-            03 — BLOG POST
+        <div class="vbox gap(3xl) p(3xl) bg(white) border(1/gray-200) r(lg) shadow(sm)">
+          <div class="caption(sm) bold(600) uppercase tracking(wide) c(gray-500)">
+            03. Blog Post Example
           </div>
           
           <article class="vbox gap(3xl) max-w(5xl)">
@@ -521,9 +624,9 @@ import {'{'}
         </div>
         
         <!-- Dashboard Widget -->
-        <div class="vbox gap(6xl) p(6xl) bg(white) r(2xl) shadow(xl)">
-          <div class="text(xs) bold(black) uppercase tracking(widest) c(mute.50)">
-            04 — DASHBOARD WIDGET
+        <div class="vbox gap(3xl) p(3xl) bg(white) border(1/gray-200) r(lg) shadow(sm)">
+          <div class="caption(sm) bold(600) uppercase tracking(wide) c(gray-500)">
+            04. Dashboard Widget Example
           </div>
           
           <div class="grid(3) gap(3xl)">
@@ -572,9 +675,9 @@ import {'{'}
         </div>
         
         <!-- E-commerce Product -->
-        <div class="vbox gap(6xl) p(6xl) bg(surface) r(2xl)">
-          <div class="text(xs) bold(black) uppercase tracking(widest) c(mute.50)">
-            05 — E-COMMERCE
+        <div class="vbox gap(3xl) p(3xl) bg(gray-50) border(1/gray-200) r(lg)">
+          <div class="caption(sm) bold(600) uppercase tracking(wide) c(gray-500)">
+            05. E-commerce Example
           </div>
           
           <div class="grid(2) gap(4xl)">
@@ -618,9 +721,9 @@ import {'{'}
         </div>
         
         <!-- Documentation -->
-        <div class="vbox gap(6xl) p(6xl) bg(white) r(2xl) shadow(xl)">
-          <div class="text(xs) bold(black) uppercase tracking(widest) c(mute.50)">
-            06 — DOCUMENTATION
+        <div class="vbox gap(3xl) p(3xl) bg(white) border(1/gray-200) r(lg) shadow(sm)">
+          <div class="caption(sm) bold(600) uppercase tracking(wide) c(gray-500)">
+            06. Documentation Example
           </div>
           
           <div class="vbox gap(4xl) max-w(5xl)">
@@ -662,19 +765,19 @@ import {'{'}
                 
                 <table class="w(full)">
                   <thead>
-                    <tr class="border-b(2/mute.20)">
+                    <tr class="bb(2/mute.20)">
                       <th class="label(base) label(uppercase) py(md) text(left)">Component</th>
                       <th class="label(base) label(uppercase) py(md) text(left)">Usage</th>
                       <th class="label(base) label(uppercase) py(md) text(left)">Example</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="border-b(1/mute.10)">
+                    <tr class="bb(1/mute.10)">
                       <td class="py(md)"><code class="code(inline)">display</code></td>
                       <td class="caption(base) py(md)">Hero text</td>
                       <td class="py(md)"><span class="label(sm) label(mono)">display(hero)</span></td>
                     </tr>
-                    <tr class="border-b(1/mute.10)">
+                    <tr class="bb(1/mute.10)">
                       <td class="py(md)"><code class="code(inline)">heading</code></td>
                       <td class="caption(base) py(md)">Document structure</td>
                       <td class="py(md)"><span class="label(sm) label(mono)">heading(h1)</span></td>
@@ -687,5 +790,208 @@ import {'{'}
         </div>
       </div>
     </section>
+
+    <!-- Usage Guidelines -->
+    <section id="guidelines" class="vbox gap(6xl) mb(8xl)">
+      <div class="vbox gap(lg)">
+        <h2 class="heading(2xl) bold(700) c(gray-900) tracking(tight)">
+          Usage Guidelines
+        </h2>
+        <p class="body(lg) c(gray-600) leading(relaxed)">
+          타이포그래피 컴포넌트를 효과적으로 사용하기 위한 가이드라인입니다.
+        </p>
+      </div>
+      
+      <div class="grid(1) gap(4xl)">
+        <!-- When to Use Each Component -->
+        <div class="vbox gap(lg) p(3xl) bg(green-50) border(1/green-200) r(lg)">
+          <h3 class="title(lg) bold(600) c(green-900)">✅ 컴포넌트 선택 가이드</h3>
+          <div class="grid(2) gap(2xl)">
+            <div class="vbox gap(md)">
+              <h4 class="title(base) bold(600) c(gray-900)">Display</h4>
+              <p class="body(sm) c(gray-700)">랜딩 페이지의 메인 헤드라인, 마케팅 배너, 후이지의 주요 메시지에 사용</p>
+              
+              <h4 class="title(base) bold(600) c(gray-900)">Heading</h4>
+              <p class="body(sm) c(gray-700)">문서의 구조적 계층(h1-h6), 섹션 제목, 컨텐츠의 주요 부분 구분에 사용</p>
+              
+              <h4 class="title(base) bold(600) c(gray-900)">Title</h4>
+              <p class="body(sm) c(gray-700)">컨트롤과 컴포넌트의 라벨, 카드 제목, 모달 헤더 등에 사용</p>
+              
+              <h4 class="title(base) bold(600) c(gray-900)">Body</h4>
+              <p class="body(sm) c(gray-700)">본문, 기사 내용, 설명 텍스트 등 일반적인 콘텐츠에 사용</p>
+            </div>
+            <div class="vbox gap(md)">
+              <h4 class="title(base) bold(600) c(gray-900)">Label</h4>
+              <p class="body(sm) c(gray-700)">버튼, 폼 라벨, 탭, 배지 등 UI 요소의 라벨에 사용</p>
+              
+              <h4 class="title(base) bold(600) c(gray-900)">Caption</h4>
+              <p class="body(sm) c(gray-700)">이미지 설명, 도움말, 타임스탬프, 메타데이터 등 보조 정보에 사용</p>
+              
+              <h4 class="title(base) bold(600) c(gray-900)">Code</h4>
+              <p class="body(sm) c(gray-700)">코드 스니펫, API 예제, 기술 문서에 사용</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Typography Hierarchy -->
+        <div class="vbox gap(lg) p(3xl) bg(blue-50) border(1/blue-200) r(lg)">
+          <h3 class="title(lg) bold(600) c(blue-900)">📈 타이포그래피 계층구조</h3>
+          <div class="vbox gap(md)">
+            <p class="body(base) c(gray-700)">
+              정보의 중요도에 따라 적절한 타이포그래피 컴포넌트를 선택하세요:
+            </p>
+            <ol class="vbox gap(sm) pl(lg)">
+              <li class="body(sm) c(gray-700)">1. 가장 중요한 정보: Display 또는 Heading(h1)</li>
+              <li class="body(sm) c(gray-700)">2. 주요 섹션: Heading(h2-h3) 또는 Title</li>
+              <li class="body(sm) c(gray-700)">3. 내용: Body 또는 Label</li>
+              <li class="body(sm) c(gray-700)">4. 보조 정보: Caption</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Best Practices -->
+        <div class="vbox gap(lg) p(3xl) bg(yellow-50) border(1/yellow-200) r(lg)">
+          <h3 class="title(lg) bold(600) c(yellow-900)">⚠️ 베스트 프랙티스</h3>
+          <div class="grid(2) gap(2xl)">
+            <div class="vbox gap(md)">
+              <h4 class="title(base) bold(600) c(green-700)">✅ Do</h4>
+              <ul class="vbox gap(xs) pl(lg)">
+                <li class="body(sm) c(gray-700)">• 일관된 컴포넌트 사용</li>
+                <li class="body(sm) c(gray-700)">• 의미적 계층구조 유지</li>
+                <li class="body(sm) c(gray-700)">• 토큰 기반 사이징</li>
+                <li class="body(sm) c(gray-700)">• 컴포넌트별 목적에 맞는 사용</li>
+              </ul>
+            </div>
+            <div class="vbox gap(md)">
+              <h4 class="title(base) bold(600) c(red-700)">❌ Don't</h4>
+              <ul class="vbox gap(xs) pl(lg)">
+                <li class="body(sm) c(gray-700)">• 임의의 폰트 크기 사용</li>
+                <li class="body(sm) c(gray-700)">• 컴포넌트 목적 무시</li>
+                <li class="body(sm) c(gray-700)">• 과도한 변형 사용</li>
+                <li class="body(sm) c(gray-700)">• 계층구조 무시</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Accessibility -->
+    <section id="accessibility" class="vbox gap(6xl) mb(8xl)">
+      <div class="vbox gap(lg)">
+        <h2 class="heading(2xl) bold(700) c(gray-900) tracking(tight)">
+          Accessibility & Performance
+        </h2>
+        <p class="body(lg) c(gray-600) leading(relaxed)">
+          모든 사용자가 접근할 수 있도록 설계된 타이포그래피 시스템입니다.
+        </p>
+      </div>
+      
+      <div class="grid(2) gap(4xl)">
+        <!-- Accessibility Features -->
+        <div class="vbox gap(lg) p(3xl) bg(white) border(1/gray-200) r(lg) shadow(sm)">
+          <h3 class="title(lg) bold(600) c(gray-900)">♿ 접근성 특징</h3>
+          <div class="vbox gap(md)">
+            <div class="hbox gap(md)">
+              <span class="caption(sm) bg(green-100) c(green-800) px(sm) py(xs) r(sm)">WCAG 2.1 AA</span>
+              <span class="body(sm) c(gray-700)">색상 대비 기준 준수</span>
+            </div>
+            <div class="hbox gap(md)">
+              <span class="caption(sm) bg(blue-100) c(blue-800) px(sm) py(xs) r(sm)">Semantic</span>
+              <span class="body(sm) c(gray-700)">HTML 시맨틱 표준 준수</span>
+            </div>
+            <div class="hbox gap(md)">
+              <span class="caption(sm) bg(purple-100) c(purple-800) px(sm) py(xs) r(sm)">Screen Reader</span>
+              <span class="body(sm) c(gray-700)">스크린 리더 호환성</span>
+            </div>
+            <div class="hbox gap(md)">
+              <span class="caption(sm) bg(orange-100) c(orange-800) px(sm) py(xs) r(sm)">Responsive</span>
+              <span class="body(sm) c(gray-700)">모든 디바이스 지원</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Performance Features -->
+        <div class="vbox gap(lg) p(3xl) bg(white) border(1/gray-200) r(lg) shadow(sm)">
+          <h3 class="title(lg) bold(600) c(gray-900)">⚡ 성능 최적화</h3>
+          <div class="vbox gap(md)">
+            <div class="hbox gap(md)">
+              <span class="caption(sm) bg(green-100) c(green-800) px(sm) py(xs) r(sm)">Zero Runtime</span>
+              <span class="body(sm) c(gray-700)">빌드 타임 CSS 생성</span>
+            </div>
+            <div class="hbox gap(md)">
+              <span class="caption(sm) bg(blue-100) c(blue-800) px(sm) py(xs) r(sm)">Tree Shaking</span>
+              <span class="body(sm) c(gray-700)">사용되지 않는 코드 제거</span>
+            </div>
+            <div class="hbox gap(md)">
+              <span class="caption(sm) bg(purple-100) c(purple-800) px(sm) py(xs) r(sm)">Token Based</span>
+              <span class="body(sm) c(gray-700)">효율적인 CSS 변수 사용</span>
+            </div>
+            <div class="hbox gap(md)">
+              <span class="caption(sm) bg(orange-100) c(orange-800) px(sm) py(xs) r(sm)">Cache Friendly</span>
+              <span class="body(sm) c(gray-700)">반복 로드 최소화</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Implementation -->
+    <section id="implementation" class="vbox gap(6xl) mb(8xl)">
+      <div class="vbox gap(lg)">
+        <h2 class="heading(2xl) bold(700) c(gray-900) tracking(tight)">
+          Implementation Guide
+        </h2>
+        <p class="body(lg) c(gray-600) leading(relaxed)">
+          AdorableCSS 타이포그래피 시스템을 프로젝트에 적용하는 방법입니다.
+        </p>
+      </div>
+      
+      <div class="vbox gap(4xl)">
+        <!-- Installation -->
+        <div class="vbox gap(lg) p(3xl) bg(gray-900) c(white) r(lg)">
+          <h3 class="title(lg) bold(600)">1. 설치 (Installation)</h3>
+          <div class="vbox gap(md)">
+            <pre class="code(block) bg(gray-800) p(lg) r(md)">npm install adorable-css</pre>
+            <p class="body(sm) c(gray-300)">또는 yarn, pnpm 등 선호하는 패키지 매니저를 사용하세요.</p>
+          </div>
+        </div>
+
+        <!-- Basic Usage -->
+        <div class="vbox gap(lg) p(3xl) bg(white) border(1/gray-200) r(lg)">
+          <h3 class="title(lg) bold(600) c(gray-900)">2. 기본 사용법</h3>
+          <div class="vbox gap(md)">
+            <pre class="code(block) bg(gray-100) p(lg) r(md) c(gray-900)">import { generateCSS } from 'adorable-css';
+
+// 클래스 리스트로 CSS 생성
+const css = generateCSS([
+  'display(hero)',
+  'heading(h1)', 
+  'body(lg)',
+  'caption(sm)'
+]);</pre>
+            <p class="body(sm) c(gray-600)">사용한 타이포그래피 컴포넌트만 CSS로 생성됩니다.</p>
+          </div>
+        </div>
+
+        <!-- Export CSS Tokens -->
+        <div class="vbox gap(lg) p(3xl) bg(blue-50) border(1/blue-200) r(lg)">
+          <h3 class="title(lg) bold(600) c(blue-900)">3. CSS 토큰 내보내기</h3>
+          <div class="vbox gap(md)">
+            <button 
+              on:click={copyTypographyCSS}
+              class="hbox(center) gap(md) px(lg) py(md) bg(blue-600) c(white) r(md) hover:bg(blue-700) transition"
+            >
+              <span class="label(base)">Copy Typography CSS</span>
+              <span class="caption(xs)">클립보드에 복사</span>
+            </button>
+            <p class="body(sm) c(gray-600)">
+              프로젝트에서 사용할 수 있는 CSS 변수들을 내보낼 수 있습니다.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
   </div>
 </div>
