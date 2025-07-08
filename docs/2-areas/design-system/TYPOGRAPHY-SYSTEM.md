@@ -330,8 +330,11 @@ function hello() {
 </h1>
 
 <!-- 반응형 타이포그래피 -->
+<h2 class="text(sm..2xl) font(bold)">
+  반응형 클램프로 변하는 제목
+</h2>
 <h2 class="heading(h3) md:heading(h2) lg:heading(h1)">
-  화면 크기에 따라 변하는 제목
+  브레이크포인트별 제목
 </h2>
 
 <!-- 상태별 변화 -->
@@ -364,6 +367,117 @@ function hello() {
 | `label` | UI 텍스트 | xs~lg | 기능적, 인터랙션 |
 | `caption` | 보조 설명 | xs~lg | 차분한 색상, 작은 크기 |
 | `code` | 코드 표시 | xs~lg | 고정폭, 배경색 |
+
+---
+
+## 🆕 새로운 Typography Syntax (v2.0)
+
+### AI-친화적 통합 텍스트 처리
+
+AdorableCSS v2에서는 AI가 더 쉽게 이해할 수 있도록 텍스트 관련 기능을 통합했습니다:
+
+#### `text()` 함수 - 모든 텍스트 관련 속성
+
+**Typography (폰트 크기, 라인 높이, 자간)**
+```html
+<!-- 기본 폰트 크기 -->
+<p class="text(16px)">16픽셀 텍스트</p>
+<p class="text(lg)">토큰 기반 텍스트</p>
+
+<!-- 라인 높이와 함께 -->
+<p class="text(16px/1.5)">16픽셀, 1.5 라인 높이</p>
+<p class="text(lg/1.2)">큰 텍스트, 타이트한 라인</p>
+
+<!-- 자간까지 포함 -->
+<p class="text(lg/1.2/-2%)">큰 텍스트, 타이트한 라인, 좁은 자간</p>
+```
+
+**반응형 Typography (클램프)**
+```html
+<!-- 토큰 기반 반응형 -->
+<h1 class="text(sm..6xl)">작은 화면에서는 sm, 큰 화면에서는 6xl</h1>
+<h2 class="text(lg..32px)">lg에서 32px까지</h2>
+
+<!-- 완전한 클램프 설정 -->
+<h1 class="text(16px..4vw..48px)">최소 16px, 선호 4vw, 최대 48px</h1>
+```
+
+**텍스트 속성 (정렬, 변환, 장식, 공백)**
+```html
+<!-- 텍스트 정렬 -->
+<p class="text(center)">중앙 정렬</p>
+<p class="text(right)">오른쪽 정렬</p>
+
+<!-- 텍스트 변환 -->
+<p class="text(uppercase)">대문자 변환</p>
+<p class="text(capitalize)">첫 글자 대문자</p>
+
+<!-- 텍스트 장식 -->
+<p class="text(underline)">밑줄</p>
+<p class="text(line-through)">취소선</p>
+
+<!-- 공백 처리 -->
+<p class="text(nowrap)">줄바꿈 없음</p>
+<p class="text(pre-wrap)">공백 유지</p>
+```
+
+**복합 속성 (+ 연산자)**
+```html
+<!-- 여러 텍스트 속성 조합 -->
+<p class="text(nowrap+center)">줄바꿈 없이 중앙 정렬</p>
+<p class="text(uppercase+underline)">대문자 + 밑줄</p>
+
+<!-- Typography + 텍스트 속성 -->
+<h2 class="text(lg/1.5/center)">큰 텍스트, 1.5 라인, 중앙 정렬</h2>
+<p class="text(16px/1.4/nowrap+right)">16px, 1.4 라인, 줄바꿈 없이 오른쪽 정렬</p>
+
+<!-- 반응형 + 복합 -->
+<h1 class="text(sm..2xl/1.5/tight)">반응형 + 라인 높이 + 자간</h1>
+```
+
+#### `font()` 함수 - 폰트 굵기 전용
+
+```html
+<!-- 폰트 굵기만 담당 -->
+<p class="font(600)">숫자 굵기</p>
+<p class="font(bold)">볼드</p>
+<p class="font(semibold)">세미볼드</p>
+<p class="font(light)">라이트</p>
+```
+
+#### 실제 사용 예제
+
+```html
+<!-- 이전 방식 (v1) -->
+<h1 class="font(4xl) bold() center">
+  제목
+</h1>
+
+<!-- 새로운 방식 (v2) -->
+<h1 class="text(4xl/center) font(bold)">
+  제목
+</h1>
+
+<!-- 반응형 제목 -->
+<h1 class="text(lg..6xl/1.2/center+uppercase) font(bold)">
+  반응형 제목
+</h1>
+
+<!-- 버튼 텍스트 -->
+<button class="text(sm/nowrap+center) font(medium)">
+  클릭하기
+</button>
+```
+
+### 마이그레이션 가이드
+
+| 이전 (v1) | 새로운 (v2) | 설명 |
+|----------|------------|------|
+| `font(lg)` | `text(lg)` | 폰트 크기는 text()로 |
+| `font(16/1.5)` | `text(16px/1.5)` | 라인 높이 포함 |
+| `bold()` | `font(bold)` | 폰트 굵기는 font()로 |
+| `center` | `text(center)` | 텍스트 정렬은 text()로 |
+| `uppercase` | `text(uppercase)` | 텍스트 변환도 text()로 |
 
 ---
 

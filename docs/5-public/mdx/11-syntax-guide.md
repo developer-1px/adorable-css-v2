@@ -70,8 +70,8 @@ underline → text-decoration: underline
 /* 패딩 - 상/우/하/좌 */
 p(10/20/30/40)    → padding: 10px 20px 30px 40px
 
-/* 폰트 - 크기/줄높이/자간 */
-font(16/1.5/-2%)  → font-size: 16px; line-height: 1.5; letter-spacing: -0.02em
+/* 텍스트 - 크기/줄높이/자간 (v2.0) */
+text(16px/1.5/-2%) → font-size: 16px; line-height: 1.5; letter-spacing: -0.02em
 
 /* 테두리 - 너비/색상 */
 border(2/blue-500) → border: 2px solid var(--blue-500)
@@ -225,7 +225,7 @@ c(white)!!!     → 세 단계 높은 우선순위 (!important)
   hover:shadow(xl)
   transition
 ">
-  <h3 class="font(lg) bold mb(12)">카드 제목</h3>
+  <h3 class="text(lg) font(bold) mb(12)">카드 제목</h3>
   <p class="c(gray-600)">카드 내용...</p>
 </div>
 ```
@@ -234,8 +234,8 @@ c(white)!!!     → 세 단계 높은 우선순위 (!important)
 ```html
 <h1 class="
   c(45deg/purple-500..pink-500)
-  font(4xl) bold
-  text(center)
+  text(4xl/center)
+  font(bold)
 ">
   그라디언트 제목
 </h1>

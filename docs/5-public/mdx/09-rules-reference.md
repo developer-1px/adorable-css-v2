@@ -242,51 +242,125 @@ bg(to-br/blue-500..green-500)      /* 방향 키워드 */
 bg(radial/purple-500..transparent)  /* 방사형 */
 ```
 
-## 타이포그래피
+## 타이포그래피 (v2.0 - AI-친화적 통합 문법)
 
-### 폰트 크기
+### text() 함수 - 모든 텍스트 관련 속성 (v2.0)
+
+#### Typography (폰트 크기, 라인 높이, 자간)
 ```css
-font(16)            /* font-size: 16px */
-font(sm)            /* font-size: var(--font-sm) */
-font(xl)            /* font-size: var(--font-xl) */
+/* 기본 폰트 크기 */
+text(16px)          /* font-size: 16px */
+text(sm)            /* font-size: var(--font-sm) */
+text(xl)            /* font-size: var(--font-xl) */
 
-/* 통합 문법 */
-font(16/1.5)        /* font-size + line-height */
-font(16/1.5/-2%)    /* + letter-spacing */
+/* 라인 높이와 함께 */
+text(16px/1.5)      /* font-size: 16px; line-height: 1.5 */
+text(lg/1.2)        /* font-size: var(--font-lg); line-height: 1.2 */
+
+/* 자간까지 포함 */
+text(lg/1.2/-2%)    /* font-size + line-height + letter-spacing */
 ```
 
-### 폰트 굵기
+#### 반응형 Typography (클램프)
 ```css
-bold()              /* font-weight: 700 */
-bold(600)           /* font-weight: 600 */
-bold(semi)          /* Deprecated: use bold(600) */
-bold(400)           /* font-weight: 400 (normal) */
-bold(300)           /* font-weight: 300 (light) */
+/* 토큰 기반 반응형 */
+text(sm..6xl)       /* clamp(var(--font-sm), 4vw, var(--font-6xl)) */
+text(lg..32px)      /* clamp(var(--font-lg), 4vw, 32px) */
+
+/* 완전한 클램프 설정 */
+text(16px..4vw..48px) /* clamp(16px, 4vw, 48px) */
 ```
 
-### 텍스트 정렬
+#### 텍스트 속성 (정렬, 변환, 장식, 공백)
 ```css
+/* 텍스트 정렬 */
 text(center)        /* text-align: center */
 text(left)          /* text-align: left */
 text(right)         /* text-align: right */
 text(justify)       /* text-align: justify */
+
+/* 텍스트 변환 */
+text(uppercase)     /* text-transform: uppercase */
+text(lowercase)     /* text-transform: lowercase */
+text(capitalize)    /* text-transform: capitalize */
+
+/* 텍스트 장식 */
+text(underline)     /* text-decoration: underline */
+text(line-through)  /* text-decoration: line-through */
+text(no-underline)  /* text-decoration: none */
+
+/* 공백 처리 */
+text(nowrap)        /* white-space: nowrap */
+text(pre-wrap)      /* white-space: pre-wrap */
+text(pre)           /* white-space: pre */
 ```
 
-### 텍스트 장식
+#### 복합 속성 (+ 연산자)
 ```css
-underline           /* text-decoration: underline */
-line-through        /* text-decoration: line-through */
-no-underline        /* text-decoration: none */
-decoration(primary) /* text-decoration-color: var(--primary) */
+/* 여러 텍스트 속성 조합 */
+text(nowrap+center)      /* white-space: nowrap; text-align: center */
+text(uppercase+underline) /* text-transform: uppercase; text-decoration: underline */
+
+/* Typography + 텍스트 속성 */
+text(lg/1.5/center)      /* font-size + line-height + text-align */
+text(16px/1.4/nowrap+right) /* 모든 속성 혼합 */
+
+/* 반응형 + 복합 */
+text(sm..2xl/1.5/tight)  /* 반응형 크기 + 라인 높이 + 자간 */
 ```
 
-### 기타 텍스트
+### font() 함수 - 폰트 굵기 전용 (v2.0)
 ```css
+/* 숫자 굵기 */
+font(600)           /* font-weight: 600 */
+font(400)           /* font-weight: 400 (normal) */
+font(300)           /* font-weight: 300 (light) */
+
+/* 키워드 굵기 */
+font(bold)          /* font-weight: 700 */
+font(semibold)      /* font-weight: 600 */
+font(medium)        /* font-weight: 500 */
+font(light)         /* font-weight: 300 */
+font(thin)          /* font-weight: 100 */
+```
+
+### 마이그레이션 가이드 (v1 → v2)
+```css
+/* 이전 (v1) → 새로운 (v2) */
+font(lg)            → text(lg)
+font(16/1.5)        → text(16px/1.5)
+bold()              → font(bold)
+bold(600)           → font(600)
+center              → text(center)
+uppercase           → text(uppercase)
+underline           → text(underline)
+line-through        → text(line-through)
+nowrap              → text(nowrap)
+```
+
+### 실제 사용 예제
+```css
+/* 제목 */
+text(2xl/1.2/center) font(bold)
+
+/* 버튼 텍스트 */
+text(sm/nowrap+center) font(medium)
+
+/* 반응형 히어로 제목 */
+text(lg..6xl/1.1/center+uppercase) font(black)
+
+/* 본문 텍스트 */
+text(base/1.6) font(400)
+```
+
+### 기타 텍스트 속성
+```css
+/* 폰트 스타일 */
 italic              /* font-style: italic */
-uppercase           /* text-transform: uppercase */
-lowercase           /* text-transform: lowercase */
-capitalize          /* text-transform: capitalize */
+
+/* 특수 효과 */
 truncate            /* 텍스트 말줄임 */
+decoration(primary) /* text-decoration-color: var(--primary) */
 ```
 
 ## 테두리 (Border)
@@ -315,10 +389,10 @@ r(lg)               /* border-radius: var(--radius-lg) */
 r(full)             /* border-radius: 9999px */
 
 /* 개별 모서리 */
-r-tl(8)             /* border-top-left-radius */
-r-tr(8)             /* border-top-right-radius */
-r-bl(8)             /* border-bottom-left-radius */
-r-br(8)             /* border-bottom-right-radius */
+rtl(8)             /* border-top-left-radius */
+rtr(8)             /* border-top-right-radius */
+rbl(8)             /* border-bottom-left-radius */
+rbr(8)             /* border-bottom-right-radius */
 ```
 
 ## 효과 (Effects)

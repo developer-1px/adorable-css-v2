@@ -53,12 +53,17 @@ body(md)          /* body text */
 label(sm)         /* form labels */
 caption(xs)       /* small text */
 
-/* Utilities */
-font(lg)          /* font-size */
-bold(), bold(600) /* font-weight */
-italic            /* font-style */
+/* Utilities (v2.0) */
+text(lg)          /* font-size */
+text(lg/1.5)      /* font-size + line-height */
 text(center)      /* text-align */
-uppercase         /* text-transform */
+text(uppercase)   /* text-transform */
+text(underline)   /* text-decoration */
+text(nowrap)      /* white-space */
+text(center+uppercase) /* combined properties */
+font(bold)        /* font-weight only */
+font(600)         /* font-weight: 600 */
+italic            /* font-style */
 ```
 
 ### Effects
