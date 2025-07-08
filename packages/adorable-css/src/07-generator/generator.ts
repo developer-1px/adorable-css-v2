@@ -1,19 +1,18 @@
 // Core dependencies
-import {parseAdorableCSS} from "../01-core/parser/parser"
-import {cleanDuplicateSelectors, cssEscape} from "../01-core/parser/cssEscape"
+import {parseAdorableCSS} from "../01-core/parser/parser.js"
+import {cleanDuplicateSelectors, cssEscape} from "../01-core/utils/cssEscape"
 import {createMemo} from '../01-core/utils/memo'
 import {resetCSS} from './reset'
-import {addImportanceToSelector, extractImportanceLevel, setImportanceLevel} from './importance-utils'
+import {addImportanceToSelector, extractImportanceLevel} from './importance-utils'
 
 // Token system
-import type {DesignTokens} from '../02-design_tokens/index'
-import {defaultTokens, generateTokenCSS, generateUsedTokensCSS, setTokenContext} from '../02-design_tokens/index'
+import {clearUsedTokens, generateUsedTokensCSS} from '../02-design_tokens/used-tokens'
 
 // Rule2 system
-import {getRule2Definition, initializeRule2Handlers} from '../04-rules/index'
+import {getRule2Definition, initializeRule2Handlers} from '../04-rules/rule2-registry'
 
 // Plugins
-import {isResponsiveClass, isStateClass, StateSelector, createStateCSS, extractStateBaseClass} from "../06-plugins/responsive/responsive-decorator"
+import {isResponsiveClass, isStateClass, StateSelector, createStateCSS} from "../06-plugins/responsive/responsive-decorator"
 
 // Initialize Rule2 handlers lazily to avoid circular dependencies
 let rule2Initialized = false;
@@ -24,27 +23,25 @@ function ensureRule2Initialized() {
   }
 }
 
-// Entry point: Parse user input and generate CSS
+// Entry point: Parse user input and generate CSS (kept for backwards compatibility)
 export const generateCSSWithTokens = (
   classList: string[], 
-  options: { includeTokens?: boolean; tokens?: DesignTokens } = {}
+  options: { includeTokens?: boolean } = {}
 ): string => {
-  // Ensure Rule2 handlers are initialized
-  ensureRule2Initialized();
-  
-  const { includeTokens = true, tokens = defaultTokens } = options;
-  
-  setTokenContext(tokens);
-  const css = generateCSS(classList);
-  setTokenContext(defaultTokens);
-  
-  return includeTokens ? `${generateTokenCSS(tokens)}\n\n${css}` : css;
+  return generateCSS(classList, options);
 };
 
 // Generate CSS from array of classes with layer system
-export const generateCSS = (classList: string[]): string => {
+export const generateCSS = (classList: string[], options: { includeTokens?: boolean } = {}): string => {
   // Ensure Rule2 handlers are initialized
   ensureRule2Initialized();
+  
+  const { includeTokens = true } = options;
+  
+  // Clear used tokens for fresh tracking
+  if (includeTokens) {
+    clearUsedTokens();
+  }
   
   // Group CSS by layer
   const layerGroups: Record<string, string[]> = {
@@ -75,7 +72,8 @@ export const generateCSS = (classList: string[]): string => {
     layeredCSS += `@layer utilities{${layerGroups.utilities.join("\n")}}`;
   }
   
-  return generateUsedTokensCSS() + cleanDuplicateSelectors(layeredCSS);
+  const finalCSS = cleanDuplicateSelectors(layeredCSS);
+  return includeTokens ? `${generateUsedTokensCSS()}\n\n${finalCSS}` : finalCSS;
 };
 
 // Generate CSS with layer information
@@ -89,7 +87,6 @@ function generateClassWithLayer(value: string): { css: string; layer: string } |
   
   try {
     const importanceInfo = extractImportanceLevel(value);
-    setImportanceLevel(importanceInfo.level);
     
     const parseResult = parseAdorableCSS(importanceInfo.className);
     const baseSelector = "." + cssEscape(value);
@@ -107,7 +104,7 @@ function generateClassWithLayer(value: string): { css: string; layer: string } |
     
     const cssRules = parseResult.value
       .map((node: any) => {
-        const selector = addImportanceToSelector(baseSelector);
+        const selector = addImportanceToSelector(baseSelector, importanceInfo.level);
         
         // Handle pseudo-class selectors (e.g., hover:bg(red))
         if (node.combinators?.[0]?.combinator === ":") {
@@ -137,7 +134,6 @@ function generateStateClass(value: string): { css: string; layer: string } | nul
     // Extract the base class (e.g., "c(red-500)" from "group-hover:c(red-500)")
     const baseClass = statePattern.selector;
     const importanceInfo = extractImportanceLevel(baseClass);
-    setImportanceLevel(importanceInfo.level);
     
     // Parse the base class to get CSS properties
     const parseResult = parseAdorableCSS(importanceInfo.className);
@@ -169,8 +165,8 @@ function generateStateClass(value: string): { css: string; layer: string } | nul
       }
     });
     
-    // Create the state selector
-    const baseSelector = "." + cssEscape(value);
+    // Create the state selector with importance
+    const baseSelector = addImportanceToSelector("." + cssEscape(value), importanceInfo.level);
     const stateCSS = createStateCSS(cssProperties, statePattern, baseSelector);
     
     // Convert the state CSS object to string
@@ -205,7 +201,11 @@ function generateCSSFromRule2(selector: any): string {
     ? '__positionType' 
     : actualSelector.type === 'function' 
       ? actualSelector.name 
-      : (selector.image || actualSelector.image || selector.name);
+      : actualSelector.type === 'css_literal'
+        ? 'css_literal'
+        : actualSelector.type === 'css_nested_literal'
+          ? 'css_nested_literal'
+          : (selector.image || actualSelector.image || selector.name);
   
   const rule2Definition = getRule2Definition(ruleName);
   if (!rule2Definition) return "";

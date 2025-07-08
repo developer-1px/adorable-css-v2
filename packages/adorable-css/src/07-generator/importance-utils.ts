@@ -21,28 +21,18 @@ export const extractImportanceLevel = (className: string): ImportanceInfo => {
   };
 };
 
-// Store current importance level for the class being processed
-let currentImportanceLevel = 0;
-
-/**
- * Set the current importance level
- */
-export const setImportanceLevel = (level: number): void => {
-  currentImportanceLevel = level;
-};
-
 /**
  * Add [class] specificity boost to selector based on importance level
  * Works with layer system to provide fine-grained control
  */
-export const addImportanceToSelector = (selector: string): string => {
-  if (currentImportanceLevel === 0) return selector;
+export const addImportanceToSelector = (selector: string, level = 0): string => {
+  if (level === 0) return selector;
   
-  // Add :where() wrapper with attribute selectors for specificity boost
+  // Add attribute selectors before the main selector for specificity boost
   // Each ! adds one attribute selector for incremental specificity
-  const attributeSelectors = Array(currentImportanceLevel)
+  const attributeSelectors = Array(level)
     .fill('[class]')
     .join('');
   
-  return `${selector}${attributeSelectors}`;
+  return `${attributeSelectors}${selector}`;
 };

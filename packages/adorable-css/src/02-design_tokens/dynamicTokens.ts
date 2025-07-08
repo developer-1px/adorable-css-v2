@@ -1,92 +1,51 @@
 /**
- * Dynamic token calculation system
- * Generates calc() values at runtime based on scale configuration
+ * Dynamic token generation utilities
  */
 
-import { 
-  DEFAULT_SCALE_CONFIG
-} from './scaleConfig';
-import type { 
-  ScaleConfig
-} from './scaleConfig';
+import { TEXT_TOKEN_MAP } from './text-tokens';
+import { SPACING_TOKEN_MAP } from './spacing-tokens';
 import { registerToken } from './tokenRegistry';
 
-// Legacy scale configuration for backwards compatibility
+// Use the same tracking state as token-resolver
+let trackingEnabled = true;
 
-
-// Global scale configuration
-let globalScaleConfig: ScaleConfig = DEFAULT_SCALE_CONFIG;
-
-/**
- * Set global scale configuration
- */
-export function setScaleConfig(config: Partial<ScaleConfig>): void {
-  globalScaleConfig = {
-    ...globalScaleConfig,
-    ...config
-  };
+export function setDynamicTokenTracking(enabled: boolean): void {
+  trackingEnabled = enabled;
 }
 
 /**
- * Get current scale configuration
+ * Generate spacing calculation and track token usage
  */
-export function getScaleConfig(): ScaleConfig {
-  return globalScaleConfig;
-}
-
-/**
- * Token category type
- */
-export type TokenCategory = 'font' | 'spacing' | 'size' | 'container';
-
-/**
- * Token generation options
- */
-export interface TokenOptions {
-  /** Handle zero value specially */
-  allowZero?: boolean;
-  /** Handle numeric values for backwards compatibility */
-  allowNumeric?: boolean;
-  /** Custom fallback unit for numeric values */
-  numericUnit?: string;
-}
-
-/**
- * Generate dynamic token calc expression (unified interface)
- * @param category - Token category (font, spacing, size, container)
- * @param token - Token name (e.g., 'xl', '3xl', '12xl')
- * @param options - Token generation options
- * @returns CSS variable reference or fallback value
- */
-export function generateTokenCalc(
-  category: TokenCategory,
-  token: string,
-  options: TokenOptions = {}
-): string {
-  const { allowZero = false, allowNumeric = false, numericUnit = 'rem' } = options;
-  
-  // Handle zero value
-  if (allowZero && token === '0') {
-    return '0';
+export function generateSpacingCalc(token: string): string {
+  if (token in SPACING_TOKEN_MAP) {
+    if (trackingEnabled) registerToken('spacing', token);
+    return `var(--spacing-${token})`;
   }
-  
-  // Handle numeric values for backwards compatibility
-  if (allowNumeric) {
-    const numericValue = parseInt(token);
-    if (!isNaN(numericValue) && token === numericValue.toString()) {
-      return `${numericValue}${numericUnit}`;
-    }
-  }
-  
-  // Register the token for lazy generation
-  registerToken(category, token);
-  
-  // Return clean CSS variable reference
-  return `var(--${category}-${token})`;
+  return token;
 }
 
-// Legacy functions for backwards compatibility
-export const generateSpacingCalc = (token: string) => generateTokenCalc('spacing', token, { allowZero: true });
-export const generateFontCalc = (token: string) => generateTokenCalc('font', token);
-export const generateSizeCalc = (token: string) => generateTokenCalc('size', token, { allowZero: true, allowNumeric: true, numericUnit: 'rem' });
-export const generateContainerCalc = (token: string) => generateTokenCalc('container', token);
+/**
+ * Generate font calculation and track token usage
+ */
+export function generateFontCalc(token: string): string {
+  if (token in TEXT_TOKEN_MAP) {
+    if (trackingEnabled) registerToken('text', token);
+    return `var(--text-${token})`;
+  }
+  return token;
+}
+
+/**
+ * Generate size calculation (can use both spacing and text tokens) and track token usage
+ */
+export function generateSizeCalc(token: string): string {
+  if (token in SPACING_TOKEN_MAP) {
+    if (trackingEnabled) registerToken('spacing', token);
+    return `var(--spacing-${token})`;
+  }
+  if (token in TEXT_TOKEN_MAP) {
+    if (trackingEnabled) registerToken('text', token);
+    return `var(--text-${token})`;
+  }
+  return token;
+}

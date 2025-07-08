@@ -1,35 +1,18 @@
 /**
- * Base Color Definitions
- * Single source of truth for all base colors used in the design system
- * These are carefully selected for optimal perception and accessibility
+ * Base color definitions
  */
 
-export const baseColors = {
-  // Primary colors - scientifically selected for optimal perception
-  red: '#ef4444',      // Warm red, good contrast
-  orange: '#f97316',   // Vibrant orange
-  amber: '#f59e0b',    // Warm amber
-  yellow: '#eab308',   // Clear yellow
-  lime: '#84cc16',     // Fresh lime
-  green: '#22c55e',    // Natural green
-  emerald: '#10b981',  // Rich emerald
-  teal: '#14b8a6',     // Balanced teal
-  cyan: '#06b6d4',     // Pure cyan
-  sky: '#0ea5e9',      // Bright sky blue
-  blue: '#3b82f6',     // True blue
-  indigo: '#6366f1',   // Deep indigo
-  violet: '#8b5cf6',   // Rich violet
-  purple: '#a855f7',   // Vibrant purple
-  fuchsia: '#d946ef',  // Bright fuchsia
-  pink: '#ec4899',     // Warm pink
-  rose: '#f43f5e',     // Rose red
-  
-  // Neutrals - optimized for readability
-  slate: '#64748b',
-  gray: '#6b7280',
-  zinc: '#71717a',
-  neutral: '#737373',
-  stone: '#78716c'
-} as const;
+import { COLOR_TOKEN_MAP } from '../../color-tokens';
 
-export type BaseColorName = keyof typeof baseColors;
+// Re-export semantic colors from color tokens
+export const SEMANTIC_COLORS = COLOR_TOKEN_MAP;
+
+// Single color defaults (for numbered color scales)
+export const SINGLE_COLOR_DEFAULTS: Record<string, string> = {
+  gray: 'gray-500',    
+  red: 'red-500',     
+  blue: 'blue-500',    
+  green: 'green-500',   
+  yellow: 'yellow-500',  
+  purple: 'purple-500',  
+};
