@@ -1,4 +1,4 @@
-import { isToken, getTokenVar } from '../../../03-values/token-resolver';
+import { isToken, getTokenVar } from '../../../02-design_tokens/token-resolver';
 import { transformValue, color } from '../../../03-values/value-transform';
 
 const BORDER_STYLES = ['none','hidden','dotted','dashed','solid','double','groove','ridge','inset','outset'];
@@ -12,7 +12,7 @@ export const parseBorder = (args: string): string => {
 };
 
 export const parseRadius = (args: string): string => {
-  if (!args) return getTokenVar('radius', 'md');
+  if (!args) return '0';
   if (isToken(args, 'radius')) return getTokenVar('radius', args);
   if (args.includes('/')) return args.split('/').map(v => isToken(v, 'radius') ? getTokenVar('radius', v) : transformValue(v || '0')).join(' ');
   return transformValue(args);

@@ -1,4 +1,4 @@
-import { rule2, getFirstValue, getAllValues, isVoid } from '../../01-core/ast-utils';
+import { rule2, getFirstValue, getAllValues, isVoid } from '../ast-utils/rule2-helpers';
 
 // Flex - dual purpose: display:flex or flex shorthand
 export const flex = rule2(s => {
@@ -129,7 +129,7 @@ export const order = rule2(s => {
 export { gap, gapX, gapY } from '../figma/layout/gap';
 
 // Compositions (from autoLayout)
-export { hbox, vbox, pack, wrap } from '../figma/layout/autoLayout';
+export { hbox, vbox, pack } from '../figma/layout/autoLayout';
 
 // Contents display utility
 export const contents = rule2(() => 'display:contents');

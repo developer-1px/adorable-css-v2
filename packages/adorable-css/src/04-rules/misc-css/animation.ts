@@ -1,4 +1,4 @@
-import { rule2 } from '../../01-core/ast-utils';
+import { rule2 } from '../ast-utils/rule2-helpers';
 
 /**
  * Animation utilities for Rule2 system

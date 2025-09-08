@@ -1,4 +1,5 @@
-import { rule2, single, getSideValues, spacing, safeCss, getFirstValue } from '../../../01-core/ast-utils';
+import { rule2, single, getSideValues, safeCss, getFirstValue } from '../../ast-utils/rule2-helpers';
+import { spacing } from '../../../03-values/value-transform';
 
 export const gap = rule2(s => getFirstValue(s) === 'auto' ? 'justify-content:space-between' : safeCss('gap', getSideValues(s, spacing)));
 export const gapX = single('column-gap', spacing);

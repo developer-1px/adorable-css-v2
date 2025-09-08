@@ -1,7 +1,7 @@
-import { rule2, getFirstValue } from '../../../01-core/ast-utils';
+import { rule2, getFirstValue } from '../../ast-utils/rule2-helpers';
 import { color } from '../../../03-values/value-transform';
 import { makeColor } from '../../../03-values/makeValue';
-import { isToken, getTokenVar } from '../../../03-values/token-resolver';
+import { isToken, getTokenVar } from '../../../02-design_tokens/token-resolver';
 
 const DIRS: Record<string, string> = {
   'to-top': 'to top', 'to-right': 'to right', 'to-bottom': 'to bottom', 'to-left': 'to left',

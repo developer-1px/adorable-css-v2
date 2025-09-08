@@ -1,9 +1,9 @@
 <script lang="ts">
-  import { defaultTokens } from 'adorable-css';
+  import { getTokenEntries } from 'adorable-css';
   import { Circle, Copy, RectangleHorizontal, Square, Zap } from 'lucide-svelte';
   
   // Enhanced radius data with usage context
-  const radiusVariants = Object.entries(defaultTokens.radius).map(([key, value]) => ({
+  const radiusVariants = getTokenEntries('radius').map(({ key, value }) => ({
     key,
     value,
     usage: getRadiusUsage(key),

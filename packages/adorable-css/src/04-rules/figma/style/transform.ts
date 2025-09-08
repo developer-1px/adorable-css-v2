@@ -1,4 +1,4 @@
-import { rule2, extractValue } from '../../../01-core/ast-utils';
+import { rule2, extractValue } from '../../ast-utils/rule2-helpers';
 import { transformValue } from '../../../03-values/value-transform';
 import { addDeg, processTransform, getOrigin } from './transform-utils';
 

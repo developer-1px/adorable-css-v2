@@ -3,7 +3,7 @@
  */
 
 // AST Node Types
-interface ASTNode {
+export interface ASTNode {
   selector?: {
     type: string;
     args?: ASTArg[];
@@ -11,7 +11,7 @@ interface ASTNode {
   };
 }
 
-interface ASTArg {
+export interface ASTArg {
   type?: string;
   image?: string;
   value?: string | number;

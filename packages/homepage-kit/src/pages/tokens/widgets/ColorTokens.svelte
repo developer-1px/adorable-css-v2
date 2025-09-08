@@ -1,8 +1,6 @@
 <script lang="ts">
   import { colorPalette } from 'adorable-css';
   import { Palette, Droplet, Sun, Copy, Check } from 'lucide-svelte';
-  import TokenSection from '$lib/components/tokens/TokenSection.svelte';
-  import TokenCard from '$lib/components/tokens/TokenCard.svelte';
 
   // Get color groups from OKLCH palette
   function getColorGroups() {
@@ -65,25 +63,34 @@
   const brandEndColor = colorGroups.palette['pink']?.['500'] || '';
 </script>
 
-<TokenSection 
-  icon={Palette}
-  iconColor="indigo-600"
-  title="Color System"
-  description="OKLCH-based color palette designed for perfect perceptual uniformity. Every color works harmoniously in gradients and provides excellent accessibility."
->
+<div class="vbox gap(4xl)">
+  <!-- Header Section -->
+  <div class="vbox gap(2xl)">
+    <div class="hbox(middle) gap(lg)">
+      <div class="p(lg) r(xl) bg(indigo-100)">
+        <Palette size={24} class="c(indigo-600)" />
+      </div>
+      <div class="vbox gap(sm)">
+        <h2 class="heading(display/2xl) font(800) c(gray-900)">Color System</h2>
+        <p class="body(lg) c(gray-600)">OKLCH-based color palette designed for perfect perceptual uniformity. Every color works harmoniously in gradients and provides excellent accessibility.</p>
+      </div>
+    </div>
+  </div>
 
-  <!-- Featured Gradients -->
-  <TokenCard 
-    title="Featured Gradients"
-    subtitle="Beautiful, smooth gradients powered by OKLCH"
-    icon={Sun}
-    iconColor="gray-400"
-  >
+  <!-- Featured Gradients Card -->
+  <div class="bg(white) r(2xl) p(3xl) shadow(lg) border(1/gray-100)">
+    <div class="hbox(between/middle) mb(2xl)">
+      <div>
+        <h3 class="heading(h2) font(700) c(gray-900) mb(xs)">Featured Gradients</h3>
+        <p class="body(md) c(gray-600)">Beautiful, smooth gradients powered by OKLCH</p>
+      </div>
+      <Sun size={20} class="c(gray-400)" />
+    </div>
     
     <div class="grid(2) md:grid(3) gap(xl)">
       {#each featuredGradients as gradient}
         <button 
-          class="group relative h(lg) r(xl) {gradient.class} shadow(lg) hover:shadow(2xl) 
+          class="group relative h(32) r(xl) {gradient.class} shadow(lg) hover:shadow(2xl) 
                  hover:scale(1.02) transition-all cursor-pointer overflow(hidden)"
           on:click={() => copyColor(gradient.value)}
         >
@@ -96,15 +103,15 @@
           </div>
           <div class="absolute top(md) right(md) opacity(0) group-hover:opacity(100) transition">
             {#if copiedColor === gradient.value}
-              <Check size="16" class="c(white)" />
+              <Check size={16} class="c(white)" />
             {:else}
-              <Copy size="16" class="c(white)" />
+              <Copy size={16} class="c(white)" />
             {/if}
           </div>
         </button>
       {/each}
     </div>
-  </TokenCard>
+  </div>
 
   <!-- Brand Identity -->
   <div class="bg(white) r(2xl) shadow(xl) shadow(gray-200.5) overflow(hidden) p(2xl)">
@@ -113,12 +120,12 @@
         <h3 class="heading(h2) c(gray-900) mb(xs)">Brand Identity</h3>
         <p class="font(sm) c(gray-600)">Primary brand gradient</p>
       </div>
-      <Droplet size="20" class="c(purple-500)" />
+      <Droplet size={20} class="c(purple-500)" />
     </div>
     
     <div class="grid(3) gap(xl)">
       <button 
-        class="group relative h(lg) r(xl) bg(135deg/purple-500..pink-500) shadow(lg) hover:shadow(2xl) 
+        class="group relative h(32) r(xl) bg(135deg/purple-500..pink-500) shadow(lg) hover:shadow(2xl) 
                hover:scale(1.02) transition-all cursor-pointer overflow(hidden)"
         on:click={() => copyColor('brand')}
       >
@@ -131,9 +138,9 @@
         </div>
         <div class="absolute top(md) right(md) opacity(0) group-hover:opacity(100) transition">
           {#if copiedColor === 'brand'}
-            <Check size="16" class="c(white)" />
+            <Check size={16} class="c(white)" />
           {:else}
-            <Copy size="16" class="c(white)" />
+            <Copy size={16} class="c(white)" />
           {/if}
         </div>
       </button>
@@ -141,7 +148,7 @@
       <div class="vbox gap(md)">
         <h4 class="font(medium) c(gray-800)">Brand Start</h4>
         <button 
-          class="h(md) w(full) r(lg) shadow(md) hover:shadow(lg) transition cursor-pointer border(none)"
+          class="h(16) w(full) r(lg) shadow(md) hover:shadow(lg) transition cursor-pointer border(none)"
           style="background: {brandStartColor}"
           on:click={() => copyColor('purple-500')}
         ></button>
@@ -151,7 +158,7 @@
       <div class="vbox gap(md)">
         <h4 class="font(medium) c(gray-800)">Brand End</h4>
         <button 
-          class="h(md) w(full) r(lg) shadow(md) hover:shadow(lg) transition cursor-pointer border(none)"
+          class="h(16) w(full) r(lg) shadow(md) hover:shadow(lg) transition cursor-pointer border(none)"
           style="background: {brandEndColor}"
           on:click={() => copyColor('pink-500')}
         ></button>
@@ -160,133 +167,164 @@
     </div>
   </div>
 
-  <!-- Full Spectrum -->
-  <div class="bg(white) r(2xl) shadow(xl) shadow(gray-200.5) overflow(hidden)">
-    <div class="p(2xl) bb(1px/gray-100)">
-      <div class="hbox(between/middle) mb(xl)">
-        <div>
-          <h3 class="heading(h2) c(gray-900) mb(xs)">Full Color Spectrum</h3>
-          <p class="font(sm) c(gray-600)">Complete palette with all shades</p>
-        </div>
-        <Sun size="20" class="c(amber-500)" />
-      </div>
-    </div>
+  <!-- Semantic Colors -->
+  <div class="bg(gray-50) r(2xl) p(3xl) border(1/gray-200)">
+    <h3 class="heading(h2) font(700) c(gray-900) mb(2xl) text(center)">Semantic Colors</h3>
+    <p class="body(lg) c(gray-600) text(center) mb(3xl) max-w(3xl) mx(auto)">
+      Purpose-driven colors that communicate meaning and enhance user experience
+    </p>
     
-    <div class="vbox">
-      {#each [...colorGroups.spectrum, ...colorGroups.neutral] as colorName}
-        {#if colorGroups.palette[colorName]}
-          {@const color700 = colorGroups.palette[colorName]?.['700'] || ''}
-          <div class="hbox hover:bg(gray-50) transition">
-            <div class="w(120px) hbox(center/middle) py(lg) px(md)" style="color: {color700}">
-              <h4 class="font(medium) capitalize text(center)">{colorName}</h4>
+    <div class="grid(2) md:grid(4) gap(xl)">
+      {#each Object.entries(semanticColors) as [name, config]}
+        <div class="bg(white) r(xl) p(xl) shadow(md) hover:shadow(lg) transition">
+          <div class="vbox gap(md)">
+            <div class="h(16) w(full) r(lg) bg({config.base}) shadow(sm)"></div>
+            <div>
+              <h4 class="font(medium) c(gray-900) capitalize">{name}</h4>
+              <p class="font(xs) c(gray-600)">{config.label}</p>
             </div>
-              <div class="hbox gap(0) flex(1) px(xs) py(xs)">
-                {#each shades as shade}
-                  {#if colorGroups.palette[colorName][shade]}
-                    {@const colorValue = colorGroups.palette[colorName][shade]}
-                    <button 
-                      class="group relative flex(1) hover:z(10)"
-                      on:click={() => copyColor(`${colorName}-${shade}`)}
-                      title="{colorName}-{shade}"
-                    >
-                      <div 
-                        class="h(48px) w(full) shadow(sm) group-hover:shadow(xl) 
-                               group-hover:scale(1.1) transition-all cursor-pointer
-                               {shade === '50' ? 'r(l-lg)' : ''}
-                               {shade === '950' ? 'r(r-lg)' : ''}" 
-                        style="background: {colorValue}"
-                      >
-                        <div class="absolute inset(0) opacity(0) group-hover:opacity(100) 
-                                    bg(black.2) hbox(center/middle) transition
-                                    {shade === '50' ? 'r(l-lg)' : ''}
-                                    {shade === '950' ? 'r(r-lg)' : ''}">
-                          {#if copiedColor === `${colorName}-${shade}`}
-                            <Check size="16" class="c(white)" />
-                          {:else}
-                            <Copy size="16" class="c(white)" />
-                          {/if}
-                        </div>
-                        <div class="absolute bottom(4) left(0) right(0) text(center)">
-                          <span class="font(2xs) c({parseInt(shade) >= 600 ? 'white.8' : 'black.6'}) font(medium)">{shade}</span>
-                        </div>
-                      </div>
-                    </button>
-                  {/if}
-                {/each}
-              </div>
+            <div class="hbox gap(xs)">
+              {#each config.shades as shade}
+                <button 
+                  class="h(8) flex(1) r(sm) bg({shade}) hover:scale(1.1) transition cursor-pointer"
+                  on:click={() => copyColor(shade)}
+                ></button>
+              {/each}
+            </div>
           </div>
-        {/if}
+        </div>
       {/each}
     </div>
   </div>
 
-  <!-- Semantic Colors -->
-  <div class="bg(white) r(2xl) shadow(xl) shadow(gray-200.5) p(2xl)">
-    <h3 class="heading(h2) c(gray-900) mb(xs)">Semantic Colors</h3>
-    <p class="font(sm) c(gray-600) mb(2xl)">Meaningful colors for UI communication</p>
+  <!-- Color Palette Grid -->
+  <div class="bg(white) r(2xl) shadow(xl) p(3xl) overflow(hidden)">
+    <h3 class="heading(h2) font(700) c(gray-900) mb(2xl) text(center)">Complete Color Palette</h3>
+    <p class="body(lg) c(gray-600) text(center) mb(3xl) max-w(3xl) mx(auto)">
+      Full spectrum of colors with consistent lightness progression
+    </p>
     
-    <div class="grid(2) lg:grid(4) gap(lg)">
-      {#each Object.entries(semanticColors) as [semanticName, config]}
-        {@const [colorName, shade] = config.base.split('-')}
-        {@const colorValue = colorGroups.palette[colorName]?.[shade] || ''}
-        <div class="vbox gap(sm)">
-          <button 
-            class="group vbox gap(md) p(sm) r(lg) hover:bg(gray-50) transition border(1/gray-200) cursor-pointer relative"
-            on:click={() => copyColor(semanticName)}
-          >
-            <div 
-              class="h(64px) w(full) r(sm) shadow(md) group-hover:shadow(lg) transition"
-              style="background: {colorValue}"
-            ></div>
-            <div class="vbox gap(xs)">
-              <code class="font(sm) c(gray-900) font(bold)">{semanticName}</code>
-              <p class="font(xs) c(gray-600)">{config.label}</p>
-              <code class="font(xs) c(gray-500)">{config.base}</code>
-            </div>
-            <div class="absolute top(md) right(md) opacity(0) group-hover:opacity(100) transition">
-              {#if copiedColor === semanticName}
-                <Check size="14" class="c(gray-500)" />
-              {:else}
-                <Copy size="14" class="c(gray-500)" />
+    <!-- Spectrum Colors -->
+    <div class="mb(3xl)">
+      <h4 class="font(lg) font(600) c(gray-800) mb(xl)">Spectrum Colors</h4>
+      <div class="overflow-x(auto) -mx(xl)">
+        <div class="px(xl) pb(lg)">
+          <div class="grid grid-cols-12 gap(xs) min-w(1200px)">
+            <!-- Header row -->
+            <div></div>
+            {#each shades as shade}
+              <div class="text(center) font(xs) c(gray-600) font(mono)">{shade}</div>
+            {/each}
+            
+            <!-- Color rows -->
+            {#each colorGroups.spectrum as colorName}
+              {#if colorGroups.palette[colorName]}
+                <div class="font(sm) c(gray-700) capitalize pr(sm)">{colorName}</div>
+                {#each shades as shade}
+                  {#if colorGroups.palette[colorName][shade]}
+                    <button
+                      class="h(10) w(full) r(sm) hover:scale(1.1) transition cursor-pointer shadow(sm)"
+                      style="background: {colorGroups.palette[colorName][shade]}"
+                      on:click={() => copyColor(`${colorName}-${shade}`)}
+                      title="{colorName}-{shade}"
+                    ></button>
+                  {:else}
+                    <div></div>
+                  {/if}
+                {/each}
               {/if}
-            </div>
-          </button>
+            {/each}
+          </div>
         </div>
-      {/each}
+      </div>
+    </div>
+    
+    <!-- Neutral Colors -->
+    <div>
+      <h4 class="font(lg) font(600) c(gray-800) mb(xl)">Neutral Colors</h4>
+      <div class="overflow-x(auto) -mx(xl)">
+        <div class="px(xl) pb(lg)">
+          <div class="grid grid-cols-12 gap(xs) min-w(800px)">
+            <!-- Header row -->
+            <div></div>
+            {#each shades as shade}
+              <div class="text(center) font(xs) c(gray-600) font(mono)">{shade}</div>
+            {/each}
+            
+            <!-- Color rows -->
+            {#each colorGroups.neutral as colorName}
+              {#if colorGroups.palette[colorName]}
+                <div class="font(sm) c(gray-700) capitalize pr(sm)">{colorName}</div>
+                {#each shades as shade}
+                  {#if colorGroups.palette[colorName][shade]}
+                    <button
+                      class="h(10) w(full) r(sm) hover:scale(1.1) transition cursor-pointer shadow(sm)"
+                      style="background: {colorGroups.palette[colorName][shade]}"
+                      on:click={() => copyColor(`${colorName}-${shade}`)}
+                      title="{colorName}-{shade}"
+                    ></button>
+                  {:else}
+                    <div></div>
+                  {/if}
+                {/each}
+              {/if}
+            {/each}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Color Usage Tips -->
-  <div class="bg(135deg/indigo-600..purple-600) r(2xl) p(3xl) c(white)">
-    <h3 class="heading(h1) mb(2xl) text(center)">Color Best Practices</h3>
-    <div class="grid(3) gap(2xl) max-w(4xl) mx(auto)">
-      <div class="text(center)">
-        <div class="size(80px) r(full) bg(white.2) hbox(center/middle) mx(auto) mb(lg)">
-          <span class="font(2xl)">🎨</span>
-        </div>
-        <h4 class="font(lg) bold mb(sm)">Use Semantic Colors</h4>
-        <p class="font(sm) opacity(0.9)">
-          primary, success, warning, error for consistent meaning
+  <div class="bg(gradient-to-br/indigo-600..purple-600) r(2xl) p(3xl) c(white)">
+    <h3 class="heading(h1) mb(2xl) text(center)">Color Usage Tips</h3>
+    <div class="grid(2) gap(2xl) max-w(4xl) mx(auto)">
+      <div class="bg(white.1) r(lg) p(xl) backdrop-blur(sm)">
+        <h4 class="font(lg) font(600) mb(md)">🎨 Gradients</h4>
+        <p class="font(sm) opacity(90) mb(md)">
+          OKLCH gradients are smoother and more vibrant than RGB
         </p>
+        <code class="font(xs) bg(white.1) px(sm) py(xs) r(md) block">
+          bg(45deg/blue-400..purple-500)
+        </code>
       </div>
-      <div class="text(center)">
-        <div class="size(80px) r(full) bg(white.2) hbox(center/middle) mx(auto) mb(lg)">
-          <span class="font(2xl)">🌈</span>
-        </div>
-        <h4 class="font(lg) bold mb(sm)">OKLCH Gradients</h4>
-        <p class="font(sm) opacity(0.9)">
-          Smooth, perceptually uniform gradients between any colors
+      
+      <div class="bg(white.1) r(lg) p(xl) backdrop-blur(sm)">
+        <h4 class="font(lg) font(600) mb(md)">🔍 Alpha Values</h4>
+        <p class="font(sm) opacity(90) mb(md)">
+          Use dot notation for transparency
         </p>
+        <code class="font(xs) bg(white.1) px(sm) py(xs) r(md) block">
+          bg(black.5) // 50% opacity
+        </code>
       </div>
-      <div class="text(center)">
-        <div class="size(80px) r(full) bg(white.2) hbox(center/middle) mx(auto) mb(lg)">
-          <span class="font(2xl)">♿</span>
-        </div>
-        <h4 class="font(lg) bold mb(sm)">Accessible Contrast</h4>
-        <p class="font(sm) opacity(0.9)">
-          500+ shades on white, 400- shades on black backgrounds
+      
+      <div class="bg(white.1) r(lg) p(xl) backdrop-blur(sm)">
+        <h4 class="font(lg) font(600) mb(md)">🎯 Semantic Colors</h4>
+        <p class="font(sm) opacity(90) mb(md)">
+          Use semantic names for consistent theming
         </p>
+        <code class="font(xs) bg(white.1) px(sm) py(xs) r(md) block">
+          c(primary) bg(success)
+        </code>
+      </div>
+      
+      <div class="bg(white.1) r(lg) p(xl) backdrop-blur(sm)">
+        <h4 class="font(lg) font(600) mb(md)">🌈 Color Functions</h4>
+        <p class="font(sm) opacity(90) mb(md)">
+          Advanced color manipulation
+        </p>
+        <code class="font(xs) bg(white.1) px(sm) py(xs) r(md) block">
+          bg(purple-500/hover)
+        </code>
       </div>
     </div>
   </div>
-</TokenSection>
+
+  <!-- Copied notification -->
+  {#if copiedColor}
+    <div class="fixed bottom(xl) right(xl) bg(black) c(white) px(xl) py(md) r(lg) shadow(2xl) animate-bounce">
+      Copied: {copiedColor}
+    </div>
+  {/if}
+</div>

@@ -1,7 +1,7 @@
 <script>
   import { page } from '$app/stores';
   import { onMount } from 'svelte';
-  import { docsConfig, getDocNavigation, findDocByHref } from '@docs/config';
+  import { docsConfig, getDocNavigation, findDocByHref } from '@docs/config/index.js';
   import { ChevronRight } from 'lucide-svelte';
 
   let mounted = false;
@@ -171,7 +171,7 @@
         <header class={docs_article_header}>
           <!-- Breadcrumb -->
           <nav class={breadcrumb}>
-            <a href="/" class={breadcrumb_link}>Home</a>
+            <a href="/packages/homepage-kit/static" class={breadcrumb_link}>Home</a>
             <ChevronRight size="14" />
             <a href="/docs" class={breadcrumb_link}>Docs</a>
             {#if currentDoc}

@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdorableCSS - Documentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Kalam:wght@300;400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Design System Variables */
+        :root {
+            /* Colors */
+            --cream: #FFFEF9;
+            --soft-black: #1A1A1A;
+            --charcoal: #2D2D2D;
+            --warm-gray: #6B6B6B;
+            --light-gray: #E8E8E8;
+            --accent-coral: #FF6B6B;
+            --accent-blue: #4ECDC4;
+            --accent-yellow: #FFE66D;
+            --accent-purple: #9B59B6;
+            --accent-green: #26D0CE;
+            --white: #FFFFFF;
+            
+            /* Shadows */
+            --shadow-soft: rgba(0, 0, 0, 0.06);
+            --shadow-medium: rgba(0, 0, 0, 0.12);
+            --shadow-strong: rgba(0, 0, 0, 0.24);
+            
+            /* Typography Scale */
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 1.875rem;
+            --text-4xl: 2.25rem;
+            --text-5xl: 3rem;
+            
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+        }
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--cream);
+            color: var(--soft-black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Layout */
+        .docs-layout {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .docs-sidebar {
+            width: 300px;
+            background: var(--white);
+            border-right: 3px solid var(--soft-black);
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 10;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .docs-sidebar.open {
+            transform: translateX(0);
+        }
+
+        .docs-main {
+            flex: 1;
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+        }
+
+        .docs-main.with-sidebar {
+            margin-left: 300px;
+        }
+
+        /* Header */
+        .docs-header {
+            background: var(--white);
+            border-bottom: 3px solid var(--soft-black);
+            padding: var(--space-lg);
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            box-shadow: 0 4px 8px var(--shadow-soft);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-family: 'Caveat', cursive;
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            color: var(--accent-coral);
+            text-decoration: none;
+            transform: rotate(-1deg);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: rotate(1deg) scale(1.05);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: var(--accent-yellow);
+            border: 2px solid var(--soft-black);
+            padding: var(--space-sm);
+            border-radius: var(--radius-md);
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            cursor: pointer;
+            transform: rotate(-1deg);
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            transform: rotate(1deg) translateY(-2px);
+            box-shadow: 3px 3px 0 var(--soft-black);
+        }
+
+        .search-box {
+            position: relative;
+            max-width: 400px;
+            flex: 1;
+            margin: 0 var(--space-xl);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: var(--space-md) var(--space-lg);
+            border: 2px solid var(--light-gray);
+            border-radius: var(--radius-xl);
+            font-family: inherit;
+            font-size: var(--text-base);
+            background: var(--cream);
+            transition: all 0.3s ease;
+            transform: rotate(-0.5deg);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-coral);
+            transform: rotate(0deg) translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow-medium);
+        }
+
+        /* Sidebar Content */
+        .sidebar-header {
+            padding: var(--space-xl);
+            border-bottom: 2px solid var(--light-gray);
+            text-align: center;
+        }
+
+        .sidebar-title {
+            font-family: 'Caveat', cursive;
+            font-size: var(--text-4xl);
+            font-weight: 700;
+            color: var(--accent-coral);
+            transform: rotate(-2deg);
+            margin-bottom: var(--space-sm);
+        }
+
+        .sidebar-subtitle {
+            font-family: 'Kalam', cursive;
+            color: var(--warm-gray);
+            font-size: var(--text-lg);
+        }
+
+        .nav-section {
+            padding: var(--space-lg);
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .nav-section-title {
+            font-family: 'Kalam', cursive;
+            font-size: var(--text-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            color: var(--charcoal);
+            position: relative;
+        }
+
+        .nav-section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 60%;
+            height: 3px;
+            background: var(--accent-yellow);
+            transform: rotate(-1deg);
+        }
+
+        .nav-list {
+            list-style: none;
+        }
+
+        .nav-item {
+            margin-bottom: var(--space-sm);
+        }
+
+        .nav-link {
+            display: block;
+            padding: var(--space-sm) var(--space-md);
+            color: var(--warm-gray);
+            text-decoration: none;
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: var(--text-base);
+        }
+
+        .nav-link:hover {
+            background: var(--accent-yellow);
+            color: var(--soft-black);
+            transform: translateX(5px);
+        }
+
+        .nav-link.active {
+            background: var(--accent-coral);
+            color: var(--white);
+            font-weight: 600;
+            box-shadow: 3px 3px 0 var(--soft-black);
+            transform: rotate(-1deg);
+        }
+
+        .nav-badge {
+            background: var(--accent-green);
+            color: var(--white);
+            font-size: var(--text-xs);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-xl);
+            font-weight: 700;
+            margin-left: var(--space-sm);
+            transform: rotate(10deg);
+        }
+
+        /* Main Content */
+        .docs-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: var(--space-2xl);
+        }
+
+        .content-header {
+            text-align: center;
+            margin-bottom: var(--space-3xl);
+            position: relative;
+        }
+
+        .page-title {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(var(--text-4xl), 6vw, var(--text-5xl));
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            transform: rotate(-1deg);
+            position: relative;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%) rotate(2deg);
+            width: 80%;
+            height: 8px;
+            background: var(--accent-blue);
+            opacity: 0.7;
+        }
+
+        .page-description {
+            font-family: 'Kalam', cursive;
+            font-size: var(--text-xl);
+            color: var(--warm-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Content Sections */
+        .content-section {
+            margin-bottom: var(--space-3xl);
+            position: relative;
+        }
+
+        .section-card {
+            background: var(--white);
+            border: 2px solid var(--soft-black);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            margin-bottom: var(--space-xl);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .section-card:nth-child(odd) {
+            transform: rotate(0.5deg);
+        }
+
+        .section-card:nth-child(even) {
+            transform: rotate(-0.5deg);
+        }
+
+        .section-card:hover {
+            transform: rotate(0deg) translateY(-5px);
+            box-shadow: 8px 8px 0 var(--accent-purple);
+        }
+
+        /* Card Variations */
+        .card-small {
+            padding: var(--space-lg);
+            max-width: 400px;
+            margin: var(--space-lg) auto;
+        }
+
+        .card-large {
+            padding: var(--space-3xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .card-wide {
+            padding: var(--space-xl) var(--space-3xl);
+            margin: var(--space-2xl) 0;
+        }
+
+        .card-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
+            align-items: start;
+        }
+
+        .card-feature {
+            background: linear-gradient(135deg, var(--accent-coral), var(--accent-purple));
+            color: var(--white);
+            border-color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-feature::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="white" opacity="0.1"/></svg>') repeat;
+            background-size: 20px 20px;
+            transform: rotate(45deg);
+        }
+
+        .card-code-heavy {
+            background: var(--soft-black);
+            color: var(--accent-yellow);
+            border-color: var(--charcoal);
+        }
+
+        .card-code-heavy .section-title {
+            color: var(--accent-yellow);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
+            margin: var(--space-xl) 0;
+        }
+
+        .card-grid-small {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        /* Long Content Styles */
+        .prose {
+            max-width: none;
+        }
+
+        .prose h3 {
+            font-family: 'Kalam', cursive;
+            font-size: var(--text-xl);
+            font-weight: 700;
+            margin: var(--space-xl) 0 var(--space-md);
+            color: var(--accent-coral);
+            position: relative;
+        }
+
+        .prose h3::before {
+            content: '→';
+            position: absolute;
+            left: -var(--space-lg);
+            color: var(--accent-yellow);
+            font-family: 'Caveat', cursive;
+            font-size: var(--text-2xl);
+        }
+
+        .prose h4 {
+            font-family: 'Kalam', cursive;
+            font-size: var(--text-lg);
+            font-weight: 600;
+            margin: var(--space-lg) 0 var(--space-sm);
+            color: var(--charcoal);
+        }
+
+        .prose p {
+            margin-bottom: var(--space-lg);
+            line-height: 1.8;
+        }
+
+        .prose ul, .prose ol {
+            margin: var(--space-lg) 0;
+            padding-left: var(--space-2xl);
+        }
+
+        .prose li {
+            margin-bottom: var(--space-sm);
+            line-height: 1.7;
+        }
+
+        .prose blockquote {
+            background: var(--accent-yellow);
+            border-left: 5px solid var(--accent-coral);
+            padding: var(--space-lg);
+            margin: var(--space-xl) 0;
+            border-radius: var(--radius-md);
+            font-style: italic;
+            transform: rotate(-0.5deg);
+            position: relative;
+        }
+
+        .prose blockquote::before {
+            content: '"';
+            font-family: 'Caveat', cursive;
+            font-size: 4rem;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            color: var(--accent-coral);
+            opacity: 0.5;
+        }
+
+        .highlight-box {
+            background: var(--accent-blue);
+            color: var(--white);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            margin: var(--space-lg) 0;
+            border: 2px solid var(--soft-black);
+            transform: rotate(0.5deg);
+        }
+
+        .tip-box {
+            background: var(--accent-green);
+            color: var(--white);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            margin: var(--space-lg) 0;
+            border: 2px solid var(--soft-black);
+            transform: rotate(-0.5deg);
+            position: relative;
+        }
+
+        .tip-box::before {
+            content: '💡';
+            position: absolute;
+            top: -15px;
+            left: var(--space-lg);
+            font-size: var(--text-2xl);
+            background: var(--white);
+            padding: var(--space-xs);
+            border-radius: 50%;
+            border: 2px solid var(--soft-black);
+        }
+
+        .section-title {
+            font-family: 'Kalam', cursive;
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            color: var(--charcoal);
+        }
+
+        .section-content {
+            font-size: var(--text-lg);
+            line-height: 1.8;
+            margin-bottom: var(--space-lg);
+        }
+
+        /* Code Examples */
+        .code-example {
+            background: var(--soft-black);
+            color: var(--accent-yellow);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            font-family: 'Space Mono', monospace;
+            margin: var(--space-lg) 0;
+            position: relative;
+            overflow-x: auto;
+            transform: rotate(-0.5deg);
+            border: 2px solid var(--charcoal);
+        }
+
+        .code-example::before {
+            content: '// AdorableCSS';
+            position: absolute;
+            top: var(--space-sm);
+            right: var(--space-lg);
+            color: var(--warm-gray);
+            font-size: var(--text-sm);
+        }
+
+        .code-line {
+            margin: var(--space-sm) 0;
+            padding-left: var(--space-lg);
+        }
+
+        .code-comment {
+            color: var(--warm-gray);
+            font-style: italic;
+        }
+
+        /* Interactive Examples */
+        .demo-section {
+            background: var(--cream);
+            border: 2px dashed var(--accent-coral);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin: var(--space-lg) 0;
+            text-align: center;
+        }
+
+        .demo-title {
+            font-family: 'Kalam', cursive;
+            font-size: var(--text-xl);
+            margin-bottom: var(--space-lg);
+            color: var(--accent-coral);
+        }
+
+        .demo-button {
+            background: var(--accent-coral);
+            color: var(--white);
+            border: 2px solid var(--soft-black);
+            padding: var(--space-md) var(--space-xl);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: var(--space-sm);
+            transform: rotate(-1deg);
+        }
+
+        .demo-button:hover {
+            transform: rotate(1deg) translateY(-2px);
+            box-shadow: 4px 4px 0 var(--soft-black);
+        }
+
+        .demo-card {
+            background: var(--white);
+            border: 2px solid var(--soft-black);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin: var(--space-md);
+            display: inline-block;
+            min-width: 200px;
+            transition: all 0.3s ease;
+        }
+
+        .demo-card:hover {
+            transform: scale(1.05) rotate(2deg);
+            box-shadow: 6px 6px 0 var(--accent-blue);
+        }
+
+        /* Quick Start Guide */
+        .quick-start {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-xl);
+            margin: var(--space-2xl) 0;
+        }
+
+        .step-card {
+            background: var(--white);
+            border: 2px solid var(--soft-black);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:nth-child(1) { transform: rotate(1deg); }
+        .step-card:nth-child(2) { transform: rotate(-0.5deg); }
+        .step-card:nth-child(3) { transform: rotate(0.5deg); }
+
+        .step-card:hover {
+            transform: rotate(0deg) translateY(-10px);
+            box-shadow: 8px 8px 0 var(--accent-green);
+        }
+
+        .step-number {
+            background: var(--accent-coral);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Caveat', cursive;
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            margin: 0 auto var(--space-lg);
+            border: 2px solid var(--soft-black);
+            transform: rotate(-10deg);
+        }
+
+        .step-title {
+            font-family: 'Kalam', cursive;
+            font-size: var(--text-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+        }
+
+        .step-description {
+            color: var(--warm-gray);
+            line-height: 1.6;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: var(--white);
+            border: 2px solid var(--soft-black);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-2xl);
+            transform: rotate(-0.5deg);
+        }
+
+        .toc-title {
+            font-family: 'Kalam', cursive;
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            color: var(--accent-coral);
+        }
+
+        .toc-list {
+            list-style: none;
+            columns: 2;
+            column-gap: var(--space-2xl);
+        }
+
+        .toc-item {
+            break-inside: avoid;
+            margin-bottom: var(--space-md);
+        }
+
+        .toc-link {
+            color: var(--charcoal);
+            text-decoration: none;
+            font-weight: 500;
+            padding: var(--space-sm) var(--space-md);
+            display: block;
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+        }
+
+        .toc-link:hover {
+            background: var(--accent-yellow);
+            transform: translateX(10px);
+        }
+
+        /* Floating doodles */
+        .doodle {
+            position: absolute;
+            font-family: 'Caveat', cursive;
+            font-size: var(--text-2xl);
+            color: var(--warm-gray);
+            opacity: 0.2;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .doodle-1 { top: 10%; left: 5%; transform: rotate(-15deg); }
+        .doodle-2 { top: 20%; right: 10%; transform: rotate(20deg); }
+        .doodle-3 { bottom: 30%; left: 8%; transform: rotate(-10deg); }
+        .doodle-4 { bottom: 20%; right: 5%; transform: rotate(15deg); }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .docs-sidebar {
+                width: 280px;
+            }
+            
+            .docs-main.with-sidebar {
+                margin-left: 0;
+            }
+            
+            .menu-toggle {
+                display: block;
+            }
+            
+            .search-box {
+                display: none;
+            }
+            
+            .card-split {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+            
+            .card-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .docs-content {
+                padding: var(--space-lg);
+            }
+            
+            .section-card {
+                transform: rotate(0deg) !important;
+                padding: var(--space-lg);
+            }
+            
+            .card-large {
+                padding: var(--space-xl);
+            }
+            
+            .card-wide {
+                padding: var(--space-lg);
+            }
+            
+            .step-card {
+                transform: rotate(0deg) !important;
+            }
+            
+            .toc-list {
+                columns: 1;
+            }
+            
+            .quick-start {
+                grid-template-columns: 1fr;
+            }
+            
+            .card-grid, .card-grid-small {
+                grid-template-columns: 1fr;
+                gap: var(--space-md);
+            }
+            
+            .code-example {
+                transform: rotate(0deg);
+                padding: var(--space-lg);
+                font-size: var(--text-sm);
+            }
+            
+            .prose h3::before {
+                display: none;
+            }
+            
+            .tip-box::before {
+                position: relative;
+                top: 0;
+                left: 0;
+                display: inline-block;
+                margin-right: var(--space-sm);
+            }
+            
+            .highlight-box,
+            .tip-box {
+                transform: rotate(0deg);
+                padding: var(--space-md);
+            }
+            
+            .prose blockquote {
+                transform: rotate(0deg);
+                margin: var(--space-md) 0;
+                padding: var(--space-md);
+            }
+        }
+
+        /* Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(-15deg); }
+            50% { transform: translateY(-10px) rotate(-15deg); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(20deg); }
+            50% { transform: rotate(25deg); }
+        }
+
+        .doodle-1 { animation: float 6s ease-in-out infinite; }
+        .doodle-2 { animation: wiggle 4s ease-in-out infinite; }
+    </style>
+</head>
+<body>
+    <!-- Floating doodles -->
+    <div class="doodle doodle-1">✨</div>
+    <div class="doodle doodle-2">→</div>
+    <div class="doodle doodle-3">{ }</div>
+    <div class="doodle doodle-4">💖</div>
+
+    <div class="docs-layout">
+        <!-- Sidebar -->
+        <nav class="docs-sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1 class="sidebar-title">Docs</h1>
+                <p class="sidebar-subtitle">Complete Guide</p>
+            </div>
+
+            <div class="nav-section">
+                <h2 class="nav-section-title">Getting Started</h2>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#introduction" class="nav-link active">소개 <span class="nav-badge">NEW</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#installation" class="nav-link">설치하기</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#quick-start" class="nav-link">빠른 시작</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#configuration" class="nav-link">설정</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <h2 class="nav-section-title">Core Concepts</h2>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#figma-mapping" class="nav-link">Figma 매핑</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#design-tokens" class="nav-link">디자인 토큰</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#layout-system" class="nav-link">레이아웃 시스템</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#typography" class="nav-link">타이포그래피</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <h2 class="nav-section-title">Components</h2>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#buttons" class="nav-link">버튼</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#cards" class="nav-link">카드</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#forms" class="nav-link">폼</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#navigation" class="nav-link">네비게이션</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="nav-section">
+                <h2 class="nav-section-title">Advanced</h2>
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#custom-components" class="nav-link">커스텀 컴포넌트</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#animations" class="nav-link">애니메이션</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#theming" class="nav-link">테마</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#performance" class="nav-link">성능 최적화</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="docs-main" id="main">
+            <!-- Header -->
+            <header class="docs-header">
+                <div class="header-content">
+                    <a href="#" class="logo">AdorableCSS</a>
+                    
+                    <div class="search-box">
+                        <input 
+                            type="text" 
+                            class="search-input" 
+                            placeholder="문서 검색... (곧 출시)"
+                        />
+                    </div>
+                    
+                    <button class="menu-toggle" onclick="toggleSidebar()">
+                        MENU
+                    </button>
+                </div>
+            </header>
+
+            <!-- Content -->
+            <div class="docs-content">
+                <!-- Page Header -->
+                <header class="content-header">
+                    <h1 class="page-title">AdorableCSS 문서</h1>
+                    <p class="page-description">
+                        Figma-first CSS 프레임워크로 디자인과 코드 사이의 거리를 없애보세요
+                    </p>
+                </header>
+
+                <!-- Table of Contents -->
+                <div class="toc">
+                    <h2 class="toc-title">📖 목차</h2>
+                    <ul class="toc-list">
+                        <li class="toc-item"><a href="#introduction" class="toc-link">소개</a></li>
+                        <li class="toc-item"><a href="#installation" class="toc-link">설치하기</a></li>
+                        <li class="toc-item"><a href="#quick-start" class="toc-link">빠른 시작</a></li>
+                        <li class="toc-item"><a href="#figma-mapping" class="toc-link">Figma 매핑</a></li>
+                        <li class="toc-item"><a href="#design-tokens" class="toc-link">디자인 토큰</a></li>
+                        <li class="toc-item"><a href="#layout-system" class="toc-link">레이아웃 시스템</a></li>
+                        <li class="toc-item"><a href="#typography" class="toc-link">타이포그래피</a></li>
+                        <li class="toc-item"><a href="#components" class="toc-link">컴포넌트</a></li>
+                    </ul>
+                </div>
+
+                <!-- Introduction Section -->
+                <section class="content-section" id="introduction">
+                    <div class="section-card">
+                        <h2 class="section-title">🎨 AdorableCSS란?</h2>
+                        <div class="section-content">
+                            <p>AdorableCSS는 Figma의 디자인 언어를 그대로 CSS로 옮긴 혁신적인 프레임워크입니다. 더 이상 디자인과 코드 사이에서 번역할 필요가 없어요!</p>
+                            
+                            <div class="code-example">
+                                <div class="code-line">// Figma에서 이렇게 생각하신다면...</div>
+                                <div class="code-line">Auto Layout: Horizontal, Space Between, Padding 24px</div>
+                                <div class="code-line"></div>
+                                <div class="code-line">// AdorableCSS에서는 이렇게 쓸 수 있어요!</div>
+                                <div class="code-line">hbox(pack) p(24)</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Installation Section -->
+                <section class="content-section" id="installation">
+                    <div class="section-card">
+                        <h2 class="section-title">📦 설치하기</h2>
+                        <div class="section-content">
+                            <p>npm, yarn, 또는 CDN을 통해 AdorableCSS를 프로젝트에 추가할 수 있습니다.</p>
+                            
+                            <div class="code-example">
+                                <div class="code-line"># NPM으로 설치</div>
+                                <div class="code-line">npm install adorable-css</div>
+                                <div class="code-line"></div>
+                                <div class="code-line"># Yarn으로 설치</div>
+                                <div class="code-line">yarn add adorable-css</div>
+                                <div class="code-line"></div>
+                                <div class="code-line"># CDN 사용</div>
+                                <div class="code-line">&lt;link rel="stylesheet" href="https://cdn.adorable-css.com/v2/adorable.css"&gt;</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Quick Start Section -->
+                <section class="content-section" id="quick-start">
+                    <div class="section-card">
+                        <h2 class="section-title">🚀 빠른 시작</h2>
+                        <div class="section-content">
+                            <p>3단계로 AdorableCSS를 시작해보세요!</p>
+                        </div>
+                        
+                        <div class="quick-start">
+                            <div class="step-card">
+                                <div class="step-number">1</div>
+                                <h3 class="step-title">설치</h3>
+                                <p class="step-description">npm이나 CDN으로 AdorableCSS를 프로젝트에 추가하세요.</p>
+                            </div>
+                            
+                            <div class="step-card">
+                                <div class="step-number">2</div>
+                                <h3 class="step-title">클래스 작성</h3>
+                                <p class="step-description">Figma처럼 직관적인 클래스명을 HTML에 적용하세요.</p>
+                            </div>
+                            
+                            <div class="step-card">
+                                <div class="step-number">3</div>
+                                <h3 class="step-title">결과 확인</h3>
+                                <p class="step-description">마법처럼 아름다운 디자인이 화면에 나타납니다!</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Interactive Demo Section -->
+                <section class="content-section" id="demo">
+                    <div class="section-card">
+                        <h2 class="section-title">🎮 인터랙티브 데모</h2>
+                        <div class="section-content">
+                            <p>직접 체험해보세요! 아래 버튼들로 AdorableCSS의 매력을 느껴보세요.</p>
+                        </div>
+                        
+                        <div class="demo-section">
+                            <h3 class="demo-title">라이브 예시</h3>
+                            
+                            <button class="demo-button" onclick="animateCard()">카드 애니메이션</button>
+                            <button class="demo-button" onclick="changeColors()">컬러 변경</button>
+                            <button class="demo-button" onclick="resetDemo()">리셋</button>
+                            
+                            <div class="demo-card" id="demoCard">
+                                <h4>AdorableCSS 카드</h4>
+                                <p>hbox(center) p(lg) r(md) shadow(soft)</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Figma Mapping Section -->
+                <section class="content-section" id="figma-mapping">
+                    <div class="section-card">
+                        <h2 class="section-title">🎯 Figma 매핑</h2>
+                        <div class="section-content">
+                            <p>Figma의 Auto Layout과 디자인 개념을 CSS로 1:1 매핑합니다.</p>
+                            
+                            <div class="code-example">
+                                <div class="code-line code-comment">// Figma: Auto Layout → Horizontal</div>
+                                <div class="code-line">hbox() <span class="code-comment">// display: flex; flex-direction: row;</span></div>
+                                <div class="code-line"></div>
+                                <div class="code-line code-comment">// Figma: Auto Layout → Vertical</div>
+                                <div class="code-line">vbox() <span class="code-comment">// display: flex; flex-direction: column;</span></div>
+                                <div class="code-line"></div>
+                                <div class="code-line code-comment">// Figma: Width → Fill</div>
+                                <div class="code-line">w(fill) <span class="code-comment">// flex: 1;</span></div>
+                                <div class="code-line"></div>
+                                <div class="code-line code-comment">// Figma: Gap</div>
+                                <div class="code-line">gap(16) <span class="code-comment">// gap: 16px;</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Design Tokens Section -->
+                <section class="content-section" id="design-tokens">
+                    <div class="section-card">
+                        <h2 class="section-title">🎨 디자인 토큰</h2>
+                        <div class="section-content">
+                            <p>일관된 디자인 시스템을 위한 토큰 기반 접근법을 사용합니다.</p>
+                            
+                            <div class="code-example">
+                                <div class="code-line code-comment">// 컬러 토큰</div>
+                                <div class="code-line">c(primary) bg(white) border(gray-200)</div>
+                                <div class="code-line"></div>
+                                <div class="code-line code-comment">// 스페이싱 토큰</div>
+                                <div class="code-line">p(xs) m(sm) gap(md) p(lg) m(xl)</div>
+                                <div class="code-line"></div>
+                                <div class="code-line code-comment">// 타이포그래피 토큰</div>
+                                <div class="code-line">text(body/lg) font(semibold) leading(relaxed)</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Layout System - Large Feature Card -->
+                <section class="content-section" id="layout-system">
+                    <div class="section-card card-feature card-large">
+                        <h2 class="section-title">🧱 레이아웃 시스템 완전 가이드</h2>
+                        <div class="section-content prose">
+                            <p>AdorableCSS의 레이아웃 시스템은 Figma의 Auto Layout을 완벽하게 재현합니다. 복잡한 CSS Flexbox나 Grid를 몰라도 직관적으로 레이아웃을 구성할 수 있어요.</p>
+                            
+                            <h3>기본 컨테이너</h3>
+                            <p>모든 레이아웃은 기본 컨테이너부터 시작합니다. Figma에서 Frame을 만드는 것처럼 간단해요!</p>
+                            
+                            <div class="code-example">
+                                <div class="code-line">// 세로 배치 (Figma: Vertical Auto Layout)</div>
+                                <div class="code-line">vbox() gap(16) p(24)</div>
+                                <div class="code-line"></div>
+                                <div class="code-line">// 가로 배치 (Figma: Horizontal Auto Layout)</div>
+                                <div class="code-line">hbox() gap(12) p(16)</div>
+                                <div class="code-line"></div>
+                                <div class="code-line">// 중앙 정렬 (Figma: Center Alignment)</div>
+                                <div class="code-line">vbox(center/middle) min-h(100vh)</div>
+                            </div>
+                            
+                            <h3>고급 배치 옵션</h3>
+                            <p>공간 분배, 정렬, 래핑까지 Figma의 모든 기능을 지원합니다:</p>
+                            
+                            <ul>
+                                <li><strong>hbox(pack)</strong> - 양쪽 끝으로 밀어내기 (space-between)</li>
+                                <li><strong>hbox(around)</strong> - 균등 분배 (space-around)</li>
+                                <li><strong>vbox(top/start)</strong> - 위쪽/왼쪽 정렬</li>
+                                <li><strong>vbox(bottom/end)</strong> - 아래쪽/오른쪽 정렬</li>
+                                <li><strong>wrap</strong> - 줄바꿈 허용</li>
+                            </ul>
+                            
+                            <blockquote>
+                                "CSS를 몰라도 Figma를 할 줄 안다면 AdorableCSS를 사용할 수 있어요. 디자이너와 개발자가 같은 언어로 소통할 수 있는 게 가장 큰 장점이에요!" - 실제 사용자 후기
+                            </blockquote>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Typography Deep Dive - Split Card -->
+                <section class="content-section" id="typography-deep">
+                    <div class="section-card card-split card-wide">
+                        <div>
+                            <h2 class="section-title">✍️ 타이포그래피 시스템</h2>
+                            <div class="prose">
+                                <p>AdorableCSS v2부터는 AI가 이해하기 쉬운 통합 타이포그래피 시스템을 도입했습니다.</p>
+                                
+                                <h3>새로운 text() 함수</h3>
+                                <p>하나의 함수로 모든 텍스트 스타일링을 처리합니다:</p>
+                                
+                                <h4>기본 사용법</h4>
+                                <ul>
+                                    <li><code>text(16px)</code> - 폰트 크기 설정</li>
+                                    <li><code>text(lg)</code> - 토큰 기반 크기</li>
+                                    <li><code>text(16px/1.5)</code> - 크기 + 줄간격</li>
+                                    <li><code>text(lg/1.2/-2%)</code> - 크기 + 줄간격 + 자간</li>
+                                </ul>
+                                
+                                <div class="tip-box">
+                                    <strong>Pro Tip:</strong> text() 함수는 타이포그래피뿐만 아니라 텍스트 정렬, 변형, 공백 처리까지 모두 처리할 수 있어요!
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="code-example">
+                                <div class="code-line">// 반응형 타이포그래피</div>
+                                <div class="code-line">text(sm..6xl)</div>
+                                <div class="code-line">// → clamp(14px, 4vw, 64px)</div>
+                                <div class="code-line"></div>
+                                <div class="code-line">// 텍스트 속성 조합</div>
+                                <div class="code-line">text(center+uppercase)</div>
+                                <div class="code-line">// → text-align: center;</div>
+                                <div class="code-line">//   text-transform: uppercase;</div>
+                                <div class="code-line"></div>
+                                <div class="code-line">// 완전한 조합</div>
+                                <div class="code-line">text(lg/1.5/center+nowrap)</div>
+                                <div class="code-line">// → font-size: 18px;</div>
+                                <div class="code-line">//   line-height: 1.5;</div>
+                                <div class="code-line">//   text-align: center;</div>
+                                <div class="code-line">//   white-space: nowrap;</div>
+                            </div>
+                            
+                            <div class="highlight-box">
+                                <strong>AI 친화적 설계</strong><br>
+                                ChatGPT나 Claude 같은 AI가 AdorableCSS 코드를 더 쉽게 이해하고 생성할 수 있도록 설계되었습니다.
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Real World Examples - Grid of Small Cards -->
+                <section class="content-section" id="real-examples">
+                    <h2 class="section-title" style="text-align: center; margin-bottom: var(--space-2xl);">🌟 실제 사용 사례</h2>
+                    
+                    <div class="card-grid-small">
+                        <div class="section-card card-small">
+                            <h3 style="font-family: 'Kalam', cursive; color: var(--accent-coral); margin-bottom: var(--space-md);">네비게이션 바</h3>
+                            <div class="code-example" style="font-size: var(--text-sm); padding: var(--space-md);">
+                                <div class="code-line">hbox(pack/middle)</div>
+                                <div class="code-line">p(md) bg(white)</div>
+                                <div class="code-line">shadow(soft)</div>
+                                <div class="code-line">sticky top(0)</div>
+                            </div>
+                            <p style="margin-top: var(--space-sm); font-size: var(--text-sm); color: var(--warm-gray);">고정형 네비게이션</p>
+                        </div>
+
+                        <div class="section-card card-small">
+                            <h3 style="font-family: 'Kalam', cursive; color: var(--accent-blue); margin-bottom: var(--space-md);">카드 리스트</h3>
+                            <div class="code-example" style="font-size: var(--text-sm); padding: var(--space-md);">
+                                <div class="code-line">grid(3fr) gap(lg)</div>
+                                <div class="code-line">p(xl) r(lg)</div>
+                                <div class="code-line">bg(white)</div>
+                                <div class="code-line">hover:scale(1.02)</div>
+                            </div>
+                            <p style="margin-top: var(--space-sm); font-size: var(--text-sm); color: var(--warm-gray);">반응형 카드 그리드</p>
+                        </div>
+
+                        <div class="section-card card-small">
+                            <h3 style="font-family: 'Kalam', cursive; color: var(--accent-green); margin-bottom: var(--space-md);">히어로 섹션</h3>
+                            <div class="code-example" style="font-size: var(--text-sm); padding: var(--space-md);">
+                                <div class="code-line">vbox(center/middle)</div>
+                                <div class="code-line">min-h(60vh)</div>
+                                <div class="code-line">text(center)</div>
+                                <div class="code-line">bg(gradient)</div>
+                            </div>
+                            <p style="margin-top: var(--space-sm); font-size: var(--text-sm); color: var(--warm-gray);">랜딩 페이지 히어로</p>
+                        </div>
+
+                        <div class="section-card card-small">
+                            <h3 style="font-family: 'Kalam', cursive; color: var(--accent-purple); margin-bottom: var(--space-md);">사이드바</h3>
+                            <div class="code-example" style="font-size: var(--text-sm); padding: var(--space-md);">
+                                <div class="code-line">vbox w(280)</div>
+                                <div class="code-line">h(100vh) p(lg)</div>
+                                <div class="code-line">bg(gray-50)</div>
+                                <div class="code-line">border-r</div>
+                            </div>
+                            <p style="margin-top: var(--space-sm); font-size: var(--text-sm); color: var(--warm-gray);">고정 사이드바</p>
+                        </div>
+
+                        <div class="section-card card-small">
+                            <h3 style="font-family: 'Kalam', cursive; color: var(--accent-coral); margin-bottom: var(--space-md);">모달</h3>
+                            <div class="code-example" style="font-size: var(--text-sm); padding: var(--space-md);">
+                                <div class="code-line">fixed inset(0)</div>
+                                <div class="code-line">vbox(center/middle)</div>
+                                <div class="code-line">bg(black.5)</div>
+                                <div class="code-line">backdrop-blur</div>
+                            </div>
+                            <p style="margin-top: var(--space-sm); font-size: var(--text-sm); color: var(--warm-gray);">모달 오버레이</p>
+                        </div>
+
+                        <div class="section-card card-small">
+                            <h3 style="font-family: 'Kalam', cursive; color: var(--accent-yellow); margin-bottom: var(--space-md);">버튼</h3>
+                            <div class="code-example" style="font-size: var(--text-sm); padding: var(--space-md);">
+                                <div class="code-line">hbox(center/middle)</div>
+                                <div class="code-line">p(md/lg) r(md)</div>
+                                <div class="code-line">bg(primary)</div>
+                                <div class="code-line">hover:scale(1.05)</div>
+                            </div>
+                            <p style="margin-top: var(--space-sm); font-size: var(--text-sm); color: var(--warm-gray);">인터랙티브 버튼</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Advanced Concepts - Code Heavy Card -->
+                <section class="content-section" id="advanced-concepts">
+                    <div class="section-card card-code-heavy card-large">
+                        <h2 class="section-title">⚡ 고급 개념 및 최적화</h2>
+                        <div class="section-content prose">
+                            <p style="color: var(--accent-yellow);">AdorableCSS의 진정한 힘은 고급 기능들에서 나타납니다. 성능, 확장성, 유지보수성을 고려한 패턴들을 알아보세요.</p>
+                            
+                            <h3>컴포넌트 시스템</h3>
+                            <p style="color: var(--light-gray);">재사용 가능한 컴포넌트를 정의하고 확장할 수 있습니다:</p>
+                            
+                            <div class="code-example">
+                                <div class="code-line">// 기본 버튼 컴포넌트</div>
+                                <div class="code-line">defineComponent('btn', {</div>
+                                <div class="code-line">  base: 'hbox(center/middle) p(md/lg) r(md) font(medium) transition',</div>
+                                <div class="code-line">  variants: {</div>
+                                <div class="code-line">    primary: 'bg(coral) c(white) hover:bg(coral.dark)',</div>
+                                <div class="code-line">    secondary: 'bg(gray-100) c(gray-900) hover:bg(gray-200)',</div>
+                                <div class="code-line">    ghost: 'bg(transparent) c(coral) hover:bg(coral.light)'</div>
+                                <div class="code-line">  },</div>
+                                <div class="code-line">  sizes: {</div>
+                                <div class="code-line">    sm: 'p(sm/md) text(sm)',</div>
+                                <div class="code-line">    lg: 'p(lg/xl) text(lg)'</div>
+                                <div class="code-line">  }</div>
+                                <div class="code-line">})</div>
+                                <div class="code-line"></div>
+                                <div class="code-line">// 사용법</div>
+                                <div class="code-line">&lt;button class="btn(primary/lg)"&gt;클릭하세요&lt;/button&gt;</div>
+                            </div>
+                            
+                            <h3>성능 최적화</h3>
+                            <p style="color: var(--light-gray);">빌드 타임에 CSS를 생성하여 런타임 오버헤드가 전혀 없습니다:</p>
+                            
+                            <ul style="color: var(--light-gray);">
+                                <li><strong>Zero Runtime</strong> - 모든 처리는 빌드 타임에 완료</li>
+                                <li><strong>Tree Shaking</strong> - 사용하지 않는 스타일 자동 제거</li>
+                                <li><strong>CSS Minification</strong> - 최적화된 CSS 출력</li>
+                                <li><strong>Critical CSS</strong> - 중요한 스타일 우선 로딩</li>
+                            </ul>
+                            
+                            <h3>커스터마이징</h3>
+                            <p style="color: var(--light-gray);">프로젝트 요구사항에 맞게 디자인 시스템을 확장할 수 있습니다:</p>
+                            
+                            <div class="code-example">
+                                <div class="code-line">// adorable.config.js</div>
+                                <div class="code-line">export default {</div>
+                                <div class="code-line">  theme: {</div>
+                                <div class="code-line">    colors: {</div>
+                                <div class="code-line">      brand: '#FF6B6B',</div>
+                                <div class="code-line">      success: '#26D0CE',</div>
+                                <div class="code-line">      warning: '#FFE66D'</div>
+                                <div class="code-line">    },</div>
+                                <div class="code-line">    spacing: {</div>
+                                <div class="code-line">      xs: '4px',</div>
+                                <div class="code-line">      sm: '8px',</div>
+                                <div class="code-line">      md: '16px',</div>
+                                <div class="code-line">      lg: '24px',</div>
+                                <div class="code-line">      xl: '32px'</div>
+                                <div class="code-line">    }</div>
+                                <div class="code-line">  },</div>
+                                <div class="code-line">  plugins: ['@adorable-css/animations', '@adorable-css/forms']</div>
+                                <div class="code-line">}</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Migration Guide -->
+                <section class="content-section" id="migration">
+                    <div class="section-card card-wide">
+                        <h2 class="section-title">🚀 마이그레이션 가이드</h2>
+                        <div class="section-content prose">
+                            <p>기존 CSS 프레임워크에서 AdorableCSS로 이전하는 것은 생각보다 간단합니다. 단계별로 진행해보세요.</p>
+                            
+                            <h3>Tailwind CSS에서 마이그레이션</h3>
+                            <p>Tailwind를 사용하고 계신다면 매우 유사한 개념들이 많아 쉽게 적응하실 수 있어요:</p>
+                            
+                            <div class="code-example">
+                                <div class="code-line code-comment">// Tailwind CSS</div>
+                                <div class="code-line">flex items-center justify-between p-4 bg-white shadow-sm rounded-lg</div>
+                                <div class="code-line"></div>
+                                <div class="code-line code-comment">// AdorableCSS</div>
+                                <div class="code-line">hbox(pack/middle) p(lg) bg(white) shadow(soft) r(lg)</div>
+                            </div>
+                            
+                            <h3>Bootstrap에서 마이그레이션</h3>
+                            <p>컴포넌트 중심의 Bootstrap 방식을 더 현대적으로 변환:</p>
+                            
+                            <div class="code-example">
+                                <div class="code-line code-comment">// Bootstrap</div>
+                                <div class="code-line">&lt;div class="container"&gt;</div>
+                                <div class="code-line">  &lt;div class="row"&gt;</div>
+                                <div class="code-line">    &lt;div class="col-md-6"&gt;Content&lt;/div&gt;</div>
+                                <div class="code-line">  &lt;/div&gt;</div>
+                                <div class="code-line">&lt;/div&gt;</div>
+                                <div class="code-line"></div>
+                                <div class="code-line code-comment">// AdorableCSS</div>
+                                <div class="code-line">&lt;div class="container"&gt;</div>
+                                <div class="code-line">  &lt;div class="grid(2fr) gap(lg)"&gt;</div>
+                                <div class="code-line">    &lt;div&gt;Content&lt;/div&gt;</div>
+                                <div class="code-line">  &lt;/div&gt;</div>
+                                <div class="code-line">&lt;/div&gt;</div>
+                            </div>
+                            
+                            <div class="tip-box">
+                                <strong>마이그레이션 팁:</strong> 한 번에 모든 것을 바꾸지 마세요. 새로운 컴포넌트부터 AdorableCSS를 적용하고 점진적으로 확장해나가는 것이 좋습니다.
+                            </div>
+                            
+                            <h3>단계별 마이그레이션 계획</h3>
+                            <ol>
+                                <li><strong>1주차:</strong> AdorableCSS 설치 및 설정</li>
+                                <li><strong>2주차:</strong> 새로운 컴포넌트에 AdorableCSS 적용</li>
+                                <li><strong>3-4주차:</strong> 기존 레이아웃 시스템 점진적 변환</li>
+                                <li><strong>5-6주차:</strong> 타이포그래피 및 컬러 시스템 통합</li>
+                                <li><strong>7-8주차:</strong> 기존 CSS 정리 및 최적화</li>
+                            </ol>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Community and Resources -->
+                <section class="content-section">
+                    <div class="section-card">
+                        <h2 class="section-title">🌍 커뮤니티 & 리소스</h2>
+                        <div class="section-content">
+                            <p>AdorableCSS 커뮤니티에 참여하여 최신 소식을 받아보고, 질문하고, 경험을 공유하세요!</p>
+                            
+                            <div class="card-grid" style="margin-top: var(--space-xl);">
+                                <div class="section-card card-small" style="text-align: center;">
+                                    <h3 style="color: var(--accent-coral);">📖 문서</h3>
+                                    <p>상세한 API 레퍼런스와 가이드</p>
+                                    <button class="demo-button" style="margin-top: var(--space-md);">문서 보기</button>
+                                </div>
+                                
+                                <div class="section-card card-small" style="text-align: center;">
+                                    <h3 style="color: var(--accent-blue);">💬 디스코드</h3>
+                                    <p>실시간 커뮤니티 채팅</p>
+                                    <button class="demo-button" style="margin-top: var(--space-md);">참여하기</button>
+                                </div>
+                                
+                                <div class="section-card card-small" style="text-align: center;">
+                                    <h3 style="color: var(--accent-green);">🐙 GitHub</h3>
+                                    <p>오픈소스 기여 및 이슈 리포트</p>
+                                    <button class="demo-button" style="margin-top: var(--space-md);">저장소 보기</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Sidebar toggle functionality
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const main = document.getElementById('main');
+            
+            sidebar.classList.toggle('open');
+            main.classList.toggle('with-sidebar');
+        }
+
+        // Demo functionality
+        let demoState = 0;
+        const colors = ['var(--accent-coral)', 'var(--accent-blue)', 'var(--accent-green)', 'var(--accent-purple)'];
+        
+        function animateCard() {
+            const card = document.getElementById('demoCard');
+            card.style.transform = 'scale(1.1) rotate(5deg)';
+            setTimeout(() => {
+                card.style.transform = 'scale(1) rotate(0deg)';
+            }, 300);
+        }
+        
+        function changeColors() {
+            const card = document.getElementById('demoCard');
+            demoState = (demoState + 1) % colors.length;
+            card.style.borderColor = colors[demoState];
+            card.style.boxShadow = `6px 6px 0 ${colors[demoState]}`;
+        }
+        
+        function resetDemo() {
+            const card = document.getElementById('demoCard');
+            card.style.borderColor = 'var(--soft-black)';
+            card.style.boxShadow = '6px 6px 0 var(--soft-black)';
+            card.style.transform = 'scale(1) rotate(0deg)';
+            demoState = 0;
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Active navigation highlighting
+        function updateActiveNav() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                if (scrollY >= sectionTop) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateActiveNav);
+        
+        // Close sidebar on mobile when clicking outside
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (window.innerWidth <= 1024 && 
+                !sidebar.contains(event.target) && 
+                !menuToggle.contains(event.target) && 
+                sidebar.classList.contains('open')) {
+                toggleSidebar();
+            }
+        });
+    </script>
+</body>
+</html>

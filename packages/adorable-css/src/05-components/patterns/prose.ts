@@ -192,12 +192,9 @@ export const documentation = defineComponent({
   defaults: { variant: 'technical' }
 });
 
-export const markdown = prose;
-
 // Export for 03-rules
 export const proseRules = {
   prose,
   article,
-  documentation,
-  markdown
+  documentation
 };

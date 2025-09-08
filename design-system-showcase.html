@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdorableCSS - Design System Showcase</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Kalam:wght@300;400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Design System Variables */
+        :root {
+            /* Colors */
+            --cream: #FFFEF9;
+            --soft-black: #1A1A1A;
+            --charcoal: #2D2D2D;
+            --warm-gray: #6B6B6B;
+            --light-gray: #E8E8E8;
+            --accent-coral: #FF6B6B;
+            --accent-blue: #4ECDC4;
+            --accent-yellow: #FFE66D;
+            --accent-purple: #9B59B6;
+            --accent-green: #26D0CE;
+            --white: #FFFFFF;
+            
+            /* Shadows */
+            --shadow-soft: rgba(0, 0, 0, 0.06);
+            --shadow-medium: rgba(0, 0, 0, 0.12);
+            --shadow-strong: rgba(0, 0, 0, 0.24);
+            --shadow-colored: rgba(255, 107, 107, 0.3);
+            
+            /* Typography Scale */
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 1.875rem;
+            --text-4xl: 2.25rem;
+            --text-5xl: 3rem;
+            --text-6xl: 3.75rem;
+            
+            /* Spacing Scale */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --radius-full: 9999px;
+        }
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--cream);
+            color: var(--soft-black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--space-xl);
+        }
+
+        .section {
+            margin-bottom: var(--space-3xl);
+        }
+
+        .section-title {
+            font-family: 'Caveat', cursive;
+            font-size: var(--text-5xl);
+            font-weight: 700;
+            margin-bottom: var(--space-xl);
+            text-align: center;
+            position: relative;
+            transform: rotate(-1deg);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%) rotate(2deg);
+            width: 80%;
+            height: 8px;
+            background: var(--accent-yellow);
+            opacity: 0.7;
+            z-index: -1;
+        }
+
+        /* Sketch elements */
+        .sketch-box {
+            border: 2px solid var(--soft-black);
+            background: var(--white);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            position: relative;
+            transform: rotate(-0.5deg);
+            box-shadow: 6px 6px 0 var(--soft-black);
+            transition: all 0.3s ease;
+        }
+
+        .sketch-box:hover {
+            transform: rotate(0deg) translateY(-3px);
+            box-shadow: 8px 8px 0 var(--accent-blue);
+        }
+
+        /* Grid layouts */
+        .grid {
+            display: grid;
+            gap: var(--space-xl);
+        }
+
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: var(--space-3xl) 0;
+            position: relative;
+        }
+
+        .main-title {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(var(--text-4xl), 8vw, var(--text-6xl));
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+            transform: rotate(-2deg);
+        }
+
+        .subtitle {
+            font-family: 'Kalam', cursive;
+            font-size: var(--text-xl);
+            color: var(--warm-gray);
+            transform: rotate(1deg);
+        }
+
+        /* Typography Showcase */
+        .typography-grid {
+            display: grid;
+            gap: var(--space-lg);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .font-showcase {
+            background: var(--white);
+            border: 2px solid var(--soft-black);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            position: relative;
+        }
+
+        .font-showcase:nth-child(1) { transform: rotate(1deg); }
+        .font-showcase:nth-child(2) { transform: rotate(-0.5deg); }
+        .font-showcase:nth-child(3) { transform: rotate(0.5deg); }
+        .font-showcase:nth-child(4) { transform: rotate(-1deg); }
+
+        .font-showcase:hover {
+            transform: rotate(0deg) scale(1.02);
+            box-shadow: 5px 5px 0 var(--accent-coral);
+        }
+
+        .font-family-name {
+            font-family: 'Space Mono', monospace;
+            font-size: var(--text-sm);
+            color: var(--warm-gray);
+            margin-bottom: var(--space-sm);
+            background: var(--light-gray);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            display: inline-block;
+        }
+
+        .font-inter { font-family: 'Inter', sans-serif; }
+        .font-caveat { font-family: 'Caveat', cursive; }
+        .font-kalam { font-family: 'Kalam', cursive; }
+        .font-mono { font-family: 'Space Mono', monospace; }
+
+        /* Color Palette */
+        .color-palette {
+            display: grid;
+            gap: var(--space-lg);
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        }
+
+        .color-swatch {
+            text-align: center;
+            position: relative;
+        }
+
+        .color-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto var(--space-md);
+            border: 3px solid var(--soft-black);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .color-circle:hover {
+            transform: scale(1.1) rotate(10deg);
+            box-shadow: 0 10px 25px var(--shadow-medium);
+        }
+
+        .color-name {
+            font-family: 'Kalam', cursive;
+            font-weight: 700;
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-xs);
+        }
+
+        .color-value {
+            font-family: 'Space Mono', monospace;
+            font-size: var(--text-sm);
+            color: var(--warm-gray);
+        }
+
+        /* Color variations */
+        .color-cream { background: var(--cream); }
+        .color-soft-black { background: var(--soft-black); }
+        .color-charcoal { background: var(--charcoal); }
+        .color-warm-gray { background: var(--warm-gray); }
+        .color-light-gray { background: var(--light-gray); }
+        .color-coral { background: var(--accent-coral); }
+        .color-blue { background: var(--accent-blue); }
+        .color-yellow { background: var(--accent-yellow); }
+        .color-purple { background: var(--accent-purple); }
+        .color-green { background: var(--accent-green); }
+        .color-white { background: var(--white); }
+
+        /* Shadow Showcase */
+        .shadow-grid {
+            display: grid;
+            gap: var(--space-xl);
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        .shadow-card {
+            background: var(--white);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .shadow-soft { box-shadow: 0 2px 8px var(--shadow-soft); }
+        .shadow-medium { box-shadow: 0 4px 16px var(--shadow-medium); }
+        .shadow-strong { box-shadow: 0 8px 32px var(--shadow-strong); }
+        .shadow-colored { box-shadow: 0 8px 24px var(--shadow-colored); }
+        .shadow-sketch { 
+            border: 2px solid var(--soft-black);
+            box-shadow: 6px 6px 0 var(--soft-black);
+            transform: rotate(-1deg);
+        }
+
+        .shadow-name {
+            font-family: 'Kalam', cursive;
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+        }
+
+        .shadow-description {
+            font-size: var(--text-sm);
+            color: var(--warm-gray);
+        }
+
+        /* Components Showcase */
+        .component-grid {
+            display: grid;
+            gap: var(--space-xl);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        }
+
+        .component-demo {
+            background: var(--white);
+            border: 2px solid var(--soft-black);
+            padding: var(--space-xl);
+            border-radius: var(--radius-lg);
+            position: relative;
+        }
+
+        .component-demo:nth-child(odd) { transform: rotate(0.5deg); }
+        .component-demo:nth-child(even) { transform: rotate(-0.5deg); }
+
+        .component-demo:hover {
+            transform: rotate(0deg) translateY(-5px);
+            box-shadow: 8px 8px 0 var(--accent-purple);
+        }
+
+        /* Button Examples */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            margin: var(--space-xs);
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent-coral);
+            color: var(--white);
+            border-color: var(--soft-black);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 3px 3px 0 var(--soft-black);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--soft-black);
+            border-color: var(--soft-black);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-yellow);
+            transform: translateY(-2px);
+            box-shadow: 3px 3px 0 var(--soft-black);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--accent-coral);
+            border-color: var(--accent-coral);
+        }
+
+        .btn-ghost:hover {
+            background: var(--accent-coral);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        /* Card Examples */
+        .card {
+            background: var(--white);
+            border: 2px solid var(--soft-black);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin: var(--space-md) 0;
+            position: relative;
+        }
+
+        .card-elevated {
+            box-shadow: 6px 6px 0 var(--soft-black);
+            transform: rotate(-0.5deg);
+        }
+
+        .card-soft {
+            box-shadow: 0 4px 16px var(--shadow-soft);
+            border-color: var(--light-gray);
+        }
+
+        .card-colorful {
+            border-color: var(--accent-blue);
+            box-shadow: 4px 4px 0 var(--accent-blue);
+        }
+
+        /* Input Examples */
+        .input {
+            width: 100%;
+            padding: var(--space-md);
+            border: 2px solid var(--light-gray);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+            font-size: var(--text-base);
+            transition: all 0.3s ease;
+            margin: var(--space-sm) 0;
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: var(--accent-coral);
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .input-sketch {
+            border-color: var(--soft-black);
+            border-radius: var(--radius-lg);
+            transform: rotate(-0.5deg);
+        }
+
+        .input-sketch:focus {
+            transform: rotate(0deg) translateY(-2px);
+            box-shadow: 3px 3px 0 var(--accent-yellow);
+        }
+
+        /* Floating doodles */
+        .doodle {
+            position: absolute;
+            font-family: 'Caveat', cursive;
+            font-size: var(--text-2xl);
+            color: var(--warm-gray);
+            opacity: 0.3;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .doodle-1 { top: 10%; left: 5%; transform: rotate(-15deg); }
+        .doodle-2 { top: 20%; right: 10%; transform: rotate(20deg); }
+        .doodle-3 { bottom: 30%; left: 8%; transform: rotate(-10deg); }
+        .doodle-4 { bottom: 20%; right: 5%; transform: rotate(15deg); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: var(--space-md); }
+            .grid-4 { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+            .grid-3 { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+            .color-circle { width: 80px; height: 80px; }
+            .sketch-box { transform: rotate(0deg); }
+            .component-demo { transform: rotate(0deg) !important; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating doodles -->
+    <div class="doodle doodle-1">✨</div>
+    <div class="doodle doodle-2">→</div>
+    <div class="doodle doodle-3">{ }</div>
+    <div class="doodle doodle-4">♥</div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="main-title">AdorableCSS</h1>
+            <p class="subtitle">Design System Showcase</p>
+        </header>
+
+        <!-- Typography Section -->
+        <section class="section">
+            <h2 class="section-title">Typography</h2>
+            <div class="typography-grid">
+                <div class="font-showcase">
+                    <div class="font-family-name">Inter</div>
+                    <div class="font-inter">
+                        <h3 style="font-size: var(--text-3xl); margin-bottom: var(--space-sm);">Clean & Modern</h3>
+                        <p style="font-size: var(--text-lg);">Inter는 UI에 최적화된 깔끔한 산세리프 폰트입니다.</p>
+                        <p style="font-size: var(--text-base); margin-top: var(--space-sm);">본문과 인터페이스 텍스트에 완벽합니다.</p>
+                    </div>
+                </div>
+
+                <div class="font-showcase">
+                    <div class="font-family-name">Caveat</div>
+                    <div class="font-caveat">
+                        <h3 style="font-size: var(--text-3xl); margin-bottom: var(--space-sm);">Playful & Fun</h3>
+                        <p style="font-size: var(--text-lg);">손글씨 느낌의 Caveat으로 친근함을 표현해요.</p>
+                        <p style="font-size: var(--text-base); margin-top: var(--space-sm);">제목과 강조에 활용하세요!</p>
+                    </div>
+                </div>
+
+                <div class="font-showcase">
+                    <div class="font-family-name">Kalam</div>
+                    <div class="font-kalam">
+                        <h3 style="font-size: var(--text-3xl); margin-bottom: var(--space-sm);">Friendly & Warm</h3>
+                        <p style="font-size: var(--text-lg);">따뜻한 느낌의 Kalam으로 친밀감을 더해요.</p>
+                        <p style="font-size: var(--text-base); margin-top: var(--space-sm);">부제목과 설명글에 좋습니다.</p>
+                    </div>
+                </div>
+
+                <div class="font-showcase">
+                    <div class="font-family-name">Space Mono</div>
+                    <div class="font-mono">
+                        <h3 style="font-size: var(--text-3xl); margin-bottom: var(--space-sm);">Code & Tech</h3>
+                        <p style="font-size: var(--text-lg);">개발자를 위한 모노스페이스 폰트예요.</p>
+                        <p style="font-size: var(--text-base); margin-top: var(--space-sm);">코드와 기술적 내용에 사용하세요.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Colors Section -->
+        <section class="section">
+            <h2 class="section-title">Color Palette</h2>
+            <div class="color-palette">
+                <div class="color-swatch">
+                    <div class="color-circle color-cream"></div>
+                    <div class="color-name">Cream</div>
+                    <div class="color-value">#FFFEF9</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-circle color-soft-black"></div>
+                    <div class="color-name">Soft Black</div>
+                    <div class="color-value">#1A1A1A</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-circle color-charcoal"></div>
+                    <div class="color-name">Charcoal</div>
+                    <div class="color-value">#2D2D2D</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-circle color-warm-gray"></div>
+                    <div class="color-name">Warm Gray</div>
+                    <div class="color-value">#6B6B6B</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-circle color-coral"></div>
+                    <div class="color-name">Coral</div>
+                    <div class="color-value">#FF6B6B</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-circle color-blue"></div>
+                    <div class="color-name">Teal</div>
+                    <div class="color-value">#4ECDC4</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-circle color-yellow"></div>
+                    <div class="color-name">Yellow</div>
+                    <div class="color-value">#FFE66D</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-circle color-purple"></div>
+                    <div class="color-name">Purple</div>
+                    <div class="color-value">#9B59B6</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-circle color-green"></div>
+                    <div class="color-name">Green</div>
+                    <div class="color-value">#26D0CE</div>
+                </div>
+                <div class="color-swatch">
+                    <div class="color-circle color-white"></div>
+                    <div class="color-name">White</div>
+                    <div class="color-value">#FFFFFF</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Shadow & Effects Section -->
+        <section class="section">
+            <h2 class="section-title">Shadows & Effects</h2>
+            <div class="shadow-grid">
+                <div class="shadow-card shadow-soft">
+                    <div class="shadow-name">Soft Shadow</div>
+                    <div class="shadow-description">미묘한 깊이감</div>
+                </div>
+                <div class="shadow-card shadow-medium">
+                    <div class="shadow-name">Medium Shadow</div>
+                    <div class="shadow-description">적당한 부유감</div>
+                </div>
+                <div class="shadow-card shadow-strong">
+                    <div class="shadow-name">Strong Shadow</div>
+                    <div class="shadow-description">강한 입체감</div>
+                </div>
+                <div class="shadow-card shadow-colored">
+                    <div class="shadow-name">Colored Shadow</div>
+                    <div class="shadow-description">컬러풀한 효과</div>
+                </div>
+                <div class="shadow-card shadow-sketch">
+                    <div class="shadow-name">Sketch Shadow</div>
+                    <div class="shadow-description">손그림 느낌</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Components Section -->
+        <section class="section">
+            <h2 class="section-title">Components</h2>
+            <div class="component-grid">
+                <!-- Buttons -->
+                <div class="component-demo">
+                    <h3 style="font-family: 'Kalam', cursive; font-size: var(--text-xl); margin-bottom: var(--space-lg);">Buttons</h3>
+                    <button class="btn btn-primary">Primary Button</button>
+                    <button class="btn btn-secondary">Secondary Button</button>
+                    <button class="btn btn-ghost">Ghost Button</button>
+                </div>
+
+                <!-- Cards -->
+                <div class="component-demo">
+                    <h3 style="font-family: 'Kalam', cursive; font-size: var(--text-xl); margin-bottom: var(--space-lg);">Cards</h3>
+                    <div class="card card-elevated">
+                        <h4>Elevated Card</h4>
+                        <p>스케치 스타일의 카드</p>
+                    </div>
+                    <div class="card card-soft">
+                        <h4>Soft Card</h4>
+                        <p>부드러운 그림자 카드</p>
+                    </div>
+                    <div class="card card-colorful">
+                        <h4>Colorful Card</h4>
+                        <p>컬러풀한 강조 카드</p>
+                    </div>
+                </div>
+
+                <!-- Inputs -->
+                <div class="component-demo">
+                    <h3 style="font-family: 'Kalam', cursive; font-size: var(--text-xl); margin-bottom: var(--space-lg);">Inputs</h3>
+                    <input type="text" class="input" placeholder="기본 입력창">
+                    <input type="text" class="input input-sketch" placeholder="스케치 스타일 입력창">
+                </div>
+
+                <!-- Typography Scale -->
+                <div class="component-demo">
+                    <h3 style="font-family: 'Kalam', cursive; font-size: var(--text-xl); margin-bottom: var(--space-lg);">Typography Scale</h3>
+                    <div style="font-size: var(--text-3xl); margin: var(--space-sm) 0;">Heading Large</div>
+                    <div style="font-size: var(--text-2xl); margin: var(--space-sm) 0;">Heading Medium</div>
+                    <div style="font-size: var(--text-xl); margin: var(--space-sm) 0;">Heading Small</div>
+                    <div style="font-size: var(--text-lg); margin: var(--space-sm) 0;">Large Text</div>
+                    <div style="font-size: var(--text-base); margin: var(--space-sm) 0;">Body Text</div>
+                    <div style="font-size: var(--text-sm); margin: var(--space-sm) 0; color: var(--warm-gray);">Small Text</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Usage Examples -->
+        <section class="section">
+            <h2 class="section-title">AdorableCSS Syntax</h2>
+            <div class="sketch-box">
+                <div style="font-family: 'Space Mono', monospace; background: var(--soft-black); color: var(--accent-yellow); padding: var(--space-lg); border-radius: var(--radius-md); margin: var(--space-md) 0;">
+                    <div style="margin: 0.5rem 0;">// Layout</div>
+                    <div style="margin: 0.5rem 0; padding-left: 1rem;">hbox(pack) gap(16) p(24) r(lg)</div>
+                    <div style="margin: 0.5rem 0;"></div>
+                    <div style="margin: 0.5rem 0;">// Typography</div>
+                    <div style="margin: 0.5rem 0; padding-left: 1rem;">text(title/2xl) font(bold) c(charcoal)</div>
+                    <div style="margin: 0.5rem 0;"></div>
+                    <div style="margin: 0.5rem 0;">// Background & Effects</div>
+                    <div style="margin: 0.5rem 0; padding-left: 1rem;">bg(white) shadow(soft) hover:scale(1.05)</div>
+                </div>
+                <p style="text-align: center; font-family: 'Kalam', cursive; font-size: var(--text-lg); margin-top: var(--space-lg);">
+                    🎨 Figma-first 디자인 언어로 코딩하세요!
+                </p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

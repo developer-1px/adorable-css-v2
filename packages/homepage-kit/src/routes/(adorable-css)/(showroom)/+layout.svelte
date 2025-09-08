@@ -101,7 +101,7 @@
               transition-all duration(300) {isNavigating ? 'scale(1.05)' : ''}">
     <!-- Home Button -->
     <a
-      href="/"
+      href="/packages/homepage-kit/static"
       class="size(32px) r(md) border(1/gray-300) bg(white) hover:bg(gray-50) 
              transition hbox(center/middle)"
       title="Home (ESC)"

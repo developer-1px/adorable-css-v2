@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Layers, Box, Card as CardIcon, Monitor, Smartphone, Tablet } from 'lucide-svelte';
-  import { Card } from '$lib/components/ui';
+  import Card from '$lib/components/ui/Card.svelte';
 
   // Elevation levels based on Material Design with AdorableCSS naming
   const elevationLevels = [

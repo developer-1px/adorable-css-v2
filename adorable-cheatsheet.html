@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdorableCSS - Syntax Cheat Sheet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Kalam:wght@300;400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Design System Variables */
+        :root {
+            /* Colors */
+            --cream: #FFFEF9;
+            --soft-black: #1A1A1A;
+            --charcoal: #2D2D2D;
+            --warm-gray: #6B6B6B;
+            --light-gray: #E8E8E8;
+            --accent-coral: #FF6B6B;
+            --accent-blue: #4ECDC4;
+            --accent-yellow: #FFE66D;
+            --accent-purple: #9B59B6;
+            --accent-green: #26D0CE;
+            --white: #FFFFFF;
+            
+            /* Shadows */
+            --shadow-soft: rgba(0, 0, 0, 0.06);
+            --shadow-medium: rgba(0, 0, 0, 0.12);
+            --shadow-strong: rgba(0, 0, 0, 0.24);
+            
+            /* Typography Scale */
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 1.875rem;
+            --text-4xl: 2.25rem;
+            --text-5xl: 3rem;
+            
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+        }
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--cream);
+            color: var(--soft-black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: var(--space-xl);
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: var(--space-2xl) 0;
+            position: relative;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .main-title {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(var(--text-4xl), 8vw, var(--text-5xl));
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+            transform: rotate(-2deg);
+            color: var(--accent-coral);
+        }
+
+        .subtitle {
+            font-family: 'Kalam', cursive;
+            font-size: var(--text-xl);
+            color: var(--warm-gray);
+            transform: rotate(1deg);
+        }
+
+        /* Search Section */
+        .search-section {
+            margin-bottom: var(--space-2xl);
+            text-align: center;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: var(--space-lg) var(--space-xl);
+            border: 3px solid var(--soft-black);
+            border-radius: var(--radius-2xl);
+            font-family: 'Space Mono', monospace;
+            font-size: var(--text-lg);
+            background: var(--white);
+            transform: rotate(-0.5deg);
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            transform: rotate(0deg) translateY(-3px);
+            box-shadow: 6px 6px 0 var(--accent-yellow);
+        }
+
+        .search-info {
+            margin-top: var(--space-lg);
+            font-family: 'Kalam', cursive;
+            color: var(--warm-gray);
+            font-size: var(--text-base);
+        }
+
+        /* Quick Navigation */
+        .quick-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-3xl);
+        }
+
+        .nav-chip {
+            background: var(--white);
+            border: 2px solid var(--soft-black);
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius-xl);
+            text-decoration: none;
+            color: var(--charcoal);
+            font-weight: 600;
+            font-size: var(--text-sm);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-chip:nth-child(odd) { transform: rotate(-2deg); }
+        .nav-chip:nth-child(even) { transform: rotate(2deg); }
+
+        .nav-chip:hover {
+            transform: rotate(0deg) translateY(-2px);
+            background: var(--accent-coral);
+            color: var(--white);
+            box-shadow: 3px 3px 0 var(--soft-black);
+        }
+
+        /* Section Layout */
+        .cheat-sections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        .cheat-section {
+            background: var(--white);
+            border: 3px solid var(--soft-black);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .cheat-section:nth-child(1) { transform: rotate(0.5deg); }
+        .cheat-section:nth-child(2) { transform: rotate(-0.5deg); }
+        .cheat-section:nth-child(3) { transform: rotate(1deg); }
+        .cheat-section:nth-child(4) { transform: rotate(-1deg); }
+        .cheat-section:nth-child(5) { transform: rotate(0.5deg); }
+        .cheat-section:nth-child(6) { transform: rotate(-0.5deg); }
+
+        .cheat-section:hover {
+            transform: rotate(0deg) translateY(-5px);
+            box-shadow: 8px 8px 0 var(--accent-blue);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-lg);
+            padding-bottom: var(--space-md);
+            border-bottom: 2px solid var(--light-gray);
+        }
+
+        .section-title {
+            font-family: 'Caveat', cursive;
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            color: var(--charcoal);
+        }
+
+        .section-icon {
+            background: var(--accent-coral);
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-lg);
+            transform: rotate(-10deg);
+        }
+
+        /* Syntax Groups */
+        .syntax-group {
+            margin-bottom: var(--space-lg);
+        }
+
+        .group-title {
+            font-family: 'Kalam', cursive;
+            font-size: var(--text-lg);
+            font-weight: 700;
+            color: var(--accent-purple);
+            margin-bottom: var(--space-md);
+            position: relative;
+        }
+
+        .group-title::before {
+            content: '→';
+            position: absolute;
+            left: -var(--space-md);
+            color: var(--accent-yellow);
+            font-family: 'Caveat', cursive;
+        }
+
+        .syntax-list {
+            display: grid;
+            gap: var(--space-sm);
+        }
+
+        .syntax-item {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: var(--space-md);
+            align-items: center;
+            padding: var(--space-sm) var(--space-md);
+            background: var(--cream);
+            border-radius: var(--radius-sm);
+            transition: all 0.3s ease;
+        }
+
+        .syntax-item:hover {
+            background: var(--accent-yellow);
+            transform: translateX(5px);
+        }
+
+        .syntax-code {
+            font-family: 'Space Mono', monospace;
+            font-size: var(--text-sm);
+            color: var(--charcoal);
+            font-weight: 600;
+        }
+
+        .syntax-description {
+            font-size: var(--text-xs);
+            color: var(--warm-gray);
+            text-align: right;
+        }
+
+        /* Special Syntax Patterns */
+        .pattern-example {
+            background: var(--soft-black);
+            color: var(--accent-yellow);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            font-family: 'Space Mono', monospace;
+            font-size: var(--text-sm);
+            margin: var(--space-sm) 0;
+            position: relative;
+        }
+
+        .pattern-example::before {
+            content: 'EXAMPLE';
+            position: absolute;
+            top: -8px;
+            right: var(--space-md);
+            background: var(--accent-green);
+            color: var(--white);
+            padding: var(--space-xs) var(--space-sm);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            border-radius: var(--radius-sm);
+        }
+
+        /* Value Tables */
+        .value-table {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: var(--space-xs);
+            margin: var(--space-md) 0;
+        }
+
+        .value-chip {
+            background: var(--light-gray);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            text-align: center;
+            font-family: 'Space Mono', monospace;
+            font-size: var(--text-xs);
+            border: 1px solid var(--warm-gray);
+            transition: all 0.3s ease;
+        }
+
+        .value-chip:hover {
+            background: var(--accent-blue);
+            color: var(--white);
+            transform: scale(1.05);
+        }
+
+        /* Color Preview */
+        .color-preview {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid var(--soft-black);
+            margin-right: var(--space-sm);
+            vertical-align: middle;
+        }
+
+        /* Tips and Notes */
+        .tip {
+            background: var(--accent-green);
+            color: var(--white);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            margin: var(--space-lg) 0;
+            font-size: var(--text-sm);
+            position: relative;
+            transform: rotate(-0.5deg);
+        }
+
+        .tip::before {
+            content: '💡';
+            position: absolute;
+            top: -10px;
+            left: var(--space-md);
+            background: var(--white);
+            padding: var(--space-xs);
+            border-radius: 50%;
+            border: 2px solid var(--soft-black);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .cheat-sections {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--space-lg);
+            }
+            
+            .cheat-sections {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+            
+            .cheat-section {
+                transform: rotate(0deg) !important;
+                padding: var(--space-lg);
+            }
+            
+            .quick-nav {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: var(--space-sm);
+            }
+            
+            .nav-chip {
+                transform: rotate(0deg) !important;
+                flex-shrink: 0;
+            }
+            
+            .value-table {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+        }
+
+        /* Hidden class for search */
+        .hidden {
+            display: none;
+        }
+
+        /* Floating doodles */
+        .doodle {
+            position: absolute;
+            font-family: 'Caveat', cursive;
+            font-size: var(--text-2xl);
+            color: var(--warm-gray);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .doodle-1 { top: 5%; left: 2%; transform: rotate(-15deg); }
+        .doodle-2 { top: 15%; right: 5%; transform: rotate(20deg); }
+        .doodle-3 { bottom: 25%; left: 3%; transform: rotate(-10deg); }
+        .doodle-4 { bottom: 15%; right: 2%; transform: rotate(15deg); }
+    </style>
+</head>
+<body>
+    <!-- Floating doodles -->
+    <div class="doodle doodle-1">✨</div>
+    <div class="doodle doodle-2">🎨</div>
+    <div class="doodle doodle-3">{ }</div>
+    <div class="doodle doodle-4">💖</div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="main-title">AdorableCSS Cheat Sheet</h1>
+            <p class="subtitle">모든 문법을 한눈에! 빠른 참고 가이드</p>
+        </header>
+
+        <!-- Search Section -->
+        <section class="search-section">
+            <div class="search-container">
+                <input 
+                    type="text" 
+                    class="search-input" 
+                    placeholder="문법 검색... (예: hbox, text, bg)"
+                    id="searchInput"
+                />
+                <p class="search-info">💡 원하는 속성이나 값을 입력하여 빠르게 찾아보세요!</p>
+            </div>
+        </section>
+
+        <!-- Quick Navigation -->
+        <nav class="quick-nav">
+            <a href="#layout" class="nav-chip">📐 Layout</a>
+            <a href="#typography" class="nav-chip">✍️ Typography</a>
+            <a href="#colors" class="nav-chip">🎨 Colors</a>
+            <a href="#spacing" class="nav-chip">📏 Spacing</a>
+            <a href="#sizing" class="nav-chip">📦 Sizing</a>
+            <a href="#effects" class="nav-chip">✨ Effects</a>
+            <a href="#states" class="nav-chip">🔄 States</a>
+            <a href="#responsive" class="nav-chip">📱 Responsive</a>
+        </nav>
+
+        <!-- Cheat Sections -->
+        <div class="cheat-sections">
+            <!-- Layout Section -->
+            <section class="cheat-section" id="layout">
+                <div class="section-header">
+                    <h2 class="section-title">Layout System</h2>
+                    <div class="section-icon">📐</div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Flexbox Containers</h3>
+                    <div class="syntax-list">
+                        <div class="syntax-item">
+                            <span class="syntax-code">hbox()</span>
+                            <span class="syntax-description">Horizontal flexbox</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">vbox()</span>
+                            <span class="syntax-description">Vertical flexbox</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">hbox(center)</span>
+                            <span class="syntax-description">Center alignment</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">hbox(pack)</span>
+                            <span class="syntax-description">Space between</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">vbox(middle)</span>
+                            <span class="syntax-description">Center items</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">hbox(pack/middle)</span>
+                            <span class="syntax-description">Space between + center</span>
+                        </div>
+                    </div>
+
+                    <div class="pattern-example">
+&lt;div class="hbox(pack/middle) gap(lg) p(xl)"&gt;
+  &lt;div&gt;Logo&lt;/div&gt;
+  &lt;nav class="hbox gap(md)"&gt;...&lt;/nav&gt;
+&lt;/div&gt;
+                    </div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Grid System</h3>
+                    <div class="syntax-list">
+                        <div class="syntax-item">
+                            <span class="syntax-code">grid(2fr)</span>
+                            <span class="syntax-description">2 equal columns</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">grid(1fr/2fr)</span>
+                            <span class="syntax-description">1:2 ratio columns</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">grid(auto-fit/300px)</span>
+                            <span class="syntax-description">Auto fit 300px min</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">gap(md)</span>
+                            <span class="syntax-description">Grid/flex gap</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Positioning</h3>
+                    <div class="syntax-list">
+                        <div class="syntax-item">
+                            <span class="syntax-code">fixed</span>
+                            <span class="syntax-description">Fixed position</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">absolute</span>
+                            <span class="syntax-description">Absolute position</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">sticky</span>
+                            <span class="syntax-description">Sticky position</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">top(0)</span>
+                            <span class="syntax-description">Top: 0</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">inset(0)</span>
+                            <span class="syntax-description">All sides: 0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tip">
+                    <strong>Layout Tip:</strong> hbox()와 vbox()는 Figma의 Auto Layout과 완전히 동일합니다. 디자이너와 개발자가 같은 언어로 소통할 수 있어요!
+                </div>
+            </section>
+
+            <!-- Typography Section -->
+            <section class="cheat-section" id="typography">
+                <div class="section-header">
+                    <h2 class="section-title">Typography</h2>
+                    <div class="section-icon">✍️</div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Text Sizing</h3>
+                    <div class="syntax-list">
+                        <div class="syntax-item">
+                            <span class="syntax-code">text(16px)</span>
+                            <span class="syntax-description">Font size: 16px</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">text(lg)</span>
+                            <span class="syntax-description">Token-based size</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">text(16px/1.5)</span>
+                            <span class="syntax-description">Size + line height</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">text(lg/1.2/-2%)</span>
+                            <span class="syntax-description">Size + line + spacing</span>
+                        </div>
+                    </div>
+
+                    <div class="value-table">
+                        <div class="value-chip">xs</div>
+                        <div class="value-chip">sm</div>
+                        <div class="value-chip">base</div>
+                        <div class="value-chip">lg</div>
+                        <div class="value-chip">xl</div>
+                        <div class="value-chip">2xl</div>
+                        <div class="value-chip">3xl</div>
+                        <div class="value-chip">4xl</div>
+                        <div class="value-chip">5xl</div>
+                        <div class="value-chip">6xl</div>
+                    </div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Text Properties</h3>
+                    <div class="syntax-list">
+                        <div class="syntax-item">
+                            <span class="syntax-code">text(center)</span>
+                            <span class="syntax-description">Text align center</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">text(uppercase)</span>
+                            <span class="syntax-description">Text transform</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">text(nowrap)</span>
+                            <span class="syntax-description">No line breaks</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">text(center+uppercase)</span>
+                            <span class="syntax-description">Combined properties</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Responsive Typography</h3>
+                    <div class="syntax-list">
+                        <div class="syntax-item">
+                            <span class="syntax-code">text(sm..2xl)</span>
+                            <span class="syntax-description">Clamp sizing</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">text(16px..4vw..48px)</span>
+                            <span class="syntax-description">Custom clamp</span>
+                        </div>
+                    </div>
+
+                    <div class="pattern-example">
+text(lg/1.5/center+nowrap)
+// → font-size: 18px; line-height: 1.5; 
+//   text-align: center; white-space: nowrap;
+                    </div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Font Weight</h3>
+                    <div class="syntax-list">
+                        <div class="syntax-item">
+                            <span class="syntax-code">font(400)</span>
+                            <span class="syntax-description">Numeric weight</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">font(bold)</span>
+                            <span class="syntax-description">Named weight</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">font(semibold)</span>
+                            <span class="syntax-description">Font weight 600</span>
+                        </div>
+                    </div>
+
+                    <div class="value-table">
+                        <div class="value-chip">thin</div>
+                        <div class="value-chip">light</div>
+                        <div class="value-chip">normal</div>
+                        <div class="value-chip">medium</div>
+                        <div class="value-chip">semibold</div>
+                        <div class="value-chip">bold</div>
+                        <div class="value-chip">black</div>
+                    </div>
+                </div>
+
+                <div class="tip">
+                    <strong>Typography Tip:</strong> text() 함수 하나로 모든 텍스트 스타일링이 가능해요! AI가 이해하기 쉽도록 설계되었습니다.
+                </div>
+            </section>
+
+            <!-- Colors Section -->
+            <section class="cheat-section" id="colors">
+                <div class="section-header">
+                    <h2 class="section-title">Colors</h2>
+                    <div class="section-icon">🎨</div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Color Properties</h3>
+                    <div class="syntax-list">
+                        <div class="syntax-item">
+                            <span class="syntax-code">c(primary)</span>
+                            <span class="syntax-description">Text color</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">bg(white)</span>
+                            <span class="syntax-description">Background color</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">border(gray-200)</span>
+                            <span class="syntax-description">Border color</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">bg(white.5)</span>
+                            <span class="syntax-description">50% opacity</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Color Palette</h3>
+                    <div class="syntax-list">
+                        <div class="syntax-item">
+                            <span class="syntax-code"><span class="color-preview" style="background: #FF6B6B;"></span>coral</span>
+                            <span class="syntax-description">Primary coral</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code"><span class="color-preview" style="background: #4ECDC4;"></span>blue</span>
+                            <span class="syntax-description">Accent blue</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code"><span class="color-preview" style="background: #FFE66D;"></span>yellow</span>
+                            <span class="syntax-description">Accent yellow</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code"><span class="color-preview" style="background: #9B59B6;"></span>purple</span>
+                            <span class="syntax-description">Accent purple</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code"><span class="color-preview" style="background: #26D0CE;"></span>green</span>
+                            <span class="syntax-description">Accent green</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Neutral Colors</h3>
+                    <div class="value-table">
+                        <div class="value-chip">white</div>
+                        <div class="value-chip">cream</div>
+                        <div class="value-chip">gray-50</div>
+                        <div class="value-chip">gray-100</div>
+                        <div class="value-chip">gray-200</div>
+                        <div class="value-chip">gray-500</div>
+                        <div class="value-chip">gray-900</div>
+                        <div class="value-chip">black</div>
+                    </div>
+                </div>
+
+                <div class="pattern-example">
+&lt;div class="bg(coral.8) c(white) border(coral)"&gt;
+  Coral background with 80% opacity
+&lt;/div&gt;
+                </div>
+
+                <div class="tip">
+                    <strong>Color Tip:</strong> .5, .8 등의 숫자로 투명도를 조절할 수 있어요! bg(white.5)는 50% 투명한 흰색입니다.
+                </div>
+            </section>
+
+            <!-- Spacing Section -->
+            <section class="cheat-section" id="spacing">
+                <div class="section-header">
+                    <h2 class="section-title">Spacing</h2>
+                    <div class="section-icon">📏</div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Padding</h3>
+                    <div class="syntax-list">
+                        <div class="syntax-item">
+                            <span class="syntax-code">p(md)</span>
+                            <span class="syntax-description">All sides padding</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">px(lg)</span>
+                            <span class="syntax-description">Horizontal padding</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">py(sm)</span>
+                            <span class="syntax-description">Vertical padding</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">pt(xl)</span>
+                            <span class="syntax-description">Top padding</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">p(sm/lg)</span>
+                            <span class="syntax-description">Vertical/Horizontal</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Margin</h3>
+                    <div class="syntax-list">
+                        <div class="syntax-item">
+                            <span class="syntax-code">m(auto)</span>
+                            <span class="syntax-description">Center element</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">mx(auto)</span>
+                            <span class="syntax-description">Center horizontally</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">mt(lg)</span>
+                            <span class="syntax-description">Top margin</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">mb(-sm)</span>
+                            <span class="syntax-description">Negative margin</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Spacing Scale</h3>
+                    <div class="value-table">
+                        <div class="value-chip">xs → 4px</div>
+                        <div class="value-chip">sm → 8px</div>
+                        <div class="value-chip">md → 16px</div>
+                        <div class="value-chip">lg → 24px</div>
+                        <div class="value-chip">xl → 32px</div>
+                        <div class="value-chip">2xl → 48px</div>
+                        <div class="value-chip">3xl → 64px</div>
+                    </div>
+                </div>
+
+                <div class="pattern-example">
+&lt;div class="p(lg/xl) m(auto) max-w(600px)"&gt;
+  Centered container with padding
+&lt;/div&gt;
+                </div>
+
+                <div class="tip">
+                    <strong>Spacing Tip:</strong> AdorableCSS는 margin보다 gap과 padding을 권장해요! 더 예측 가능한 레이아웃을 만들 수 있습니다.
+                </div>
+            </section>
+
+            <!-- Sizing Section -->
+            <section class="cheat-section" id="sizing">
+                <div class="section-header">
+                    <h2 class="section-title">Sizing</h2>
+                    <div class="section-icon">📦</div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Width & Height</h3>
+                    <div class="syntax-list">
+                        <div class="syntax-item">
+                            <span class="syntax-code">w(fill)</span>
+                            <span class="syntax-description">Width: 100%</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">w(hug)</span>
+                            <span class="syntax-description">Width: fit-content</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">w(300px)</span>
+                            <span class="syntax-description">Fixed width</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">h(100vh)</span>
+                            <span class="syntax-description">Full viewport height</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">min-w(320px)</span>
+                            <span class="syntax-description">Minimum width</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">max-h(80vh)</span>
+                            <span class="syntax-description">Maximum height</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Figma-Style Sizing</h3>
+                    <div class="syntax-list">
+                        <div class="syntax-item">
+                            <span class="syntax-code">w(fill)</span>
+                            <span class="syntax-description">Figma "Fill"</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">w(hug)</span>
+                            <span class="syntax-description">Figma "Hug"</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">flex(1)</span>
+                            <span class="syntax-description">Flex grow</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">flex(none)</span>
+                            <span class="syntax-description">No flex</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pattern-example">
+&lt;div class="hbox gap(md)"&gt;
+  &lt;div class="w(hug)"&gt;Sidebar&lt;/div&gt;
+  &lt;div class="w(fill)"&gt;Main Content&lt;/div&gt;
+&lt;/div&gt;
+                </div>
+
+                <div class="tip">
+                    <strong>Sizing Tip:</strong> w(fill)과 w(hug)는 Figma의 Fill과 Hug Contents와 정확히 같은 동작을 해요!
+                </div>
+            </section>
+
+            <!-- Effects Section -->
+            <section class="cheat-section" id="effects">
+                <div class="section-header">
+                    <h2 class="section-title">Effects</h2>
+                    <div class="section-icon">✨</div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Shadows</h3>
+                    <div class="syntax-list">
+                        <div class="syntax-item">
+                            <span class="syntax-code">shadow(soft)</span>
+                            <span class="syntax-description">Subtle shadow</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">shadow(medium)</span>
+                            <span class="syntax-description">Medium shadow</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">shadow(strong)</span>
+                            <span class="syntax-description">Strong shadow</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">shadow(none)</span>
+                            <span class="syntax-description">Remove shadow</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Border Radius</h3>
+                    <div class="syntax-list">
+                        <div class="syntax-item">
+                            <span class="syntax-code">r(sm)</span>
+                            <span class="syntax-description">Small radius</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">r(md)</span>
+                            <span class="syntax-description">Medium radius</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">r(lg)</span>
+                            <span class="syntax-description">Large radius</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">r(full)</span>
+                            <span class="syntax-description">Fully rounded</span>
+                        </div>
+                    </div>
+
+                    <div class="value-table">
+                        <div class="value-chip">none</div>
+                        <div class="value-chip">sm</div>
+                        <div class="value-chip">md</div>
+                        <div class="value-chip">lg</div>
+                        <div class="value-chip">xl</div>
+                        <div class="value-chip">2xl</div>
+                        <div class="value-chip">full</div>
+                    </div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Transforms</h3>
+                    <div class="syntax-list">
+                        <div class="syntax-item">
+                            <span class="syntax-code">scale(1.05)</span>
+                            <span class="syntax-description">Scale 105%</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">rotate(45deg)</span>
+                            <span class="syntax-description">Rotate 45 degrees</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">translate(10px, 20px)</span>
+                            <span class="syntax-description">Move element</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pattern-example">
+&lt;button class="bg(coral) c(white) r(md) shadow(soft) 
+        hover:scale(1.05) transition"&gt;
+  Hover Button
+&lt;/button&gt;
+                </div>
+
+                <div class="tip">
+                    <strong>Effects Tip:</strong> transition 클래스를 추가하면 모든 변화가 부드럽게 애니메이션됩니다!
+                </div>
+            </section>
+
+            <!-- States Section -->
+            <section class="cheat-section" id="states">
+                <div class="section-header">
+                    <h2 class="section-title">States & Interactions</h2>
+                    <div class="section-icon">🔄</div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Pseudo States</h3>
+                    <div class="syntax-list">
+                        <div class="syntax-item">
+                            <span class="syntax-code">hover:bg(coral)</span>
+                            <span class="syntax-description">Hover state</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">focus:border(blue)</span>
+                            <span class="syntax-description">Focus state</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">active:scale(0.95)</span>
+                            <span class="syntax-description">Active/pressed</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">disabled:opacity(0.5)</span>
+                            <span class="syntax-description">Disabled state</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Transitions</h3>
+                    <div class="syntax-list">
+                        <div class="syntax-item">
+                            <span class="syntax-code">transition</span>
+                            <span class="syntax-description">Smooth transitions</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">transition(fast)</span>
+                            <span class="syntax-description">Fast transition</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">transition(slow)</span>
+                            <span class="syntax-description">Slow transition</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pattern-example">
+&lt;a class="block p(lg) bg(white) border r(lg) 
+       hover:bg(coral) hover:c(white) 
+       hover:scale(1.02) transition"&gt;
+  Interactive Card
+&lt;/a&gt;
+                </div>
+
+                <div class="tip">
+                    <strong>Interaction Tip:</strong> 상태 조합으로 자연스러운 인터랙션을 만들 수 있어요! hover:와 transition을 함께 사용하세요.
+                </div>
+            </section>
+
+            <!-- Responsive Section -->
+            <section class="cheat-section" id="responsive">
+                <div class="section-header">
+                    <h2 class="section-title">Responsive Design</h2>
+                    <div class="section-icon">📱</div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Breakpoint Prefixes</h3>
+                    <div class="syntax-list">
+                        <div class="syntax-item">
+                            <span class="syntax-code">sm:p(lg)</span>
+                            <span class="syntax-description">Small screens+</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">md:grid(2fr)</span>
+                            <span class="syntax-description">Medium screens+</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">lg:hbox</span>
+                            <span class="syntax-description">Large screens+</span>
+                        </div>
+                        <div class="syntax-item">
+                            <span class="syntax-code">xl:w(1200px)</span>
+                            <span class="syntax-description">Extra large+</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="syntax-group">
+                    <h3 class="group-title">Breakpoint Values</h3>
+                    <div class="value-table">
+                        <div class="value-chip">sm: 640px</div>
+                        <div class="value-chip">md: 768px</div>
+                        <div class="value-chip">lg: 1024px</div>
+                        <div class="value-chip">xl: 1280px</div>
+                        <div class="value-chip">2xl: 1536px</div>
+                    </div>
+                </div>
+
+                <div class="pattern-example">
+&lt;div class="vbox gap(md) 
+         md:hbox md:gap(lg) 
+         lg:p(xl)"&gt;
+  Mobile: Vertical, Desktop: Horizontal
+&lt;/div&gt;
+                </div>
+
+                <div class="tip">
+                    <strong>Responsive Tip:</strong> 모바일 퍼스트 접근법을 사용해요! 기본 스타일을 먼저 정의하고 브레이크포인트로 확장하세요.
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const cheatSections = document.querySelectorAll('.cheat-section');
+        const syntaxItems = document.querySelectorAll('.syntax-item');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                // Show all sections and items
+                cheatSections.forEach(section => {
+                    section.classList.remove('hidden');
+                });
+                syntaxItems.forEach(item => {
+                    item.style.display = 'grid';
+                });
+                return;
+            }
+
+            // Hide all sections first
+            cheatSections.forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Show sections and items that match
+            syntaxItems.forEach(item => {
+                const syntaxCode = item.querySelector('.syntax-code').textContent.toLowerCase();
+                const syntaxDesc = item.querySelector('.syntax-description').textContent.toLowerCase();
+                
+                if (syntaxCode.includes(searchTerm) || syntaxDesc.includes(searchTerm)) {
+                    item.style.display = 'grid';
+                    // Show parent section
+                    item.closest('.cheat-section').classList.remove('hidden');
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Quick navigation
+        document.querySelectorAll('.nav-chip').forEach(chip => {
+            chip.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Copy syntax on click
+        syntaxItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const syntaxCode = this.querySelector('.syntax-code').textContent;
+                navigator.clipboard.writeText(syntaxCode).then(() => {
+                    // Visual feedback
+                    const originalBg = this.style.backgroundColor;
+                    this.style.backgroundColor = 'var(--accent-green)';
+                    this.style.color = 'white';
+                    
+                    setTimeout(() => {
+                        this.style.backgroundColor = originalBg;
+                        this.style.color = '';
+                    }, 300);
+                });
+            });
+            
+            item.style.cursor = 'pointer';
+            item.title = '클릭하여 문법 복사';
+        });
+
+        // Section hover effects
+        cheatSections.forEach((section, index) => {
+            const originalTransform = section.style.transform || 'rotate(0deg)';
+            
+            section.addEventListener('mouseenter', function() {
+                this.style.transform = 'rotate(0deg) translateY(-5px)';
+            });
+            
+            section.addEventListener('mouseleave', function() {
+                this.style.transform = originalTransform;
+            });
+        });
+
+        // Value chip interactions
+        document.querySelectorAll('.value-chip').forEach(chip => {
+            chip.addEventListener('click', function() {
+                navigator.clipboard.writeText(this.textContent).then(() => {
+                    const original = this.style.backgroundColor;
+                    this.style.backgroundColor = 'var(--accent-coral)';
+                    this.style.color = 'white';
+                    
+                    setTimeout(() => {
+                        this.style.backgroundColor = original;
+                        this.style.color = '';
+                    }, 200);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

@@ -20,10 +20,10 @@ const navItems = [
 ]
 </script>
 
-<nav class="fixed layer(top) z(50) bg(white) bb(1/neutral-200)">
+<nav class="fixed! layer(top) z(50) bg(white.80) backdrop-blur(md)">
   <div class="hbox(middle) gap(auto) h(60) px(24) lg:px(32) max-w(1400px) mx(auto)">
     <!-- Logo -->
-    <a href="/" class="hbox(middle) gap(8) c(neutral-900) hover:c(neutral-700) transition">
+    <a href="/" class="hbox(middle) gap(8|16) p(10|20) c(neutral-900) hover:c(neutral-700) transition">
       <svg viewBox="0 0 32 32" class="size(28) c(primary)" fill="currentColor">
         <rect x="4" y="4" width="10" height="10" rx="2"/>
         <rect x="18" y="4" width="10" height="10" rx="2"/>
@@ -84,7 +84,7 @@ const navItems = [
 
   <!-- Mobile Navigation -->
   {#if menuOpen}
-    <div class="absolute top(60) left(0) right(0) bg(white) bb(1/neutral-200) shadow(lg) lg:hidden">
+    <div class="absolute top(60) left(0) right(0) bg(white/95) backdrop-blur(md) bb(1/neutral-200/50) shadow(lg) lg:hidden">
       <div class="vbox p(16)">
         {#each navItems as item}
           <a

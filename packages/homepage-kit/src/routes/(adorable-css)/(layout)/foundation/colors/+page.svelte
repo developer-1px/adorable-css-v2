@@ -1,5 +1,5 @@
 <script lang="ts">
-  import FoundationColors from '../../../../pages/tokens/Foundation/FoundationColors.svelte';
+  import FoundationColors from '../../../../../pages/tokens/Foundation/FoundationColors.svelte';
 </script>
 
 <svelte:head>

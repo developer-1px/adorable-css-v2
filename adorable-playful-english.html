@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdorableCSS - Whimsical Wonderland 🎪</title>
+    <style>
+        * {
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #FFE5CC 0%, #FFCCE5 25%, #E5CCFF 50%, #CCE5FF 75%, #CCFFE5 100%);
+            background-size: 400% 400%;
+            animation: dreamyGradient 20s ease infinite;
+            font-family: 'Comic Sans MS', 'Marker Felt', cursive;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        @keyframes dreamyGradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Layout Classes */
+        .hbox {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+        }
+
+        .vbox {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gap {
+            gap: 24px;
+        }
+
+        /* Display Classes */
+        .display {
+            font-size: 96px;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -4px;
+            transform: rotate(-3deg);
+            text-shadow: 
+                4px 4px 0 #FF69B4,
+                8px 8px 0 #87CEEB,
+                12px 12px 20px rgba(0,0,0,0.1);
+        }
+
+        /* Typography Classes */
+        .title {
+            font-size: 48px;
+            font-weight: 800;
+            color: #FF1493;
+            transform: skewY(-2deg);
+        }
+
+        .heading {
+            font-size: 32px;
+            font-weight: 700;
+            color: #8A2BE2;
+            text-decoration: underline wavy #FFD700 3px;
+            text-underline-offset: 8px;
+        }
+
+        .body {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #4B0082;
+        }
+
+        .caption {
+            font-size: 14px;
+            color: #696969;
+            font-style: italic;
+            transform: rotate(1deg);
+        }
+
+        .label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #FF6347;
+            background: #FFF;
+            padding: 4px 12px;
+            border-radius: 20px;
+            display: inline-block;
+            box-shadow: 2px 2px 0 #FFB6C1;
+        }
+
+        .code {
+            font-family: 'Courier New', monospace;
+            background: #2D2D2D;
+            color: #7FFF00;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 16px;
+            display: inline-block;
+            transform: rotate(-1deg);
+            box-shadow: 3px 3px 0 #000;
+        }
+
+        /* Container Classes */
+        .container {
+            max-width: 1200px;
+            padding: 40px 20px;
+            position: relative;
+        }
+
+        .section {
+            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Component Classes */
+        .card {
+            background: white;
+            padding: 32px;
+            border-radius: 20px 40px 30px 50px;
+            box-shadow: 
+                0 0 0 4px #FF69B4,
+                8px 8px 0 #FFB6C1,
+                16px 16px 30px rgba(0,0,0,0.1);
+            position: relative;
+            transform: rotate(-2deg);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card:hover {
+            transform: rotate(2deg) translateY(-10px);
+            box-shadow: 
+                0 0 0 4px #FF69B4,
+                12px 12px 0 #FFB6C1,
+                20px 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .button {
+            background: #FF1493;
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            font-size: 20px;
+            font-weight: 700;
+            border-radius: 40px 10px 40px 10px;
+            cursor: pointer;
+            position: relative;
+            transform: rotate(-2deg);
+            box-shadow: 
+                0 0 0 3px #FF69B4,
+                5px 5px 0 #8B008B;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .button:hover {
+            transform: rotate(2deg) scale(1.05);
+            box-shadow: 
+                0 0 0 3px #FF69B4,
+                8px 8px 0 #8B008B;
+        }
+
+        .button:active {
+            transform: rotate(0) scale(0.95);
+            box-shadow: 
+                0 0 0 3px #FF69B4,
+                2px 2px 0 #8B008B;
+        }
+
+        .input {
+            border: 3px dashed #FF69B4;
+            background: #FFF0F5;
+            padding: 12px 20px;
+            font-size: 18px;
+            border-radius: 10px;
+            outline: none;
+            font-family: inherit;
+            color: #8B008B;
+            transition: all 0.3s;
+        }
+
+        .input:focus {
+            border-color: #FF1493;
+            background: white;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(255,20,147,0.3);
+        }
+
+        /* Color Classes */
+        .c-white { color: white; }
+        .c-pink { color: #FF69B4; }
+        .c-purple { color: #8A2BE2; }
+        .c-blue { color: #1E90FF; }
+        .c-green { color: #32CD32; }
+        .c-yellow { color: #FFD700; }
+
+        /* Background Classes */
+        .bg-white { background: white; }
+        .bg-pink { background: #FFB6C1; }
+        .bg-purple { background: #DDA0DD; }
+        .bg-blue { background: #87CEEB; }
+        .bg-yellow { background: #FFFFE0; }
+        .bg-mint { background: #98FB98; }
+
+        /* Special Effects */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(-2deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-5deg); }
+            25% { transform: rotate(5deg); }
+            75% { transform: rotate(-3deg); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(-2deg); }
+            66% { transform: translateY(5px) rotate(2deg); }
+        }
+
+        .bounce { animation: bounce 2s ease-in-out infinite; }
+        .wiggle { animation: wiggle 1s ease-in-out infinite; }
+        .float { animation: float 3s ease-in-out infinite; }
+
+        /* Utility Classes */
+        .center { text-align: center; }
+        .inline { display: inline-block; }
+        .relative { position: relative; }
+        .absolute { position: absolute; }
+        .z-10 { z-index: 10; }
+
+        /* Decorative Elements */
+        .doodle-circle {
+            width: 100px;
+            height: 100px;
+            border: 5px solid #FF69B4;
+            border-radius: 50%;
+            position: absolute;
+            transform: rotate(45deg);
+        }
+
+        .doodle-squiggle {
+            width: 200px;
+            height: 50px;
+            border-bottom: 5px solid #8A2BE2;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .emoji-decoration {
+            font-size: 80px;
+            position: absolute;
+            opacity: 0.8;
+        }
+
+        .ribbon {
+            background: #FF1493;
+            color: white;
+            padding: 8px 24px;
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            transform: rotate(15deg);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .display { font-size: 64px; }
+            .title { font-size: 36px; }
+            .heading { font-size: 24px; }
+            .hbox { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Decorative Elements -->
+    <div class="emoji-decoration wiggle" style="top: 50px; left: 10%;">🌟</div>
+    <div class="emoji-decoration float" style="top: 200px; right: 15%;">🎨</div>
+    <div class="emoji-decoration bounce" style="bottom: 100px; left: 20%;">🌈</div>
+    <div class="emoji-decoration wiggle" style="bottom: 200px; right: 10%;">✨</div>
+    
+    <div class="doodle-circle" style="top: 100px; right: 100px;"></div>
+    <div class="doodle-squiggle" style="top: 300px; left: 50px;"></div>
+
+    <!-- Hero Section -->
+    <section class="section center">
+        <div class="container vbox gap">
+            <h1 class="display bounce c-pink">AdorableCSS</h1>
+            <p class="title c-purple">Where CSS Gets Silly! 🎭</p>
+            <p class="body">Making web design as fun as finger painting!</p>
+            
+            <div class="hbox gap" style="justify-content: center; flex-wrap: wrap;">
+                <button class="button wiggle">Get Started 🚀</button>
+                <button class="button bg-purple c-white">See Magic ✨</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="section">
+        <div class="container vbox gap">
+            <h2 class="title center c-purple">Why It's Awesome! 🎪</h2>
+            
+            <div class="hbox gap" style="justify-content: space-around; flex-wrap: wrap;">
+                <div class="card bg-yellow" style="flex: 1; min-width: 280px;">
+                    <span class="label bg-pink c-white">EASY PEASY</span>
+                    <h3 class="heading" style="margin-top: 16px; margin-bottom: 16px;">Like Building Blocks!</h3>
+                    <p class="body">Just use <span class="code">hbox</span> and <span class="code">vbox</span> - it's like playing with LEGO!</p>
+                    <div class="center" style="font-size: 60px; margin-top: 20px;">🧱</div>
+                </div>
+
+                <div class="card bg-mint float" style="flex: 1; min-width: 280px;">
+                    <span class="label bg-purple c-white">NO MARGINS</span>
+                    <h3 class="heading" style="margin-top: 16px; margin-bottom: 16px;">Gap is Your Friend!</h3>
+                    <p class="body">Forget margins! Use <span class="code">gap</span> for perfect spacing every time!</p>
+                    <div class="center" style="font-size: 60px; margin-top: 20px;">🎯</div>
+                </div>
+
+                <div class="card bg-pink" style="flex: 1; min-width: 280px;">
+                    <div class="ribbon">NEW!</div>
+                    <span class="label">SUPER FAST</span>
+                    <h3 class="heading" style="margin-top: 16px; margin-bottom: 16px;">Lightning Speed!</h3>
+                    <p class="body">Zero runtime = zoom zoom! Your site will fly! 🏎️</p>
+                    <div class="center" style="font-size: 60px; margin-top: 20px;">⚡</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Example Section -->
+    <section class="section bg-white">
+        <div class="container vbox gap center">
+            <h2 class="title c-pink wiggle inline">Look How Simple! 👀</h2>
+            
+            <div class="card bg-purple" style="max-width: 600px; margin: 0 auto;">
+                <p class="body c-white" style="font-size: 20px;">Write this magical code:</p>
+                <div style="background: #1a1a1a; padding: 24px; border-radius: 16px; margin-top: 20px;">
+                    <pre class="code" style="display: block; font-size: 18px; background: none; box-shadow: none; transform: none;">
+&lt;div class="hbox gap"&gt;
+  &lt;div class="card bg-pink"&gt;
+    &lt;h3 class="heading"&gt;Wow!&lt;/h3&gt;
+    &lt;p class="body"&gt;So pretty!&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;button class="button"&gt;Click Me!&lt;/button&gt;
+&lt;/div&gt;</pre>
+                </div>
+                <p class="caption c-white" style="margin-top: 16px;">✨ And boom! Beautiful layout appears!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Section -->
+    <section class="section">
+        <div class="container vbox gap">
+            <h2 class="title center c-purple">Play With Components! 🎮</h2>
+            
+            <div class="vbox gap center">
+                <div class="hbox gap" style="flex-wrap: wrap; justify-content: center;">
+                    <input class="input" placeholder="Type something fun! 🎉" />
+                    <button class="button bg-blue c-white">Submit!</button>
+                </div>
+                
+                <div class="hbox gap" style="flex-wrap: wrap; justify-content: center; margin-top: 40px;">
+                    <span class="label bg-pink c-white bounce">AMAZING</span>
+                    <span class="label bg-purple c-white wiggle">FANTASTIC</span>
+                    <span class="label bg-blue c-white float">INCREDIBLE</span>
+                    <span class="label bg-yellow c-purple bounce">WONDERFUL</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section center">
+        <div class="container vbox gap">
+            <h2 class="display c-purple" style="font-size: 64px;">Ready to Play? 🎊</h2>
+            <p class="title c-pink">Join the CSS party!</p>
+            
+            <div class="card bg-yellow inline" style="margin-top: 20px;">
+                <p class="heading c-purple">npm install adorable-css</p>
+                <p class="caption" style="margin-top: 8px;">Copy, paste, and start creating magic! ✨</p>
+            </div>
+            
+            <div class="hbox gap" style="justify-content: center; margin-top: 40px;">
+                <button class="button bg-pink c-white bounce">Start Now! 🚀</button>
+                <button class="button bg-purple c-white wiggle">GitHub ⭐</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section class="section center bg-white">
+        <div class="container">
+            <p class="body c-purple">Made with 💖 and lots of 🍪 by happy developers!</p>
+            <p class="caption" style="margin-top: 8px;">AdorableCSS - Because CSS should make you smile! 😊</p>
+        </div>
+    </section>
+</body>
+</html>

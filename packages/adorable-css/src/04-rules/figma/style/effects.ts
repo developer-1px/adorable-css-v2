@@ -1,4 +1,4 @@
-import { rule2, getFirstValue, getAllValues } from '../../../01-core/ast-utils';
+import { rule2, getFirstValue, getAllValues } from '../../ast-utils/rule2-helpers';
 import { filter, processShadow, processElevation, processBackdrop } from './effects-utils';
 
 export const opacity = rule2((s) => { const v = getFirstValue(s); return v ? `opacity:${v}` : ''; });

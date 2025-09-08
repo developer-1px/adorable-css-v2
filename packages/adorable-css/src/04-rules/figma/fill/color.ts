@@ -1,5 +1,5 @@
 import { makeColor } from '../../../03-values/makeValue';
-import { rule2, getFirstValue, getAllArgs } from '../../../01-core/ast-utils';
+import { rule2, getFirstValue, getAllArgs } from '../../ast-utils/rule2-helpers';
 
 const DIRS: Record<string, string> = {
   'to-top': 'to top', 'to-right': 'to right', 'to-bottom': 'to bottom', 'to-left': 'to left',

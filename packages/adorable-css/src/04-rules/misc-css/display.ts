@@ -1,4 +1,4 @@
-import { rule2 } from '../../01-core/ast-utils';
+import { rule2 } from '../ast-utils/rule2-helpers';
 
 // Basic display properties - Figma visibility and layout modes
 export const block = rule2(() => 'display:block');

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { generateCSS } from '../07-generator/generator';
+import { generateCSS } from '../../07-generator/generator';
 
 describe.skip('Layer Priority System', () => {
   it('should wrap component styles in @layer components', () => {

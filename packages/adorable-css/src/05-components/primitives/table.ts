@@ -1,8 +1,7 @@
 // Type definitions
 type CSSRule = Record<string, string | Record<string, any>>;
-export type RuleHandler = (args: string) => CSSRule;
-export type KeywordRuleHandler = () => CSSRule;
-import type { StringRuleHandler } from '../defineComponent-unified';
+import type { StringRuleHandler } from '../defineComponent';
+
 // Table component handler
 export const table: StringRuleHandler = () => {
   return [

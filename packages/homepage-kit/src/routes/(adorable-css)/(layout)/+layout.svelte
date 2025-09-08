@@ -1,6 +1,5 @@
 <script>
-import Navbar from "$lib/components/home/Navbar.svelte";
-import ClassInspector from "$lib/components/debug/ClassInspector.svelte";
+  import Navbar from '$lib/components/home/Navbar.svelte'
 </script>
 
 <!-- Alpha Version Ribbon -->
@@ -10,14 +9,10 @@ import ClassInspector from "$lib/components/debug/ClassInspector.svelte";
   </div>
 </div>
 
-<Navbar />
-
-<div class="min-h(screen) vbox pt(60)">
+<div class="min-h(screen) vbox">
+  <Navbar />
   <main class="flex(1)">
     <slot />
   </main>
 </div>
-
-<!-- Global Class Inspector -->
-<ClassInspector />
 

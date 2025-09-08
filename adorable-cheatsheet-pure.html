@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdorableCSS - Pure HTML/CSS Cheat Sheet</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Kalam:wght@300;400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* AdorableCSS-inspired Design Tokens */
+        :root {
+            /* Color palette */
+            --cream: #FFFEF9;
+            --soft-black: #1A1A1A;
+            --charcoal: #2D2D2D;
+            --warm-gray: #6B6B6B;
+            --light-gray: #E8E8E8;
+            --accent-coral: #FF6B6B;
+            --accent-blue: #4ECDC4;
+            --accent-yellow: #FFE66D;
+            --accent-purple: #9B59B6;
+            --accent-green: #26D0CE;
+            --white: #FFFFFF;
+            
+            /* Shadow system */
+            --shadow-soft: 0 1px 3px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.12);
+            --shadow-strong: 0 8px 24px rgba(0, 0, 0, 0.24);
+            
+            /* Spacing scale (AdorableCSS style) */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem; 
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            
+            /* Typography scale */
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 1.875rem;
+            --text-4xl: 2.25rem;
+            --text-5xl: 3rem;
+            
+            /* Radius system */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+            --radius-full: 9999px;
+        }
+
+        /* Reset - No margins/padding, box-sizing */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--cream);
+            color: var(--soft-black);
+            line-height: 1.6;
+            display: grid;
+            place-items: center;
+            min-height: 100vh;
+        }
+
+        /* AdorableCSS Style Class Definitions */
+
+        /* Container variants */
+        .container\(main\) {
+            display: grid;
+            max-width: 1600px;
+            width: 100%;
+            grid-template-columns: 1fr;
+            gap: var(--space-2xl);
+            padding: var(--space-xl);
+            place-self: center;
+            min-height: 100vh;
+        }
+
+        .container\(content\) {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: var(--space-xl);
+        }
+
+        /* Section variants */
+        .section\(hero\) {
+            display: grid;
+            place-items: center;
+            text-align: center;
+            padding: var(--space-3xl) 0;
+            position: relative;
+        }
+
+        .section\(search\) {
+            display: grid;
+            place-items: center;
+            gap: var(--space-lg);
+        }
+
+        .section\(nav\) {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--space-md);
+        }
+
+        /* Heading variants */
+        .heading\(hero\) {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(var(--text-4xl), 8vw, var(--text-5xl));
+            font-weight: 700;
+            color: var(--accent-coral);
+            transform: rotate(-2deg);
+        }
+
+        .heading\(section\) {
+            font-family: 'Caveat', cursive;
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            color: var(--charcoal);
+        }
+
+        .heading\(group\) {
+            font-family: 'Kalam', cursive;
+            font-size: var(--text-lg);
+            font-weight: 700;
+            color: var(--accent-purple);
+            position: relative;
+            padding-left: var(--space-md);
+        }
+
+        .heading\(group\)::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-yellow);
+            font-family: 'Caveat', cursive;
+        }
+
+        /* Title variants */
+        .title\(sub\) {
+            font-family: 'Kalam', cursive;
+            font-size: var(--text-xl);
+            color: var(--warm-gray);
+            transform: rotate(1deg);
+        }
+
+        /* Body text variants */
+        .body\(info\) {
+            font-family: 'Kalam', cursive;
+            color: var(--warm-gray);
+            font-size: var(--text-base);
+        }
+
+        .body\(description\) {
+            font-size: var(--text-xs);
+            color: var(--warm-gray);
+            text-align: right;
+        }
+
+        /* Caption variants */
+        .caption\(code\) {
+            font-family: 'Space Mono', monospace;
+            font-size: var(--text-sm);
+            color: var(--charcoal);
+            font-weight: 600;
+        }
+
+        .caption\(small\) {
+            font-size: var(--text-xs);
+            color: var(--warm-gray);
+        }
+
+        /* Label variants */  
+        .label\(nav\) {
+            background: var(--white);
+            border: 2px solid var(--soft-black);
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius-xl);
+            text-decoration: none;
+            color: var(--charcoal);
+            font-weight: 600;
+            font-size: var(--text-sm);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .label\(nav\):nth-child(odd) { transform: rotate(-2deg); }
+        .label\(nav\):nth-child(even) { transform: rotate(2deg); }
+
+        .label\(nav\):hover {
+            transform: rotate(0deg) translateY(-2px);
+            background: var(--accent-coral);
+            color: var(--white);
+            box-shadow: 3px 3px 0 var(--soft-black);
+        }
+
+        .label\(value\) {
+            background: var(--light-gray);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            text-align: center;
+            font-family: 'Space Mono', monospace;
+            font-size: var(--text-xs);
+            border: 1px solid var(--warm-gray);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .label\(value\):hover {
+            background: var(--accent-blue);
+            color: var(--white);
+            transform: scale(1.05);
+        }
+
+        /* Card variants */
+        .card\(syntax\) {
+            background: var(--white);
+            border: 3px solid var(--soft-black);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            position: relative;
+            transition: all 0.3s ease;
+            display: grid;
+            gap: var(--space-lg);
+        }
+
+        .card\(syntax\):nth-child(1) { transform: rotate(0.5deg); }
+        .card\(syntax\):nth-child(2) { transform: rotate(-0.5deg); }
+        .card\(syntax\):nth-child(3) { transform: rotate(1deg); }
+        .card\(syntax\):nth-child(4) { transform: rotate(-1deg); }
+        .card\(syntax\):nth-child(5) { transform: rotate(0.5deg); }
+        .card\(syntax\):nth-child(6) { transform: rotate(-0.5deg); }
+
+        .card\(syntax\):hover {
+            transform: rotate(0deg) translateY(-5px);
+            box-shadow: 8px 8px 0 var(--accent-blue);
+        }
+
+        .card\(input\) {
+            position: relative;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        .card\(input\) input {
+            width: 100%;
+            padding: var(--space-lg) var(--space-xl);
+            border: 3px solid var(--soft-black);
+            border-radius: var(--radius-2xl);
+            font-family: 'Space Mono', monospace;
+            font-size: var(--text-lg);
+            background: var(--white);
+            transform: rotate(-0.5deg);
+            transition: all 0.3s ease;
+        }
+
+        .card\(input\) input:focus {
+            outline: none;
+            transform: rotate(0deg) translateY(-3px);
+            box-shadow: 6px 6px 0 var(--accent-yellow);
+        }
+
+        .card\(example\) {
+            background: var(--soft-black);
+            color: var(--accent-yellow);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            font-family: 'Space Mono', monospace;
+            font-size: var(--text-sm);
+            position: relative;
+        }
+
+        .card\(example\)::before {
+            content: 'EXAMPLE';
+            position: absolute;
+            top: -8px;
+            right: var(--space-md);
+            background: var(--accent-green);
+            color: var(--white);
+            padding: var(--space-xs) var(--space-sm);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            border-radius: var(--radius-sm);
+        }
+
+        .card\(tip\) {
+            background: var(--accent-green);
+            color: var(--white);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            font-size: var(--text-sm);
+            position: relative;
+            transform: rotate(-0.5deg);
+        }
+
+        .card\(tip\)::before {
+            content: '💡';
+            position: absolute;
+            top: -10px;
+            left: var(--space-md);
+            background: var(--white);
+            padding: var(--space-xs);
+            border-radius: var(--radius-full);
+            border: 2px solid var(--soft-black);
+        }
+
+        /* Display utility classes */
+        .display\(grid-auto\) {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: var(--space-xs);
+        }
+
+        .display\(grid-syntax\) {
+            display: grid;
+            gap: var(--space-sm);
+        }
+
+        .display\(grid-item\) {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: var(--space-md);
+            align-items: center;
+            padding: var(--space-sm) var(--space-md);
+            background: var(--cream);
+            border-radius: var(--radius-sm);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .display\(grid-item\):hover {
+            background: var(--accent-yellow);
+            transform: translateX(5px);
+        }
+
+        .display\(flex-header\) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: var(--space-md);
+            border-bottom: 2px solid var(--light-gray);
+            gap: var(--space-lg);
+        }
+
+        .display\(flex-icon\) {
+            background: var(--accent-coral);
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-lg);
+            transform: rotate(-10deg);
+        }
+
+        /* Spacing utilities for gaps */
+        .gap\(xs\) { gap: var(--space-xs); }
+        .gap\(sm\) { gap: var(--space-sm); }
+        .gap\(md\) { gap: var(--space-md); }
+        .gap\(lg\) { gap: var(--space-lg); }
+        .gap\(xl\) { gap: var(--space-xl); }
+
+        /* Color preview utility */
+        .color-preview {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: var(--radius-full);
+            border: 2px solid var(--soft-black);
+            vertical-align: middle;
+        }
+
+        /* Hidden utility */
+        .hidden { display: none; }
+
+        /* Responsive design */
+        @media (max-width: 1024px) {
+            .container\(content\) {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container\(main\) {
+                padding: var(--space-lg);
+            }
+            
+            .container\(content\) {
+                grid-template-columns: 1fr;
+                gap: var(--space-lg);
+            }
+            
+            .card\(syntax\) {
+                transform: rotate(0deg) !important;
+                padding: var(--space-lg);
+            }
+            
+            .section\(nav\) {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: var(--space-sm);
+            }
+            
+            .label\(nav\) {
+                transform: rotate(0deg) !important;
+                flex-shrink: 0;
+            }
+            
+            .display\(grid-auto\) {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+        }
+
+        /* Floating doodles */
+        .doodle {
+            position: absolute;
+            font-family: 'Caveat', cursive;
+            font-size: var(--text-2xl);
+            color: var(--warm-gray);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .doodle:nth-child(1) { top: 5%; left: 2%; transform: rotate(-15deg); }
+        .doodle:nth-child(2) { top: 15%; right: 5%; transform: rotate(20deg); }
+        .doodle:nth-child(3) { bottom: 25%; left: 3%; transform: rotate(-10deg); }
+        .doodle:nth-child(4) { bottom: 15%; right: 2%; transform: rotate(15deg); }
+    </style>
+</head>
+<body>
+    <!-- Floating doodles -->
+    <div class="doodle">✨</div>
+    <div class="doodle">🎨</div>
+    <div class="doodle">{ }</div>
+    <div class="doodle">💖</div>
+
+    <div class="container(main)">
+        <!-- Hero Section -->
+        <section class="section(hero)">
+            <h1 class="heading(hero)">AdorableCSS Cheat Sheet</h1>
+            <p class="title(sub)">모든 문법을 한눈에! 빠른 참고 가이드</p>
+        </section>
+
+        <!-- Search Section -->
+        <section class="section(search)">
+            <div class="card(input)">
+                <input 
+                    type="text" 
+                    placeholder="문법 검색... (예: hbox, text, bg)"
+                    id="searchInput"
+                />
+            </div>
+            <p class="body(info)">💡 원하는 속성이나 값을 입력하여 빠르게 찾아보세요!</p>
+        </section>
+
+        <!-- Quick Navigation -->
+        <nav class="section(nav)">
+            <a href="#layout" class="label(nav)">📐 Layout</a>
+            <a href="#typography" class="label(nav)">✍️ Typography</a>
+            <a href="#colors" class="label(nav)">🎨 Colors</a>
+            <a href="#spacing" class="label(nav)">📏 Spacing</a>
+            <a href="#sizing" class="label(nav)">📦 Sizing</a>
+            <a href="#effects" class="label(nav)">✨ Effects</a>
+            <a href="#states" class="label(nav)">🔄 States</a>
+            <a href="#responsive" class="label(nav)">📱 Responsive</a>
+        </nav>
+
+        <!-- Cheat Sections Container -->
+        <div class="container(content)">
+            <!-- Layout Section -->
+            <section class="card(syntax)" id="layout">
+                <div class="display(flex-header)">
+                    <h2 class="heading(section)">Layout System</h2>
+                    <div class="display(flex-icon)">📐</div>
+                </div>
+
+                <div class="display(grid-syntax) gap(lg)">
+                    <h3 class="heading(group)">Flexbox Containers</h3>
+                    <div class="display(grid-syntax) gap(sm)">
+                        <div class="display(grid-item)">
+                            <span class="caption(code)">hbox()</span>
+                            <span class="body(description)">Horizontal flexbox</span>
+                        </div>
+                        <div class="display(grid-item)">
+                            <span class="caption(code)">vbox()</span>
+                            <span class="body(description)">Vertical flexbox</span>
+                        </div>
+                        <div class="display(grid-item)">
+                            <span class="caption(code)">hbox(center)</span>
+                            <span class="body(description)">Center alignment</span>
+                        </div>
+                        <div class="display(grid-item)">
+                            <span class="caption(code)">hbox(pack)</span>
+                            <span class="body(description)">Space between</span>
+                        </div>
+                        <div class="display(grid-item)">
+                            <span class="caption(code)">vbox(middle)</span>
+                            <span class="body(description)">Center items</span>
+                        </div>
+                        <div class="display(grid-item)">
+                            <span class="caption(code)">hbox(pack/middle)</span>
+                            <span class="body(description)">Space between + center</span>
+                        </div>
+                    </div>
+
+                    <div class="card(example)">
+&lt;div class="hbox(pack/middle) gap(lg) p(xl)"&gt;
+  &lt;div&gt;Logo&lt;/div&gt;
+  &lt;nav class="hbox gap(md)"&gt;...&lt;/nav&gt;
+&lt;/div&gt;
+                    </div>
+                </div>
+
+                <div class="display(grid-syntax) gap(lg)">
+                    <h3 class="heading(group)">Grid System</h3>
+                    <div class="display(grid-syntax) gap(sm)">
+                        <div class="display(grid-item)">
+                            <span class="caption(code)">grid(2fr)</span>
+                            <span class="body(description)">2 equal columns</span>
+                        </div>
+                        <div class="display(grid-item)">
+                            <span class="caption(code)">grid(1fr/2fr)</span>
+                            <span class="body(description)">1:2 ratio columns</span>
+                        </div>
+                        <div class="display(grid-item)">
+                            <span class="caption(code)">grid(auto-fit/300px)</span>
+                            <span class="body(description)">Auto fit 300px min</span>
+                        </div>
+                        <div class="display(grid-item)">
+                            <span class="caption(code)">gap(md)</span>
+                            <span class="body(description)">Grid/flex gap</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card(tip)">
+                    <strong>Layout Tip:</strong> hbox()와 vbox()는 Figma의 Auto Layout과 완전히 동일합니다. 디자이너와 개발자가 같은 언어로 소통할 수 있어요!
+                </div>
+            </section>
+
+            <!-- Typography Section -->
+            <section class="card(syntax)" id="typography">
+                <div class="display(flex-header)">
+                    <h2 class="heading(section)">Typography</h2>
+                    <div class="display(flex-icon)">✍️</div>
+                </div>
+
+                <div class="display(grid-syntax) gap(lg)">
+                    <h3 class="heading(group)">Text Sizing</h3>
+                    <div class="display(grid-syntax) gap(sm)">
+                        <div class="display(grid-item)">
+                            <span class="caption(code)">text(16px)</span>
+                            <span class="body(description)">Font size: 16px</span>
+                        </div>
+                        <div class="display(grid-item)">
+                            <span class="caption(code)">text(lg)</span>
+                            <span class="body(description)">Token-based size</span>
+                        </div>
+                        <div class="display(grid-item)">
+                            <span class="caption(code)">text(16px/1.5)</span>
+                            <span class="body(description)">Size + line height</span>
+                        </div>
+                        <div class="display(grid-item)">
+                            <span class="caption(code)">text(lg/1.2/-2%)</span>
+                            <span class="body(description)">Size + line + spacing</span>
+                        </div>
+                    </div>
+
+                    <div class="display(grid-auto)">
+                        <div class="label(value)">xs</div>
+                        <div class="label(value)">sm</div>
+                        <div class="label(value)">base</div>
+                        <div class="label(value)">lg</div>
+                        <div class="label(value)">xl</div>
+                        <div class="label(value)">2xl</div>
+                        <div class="label(value)">3xl</div>
+                        <div class="label(value)">4xl</div>
+                        <div class="label(value)">5xl</div>
+                        <div class="label(value)">6xl</div>
+                    </div>
+                </div>
+
+                <div class="card(tip)">
+                    <strong>Typography Tip:</strong> text() 함수 하나로 모든 텍스트 스타일링이 가능해요! AI가 이해하기 쉽도록 설계되었습니다.
+                </div>
+            </section>
+
+            <!-- Colors Section -->
+            <section class="card(syntax)" id="colors">
+                <div class="display(flex-header) gap(lg)">
+                    <h2 class="heading(section)">Colors</h2>
+                    <div class="display(flex-icon)">🎨</div>
+                </div>
+
+                <div class="gap(lg)">
+                    <h3 class="heading(group)">Color Properties</h3>
+                    <div class="display(grid-syntax) gap(sm)">
+                        <div class="display(grid-item)">
+                            <span class="caption(code)">c(primary)</span>
+                            <span class="body(description)">Text color</span>
+                        </div>
+                        <div class="display(grid-item)">
+                            <span class="caption(code)">bg(white)</span>
+                            <span class="body(description)">Background color</span>
+                        </div>
+                        <div class="display(grid-item)">
+                            <span class="caption(code)">border(gray-200)</span>
+                            <span class="body(description)">Border color</span>
+                        </div>
+                        <div class="display(grid-item)">
+                            <span class="caption(code)">bg(white.5)</span>
+                            <span class="body(description)">50% opacity</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gap(lg)">
+                    <h3 class="heading(group)">Color Palette</h3>
+                    <div class="display(grid-syntax) gap(sm)">
+                        <div class="display(grid-item)">
+                            <span class="caption(code)"><span class="color-preview" style="background: #FF6B6B; margin-right: var(--space-sm);"></span>coral</span>
+                            <span class="body(description)">Primary coral</span>
+                        </div>
+                        <div class="display(grid-item)">
+                            <span class="caption(code)"><span class="color-preview" style="background: #4ECDC4; margin-right: var(--space-sm);"></span>blue</span>
+                            <span class="body(description)">Accent blue</span>
+                        </div>
+                        <div class="display(grid-item)">
+                            <span class="caption(code)"><span class="color-preview" style="background: #FFE66D; margin-right: var(--space-sm);"></span>yellow</span>
+                            <span class="body(description)">Accent yellow</span>
+                        </div>
+                        <div class="display(grid-item)">
+                            <span class="caption(code)"><span class="color-preview" style="background: #9B59B6; margin-right: var(--space-sm);"></span>purple</span>
+                            <span class="body(description)">Accent purple</span>
+                        </div>
+                        <div class="display(grid-item)">
+                            <span class="caption(code)"><span class="color-preview" style="background: #26D0CE; margin-right: var(--space-sm);"></span>green</span>
+                            <span class="body(description)">Accent green</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card(tip)">
+                    <strong>Color Tip:</strong> .5, .8 등의 숫자로 투명도를 조절할 수 있어요! bg(white.5)는 50% 투명한 흰색입니다.
+                </div>
+            </section>
+
+            <!-- Continue with remaining sections... -->
+        </div>
+    </div>
+
+    <script>
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const syntaxCards = document.querySelectorAll('.card\\(syntax\\)');
+        const syntaxItems = document.querySelectorAll('.display\\(grid-item\\)');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            
+            if (searchTerm === '') {
+                syntaxCards.forEach(card => card.classList.remove('hidden'));
+                syntaxItems.forEach(item => item.style.display = 'grid');
+                return;
+            }
+
+            syntaxCards.forEach(card => card.classList.add('hidden'));
+
+            syntaxItems.forEach(item => {
+                const syntaxCode = item.querySelector('.caption\\(code\\)').textContent.toLowerCase();
+                const syntaxDesc = item.querySelector('.body\\(description\\)').textContent.toLowerCase();
+                
+                if (syntaxCode.includes(searchTerm) || syntaxDesc.includes(searchTerm)) {
+                    item.style.display = 'grid';
+                    item.closest('.card\\(syntax\\)').classList.remove('hidden');
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Quick navigation
+        document.querySelectorAll('.label\\(nav\\)').forEach(nav => {
+            nav.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Copy functionality
+        syntaxItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const syntaxCode = this.querySelector('.caption\\(code\\)').textContent;
+                navigator.clipboard.writeText(syntaxCode).then(() => {
+                    const originalBg = this.style.backgroundColor;
+                    this.style.backgroundColor = 'var(--accent-green)';
+                    this.style.color = 'white';
+                    
+                    setTimeout(() => {
+                        this.style.backgroundColor = originalBg;
+                        this.style.color = '';
+                    }, 300);
+                });
+            });
+            
+            item.style.cursor = 'pointer';
+            item.title = '클릭하여 문법 복사';
+        });
+
+        // Value chip copy
+        document.querySelectorAll('.label\\(value\\)').forEach(chip => {
+            chip.addEventListener('click', function() {
+                navigator.clipboard.writeText(this.textContent).then(() => {
+                    const original = this.style.backgroundColor;
+                    this.style.backgroundColor = 'var(--accent-coral)';
+                    this.style.color = 'white';
+                    
+                    setTimeout(() => {
+                        this.style.backgroundColor = original;
+                        this.style.color = '';
+                    }, 200);
+                });
+            });
+        });
+    </script>
+</body>
+</html>

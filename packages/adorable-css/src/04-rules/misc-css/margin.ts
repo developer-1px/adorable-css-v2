@@ -1,4 +1,5 @@
-import { rule2, single, getSideValues, spacing, safeCss } from '../../01-core/ast-utils';
+import { rule2, single, getSideValues, safeCss } from '../ast-utils/rule2-helpers';
+import { spacing } from '../../03-values/value-transform';
 
 export const m = rule2(s => {
   const values = getSideValues(s, spacing);

@@ -1,5 +1,5 @@
 import { transformValue, color } from '../../../03-values/value-transform';
-import { isToken, getTokenVar } from '../../../03-values/token-resolver';
+import { isToken, getTokenVar } from '../../../02-design_tokens/token-resolver';
 
 const SHADOWS = {
   none: 'none',

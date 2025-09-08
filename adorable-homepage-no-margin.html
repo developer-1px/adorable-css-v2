@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdorableCSS - Design to Code, Magically (No Margin Version)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Kalam:wght@300;400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Sophisticated color palette */
+        :root {
+            --cream: #FFFEF9;
+            --soft-black: #1A1A1A;
+            --charcoal: #2D2D2D;
+            --warm-gray: #6B6B6B;
+            --light-gray: #E8E8E8;
+            --accent-coral: #FF6B6B;
+            --accent-blue: #4ECDC4;
+            --accent-yellow: #FFE66D;
+            --accent-purple: #9B59B6;
+            --white: #FFFFFF;
+            --shadow: rgba(0, 0, 0, 0.06);
+            --shadow-deep: rgba(0, 0, 0, 0.12);
+        }
+
+        /* Reset - NO MARGINS! */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--cream);
+            color: var(--soft-black);
+            overflow-x: hidden;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Main Layout - Using vbox pattern */
+        .main-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+            flex: 1;
+        }
+
+        /* Sketch elements */
+        .sketch-underline {
+            position: relative;
+            display: inline-block;
+        }
+
+        .sketch-underline::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: -5px;
+            right: -5px;
+            height: 15px;
+            background: var(--accent-yellow);
+            transform: rotate(-1deg);
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        .sketch-circle {
+            position: relative;
+            display: inline-block;
+        }
+
+        .sketch-circle::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 120%;
+            height: 120%;
+            border: 3px solid var(--accent-coral);
+            border-radius: 50%;
+            transform: translate(-50%, -50%) rotate(-5deg);
+            z-index: -1;
+        }
+
+        /* Doodle patterns */
+        .doodle-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: 
+                radial-gradient(circle at 20% 30%, var(--soft-black) 1px, transparent 1px),
+                radial-gradient(circle at 80% 70%, var(--soft-black) 1px, transparent 1px),
+                radial-gradient(circle at 40% 80%, var(--soft-black) 1px, transparent 1px);
+            background-size: 50px 50px, 30px 30px, 40px 40px;
+        }
+
+        /* Container - with padding, not margin */
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+
+        /* Header - no margins, just padding */
+        .header {
+            text-align: center;
+            padding: 4rem 0;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(4rem, 10vw, 7rem);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: rotate(2deg) scale(1.05);
+        }
+
+        .tagline {
+            font-family: 'Kalam', cursive;
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: var(--warm-gray);
+            transform: rotate(1deg);
+        }
+
+        /* Hero section - gap instead of margin */
+        .hero {
+            background: var(--white);
+            border: 2px solid var(--soft-black);
+            border-radius: 20px;
+            padding: 3rem;
+            position: relative;
+            transform: rotate(-0.5deg);
+            box-shadow: 8px 8px 0 var(--soft-black);
+        }
+
+        .hero::before {
+            content: 'FIGMA → CODE';
+            position: absolute;
+            top: -15px;
+            left: 30px;
+            background: var(--accent-coral);
+            color: var(--white);
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            transform: rotate(-3deg);
+        }
+
+        .hero-content {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            font-weight: 400;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .code-example {
+            font-family: 'Space Mono', monospace;
+            background: var(--soft-black);
+            color: var(--accent-yellow);
+            padding: 2rem;
+            border-radius: 10px;
+            font-size: 1rem;
+            overflow-x: auto;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .code-example::before {
+            content: '// adorable.css';
+            position: absolute;
+            top: 10px;
+            left: 20px;
+            color: var(--warm-gray);
+            font-size: 0.85rem;
+        }
+
+        .code-line {
+            padding-left: 2rem;
+        }
+
+        /* Features - grid with gap */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border: 2px solid var(--soft-black);
+            padding: 2rem;
+            position: relative;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .feature-card:nth-child(1) {
+            transform: rotate(1deg);
+            border-radius: 30px 15px 30px 15px;
+        }
+
+        .feature-card:nth-child(2) {
+            transform: rotate(-1deg);
+            border-radius: 15px 30px 15px 30px;
+        }
+
+        .feature-card:nth-child(3) {
+            transform: rotate(0.5deg);
+            border-radius: 20px;
+        }
+
+        .feature-card:hover {
+            transform: rotate(0deg) translateY(-5px);
+            box-shadow: 10px 10px 0 var(--accent-blue);
+        }
+
+        .feature-number {
+            font-family: 'Caveat', cursive;
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--accent-coral);
+            position: absolute;
+            top: -20px;
+            left: 20px;
+        }
+
+        .feature-title {
+            font-family: 'Kalam', cursive;
+            font-size: 2rem;
+            font-weight: 700;
+            padding-top: 1rem;
+        }
+
+        .feature-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: var(--charcoal);
+        }
+
+        /* CTA Section - flexbox with gap */
+        .cta-section {
+            text-align: center;
+            padding: 6rem 0;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .cta-sketch {
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            color: var(--warm-gray);
+            transform: rotate(-10deg);
+        }
+
+        .cta-button {
+            display: inline-block;
+            font-family: 'Space Mono', monospace;
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--soft-black);
+            background: var(--accent-yellow);
+            padding: 1.5rem 3rem;
+            text-decoration: none;
+            border: 3px solid var(--soft-black);
+            border-radius: 50px;
+            position: relative;
+            transition: all 0.3s ease;
+            transform: rotate(-1deg);
+        }
+
+        .cta-button:hover {
+            transform: rotate(1deg) translateY(-3px);
+            box-shadow: 5px 5px 0 var(--soft-black);
+        }
+
+        /* Floating doodles */
+        .doodle {
+            position: absolute;
+            font-family: 'Caveat', cursive;
+            font-size: 2rem;
+            color: var(--warm-gray);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .doodle-1 {
+            top: 10%;
+            left: 5%;
+            transform: rotate(-15deg);
+        }
+
+        .doodle-2 {
+            top: 20%;
+            right: 10%;
+            font-size: 1.5rem;
+            transform: rotate(20deg);
+        }
+
+        .doodle-3 {
+            bottom: 30%;
+            left: 8%;
+            transform: rotate(-10deg);
+        }
+
+        .doodle-4 {
+            bottom: 20%;
+            right: 5%;
+            font-size: 3rem;
+            transform: rotate(15deg);
+        }
+
+        /* Responsive - still no margins! */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+                gap: 2rem;
+            }
+
+            .hero {
+                padding: 2rem;
+                transform: rotate(0);
+            }
+
+            .features {
+                gap: 2rem;
+            }
+
+            .feature-card {
+                transform: rotate(0) !important;
+            }
+
+            .logo {
+                font-size: 3rem;
+            }
+
+            .header {
+                padding: 2rem 0;
+            }
+
+            .cta-section {
+                padding: 3rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="doodle-bg"></div>
+    
+    <!-- Floating doodles -->
+    <div class="doodle doodle-1">✨</div>
+    <div class="doodle doodle-2">→</div>
+    <div class="doodle doodle-3">{ }</div>
+    <div class="doodle doodle-4">♥</div>
+
+    <div class="main-layout">
+        <div class="container">
+            <!-- Header -->
+            <header class="header">
+                <h1 class="logo">
+                    Adorable<span class="sketch-underline">CSS</span>
+                </h1>
+                <p class="tagline">where design meets code with a smile</p>
+            </header>
+
+            <!-- Hero -->
+            <section class="hero">
+                <div class="hero-content">
+                    <p>
+                        <strong>AdorableCSS</strong> is a <span class="sketch-circle">Figma-first</span> CSS framework 
+                        that speaks your design language. No more translation between design and code—just pure, 
+                        intuitive syntax that makes sense.
+                    </p>
+                    
+                    <div class="code-example">
+                        <div class="code-line">hbox(pack) gap(16) p(24) r(lg) bg(white) shadow(soft)</div>
+                        <div class="code-line">text(title/2xl) font(bold) c(charcoal)</div>
+                        <div class="code-line">w(fill) h(hug) hover:scale(1.05) transition</div>
+                    </div>
+
+                    <p>
+                        <em>It's like Figma auto-layout, but in code. Magic? Pretty much.</em>
+                    </p>
+                </div>
+            </section>
+
+            <!-- Features -->
+            <section class="features">
+                <div class="feature-card">
+                    <span class="feature-number">01</span>
+                    <h3 class="feature-title">Figma Native</h3>
+                    <p class="feature-description">
+                        Use the same mental model as Figma. <code>hbox()</code>, <code>vbox()</code>, 
+                        <code>w(fill)</code>—it all just works exactly as you'd expect.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-number">02</span>
+                    <h3 class="feature-title">Token Everything</h3>
+                    <p class="feature-description">
+                        15 design token categories cover every design decision. 
+                        Consistency isn't just easy—it's automatic.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <span class="feature-number">03</span>
+                    <h3 class="feature-title">Zero Runtime</h3>
+                    <p class="feature-description">
+                        Compiles to pure CSS at build time. No JavaScript, 
+                        no runtime overhead. Just clean, fast styles.
+                    </p>
+                </div>
+            </section>
+
+            <!-- CTA -->
+            <section class="cta-section">
+                <span class="cta-sketch">ready to try?</span>
+                <a href="#" class="cta-button">Get Started →</a>
+            </section>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Type, Hash, AlignLeft, Minus, Heading1, Type as TypeIcon, FileText, Tag, MessageSquare, Info } from 'lucide-svelte';
-  import { defaultTokens } from 'adorable-css';
+  // defaultTokens removed - using hardcoded values
   
   // Display component variants - for maximum visual impact
   const displayVariants = [

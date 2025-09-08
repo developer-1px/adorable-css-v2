@@ -2,10 +2,10 @@
  * AST 기반 value 변환 유틸리티
  */
 
-import { isToken, getTokenVar } from './token-resolver';
+import { isToken, getTokenVar } from '../02-design_tokens/token-resolver';
 import { makeColor } from './makeValue';
 
-type TokenType = 'spacing' | 'font' | 'size' | 'color' | 'none';
+type TokenType = 'spacing' | 'font' | 'text' | 'size' | 'color' | 'none';
 
 /**
  * AST 값을 CSS value로 변환
@@ -27,7 +27,8 @@ export function transformValue(value: string | number, tokenType: TokenType = 'n
       case 'spacing':
         return getTokenVar('spacing', v);
       case 'font':
-        return getTokenVar('font', v);
+      case 'text':
+        return getTokenVar('text', v);
       case 'size':
         return getTokenVar('size', v);
       case 'color':

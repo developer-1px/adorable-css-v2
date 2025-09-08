@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdorableCSS vs TailwindCSS - Syntax Comparison</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Kalam:wght@300;400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FFFEF9',
+                        'soft-black': '#1A1A1A',
+                        charcoal: '#2D2D2D',
+                        'warm-gray': '#6B6B6B',
+                        'light-gray': '#E8E8E8',
+                        'accent-coral': '#FF6B6B',
+                        'accent-blue': '#4ECDC4',
+                        'accent-yellow': '#FFE66D',
+                        'accent-purple': '#9B59B6',
+                        'accent-green': '#26D0CE',
+                    },
+                    fontFamily: {
+                        'caveat': ['Caveat', 'cursive'],
+                        'kalam': ['Kalam', 'cursive'],
+                        'space-mono': ['Space Mono', 'monospace'],
+                        'inter': ['Inter', 'sans-serif'],
+                    },
+                    boxShadow: {
+                        'fun': '6px 6px 0 #FFE66D',
+                        'hover': '8px 8px 0 #4ECDC4',
+                        'nav': '3px 3px 0 #1A1A1A',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(-15deg); }
+            50% { transform: translateY(-10px) rotate(-15deg); }
+        }
+        .rotate-neg-2 { transform: rotate(-2deg); }
+        .rotate-2 { transform: rotate(2deg); }
+        .rotate-neg-0_5 { transform: rotate(-0.5deg); }
+        .rotate-0_5 { transform: rotate(0.5deg); }
+        .rotate-1 { transform: rotate(1deg); }
+        .rotate-neg-1 { transform: rotate(-1deg); }
+        .rotate-neg-10 { transform: rotate(-10deg); }
+        .rotate-neg-15 { transform: rotate(-15deg); }
+        .rotate-20 { transform: rotate(20deg); }
+        .hover-lift:hover { transform: rotate(0deg) translateY(-5px); }
+        .nav-hover:hover { transform: rotate(0deg) translateY(-2px); }
+        .search-focus:focus { transform: rotate(0deg) translateY(-3px); }
+    </style>
+</head>
+<body class="bg-cream text-soft-black font-inter overflow-x-hidden">
+    <!-- Floating doodles -->
+    <div class="fixed top-[5%] left-[2%] text-3xl text-warm-gray opacity-15 pointer-events-none z-[-1] rotate-neg-15 animate-float">✨</div>
+    <div class="fixed top-[15%] right-[5%] text-3xl text-warm-gray opacity-15 pointer-events-none z-[-1] rotate-20">🎨</div>
+    <div class="fixed bottom-[25%] left-[3%] text-3xl text-warm-gray opacity-15 pointer-events-none z-[-1] rotate-neg-10">{ }</div>
+    <div class="fixed bottom-[15%] right-[2%] text-3xl text-warm-gray opacity-15 pointer-events-none z-[-1] rotate-[15deg]">💖</div>
+
+    <div class="max-w-[1600px] mx-auto p-8">
+        <!-- Header -->
+        <header class="text-center py-12 relative mb-12">
+            <h1 class="font-caveat text-4xl sm:text-5xl lg:text-6xl font-bold mb-4 rotate-neg-2 text-accent-coral leading-tight">
+                AdorableCSS vs TailwindCSS
+            </h1>
+            <p class="font-kalam text-xl text-warm-gray rotate-1 font-medium">
+                문법 비교 가이드 - 같은 결과, 다른 접근법!
+            </p>
+        </header>
+
+        <!-- Search Section -->
+        <section class="mb-12 text-center">
+            <div class="relative max-w-2xl mx-auto">
+                <input 
+                    type="text" 
+                    class="w-full p-4 px-6 border-3 border-soft-black rounded-3xl font-space-mono text-lg bg-white rotate-neg-0_5 transition-all duration-300 focus:outline-none search-focus focus:shadow-fun" 
+                    placeholder="문법 검색... (예: hbox vs flex, text vs text-)"
+                    id="searchInput"
+                />
+                <p class="mt-6 font-kalam text-warm-gray text-base font-medium">
+                    💡 AdorableCSS와 TailwindCSS 문법을 동시에 비교해보세요!
+                </p>
+            </div>
+        </section>
+
+        <!-- Quick Navigation -->
+        <nav class="mb-16">
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#layout" class="bg-white border-2 border-soft-black px-4 py-2 rounded-xl text-charcoal font-semibold text-sm transition-all duration-300 cursor-pointer rotate-neg-2 nav-hover hover:bg-accent-coral hover:text-white hover:shadow-nav">📐 Layout</a>
+                <a href="#typography" class="bg-white border-2 border-soft-black px-4 py-2 rounded-xl text-charcoal font-semibold text-sm transition-all duration-300 cursor-pointer rotate-2 nav-hover hover:bg-accent-coral hover:text-white hover:shadow-nav">✍️ Typography</a>
+                <a href="#colors" class="bg-white border-2 border-soft-black px-4 py-2 rounded-xl text-charcoal font-semibold text-sm transition-all duration-300 cursor-pointer rotate-neg-2 nav-hover hover:bg-accent-coral hover:text-white hover:shadow-nav">🎨 Colors</a>
+                <a href="#spacing" class="bg-white border-2 border-soft-black px-4 py-2 rounded-xl text-charcoal font-semibold text-sm transition-all duration-300 cursor-pointer rotate-2 nav-hover hover:bg-accent-coral hover:text-white hover:shadow-nav">📏 Spacing</a>
+                <a href="#sizing" class="bg-white border-2 border-soft-black px-4 py-2 rounded-xl text-charcoal font-semibold text-sm transition-all duration-300 cursor-pointer rotate-neg-2 nav-hover hover:bg-accent-coral hover:text-white hover:shadow-nav">📦 Sizing</a>
+                <a href="#effects" class="bg-white border-2 border-soft-black px-4 py-2 rounded-xl text-charcoal font-semibold text-sm transition-all duration-300 cursor-pointer rotate-2 nav-hover hover:bg-accent-coral hover:text-white hover:shadow-nav">✨ Effects</a>
+                <a href="#states" class="bg-white border-2 border-soft-black px-4 py-2 rounded-xl text-charcoal font-semibold text-sm transition-all duration-300 cursor-pointer rotate-neg-2 nav-hover hover:bg-accent-coral hover:text-white hover:shadow-nav">🔄 States</a>
+                <a href="#responsive" class="bg-white border-2 border-soft-black px-4 py-2 rounded-xl text-charcoal font-semibold text-sm transition-all duration-300 cursor-pointer rotate-2 nav-hover hover:bg-accent-coral hover:text-white hover:shadow-nav">📱 Responsive</a>
+            </div>
+        </nav>
+
+        <!-- Comparison Sections -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Layout Section -->
+            <section class="bg-white border-3 border-soft-black rounded-lg p-8 relative transition-all duration-300 rotate-0_5 hover-lift hover:shadow-hover" id="layout">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b-2 border-light-gray">
+                    <h2 class="font-caveat text-2xl font-bold text-charcoal">Layout System</h2>
+                    <div class="bg-accent-coral text-white w-10 h-10 rounded-full flex items-center justify-center text-lg rotate-neg-10">📐</div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="font-kalam text-lg font-bold text-accent-purple mb-4 relative pl-4">
+                        <span class="absolute left-0 text-accent-yellow font-caveat font-bold">→</span>
+                        Flexbox Containers
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>hbox()</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>flex flex-row</code></div>
+                            <div class="text-xs text-warm-gray">Horizontal flexbox container</div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>vbox()</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>flex flex-col</code></div>
+                            <div class="text-xs text-warm-gray">Vertical flexbox container</div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>hbox(center)</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>flex items-center justify-center</code></div>
+                            <div class="text-xs text-warm-gray">Center alignment</div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>hbox(pack)</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>flex justify-between</code></div>
+                            <div class="text-xs text-warm-gray">Space between items</div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>gap(md)</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>gap-4</code></div>
+                            <div class="text-xs text-warm-gray">Gap between items</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-soft-black text-accent-yellow p-4 rounded font-space-mono text-sm relative">
+                    <div class="absolute -top-2 right-4 bg-accent-green text-white px-2 py-1 text-xs font-bold rounded">EXAMPLE</div>
+&lt;div class="hbox(pack/middle) gap(lg)"&gt;
+  &lt;div&gt;Logo&lt;/div&gt;
+  &lt;nav&gt;Menu&lt;/nav&gt;
+&lt;/div&gt;
+
+<!-- vs TailwindCSS -->
+&lt;div class="flex justify-between items-center gap-6"&gt;
+  &lt;div&gt;Logo&lt;/div&gt;
+  &lt;nav&gt;Menu&lt;/nav&gt;
+&lt;/div&gt;
+                </div>
+
+                <div class="bg-accent-green text-white p-4 rounded mt-6 text-sm relative rotate-neg-0_5">
+                    <div class="absolute -top-2 left-4 bg-white p-1 rounded-full border-2 border-soft-black">💡</div>
+                    <strong>Layout Tip:</strong> AdorableCSS는 Figma 용어를 사용하고, TailwindCSS는 CSS 속성명을 직접 사용합니다!
+                </div>
+            </section>
+
+            <!-- Typography Section -->
+            <section class="bg-white border-3 border-soft-black rounded-lg p-8 relative transition-all duration-300 rotate-neg-0_5 hover-lift hover:shadow-hover" id="typography">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b-2 border-light-gray">
+                    <h2 class="font-caveat text-2xl font-bold text-charcoal">Typography</h2>
+                    <div class="bg-accent-coral text-white w-10 h-10 rounded-full flex items-center justify-center text-lg rotate-neg-10">✍️</div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="font-kalam text-lg font-bold text-accent-purple mb-4 relative pl-4">
+                        <span class="absolute left-0 text-accent-yellow font-caveat font-bold">→</span>
+                        Text Sizing
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>text(lg)</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>text-lg</code></div>
+                            <div class="text-xs text-warm-gray">Large text size</div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>text(center)</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>text-center</code></div>
+                            <div class="text-xs text-warm-gray">Center align text</div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>text(lg/1.5/center)</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>text-lg leading-6 text-center</code></div>
+                            <div class="text-xs text-warm-gray">Size + line height + alignment</div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>font(bold)</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>font-bold</code></div>
+                            <div class="text-xs text-warm-gray">Bold font weight</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-5 gap-2 mb-6">
+                    <div class="bg-light-gray px-2 py-1 rounded text-center font-space-mono text-xs border transition-all duration-300 hover:bg-accent-blue hover:text-white hover:scale-105 cursor-pointer">xs</div>
+                    <div class="bg-light-gray px-2 py-1 rounded text-center font-space-mono text-xs border transition-all duration-300 hover:bg-accent-blue hover:text-white hover:scale-105 cursor-pointer">sm</div>
+                    <div class="bg-light-gray px-2 py-1 rounded text-center font-space-mono text-xs border transition-all duration-300 hover:bg-accent-blue hover:text-white hover:scale-105 cursor-pointer">base</div>
+                    <div class="bg-light-gray px-2 py-1 rounded text-center font-space-mono text-xs border transition-all duration-300 hover:bg-accent-blue hover:text-white hover:scale-105 cursor-pointer">lg</div>
+                    <div class="bg-light-gray px-2 py-1 rounded text-center font-space-mono text-xs border transition-all duration-300 hover:bg-accent-blue hover:text-white hover:scale-105 cursor-pointer">xl</div>
+                </div>
+
+                <div class="bg-accent-green text-white p-4 rounded mt-6 text-sm relative rotate-neg-0_5">
+                    <div class="absolute -top-2 left-4 bg-white p-1 rounded-full border-2 border-soft-black">💡</div>
+                    <strong>Typography Tip:</strong> AdorableCSS는 하나의 함수로 여러 속성을 조합하고, TailwindCSS는 각 속성을 개별 클래스로 제공합니다!
+                </div>
+            </section>
+
+            <!-- Colors Section -->
+            <section class="bg-white border-3 border-soft-black rounded-lg p-8 relative transition-all duration-300 rotate-1 hover-lift hover:shadow-hover" id="colors">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b-2 border-light-gray">
+                    <h2 class="font-caveat text-2xl font-bold text-charcoal">Colors</h2>
+                    <div class="bg-accent-coral text-white w-10 h-10 rounded-full flex items-center justify-center text-lg rotate-neg-10">🎨</div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="font-kalam text-lg font-bold text-accent-purple mb-4 relative pl-4">
+                        <span class="absolute left-0 text-accent-yellow font-caveat font-bold">→</span>
+                        Color Properties
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>c(primary)</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>text-blue-500</code></div>
+                            <div class="text-xs text-warm-gray">Text color</div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>bg(white)</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>bg-white</code></div>
+                            <div class="text-xs text-warm-gray">Background color</div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>bg(white.5)</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>bg-white/50</code></div>
+                            <div class="text-xs text-warm-gray">50% opacity background</div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>border(gray-200)</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>border-gray-200</code></div>
+                            <div class="text-xs text-warm-gray">Border color</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-accent-green text-white p-4 rounded mt-6 text-sm relative rotate-neg-0_5">
+                    <div class="absolute -top-2 left-4 bg-white p-1 rounded-full border-2 border-soft-black">💡</div>
+                    <strong>Color Tip:</strong> AdorableCSS는 .5로 투명도를 표현하고, TailwindCSS는 /50 문법을 사용합니다!
+                </div>
+            </section>
+
+            <!-- Spacing Section -->
+            <section class="bg-white border-3 border-soft-black rounded-lg p-8 relative transition-all duration-300 rotate-neg-1 hover-lift hover:shadow-hover" id="spacing">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b-2 border-light-gray">
+                    <h2 class="font-caveat text-2xl font-bold text-charcoal">Spacing</h2>
+                    <div class="bg-accent-coral text-white w-10 h-10 rounded-full flex items-center justify-center text-lg rotate-neg-10">📏</div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="font-kalam text-lg font-bold text-accent-purple mb-4 relative pl-4">
+                        <span class="absolute left-0 text-accent-yellow font-caveat font-bold">→</span>
+                        Padding & Margin
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>p(md)</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>p-4</code></div>
+                            <div class="text-xs text-warm-gray">All sides padding</div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>px(lg)</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>px-6</code></div>
+                            <div class="text-xs text-warm-gray">Horizontal padding</div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>m(auto)</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>m-auto</code></div>
+                            <div class="text-xs text-warm-gray">Center element</div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>p(sm/lg)</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>py-2 px-6</code></div>
+                            <div class="text-xs text-warm-gray">Vertical/Horizontal padding</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-4 gap-2 mb-6">
+                    <div class="bg-light-gray px-2 py-1 rounded text-center font-space-mono text-xs border transition-all duration-300 hover:bg-accent-blue hover:text-white hover:scale-105 cursor-pointer">xs→1</div>
+                    <div class="bg-light-gray px-2 py-1 rounded text-center font-space-mono text-xs border transition-all duration-300 hover:bg-accent-blue hover:text-white hover:scale-105 cursor-pointer">sm→2</div>
+                    <div class="bg-light-gray px-2 py-1 rounded text-center font-space-mono text-xs border transition-all duration-300 hover:bg-accent-blue hover:text-white hover:scale-105 cursor-pointer">md→4</div>
+                    <div class="bg-light-gray px-2 py-1 rounded text-center font-space-mono text-xs border transition-all duration-300 hover:bg-accent-blue hover:text-white hover:scale-105 cursor-pointer">lg→6</div>
+                </div>
+
+                <div class="bg-accent-green text-white p-4 rounded mt-6 text-sm relative rotate-neg-0_5">
+                    <div class="absolute -top-2 left-4 bg-white p-1 rounded-full border-2 border-soft-black">💡</div>
+                    <strong>Spacing Tip:</strong> AdorableCSS는 의미있는 토큰을 사용하고, TailwindCSS는 숫자 스케일을 사용합니다!
+                </div>
+            </section>
+
+            <!-- Effects Section -->
+            <section class="bg-white border-3 border-soft-black rounded-lg p-8 relative transition-all duration-300 rotate-0_5 hover-lift hover:shadow-hover" id="effects">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b-2 border-light-gray">
+                    <h2 class="font-caveat text-2xl font-bold text-charcoal">Effects</h2>
+                    <div class="bg-accent-coral text-white w-10 h-10 rounded-full flex items-center justify-center text-lg rotate-neg-10">✨</div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="font-kalam text-lg font-bold text-accent-purple mb-4 relative pl-4">
+                        <span class="absolute left-0 text-accent-yellow font-caveat font-bold">→</span>
+                        Shadows & Borders
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>shadow(md)</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>shadow-md</code></div>
+                            <div class="text-xs text-warm-gray">Medium shadow</div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>r(lg)</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>rounded-lg</code></div>
+                            <div class="text-xs text-warm-gray">Large border radius</div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>border(2/solid/gray)</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>border-2 border-solid border-gray-300</code></div>
+                            <div class="text-xs text-warm-gray">Border with style</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-accent-green text-white p-4 rounded mt-6 text-sm relative rotate-neg-0_5">
+                    <div class="absolute -top-2 left-4 bg-white p-1 rounded-full border-2 border-soft-black">💡</div>
+                    <strong>Effects Tip:</strong> AdorableCSS는 압축된 문법을, TailwindCSS는 명시적인 클래스들을 사용합니다!
+                </div>
+            </section>
+
+            <!-- States Section -->
+            <section class="bg-white border-3 border-soft-black rounded-lg p-8 relative transition-all duration-300 rotate-neg-0_5 hover-lift hover:shadow-hover" id="states">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b-2 border-light-gray">
+                    <h2 class="font-caveat text-2xl font-bold text-charcoal">States</h2>
+                    <div class="bg-accent-coral text-white w-10 h-10 rounded-full flex items-center justify-center text-lg rotate-neg-10">🔄</div>
+                </div>
+
+                <div class="mb-6">
+                    <h3 class="font-kalam text-lg font-bold text-accent-purple mb-4 relative pl-4">
+                        <span class="absolute left-0 text-accent-yellow font-caveat font-bold">→</span>
+                        Pseudo States
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>hover:bg(coral)</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>hover:bg-orange-400</code></div>
+                            <div class="text-xs text-warm-gray">Hover background</div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>focus:border(blue)</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>focus:border-blue-500</code></div>
+                            <div class="text-xs text-warm-gray">Focus border</div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-4 p-3 bg-cream rounded transition-all duration-300 hover:bg-accent-yellow hover:translate-x-1 cursor-pointer syntax-item">
+                            <div class="font-space-mono text-sm text-charcoal font-semibold">AdorableCSS: <code>active:scale(0.95)</code></div>
+                            <div class="font-space-mono text-sm text-warm-gray">TailwindCSS: <code>active:scale-95</code></div>
+                            <div class="text-xs text-warm-gray">Active scale</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-accent-green text-white p-4 rounded mt-6 text-sm relative rotate-neg-0_5">
+                    <div class="absolute -top-2 left-4 bg-white p-1 rounded-full border-2 border-soft-black">💡</div>
+                    <strong>States Tip:</strong> 두 프레임워크 모두 비슷한 pseudo-class 문법을 사용합니다!
+                </div>
+            </section>
+
+            <!-- Responsive Section -->
+            <section class="bg-white border-3 border-soft-black rounded-lg p-8 relative transition-all duration-300 lg:col-span-2 rotate-0_5 hover-lift hover:shadow-hover" id="responsive">
+                <div class="flex items-center justify-between mb-6 pb-4 border-b-2 border-light-gray">
+                    <h2 class="font-caveat text-2xl font-bold text-charcoal">Responsive Design</h2>
+                    <div class="bg-accent-coral text-white w-10 h-10 rounded-full flex items-center justify-center text-lg rotate-neg-10">📱</div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h3 class="font-kalam text-lg font-bold text-accent-purple mb-4 relative pl-4">
+                            <span class="absolute left-0 text-accent-yellow font-caveat font-bold">→</span>
+                            AdorableCSS 방식
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-cream rounded">
+                                <div class="font-space-mono text-sm text-charcoal font-semibold">sm:p(lg)</div>
+                                <div class="text-xs text-warm-gray">Small screens and up</div>
+                            </div>
+                            <div class="p-3 bg-cream rounded">
+                                <div class="font-space-mono text-sm text-charcoal font-semibold">md:hbox</div>
+                                <div class="text-xs text-warm-gray">Medium screens and up</div>
+                            </div>
+                            <div class="p-3 bg-cream rounded">
+                                <div class="font-space-mono text-sm text-charcoal font-semibold">lg:grid(3fr)</div>
+                                <div class="text-xs text-warm-gray">Large screens and up</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="font-kalam text-lg font-bold text-accent-purple mb-4 relative pl-4">
+                            <span class="absolute left-0 text-accent-yellow font-caveat font-bold">→</span>
+                            TailwindCSS 방식
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-cream rounded">
+                                <div class="font-space-mono text-sm text-charcoal font-semibold">sm:p-6</div>
+                                <div class="text-xs text-warm-gray">Small screens and up</div>
+                            </div>
+                            <div class="p-3 bg-cream rounded">
+                                <div class="font-space-mono text-sm text-charcoal font-semibold">md:flex</div>
+                                <div class="text-xs text-warm-gray">Medium screens and up</div>
+                            </div>
+                            <div class="p-3 bg-cream rounded">
+                                <div class="font-space-mono text-sm text-charcoal font-semibold">lg:grid-cols-3</div>
+                                <div class="text-xs text-warm-gray">Large screens and up</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-soft-black text-accent-yellow p-4 rounded font-space-mono text-sm mt-6 relative">
+                    <div class="absolute -top-2 right-4 bg-accent-green text-white px-2 py-1 text-xs font-bold rounded">COMPARISON</div>
+<!-- AdorableCSS -->
+&lt;div class="vbox gap(md) md:hbox md:gap(lg)"&gt;
+  Mobile: Vertical, Desktop: Horizontal
+&lt;/div&gt;
+
+<!-- TailwindCSS -->
+&lt;div class="flex flex-col gap-4 md:flex-row md:gap-6"&gt;
+  Mobile: Vertical, Desktop: Horizontal
+&lt;/div&gt;
+                </div>
+
+                <div class="bg-accent-green text-white p-4 rounded mt-6 text-sm relative rotate-neg-0_5">
+                    <div class="absolute -top-2 left-4 bg-white p-1 rounded-full border-2 border-soft-black">💡</div>
+                    <strong>Responsive Tip:</strong> 두 프레임워크 모두 모바일 퍼스트 접근법을 사용하지만, 문법의 간결성에 차이가 있습니다!
+                </div>
+            </section>
+        </div>
+
+        <!-- Summary Section -->
+        <section class="mt-16 bg-light-gray border-2 border-soft-black p-8 rounded-lg">
+            <h2 class="font-caveat text-3xl font-bold text-soft-black mb-8 text-center tracking-tight">Key Differences Summary</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="font-kalam text-xl font-bold text-accent-coral mb-4">🎨 AdorableCSS</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start gap-2">
+                            <span class="text-accent-green">✓</span>
+                            <span>Figma 용어 사용 (hbox, vbox, fill, hug)</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-accent-green">✓</span>
+                            <span>함수형 문법으로 여러 속성 조합</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-accent-green">✓</span>
+                            <span>더 간결한 문법 (text(lg/1.5/center))</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-accent-green">✓</span>
+                            <span>의미론적 토큰 시스템</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-accent-green">✓</span>
+                            <span>AI 친화적 설계</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="font-kalam text-xl font-bold text-accent-blue mb-4">⚡ TailwindCSS</h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start gap-2">
+                            <span class="text-accent-green">✓</span>
+                            <span>CSS 속성명 직접 사용</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-accent-green">✓</span>
+                            <span>각 속성별 개별 클래스</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-accent-green">✓</span>
+                            <span>더 명시적인 문법</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-accent-green">✓</span>
+                            <span>숫자 기반 스케일 시스템</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-accent-green">✓</span>
+                            <span>광범위한 생태계와 도구</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const syntaxItems = document.querySelectorAll('.syntax-item');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            
+            syntaxItems.forEach(item => {
+                const adorableCode = item.children[0].textContent.toLowerCase();
+                const tailwindCode = item.children[1].textContent.toLowerCase();
+                const description = item.children[2].textContent.toLowerCase();
+                
+                if (searchTerm === '' || 
+                    adorableCode.includes(searchTerm) || 
+                    tailwindCode.includes(searchTerm) || 
+                    description.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Quick navigation
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Copy on click
+        syntaxItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const adorableCode = this.children[0].textContent.split(': ')[1];
+                const tailwindCode = this.children[1].textContent.split(': ')[1];
+                const copyText = `AdorableCSS: ${adorableCode}\nTailwindCSS: ${tailwindCode}`;
+                
+                navigator.clipboard.writeText(copyText).then(() => {
+                    // Visual feedback
+                    const original = this.style.backgroundColor;
+                    this.style.backgroundColor = '#26D0CE';
+                    this.style.color = 'white';
+                    
+                    setTimeout(() => {
+                        this.style.backgroundColor = original;
+                        this.style.color = '';
+                    }, 300);
+                });
+            });
+            
+            item.style.cursor = 'pointer';
+            item.title = '클릭하여 비교 문법 복사';
+        });
+
+        // Value chip copy
+        document.querySelectorAll('.bg-light-gray').forEach(chip => {
+            chip.addEventListener('click', function() {
+                navigator.clipboard.writeText(this.textContent).then(() => {
+                    const original = this.style.backgroundColor;
+                    this.style.backgroundColor = '#FF6B6B';
+                    this.style.color = 'white';
+                    
+                    setTimeout(() => {
+                        this.style.backgroundColor = original;
+                        this.style.color = '';
+                    }, 200);
+                });
+            });
+            
+            chip.style.cursor = 'pointer';
+            chip.title = '클릭하여 복사';
+        });
+    </script>
+</body>
+</html>

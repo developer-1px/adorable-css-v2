@@ -3,19 +3,16 @@
  * Unified system for auto-injecting CSS and 02-design_tokens dynamically
  */
 
-import { generateCSS, clearTokenRegistry, defaultTokens } from 'adorable-css';
-import type { DesignTokens } from 'adorable-css';
+import { generateCSS } from 'adorable-css';
 
 interface DynamicStyleManagerOptions {
   enabled?: boolean;
-  tokens?: DesignTokens;
   watchInterval?: number;
   debug?: boolean;
 }
 
 // Module-level state
 let enabled = true;
-let _tokens: DesignTokens = defaultTokens;
 let styleElement: HTMLStyleElement | null = null;
 let observer: MutationObserver | null = null;
 const classCache: Set<string> = new Set();
@@ -215,7 +212,6 @@ const getClasses = (): string[] => Array.from(classCache);
  */
 const clear = (): void => {
   classCache.clear();
-  clearTokenRegistry();
   
   if (styleElement) {
     styleElement.textContent = '';
@@ -258,9 +254,6 @@ const updateConfig = (options: Partial<DynamicStyleManagerOptions>): void => {
     enabled = options.enabled;
   }
   
-  if (options.tokens !== undefined) {
-    _tokens = options.tokens;
-  }
   
   if (options.debug !== undefined) {
     debug = options.debug;
@@ -275,9 +268,6 @@ const updateConfig = (options: Partial<DynamicStyleManagerOptions>): void => {
     init();
   } else if (!enabled && isActive()) {
     destroy();
-  } else if (enabled && options.tokens) {
-    // Update tokens if changed
-    updateStyles();
   }
 };
 
@@ -286,7 +276,6 @@ const updateConfig = (options: Partial<DynamicStyleManagerOptions>): void => {
  */
 const initConfig = (options: DynamicStyleManagerOptions = {}): void => {
   enabled = options.enabled ?? true;
-  _tokens = options.tokens ?? defaultTokens;
   debug = options.debug ?? false;
   watchInterval = options.watchInterval ?? 100;
 };

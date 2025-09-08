@@ -1,5 +1,5 @@
-import { defineComponent } from '../../defineComponent-unified';
-import type { ComponentDefinition } from '../../defineComponent-unified';
+import { defineComponent } from '../../defineComponent';
+import type { ComponentDefinition } from '../../defineComponent';
 
 // Display component - for maximum visual impact
 export const displayDefinition: ComponentDefinition = {

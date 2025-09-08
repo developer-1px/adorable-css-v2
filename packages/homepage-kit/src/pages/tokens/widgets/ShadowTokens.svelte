@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { defaultTokens } from 'adorable-css';
+  import { getTokenEntries } from 'adorable-css';
   import { Sun, Layers, MousePointer, Sparkles } from 'lucide-svelte';
   
-  const shadows = Object.entries(defaultTokens.shadow).map(([key, value]) => ({ key, value }));
+  const shadows = getTokenEntries('shadow');
   
   // Elevation levels for integrated display
   const elevationLevels = [

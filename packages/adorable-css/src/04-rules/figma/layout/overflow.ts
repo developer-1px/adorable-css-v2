@@ -1,4 +1,4 @@
-import { rule2, extractValue } from '../../../01-core/ast-utils';
+import { rule2, extractValue } from '../../ast-utils/rule2-helpers';
 
 const OVERFLOW_MAP = {visible:'visible',hidden:'hidden',clip:'clip',scroll:'scroll',auto:'auto'};
 

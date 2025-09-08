@@ -2,7 +2,7 @@
   import { onMount } from 'svelte';
   import { Copy, Check, ChevronDown, ChevronRight } from 'lucide-svelte';
   import { generateCSS, generateClass, getAllRule2Handlers } from 'adorable-css';
-  import { initializeRule2Handlers } from 'adorable-css/04-rules';
+  import { initializeRule2Handlers } from '../../../../../adorable-css/src/04-rules/rule2-registry';
   import Badge from '$lib/components/ui/Badge.svelte';
   import Card from '$lib/components/ui/Card.svelte';
   import Button from '$lib/components/ui/Button.svelte';

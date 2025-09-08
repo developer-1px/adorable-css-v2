@@ -1,16 +1,16 @@
 <script lang="ts">
-  import { defaultTokens } from 'adorable-css';
+  // defaultTokens removed - using hardcoded values
   import { Sparkles, Copy, Clock, Waves } from 'lucide-svelte';
   
   // Enhanced effects data
-  const durationVariants = Object.entries(defaultTokens.duration).map(([key, value]) => ({
+  const durationVariants = [].map(([key, value]) => ({
     key,
     value,
     usage: getDurationUsage(key),
     category: 'duration'
   }));
   
-  const easeVariants = Object.entries(defaultTokens.ease).map(([key, value]) => ({
+  const easeVariants = [].map(([key, value]) => ({
     key,
     value,
     usage: getEaseUsage(key),

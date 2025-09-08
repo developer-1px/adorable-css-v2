@@ -1,4 +1,4 @@
-import { rule2, getAllValues } from '../../../01-core/ast-utils';
+import { rule2, getAllValues } from '../../ast-utils/rule2-helpers';
 import { color } from '../../../03-values/value-transform';
 import { parseBorder, parseRadius } from './border-utils';
 
@@ -29,3 +29,29 @@ export const border = rule2((s) => {
   }
   return `border:${parseBorder(args)}`;
 });
+
+// Direct border direction rules for cleaner syntax
+export const borderT = rule2((s) => {
+  const args = getAllValues(s).join('');
+  if (!args) return 'border-top:1px solid var(--border)';
+  return `border-top:${parseBorder(args)}`;
+});
+
+export const borderR = rule2((s) => {
+  const args = getAllValues(s).join('');
+  if (!args) return 'border-right:1px solid var(--border)';
+  return `border-right:${parseBorder(args)}`;
+});
+
+export const borderB = rule2((s) => {
+  const args = getAllValues(s).join('');
+  if (!args) return 'border-bottom:1px solid var(--border)';
+  return `border-bottom:${parseBorder(args)}`;
+});
+
+export const borderL = rule2((s) => {
+  const args = getAllValues(s).join('');
+  if (!args) return 'border-left:1px solid var(--border)';
+  return `border-left:${parseBorder(args)}`;
+});
+

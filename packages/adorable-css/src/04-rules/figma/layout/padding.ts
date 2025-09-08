@@ -1,4 +1,5 @@
-import { rule2, single, getSideValues, spacing, safeCss } from '../../../01-core/ast-utils';
+import { rule2, single, getSideValues, safeCss } from '../../ast-utils/rule2-helpers';
+import { spacing } from '../../../03-values/value-transform';
 
 export const p = rule2(s => safeCss('padding', getSideValues(s, spacing)));
 export const pt = single('padding-top', spacing);

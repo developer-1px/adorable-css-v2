@@ -3,54 +3,54 @@
  * Format: color-shade (e.g. red-500, blue-100, gray-900)
  */
 
-// Base OKLCH color definitions (color-500 as base)
+// Base OKLCH color definitions (color-500 as base) - Adjusted for brighter palette
 export const OKLCH_BASE_COLORS = {
   // Reds
-  'red': 'oklch(62.8% 0.25769 27.41)',
-  'rose': 'oklch(64.75% 0.1947 3.48)',
-  'pink': 'oklch(65.69% 0.196 353.16)',
+  'red': 'oklch(68% 0.22 27.41)',
+  'rose': 'oklch(70% 0.17 3.48)',
+  'pink': 'oklch(71% 0.17 353.16)',
   
-  // Oranges
-  'orange': 'oklch(70.66% 0.1532 70.67)',
-  'amber': 'oklch(78.23% 0.1336 89.65)',
-  'yellow': 'oklch(84.89% 0.1367 102.21)',
+  // Oranges  
+  'orange': 'oklch(76% 0.14 70.67)',
+  'amber': 'oklch(82% 0.12 89.65)',
+  'yellow': 'oklch(88% 0.12 102.21)',
   
   // Greens
-  'lime': 'oklch(79.87% 0.1484 120.75)',
-  'green': 'oklch(64.17% 0.1369 142.5)',
-  'emerald': 'oklch(69.59% 0.149 162.48)',
-  'teal': 'oklch(70.38% 0.1181 180.08)',
-  'cyan': 'oklch(76.79% 0.131 191.75)',
+  'lime': 'oklch(83% 0.13 120.75)',
+  'green': 'oklch(70% 0.12 142.5)',
+  'emerald': 'oklch(74% 0.13 162.48)',
+  'teal': 'oklch(75% 0.10 180.08)',
+  'cyan': 'oklch(80% 0.11 191.75)',
   
   // Blues
-  'sky': 'oklch(72.61% 0.1206 230.31)',
-  'blue': 'oklch(67.29% 0.1966 255.85)',
-  'indigo': 'oklch(54.04% 0.2175 271.71)',
-  'violet': 'oklch(60.8% 0.2346 296.85)',
-  'purple': 'oklch(58.82% 0.2085 309.7)',
-  'fuchsia': 'oklch(64.75% 0.277 328.36)',
+  'sky': 'oklch(77% 0.11 230.31)',
+  'blue': 'oklch(72% 0.17 255.85)',
+  'indigo': 'oklch(60% 0.19 271.71)',
+  'violet': 'oklch(66% 0.20 296.85)',
+  'purple': 'oklch(64% 0.18 309.7)',
+  'fuchsia': 'oklch(70% 0.24 328.36)',
   
   // Neutrals
-  'slate': 'oklch(52.33% 0.0133 247.86)',
-  'gray': 'oklch(53.56% 0 0)',
-  'zinc': 'oklch(52.33% 0.0043 247.86)',
-  'neutral': 'oklch(53.56% 0 0)',
-  'stone': 'oklch(52.33% 0.0087 56.29)',
+  'slate': 'oklch(58% 0.0133 247.86)',
+  'gray': 'oklch(60% 0 0)',
+  'zinc': 'oklch(58% 0.0043 247.86)',
+  'neutral': 'oklch(60% 0 0)',
+  'stone': 'oklch(58% 0.0087 56.29)',
 } as const;
 
-// Shade variations (lightness adjustments)
+// Shade variations (lightness adjustments) - Brighter palette
 export const SHADE_LIGHTNESS = {
   '50': '98%',
-  '100': '95%',
-  '200': '90%', 
-  '300': '82%',
-  '400': '70%',
-  '500': '60%',  // base
-  '600': '50%',
-  '700': '40%',
-  '800': '30%',
-  '900': '20%',
-  '950': '10%',
+  '100': '96%',
+  '200': '92%', 
+  '300': '86%',
+  '400': '76%',
+  '500': '65%',  // base - brighter
+  '600': '56%',
+  '700': '46%',
+  '800': '36%',
+  '900': '26%',
+  '950': '16%',
 } as const;
 
 // Generate full color map with shades

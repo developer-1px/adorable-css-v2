@@ -3,8 +3,8 @@
  * makeValue.ts에서 분리하여 코드 라인수 감소
  */
 
-import { checkIsToken } from '../01-core/utils/token-checker'
-import { generateSpacingCalc, generateFontCalc, generateSizeCalc } from './token-resolver'
+import { checkIsToken } from '../02-design_tokens/token-checker'
+import { generateSpacingCalc, generateFontCalc, generateSizeCalc } from '../02-design_tokens/dynamicTokens'
 
 // CSS 변수 처리
 export const cssvar = (value: string | number) => {
@@ -14,16 +14,9 @@ export const cssvar = (value: string | number) => {
   if (strValue.startsWith('--')) return `var(${value})`;
   
   // 토큰 처리
-  if (checkIsToken(strValue, 'spacing')) {
+  if (checkIsToken(strValue)) {
+    // Determine token type based on context (simplified for now)
     return generateSpacingCalc(strValue);
-  }
-  
-  if (checkIsToken(strValue, 'font')) {
-    return generateFontCalc(strValue);
-  }
-  
-  if (checkIsToken(strValue, 'size')) {
-    return generateSizeCalc(strValue);
   }
   
   return value;

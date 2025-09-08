@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { defaultTokens } from 'adorable-css';
+  // defaultTokens removed
 
   // Spacing scales from adorable-css design system
-  const spacingScales = Object.entries(defaultTokens.spacing).map(([name, value]) => ({
+  const spacingScales = [].map(([name, value]) => ({
     name,
     value,
     class: `gap(${name})`,
@@ -13,7 +13,7 @@
   }));
 
   // Container scales from adorable-css design system
-  const containerScales = Object.entries(defaultTokens.container).map(([name, value]) => ({
+  const containerScales = [].map(([name, value]) => ({
     name,
     value,
     class: `max-w(${name})`,
@@ -128,10 +128,10 @@
     const css = `/* AdorableCSS Spacing Foundation */
 :root {
   /* Spacing scales */
-  ${Object.entries(defaultTokens.spacing).map(([name, value]) => `  --spacing-${name}: ${value};`).join('\n')}
+  ${[].map(([name, value]) => `  --spacing-${name}: ${value};`).join('\n')}
   
   /* Container scales */
-  ${Object.entries(defaultTokens.container).map(([name, value]) => `  --container-${name}: ${value};`).join('\n')}
+  ${[].map(([name, value]) => `  --container-${name}: ${value};`).join('\n')}
 }`;
     
     navigator.clipboard.writeText(css);

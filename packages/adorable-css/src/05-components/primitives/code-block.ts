@@ -1,12 +1,11 @@
 // Type definitions
 type CSSRule = Record<string, string | Record<string, any>>;
-export type RuleHandler = (args: string) => CSSRule;
-export type KeywordRuleHandler = () => CSSRule;
-import type { StringRuleHandler } from '../defineComponent-unified';
+import type { StringRuleHandler } from '../defineComponent';
+
 // Code block component for displaying code snippets
 export const codeBlockString: StringRuleHandler = (_args?: string): string | (string | CSSRule)[] => {
   return [
-    'r(lg) p(24) overflow(auto) text(mono/sm) leading(relaxed) bg(gray-50) c(black)',
+    'r(lg) p(24) overflow(auto) text(mono/sm) leading(relaxed) bg(gray-50) c(black)'
   ];
 };
 

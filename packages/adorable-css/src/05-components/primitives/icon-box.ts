@@ -1,8 +1,7 @@
 // Type definitions
 type CSSRule = Record<string, string | Record<string, any>>;
-export type RuleHandler = (args: string) => CSSRule;
-export type KeywordRuleHandler = () => CSSRule;
-import type { StringRuleHandler } from '../defineComponent-unified';
+import type { StringRuleHandler } from '../defineComponent';
+
 
 // Icon box component - perfect for icon containers in cards, features, etc.
 export const iconBoxString: StringRuleHandler = (args?: string): string | (string | CSSRule)[] => {

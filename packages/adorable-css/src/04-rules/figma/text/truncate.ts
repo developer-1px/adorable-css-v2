@@ -1,4 +1,4 @@
-import { rule2, getFirstValue } from '../../../01-core/ast-utils';
+import { rule2, getFirstValue } from '../../ast-utils/rule2-helpers';
 
 export const truncate = rule2((s) => {
   const lines = parseInt(getFirstValue(s) || '1');

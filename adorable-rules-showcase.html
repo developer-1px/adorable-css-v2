@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdorableCSS Rules - Complete Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Kalam:wght@300;400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Design System Variables */
+        :root {
+            /* Colors */
+            --cream: #FFFEF9;
+            --soft-black: #1A1A1A;
+            --charcoal: #2D2D2D;
+            --warm-gray: #6B6B6B;
+            --light-gray: #E8E8E8;
+            --accent-coral: #FF6B6B;
+            --accent-blue: #4ECDC4;
+            --accent-yellow: #FFE66D;
+            --accent-purple: #9B59B6;
+            --accent-green: #26D0CE;
+            --white: #FFFFFF;
+            
+            /* Typography Scale */
+            --text-xs: 0.75rem;
+            --text-sm: 0.875rem;
+            --text-base: 1rem;
+            --text-lg: 1.125rem;
+            --text-xl: 1.25rem;
+            --text-2xl: 1.5rem;
+            --text-3xl: 1.875rem;
+            --text-4xl: 2.25rem;
+            --text-5xl: 3rem;
+            --text-6xl: 3.75rem;
+            
+            /* Spacing */
+            --space-xs: 0.25rem;
+            --space-sm: 0.5rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            --space-4xl: 5rem;
+            
+            /* Border Radius */
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --radius-2xl: 1.5rem;
+        }
+
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--cream);
+            color: var(--soft-black);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* AdorableCSS Components with Parentheses */
+        .hbox\(\) {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .vbox\(\) {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .hbox\(center\) { 
+            display: flex;
+            flex-direction: row;
+            justify-content: center; 
+            align-items: center; 
+        }
+        .hbox\(pack\) { 
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between; 
+        }
+        .hbox\(middle\) { 
+            display: flex;
+            flex-direction: row;
+            align-items: center; 
+        }
+        .hbox\(pack\/middle\) {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .vbox\(center\) { 
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+        }
+        .vbox\(middle\) { 
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+        }
+
+        .gap\(xs\) { gap: var(--space-xs); }
+        .gap\(sm\) { gap: var(--space-sm); }
+        .gap\(md\) { gap: var(--space-md); }
+        .gap\(lg\) { gap: var(--space-lg); }
+        .gap\(xl\) { gap: var(--space-xl); }
+        .gap\(2xl\) { gap: var(--space-2xl); }
+        .gap\(3xl\) { gap: var(--space-3xl); }
+
+        .p\(xs\) { padding: var(--space-xs); }
+        .p\(sm\) { padding: var(--space-sm); }
+        .p\(md\) { padding: var(--space-md); }
+        .p\(lg\) { padding: var(--space-lg); }
+        .p\(xl\) { padding: var(--space-xl); }
+        .p\(2xl\) { padding: var(--space-2xl); }
+        .p\(3xl\) { padding: var(--space-3xl); }
+        .p\(4xl\) { padding: var(--space-4xl); }
+
+        .px-lg { padding-left: var(--space-lg); padding-right: var(--space-lg); }
+        .py-lg { padding-top: var(--space-lg); padding-bottom: var(--space-lg); }
+        .px-xl { padding-left: var(--space-xl); padding-right: var(--space-xl); }
+        .py-xl { padding-top: var(--space-xl); padding-bottom: var(--space-xl); }
+
+        .m-auto { margin: auto; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .mb-lg { margin-bottom: var(--space-lg); }
+        .mb-xl { margin-bottom: var(--space-xl); }
+        .mb-2xl { margin-bottom: var(--space-2xl); }
+        .mb-3xl { margin-bottom: var(--space-3xl); }
+        .mb-4xl { margin-bottom: var(--space-4xl); }
+        .mt-lg { margin-top: var(--space-lg); }
+        .mt-xl { margin-top: var(--space-xl); }
+        .mt-2xl { margin-top: var(--space-2xl); }
+
+        .r\(sm\) { border-radius: var(--radius-sm); }
+        .r\(md\) { border-radius: var(--radius-md); }
+        .r\(lg\) { border-radius: var(--radius-lg); }
+        .r\(xl\) { border-radius: var(--radius-xl); }
+        .r\(2xl\) { border-radius: var(--radius-2xl); }
+        .r\(full\) { border-radius: 50%; }
+
+        .bg\(white\) { background-color: var(--white); }
+        .bg\(cream\) { background-color: var(--cream); }
+        .bg\(coral\) { background-color: var(--accent-coral); }
+        .bg\(blue\) { background-color: var(--accent-blue); }
+        .bg\(yellow\) { background-color: var(--accent-yellow); }
+        .bg\(purple\) { background-color: var(--accent-purple); }
+        .bg\(green\) { background-color: var(--accent-green); }
+        .bg\(light-gray\) { background-color: var(--light-gray); }
+
+        .c\(white\) { color: var(--white); }
+        .c\(coral\) { color: var(--accent-coral); }
+        .c\(blue\) { color: var(--accent-blue); }
+        .c\(purple\) { color: var(--accent-purple); }
+        .c\(charcoal\) { color: var(--charcoal); }
+        .c\(warm-gray\) { color: var(--warm-gray); }
+        .c\(soft-black\) { color: var(--soft-black); }
+
+        .border-black { border: 3px solid var(--soft-black); }
+        .border-gray { border: 2px solid var(--light-gray); }
+
+        .shadow-soft { box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06); }
+        .shadow-md { box-shadow: 0 4px 6px rgba(0, 0, 0, 0.12); }
+        .shadow-fun { box-shadow: 6px 6px 0 var(--accent-yellow); }
+        .shadow-hover { box-shadow: 8px 8px 0 var(--accent-blue); }
+        .shadow-nav { box-shadow: 3px 3px 0 var(--soft-black); }
+
+        .w-full { width: 100%; }
+        .w-fit { width: fit-content; }
+        .max-w-md { max-width: 28rem; }
+        .max-w-lg { max-width: 32rem; }
+        .max-w-xl { max-width: 36rem; }
+        .max-w-2xl { max-width: 42rem; }
+        .max-w-4xl { max-width: 56rem; }
+        .max-w-6xl { max-width: 72rem; }
+
+        .h-10 { height: 2.5rem; }
+        .h-12 { height: 3rem; }
+
+        .text-center { text-align: center; }
+        .text-left { text-align: left; }
+
+        /* Typography Components */
+        .display\(\) {
+            font-family: 'Caveat', cursive;
+            font-size: clamp(var(--text-4xl), 8vw, var(--text-6xl));
+            font-weight: 700;
+            line-height: 1.1;
+        }
+
+        .heading\(\) {
+            font-family: 'Caveat', cursive;
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .heading\(h1\) { 
+            font-family: 'Caveat', cursive;
+            font-size: var(--text-4xl);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .heading\(h2\) { 
+            font-family: 'Caveat', cursive;
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .heading\(h3\) { 
+            font-family: 'Caveat', cursive;
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .title\(\) {
+            font-family: 'Kalam', cursive;
+            font-size: var(--text-xl);
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .body\(\) {
+            font-family: 'Inter', sans-serif;
+            font-size: var(--text-base);
+            line-height: 1.6;
+        }
+
+        .body\(lg\) { 
+            font-family: 'Inter', sans-serif;
+            font-size: var(--text-lg);
+            line-height: 1.6;
+        }
+        .body\(sm\) { 
+            font-family: 'Inter', sans-serif;
+            font-size: var(--text-sm);
+            line-height: 1.6;
+        }
+
+        .label\(\) {
+            font-family: 'Inter', sans-serif;
+            font-size: var(--text-sm);
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .caption\(\) {
+            font-family: 'Inter', sans-serif;
+            font-size: var(--text-xs);
+            line-height: 1.4;
+        }
+
+        .mono {
+            font-family: 'Space Mono', monospace;
+        }
+
+        /* Interactive Components */
+        .button\(\) {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-md) var(--space-lg);
+            border: 2px solid var(--soft-black);
+            border-radius: var(--radius-xl);
+            background: var(--white);
+            color: var(--charcoal);
+            font-family: 'Inter', sans-serif;
+            font-size: var(--text-sm);
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: rotate(-1deg);
+        }
+
+        .button\(\):hover {
+            transform: rotate(0deg) translateY(-2px);
+            background: var(--accent-coral);
+            color: var(--white);
+            box-shadow: 3px 3px 0 var(--soft-black);
+        }
+
+        .button\(primary\) {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-md) var(--space-lg);
+            border: 2px solid var(--soft-black);
+            border-radius: var(--radius-xl);
+            font-family: 'Inter', sans-serif;
+            font-size: var(--text-sm);
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            transform: rotate(-1deg);
+            background: var(--accent-coral);
+            color: var(--white);
+        }
+
+        .button\(primary\):hover {
+            transform: rotate(0deg) translateY(-2px);
+            background: var(--accent-blue);
+        }
+
+        .card\(\) {
+            background: var(--white);
+            border: 3px solid var(--soft-black);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            transition: all 0.3s ease;
+        }
+
+        .card.hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 8px 8px 0 var(--accent-blue);
+        }
+
+        .card.rotate-1 { transform: rotate(0.5deg); }
+        .card.rotate-2 { transform: rotate(-0.5deg); }
+        .card.rotate-3 { transform: rotate(1deg); }
+        .card.rotate-4 { transform: rotate(-1deg); }
+
+        .card.hover.rotate-1:hover { transform: rotate(0deg) translateY(-5px); }
+        .card.hover.rotate-2:hover { transform: rotate(0deg) translateY(-5px); }
+        .card.hover.rotate-3:hover { transform: rotate(0deg) translateY(-5px); }
+        .card.hover.rotate-4:hover { transform: rotate(0deg) translateY(-5px); }
+
+        .input\(\) {
+            width: 100%;
+            padding: var(--space-lg);
+            border: 3px solid var(--soft-black);
+            border-radius: var(--radius-2xl);
+            font-family: 'Space Mono', monospace;
+            font-size: var(--text-lg);
+            background: var(--white);
+            transform: rotate(-0.5deg);
+            transition: all 0.3s ease;
+        }
+
+        .input\(\):focus {
+            outline: none;
+            transform: rotate(0deg) translateY(-3px);
+            box-shadow: 6px 6px 0 var(--accent-yellow);
+        }
+
+        /* Layout Utilities */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-xl);
+        }
+
+        .grid {
+            display: grid;
+        }
+
+        .grid-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-auto { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+
+        .flex-wrap { flex-wrap: wrap; }
+
+        .relative { position: relative; }
+        .absolute { position: absolute; }
+        .fixed { position: fixed; }
+
+        .top-0 { top: 0; }
+        .left-0 { left: 0; }
+        .right-0 { right: 0; }
+        .bottom-0 { bottom: 0; }
+
+        .z-10 { z-index: 10; }
+        .z-neg { z-index: -1; }
+
+        .opacity-20 { opacity: 0.2; }
+        .pointer-none { pointer-events: none; }
+
+        .transition { transition: all 0.3s ease; }
+
+        /* Special Transforms */
+        .rotate-neg-15 { transform: rotate(-15deg); }
+        .rotate-neg-10 { transform: rotate(-10deg); }
+        .rotate-neg-2 { transform: rotate(-2deg); }
+        .rotate-neg-1 { transform: rotate(-1deg); }
+        .rotate-1 { transform: rotate(1deg); }
+        .rotate-2 { transform: rotate(2deg); }
+        .rotate-10 { transform: rotate(10deg); }
+        .rotate-15 { transform: rotate(15deg); }
+        .rotate-20 { transform: rotate(20deg); }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .grid-auto {
+                grid-template-columns: 1fr;
+            }
+            
+            .hbox.responsive {
+                flex-direction: column;
+            }
+            
+            .card {
+                transform: rotate(0deg) !important;
+            }
+            
+            .container {
+                padding: 0 var(--space-lg);
+            }
+        }
+
+        /* Floating Elements */
+        .doodle {
+            position: fixed;
+            font-family: 'Caveat', cursive;
+            font-size: var(--text-3xl);
+            color: var(--warm-gray);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .doodle-1 { top: 5%; left: 2%; transform: rotate(-15deg); }
+        .doodle-2 { top: 15%; right: 5%; transform: rotate(20deg); }
+        .doodle-3 { bottom: 25%; left: 3%; transform: rotate(-10deg); }
+        .doodle-4 { bottom: 15%; right: 2%; transform: rotate(15deg); }
+
+        /* Interactive Demo Styles */
+        .demo-area {
+            background: var(--light-gray);
+            border: 2px dashed var(--warm-gray);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin: var(--space-lg) 0;
+            position: relative;
+        }
+
+        .demo-area::before {
+            content: 'LIVE DEMO';
+            position: absolute;
+            top: -8px;
+            right: var(--space-lg);
+            background: var(--accent-green);
+            color: var(--white);
+            padding: var(--space-xs) var(--space-sm);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            border-radius: var(--radius-sm);
+        }
+
+        .code-block {
+            background: var(--soft-black);
+            color: var(--accent-yellow);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            font-family: 'Space Mono', monospace;
+            font-size: var(--text-sm);
+            margin: var(--space-md) 0;
+            position: relative;
+            overflow-x: auto;
+        }
+
+        .code-block::before {
+            content: 'HTML';
+            position: absolute;
+            top: -8px;
+            right: var(--space-lg);
+            background: var(--accent-coral);
+            color: var(--white);
+            padding: var(--space-xs) var(--space-sm);
+            font-size: var(--text-xs);
+            font-weight: 700;
+            border-radius: var(--radius-sm);
+        }
+
+        /* Rule Categories */
+        .rule-category {
+            margin: var(--space-4xl) 0;
+        }
+
+        .rule-item {
+            background: var(--cream);
+            border-radius: var(--radius-sm);
+            padding: var(--space-md);
+            margin: var(--space-sm) 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .rule-item:hover {
+            background: var(--accent-yellow);
+            transform: translateX(5px);
+        }
+
+        .rule-name {
+            font-family: 'Space Mono', monospace;
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+
+        .rule-description {
+            color: var(--warm-gray);
+            font-size: var(--text-sm);
+        }
+
+        .icon-badge {
+            background: var(--accent-coral);
+            color: var(--white);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--text-xl);
+            transform: rotate(-10deg);
+        }
+
+        /* Special tip boxes */
+        .tip-box {
+            background: var(--accent-green);
+            color: var(--white);
+            padding: var(--space-lg);
+            border-radius: var(--radius-lg);
+            margin: var(--space-xl) 0;
+            font-size: var(--text-sm);
+            position: relative;
+            transform: rotate(-0.5deg);
+        }
+
+        .tip-box::before {
+            content: '💡';
+            position: absolute;
+            top: -10px;
+            left: var(--space-lg);
+            background: var(--white);
+            padding: var(--space-xs);
+            border-radius: 50%;
+            border: 2px solid var(--soft-black);
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating doodles -->
+    <div class="doodle doodle-1">✨</div>
+    <div class="doodle doodle-2">🎨</div>
+    <div class="doodle doodle-3">{ }</div>
+    <div class="doodle doodle-4">💖</div>
+
+    <!-- Header -->
+    <header class="py-4xl text-center relative mb-4xl">
+        <div class="container">
+            <div class="vbox() center gap(xl)">
+                <h1 class="display() c(coral) rotate-neg-2 mb-lg">
+                    AdorableCSS Rules
+                </h1>
+                <p class="title() c(warm-gray) rotate-1">
+                    Figma-first CSS Framework의 모든 규칙들을 실제로 체험해보세요!
+                </p>
+                <div class="hbox() center gap(md) flex-wrap">
+                    <span class="button()">📐 Layout</span>
+                    <span class="button()">✍️ Typography</span>
+                    <span class="button()">🎨 Colors</span>
+                    <span class="button()">✨ Effects</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search & Live Demo -->
+    <section class="mb-4xl">
+        <div class="container">
+            <div class="max-w-2xl mx-auto">
+                <input type="text" class="input()" placeholder="문법 검색... (예: hbox, vbox, gap)" id="searchInput">
+                <p class="body() c(warm-gray) text-center mt-lg">
+                    💡 실제 AdorableCSS 규칙들을 검색하고 체험해보세요!
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Layout Rules -->
+        <section class="rule-category">
+            <div class="card() hover rotate-1 mb-3xl">
+                <div class="hbox() middle pack mb-xl">
+                    <h2 class="heading(h2) c(charcoal)">Layout System</h2>
+                    <div class="icon-badge">📐</div>
+                </div>
+
+                <div class="vbox() gap(lg)">
+                    <div>
+                        <h3 class="title() c(purple) mb-lg">Flexbox Containers</h3>
+                        <div class="vbox() gap(sm)">
+                            <div class="rule-item" onclick="copyToClipboard('hbox()')">
+                                <div class="hbox() middle gap(md)">
+                                    <div class="rule-name">hbox()</div>
+                                    <span class="caption() c(blue) bg(light-gray) px-lg r(sm)">순수 CSS: .hbox\(\)</span>
+                                </div>
+                                <div class="rule-description">Horizontal flexbox container - Figma의 Auto Layout과 동일</div>
+                            </div>
+                            <div class="rule-item" onclick="copyToClipboard('vbox()')">
+                                <div class="hbox middle gap-md">
+                                    <div class="rule-name">vbox()</div>
+                                    <span class="caption c-blue bg-light-gray px-lg r-sm">순수 CSS: .vbox</span>
+                                </div>
+                                <div class="rule-description">Vertical flexbox container - 세로 방향 배치</div>
+                            </div>
+                            <div class="rule-item" onclick="copyToClipboard('hbox(center)')">
+                                <div class="hbox middle gap-md">
+                                    <div class="rule-name">hbox(center)</div>
+                                    <span class="caption c-blue bg-light-gray px-lg r-sm">순수 CSS: .hbox.center</span>
+                                </div>
+                                <div class="rule-description">가운데 정렬된 horizontal box</div>
+                            </div>
+                            <div class="rule-item" onclick="copyToClipboard('hbox(pack)')">
+                                <div class="hbox middle gap-md">
+                                    <div class="rule-name">hbox(pack)</div>
+                                    <span class="caption c-blue bg-light-gray px-lg r-sm">순수 CSS: .hbox.pack</span>
+                                </div>
+                                <div class="rule-description">양쪽 끝으로 정렬 (space-between)</div>
+                            </div>
+                            <div class="rule-item" onclick="copyToClipboard('gap(md)')">
+                                <div class="hbox middle gap-md">
+                                    <div class="rule-name">gap(md)</div>
+                                    <span class="caption c-blue bg-light-gray px-lg r-sm">순수 CSS: .gap-md</span>
+                                </div>
+                                <div class="rule-description">요소들 사이의 간격</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="demo-area">
+                        <div class="hbox(pack) gap(md)">
+                            <div class="card() bg(coral) c(white) p(lg) r(lg)">Logo</div>
+                            <div class="hbox() center gap(md)">
+                                <div class="button()">Home</div>
+                                <div class="button()">About</div>
+                                <div class="button(primary)">Contact</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+&lt;div class="hbox(pack) gap(md)"&gt;
+  &lt;div class="card bg(coral) c(white) p(lg)"&gt;Logo&lt;/div&gt;
+  &lt;nav class="hbox gap(md)"&gt;
+    &lt;a class="button"&gt;Home&lt;/a&gt;
+    &lt;a class="button"&gt;About&lt;/a&gt;
+    &lt;a class="button primary"&gt;Contact&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/div&gt;
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Layout Tip:</strong> hbox()와 vbox()는 Figma의 Auto Layout과 완전히 동일한 개념입니다. 디자이너와 개발자가 같은 언어로 소통할 수 있어요!
+                </div>
+            </div>
+        </section>
+
+        <!-- Typography Rules -->
+        <section class="rule-category">
+            <div class="card hover rotate-2 mb-3xl">
+                <div class="hbox middle pack mb-xl">
+                    <h2 class="heading h2 c-charcoal">Typography System</h2>
+                    <div class="icon-badge">✍️</div>
+                </div>
+
+                <div class="vbox gap-lg">
+                    <div>
+                        <h3 class="title c-purple mb-lg">Typography Components</h3>
+                        <div class="vbox gap-sm">
+                            <div class="rule-item" onclick="copyToClipboard('display()')">
+                                <div class="rule-name">display()</div>
+                                <div class="rule-description">Large display text component - 메인 제목용</div>
+                            </div>
+                            <div class="rule-item" onclick="copyToClipboard('heading()')">
+                                <div class="rule-name">heading()</div>
+                                <div class="rule-description">Section heading component - 섹션 제목용</div>
+                            </div>
+                            <div class="rule-item" onclick="copyToClipboard('title()')">
+                                <div class="rule-name">title()</div>
+                                <div class="rule-description">Card title component - 카드 제목용</div>
+                            </div>
+                            <div class="rule-item" onclick="copyToClipboard('body()')">
+                                <div class="rule-name">body()</div>
+                                <div class="rule-description">Body text component - 본문 텍스트용</div>
+                            </div>
+                            <div class="rule-item" onclick="copyToClipboard('label()')">
+                                <div class="rule-name">label()</div>
+                                <div class="rule-description">Label component - 폼 라벨이나 작은 제목용</div>
+                            </div>
+                            <div class="rule-item" onclick="copyToClipboard('caption()')">
+                                <div class="rule-name">caption()</div>
+                                <div class="rule-description">Caption component - 설명 텍스트용</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="demo-area">
+                        <div class="vbox() gap(lg)">
+                            <h1 class="display() c(coral)">Display Text</h1>
+                            <h2 class="heading() c(charcoal)">Heading Text</h2>
+                            <h3 class="title() c(purple)">Title Text</h3>
+                            <p class="body() c(charcoal)">Body text for paragraphs and main content. Lorem ipsum dolor sit amet consectetur.</p>
+                            <span class="label() c(charcoal)">Label Text</span>
+                            <span class="caption() c(warm-gray)">Caption text for descriptions</span>
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+&lt;h1 class="display()"&gt;Display Text&lt;/h1&gt;
+&lt;h2 class="heading()"&gt;Heading Text&lt;/h2&gt;
+&lt;h3 class="title()"&gt;Title Text&lt;/h3&gt;
+&lt;p class="body()"&gt;Body text content...&lt;/p&gt;
+&lt;span class="label()"&gt;Label Text&lt;/span&gt;
+&lt;span class="caption()"&gt;Caption text&lt;/span&gt;
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Typography Tip:</strong> 각 컴포넌트는 의미론적으로 설계되어 일관된 타이포그래피 시스템을 만듭니다. AI도 쉽게 이해할 수 있어요!
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Components -->
+        <section class="rule-category">
+            <div class="card hover rotate-3 mb-3xl">
+                <div class="hbox middle pack mb-xl">
+                    <h2 class="heading h2 c-charcoal">Interactive Components</h2>
+                    <div class="icon-badge">🎯</div>
+                </div>
+
+                <div class="vbox gap-lg">
+                    <div>
+                        <h3 class="title c-purple mb-lg">Buttons & Inputs</h3>
+                        <div class="vbox gap-sm">
+                            <div class="rule-item" onclick="copyToClipboard('button()')">
+                                <div class="rule-name">button()</div>
+                                <div class="rule-description">Default button component with hover effects</div>
+                            </div>
+                            <div class="rule-item" onclick="copyToClipboard('button(primary)')">
+                                <div class="rule-name">button(primary)</div>
+                                <div class="rule-description">Primary action button with accent color</div>
+                            </div>
+                            <div class="rule-item" onclick="copyToClipboard('card()')">
+                                <div class="rule-name">card()</div>
+                                <div class="rule-description">Container component with border and padding</div>
+                            </div>
+                            <div class="rule-item" onclick="copyToClipboard('input()')">
+                                <div class="rule-name">input()</div>
+                                <div class="rule-description">Input field with AdorableCSS styling</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="demo-area">
+                        <div class="vbox gap-lg">
+                            <div class="hbox center gap-md flex-wrap">
+                                <button class="button">Default Button</button>
+                                <button class="button primary">Primary Button</button>
+                            </div>
+                            <div class="card bg-white p-xl r-lg border-black">
+                                <h3 class="title c-charcoal mb-md">Card Component</h3>
+                                <p class="body c-warm-gray">This is a card component with border and padding.</p>
+                            </div>
+                            <input type="text" class="input" placeholder="Type something here...">
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+&lt;button class="button()"&gt;Default Button&lt;/button&gt;
+&lt;button class="button(primary)"&gt;Primary Button&lt;/button&gt;
+
+&lt;div class="card() p(xl)"&gt;
+  &lt;h3 class="title()"&gt;Card Title&lt;/h3&gt;
+  &lt;p class="body()"&gt;Card content...&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;input type="text" class="input()" placeholder="Input field"&gt;
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Component Tip:</strong> 모든 컴포넌트는 일관된 디자인 시스템을 따르며, 호버 효과와 transition이 내장되어 있습니다!
+                </div>
+            </div>
+        </section>
+
+        <!-- Color & Effects -->
+        <section class="rule-category">
+            <div class="card hover rotate-4 mb-3xl">
+                <div class="hbox middle pack mb-xl">
+                    <h2 class="heading h2 c-charcoal">Colors & Effects</h2>
+                    <div class="icon-badge">🎨</div>
+                </div>
+
+                <div class="vbox gap-lg">
+                    <div>
+                        <h3 class="title c-purple mb-lg">Color System</h3>
+                        <div class="vbox gap-sm">
+                            <div class="rule-item" onclick="copyToClipboard('bg(coral)')">
+                                <div class="rule-name">bg(coral)</div>
+                                <div class="rule-description">Coral background color - primary accent</div>
+                            </div>
+                            <div class="rule-item" onclick="copyToClipboard('c(white)')">
+                                <div class="rule-name">c(white)</div>
+                                <div class="rule-description">White text color</div>
+                            </div>
+                            <div class="rule-item" onclick="copyToClipboard('border(black)')">
+                                <div class="rule-name">border(black)</div>
+                                <div class="rule-description">Black border</div>
+                            </div>
+                            <div class="rule-item" onclick="copyToClipboard('shadow(hover)')">
+                                <div class="rule-name">shadow(hover)</div>
+                                <div class="rule-description">Hover shadow effect</div>
+                            </div>
+                            <div class="rule-item" onclick="copyToClipboard('r(lg)')">
+                                <div class="rule-name">r(lg)</div>
+                                <div class="rule-description">Large border radius</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="demo-area">
+                        <div class="grid grid-auto gap-lg">
+                            <div class="p-xl r-lg bg-coral c-white text-center">
+                                <div class="title">Coral</div>
+                            </div>
+                            <div class="p-xl r-lg bg-blue c-white text-center">
+                                <div class="title">Blue</div>
+                            </div>
+                            <div class="p-xl r-lg bg-yellow c-charcoal text-center">
+                                <div class="title">Yellow</div>
+                            </div>
+                            <div class="p-xl r-lg bg-purple c-white text-center">
+                                <div class="title">Purple</div>
+                            </div>
+                            <div class="p-xl r-lg bg-green c-white text-center">
+                                <div class="title">Green</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+&lt;div class="bg(coral) c(white) p(xl) r(lg)"&gt;
+  Coral background with white text
+&lt;/div&gt;
+
+&lt;div class="card() shadow(hover) border(black)"&gt;
+  Card with hover shadow and border
+&lt;/div&gt;
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Color Tip:</strong> AdorableCSS는 의미론적 색상 이름을 사용하여 디자인 시스템의 일관성을 유지합니다!
+                </div>
+            </div>
+        </section>
+
+        <!-- Responsive Design -->
+        <section class="rule-category">
+            <div class="card hover rotate-1 mb-3xl">
+                <div class="hbox middle pack mb-xl">
+                    <h2 class="heading h2 c-charcoal">Responsive Design</h2>
+                    <div class="icon-badge">📱</div>
+                </div>
+
+                <div class="vbox gap-lg">
+                    <div class="demo-area">
+                        <div class="hbox responsive gap-lg">
+                            <div class="card bg-coral c-white p-xl r-lg w-fit">
+                                <div class="title">Desktop: Side by side</div>
+                                <div class="body">Mobile: Stacked</div>
+                            </div>
+                            <div class="card bg-blue c-white p-xl r-lg w-fit">
+                                <div class="title">Responsive</div>
+                                <div class="body">Layout magic!</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="code-block">
+&lt;div class="hbox(responsive) gap(lg)"&gt;
+  &lt;div class="card()"&gt;Content 1&lt;/div&gt;
+  &lt;div class="card()"&gt;Content 2&lt;/div&gt;
+&lt;/div&gt;
+
+/* Automatically responsive - 
+   Horizontal on desktop, vertical on mobile */
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <strong>Responsive Tip:</strong> AdorableCSS는 자동으로 반응형이 되도록 설계되어, 복잡한 미디어 쿼리 없이도 아름다운 레이아웃을 만들 수 있습니다!
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section class="text-center py-4xl">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="display c-coral mb-xl rotate-neg-1">
+                    Ready to try AdorableCSS?
+                </h2>
+                <p class="body lg c-warm-gray mb-2xl">
+                    Figma-first 접근법으로 더 직관적이고 아름다운 웹을 만들어보세요!
+                </p>
+                <div class="hbox center gap-lg flex-wrap">
+                    <a href="#" class="button primary">Get Started</a>
+                    <a href="#" class="button">View Documentation</a>
+                    <a href="#" class="button">GitHub Repository</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Copy feedback -->
+    <div id="copyFeedback" class="fixed top-0 right-0 p-lg bg-green c-white r-lg shadow-md transition" style="transform: translateX(100%); margin: var(--space-lg);">
+        문법이 복사되었습니다! 📋
+    </div>
+
+    <script>
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const ruleItems = document.querySelectorAll('.rule-item');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            
+            ruleItems.forEach(item => {
+                const ruleName = item.querySelector('.rule-name').textContent.toLowerCase();
+                const ruleDesc = item.querySelector('.rule-description').textContent.toLowerCase();
+                
+                if (searchTerm === '' || ruleName.includes(searchTerm) || ruleDesc.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Copy to clipboard functionality
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showCopyFeedback();
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        function showCopyFeedback() {
+            const feedback = document.getElementById('copyFeedback');
+            feedback.style.transform = 'translateX(0)';
+            
+            setTimeout(() => {
+                feedback.style.transform = 'translateX(100%)';
+            }, 2000);
+        }
+
+        // Add click event to all rule items
+        ruleItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const ruleName = this.querySelector('.rule-name').textContent;
+                copyToClipboard(ruleName);
+                
+                // Visual feedback
+                const original = this.style.backgroundColor;
+                this.style.backgroundColor = 'var(--accent-green)';
+                this.style.color = 'white';
+                
+                setTimeout(() => {
+                    this.style.backgroundColor = original;
+                    this.style.color = '';
+                }, 300);
+            });
+        });
+
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

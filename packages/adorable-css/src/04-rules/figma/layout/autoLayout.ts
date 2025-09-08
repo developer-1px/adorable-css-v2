@@ -1,4 +1,4 @@
-import {rule2, getAllValues} from '../../../01-core/ast-utils'
+import {rule2, getAllValues} from '../../ast-utils/rule2-helpers'
 
 // Compact flex utilities
 const ALIGN = {top:'flex-start',middle:'center',bottom:'flex-end',fill:'stretch',stretch:'stretch',left:'flex-start',center:'center',right:'flex-end',end:'flex-end',baseline:'baseline'};
@@ -15,11 +15,23 @@ const flexCSS = (dir: string, align?: string, justify?: string, extra: string[] 
 const parseFlexArgs = (args: string[]) => {
   const val = args.join('');
   const vals = val.split(/[+/]/);
+  
+  // For vbox: left/center/right are align values
+  // For hbox: top/middle/bottom are align values
+  const alignValues = ['top','middle','bottom','fill','end','baseline','stretch','left','center','right'];
+  const justifyValues = ['left','right','center','end','between','around','evenly','top','middle','bottom'];
+  
+  // Find first align value
+  const align = vals.find(x => alignValues.includes(x));
+  
+  // Find justify value that's not already used as align
+  const justify = vals.find(x => justifyValues.includes(x) && x !== align);
+  
   return {
     val,
     vals,
-    align: vals.find(x => ['top','middle','bottom','fill','end','baseline','left','center','right','stretch'].includes(x)),
-    justify: vals.find(x => ['left','right','center','end','between','around','evenly','top','middle','bottom'].includes(x)),
+    align,
+    justify,
     hasWrap: vals.includes('wrap'),
     hasReverse: vals.includes('reverse')
   };
@@ -38,10 +50,15 @@ export const vbox = rule2((s) => {
   const values = getAllValues(s);
   const { val, align, justify, hasWrap, hasReverse } = parseFlexArgs(values);
   if (val === 'pack') return flexCSS('column', 'center', 'center', ['text-align:center']);
-  const textAlign = parseTextAlign(align) || 'justify';
-  const extra = [...(hasWrap ? ['flex-wrap:wrap'] : []), ...(hasReverse ? ['flex-direction:column-reverse'] : []), ...(textAlign ? [`text-align:${textAlign}`] : [])];
+  
+  // Determine text-align based on align value
+  let textAlign = 'justify'; // default
+  if (align) {
+    textAlign = parseTextAlign(align) || textAlign;
+  }
+  
+  const extra = [...(hasWrap ? ['flex-wrap:wrap'] : []), ...(hasReverse ? ['flex-direction:column-reverse'] : []), `text-align:${textAlign}`];
   return flexCSS('column', parseAlign(align) || 'stretch', parseJustify(justify) || 'flex-start', extra);
 });
 
 export const pack = rule2(() => flexCSS('row', 'center', 'center'));
-export const wrap = hbox;

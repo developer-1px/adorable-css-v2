@@ -1,0 +1,508 @@
+여엉로 <!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdorableCSS - 낙서장 🖍️</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #FFF5E6;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            overflow-x: hidden;
+            cursor: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><text y="20" font-size="20">✏️</text></svg>'), auto;
+        }
+
+        /* 낙서 배경 패턴 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, transparent, transparent 35px, #E8DCC6 35px, #E8DCC6 37px),
+                repeating-linear-gradient(90deg, transparent, transparent 35px, #E8DCC6 35px, #E8DCC6 37px);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        /* 메인 타이틀 - 손글씨처럼 */
+        .doodle-title {
+            font-size: 120px;
+            color: #FF1744;
+            text-align: center;
+            margin-top: 50px;
+            transform: rotate(-5deg);
+            text-shadow: 
+                3px 3px 0 #FFE0B2,
+                6px 6px 0 #FFCCBC,
+                9px 9px 10px rgba(0,0,0,0.1);
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%) rotate(-5deg);
+        }
+
+        /* 밑줄 낙서 */
+        .doodle-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: -20px;
+            right: -20px;
+            height: 15px;
+            background: #FFD54F;
+            transform: skewY(-2deg);
+            border-radius: 50%;
+            opacity: 0.6;
+        }
+
+        /* 부제목 - 연필로 쓴 것처럼 */
+        .sub-title {
+            text-align: center;
+            font-size: 24px;
+            color: #424242;
+            margin: 30px 0;
+            opacity: 0.8;
+            font-weight: normal;
+            transform: rotate(1deg);
+        }
+
+        /* 낙서 섹션 */
+        .doodle-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+            position: relative;
+        }
+
+        /* 포스트잇 스타일 박스 */
+        .postit {
+            background: #FFEB3B;
+            padding: 30px;
+            position: relative;
+            display: inline-block;
+            margin: 20px;
+            box-shadow: 
+                0 0 0 1px rgba(0,0,0,0.1),
+                3px 3px 3px rgba(0,0,0,0.1);
+            transform: rotate(-2deg);
+            transition: transform 0.2s;
+        }
+
+        .postit:nth-child(even) {
+            background: #80DEEA;
+            transform: rotate(3deg);
+        }
+
+        .postit:nth-child(3n) {
+            background: #FFB74D;
+            transform: rotate(-4deg);
+        }
+
+        .postit:hover {
+            transform: rotate(0deg) scale(1.1);
+            z-index: 10;
+        }
+
+        /* 테이프 효과 */
+        .postit::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 30px;
+            background: rgba(255,255,255,0.6);
+            border: 1px solid rgba(0,0,0,0.1);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* 손그림 버튼 */
+        .doodle-button {
+            background: #FF6B6B;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 50px 20px 50px 20px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 
+                inset -3px -3px 0 #D84545,
+                3px 3px 0 #FFB6B6;
+            margin: 10px;
+        }
+
+        .doodle-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                inset -3px -3px 0 #D84545,
+                6px 6px 0 #FFB6B6;
+        }
+
+        .doodle-button:active {
+            transform: translateY(0);
+            box-shadow: 
+                inset -1px -1px 0 #D84545,
+                1px 1px 0 #FFB6B6;
+        }
+
+        /* 낙서 화살표 */
+        .arrow-doodle {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+        }
+
+        .arrow-doodle svg {
+            width: 100%;
+            height: 100%;
+            stroke: #E91E63;
+            stroke-width: 3;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.1));
+        }
+
+        /* 하이라이트 마커 효과 */
+        .highlight {
+            background: linear-gradient(to bottom, transparent 40%, #FFFF00 40%, #FFFF00 70%, transparent 70%);
+            padding: 0 5px;
+            display: inline;
+        }
+
+        .highlight-pink {
+            background: linear-gradient(to bottom, transparent 40%, #FF69B4 40%, #FF69B4 70%, transparent 70%);
+        }
+
+        .highlight-green {
+            background: linear-gradient(to bottom, transparent 40%, #98FB98 40%, #98FB98 70%, transparent 70%);
+        }
+
+        /* 스티커 이모지 */
+        .sticker {
+            position: absolute;
+            font-size: 60px;
+            animation: wobble 3s ease-in-out infinite;
+            cursor: grab;
+        }
+
+        .sticker:active {
+            cursor: grabbing;
+        }
+
+        @keyframes wobble {
+            0%, 100% { transform: rotate(-5deg); }
+            50% { transform: rotate(5deg); }
+        }
+
+        /* 코드 스니펫 - 노트북 페이지처럼 */
+        .notebook-code {
+            background: white;
+            border: 2px solid #E91E63;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 30px auto;
+            max-width: 600px;
+            position: relative;
+            font-family: monospace;
+            font-size: 16px;
+            box-shadow: 
+                5px 5px 0 #E91E63,
+                5px 5px 10px rgba(0,0,0,0.1);
+        }
+
+        .notebook-code::before {
+            content: '💡 이렇게 쓰면 돼요!';
+            position: absolute;
+            top: -40px;
+            left: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-family: 'Comic Sans MS', cursive;
+            font-size: 14px;
+        }
+
+        /* 동그라미 친 텍스트 */
+        .circle-text {
+            position: relative;
+            display: inline-block;
+            padding: 5px 15px;
+        }
+
+        .circle-text::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: calc(100% + 20px);
+            height: calc(100% + 10px);
+            border: 3px solid #FF5722;
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        /* 물결선 밑줄 */
+        .wavy-underline {
+            text-decoration: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 4"><path d="M0,2 Q5,0 10,2 T20,2" stroke="%232196F3" stroke-width="2" fill="none"/></svg>');
+            background-position: 0 100%;
+            background-size: 20px 4px;
+            background-repeat: repeat-x;
+            padding-bottom: 4px;
+        }
+
+        /* 말풍선 */
+        .speech-bubble {
+            background: #FFFFFF;
+            border: 3px solid #333;
+            border-radius: 30px;
+            padding: 20px 30px;
+            position: relative;
+            display: inline-block;
+            margin: 30px;
+            max-width: 400px;
+            box-shadow: 3px 3px 0 #333;
+        }
+
+        .speech-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 50px;
+            width: 30px;
+            height: 30px;
+            background: #FFFFFF;
+            border-bottom: 3px solid #333;
+            border-right: 3px solid #333;
+            transform: rotate(45deg);
+            box-shadow: 3px 3px 0 #333;
+        }
+
+        /* 펜으로 그린 박스 */
+        .sketch-box {
+            border: 3px solid #333;
+            border-radius: 10px 30px 20px 40px;
+            padding: 30px;
+            margin: 20px;
+            position: relative;
+            background: white;
+        }
+
+        .sketch-box::before {
+            content: '✨';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 40px;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.3) rotate(180deg); }
+        }
+
+        /* 낙서 그리드 */
+        .doodle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin: 50px 0;
+        }
+
+        /* 빙글빙글 텍스트 */
+        .spinning-text {
+            animation: spin 10s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* 점선 연결선 */
+        .dotted-line {
+            border-bottom: 3px dotted #9C27B0;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        /* 손가락 포인터 */
+        .pointer {
+            font-size: 40px;
+            position: absolute;
+            animation: point 1s ease-in-out infinite;
+        }
+
+        @keyframes point {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(10px); }
+        }
+
+        /* 낙서 푸터 */
+        .doodle-footer {
+            text-align: center;
+            padding: 50px;
+            position: relative;
+        }
+
+        .doodle-footer::before {
+            content: '~ THE END ~';
+            font-size: 30px;
+            color: #795548;
+            position: relative;
+            display: inline-block;
+            padding: 0 30px;
+            background: #FFF5E6;
+        }
+
+        /* 크레용 효과 */
+        .crayon {
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 2px, rgba(255,0,0,0.1) 2px, rgba(255,0,0,0.1) 4px),
+                repeating-linear-gradient(-45deg, transparent, transparent 2px, rgba(0,0,255,0.1) 2px, rgba(0,0,255,0.1) 4px);
+            padding: 10px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 떠다니는 스티커들 -->
+    <div class="sticker" style="top: 100px; left: 50px;">⭐</div>
+    <div class="sticker" style="top: 200px; right: 100px;">🌟</div>
+    <div class="sticker" style="top: 400px; left: 80px;">💫</div>
+    <div class="sticker" style="bottom: 200px; right: 50px;">🎨</div>
+
+    <!-- 메인 타이틀 -->
+    <h1 class="doodle-title">AdorableCSS</h1>
+    <p class="sub-title">이게 바로 <span class="wavy-underline">진짜 CSS</span>의 맛이지! 😋</p>
+
+    <!-- 화살표 낙서 -->
+    <div class="arrow-doodle" style="top: 300px; left: 100px; transform: rotate(45deg);">
+        <svg>
+            <path d="M10,50 Q30,10 50,50 L40,40 M50,50 L40,60" />
+        </svg>
+    </div>
+
+    <!-- 메인 컨텐츠 -->
+    <div class="doodle-section">
+        <!-- 말풍선 소개 -->
+        <div style="text-align: center;">
+            <div class="speech-bubble">
+                <p style="font-size: 20px; margin: 0;">
+                    안녕! 나는 <span class="highlight-pink">AdorableCSS</span>야!<br>
+                    <span class="circle-text">CSS</span>를 더 재밌게 만들어줄게! 🎪
+                </p>
+            </div>
+        </div>
+
+        <!-- 포스트잇 그리드 -->
+        <div class="doodle-grid">
+            <div class="postit">
+                <h3 style="font-size: 24px; margin-bottom: 15px;">
+                    <span class="highlight">Figma랑 똑같아!</span>
+                </h3>
+                <p>hbox(), vbox() 이런거 쓰면<br>Figma처럼 뚝딱뚝딱!</p>
+                <div style="text-align: right; margin-top: 20px;">
+                    <span style="font-size: 30px;">🎯</span>
+                </div>
+            </div>
+
+            <div class="postit">
+                <h3 style="font-size: 24px; margin-bottom: 15px;">
+                    margin은 <span style="text-decoration: line-through; color: red;">NO!</span>
+                </h3>
+                <p>gap이랑 padding만 쓰면<br>레이아웃이 더 예뻐져!</p>
+                <div style="text-align: right; margin-top: 20px;">
+                    <span class="spinning-text" style="font-size: 30px;">🚫</span>
+                </div>
+            </div>
+
+            <div class="postit">
+                <h3 style="font-size: 24px; margin-bottom: 15px;">
+                    <span class="highlight-green">초고속 번개!</span>
+                </h3>
+                <p>빌드할 때 다 만들어서<br>런타임엔 가벼워!</p>
+                <div style="text-align: right; margin-top: 20px;">
+                    <span style="font-size: 30px;">⚡</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- 코드 예제 -->
+        <div class="notebook-code">
+            <pre style="margin: 0; line-height: 1.6;">
+<span style="color: #E91E63;">// 이렇게 쉬워요!</span>
+&lt;div class="<span class="highlight">hbox() gap(16) p(20)</span>"&gt;
+  &lt;div class="<span class="highlight-pink">w(fill)</span>"&gt;안녕!&lt;/div&gt;
+  &lt;button class="<span class="highlight-green">button</span>"&gt;클릭!&lt;/button&gt;
+&lt;/div&gt;</pre>
+        </div>
+
+        <!-- 스케치 박스들 -->
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin: 50px 0;">
+            <div class="sketch-box crayon">
+                <h3 style="font-size: 28px; margin-bottom: 10px;">🌈 알록달록</h3>
+                <p>디자인 토큰으로<br>색상 관리 끝!</p>
+            </div>
+
+            <div class="sketch-box">
+                <h3 style="font-size: 28px; margin-bottom: 10px;">📐 딱딱 맞게</h3>
+                <p>spacing 토큰으로<br>일관된 간격!</p>
+                <span class="pointer" style="bottom: -30px; right: -40px;">👉</span>
+            </div>
+
+            <div class="sketch-box crayon">
+                <h3 style="font-size: 28px; margin-bottom: 10px;">🎭 컴포넌트</h3>
+                <p>button, card, heading<br>다 준비됐어!</p>
+            </div>
+        </div>
+
+        <div class="dotted-line"></div>
+
+        <!-- CTA 버튼들 -->
+        <div style="text-align: center; margin: 50px 0;">
+            <button class="doodle-button">
+                시작하기! 🚀
+            </button>
+            <button class="doodle-button" style="background: #4CAF50;">
+                문서 보기 📚
+            </button>
+            <button class="doodle-button" style="background: #2196F3;">
+                GitHub ⭐
+            </button>
+        </div>
+
+        <!-- 추가 화살표 -->
+        <div class="arrow-doodle" style="bottom: 100px; right: 200px; transform: rotate(-30deg);">
+            <svg>
+                <path d="M10,10 Q50,30 90,10 L80,5 M90,10 L85,20" />
+            </svg>
+        </div>
+    </div>
+
+    <!-- 푸터 -->
+    <div class="doodle-footer">
+        <p style="font-size: 20px; color: #795548; margin-bottom: 20px;">
+            Made with <span style="color: red; font-size: 30px;">♥</span> and lots of <span class="spinning-text">🖍️</span>
+        </p>
+    </div>
+</body>
+</html>

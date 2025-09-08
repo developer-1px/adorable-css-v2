@@ -1,4 +1,4 @@
-import { rule2, getFirstValue } from '../../../01-core/ast-utils';
+import { rule2, getFirstValue } from '../../ast-utils/rule2-helpers';
 
 const WHITESPACE_MAP: Record<string, string> = {
   normal: 'normal',

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdorableCSS - 뿅! 하고 나타난 귀요미 CSS 🌈</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        /* AdorableCSS Classes */
+        .hbox\(\) { display: flex; flex-direction: row; }
+        .vbox\(\) { display: flex; flex-direction: column; }
+        .w\(fill\) { flex: 1; }
+        .w\(hug\) { width: fit-content; }
+        
+        /* Spacing */
+        .gap\(8\) { gap: 8px; }
+        .gap\(12\) { gap: 12px; }
+        .gap\(16\) { gap: 16px; }
+        .gap\(24\) { gap: 24px; }
+        .gap\(32\) { gap: 32px; }
+        .gap\(48\) { gap: 48px; }
+        .gap\(64\) { gap: 64px; }
+        
+        .p\(8\) { padding: 8px; }
+        .p\(12\) { padding: 12px; }
+        .p\(16\) { padding: 16px; }
+        .p\(24\) { padding: 24px; }
+        .p\(32\) { padding: 32px; }
+        .p\(48\) { padding: 48px; }
+        .px\(16\) { padding-left: 16px; padding-right: 16px; }
+        .px\(24\) { padding-left: 24px; padding-right: 24px; }
+        .py\(8\) { padding-top: 8px; padding-bottom: 8px; }
+        .py\(12\) { padding-top: 12px; padding-bottom: 12px; }
+        .py\(80\) { padding-top: 80px; padding-bottom: 80px; }
+        
+        /* Layout */
+        .items\(center\) { align-items: center; }
+        .items\(start\) { align-items: flex-start; }
+        .items\(end\) { align-items: flex-end; }
+        .justify\(center\) { justify-content: center; }
+        .justify\(between\) { justify-content: space-between; }
+        .justify\(around\) { justify-content: space-around; }
+        .flex\(wrap\) { flex-wrap: wrap; }
+        
+        /* Position */
+        .relative { position: relative; }
+        .absolute { position: absolute; }
+        .layer\(\) { position: absolute; inset: 0; }
+        
+        /* Size */
+        .w\(100\%\) { width: 100%; }
+        .h\(100vh\) { height: 100vh; }
+        .maxW\(1200\) { max-width: 1200px; }
+        
+        /* Typography */
+        .font\(96\) { font-size: 96px; }
+        .font\(64\) { font-size: 64px; }
+        .font\(48\) { font-size: 48px; }
+        .font\(32\) { font-size: 32px; }
+        .font\(24\) { font-size: 24px; }
+        .font\(20\) { font-size: 20px; }
+        .font\(18\) { font-size: 18px; }
+        .font\(16\) { font-size: 16px; }
+        .font\(14\) { font-size: 14px; }
+        .font\(black\) { font-weight: 900; }
+        .font\(bold\) { font-weight: 700; }
+        .font\(medium\) { font-weight: 500; }
+        .text\(center\) { text-align: center; }
+        .text\(right\) { text-align: right; }
+        
+        /* Colors */
+        body { 
+            background: linear-gradient(45deg, #FF6B6B 0%, #4ECDC4 25%, #45B7D1 50%, #96CEB4 75%, #FECA57 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .bg\(white\) { background: white; }
+        .bg\(black\) { background: black; }
+        .bg\(pink\) { background: #FF6B6B; }
+        .bg\(mint\) { background: #4ECDC4; }
+        .bg\(blue\) { background: #45B7D1; }
+        .bg\(yellow\) { background: #FECA57; }
+        .bg\(purple\) { background: #A55EEA; }
+        .bg\(gradient-rainbow\) {
+            background: linear-gradient(90deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FECA57, #A55EEA);
+            background-size: 200% 100%;
+            animation: rainbow 3s linear infinite;
+        }
+        
+        @keyframes rainbow {
+            to { background-position: -200% 0; }
+        }
+        
+        .c\(white\) { color: white; }
+        .c\(black\) { color: black; }
+        .c\(pink\) { color: #FF6B6B; }
+        .c\(mint\) { color: #4ECDC4; }
+        .c\(blue\) { color: #45B7D1; }
+        
+        /* Border & Effects */
+        .r\(8\) { border-radius: 8px; }
+        .r\(16\) { border-radius: 16px; }
+        .r\(24\) { border-radius: 24px; }
+        .r\(32\) { border-radius: 32px; }
+        .r\(999\) { border-radius: 999px; }
+        .r\(50\%\) { border-radius: 50%; }
+        
+        .shadow\(soft\) { box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
+        .shadow\(bold\) { box-shadow: 8px 8px 0 rgba(0,0,0,0.2); }
+        .shadow\(color\) { box-shadow: 8px 8px 0 #FFB6C1; }
+        
+        /* Components */
+        .bubble {
+            background: white;
+            border-radius: 32px;
+            padding: 32px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+            position: relative;
+            transform: rotate(-2deg);
+            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        
+        .bubble:hover {
+            transform: rotate(2deg) scale(1.05);
+        }
+        
+        .button-pop {
+            display: inline-block;
+            padding: 16px 32px;
+            border-radius: 999px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.2s;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            border: none;
+            font-size: 18px;
+        }
+        
+        .button-pop::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .button-pop:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .button-pop:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+        }
+        
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .bounce {
+            animation: bounce 1s ease-in-out infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-10px) scale(1.1); }
+        }
+        
+        .spin {
+            animation: spin 2s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .wiggle {
+            animation: wiggle 0.5s ease-in-out infinite;
+        }
+        
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(-3deg); }
+            50% { transform: rotate(3deg); }
+        }
+        
+        .emoji-huge {
+            font-size: 160px;
+            line-height: 1;
+            display: inline-block;
+        }
+        
+        .emoji-big {
+            font-size: 80px;
+            line-height: 1;
+        }
+        
+        .emoji-medium {
+            font-size: 48px;
+            line-height: 1;
+        }
+        
+        .sticker {
+            position: absolute;
+            font-size: 32px;
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .sticker:nth-child(odd) {
+            animation-delay: 0.5s;
+        }
+        
+        .code-bubble {
+            background: #2D3748;
+            color: #A0AEC0;
+            padding: 20px 28px;
+            border-radius: 24px;
+            font-family: 'SF Mono', 'Monaco', monospace;
+            font-size: 16px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .code-bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 30px;
+            width: 20px;
+            height: 20px;
+            background: #2D3748;
+            transform: rotate(45deg);
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 999px;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        /* Special Effects */
+        .sparkle {
+            position: relative;
+        }
+        
+        .sparkle::before,
+        .sparkle::after {
+            content: '✨';
+            position: absolute;
+            font-size: 24px;
+            animation: sparkle 2s linear infinite;
+        }
+        
+        .sparkle::before {
+            top: -10px;
+            left: -20px;
+            animation-delay: 0s;
+        }
+        
+        .sparkle::after {
+            bottom: -10px;
+            right: -20px;
+            animation-delay: 1s;
+        }
+        
+        @keyframes sparkle {
+            0%, 100% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .font\(96\) { font-size: 48px; }
+            .font\(64\) { font-size: 36px; }
+            .font\(48\) { font-size: 32px; }
+            .emoji-huge { font-size: 100px; }
+            .emoji-big { font-size: 60px; }
+            .bubble { transform: rotate(0deg); }
+            .bubble:hover { transform: rotate(0deg) scale(1.02); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Decorations -->
+    <div class="sticker" style="top: 10%; left: 5%;">🌟</div>
+    <div class="sticker" style="top: 20%; right: 10%;">💖</div>
+    <div class="sticker" style="top: 50%; left: 3%;">🌈</div>
+    <div class="sticker" style="bottom: 20%; right: 5%;">✨</div>
+    <div class="sticker" style="bottom: 30%; left: 8%;">🎨</div>
+
+    <!-- Hero Section -->
+    <section class="vbox() items(center) justify(center) h(100vh) relative">
+        <div class="vbox() items(center) gap(32) px(24)">
+            <div class="emoji-huge floating">🎪</div>
+            <h1 class="font(96) font(black) c(white) text(center) sparkle">AdorableCSS</h1>
+            <p class="font(24) c(white) text(center)">CSS가 이렇게 재밌을 줄 몰랐지? 😝</p>
+            
+            <div class="hbox() gap(16) flex(wrap) justify(center)">
+                <button class="button-pop bg(white) c(pink) shadow(bold)">
+                    와! 시작하기 🚀
+                </button>
+                <button class="button-pop bg(black) c(white)">
+                    뭐야 이거 😍
+                </button>
+            </div>
+            
+            <div class="code-bubble wiggle">
+                class="hbox() gap(16) p(24)"
+            </div>
+        </div>
+    </section>
+
+    <!-- Playful Features -->
+    <section class="vbox() items(center) py(80) px(24)">
+        <div class="vbox() gap(64) maxW(1200) w(100%)">
+            <h2 class="font(64) font(bold) text(center) c(white)">
+                이런 걸 만들 수 있어요! 🎯
+            </h2>
+            
+            <div class="hbox() gap(32) flex(wrap) justify(around)">
+                <!-- Feature Card 1 -->
+                <div class="bubble vbox() gap(24) items(center)" style="transform: rotate(-5deg);">
+                    <div class="emoji-big bounce">🏗️</div>
+                    <h3 class="font(32) font(bold)">Figma 뚝딱!</h3>
+                    <div class="vbox() gap(8)">
+                        <span class="tag bg(pink) c(white)">hbox()</span>
+                        <span class="tag bg(mint) c(white)">vbox()</span>
+                        <span class="tag bg(blue) c(white)">w(fill)</span>
+                    </div>
+                    <p class="text(center) font(18)">
+                        Figma 보면서<br>그대로 코딩해요!
+                    </p>
+                </div>
+
+                <!-- Feature Card 2 -->
+                <div class="bubble vbox() gap(24) items(center)" style="transform: rotate(3deg);">
+                    <div class="emoji-big spin">🎨</div>
+                    <h3 class="font(32) font(bold)">예쁜 디자인!</h3>
+                    <div class="vbox() gap(8)">
+                        <span class="tag bg(yellow) c(black)">r(24)</span>
+                        <span class="tag bg(purple) c(white)">shadow(soft)</span>
+                        <span class="tag bg(gradient-rainbow) c(white)">gap(16)</span>
+                    </div>
+                    <p class="text(center) font(18)">
+                        토큰 시스템으로<br>일관된 디자인!
+                    </p>
+                </div>
+
+                <!-- Feature Card 3 -->
+                <div class="bubble vbox() gap(24) items(center)" style="transform: rotate(-3deg);">
+                    <div class="emoji-big wiggle">⚡</div>
+                    <h3 class="font(32) font(bold)">초고속!</h3>
+                    <div class="vbox() gap(8)">
+                        <span class="tag bg(black) c(white)">Zero Runtime</span>
+                        <span class="tag bg(pink) c(white)">Tree Shaking</span>
+                        <span class="tag bg(mint) c(black)">Type Safe</span>
+                    </div>
+                    <p class="text(center) font(18)">
+                        빌드타임에 다 해결!<br>런타임 걱정 끝!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Demo -->
+    <section class="vbox() items(center) py(80) relative">
+        <div class="vbox() gap(48) items(center) px(24) maxW(1200) w(100%)">
+            <h2 class="font(48) font(bold) c(white) text(center)">
+                직접 만져보세요! 🎮
+            </h2>
+            
+            <div class="bubble vbox() gap(32) p(48) w(100%)" style="transform: rotate(0);">
+                <div class="hbox() gap(24) items(center) flex(wrap)">
+                    <div class="emoji-medium floating">🎯</div>
+                    <div class="vbox() gap(12) w(fill)">
+                        <h3 class="font(24) font(bold)">마진 없이도 이렇게 예뻐요!</h3>
+                        <p class="font(18) c(black)">gap과 padding만으로 완벽한 레이아웃</p>
+                    </div>
+                    <button class="button-pop bg(gradient-rainbow) c(white)">
+                        눌러봐! 🎉
+                    </button>
+                </div>
+            </div>
+
+            <div class="hbox() gap(16) flex(wrap)">
+                <div class="bubble p(24) bounce" style="transform: rotate(5deg);">
+                    <span class="font(32)">🌈</span>
+                </div>
+                <div class="bubble p(24) wiggle" style="transform: rotate(-8deg);">
+                    <span class="font(32)">🦄</span>
+                </div>
+                <div class="bubble p(24) spin" style="transform: rotate(3deg);">
+                    <span class="font(32)">🎪</span>
+                </div>
+                <div class="bubble p(24) floating" style="transform: rotate(-5deg);">
+                    <span class="font(32)">🎨</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="vbox() items(center) justify(center) py(80) relative">
+        <div class="bubble vbox() gap(32) items(center) p(48) shadow(color)" style="transform: rotate(-2deg);">
+            <h2 class="font(48) font(black) sparkle">지금 바로 시작! 🎊</h2>
+            <div class="code-bubble font(20)">
+                npm install adorable-css
+            </div>
+            <div class="hbox() gap(16)">
+                <a href="#" class="button-pop bg(pink) c(white)">
+                    문서 구경하기 📚
+                </a>
+                <a href="#" class="button-pop bg(mint) c(white)">
+                    GitHub 놀러가기 ⭐
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="vbox() items(center) py(32) gap(16)">
+        <p class="font(18) c(white) text(center)">
+            Made with 💖 + 🎨 + 🦄 = AdorableCSS
+        </p>
+        <div class="hbox() gap(8)">
+            <span class="tag">귀여움</span>
+            <span class="tag">장난스러움</span>
+            <span class="tag">강력함</span>
+        </div>
+    </footer>
+</body>
+</html>

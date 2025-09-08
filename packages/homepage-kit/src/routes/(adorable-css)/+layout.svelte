@@ -1,5 +1,5 @@
 <script lang="ts">
-import '../app.css'
+import '../../app.css'
 import {onMount} from 'svelte'
 import AdorableCSSV2 from 'adorable-css-cdn'
 

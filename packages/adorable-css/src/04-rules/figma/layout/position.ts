@@ -1,4 +1,5 @@
-import { rule2, single, spacing, extractValue, getAllArgs, getFirstArg } from '../../../01-core/ast-utils';
+import { rule2, single, extractValue, getAllArgs, getFirstArg } from '../../ast-utils/rule2-helpers';
+import { spacing } from '../../../03-values/value-transform';
 import { px } from '../../../03-values/makeValue';
 
 const Z_MAP = {auto:'auto',base:'0',below:'-1',above:'1',dropdown:'1000',modal:'2000',popover:'3000',tooltip:'4000',max:'9999',top:'9999'};

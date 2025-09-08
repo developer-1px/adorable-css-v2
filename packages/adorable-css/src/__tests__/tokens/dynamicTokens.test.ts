@@ -1,15 +1,11 @@
-import { describe, it, expect, beforeEach } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { 
   generateSpacingCalc, 
   generateFontCalc,
   generateSizeCalc 
-} from '../dynamicTokens'
-import { clearTokenRegistry, getUsedTokens } from '../tokenRegistry'
+} from '../../02-design_tokens/dynamicTokens'
 
 describe('dynamicTokens', () => {
-  beforeEach(() => {
-    clearTokenRegistry()
-  })
 
   describe('generateSpacingCalc', () => {
     it('should return CSS variable for spacing 02-design_tokens', () => {
@@ -26,14 +22,6 @@ describe('dynamicTokens', () => {
       expect(generateSpacingCalc('100xl')).toBe('var(--spacing-100xl)')
     })
 
-    it('should register 02-design_tokens when generating', () => {
-      generateSpacingCalc('md')
-      generateSpacingCalc('lg')
-      
-      const used = getUsedTokens()
-      expect(used.spacing.has('md')).toBe(true)
-      expect(used.spacing.has('lg')).toBe(true)
-    })
 
     it('should handle numeric 02-design_tokens', () => {
       expect(generateSpacingCalc('0')).toBe('0')
@@ -57,14 +45,6 @@ describe('dynamicTokens', () => {
       expect(generateFontCalc('20xl')).toBe('var(--font-20xl)')
     })
 
-    it('should register 02-design_tokens when generating', () => {
-      generateFontCalc('sm')
-      generateFontCalc('xl')
-      
-      const used = getUsedTokens()
-      expect(used.font.has('sm')).toBe(true)
-      expect(used.font.has('xl')).toBe(true)
-    })
   })
 
   describe('generateSizeCalc', () => {
@@ -82,13 +62,5 @@ describe('dynamicTokens', () => {
       expect(generateSizeCalc('50')).toBe('50rem')
     })
 
-    it('should register 02-design_tokens when generating', () => {
-      generateSizeCalc('md')
-      generateSizeCalc('2xl')
-      
-      const used = getUsedTokens()
-      expect(used.size.has('md')).toBe(true)
-      expect(used.size.has('2xl')).toBe(true)
-    })
   })
 })

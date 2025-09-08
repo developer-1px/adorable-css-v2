@@ -1,4 +1,4 @@
-import { rule2, getAllValues } from '../../01-core/ast-utils';
+import { rule2, getAllValues } from '../ast-utils/rule2-helpers';
 
 // Pointer events control - Figma "Pass through" equivalent
 // Usage: pointer-events(none), pointer-events(auto)

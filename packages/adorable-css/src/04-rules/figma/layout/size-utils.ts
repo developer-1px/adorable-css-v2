@@ -1,4 +1,4 @@
-import { isToken, resolveSizeToken, resolveContainerToken } from '../../../03-values/token-resolver';
+import { isToken, resolveSizeToken, resolveContainerToken } from '../../../02-design_tokens/token-resolver';
 import { transformValue } from '../../../03-values/value-transform';
 
 // Size keywords mapping
@@ -22,6 +22,33 @@ export const processSize = (value: string, prop: string): string => {
 };
 
 export const processDoubleSize = (value: string): string => {
+  // Enhanced aspect-ratio with constraints: size(16:9/w:300) or size(w:300/16:9)
+  const aspectWithConstraintMatch = value.match(/^(?:([0-9.]+):([0-9.]+)\/([wh]):(.+)|([wh]):(.+)\/([0-9.]+):([0-9.]+))$/);
+  if (aspectWithConstraintMatch) {
+    let ratio1, ratio2, constraint, constraintValue;
+    
+    if (aspectWithConstraintMatch[1]) {
+      // Format: 16:9/w:300
+      ratio1 = aspectWithConstraintMatch[1];
+      ratio2 = aspectWithConstraintMatch[2];
+      constraint = aspectWithConstraintMatch[3];
+      constraintValue = aspectWithConstraintMatch[4];
+    } else {
+      // Format: w:300/16:9
+      constraint = aspectWithConstraintMatch[5];
+      constraintValue = aspectWithConstraintMatch[6];
+      ratio1 = aspectWithConstraintMatch[7];
+      ratio2 = aspectWithConstraintMatch[8];
+    }
+    
+    const constraintProp = constraint === 'w' ? 'width' : 'height';
+    const constraintCss = `${constraintProp}:${transformValue(constraintValue)}`;
+    const aspectRatioCss = `aspect-ratio:${ratio1}/${ratio2}`;
+    
+    return `${aspectRatioCss};${constraintCss}`;
+  }
+  
+  // Original aspect-ratio without constraints
   const ratioMatch = value.match(/^(\d+):(\d+)$/);
   if (ratioMatch) return `aspect-ratio:${ratioMatch[1]}/${ratioMatch[2]};width:100%`;
   

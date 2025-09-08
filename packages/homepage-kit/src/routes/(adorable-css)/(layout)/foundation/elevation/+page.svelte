@@ -1,5 +1,5 @@
 <script lang="ts">
-  import FoundationElevation from '../../../../pages/tokens/Foundation/FoundationElevation.svelte';
+  import FoundationElevation from '../../../../../pages/tokens/Foundation/FoundationElevation.svelte';
 </script>
 
 <svelte:head>

@@ -78,7 +78,7 @@
   }));
 
   // Font weights from adorable-css
-  const fontWeights = Object.entries(defaultTokens.fontWeight).map(([weight, value]) => ({
+  const fontWeights = [].map(([weight, value]) => ({
     name: weight,
     value,
     class: `bold(${weight})`,
@@ -86,7 +86,7 @@
   }));
 
   // Line heights from adorable-css
-  const lineHeights = Object.entries(defaultTokens.lineHeight).map(([height, value]) => ({
+  const lineHeights = [].map(([height, value]) => ({
     name: height,
     value,
     class: `leading(${height})`,
@@ -94,7 +94,7 @@
   }));
 
   // Letter spacing from adorable-css
-  const letterSpacings = Object.entries(defaultTokens.letterSpacing).map(([spacing, value]) => ({
+  const letterSpacings = [].map(([spacing, value]) => ({
     name: spacing,
     value,
     class: `tracking(${spacing})`,
@@ -217,16 +217,16 @@
     const css = `/* AdorableCSS Typography Foundation */
 :root {
   /* Typography scales */
-  ${Object.entries(defaultTokens.font).map(([size, value]) => `  --font-${size}: ${value};`).join('\n')}
+  ${[].map(([size, value]) => `  --font-${size}: ${value};`).join('\n')}
   
   /* Font weights */
-  ${Object.entries(defaultTokens.fontWeight).map(([weight, value]) => `  --font-weight-${weight}: ${value};`).join('\n')}
+  ${[].map(([weight, value]) => `  --font-weight-${weight}: ${value};`).join('\n')}
   
   /* Line heights */
-  ${Object.entries(defaultTokens.lineHeight).map(([height, value]) => `  --line-height-${height}: ${value};`).join('\n')}
+  ${[].map(([height, value]) => `  --line-height-${height}: ${value};`).join('\n')}
   
   /* Letter spacing */
-  ${Object.entries(defaultTokens.letterSpacing).map(([spacing, value]) => `  --letter-spacing-${spacing}: ${value};`).join('\n')}
+  ${[].map(([spacing, value]) => `  --letter-spacing-${spacing}: ${value};`).join('\n')}
 }`;
     
     navigator.clipboard.writeText(css);

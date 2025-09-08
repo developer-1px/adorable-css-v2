@@ -3,8 +3,7 @@
 
 // Type definitions
 type CSSRule = Record<string, string | Record<string, any>>;
-export type RuleHandler = (args: string) => CSSRule;
-export type KeywordRuleHandler = () => CSSRule;
+type RuleHandler = (args: string) => CSSRule;
 
 // Animation keyframes definitions
 export const animationKeyframes = {
@@ -292,4 +291,3 @@ export const animationsPlugin = {
   }
 };
 
-export default animationsPlugin;

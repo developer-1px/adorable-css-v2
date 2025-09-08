@@ -123,7 +123,10 @@
       "Bash(../../fix-imports.sh)",
       "Bash(pnpm --filter adorable-css-lint build)",
       "Bash(gtimeout:*)",
-      "Bash(timeout:*)"
+      "Bash(timeout:*)",
+      "WebFetch(domain:tailwindcss.com)",
+      "Bash(pntml test:*)",
+      "Bash(npx ts-node:*)"
     ],
     "deny": []
   }

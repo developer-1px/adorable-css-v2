@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { generateCSS } from '../07-generator/generator';
+import { generateCSS } from '../../07-generator/generator';
 
 describe('Spacing tokens bug fix verification', () => {
   it('should generate positive values for all xs spacing tokens', () => {

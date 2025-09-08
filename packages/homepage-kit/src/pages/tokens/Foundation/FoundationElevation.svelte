@@ -1,8 +1,8 @@
 <script lang="ts">
-  import { defaultTokens } from 'adorable-css';
+  // defaultTokens removed
 
   // Shadow scales from adorable-css design system
-  const shadowScales = Object.entries(defaultTokens.shadow).map(([name, value]) => ({
+  const shadowScales = [].map(([name, value]) => ({
     name,
     value,
     class: `shadow(${name})`,
@@ -46,7 +46,7 @@
     const css = `/* AdorableCSS Elevation Foundation */
 :root {
   /* Shadow scales */
-  ${Object.entries(defaultTokens.shadow).map(([name, value]) => `  --shadow-${name}: ${value};`).join('\n')}
+  ${[].map(([name, value]) => `  --shadow-${name}: ${value};`).join('\n')}
 }`;
     
     navigator.clipboard.writeText(css);

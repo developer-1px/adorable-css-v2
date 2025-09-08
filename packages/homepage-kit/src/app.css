@@ -1,6 +1,7 @@
-/* CSS Reset is now included in AdorableCSS via @layer base */
+/* UnoCSS Directives */
+@unocss preflights;
+@unocss default;
 
-/* Base typography settings are now handled by AdorableCSS reset in @layer base */
 :root {
 	font-family:
 		system-ui,
@@ -14,7 +15,6 @@
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-
 }
 
 code {

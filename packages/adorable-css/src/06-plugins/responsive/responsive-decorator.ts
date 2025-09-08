@@ -153,17 +153,6 @@ export function extractBaseClass(responsiveClassName: string): string {
   return pattern ? pattern.selector : responsiveClassName;
 }
 
-// Debug helper
-export function debugResponsivePattern(className: string): void {
-  const pattern = ResponsiveSelector.analyze(className);
-  if (pattern) {
-    // Pattern found - debugging can be added here if needed
-    return;
-  } else {
-    // No pattern found - debugging can be added here if needed
-    return;
-  }
-}
 
 // State pattern definitions
 export interface StatePattern {

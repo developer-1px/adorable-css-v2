@@ -1,11 +1,9 @@
 <script lang="ts">
-  import { defaultTokens } from 'adorable-css';
+  import { getTokenEntries } from 'adorable-css';
   import { Ruler, Copy, Grid, Layers, Box } from 'lucide-svelte';
-  import TokenSection from '$lib/components/tokens/TokenSection.svelte';
-  import TokenCard from '$lib/components/tokens/TokenCard.svelte';
   
   // Enhanced spacing data with usage context
-  const spacingVariants = Object.entries(defaultTokens.spacing).map(([key, value]) => ({
+  const spacingVariants = getTokenEntries('spacing').map(({ key, value }) => ({
     key,
     value,
     usage: getSpacingUsage(key),
@@ -42,27 +40,40 @@
   }
 </script>
 
-<TokenSection 
-  icon={Ruler}
-  iconColor="green-600"
-  title="Spacing System"
-  description="A mathematical spacing system that creates visual rhythm and perfect alignment"
-  gradient={true}
-  stats={[
-    { value: String(spacingVariants.length), label: 'Spacing Steps', color: 'green-600' },
-    { value: '4:1', label: 'Scale Ratio', color: 'emerald-600' },
-    { value: '✓', label: 'Responsive', color: 'green-500' }
-  ]}
->
+<div class="vbox gap(4xl)">
+  <!-- Header Section -->
+  <div class="vbox gap(2xl)">
+    <div class="hbox(middle) gap(lg)">
+      <div class="p(lg) r(xl) bg(green-100)">
+        <Ruler size={24} class="c(green-600)" />
+      </div>
+      <div class="vbox gap(sm)">
+        <h2 class="heading(display/2xl) font(800) c(gray-900)">Spacing System</h2>
+        <p class="body(lg) c(gray-600)">A mathematical spacing system that creates visual rhythm and perfect alignment</p>
+      </div>
+    </div>
+    
+    <!-- Stats -->
+    <div class="hbox gap(xl)">
+      <div class="vbox gap(xs)">
+        <div class="text(2xl) font(bold) c(green-600)">{spacingVariants.length}</div>
+        <div class="text(sm) c(gray-600)">Spacing Steps</div>
+      </div>
+      <div class="vbox gap(xs)">
+        <div class="text(2xl) font(bold) c(emerald-600)">4:1</div>
+        <div class="text(sm) c(gray-600)">Scale Ratio</div>
+      </div>
+      <div class="vbox gap(xs)">
+        <div class="text(2xl) font(bold) c(green-500)">✓</div>
+        <div class="text(sm) c(gray-600)">Responsive</div>
+      </div>
+    </div>
+  </div>
 
-  <!-- Quick Spacing Scale Overview -->
-  <TokenCard
-    title="Spacing Scale"
-    subtitle="Visual representation of all spacing tokens"
-    gradient={true}
-    gradientColors="green-50..emerald-50"
-    shadowColor="green-100.3"
-  >
+  <!-- Spacing Scale Card -->
+  <div class="bg(gradient-to-br/green-50..emerald-50) r(2xl) p(3xl) shadow(lg) border(1/green-100)">
+    <h3 class="heading(h2) font(700) c(gray-900) mb(xl)">Spacing Scale</h3>
+    <p class="body(md) c(gray-600) mb(2xl)">Visual representation of all spacing tokens</p>
     
     <div class="p(2xl)">
       <!-- Horizontal Visual Scale -->
@@ -73,7 +84,7 @@
             <div class="vbox(center) gap(sm)">
               <!-- Visual bar -->
               <div class="bg(to-br/green-400..emerald-500) r(sm) shadow(sm)" 
-                   style="width: sm; height: {value}; min-height: xs; max-height: 6xl;"></div>
+                   style="width: var(--spacing-sm); height: {value}; min-height: var(--spacing-xs); max-height: var(--spacing-6xl);"></div>
               <!-- Label -->
               <div class="font(xs) c(gray-600) font(mono)">{key}</div>
               <div class="font(xs) c(gray-500) font(mono)">{value}</div>
@@ -83,22 +94,19 @@
         <p class="font(xs) c(gray-500) text(center) mt(lg)">Click spacing examples in the playground below to copy usage</p>
       </div>
     </div>
-  </TokenCard>
+  </div>
 
   <!-- Gap Visual Demo Section -->
-  <TokenCard
-    title="Gap in Action"
-    subtitle="See spacing tokens applied as flexbox and grid gaps"
-    gradient={true}
-    gradientColors="blue-50..indigo-50"
-    shadowColor="blue-100.3"
-  >
+  <div class="bg(gradient-to-br/blue-50..indigo-50) r(2xl) p(3xl) shadow(lg) border(1/blue-100)">
+    <h3 class="heading(h2) font(700) c(gray-900) mb(xl)">Gap in Action</h3>
+    <p class="body(md) c(gray-600) mb(2xl)">See spacing tokens applied as flexbox and grid gaps</p>
+    
     <div class="p(2xl)">
       <div class="grid(2) gap(2xl)">
         <!-- Flexbox Gap Demo -->
         <div class="vbox gap(lg)">
           <h4 class="font(sm) bold c(gray-700) mb(md) uppercase tracking(wide) hbox(middle) gap(sm)">
-            <Box size="16" class="c(blue-500)" />
+            <Box size={16} class="c(blue-500)" />
             Flexbox Gap
           </h4>
           <div class="vbox gap(md)">
@@ -119,7 +127,7 @@
         <!-- Grid Gap Demo -->
         <div class="vbox gap(lg)">
           <h4 class="font(sm) bold c(gray-700) mb(md) uppercase tracking(wide) hbox(middle) gap(sm)">
-            <Grid size="16" class="c(indigo-500)" />
+            <Grid size={16} class="c(indigo-500)" />
             Grid Gap
           </h4>
           <div class="vbox gap(md)">
@@ -143,7 +151,7 @@
       <!-- Gap Auto Demo (Space Between) -->
       <div class="mt(2xl) p(xl) bg(violet-50) r(xl) border(xs/violet-200)">
         <h4 class="font(sm) bold c(gray-700) mb(md) uppercase tracking(wide) hbox(middle) gap(sm)">
-          <Layers size="16" class="c(violet-500)" />
+          <Layers size={16} class="c(violet-500)" />
           Gap Auto (Space Between)
         </h4>
         <div class="font(xs) c(violet-600) mb(sm) font(mono)">gap(auto) → justify-content: space-between</div>
@@ -155,20 +163,20 @@
         <p class="font(xs) c(gray-500) mt(sm)">Perfect for navigation bars, toolbars, and evenly distributed content</p>
       </div>
     </div>
-  </TokenCard>
+  </div>
 
   <!-- Interactive Spacing Playground -->
   <div class="bg(to-br/slate-50..gray-50) r(3xl) p(3xl) border(1px/gray-200)">
     <div class="text(center) mb(3xl)">
       <h3 class="heading(h2) c(gray-900) mb(sm)">Spacing Playground</h3>
-      <p class="fonr(lg) c(gray-600)">See how different spacing values affect layout and visual hierarchy</p>
+      <p class="body(lg) c(gray-600)">See how different spacing values affect layout and visual hierarchy</p>
     </div>
     
     <div class="grid(3) gap(2xl)">
       <!-- Micro spacing -->
       <div class="bg(white) r(xl) p(xl) shadow(lg) border(xs/green-100)">
         <h4 class="heading(h4) c(gray-900) mb(lg) hbox(middle) gap(sm)">
-          <Box size="16" class="c(green-500)" />
+          <Box size={16} class="c(green-500)" />
           Micro Spacing
         </h4>
         <div class="vbox gap(md)">
@@ -184,7 +192,7 @@
       <!-- Component spacing -->
       <div class="bg(white) r(xl) p(xl) shadow(lg) border(xs/emerald-100)">
         <h4 class="heading(h4) c(gray-900) mb(lg) hbox(middle) gap(sm)">
-          <Layers size="16" class="c(emerald-500)" />
+          <Layers size={16} class="c(emerald-500)" />
           Component
         </h4>
         <div class="vbox gap(md)">
@@ -200,7 +208,7 @@
       <!-- Layout spacing -->
       <div class="bg(white) r(xl) p(xl) shadow(lg) border(xs/green-100)">
         <h4 class="heading(h4) c(gray-900) mb(lg) hbox(middle) gap(sm)">
-          <Grid size="16" class="c(green-600)" />
+          <Grid size={16} class="c(green-600)" />
           Layout
         </h4>
         <div class="vbox gap(md)">
@@ -236,7 +244,7 @@
         <div class="grid(3) gap(2xl) max-w(4xl) mx(auto)">
           <div class="vbox gap(lg) p(2xl) bg(white.05) backdrop-blur(md) r(xl) border(xs/white.1) text(center)">
             <div class="p(lg) r(full) bg(white.1) mx(auto) mb(lg)">
-              <Ruler size="24" class="c(white)" />
+              <Ruler size={24} class="c(white)" />
             </div>
             <div class="heading(h4) c(white)">Consistent</div>
             <div class="font(sm) c(white.8) leading(relaxed)">
@@ -246,7 +254,7 @@
           
           <div class="vbox gap(lg) p(2xl) bg(white.05) backdrop-blur(md) r(xl) border(xs/white.1) text(center)">
             <div class="p(lg) r(full) bg(white.1) mx(auto) mb(lg)">
-              <Grid size="24" class="c(white)" />
+              <Grid size={24} class="c(white)" />
             </div>
             <div class="heading(h4) c(white)">Responsive</div>
             <div class="font(sm) c(white.8) leading(relaxed)">
@@ -256,7 +264,7 @@
           
           <div class="vbox gap(lg) p(2xl) bg(white.05) backdrop-blur(md) r(xl) border(xs/white.1) text(center)">
             <div class="p(lg) r(full) bg(white.1) mx(auto) mb(lg)">
-              <Layers size="24" class="c(white)" />
+              <Layers size={24} class="c(white)" />
             </div>
             <div class="heading(h4) c(white)">Semantic</div>
             <div class="font(sm) c(white.8) leading(relaxed)">
@@ -267,4 +275,4 @@
       </div>
     </div>
   </div>
-</TokenSection>
+</div>

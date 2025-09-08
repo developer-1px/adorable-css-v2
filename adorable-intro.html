@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdorableCSS - 귀엽고 장난스러운 CSS 프레임워크 🎨</title>
+    <link rel="stylesheet" href="https://unpkg.com/adorable-css@latest/dist/adorable.css">
+    <style>
+        /* Escape special characters in class names */
+        .hbox\(\) { display: flex; flex-direction: row; }
+        .vbox\(\) { display: flex; flex-direction: column; }
+        .w\(fill\) { flex: 1; }
+        .h\(fill\) { flex: 1; }
+        .w\(hug\) { width: fit-content; }
+        .h\(hug\) { height: fit-content; }
+        
+        /* Layout utilities */
+        .gap\(16\) { gap: 16px; }
+        .gap\(20\) { gap: 20px; }
+        .gap\(24\) { gap: 24px; }
+        .gap\(32\) { gap: 32px; }
+        .gap\(40\) { gap: 40px; }
+        .gap\(48\) { gap: 48px; }
+        
+        .p\(16\) { padding: 16px; }
+        .p\(20\) { padding: 20px; }
+        .p\(24\) { padding: 24px; }
+        .p\(32\) { padding: 32px; }
+        .p\(40\) { padding: 40px; }
+        .px\(16\) { padding-left: 16px; padding-right: 16px; }
+        .px\(20\) { padding-left: 20px; padding-right: 20px; }
+        .py\(8\) { padding-top: 8px; padding-bottom: 8px; }
+        .py\(12\) { padding-top: 12px; padding-bottom: 12px; }
+        .py\(16\) { padding-top: 16px; padding-bottom: 16px; }
+        
+        /* Alignment */
+        .items\(center\) { align-items: center; }
+        .justify\(center\) { justify-content: center; }
+        .justify\(between\) { justify-content: space-between; }
+        .text\(center\) { text-align: center; }
+        
+        /* Size utilities */
+        .w\(100\%\) { width: 100%; }
+        .maxW\(1200\) { max-width: 1200px; }
+        .maxW\(800\) { max-width: 800px; }
+        .maxW\(400\) { max-width: 400px; }
+        .minH\(100vh\) { min-height: 100vh; }
+        
+        /* Colors */
+        .bg\(primary\) { background-color: #6366f1; }
+        .bg\(secondary\) { background-color: #ec4899; }
+        .bg\(surface\) { background-color: #f8fafc; }
+        .bg\(white\) { background-color: white; }
+        .bg\(gradient\) { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .bg\(pink-100\) { background-color: #fce7f3; }
+        .bg\(purple-100\) { background-color: #f3e8ff; }
+        .bg\(blue-100\) { background-color: #dbeafe; }
+        .bg\(yellow-100\) { background-color: #fef3c7; }
+        
+        .c\(white\) { color: white; }
+        .c\(primary\) { color: #6366f1; }
+        .c\(secondary\) { color: #ec4899; }
+        .c\(gray-600\) { color: #4b5563; }
+        .c\(gray-800\) { color: #1f2937; }
+        
+        /* Typography */
+        .font\(72\) { font-size: 72px; }
+        .font\(48\) { font-size: 48px; }
+        .font\(36\) { font-size: 36px; }
+        .font\(24\) { font-size: 24px; }
+        .font\(20\) { font-size: 20px; }
+        .font\(18\) { font-size: 18px; }
+        .font\(16\) { font-size: 16px; }
+        .font\(14\) { font-size: 14px; }
+        .font\(bold\) { font-weight: 700; }
+        .font\(semibold\) { font-weight: 600; }
+        .font\(medium\) { font-weight: 500; }
+        .leading\(1\.2\) { line-height: 1.2; }
+        .leading\(1\.6\) { line-height: 1.6; }
+        
+        /* Border & Radius */
+        .r\(16\) { border-radius: 16px; }
+        .r\(20\) { border-radius: 20px; }
+        .r\(24\) { border-radius: 24px; }
+        .r\(999\) { border-radius: 999px; }
+        .ring\(2\) { box-shadow: 0 0 0 2px currentColor; }
+        
+        /* Effects */
+        .shadow\(lg\) { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1); }
+        .shadow\(xl\) { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); }
+        .opacity\(0\.8\) { opacity: 0.8; }
+        
+        /* Animation */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes wiggle {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-3deg); }
+            75% { transform: rotate(3deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        .animate\(bounce\) { animation: bounce 2s ease-in-out infinite; }
+        .animate\(wiggle\) { animation: wiggle 1s ease-in-out infinite; }
+        .animate\(pulse\) { animation: pulse 2s ease-in-out infinite; }
+        
+        /* Components */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: 999px;
+            font-weight: 600;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            text-decoration: none;
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+        }
+        
+        .hero-emoji {
+            font-size: 120px;
+            display: inline-block;
+        }
+        
+        .feature-icon {
+            font-size: 48px;
+            display: inline-block;
+        }
+        
+        .code-snippet {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 16px 20px;
+            border-radius: 12px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .font\(72\) { font-size: 48px; }
+            .font\(48\) { font-size: 36px; }
+            .font\(36\) { font-size: 28px; }
+            .hero-emoji { font-size: 80px; }
+            .flex-wrap { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body class="vbox() bg(surface) minH(100vh)">
+    <!-- Hero Section -->
+    <section class="vbox() items(center) justify(center) bg(gradient) c(white) py(40) animate(pulse)">
+        <div class="vbox() items(center) gap(32) maxW(800) px(20)">
+            <div class="hero-emoji animate(bounce)">🎨</div>
+            <h1 class="font(72) font(bold) leading(1.2) text(center)">AdorableCSS</h1>
+            <p class="font(24) opacity(0.8) text(center)">귀엽고 장난스러운 CSS 프레임워크로 만드는 아름다운 웹</p>
+            <div class="hbox() gap(16) flex-wrap">
+                <a href="#" class="button bg(white) c(primary)">
+                    <span>시작하기 🚀</span>
+                </a>
+                <a href="#" class="button bg(secondary) c(white)">
+                    <span>문서 보기 📚</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="vbox() items(center) py(40) px(20)">
+        <div class="vbox() gap(48) maxW(1200) w(100%)">
+            <div class="vbox() items(center) gap(16)">
+                <h2 class="font(48) font(bold) c(gray-800)">왜 AdorableCSS인가요?</h2>
+                <p class="font(20) c(gray-600) text(center)">개발이 즐거워지는 마법같은 기능들 ✨</p>
+            </div>
+            
+            <div class="hbox() gap(24) flex-wrap">
+                <!-- Feature 1 -->
+                <div class="card w(fill) vbox() gap(16) items(center) bg(pink-100)">
+                    <div class="feature-icon animate(wiggle)">🎯</div>
+                    <h3 class="font(24) font(semibold) c(gray-800)">Figma처럼 쉬운</h3>
+                    <p class="c(gray-600) text(center) leading(1.6)">
+                        hbox(), vbox(), w(fill) 같은 직관적인 문법으로<br>
+                        디자인을 그대로 코드로 옮기세요
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="card w(fill) vbox() gap(16) items(center) bg(purple-100)">
+                    <div class="feature-icon animate(wiggle)">🚀</div>
+                    <h3 class="font(24) font(semibold) c(gray-800)">빠른 개발</h3>
+                    <p class="c(gray-600) text(center) leading(1.6)">
+                        CSS 표준 문법을 그대로 사용하여<br>
+                        학습 곡선 없이 바로 시작하세요
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="card w(fill) vbox() gap(16) items(center) bg(blue-100)">
+                    <div class="feature-icon animate(wiggle)">🎨</div>
+                    <h3 class="font(24) font(semibold) c(gray-800)">아름다운 디자인</h3>
+                    <p class="c(gray-600) text(center) leading(1.6)">
+                        내장된 디자인 시스템으로<br>
+                        일관되고 예쁜 UI를 만드세요
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Example Section -->
+    <section class="vbox() items(center) bg(white) py(40) px(20)">
+        <div class="vbox() gap(32) maxW(800) w(100%)">
+            <div class="vbox() items(center) gap(16)">
+                <h2 class="font(36) font(bold) c(gray-800)">정말 쉬워요! 👶</h2>
+                <p class="font(18) c(gray-600)">이렇게 간단하게 레이아웃을 만들 수 있어요</p>
+            </div>
+            
+            <div class="vbox() gap(24)">
+                <div class="code-snippet">
+                    &lt;div class="hbox() gap(16) p(20) bg(white) r(16) shadow(lg)"&gt;<br>
+                    &nbsp;&nbsp;&lt;div class="w(fill) vbox() gap(8)"&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;h3 class="font(24) font(bold)"&gt;제목&lt;/h3&gt;<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&lt;p class="c(gray-600)"&gt;내용&lt;/p&gt;<br>
+                    &nbsp;&nbsp;&lt;/div&gt;<br>
+                    &nbsp;&nbsp;&lt;button class="button bg(primary) c(white)"&gt;클릭!&lt;/button&gt;<br>
+                    &lt;/div&gt;
+                </div>
+                
+                <div class="vbox() items(center) gap(16)">
+                    <p class="font(16) c(gray-600)">👇 결과물</p>
+                    <div class="hbox() gap(16) p(20) bg(white) r(16) shadow(lg) w(100%)">
+                        <div class="w(fill) vbox() gap(8)">
+                            <h3 class="font(24) font(bold)">제목</h3>
+                            <p class="c(gray-600)">내용</p>
+                        </div>
+                        <button class="button bg(primary) c(white)">클릭!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fun Facts Section -->
+    <section class="vbox() items(center) py(40) px(20)">
+        <div class="vbox() gap(32) maxW(800) w(100%)">
+            <h2 class="font(36) font(bold) c(gray-800) text(center)">재미있는 사실들 🎉</h2>
+            
+            <div class="vbox() gap(20)">
+                <div class="hbox() gap(16) items(center) p(20) bg(yellow-100) r(16)">
+                    <span class="font(36)">🚫</span>
+                    <div class="vbox() gap(4)">
+                        <h4 class="font(20) font(semibold)">No Margin Rule!</h4>
+                        <p class="c(gray-600)">margin 대신 gap과 padding을 사용해요. 더 예측 가능한 레이아웃!</p>
+                    </div>
+                </div>
+                
+                <div class="hbox() gap(16) items(center) p(20) bg(pink-100) r(16)">
+                    <span class="font(36)">🎨</span>
+                    <div class="vbox() gap(4)">
+                        <h4 class="font(20) font(semibold)">CSS 표준 문법</h4>
+                        <p class="c(gray-600)">scale(1.05), opacity(0.5) 같은 친숙한 CSS 문법 그대로!</p>
+                    </div>
+                </div>
+                
+                <div class="hbox() gap(16) items(center) p(20) bg(purple-100) r(16)">
+                    <span class="font(36)">⚡</span>
+                    <div class="vbox() gap(4)">
+                        <h4 class="font(20) font(semibold)">Zero Runtime</h4>
+                        <p class="c(gray-600)">빌드 타임에 모든 CSS 생성. 런타임 오버헤드 제로!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="vbox() items(center) bg(gradient) c(white) py(40) px(20)">
+        <div class="vbox() items(center) gap(24) maxW(800)">
+            <h2 class="font(48) font(bold) text(center)">지금 시작하세요! 🎊</h2>
+            <p class="font(20) opacity(0.8) text(center)">
+                AdorableCSS와 함께 더 즐겁고 아름다운 웹을 만들어보세요
+            </p>
+            <div class="hbox() gap(16) flex-wrap">
+                <a href="#" class="button bg(white) c(primary) font(18)">
+                    npm install adorable-css
+                </a>
+                <a href="#" class="button bg(secondary) c(white) font(18)">
+                    GitHub ⭐
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="vbox() items(center) py(20) px(20) c(gray-600)">
+        <p class="font(14)">Made with ❤️ by AdorableCSS Team</p>
+    </footer>
+</body>
+</html>

@@ -48,8 +48,11 @@ describe('input component', () => {
     it('should include state classes from states object', () => {
       const result = inputString();
       expect(result).toContain('hover:border(gray-300)');
-      expect(result).toContain('focus:border(gray-900) ring(1/gray-900)');
-      expect(result).toContain('disabled:cursor(not-allowed) opacity(50) bg(gray-50)');
+      expect(result).toContain('focus:border(gray-900)');
+      expect(result).toContain('focus:ring(1/gray-900)');
+      expect(result).toContain('disabled:cursor(not-allowed)');
+      expect(result).toContain('disabled:opacity(50)');
+      expect(result).toContain('disabled:bg(gray-50)');
     });
   });
 

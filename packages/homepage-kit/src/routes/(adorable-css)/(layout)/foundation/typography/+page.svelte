@@ -1,5 +1,5 @@
 <script lang="ts">
-  import FoundationTypography from '../../../../pages/tokens/Foundation/FoundationTypography.svelte';
+  import FoundationTypography from '../../../../../pages/tokens/Foundation/FoundationTypography.svelte';
 </script>
 
 <svelte:head>

@@ -1,123 +1,107 @@
 /**
- * Clamp 및 Range 처리 로직 통합
- * makeClamp, makeRangeClamp, pxWithClamp, cssvarWithClamp 함수들을 통합하여 코드 라인수 감소
+ * Clamp 및 Range 처리 로직
  */
 
 import { px, cssvar } from './value-utils'
-import { checkIsToken } from '../01-core/utils/token-checker'
+import { registerUsedToken } from '../02-design_tokens/used-tokens'
+import { TEXT_TOKEN_MAP } from '../02-design_tokens/text-tokens'
 
-// Clamp 처리 인터페이스
-export interface ClampProcessor {
-  process(value: string): string
+const FONT_TOKENS = ['3xs', '2xs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl'] as const
+
+export interface ClampOptions {
+  tokenType?: string
+  trackingEnabled?: boolean
+  onTokenFound?: (tokenType: string, token: string) => void
 }
 
-// 기본 Clamp 처리기
-export class DefaultClampProcessor implements ClampProcessor {
-  process(value: string): string {
-    // Handle explicit clamp syntax: clamp(min,preferred,max)
-    if (value.startsWith('clamp(') && value.endsWith(')')) {
-      const clampContent = value.slice(6, -1) // Remove 'clamp(' and ')'
-      const parts = clampContent.split(',').map(part => part.trim())
-      
-      if (parts.length === 3) {
-        const [min, preferred, max] = parts.map(part => {
-          // Apply appropriate value transformation
-          if (part.match(/^\d+(\.\d+)?(px|rem|em|vh|vw|%)$/)) return part
-          
-          // Check for font tokens explicitly (including xl variants)
-          const fontTokens = ['xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl'];
-          if (fontTokens.includes(part) || /^\d+xl$/.test(part)) {
-            return `var(--font-${part})`;
-          }
-          
-          // For other tokens, try cssvar transformation
-          const transformed = cssvar(part)
-          return transformed !== part ? transformed : px(part)
-        })
-        return `clamp(${min}, ${preferred}, ${max})`
+// Transform value for clamp
+function transformClampValue(value: string, options?: ClampOptions): string {
+  // Already has unit
+  if (/^\d+(\.\d+)?(px|rem|em|vh|vw|%)$/.test(value)) return value
+  
+  // Font token
+  if (FONT_TOKENS.includes(value as any)) {
+    if (options?.trackingEnabled) {
+      // Register token with new system
+      const varName = `--text-${value}`
+      const varValue = TEXT_TOKEN_MAP[value as keyof typeof TEXT_TOKEN_MAP]
+      if (varValue) {
+        registerUsedToken(varName, varValue)
       }
+      // Also call the old callback for backward compatibility
+      options?.onTokenFound?.(options.tokenType || 'text', value)
     }
-    
-    return value
-  }
-}
-
-// Range 처리기
-export class RangeClampProcessor implements ClampProcessor {
-  private clampProcessor = new DefaultClampProcessor()
-  
-  process(value: string): string {
-    // Handle triple range syntax: xl..8vh..sm (min..preferred..max)
-    const tripleRangeMatch = value.match(/^([^.]+)\.\.([^.]+)\.\.([^.]+)$/)
-    if (tripleRangeMatch) {
-      const [, min, preferred, max] = tripleRangeMatch
-      return this.clampProcessor.process(`clamp(${min},${preferred},${max})`)
-    }
-    
-    // Handle double range syntax: xl..30px (min..max with smart preferred)
-    const doubleRangeMatch = value.match(/^([^.]+)\.\.([^.]+)$/)
-    if (doubleRangeMatch) {
-      const [, min, max] = doubleRangeMatch
-      const preferred = this.generateSmartPreferred(min, max)
-      return this.clampProcessor.process(`clamp(${min},${preferred},${max})`)
-    }
-    
-    return value
+    return `var(--text-${value})`
   }
   
-  private generateSmartPreferred(min: string, max: string): string {
-    // If both are size tokens, use viewport-based interpolation
-    if (checkIsToken(min, 'font') && max.match(/^\d+px$/)) {
-      return '4vw' // Default viewport-based scaling
-    } else if (checkIsToken(min, 'spacing') && max.match(/^\d+px$/)) {
-      return '8vw' // Larger viewport scaling for spacing
-    } else if (min.match(/^\d+xl$/) && max.match(/^\d+px$/)) {
-      return '5vw' // For xl tokens to px
-    } else {
-      // Fallback: try to interpolate between min and max
-      const minPx = parseFloat(String(px(min)).replace('px', '')) || 16
-      const maxPx = parseFloat(String(px(max)).replace('px', '')) || 32
-      const avgPx = (minPx + maxPx) / 2
-      return `${avgPx * 0.25}vw` // Use 25% of average as vw
+  // Try cssvar, fallback to px
+  const transformed = cssvar(value)
+  return transformed !== value ? transformed : px(value)
+}
+
+// Main clamp processing
+export function makeClamp(value: string, options?: ClampOptions): string {
+  // Explicit clamp syntax
+  if (value.startsWith('clamp(') && value.endsWith(')')) {
+    const content = value.slice(6, -1)
+    const parts = content.split(',').map(p => p.trim())
+    
+    if (parts.length === 3) {
+      const [min, preferred, max] = parts.map(p => transformClampValue(p, options))
+      return `clamp(${min}, ${preferred}, ${max})`
     }
   }
+  
+  // Triple range: min..preferred..max
+  const triple = value.match(/^([^.]+)\.\.([^.]+)\.\.([^.]+)$/)
+  if (triple) {
+    const [, min, preferred, max] = triple
+    return makeClamp(`clamp(${min},${preferred},${max})`, options)
+  }
+  
+  // Double range: min..max
+  const double = value.match(/^([^.]*)\.\.([^.]*)$/)
+  if (double?.[1] || double?.[2]) {
+    const [, min = '', max = ''] = double
+    const minVal = min || (options?.tokenType === 'text' ? 'sm' : '0')
+    const maxVal = max || (options?.tokenType === 'text' ? '6xl' : '100%')
+    const preferred = '4vw' // Default
+    return makeClamp(`clamp(${minVal},${preferred},${maxVal})`, options)
+  }
+  
+  return value
 }
 
-// 팩토리 함수
-export function createClampProcessor(type: 'default' | 'range' = 'default'): ClampProcessor {
-  return type === 'range' ? new RangeClampProcessor() : new DefaultClampProcessor()
-}
+// Alias for backward compatibility
+export const makeRangeClamp = makeClamp
 
-// 편의 함수들 (기존 API 호환성)
-export const makeClamp = (value: string) => createClampProcessor('default').process(value)
-export const makeRangeClamp = (value: string) => createClampProcessor('range').process(value)
+// Text-specific clamp with tracking
+export function makeTextClamp(value: string, onTokenFound?: (tokenType: string, token: string) => void): string {
+  return makeClamp(value, {
+    tokenType: 'text',
+    trackingEnabled: true,
+    onTokenFound
+  })
+}
 
 // Enhanced px/cssvar with clamp support
-export const pxWithClamp = (value: string | number) => {
+export function pxWithClamp(value: string | number): string | number {
   if (value === undefined || value === null) throw new Error('pxWithClamp: value is undefined')
   if (value === 0 || value === '0') return 0
 
   const v = String(value)
-
-  // Check for clamp/range syntax first
   if (v.includes('clamp(') || v.includes('..')) {
-    const processor = v.includes('clamp(') ? 'default' : 'range'
-    return createClampProcessor(processor).process(v)
+    return makeClamp(v)
   }
   
-  // Fall back to regular px processing
   return px(v)
 }
 
-export const cssvarWithClamp = (value: string | number) => {
-  const strValue = String(value)
-  
-  // Handle clamp/range syntax
-  if (strValue.includes('clamp(') || strValue.includes('..')) {
-    const processor = strValue.includes('clamp(') ? 'default' : 'range'
-    return createClampProcessor(processor).process(strValue)
+export function cssvarWithClamp(value: string | number): string {
+  const v = String(value)
+  if (v.includes('clamp(') || v.includes('..')) {
+    return makeClamp(v)
   }
   
-  // Fall back to regular cssvar processing
-  return cssvar(strValue)
+  return cssvar(v)
 }
