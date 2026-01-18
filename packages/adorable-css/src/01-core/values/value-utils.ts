@@ -78,13 +78,21 @@ export const px = (value: string | number) => {
   // 숫자만 있는 경우 px 추가 (Physical Pixel)
   if (/^-?\d+(\.\d+)?$/.test(v)) return v + 'px'
 
-  // CSS 함수나 키워드인 경우
-  if (v.includes('(') || /^(auto|inherit|initial|unset|none|max-content|min-content|fit-content)$/.test(v)) {
+  // CSS 함수나 키워드인 경우 - without regex
+  const cssKeywords = ['auto', 'inherit', 'initial', 'unset', 'none', 'max-content', 'min-content', 'fit-content'];
+  if (v.includes('(') || cssKeywords.includes(v)) {
     return value
   }
 
-  // 유효하지 않은 값
-  if (!v.match(/^[\w\-.%]+$/)) return '0'
+  // 유효하지 않은 값 - without regex
+  // Check if value contains only valid characters: word chars, dash, dot, percent
+  const isValid = v.split('').every(char => {
+    return (char >= 'a' && char <= 'z') ||
+           (char >= 'A' && char <= 'Z') ||
+           (char >= '0' && char <= '9') ||
+           char === '_' || char === '-' || char === '.' || char === '%';
+  });
+  if (!isValid) return '0'
 
   return value
 }

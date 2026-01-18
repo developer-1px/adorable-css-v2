@@ -68,18 +68,22 @@ export function getTokenStep(token: string, category?: 'font' | 'spacing' | 'siz
     return numericValue;
   }
 
-  // Handle numbered xl tokens (2xl, 3xl, etc.)
-  const xlMatch = token.match(/^(\d+)xl$/);
-  if (xlMatch) {
-    const num = parseInt(xlMatch[1]);
-    return category === 'font' ? num + 1 : num + 4;
+  // Handle numbered xl tokens (2xl, 3xl, etc.) - without regex
+  if (token.endsWith('xl') && token.length > 2) {
+    const numPart = token.slice(0, -2);
+    const num = parseInt(numPart);
+    if (!isNaN(num) && numPart === num.toString()) {
+      return category === 'font' ? num + 1 : num + 4;
+    }
   }
 
-  // Handle numbered xs tokens (2xs, 3xs, etc.)
-  const xsMatch = token.match(/^(\d+)xs$/);
-  if (xsMatch) {
-    const num = parseInt(xsMatch[1]);
-    return -num + 1; // 2xs = -1, 3xs = -2, 4xs = -3
+  // Handle numbered xs tokens (2xs, 3xs, etc.) - without regex
+  if (token.endsWith('xs') && token.length > 2) {
+    const numPart = token.slice(0, -2);
+    const num = parseInt(numPart);
+    if (!isNaN(num) && numPart === num.toString()) {
+      return -num + 1; // 2xs = -1, 3xs = -2, 4xs = -3
+    }
   }
 
   // Handle base tokens

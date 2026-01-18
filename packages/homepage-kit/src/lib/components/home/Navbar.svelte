@@ -1,11 +1,11 @@
 <script lang="ts">
 import {page} from '$app/stores'
-import {Github, Menu, X, Search} from 'lucide-svelte'
+import {Github, Menu, X} from 'lucide-svelte'
+import Logo from '$lib/components/ui/Logo.svelte'
 
 let menuOpen = false
 
 $: currentPath = $page.url.pathname
-$: isTokensActive = currentPath.startsWith('/tokens')
 
 const navItems = [
   {href: '/docs', label: 'Docs'},
@@ -16,25 +16,32 @@ const navItems = [
 ]
 </script>
 
-<nav class="sticky top(0) z(100) w(full) bg(white/80) backdrop-blur(20px) border-b(1/gray-200/50)">
-  <div class="hbox(between) h(64) px(xl) max-w(1400px) mx(auto)">
-    <!-- Logo -->
-    <a href="/" class="hbox(middle) gap(sm) c(gray-900) hover:c(black) transition text(none)">
-      <div class="size(32) bg(indigo-600) r(8px) hbox(center)">
-        <span class="c(white) font(bold) text(lg)">A</span>
+<nav class="sticky top(0) z(100) w(full)">
+  <!-- Glass Background -->
+  <div class="absolute inset(0) bg(white/80) backdrop-blur(20px) border-b(1/gray-200/50)"></div>
+
+  <div class="relative hbox(between) h(72) px(xl) max-w(1440px) mx(auto)">
+    <!-- Logo & Brand -->
+    <a href="/" class="hbox(middle) gap(sm) text(none) group">
+      <div class="relative transition-transform duration(300) group-hover:scale(1.1) group-hover:rotate(-5deg)">
+        <Logo size={36} filled />
       </div>
-      <span class="text(lg) bold c(gray-900)">AdorableCSS</span>
+      <span class="text(xl) font(800) tracking(tight) c(gray-900)">
+        Adorable<span class="c(indigo-600)">CSS</span>
+      </span>
     </a>
 
     <!-- Desktop Navigation -->
-    <div class="hbox(middle) gap(xl) ..lg:hidden">
+    <div class="hbox(middle) gap(lg) ..lg:hidden">
       <!-- Nav Links -->
-      <div class="hbox(middle) gap(lg)">
+      <div class="hbox(middle) bg(gray-100/50) p(4px) r(full) border(1/gray-200/50)">
         {#each navItems as item}
           <a
             href={item.href}
-            class="text(sm) font(medium) c(gray-600) hover:c(gray-900) transition text(none)"
-            class:selected={currentPath.startsWith(item.href)}
+            class="px(lg) py(6px) r(full) text(sm) font(medium) transition-all duration(200) text(none)
+                   {currentPath.startsWith(item.href) 
+                     ? 'bg(white) c(indigo-600) shadow(sm) font(bold)' 
+                     : 'c(gray-600) hover:c(gray-900) hover:bg(gray-200/50)'}"
           >
             {item.label}
           </a>
@@ -42,21 +49,18 @@ const navItems = [
       </div>
 
       <!-- Actions -->
-      <div class="hbox(middle) gap(md)">
-        <div class="w(1px) h(20px) bg(gray-200)"></div>
-        
+      <div class="hbox(middle) gap(md) pl(md) border-l(1/gray-200)">
         <a
           href="https://github.com/adorablecss/adorable-css"
           target="_blank"
-          rel="noopener"
-          class="size(36) hbox(center) hover:bg(gray-100) r(full) c(gray-500) hover:c(gray-900) transition"
+          class="size(40) hbox(center) r(full) c(gray-500) hover:bg(gray-100) hover:c(black) transition"
         >
           <Github size="20" />
         </a>
 
         <a 
           href="/docs/getting-started" 
-          class="px(lg) py(2) r(full) bg(indigo-600) c(white) text(sm) font(bold) hover:bg(indigo-700) hover:scale(1.05) transition text(none)"
+          class="h(40) px(xl) hbox(center) r(full) bg(gray-900) c(white) text(sm) font(bold) hover:bg(black) hover:scale(1.05) transition shadow(lg) shadow(indigo-500/20) text(none)"
         >
           Get Started
         </a>
@@ -78,29 +82,24 @@ const navItems = [
 
   <!-- Mobile Navigation -->
   {#if menuOpen}
-    <div class="absolute top(full) left(0) right(0) bg(white) border-b(1/gray-200) shadow(xl) lg:hidden p(xl) vbox gap(lg)">
+    <div class="absolute top(full) left(0) right(0) h(calc(100vh-72px)) bg(white) border-t(1/gray-200) lg:hidden p(2xl) vbox gap(xl) overflow-y-auto">
       {#each navItems as item}
         <a
           href={item.href}
-          class="text(lg) font(medium) c(gray-600) hover:c(gray-900) text(none)"
+          class="text(2xl) font(bold) c(gray-900) hover:c(indigo-600) text(none)"
           on:click={() => menuOpen = false}
         >
           {item.label}
         </a>
       {/each}
       <div class="w(full) h(1px) bg(gray-100)"></div>
-       <a 
-          href="/docs/getting-started" 
-          class="w(full) py(3) r(lg) bg(indigo-600) c(white) text(center) font(bold)"
-        >
-          Get Started
-        </a>
+      <a 
+        href="/docs/getting-started" 
+        class="w(full) py(lg) r(lg) bg(indigo-600) c(white) text(center) font(bold) text(lg)"
+        on:click={() => menuOpen = false}
+      >
+        Get Started
+      </a>
     </div>
   {/if}
 </nav>
-
-<style>
-  .selected {
-    color: var(--c-indigo-600);
-  }
-</style>

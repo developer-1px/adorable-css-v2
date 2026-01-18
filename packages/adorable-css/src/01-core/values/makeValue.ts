@@ -27,17 +27,23 @@ export function getActualColorValue(colorName: string): string {
     return BASE_COLOR_VALUES[colorName]
   }
 
-  // Handle color-shade format (e.g., purple-500, gray-100)
-  const colorShadeMatch = colorName.match(/^([a-z]+)-(\d+)$/)
-  if (colorShadeMatch) {
-    const [, colorFamily, shade] = colorShadeMatch
+  // Handle color-shade format (e.g., purple-500, gray-100) - without regex
+  const lastDashIndex = colorName.lastIndexOf('-');
+  if (lastDashIndex > 0) {
+    const colorFamily = colorName.slice(0, lastDashIndex);
+    const shade = colorName.slice(lastDashIndex + 1);
 
-    // Get base color hex value
-    const baseHex = BASE_COLOR_VALUES[colorFamily]
-    if (baseHex && TONE_VALUES[shade]) {
-      // For now, return the base color - could implement OKLCH tone generation later
-      // This provides proper gradient support immediately
-      return baseHex
+    // Check if shade is all digits
+    const isNumericShade = shade.length > 0 && !isNaN(Number(shade)) && shade === parseInt(shade).toString();
+
+    if (isNumericShade) {
+      // Get base color hex value
+      const baseHex = BASE_COLOR_VALUES[colorFamily];
+      if (baseHex && TONE_VALUES[shade]) {
+        // For now, return the base color - could implement OKLCH tone generation later
+        // This provides proper gradient support immediately
+        return baseHex;
+      }
     }
   }
 
@@ -176,8 +182,33 @@ export const makeClamp = (value: string) => {
     if (parts.length === 3) {
       const [min, preferred, max] = parts.map(part => {
         // Apply appropriate value transformation
-        if (part.match(/^\d+(\.\d+)?(px|rem|em|vh|vw|%)$/)) return part;
-        if (part.match(/^\d+xl$/)) return px(part);
+        // Check if it has CSS unit (px, rem, em, vh, vw, %) - without regex
+        const hasUnit = part.endsWith('px') || part.endsWith('rem') || part.endsWith('em') ||
+                        part.endsWith('vh') || part.endsWith('vw') || part.endsWith('%');
+        if (hasUnit) {
+          // Find the first letter or % character
+          let unitIndex = -1;
+          for (let i = 0; i < part.length; i++) {
+            const char = part[i];
+            if ((char >= 'a' && char <= 'z') || char === '%') {
+              unitIndex = i;
+              break;
+            }
+          }
+          if (unitIndex > 0) {
+            const numPart = part.slice(0, unitIndex);
+            if (!isNaN(parseFloat(numPart))) return part;
+          }
+        }
+
+        // Check for xl pattern - without regex
+        if (part.endsWith('xl') && part.length > 2) {
+          const numPart = part.slice(0, -2);
+          if (!isNaN(parseInt(numPart)) && numPart === parseInt(numPart).toString()) {
+            return px(part);
+          }
+        }
+
         if (isToken(part, 'spacing') || isToken(part, 'font') || isToken(part, 'size')) return cssvar(part);
         return px(part);
       });
@@ -188,39 +219,66 @@ export const makeClamp = (value: string) => {
   return value;
 }
 
+// Helper function to check if value ends with pattern - without regex
+function endsWithPx(value: string): boolean {
+  return value.endsWith('px');
+}
+
+function isXlToken(value: string): boolean {
+  if (value.endsWith('xl') && value.length > 2) {
+    const numPart = value.slice(0, -2);
+    return !isNaN(parseInt(numPart)) && numPart === parseInt(numPart).toString();
+  }
+  return false;
+}
+
 // Range syntax support for clamp generation
 export const makeRangeClamp = (value: string) => {
-  // Handle triple range syntax: xl..8vh..sm (min..preferred..max)
-  const tripleRangeMatch = value.match(/^([^.]+)\.\.([^.]+)\.\.([^.]+)$/);
-  if (tripleRangeMatch) {
-    const [, min, preferred, max] = tripleRangeMatch;
-    return makeClamp(`clamp(${min}, ${preferred}, ${max})`);
+  // Handle triple range syntax: xl..8vh..sm (min..preferred..max) - without regex
+  // Count occurrences of '..' without regex
+  let dotsCount = 0;
+  for (let i = 0; i < value.length - 1; i++) {
+    if (value[i] === '.' && value[i + 1] === '.') {
+      dotsCount++;
+      i++; // Skip next character
+    }
   }
 
-  // Handle double range syntax: xl..30px (min..max with smart preferred)
-  const doubleRangeMatch = value.match(/^([^.]+)\.\.([^.]+)$/);
-  if (doubleRangeMatch) {
-    const [, min, max] = doubleRangeMatch;
-
-    // Smart preferred value generation
-    let preferred: string;
-
-    // If both are size 02-design_tokens, use viewport-based interpolation
-    if (isToken(min, 'font') && max.match(/^\d+px$/)) {
-      preferred = '4vw'; // Default viewport-based scaling
-    } else if (isToken(min, 'spacing') && max.match(/^\d+px$/)) {
-      preferred = '8vw'; // Larger viewport scaling for spacing
-    } else if (min.match(/^\d+xl$/) && max.match(/^\d+px$/)) {
-      preferred = '5vw'; // For xl 02-design_tokens to px
-    } else {
-      // Fallback: try to interpolate between min and max
-      const minPx = parseFloat(String(px(min)).replace('px', '')) || 16;
-      const maxPx = parseFloat(String(px(max)).replace('px', '')) || 32;
-      const avgPx = (minPx + maxPx) / 2;
-      preferred = `${avgPx * 0.25} vw`; // Use 25% of average as vw
+  if (dotsCount === 2) {
+    // Triple range: split by '..'
+    const parts = value.split('..');
+    if (parts.length === 3) {
+      const [min, preferred, max] = parts;
+      return makeClamp(`clamp(${min}, ${preferred}, ${max})`);
     }
+  }
 
-    return makeClamp(`clamp(${min}, ${preferred}, ${max})`);
+  // Handle double range syntax: xl..30px (min..max with smart preferred) - without regex
+  if (dotsCount === 1) {
+    const parts = value.split('..');
+    if (parts.length === 2) {
+      const [min, max] = parts;
+
+      // Smart preferred value generation
+      let preferred: string;
+
+      // If both are size tokens, use viewport-based interpolation - without regex
+      if (isToken(min, 'font') && endsWithPx(max)) {
+        preferred = '4vw'; // Default viewport-based scaling
+      } else if (isToken(min, 'spacing') && endsWithPx(max)) {
+        preferred = '8vw'; // Larger viewport scaling for spacing
+      } else if (isXlToken(min) && endsWithPx(max)) {
+        preferred = '5vw'; // For xl tokens to px
+      } else {
+        // Fallback: try to interpolate between min and max
+        const minPx = parseFloat(String(px(min)).replace('px', '')) || 16;
+        const maxPx = parseFloat(String(px(max)).replace('px', '')) || 32;
+        const avgPx = (minPx + maxPx) / 2;
+        preferred = `${avgPx * 0.25} vw`; // Use 25% of average as vw
+      }
+
+      return makeClamp(`clamp(${min}, ${preferred}, ${max})`);
+    }
   }
 
   return value;

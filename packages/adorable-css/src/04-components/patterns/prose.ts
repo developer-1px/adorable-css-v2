@@ -4,7 +4,7 @@ import type { ComponentDefinition } from '../defineComponent';
 // VitePress-inspired prose component with refined typography
 const proseDefinition: ComponentDefinition = {
   // Base typography with optimal reading experience
-  base: 'font(16/1.75) c(neutral-800)',
+  base: 'text(16/1.75) c(neutral-800)',
 
   selectors: {
     // Typography hierarchy using heading component with margin
@@ -16,7 +16,7 @@ const proseDefinition: ComponentDefinition = {
     'h6': 'heading(h6) c(neutral-900) mt(lg) mb(sm)',
 
     // Body & inline elements - VitePress inspired
-    'p': 'font(16/1.75) mb(20) c(neutral-800)',
+    'p': 'text(16/1.75) mb(20) c(neutral-800)',
     'strong': 'bold(700) c(neutral-900)',
     'em': 'italic',
     'mark': 'bg(warning.2) px(4) py(1) r(2)',
@@ -40,13 +40,13 @@ const proseDefinition: ComponentDefinition = {
     'blockquote': 'my(24) pl(20) border-l(4/neutral-300) c(neutral-700) italic',
     'blockquote p': 'mb(8)',
     'blockquote p:last-child': 'mb(0)',
-    'blockquote cite': 'block mt(8) font(14) not-italic c(neutral-500)',
+    'blockquote cite': 'block mt(8) text(14) not-italic c(neutral-500)',
     'blockquote cite::before': 'content("—") mr(4)',
 
     // Tables - VitePress style
     'table': 'w(full) my(16) border-collapse text(left)',
     'thead': 'border-b(2/neutral-300)',
-    'th': 'px(12) py(8) font(14) bold(600) c(primary) text(left)',
+    'th': 'px(12) py(8) text(14) bold(600) c(primary) text(left)',
     'td': 'px(12) py(8) border-b(1/neutral-200)',
     'tbody tr:last-child td': 'border-b(0)',
     'tbody tr:hover': 'bg(neutral-50)',
@@ -56,13 +56,13 @@ const proseDefinition: ComponentDefinition = {
     'img': 'max-w(full) h(auto) r(8) my(16)',
     'figure': 'my(24)',
     'figure img': 'mx(auto) mb(8)',
-    'figcaption': 'text(center) font(14) c(neutral-600) mt(8)',
+    'figcaption': 'text(center) text(14) c(neutral-600) mt(8)',
 
     // Code & interactive elements - Light theme
-    'code': 'px(4) py(1) bg(neutral-50) r(4) border(1/neutral-200) font(sm) break-words',
-    'pre': 'my(16) p(16) c(neutral-900) r(8) border(1/neutral-200) overflow-x(auto) font(mono) font(xs)',
+    'code': 'px(4) py(1) bg(neutral-50) r(4) border(1/neutral-200) text(sm) break-words',
+    'pre': 'my(16) p(16) c(neutral-900) r(8) border(1/neutral-200) overflow-x(auto) font(mono) text(xs)',
     'pre code': 'p(0) bg(transparent) c(inherit) border(0)',
-    'kbd': 'inline-block px(6) py(1) bg(neutral-100) border(1/neutral-300) r(4) shadow(sm) font(mono) font(12) c(neutral-700)',
+    'kbd': 'inline-block px(6) py(1) bg(neutral-100) border(1/neutral-300) r(4) shadow(sm) font(mono) text(12) c(neutral-700)',
     'abbr[title]': 'decoration(dotted) underline-offset(2) cursor(help)',
 
     // Structured content
@@ -78,7 +78,7 @@ const proseDefinition: ComponentDefinition = {
     '> *:first-child': 'mt(0)',
     '> *:last-child': 'mb(0)',
 
-    '.lead': 'font(20/1.6) c(neutral-600) mb(24)',
+    '.lead': 'text(20/1.6) c(neutral-600) mb(24)',
 
     // VitePress special elements
     '.tip, .warning, .danger, .info': 'my(16) p(16) r(8) border-l(4)',
@@ -90,9 +90,9 @@ const proseDefinition: ComponentDefinition = {
 
   // Size variants - VitePress inspired
   sizes: {
-    sm: 'font(base/1.5) max-w(sm)',
+    sm: 'text(base/1.5) max-w(sm)',
     default: '',
-    lg: 'font(xl/1.7) max-w(4xl)'
+    lg: 'text(xl/1.7) max-w(4xl)'
   },
 
   // Style variants
@@ -101,26 +101,26 @@ const proseDefinition: ComponentDefinition = {
     docs: 'max-w(3xl)',
     article: 'font(serif) hyphens(auto) max-w(prose) mx(auto)',
     technical: 'font(mono) max-w(4xl)',
-    marketing: 'font(lg/1.65) tracking(tight)'
+    marketing: 'text(lg/1.65) tracking(tight)'
   },
 
   // Variant-specific overrides
   variantSelectors: {
     sm: {
-      'h1': 'font(24/1.25) mt(0) mb(lg)',
-      'h2': 'font(20/1.3) mt(3xl) mb(md)',
-      'h3': 'font(16/1.4) mt(2xl) mb(sm)',
+      'h1': 'text(24/1.25) mt(0) mb(lg)',
+      'h2': 'text(20/1.3) mt(3xl) mb(md)',
+      'h3': 'text(16/1.4) mt(2xl) mb(sm)',
       'blockquote': 'pl(12) border-l(3)',
-      'code': 'font(12)',
-      'pre': 'p(12) font(12)',
-      'th, td': 'px(8) py(6) font(13)'
+      'code': 'text(12)',
+      'pre': 'p(12) text(12)',
+      'th, td': 'px(8) py(6) text(13)'
     },
 
     lg: {
-      'h1': 'font(40/1.2/-2%) mt(0) mb(3xl)',
-      'h2': 'font(32/1.25/-1%) mt(6xl) mb(xl)',
-      'h3': 'font(24/1.3) mt(4xl) mb(lg)',
-      'p': 'mb(20) font(18/1.7)',
+      'h1': 'text(40/1.2/-2%) mt(0) mb(3xl)',
+      'h2': 'text(32/1.25/-1%) mt(6xl) mb(xl)',
+      'h3': 'text(24/1.3) mt(4xl) mb(lg)',
+      'p': 'mb(20) text(18/1.7)',
       'blockquote': 'my(24) pl(24) border-l(5)',
       'pre': 'p(20) my(24)'
     },
@@ -136,35 +136,35 @@ const proseDefinition: ComponentDefinition = {
 
     article: {
       'p': 'text-indent(2em) mb(0)',
-      'p:first-of-type': 'text-indent(0) font(18/1.8)',
-      'p:first-of-type::first-letter': 'float(left) font(72/1) bold(700) mr(8) mt(4) c(primary)',
+      'p:first-of-type': 'text-indent(0) text(18/1.8)',
+      'p:first-of-type::first-letter': 'float(left) text(72/1) bold(700) mr(8) mt(4) c(primary)',
       'p + p': 'mt(0)',
       'h1, h2, h3': 'font(serif) text(center) my(32) mt(3xl) mb(xl)',
       'blockquote': 'font(italic) mx(32) my(32) text(center) border(0)',
-      'blockquote p': 'font(20/1.6)'
+      'blockquote p': 'text(20/1.6)'
     },
 
     technical: {
       'h1, h2, h3, h4, h5, h6': 'font(mono) bold(400) mt(2xl) mb(lg)',
-      'p': 'font(14/1.75)',
+      'p': 'text(14/1.75)',
       'code': 'bg(primary.1) c(primary-700) px(6) py(2) border(1/primary-200)',
       'pre': 'bg(neutral-50) c(neutral-900) p(16) border(1/neutral-300) font(mono)',
       'pre code': 'p(0) bg(transparent) c(inherit) border(0)',
       'a': 'c(primary) decoration(none) bold(500)',
       'a:hover': 'c(primary-700) decoration(underline)',
-      'table': 'font(mono) font(13)',
-      'ul, ol': 'font(14)'
+      'table': 'font(mono) text(13)',
+      'ul, ol': 'text(14)'
     },
 
     marketing: {
-      'h1': 'font(..5xl/1/-4%) bold(black) tracking(tight) c(to-br/primary..primary-700)',
-      'h2': 'font(..4xl/1.1/-3%) c(primary)',
-      'h3': 'font(..3xl/1.2/-2%) c(primary-800)',
-      'p': 'font(lg) lh(1.75) c(neutral-700)',
+      'h1': 'text(..5xl/1/-4%) bold(black) tracking(tight) c(to-br/primary..primary-700)',
+      'h2': 'text(..4xl/1.1/-3%) c(primary)',
+      'h3': 'text(..3xl/1.2/-2%) c(primary-800)',
+      'p': 'text(lg) lh(1.75) c(neutral-700)',
       'strong': 'c(primary)',
       'a': 'c(primary) bold(medium) decoration(none) hover:decoration(underline)',
-      'blockquote': 'font(xl) italic border-l(primary) pl(xl) my(2xl)',
-      '.lead': 'font(2xl/1.5) bold(light) c(neutral-700) max-w(4xl)'
+      'blockquote': 'text(xl) italic border-l(primary) pl(xl) my(2xl)',
+      '.lead': 'text(2xl/1.5) bold(light) c(neutral-700) max-w(4xl)'
     }
   },
 
