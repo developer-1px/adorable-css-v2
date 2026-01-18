@@ -12,7 +12,7 @@ import ClassInspector from "$lib/components/debug/ClassInspector.svelte";
 
 <Navbar />
 
-<div class="min-h(screen) vbox pt(60)">
+<div class="min-h(screen) vbox">
   <main class="flex(1)">
     <slot />
   </main>

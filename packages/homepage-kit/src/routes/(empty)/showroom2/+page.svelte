@@ -161,7 +161,7 @@
             alt={product.name}
             class="w(full) aspect(1) object(cover) r(lg) bg(neutral-50)"
           />
-          <button class="absolute top(md) right(md) p(sm) bg(white/auto-text) r(md) hover:scale(110) transition">
+          <button class="absolute top(md) right(md) p(sm) bg(white/auto-text) r(md) hover:scale(1.1) transition">
             <div class="size(16) c(neutral-600)">{@html icons.heart}</div>
           </button>
         </div>

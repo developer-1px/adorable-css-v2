@@ -1,96 +1,84 @@
-<script>
-  let activeSection = 'core';
+<script lang="ts">
+  import { referenceData } from '$lib/referenceData';
+  
+  let activeCategory = Object.keys(referenceData)[0];
+
+  // Helper to scroll to section
+  function scrollTo(id: string) {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // Generate ID from string
+  const toId = (str: string) => str.toLowerCase().replace(/[^a-z0-9]/g, '-');
 </script>
 
-<div class="hbox w(full) min-h(screen) bg(gray-50)">
+<div class="hbox w(full) h(screen) bg(gray-50) overflow(hidden)">
   
   <!-- Sidebar -->
-  <aside class="w(240) fixed h(screen) overflow-y(auto) border-r(1/gray-200) bg(white) p(6) vbox gap(8)">
-    <div class="vbox gap(4)">
-      <h3 class="font(caption) c(gray-500) bold(600) uppercase tracking(wider)">Core</h3>
-      <a href="#core" class="p(2) c(gray-900) hover:c(indigo-600) transition">Concepts</a>
+  <aside class="w(280) h(full) overflow-y(auto) border-r(1/gray-200) bg(white) p(10) shrink(0)">
+    <div class="vbox gap(2) mb(12)">
+      <h1 class="font(title-lg) bold(800) c(gray-900)">Rules</h1>
+      <p class="font(body-sm) c(gray-500)">Complete API Reference</p>
     </div>
 
-    <div class="vbox gap(4) mt(6)">
-      <h3 class="font(caption) c(gray-500) bold(600) uppercase tracking(wider)">Layout</h3>
-      <a href="#hbox" class="p(2) c(gray-900) hover:c(indigo-600) transition">HBox / VBox</a>
-      <a href="#grid" class="p(2) c(gray-900) hover:c(indigo-600) transition">Grid</a>
-    </div>
-
-    <div class="vbox gap(4) mt(6)">
-      <h3 class="font(caption) c(gray-500) bold(600) uppercase tracking(wider)">Spacing</h3>
-      <a href="#spacing" class="p(2) c(gray-900) hover:c(indigo-600) transition">Padding & Margin</a>
-      <a href="#gap" class="p(2) c(gray-900) hover:c(indigo-600) transition">Gap</a>
-    </div>
-
-    <div class="vbox gap(4) mt(6)">
-      <h3 class="font(caption) c(gray-500) bold(600) uppercase tracking(wider)">Visual</h3>
-      <a href="#color" class="p(2) c(gray-900) hover:c(indigo-600) transition">Color & Background</a>
-      <a href="#radius" class="p(2) c(gray-900) hover:c(indigo-600) transition">Radius</a>
-      <a href="#effects" class="p(2) c(gray-900) hover:c(indigo-600) transition">Shadow & Effects</a>
+    <div class="vbox gap(10)">
+      {#each Object.entries(referenceData) as [category, subcategories]}
+        <div class="vbox gap(4)">
+          <h3 class="font(caption) c(gray-400) bold(600) uppercase tracking(wider)">{category.split('(')[1]?.replace(')', '') || category}</h3>
+          <div class="vbox gap(1)">
+            {#each Object.keys(subcategories) as subcategory}
+              <a 
+                href="#{toId(category)}-{toId(subcategory)}"
+                class="p(2) -ml(2) r(md) c(gray-600) hover:bg(gray-50) hover:c(gray-900) transition text(sm) font(medium) block text(none)"
+              >
+                {subcategory}
+              </a>
+            {/each}
+          </div>
+        </div>
+      {/each}
     </div>
   </aside>
 
   <!-- Main Content -->
-  <main class="ml(240) flex(1) p(12) max-w(1000px)">
-    <div class="vbox gap(16)">
+  <main class="flex(1) h(full) overflow-y(auto) scroll-smooth">
+    <div class="max-w(1200px) p(24) mx(auto) vbox gap(32)">
       
-      <!-- Intro -->
-      <section id="core" class="vbox gap(4) pb(12) border-b(1/gray-200)">
-        <h1 class="font(display-lg) bold(900)">Reference</h1>
-        <p class="font(body-lg) c(gray-600)">The complete API reference for AdorableCSS.</p>
-      </section>
-
-      <!-- Layout -->
-      <section id="hbox" class="vbox gap(6) mt(8) py(8)">
-        <h2 class="font(heading-lg)">Layout Primitives</h2>
-        <div class="vbox gap(4)">
-          <div class="vbox gap(2)">
-            <code class="font(mono) c(indigo-600) text(lg) bg(indigo-50) w(fit) px(2) r(md)">hbox(alignment?)</code>
-            <p class="c(gray-700)">Horizontal Flex container. Shortcut for `display: flex; flex-direction: row`.</p>
+      {#each Object.entries(referenceData) as [category, subcategories]}
+        <section id={toId(category)} class="vbox gap(8)">
+          <div class="pb(4) border-b(1/gray-200) mt(8)">
+            <h2 class="font(display-sm) bold(800) c(gray-900)">{category}</h2>
           </div>
-          <div class="grid(2) gap(4)">
-             <div class="p(6) bg(white) r(lg) shadow(sm) vbox gap(2)">
-               <code class="text(sm) c(gray-500)">hbox(left)</code>
-               <div class="hbox(left) gap(2) bg(gray-100) p(2) r(md) h(20)">
-                 <div class="size(16) bg(indigo-500) r(full)"></div>
-                 <div class="size(16) bg(indigo-500) r(full) opacity(50)"></div>
-               </div>
-             </div>
-             <div class="p(6) bg(white) r(lg) shadow(sm) vbox gap(2)">
-                <code class="text(sm) c(gray-500)">hbox(center)</code>
-                <div class="hbox(center) gap(2) bg(gray-100) p(2) r(md) h(20)">
-                  <div class="size(16) bg(indigo-500) r(full)"></div>
-                  <div class="size(16) bg(indigo-500) r(full) opacity(50)"></div>
+
+          <div class="grid(1) lg:grid-cols(2) gap(8)">
+            {#each Object.entries(subcategories) as [subcategory, items]}
+              <div id="{toId(category)}-{toId(subcategory)}" class="vbox gap(6) p(8) bg(white) r(xl) shadow(sm) border(1/gray-100)">
+                <h3 class="font(title-md) c(indigo-600) bold(600)">{subcategory}</h3>
+                
+                <div class="vbox gap(4)">
+                  {#each items as item}
+                    <div class="vbox gap(2)">
+                      <div class="hbox(middle) gap(2)">
+                        <span class="px(2.5) py(1) bg(gray-100) r(md) text(xs) c(gray-500) font(mono)">{item.property}</span>
+                      </div>
+                      <div class="hbox flex-wrap gap(2)">
+                        {#each item.syntax as syntax}
+                          <code class="font(mono) text(sm) c(gray-800) bg(gray-50) px(3) py(1.5) r(md) border(1/gray-200)">
+                            {syntax}
+                          </code>
+                        {/each}
+                      </div>
+                    </div>
+                  {/each}
                 </div>
               </div>
+            {/each}
           </div>
-        </div>
-      </section>
+        </section>
+      {/each}
 
-      <!-- Spacing -->
-      <section id="spacing" class="vbox gap(6) mt(8) py(8) border-t(1/gray-200)">
-        <h2 class="font(heading-lg)">Spacing & Sizing</h2>
-        <div class="vbox gap(4) p(6) bg(yellow-50) r(lg) border(1/yellow-200)">
-          <h3 class="font(title-md) c(yellow-800)">Hybrid Unit System</h3>
-          <p class="c(yellow-900)">
-            <strong>Spacing</strong> (`p`, `m`, `gap`) uses <strong>4px grid units</strong>.<br>
-            <strong>Sizing</strong> (`w`, `h`, `size`) uses <strong>physical pixels</strong>.
-          </p>
-        </div>
-        
-        <div class="grid(2) gap(8)">
-          <div class="vbox gap(2)">
-            <code class="font(mono) c(indigo-600) text(lg)">gap(4)</code>
-            <p class="c(gray-600)">= 16px (4 * 4px)</p>
-          </div>
-          <div class="vbox gap(2)">
-            <code class="font(mono) c(indigo-600) text(lg)">size(32)</code>
-            <p class="c(gray-600)">= 32px (Physical)</p>
-          </div>
-        </div>
-      </section>
-
+      <div class="h(100)"></div> <!-- Bottom spacer -->
     </div>
   </main>
 

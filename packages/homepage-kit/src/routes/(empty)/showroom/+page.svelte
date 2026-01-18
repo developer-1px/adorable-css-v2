@@ -181,7 +181,7 @@
         <div class="size(16:9) r(xl) bg(neutral-100) shadow(xl) clip">
           <div class="absolute inset(0) bg(135deg/primary.1..primary.2)"></div>
           <div class="absolute inset(0) hbox(center/middle)">
-            <div class="size(80) r(full) bg(white) shadow(lg) hbox(center/middle) hover:scale(110) transition cursor(pointer)">
+            <div class="size(80) r(full) bg(white) shadow(lg) hbox(center/middle) hover:scale(1.1) transition cursor(pointer)">
               <svg class="size(32) c(primary) ml(4)" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M8 5v14l11-7z"/>
               </svg>
@@ -488,7 +488,7 @@
           { value: '4.9/5', label: 'Customer Rating', icon: 'star', color: 'warning' }
         ] as stat}
           <div class="text(center) p(2xl) r(xl) bg({stat.color}-50) hover:shadow(lg) transition group">
-            <div class="size(64) r(full) bg({stat.color}-100) c({stat.color}-600) hbox(center/middle) mx(auto) group-hover:scale(110) transition">
+            <div class="size(64) r(full) bg({stat.color}-100) c({stat.color}-600) hbox(center/middle) mx(auto) group-hover:scale(1.1) transition">
               {@html icons[stat.icon]}
             </div>
             <h3 class="display(xl) c(neutral-900) my(lg)">{stat.value}</h3>

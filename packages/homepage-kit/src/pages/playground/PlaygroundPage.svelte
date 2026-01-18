@@ -902,17 +902,5 @@
       padding-left: 1rem;
       padding-right: 1rem;
     }
-    
-    .font\(3xl\) {
-      font-size: 2rem;
-    }
-    
-    .font\(4xl\) {
-      font-size: 2.5rem;
-    }
-    
-    .font\(5xl\) {
-      font-size: 3rem;
-    }
   }
 </style>

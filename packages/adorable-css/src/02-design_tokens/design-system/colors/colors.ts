@@ -3,8 +3,8 @@
 
 import type { RuleHandler, CSSRule } from '../../../03-rules/types';
 import { makeColor, getActualColorValue } from '../../../01-core/values/makeValue';
-import { 
-  createAdvancedColorSystem, 
+import {
+  createAdvancedColorSystem,
   generateAdvancedColorPalette,
   flattenColorPalette,
   generateColorCSS,
@@ -92,13 +92,13 @@ let currentSemanticConfig: SemanticColorConfig = semanticColors;
 export function generateColorPalette(): Record<string, string> {
   // Get base palette
   const basePalette = colorSystem.flatPalette;
-  
+
   // Update token system with palette
   setColorPalette(basePalette);
-  
+
   // Build semantic colors
   const semanticPalette = buildSemanticColors(currentSemanticConfig);
-  
+
   // Merge palettes
   return {
     ...basePalette,
@@ -113,13 +113,13 @@ export function setTheme(themeName: string): Record<string, string> {
   if (themes[themeName]) {
     currentTheme = themes[themeName];
     colorSystem = createAdvancedColorSystem(currentTheme.options);
-    
+
     // Regenerate palette with semantic colors
     colorPalette = generateColorPalette();
-    
+
     // Update color 03-rules
     Object.assign(colorRules, colorSystem.colorRules);
-    
+
     return colorPalette;
   }
   return colorPalette;
@@ -159,8 +159,8 @@ export function createCustomTheme(name: string, options: ColorThemeOptions): voi
  * Create a color variant with fine-tuned adjustments
  */
 export function createColorVariant(
-  baseTheme: string, 
-  name: string, 
+  baseTheme: string,
+  name: string,
   adjustments: ColorThemeOptions
 ): void {
   const base = themes[baseTheme];
@@ -185,13 +185,13 @@ export function adjustCurrentTheme(adjustments: ColorThemeOptions): Record<strin
     saturation: (currentTheme.options.saturation || 0) + (adjustments.saturation || 0),
     lightness: (currentTheme.options.lightness || 0) + (adjustments.lightness || 0)
   };
-  
+
   colorSystem = createAdvancedColorSystem(newOptions);
   colorPalette = colorSystem.flatPalette;
-  
+
   // Update color 03-rules
   Object.assign(colorRules, colorSystem.colorRules);
-  
+
   return colorPalette;
 }
 
@@ -219,15 +219,15 @@ export const colorRules: Record<string, RuleHandler> = {
   // Text color
   c: (value?: string): CSSRule => {
     if (!value) return {};
-    
+
     if (value === "current") return { color: "currentColor" };
-    
+
     // Handle special brand gradient for text
     if (value === 'brand' || value === 'gradient-brand') {
       return {
         background: colorPalette['brand-gradient-text'] || colorPalette['brand-gradient'] || 'var(--brand-gradient)',
         "-webkit-background-clip": "text",
-        "background-clip": "text", 
+        "background-clip": "text",
         "-webkit-text-fill-color": "transparent",
       };
     }
@@ -235,11 +235,11 @@ export const colorRules: Record<string, RuleHandler> = {
     // c(135deg/color1..color2..color3) - full gradient syntax matching bg() utility  
     if (value.includes('/') && value.includes('..')) {
       const [angleOrDirection, colors] = value.split('/');
-      
+
       // Handle direction/angle (do NOT apply makeColor to this part!)
       let gradientDirection = '90deg';
       let isRadial = false;
-      
+
       if (angleOrDirection) {
         if (angleOrDirection.includes('deg')) {
           gradientDirection = angleOrDirection;
@@ -254,7 +254,7 @@ export const colorRules: Record<string, RuleHandler> = {
         } else if (['to-r', 'to-l', 'to-t', 'to-b', 'to-tr', 'to-tl', 'to-br', 'to-bl', 'to-right', 'to-left', 'to-top', 'to-bottom', 'to-top-right', 'to-top-left', 'to-bottom-right', 'to-bottom-left'].includes(angleOrDirection)) {
           const directionMap: Record<string, string> = {
             'to-r': 'to right',
-            'to-l': 'to left', 
+            'to-l': 'to left',
             'to-t': 'to top',
             'to-b': 'to bottom',
             'to-tr': 'to top right',
@@ -269,7 +269,17 @@ export const colorRules: Record<string, RuleHandler> = {
             'to-top-right': 'to top right',
             'to-top-left': 'to top left',
             'to-bottom-right': 'to bottom right',
-            'to-bottom-left': 'to bottom left'
+
+            'to-bottom-left': 'to bottom left',
+            // Verbose linear syntax support
+            'linear-to-r': 'to right',
+            'linear-to-l': 'to left',
+            'linear-to-t': 'to top',
+            'linear-to-b': 'to bottom',
+            'linear-to-tr': 'to top right',
+            'linear-to-tl': 'to top left',
+            'linear-to-br': 'to bottom right',
+            'linear-to-bl': 'to bottom left'
           };
           gradientDirection = directionMap[angleOrDirection] || '90deg';
         } else if (!isNaN(Number(angleOrDirection))) {
@@ -283,14 +293,14 @@ export const colorRules: Record<string, RuleHandler> = {
         // Use actual color values for gradients instead of CSS variables
         return getActualColorValue(trimmedColor);
       }).join(', ') : '';
-      
+
       // Return appropriate gradient type for text
       const gradientType = isRadial ? 'radial-gradient' : 'linear-gradient';
-      
+
       return {
         background: `${gradientType}(${gradientDirection}, ${colorList})`,
         "-webkit-background-clip": "text",
-        "background-clip": "text", 
+        "background-clip": "text",
         "-webkit-text-fill-color": "transparent",
       };
     }
@@ -304,7 +314,7 @@ export const colorRules: Record<string, RuleHandler> = {
       return {
         background: `linear-gradient(90deg, ${startColor}, ${endColor})`,
         "-webkit-background-clip": "text",
-        "background-clip": "text", 
+        "background-clip": "text",
         "-webkit-text-fill-color": "transparent",
       };
     }
@@ -319,12 +329,12 @@ export const colorRules: Record<string, RuleHandler> = {
         "-webkit-text-fill-color": "transparent",
       };
     }
-    
+
     // Check colorPalette first
     if (colorPalette[value]) {
       return { color: colorPalette[value] };
     }
-    
+
     // Handle all colors including opacity syntax (white.8, black.2) with makeColor
     const processedColor = makeColor(value);
     return { color: processedColor };
@@ -333,27 +343,27 @@ export const colorRules: Record<string, RuleHandler> = {
   // Background color
   bg: (value?: string): CSSRule => {
     if (!value) return {};
-    
+
     // Handle special brand gradient
     if (value === 'brand' || value === 'gradient-brand') {
       return { background: colorPalette['brand-gradient'] || 'var(--brand-gradient)' };
     }
-    
+
     // Handle gradient syntax - direction first: 135deg/purple-500..pink-500
     if (value.includes('..')) {
       let colors: string[] = [];
       let direction = '135deg'; // default direction
       let isRadial = false;
-      
+
       // Check if there's a direction specified with /
       if (value.includes('/')) {
         const parts = value.split('/');
-        
+
         // Check if first part is direction (contains deg, keyword, or radial)
         if (parts[0].includes('deg') || parts[0].startsWith('to-') || parts[0].startsWith('radial')) {
           direction = parts[0];
           colors = parts[1].split('..');
-          
+
           // Check if it's radial gradient
           if (parts[0].startsWith('radial')) {
             isRadial = true;
@@ -368,18 +378,18 @@ export const colorRules: Record<string, RuleHandler> = {
           // Old format: colors/direction
           colors = parts[0].split('..');
           direction = parts[1];
-          
+
           if (direction.startsWith('radial')) {
             isRadial = true;
             direction = direction.replace('radial-gradient/', '').replace('radial/', '') || 'circle';
           }
         }
-        
+
         // Convert direction keywords to degrees (for linear gradients only)
         if (!isRadial) {
           const directionMap: Record<string, string> = {
             'to-t': 'to top',
-            'to-r': 'to right', 
+            'to-r': 'to right',
             'to-b': 'to bottom',
             'to-l': 'to left',
             'to-tr': 'to top right',
@@ -394,21 +404,30 @@ export const colorRules: Record<string, RuleHandler> = {
             'to-top-right': 'to top right',
             'to-top-left': 'to top left',
             'to-bottom-right': 'to bottom right',
-            'to-bottom-left': 'to bottom left'
+            'to-bottom-left': 'to bottom left',
+            // Verbose linear syntax support
+            'linear-to-r': 'to right',
+            'linear-to-l': 'to left',
+            'linear-to-t': 'to top',
+            'linear-to-b': 'to bottom',
+            'linear-to-tr': 'to top right',
+            'linear-to-tl': 'to top left',
+            'linear-to-br': 'to bottom right',
+            'linear-to-bl': 'to bottom left'
           };
-          
+
           direction = directionMap[direction] || direction;
         }
       } else {
         colors = value.split('..');
       }
-      
+
       // Build the gradient string
       const colorStops = colors.map(color => {
         // Use actual color values for gradients instead of CSS variables
         return getActualColorValue(color.trim());
       }).join(', ');
-      
+
       // Return appropriate gradient type
       if (isRadial) {
         return { background: `radial-gradient(${direction}, ${colorStops})` };
@@ -416,17 +435,17 @@ export const colorRules: Record<string, RuleHandler> = {
         return { background: `linear-gradient(${direction}, ${colorStops})` };
       }
     }
-    
+
     // Handle colors with opacity using dot notation (white.5, black.2)
     if (value.includes('.')) {
       const processedColor = makeColor(value);
       return { background: processedColor };
     }
-    
+
     if (colorPalette[value]) {
       return { background: colorPalette[value] };
     }
-    
+
     // Handle opacity with slash syntax (deprecated)
     const opacityMatch = value.match(/^(.+)\/(.+)$/);
     if (opacityMatch) {
@@ -434,7 +453,7 @@ export const colorRules: Record<string, RuleHandler> = {
       if (colorPalette[colorName]) {
         const baseColor = colorPalette[colorName];
         const alpha = opacity.includes('%') ? parseInt(opacity) / 100 : parseFloat(opacity);
-        
+
         // If it's OKLCH, convert to OKLCH with alpha
         if (baseColor.startsWith('oklch')) {
           const oklchMatch = baseColor.match(/oklch\(([^)]+)\)/);
@@ -442,7 +461,7 @@ export const colorRules: Record<string, RuleHandler> = {
             return { background: `oklch(${oklchMatch[1]} / ${alpha})` };
           }
         }
-        
+
         // Fallback for hex colors
         const hexFallback = colorPalette[`${colorName}-hex`];
         if (hexFallback) {
@@ -453,7 +472,7 @@ export const colorRules: Record<string, RuleHandler> = {
         }
       }
     }
-    
+
     // Fallback to makeColor for basic colors
     const processedColor = makeColor(value);
     return { background: processedColor };
@@ -462,23 +481,23 @@ export const colorRules: Record<string, RuleHandler> = {
   // Border color
   bc: (value?: string): CSSRule => {
     if (!value) return {};
-    
+
     // Handle gradient syntax: color1..color2/direction
     const gradientMatch = value.match(/^(.+)\.\.(.*)\/(.+)$/);
     if (gradientMatch) {
       const [, color1, color2, direction] = gradientMatch;
-      
+
       // Get colors from palette or use as-is
       const startColor = colorPalette[color1] || color1;
       const endColor = colorPalette[color2] || color2;
-      
+
       return { 'border-color': `linear-gradient(${direction}, ${startColor}, ${endColor})` };
     }
-    
+
     if (colorPalette[value]) {
       return { 'border-color': colorPalette[value] };
     }
-    
+
     // Handle opacity
     const opacityMatch = value.match(/^(.+)\/(.+)$/);
     if (opacityMatch) {
@@ -486,7 +505,7 @@ export const colorRules: Record<string, RuleHandler> = {
       if (colorPalette[colorName]) {
         const baseColor = colorPalette[colorName];
         const alpha = opacity.includes('%') ? parseInt(opacity) / 100 : parseFloat(opacity);
-        
+
         // If it's OKLCH, convert to OKLCH with alpha
         if (baseColor.startsWith('oklch')) {
           const oklchMatch = baseColor.match(/oklch\(([^)]+)\)/);
@@ -494,7 +513,7 @@ export const colorRules: Record<string, RuleHandler> = {
             return { 'border-color': `oklch(${oklchMatch[1]} / ${alpha})` };
           }
         }
-        
+
         // Fallback for hex colors
         const hexFallback = colorPalette[`${colorName}-hex`];
         if (hexFallback) {
@@ -505,30 +524,30 @@ export const colorRules: Record<string, RuleHandler> = {
         }
       }
     }
-    
+
     return { 'border-color': value };
   },
 
   // Specific border colors
   btc: (value?: string): CSSRule => {
     if (!value) return {};
-    
+
     // Handle gradient syntax: color1..color2/direction
     const gradientMatch = value.match(/^(.+)\.\.(.*)\/(.+)$/);
     if (gradientMatch) {
       const [, color1, color2, direction] = gradientMatch;
-      
+
       // Get colors from palette or use as-is
       const startColor = colorPalette[color1] || color1;
       const endColor = colorPalette[color2] || color2;
-      
+
       return { 'border-top-color': `linear-gradient(${direction}, ${startColor}, ${endColor})` };
     }
-    
+
     if (colorPalette[value]) {
       return { 'border-top-color': colorPalette[value] };
     }
-    
+
     // Handle opacity
     const opacityMatch = value.match(/^(.+)\/(.+)$/);
     if (opacityMatch) {
@@ -536,7 +555,7 @@ export const colorRules: Record<string, RuleHandler> = {
       if (colorPalette[colorName]) {
         const baseColor = colorPalette[colorName];
         const alpha = opacity.includes('%') ? parseInt(opacity) / 100 : parseFloat(opacity);
-        
+
         // If it's OKLCH, convert to OKLCH with alpha
         if (baseColor.startsWith('oklch')) {
           const oklchMatch = baseColor.match(/oklch\(([^)]+)\)/);
@@ -544,7 +563,7 @@ export const colorRules: Record<string, RuleHandler> = {
             return { 'border-top-color': `oklch(${oklchMatch[1]} / ${alpha})` };
           }
         }
-        
+
         // Fallback for hex colors
         const hexFallback = colorPalette[`${colorName}-hex`];
         if (hexFallback) {
@@ -555,29 +574,29 @@ export const colorRules: Record<string, RuleHandler> = {
         }
       }
     }
-    
+
     return { 'border-top-color': value };
   },
 
   brc: (value?: string): CSSRule => {
     if (!value) return {};
-    
+
     // Handle gradient syntax: color1..color2/direction
     const gradientMatch = value.match(/^(.+)\.\.(.*)\/(.+)$/);
     if (gradientMatch) {
       const [, color1, color2, direction] = gradientMatch;
-      
+
       // Get colors from palette or use as-is
       const startColor = colorPalette[color1] || color1;
       const endColor = colorPalette[color2] || color2;
-      
+
       return { 'border-right-color': `linear-gradient(${direction}, ${startColor}, ${endColor})` };
     }
-    
+
     if (colorPalette[value]) {
       return { 'border-right-color': colorPalette[value] };
     }
-    
+
     // Handle opacity
     const opacityMatch = value.match(/^(.+)\/(.+)$/);
     if (opacityMatch) {
@@ -585,7 +604,7 @@ export const colorRules: Record<string, RuleHandler> = {
       if (colorPalette[colorName]) {
         const baseColor = colorPalette[colorName];
         const alpha = opacity.includes('%') ? parseInt(opacity) / 100 : parseFloat(opacity);
-        
+
         // If it's OKLCH, convert to OKLCH with alpha
         if (baseColor.startsWith('oklch')) {
           const oklchMatch = baseColor.match(/oklch\(([^)]+)\)/);
@@ -593,7 +612,7 @@ export const colorRules: Record<string, RuleHandler> = {
             return { 'border-right-color': `oklch(${oklchMatch[1]} / ${alpha})` };
           }
         }
-        
+
         // Fallback for hex colors
         const hexFallback = colorPalette[`${colorName}-hex`];
         if (hexFallback) {
@@ -604,29 +623,29 @@ export const colorRules: Record<string, RuleHandler> = {
         }
       }
     }
-    
+
     return { 'border-right-color': value };
   },
 
   bbc: (value?: string): CSSRule => {
     if (!value) return {};
-    
+
     // Handle gradient syntax: color1..color2/direction
     const gradientMatch = value.match(/^(.+)\.\.(.*)\/(.+)$/);
     if (gradientMatch) {
       const [, color1, color2, direction] = gradientMatch;
-      
+
       // Get colors from palette or use as-is
       const startColor = colorPalette[color1] || color1;
       const endColor = colorPalette[color2] || color2;
-      
+
       return { 'border-bottom-color': `linear-gradient(${direction}, ${startColor}, ${endColor})` };
     }
-    
+
     if (colorPalette[value]) {
       return { 'border-bottom-color': colorPalette[value] };
     }
-    
+
     // Handle opacity
     const opacityMatch = value.match(/^(.+)\/(.+)$/);
     if (opacityMatch) {
@@ -634,7 +653,7 @@ export const colorRules: Record<string, RuleHandler> = {
       if (colorPalette[colorName]) {
         const baseColor = colorPalette[colorName];
         const alpha = opacity.includes('%') ? parseInt(opacity) / 100 : parseFloat(opacity);
-        
+
         // If it's OKLCH, convert to OKLCH with alpha
         if (baseColor.startsWith('oklch')) {
           const oklchMatch = baseColor.match(/oklch\(([^)]+)\)/);
@@ -642,7 +661,7 @@ export const colorRules: Record<string, RuleHandler> = {
             return { 'border-bottom-color': `oklch(${oklchMatch[1]} / ${alpha})` };
           }
         }
-        
+
         // Fallback for hex colors
         const hexFallback = colorPalette[`${colorName}-hex`];
         if (hexFallback) {
@@ -653,29 +672,29 @@ export const colorRules: Record<string, RuleHandler> = {
         }
       }
     }
-    
+
     return { 'border-bottom-color': value };
   },
 
   blc: (value?: string): CSSRule => {
     if (!value) return {};
-    
+
     // Handle gradient syntax: color1..color2/direction
     const gradientMatch = value.match(/^(.+)\.\.(.*)\/(.+)$/);
     if (gradientMatch) {
       const [, color1, color2, direction] = gradientMatch;
-      
+
       // Get colors from palette or use as-is
       const startColor = colorPalette[color1] || color1;
       const endColor = colorPalette[color2] || color2;
-      
+
       return { 'border-left-color': `linear-gradient(${direction}, ${startColor}, ${endColor})` };
     }
-    
+
     if (colorPalette[value]) {
       return { 'border-left-color': colorPalette[value] };
     }
-    
+
     // Handle opacity
     const opacityMatch = value.match(/^(.+)\/(.+)$/);
     if (opacityMatch) {
@@ -683,7 +702,7 @@ export const colorRules: Record<string, RuleHandler> = {
       if (colorPalette[colorName]) {
         const baseColor = colorPalette[colorName];
         const alpha = opacity.includes('%') ? parseInt(opacity) / 100 : parseFloat(opacity);
-        
+
         // If it's OKLCH, convert to OKLCH with alpha
         if (baseColor.startsWith('oklch')) {
           const oklchMatch = baseColor.match(/oklch\(([^)]+)\)/);
@@ -691,7 +710,7 @@ export const colorRules: Record<string, RuleHandler> = {
             return { 'border-left-color': `oklch(${oklchMatch[1]} / ${alpha})` };
           }
         }
-        
+
         // Fallback for hex colors
         const hexFallback = colorPalette[`${colorName}-hex`];
         if (hexFallback) {
@@ -702,7 +721,7 @@ export const colorRules: Record<string, RuleHandler> = {
         }
       }
     }
-    
+
     return { 'border-left-color': value };
   },
 };
@@ -722,7 +741,7 @@ export const colorsPlugin = {
   generateColorVariables,
   getNestedColorPalette,
   configureSemanticColors,
-  
+
   // Advanced utilities
   applyThemeAdjustments,
   generateAdvancedColorPalette,

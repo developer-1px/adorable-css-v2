@@ -99,7 +99,7 @@
   <!-- Mobile Nav Toggle -->
   <div class="lg:hidden fixed bottom(xl) right(xl) z(50)">
     <button 
-      class="s(56) r(full) bg(black) c(white) shadow(xl) hbox(center) hover:scale(105) transition"
+      class="s(56) r(full) bg(black) c(white) shadow(xl) hbox(center) hover:scale(1.05) transition"
       on:click={() => showMobileNav = !showMobileNav}
     >
       <Menu />

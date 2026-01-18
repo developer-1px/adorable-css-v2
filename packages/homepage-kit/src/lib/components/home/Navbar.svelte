@@ -6,11 +6,12 @@ let menuOpen = false
 
 $: currentPath = $page.url.pathname
 $: isTokensActive = currentPath.startsWith('/tokens')
-$: isFoundationActive = currentPath.startsWith('/foundation')
 
 const navItems = [
   {href: '/docs', label: 'Docs'},
   {href: '/reference', label: 'Reference'},
+  {href: '/design-system', label: 'Design System'},
+  {href: '/showcase/gitbook', label: 'Showcase'},
   {href: '/playground', label: 'Playground'},
 ]
 </script>

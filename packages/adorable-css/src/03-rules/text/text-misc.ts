@@ -77,24 +77,62 @@ export const capitalize: RuleHandler = (): CSSRule => ({
 // Line height handler
 export const line: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
-  
+
   // Handle numeric values (e.g., lh(1.5), lh(2))
   if (/^\d*\.?\d+$/.test(args)) {
     return { 'line-height': args };
   }
-  
+
   // Handle token values
   if (isToken(args, 'lineHeight')) {
     return { 'line-height': getTokenVar('lineHeight', args) };
   }
-  
+
   // Handle px values
   if (args.includes('px')) {
     return { 'line-height': args };
   }
-  
+
   // Default to the value as-is
   return { 'line-height': args };
+};
+
+// Letter spacing handler
+const letterSpacingPresets: Record<string, string> = {
+  tighter: '-0.05em',
+  tight: '-0.025em',
+  normal: '0',
+  wide: '0.025em',
+  wider: '0.05em',
+  widest: '0.1em'
+};
+
+export const letterSpacing: RuleHandler = (args?: string): CSSRule => {
+  if (!args) return { 'letter-spacing': 'normal' };
+
+  // Handle preset values
+  if (letterSpacingPresets[args]) {
+    return { 'letter-spacing': letterSpacingPresets[args] };
+  }
+
+  // Handle numeric values
+  if (/^-?\d*\.?\d+$/.test(args)) {
+    return { 'letter-spacing': `${args}em` };
+  }
+
+  // Handle token values
+  if (isToken(args, 'letterSpacing')) {
+    return { 'letter-spacing': getTokenVar('letterSpacing', args) };
+  }
+
+  // Default to the value as-is
+  return { 'letter-spacing': args };
+};
+
+// Caret color handler
+export const caretC: RuleHandler = (args?: string): CSSRule => {
+  if (!args) return { 'caret-color': 'currentColor' };
+  return { 'caret-color': String(makeColor(args)) };
 };
 
 // Export all typography utilities
@@ -114,5 +152,7 @@ export const typographyUtilityRules = {
   uppercase,
   capitalize,
   line,
+  'letter-spacing': letterSpacing,
+  'caret-c': caretC,
   truncate,
 };

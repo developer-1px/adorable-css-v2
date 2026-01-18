@@ -52,8 +52,14 @@ Object.entries(STRING_RULE_GROUPS).forEach(([groupName, ruleGroup]) => {
   });
 });
 
-// Generate flat 03-rules from central definitions
-export const rules = flattenRuleGroups(RULE_GROUPS);
+// Generate flat rules from central definitions
+export const rules = {
+  ...flattenRuleGroups(RULE_GROUPS),
+  // Add string-based component rules
+  ...Object.values(STRING_RULE_GROUPS).reduce((acc, ruleGroup) => {
+    return { ...acc, ...ruleGroup.rules };
+  }, {})
+};
 
 
 // Get rule handler (fallback: priorityRegistry -> flat 03-rules)

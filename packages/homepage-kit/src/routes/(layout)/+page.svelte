@@ -21,7 +21,7 @@
 
         <h1 class="text(72px) font(black) tracking(tight) leading(1) c(gray-900)">
           CSS for the<br/>
-          <span class="c(transparent) bg-clip(text) bg(linear-to-r/indigo-600..violet-600)">AI Age</span>
+          <span class="c(linear-to-r/indigo-600..violet-600)">AI Age</span>
         </h1>
         
         <p class="text(20px) c(gray-500) leading(1.6) max-w(640px)">
@@ -99,8 +99,8 @@
     <div class="grid(1) md:grid-cols(3) gap(32px)">
       
       <!-- Card 1 -->
-      <div class="vbox gap(6) p(8) bg(white) r(6) border(1/gray-200) hover:shadow(xl) transition duration(500) hover:-translate-y(1)">
-        <div class="size(56) r(4) bg(indigo-50) hbox(center) c(indigo-600)">
+      <div class="vbox gap(6) p(8) bg(white) r(md) border(1/gray-200) hover:shadow(xl) transition duration(500) hover:-translate-y(1)">
+        <div class="size(56) r(sm) bg(indigo-50) hbox(center) c(indigo-600)">
           <Wand2 size="28" />
         </div>
         <div class="vbox gap(3)">
@@ -112,8 +112,8 @@
       </div>
 
       <!-- Card 2 -->
-      <div class="vbox gap(6) p(8) bg(white) r(6) border(1/gray-200) hover:shadow(xl) transition duration(500) hover:-translate-y(1)">
-        <div class="size(56) r(4) bg(violet-50) hbox(center) c(violet-600)">
+      <div class="vbox gap(6) p(8) bg(white) r(md) border(1/gray-200) hover:shadow(xl) transition duration(500) hover:-translate-y(1)">
+        <div class="size(56) r(sm) bg(violet-50) hbox(center) c(violet-600)">
           <Layers size="28" />
         </div>
         <div class="vbox gap(3)">
@@ -125,8 +125,8 @@
       </div>
 
       <!-- Card 3 -->
-      <div class="vbox gap(6) p(8) bg(white) r(6) border(1/gray-200) hover:shadow(xl) transition duration(500) hover:-translate-y(1)">
-        <div class="size(56) r(4) bg(emerald-50) hbox(center) c(emerald-600)">
+      <div class="vbox gap(6) p(8) bg(white) r(md) border(1/gray-200) hover:shadow(xl) transition duration(500) hover:-translate-y(1)">
+        <div class="size(56) r(sm) bg(emerald-50) hbox(center) c(emerald-600)">
           <Zap size="28" />
         </div>
         <div class="vbox gap(3)">

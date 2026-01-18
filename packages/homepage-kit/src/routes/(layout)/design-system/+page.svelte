@@ -1,7 +1,13 @@
-<script>
-  import { onMount } from 'svelte';
+<script lang="ts">
+
   
   // Design system configuration
+  const sections = {
+    Foundation: ['Colors', 'Typography', 'Spacing'],
+    Components: ['Buttons', 'Cards']
+  };
+
+  const toId = (str: string) => str.toLowerCase();
   const colorCategories = [
     {
       name: 'Primary',
@@ -58,125 +64,154 @@
     { name: '4xl', value: '40px' },
     { name: '6xl', value: '64px' }
   ];
-
-  let activeTab = 'tokens';
 </script>
 
-<div class="vbox gap(24) py(32)">
-  <!-- Header -->
-  <section class="vbox gap(4) max-w(800px) mx(auto) px(6) text-align(center)">
-    <h1 class="font(display-lg) bold(900) c(gray-900)">
-      Design System
-    </h1>
-    <p class="font(body-lg) c(gray-500)">
-      Tokens and primitives for building Adorable interfaces.
-    </p>
-  </section>
+<div class="hbox w(full) h(screen) bg(gray-50) overflow(hidden)">
+  
+  <!-- Sidebar -->
+  <aside class="w(280) h(full) overflow-y(auto) border-r(1/gray-200) bg(white) p(10) shrink(0)">
+    <div class="vbox gap(2) mb(12)">
+      <h1 class="font(title-lg) bold(800) c(gray-900)">System</h1>
+      <p class="font(body-sm) c(gray-500)">Design Tokens</p>
+    </div>
 
-  <!-- Content -->
-  <div class="max-w(1000px) mx(auto) w(full) px(6) vbox gap(32)">
-    
-    <!-- Colors -->
-    <section class="vbox gap(12)">
-      <h2 class="font(heading-lg) c(gray-900)">Colors</h2>
-      <div class="vbox gap(16)">
-        {#each colorCategories as category}
-          <div class="vbox gap(4)">
-            <h3 class="font(title-md) c(gray-700)">{category.name}</h3>
-            <div class="grid(5) md:grid-cols(10) gap(2)">
-              {#each category.colors as color}
-                <div class="vbox gap(2) group cursor-pointer">
-                  <div 
-                    class="h(16) w(full) r(md) transition hover:scale(105)"
-                    style="background-color: {color.value}"
-                  />
-                  <div class="opacity(0) group-hover:opacity(100) transition text-align(center)">
-                    <span class="font(caption) c(gray-400)">{color.name.split('-')[1] || 'base'}</span>
-                  </div>
-                </div>
-              {/each}
-            </div>
+    <div class="vbox gap(10)">
+      {#each Object.entries(sections) as [category, items]}
+        <div class="vbox gap(4)">
+          <h3 class="font(caption) c(gray-400) bold(600) uppercase tracking(wider)">{category}</h3>
+          <div class="vbox gap(1)">
+            {#each items as item}
+              <a 
+                href="#{toId(item)}"
+                class="p(2) -ml(2) r(md) c(gray-600) hover:bg(gray-50) hover:c(gray-900) transition text(sm) font(medium) block text(none)"
+              >
+                {item}
+              </a>
+            {/each}
           </div>
-        {/each}
-      </div>
-    </section>
+        </div>
+      {/each}
+    </div>
+  </aside>
 
-    <!-- Typography -->
-    <section class="vbox gap(12)">
-      <h2 class="font(heading-lg) c(gray-900)">Typography</h2>
-      <div class="vbox gap(8)">
-        {#each typographyScale as type}
-          <div class="hbox(middle) gap(8) p(6) r(lg) hover:bg(gray-50) transition group">
-            <div class="w(120)">
-              <code class="font(caption) c(indigo-500) bg(indigo-50) px(2) py(1) r(sm)">{type.name}</code>
-            </div>
-            <div class="flex(1)">
-              <p style="font-size: {type.size}; font-weight: {type.weight};" class="c(gray-900)">
-                The quick brown fox
-              </p>
-            </div>
-            <div class="c(gray-400) font(caption) opacity(0) group-hover:opacity(100)">
-              {type.size} / {type.weight}
-            </div>
-          </div>
-        {/each}
-      </div>
-    </section>
-
-    <!-- Spacing -->
-    <section class="vbox gap(12)">
-      <h2 class="font(heading-lg) c(gray-900)">Spacing</h2>
-      <div class="grid(2) sm:grid-cols(3) md:grid-cols(4) gap(6)">
-        {#each spacingSystem as space}
-          <div class="hbox(middle) gap(4)">
-            <code class="w(32) font(caption) c(gray-500)">{space.name}</code>
-            <div 
-              class="h(8) bg(indigo-500) r(full) opacity(80)"
-              style="width: {space.value}"
-            />
-            <span class="font(caption) c(gray-400)">{space.value}</span>
-          </div>
-        {/each}
-      </div>
-    </section>
-
-    <!-- Components Preview -->
-    <section class="vbox gap(12)">
-      <h2 class="font(heading-lg) c(gray-900)">Components</h2>
-      <div class="hbox gap(8) flex-wrap">
-        <!-- Buttons -->
-        <button class="px(6) py(2) r(md) bg(indigo-600) c(white) font(bold) hover:bg(indigo-700) transition">Primary</button>
-        <button class="px(6) py(2) r(md) bg(gray-100) c(gray-700) font(bold) hover:bg(gray-200) transition">Secondary</button>
-        <button class="px(6) py(2) r(md) c(gray-600) hover:bg(gray-50) transition">Ghost</button>
-      </div>
+  <!-- Main Content -->
+  <main class="flex(1) h(full) overflow-y(auto) scroll-smooth">
+    <div class="max-w(1200px) mx(auto) w(full) p(24) vbox gap(32)">
       
-      <!-- Cards -->
-      <div class="grid(1) sm:grid-cols(2) gap(8)">
-        <div class="vbox gap(4) p(8) r(xl) bg(white) shadow(sm) hover:shadow(md) transition">
-          <div class="size(12) r(full) bg(indigo-100) hbox(center) c(indigo-600)">
-            <svg class="size(6)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-          </div>
-          <div>
-            <h3 class="font(title-lg) c(gray-900)">Borderless Card</h3>
-            <p class="font(body-md) c(gray-500) mt(2)">
-              Defined by shadow and whitespace, not borders.
-            </p>
-          </div>
+      <!-- Colors -->
+      <section id="colors" class="vbox gap(8)">
+        <div class="pb(4) border-b(1/gray-200) mt(8)">
+          <h2 class="font(display-sm) bold(800) c(gray-900)">Colors</h2>
+        </div>
+        <div class="vbox gap(12)">
+          {#each colorCategories as category}
+            <div class="vbox gap(6) p(8) bg(white) r(xl) shadow(sm) border(1/gray-100)">
+              <h3 class="font(title-md) c(gray-800)">{category.name}</h3>
+              <div class="grid(5) md:grid-cols(10) gap(3)">
+                {#each category.colors as color}
+                  <div class="vbox gap(2) group cursor-pointer">
+                    <div 
+                      class="h(20) w(full) r(md) transition hover:scale(1.05)"
+                      style="background-color: {color.value}"
+                    />
+                    <div class="opacity(0) group-hover:opacity(100) transition text-align(center)">
+                      <span class="font(caption) c(gray-400)">{color.name.split('-')[1] || 'base'}</span>
+                    </div>
+                  </div>
+                {/each}
+              </div>
+            </div>
+          {/each}
+        </div>
+      </section>
+
+      <!-- Typography -->
+      <section id="typography" class="vbox gap(8)">
+        <div class="pb(4) border-b(1/gray-200) mt(8)">
+          <h2 class="font(display-sm) bold(800) c(gray-900)">Typography</h2>
+        </div>
+        <div class="vbox gap(4) p(8) bg(white) r(xl) shadow(sm) border(1/gray-100)">
+          {#each typographyScale as type}
+            <div class="hbox(middle) gap(8) p(4) r(lg) hover:bg(gray-50) transition group">
+              <div class="w(140)">
+                <code class="font(caption) c(indigo-500) bg(indigo-50) px(2) py(1) r(sm)">{type.name}</code>
+              </div>
+              <div class="flex(1)">
+                <p style="font-size: {type.size}; font-weight: {type.weight};" class="c(gray-900)">
+                  The quick brown fox
+                </p>
+              </div>
+              <div class="c(gray-400) font(caption) opacity(0) group-hover:opacity(100)">
+                {type.size} / {type.weight}
+              </div>
+            </div>
+          {/each}
+        </div>
+      </section>
+
+      <!-- Spacing -->
+      <section id="spacing" class="vbox gap(8)">
+        <div class="pb(4) border-b(1/gray-200) mt(8)">
+          <h2 class="font(display-sm) bold(800) c(gray-900)">Spacing</h2>
+        </div>
+        <div class="grid(2) sm:grid-cols(3) md:grid-cols(4) gap(8) p(8) bg(white) r(xl) shadow(sm) border(1/gray-100)">
+          {#each spacingSystem as space}
+            <div class="hbox(middle) gap(4)">
+              <code class="w(32) font(caption) c(gray-500)">{space.name}</code>
+              <div 
+                class="h(8) bg(indigo-500) r(full) opacity(80)"
+                style="width: {space.value}"
+              />
+              <span class="font(caption) c(gray-400)">{space.value}</span>
+            </div>
+          {/each}
+        </div>
+      </section>
+
+      <!-- Components -->
+      <section id="components" class="vbox gap(8)">
+        <div class="pb(4) border-b(1/gray-200) mt(8)">
+          <h2 class="font(display-sm) bold(800) c(gray-900)">Components</h2>
         </div>
         
-        <div class="vbox gap(4) p(8) r(xl) bg(gray-50) hover:bg(gray-100) transition">
-          <div class="size(12) r(full) bg(white) shadow(sm) hbox(center) c(gray-900)">
-            <svg class="size(6)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        <div class="grid(1) lg:grid-cols(2) gap(8)">
+          <!-- Buttons Card -->
+          <div id="buttons" class="vbox gap(6) p(8) bg(white) r(xl) shadow(sm) border(1/gray-100)">
+            <h3 class="font(title-md) c(gray-800)">Buttons</h3>
+            <div class="hbox gap(4) flex-wrap">
+              <button class="px(6) py(2) r(md) bg(indigo-600) c(white) font(bold) hover:bg(indigo-700) transition shadow(sm) active:scale(0.98)">Primary</button>
+              <button class="px(6) py(2) r(md) bg(white) b(1/gray-200) c(gray-700) font(medium) hover:bg(gray-50) transition shadow(sm)">Secondary</button>
+              <button class="px(6) py(2) r(md) c(gray-600) hover:bg(gray-50) transition font(medium)">Ghost</button>
+            </div>
           </div>
-          <div>
-            <h3 class="font(title-lg) c(gray-900)">Surface Card</h3>
-            <p class="font(body-md) c(gray-500) mt(2)">
-              Uses a subtle background fill to define its area.
-            </p>
+
+          <!-- Cards Card -->
+          <div id="cards" class="vbox gap(6) p(8) bg(white) r(xl) shadow(sm) border(1/gray-100)">
+            <h3 class="font(title-md) c(gray-800)">Cards</h3>
+            <div class="vbox gap(4)">
+               <div class="vbox gap(4) p(6) r(lg) bg(white) shadow(md) border(1/gray-100)">
+                  <div class="hbox(middle) gap(3)">
+                    <div class="size(10) r(full) bg(indigo-100) hbox(center) c(indigo-600)">
+                      <svg class="size(5)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    </div>
+                    <span class="font(medium) c(gray-900)">Elevated Surface</span>
+                  </div>
+               </div>
+               <div class="vbox gap(4) p(6) r(lg) bg(gray-50) border(1/gray-200)">
+                  <div class="hbox(middle) gap(3)">
+                    <div class="size(10) r(full) bg(white) shadow(sm) hbox(center) c(gray-900)">
+                       <svg class="size(5)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+                    </div>
+                    <span class="font(medium) c(gray-900)">Flat Surface</span>
+                  </div>
+               </div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-  </div>
+      <div class="h(100)"></div> <!-- Bottom spacer -->
+    </div>
+  </main>
+
 </div>

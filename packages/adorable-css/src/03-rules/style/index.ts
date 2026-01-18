@@ -8,7 +8,7 @@ import { animationRules } from "./animation";
 import { font, fontFamily } from "../text/font";
 import { text, textShadow } from "../text/text";
 import { c } from "../text/color";
-import { bold } from "../text/bold";
+import { bold, semibold, medium, light } from "../text/bold";
 import { typographyUtilityRules } from "../text/text-misc";
 import { listRules } from "../text/list";
 import { responsiveTypographyRules } from "./responsive-typography";
@@ -20,6 +20,9 @@ export const typographyRules = {
   'text-shadow': textShadow,
   c,
   bold,
+  semibold,
+  medium,
+  light,
   ...typographyUtilityRules,
   ...listRules,
   ...responsiveTypographyRules,
