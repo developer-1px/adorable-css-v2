@@ -1,0 +1,1 @@
+import{f as a,a as e}from"../chunks/CAvDOpHM.js";import"../chunks/DJtP_mgw.js";var i=a('<div class="vbox(center/middle) min-h(60vh)"><p class="body(md) c(neutral-500)">Redirecting to documentation...</p></div>');function d(o){var t=i();e(o,t)}export{d as component};
