@@ -3,16 +3,16 @@
 // Re-export semantic design system (still needed for colors)
 export * from '../semantic-system';
 
-import { 
-  generateSemanticColorVariables, 
+import {
+  generateSemanticColorVariables,
   getColorScheme,
-  type SemanticColorSystemConfig 
+  type SemanticColorSystemConfig
 } from '../colors/semantic-color-system';
-import { 
-  generateSpacingCalc, 
-  generateFontCalc, 
-  generateSizeCalc, 
-  generateContainerCalc 
+import {
+  generateSpacingCalc,
+  generateFontCalc,
+  generateSizeCalc,
+  generateContainerCalc
 } from '../../dynamicTokens';
 
 // Semantic color configuration
@@ -51,7 +51,7 @@ export const semanticColors: SemanticColorConfig = {
 export interface DesignTokens {
   // Dynamic 02-design_tokens are now calculated at runtime
   // No need to pre-generate scale-based 02-design_tokens
-  
+
   colors: {
     // Core semantic colors
     primary: string;
@@ -129,15 +129,14 @@ export function createTokens(): DesignTokens {
       widest: '0.1em',
     },
     radius: {
-      none: '0',
-      xs: '0.125rem',
-      sm: '0.25rem',
-      md: '0.5rem',
-      lg: '0.75rem',
-      xl: '1rem',
-      '2xl': '1.5rem',
-      '3xl': '2rem',
-      '4xl': '3rem',
+      none: '0px',
+      xs: '2px',
+      sm: '4px',
+      md: '8px',
+      lg: '12px',
+      xl: '16px',
+      '2xl': '24px',
+      '3xl': '32px',
       full: '9999px',
     },
     shadow: {
@@ -227,7 +226,7 @@ export function resolveSemanticColor(value: string): { type: 'solid' | 'gradient
       end: resolveColorValue(end)
     };
   }
-  
+
   // Otherwise it's a solid color
   return {
     type: 'solid',
@@ -241,12 +240,12 @@ function resolveColorValue(value: string): string {
   if (value.startsWith('#')) {
     return value;
   }
-  
+
   // Check if it's in the color palette
   if (colorPalette[value]) {
     return colorPalette[value];
   }
-  
+
   // If it's a color with a number (like blue-500), try to find it
   // This handles cases where colorPalette might use different naming
   const colorMatch = value.match(/^(\w+)-(\d+)$/);
@@ -257,7 +256,7 @@ function resolveColorValue(value: string): string {
       return colorPalette[paletteKey];
     }
   }
-  
+
   // Fallback to the value itself
   return value;
 }
@@ -265,12 +264,12 @@ function resolveColorValue(value: string): string {
 // Build semantic colors from configuration
 export function buildSemanticColors(config: SemanticColorConfig = semanticColors): Record<string, any> {
   const result: Record<string, any> = {};
-  
+
   for (const [key, value] of Object.entries(config)) {
     if (!value) continue;
-    
+
     const resolved = resolveSemanticColor(value);
-    
+
     if (resolved.type === 'gradient') {
       result[key] = resolved.start || '';  // No hardcoded fallback
       result[`${key}-start`] = resolved.start || '';
@@ -279,19 +278,19 @@ export function buildSemanticColors(config: SemanticColorConfig = semanticColors
     } else {
       // Set the base color (500 level)
       result[key] = resolved.value;
-      
+
       // For non-gradient colors, also create color family variations
       // Extract the base color name (e.g., "purple" from "purple-500" or "violet" from "violet-500")
       const colorMatch = value.match(/^(\w+)-(\d+)$/);
       if (colorMatch) {
         const baseColorName = colorMatch[1];
-        
+
         // Generate all shades for this semantic color
         const shades = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950'];
         for (const shade of shades) {
           const shadeKey = `${key}-${shade}`;
           const paletteKey = `${baseColorName}-${shade}`;
-          
+
           // Try to resolve from palette
           const shadeValue = colorPalette[paletteKey];
           if (shadeValue) {
@@ -301,7 +300,7 @@ export function buildSemanticColors(config: SemanticColorConfig = semanticColors
       }
     }
   }
-  
+
   return result;
 }
 
@@ -320,28 +319,28 @@ export function isToken(value: string, category: string): boolean {
     if (value.match(/^\d+xl$/)) {
       return true;
     }
-    
+
     // Check for basic size 02-design_tokens (xs, sm, md, lg, xl)
     if (['4xs', '3xs', '2xs', 'xs', 'sm', 'md', 'lg', 'xl'].includes(value)) {
       return true;
     }
   }
-  
+
   // For colors, check if it's in our semantic colors or looks like a color token
   if (category === 'colors') {
-    return value in currentTokenContext.colors || 
-           colorPalette[value] !== undefined ||
-           value.match(/^\w+-\d+$/) !== null; // e.g. blue-500
+    return value in currentTokenContext.colors ||
+      colorPalette[value] !== undefined ||
+      value.match(/^\w+-\d+$/) !== null; // e.g. blue-500
   }
-  
+
   // For static 02-design_tokens, check if they exist in the token context
-  if (category === 'fontWeight' || category === 'lineHeight' || category === 'letterSpacing' || 
-      category === 'radius' || category === 'shadow' || category === 'opacity' || 
-      category === 'zIndex' || category === 'duration' || category === 'ease') {
+  if (category === 'fontWeight' || category === 'lineHeight' || category === 'letterSpacing' ||
+    category === 'radius' || category === 'shadow' || category === 'opacity' ||
+    category === 'zIndex' || category === 'duration' || category === 'ease') {
     const tokens = currentTokenContext[category];
     return !!(tokens && typeof tokens === 'object' && value in tokens);
   }
-  
+
   return false;
 }
 
@@ -360,22 +359,22 @@ export function getTokenVar(category: string, token: string): string {
   if (category === 'container') {
     return generateContainerCalc(token);
   }
-  
+
   // For colors, use CSS variable reference
   if (category === 'colors') {
     return `var(--${token})`;
   }
-  
+
   // For static 02-design_tokens, get the actual value instead of CSS variable
-  if (category === 'fontWeight' || category === 'lineHeight' || category === 'letterSpacing' || 
-      category === 'radius' || category === 'shadow' || category === 'opacity' || 
-      category === 'zIndex' || category === 'duration' || category === 'ease') {
+  if (category === 'fontWeight' || category === 'lineHeight' || category === 'letterSpacing' ||
+    category === 'radius' || category === 'shadow' || category === 'opacity' ||
+    category === 'zIndex' || category === 'duration' || category === 'ease') {
     const tokens = currentTokenContext[category];
     if (tokens && typeof tokens === 'object' && token in tokens) {
       return (tokens as any)[token];
     }
   }
-  
+
   // For other values, return CSS variable
   return `var(--${category}-${token})`;
 }
@@ -383,10 +382,10 @@ export function getTokenVar(category: string, token: string): string {
 // Generate CSS variables from 02-design_tokens
 export function generateTokenCSS(_tokens: DesignTokens = defaultTokens): string {
   const cssVars: string[] = [];
-  
+
   // Don't generate any static token CSS variables anymore
   // Everything should be dynamic calc() or actual values
-  
+
   // Add full color palette as CSS variables (gray-100, purple-500, etc.)
   if (colorPalette && Object.keys(colorPalette).length > 0) {
     cssVars.push('\n  /* Full OKLCH Color Palette */');
@@ -394,7 +393,7 @@ export function generateTokenCSS(_tokens: DesignTokens = defaultTokens): string 
       cssVars.push(`  --${colorName}: ${colorValue};`);
     }
   }
-  
+
   // Add semantic color variations if they're not already in the palette
   const semanticColorVariations = buildSemanticColors(semanticColors);
   if (semanticColorVariations && Object.keys(semanticColorVariations).length > 0) {
@@ -406,15 +405,15 @@ export function generateTokenCSS(_tokens: DesignTokens = defaultTokens): string 
       }
     }
   }
-  
+
   // Generate semantic color mappings using the dynamic system
   const semanticColorConfig: SemanticColorSystemConfig = getColorScheme('default');
   const semanticColorVars = generateSemanticColorVariables(semanticColorConfig);
-  
+
   const semanticMappings = `
   /* Semantic Color System */
 ${semanticColorVars}`;
-  
+
   // No more static token variables - everything is dynamic calc()
   // Just return color variables and semantic mappings
   return `:root {\n${cssVars.join('\n')}\n${semanticMappings}\n}`;
@@ -423,12 +422,12 @@ ${semanticColorVars}`;
 // Inject design 02-design_tokens into the document
 export function injectTokens(tokens: DesignTokens = defaultTokens): void {
   if (typeof document === 'undefined') return;
-  
+
   const existingStyle = document.getElementById('adorable-css-02-design_tokens');
   if (existingStyle) {
     existingStyle.remove();
   }
-  
+
   const style = document.createElement('style');
   style.id = 'adorable-css-02-design_tokens';
   style.textContent = generateTokenCSS(tokens);

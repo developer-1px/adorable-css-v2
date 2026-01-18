@@ -1,13 +1,17 @@
+
 import { colorPalette } from '../../02-design_tokens/design-system/colors/colors'
 import { BASE_COLOR_VALUES, TONE_VALUES } from './color-data'
 import { makeColor, makeHEX, makeHLS, makeRGB } from './color-processor'
-import { 
-  cssvar, cssString, splitValues, makeValues, makeCommaValues, 
-  makeNumber, makeRatio, percentToEm, px, deg, makeSide 
+import {
+  cssvar, cssString, splitValues, makeValues, makeCommaValues,
+  makeNumber, makeRatio, percentToEm, px, deg, makeSide
 } from './value-utils'
 
+// Local implementation of isToken (removed external import)
+import { isToken } from './is-token'
+
 // Re-export all functions for backward compatibility
-export { 
+export {
   makeColor, makeHEX, makeHLS, makeRGB,
   cssvar, cssString, splitValues, makeValues, makeCommaValues,
   makeNumber, makeRatio, percentToEm, px, deg, makeSide
@@ -19,15 +23,15 @@ export {
  */
 export function getActualColorValue(colorName: string): string {
   // Handle basic colors first
-  if (baseColorValues[colorName]) {
-    return baseColorValues[colorName]
+  if (BASE_COLOR_VALUES[colorName]) {
+    return BASE_COLOR_VALUES[colorName]
   }
-  
+
   // Handle color-shade format (e.g., purple-500, gray-100)
   const colorShadeMatch = colorName.match(/^([a-z]+)-(\d+)$/)
   if (colorShadeMatch) {
     const [, colorFamily, shade] = colorShadeMatch
-    
+
     // Get base color hex value
     const baseHex = BASE_COLOR_VALUES[colorFamily]
     if (baseHex && TONE_VALUES[shade]) {
@@ -36,12 +40,12 @@ export function getActualColorValue(colorName: string): string {
       return baseHex
     }
   }
-  
+
   // Check if it's already in the colorPalette (OKLCH values)
   if (colorPalette[colorName]) {
     return colorPalette[colorName]
   }
-  
+
   // Fallback to CSS variable (existing behavior)
   return `var(--${colorName}, ${colorName})`
 }
@@ -86,7 +90,7 @@ export const makeBorder = (value: string) => {
   if (!styleValue) styleValue = 'solid'
 
   // 값을 표준 순서로 반환: width style color
-  return `${widthValue} ${styleValue}${colorValue ? ' ' + colorValue : ''}`
+  return `${widthValue} ${styleValue}${colorValue ? ' ' + colorValue : ''} `
 }
 
 export const makeTransition = (value: string) => {
@@ -108,7 +112,7 @@ export const makePosition1 = (value: string) => {
     .map((prop, index) => {
       const value = values[index]
       if (!value || value === '-') return
-      return `${prop}:${px(value)};`
+      return `${prop}:${px(value)}; `
     })
     .filter(Boolean)
     .join('')
@@ -119,7 +123,7 @@ export const makePosition2X = (x: string) => {
     const offset = x.slice(6) || 0
     return {
       left: '50%',
-      transform: `translateX(-50%) translateX(${px(offset)})`,
+      transform: `translateX(-50 %) translateX(${px(offset)})`,
     }
   }
 
@@ -135,7 +139,7 @@ export const makePosition2Y = (y: string) => {
     const offset = y.slice(6) || 0
     return {
       top: '50%',
-      transform: `translateY(-50%) translateY(${px(offset)})`,
+      transform: `translateY(-50 %) translateY(${px(offset)})`,
     }
   }
 
@@ -152,7 +156,7 @@ export const makePosition2 = (x: string, y: string) => {
 
   let transform = {}
   if (posX.transform && posY.transform) {
-    transform = { transform: `${posX.transform} ${posY.transform}` }
+    transform = { transform: `${posX.transform} ${posY.transform} ` }
   }
 
   return {
@@ -168,7 +172,7 @@ export const makeClamp = (value: string) => {
   if (value.startsWith('clamp(') && value.endsWith(')')) {
     const clampContent = value.slice(6, -1); // Remove 'clamp(' and ')'
     const parts = clampContent.split(',').map(part => part.trim());
-    
+
     if (parts.length === 3) {
       const [min, preferred, max] = parts.map(part => {
         // Apply appropriate value transformation
@@ -180,7 +184,7 @@ export const makeClamp = (value: string) => {
       return `clamp(${min}, ${preferred}, ${max})`;
     }
   }
-  
+
   return value;
 }
 
@@ -190,17 +194,17 @@ export const makeRangeClamp = (value: string) => {
   const tripleRangeMatch = value.match(/^([^.]+)\.\.([^.]+)\.\.([^.]+)$/);
   if (tripleRangeMatch) {
     const [, min, preferred, max] = tripleRangeMatch;
-    return makeClamp(`clamp(${min},${preferred},${max})`);
+    return makeClamp(`clamp(${min}, ${preferred}, ${max})`);
   }
-  
+
   // Handle double range syntax: xl..30px (min..max with smart preferred)
   const doubleRangeMatch = value.match(/^([^.]+)\.\.([^.]+)$/);
   if (doubleRangeMatch) {
     const [, min, max] = doubleRangeMatch;
-    
+
     // Smart preferred value generation
     let preferred: string;
-    
+
     // If both are size 02-design_tokens, use viewport-based interpolation
     if (isToken(min, 'font') && max.match(/^\d+px$/)) {
       preferred = '4vw'; // Default viewport-based scaling
@@ -213,12 +217,12 @@ export const makeRangeClamp = (value: string) => {
       const minPx = parseFloat(String(px(min)).replace('px', '')) || 16;
       const maxPx = parseFloat(String(px(max)).replace('px', '')) || 32;
       const avgPx = (minPx + maxPx) / 2;
-      preferred = `${avgPx * 0.25}vw`; // Use 25% of average as vw
+      preferred = `${avgPx * 0.25} vw`; // Use 25% of average as vw
     }
-    
-    return makeClamp(`clamp(${min},${preferred},${max})`);
+
+    return makeClamp(`clamp(${min}, ${preferred}, ${max})`);
   }
-  
+
   return value;
 }
 
@@ -233,12 +237,12 @@ export const pxWithClamp = (value: string | number) => {
   if (v.includes('clamp(')) {
     return makeClamp(v);
   }
-  
+
   // Check for range syntax
   if (v.includes('..')) {
     return makeRangeClamp(v);
   }
-  
+
   // Fall back to regular px processing
   return px(v);
 }
@@ -246,17 +250,17 @@ export const pxWithClamp = (value: string | number) => {
 // Enhanced cssvar with clamp support
 export const cssvarWithClamp = (value: string | number) => {
   const strValue = String(value);
-  
+
   // Handle clamp syntax
   if (strValue.includes('clamp(')) {
     return makeClamp(strValue);
   }
-  
+
   // Handle range syntax
   if (strValue.includes('..')) {
     return makeRangeClamp(strValue);
   }
-  
+
   // Fall back to regular cssvar processing
   return cssvar(strValue);
 }

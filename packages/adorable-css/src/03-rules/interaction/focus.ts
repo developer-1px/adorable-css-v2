@@ -4,11 +4,11 @@ import { makeColor, px } from '../../01-core/values/makeValue';
 // Outline utilities
 export const outline: RuleHandler = (value?: string): CSSRule => {
   if (!value) return {};
-  
+
   if (value === 'none') {
     return { outline: 'none' };
   }
-  
+
   // outline(2/blue) format
   if (value.includes('/')) {
     const [width, color] = value.split('/');
@@ -16,19 +16,23 @@ export const outline: RuleHandler = (value?: string): CSSRule => {
       outline: `${px(width)} solid ${makeColor(color)}`
     };
   }
-  
+
   return { outline: value };
 };
 
 // Ring utilities for focus states - uses border-like syntax
 export const ring: RuleHandler = (value?: string): CSSRule => {
   if (!value) return {};
-  
+
   const parts = value.split('/');
-  let width = '2px';
-  let offset = '0';
+  let width: string | number = '2px';
+  let offset: string | number = '0';
   let color = 'currentColor';
-  
+
+  if (value === 'none' || value === '0') {
+    return { 'box-shadow': 'none' };
+  }
+
   // Parse the values based on the number of parts
   if (parts.length === 1) {
     // ring(2) - just width
@@ -43,7 +47,7 @@ export const ring: RuleHandler = (value?: string): CSSRule => {
     offset = px(parts[1]);
     color = makeColor(parts[2]);
   }
-  
+
   // If there's an offset, we need to create two shadows
   if (offset !== '0') {
     // First shadow is the offset (usually white), second is the ring
@@ -51,7 +55,7 @@ export const ring: RuleHandler = (value?: string): CSSRule => {
       'box-shadow': `0 0 0 ${offset} var(--ring-offset-color, white), 0 0 0 calc(${width} + ${offset}) ${color}`
     };
   }
-  
+
   // No offset, just the ring
   return {
     'box-shadow': `0 0 0 ${width} ${color}`
@@ -61,7 +65,7 @@ export const ring: RuleHandler = (value?: string): CSSRule => {
 // Ring offset utilities
 export const ringOffset: RuleHandler = (value?: string): CSSRule => {
   if (!value) return {};
-  
+
   // For simplicity, we'll use a white offset ring
   const offsetWidth = px(value);
   return {
@@ -72,7 +76,7 @@ export const ringOffset: RuleHandler = (value?: string): CSSRule => {
 // Whitespace utilities
 export const whitespace: RuleHandler = (value?: string): CSSRule => {
   if (!value) return {};
-  
+
   const whitespaceMap: Record<string, string> = {
     normal: 'normal',
     nowrap: 'nowrap',
@@ -80,7 +84,7 @@ export const whitespace: RuleHandler = (value?: string): CSSRule => {
     'pre-line': 'pre-line',
     'pre-wrap': 'pre-wrap'
   };
-  
+
   return { 'white-space': whitespaceMap[value] || value };
 };
 

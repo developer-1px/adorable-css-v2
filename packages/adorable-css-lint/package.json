@@ -1,0 +1,22 @@
+{
+    "name": "adorable-css-lint",
+    "version": "1.0.0",
+    "type": "module",
+    "bin": {
+        "adorable-lint": "./dist/bin.js"
+    },
+    "scripts": {
+        "build": "tsup src/bin.ts --format esm --clean",
+        "dev": "tsup --watch"
+    },
+    "dependencies": {
+        "adorable-css": "workspace:*",
+        "fast-glob": "^3.3.2",
+        "picocolors": "^1.0.0"
+    },
+    "devDependencies": {
+        "@types/node": "^22.0.0",
+        "tsup": "^8.0.0",
+        "typescript": "^5.0.0"
+    }
+}

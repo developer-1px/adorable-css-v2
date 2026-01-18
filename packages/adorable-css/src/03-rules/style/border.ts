@@ -6,7 +6,11 @@ const borderStyles = ['none', 'hidden', 'dotted', 'dashed', 'solid', 'double', '
 
 // Parse border: "1" | "red" | "1/red" | "1/solid/red"
 const parseBorder = (args: string): string => {
-  if (!args.includes('/')) return /^\d+(\.\d+)?$/.test(args) ? `${px(args)} solid currentColor` : `1px solid ${makeColor(args)}`;
+  if (!args.includes('/')) {
+    if (borderStyles.includes(args)) return args;
+    // Allow units in width (1, 1px, 1rem, 100%)
+    return /^\d+(\.\d+)?(px|rem|em|%)?$/.test(args) ? `${px(args)} solid currentColor` : `1px solid ${makeColor(args)}`;
+  }
   const [w, s, c] = args.split('/');
   const width = w ? px(w) : '1px';
   if (!s) return `${width} solid currentColor`;
@@ -27,6 +31,12 @@ export const bl = side('left');
 
 export const border: RuleHandler = (args?: string): CSSRule => {
   if (!args) return { border: '1px solid currentColor' };
+
+  // Handle border-style values (dashed, solid, etc) directly
+  if (borderStyles.includes(args) || args === 'none') {
+    return { 'border-style': args };
+  }
+
   const [dir, ...rest] = args.split('/');
   return ['top', 'right', 'bottom', 'left'].includes(dir) ? side(dir)(rest.join('/')) : { border: parseBorder(args) };
 };

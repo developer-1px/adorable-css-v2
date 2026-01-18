@@ -3,29 +3,29 @@
  * makeValue.ts에서 분리하여 코드 라인수 감소
  */
 
-import { isToken } from '../../02-design_tokens/design-system/tokens/index'
+import { isToken } from './is-token'
 import { generateSpacingCalc, generateFontCalc, generateSizeCalc } from '../../02-design_tokens/dynamicTokens'
 
 // CSS 변수 처리
 export const cssvar = (value: string | number) => {
   const strValue = String(value);
-  
+
   // CSS 변수 처리
   if (strValue.startsWith('--')) return `var(${value})`;
-  
+
   // 토큰 처리
   if (isToken(strValue, 'spacing')) {
     return generateSpacingCalc(strValue);
   }
-  
+
   if (isToken(strValue, 'font')) {
     return generateFontCalc(strValue);
   }
-  
+
   if (isToken(strValue, 'size')) {
     return generateSizeCalc(strValue);
   }
-  
+
   return value;
 }
 
@@ -65,7 +65,7 @@ export const px = (value: string | number) => {
 
   // CSS 변수 처리
   if (v.startsWith('--')) return cssvar('' + value)
-  
+
   // 토큰 처리  
   if (isToken(v, 'spacing')) return generateSpacingCalc(v)
   if (isToken(v, 'font')) return generateFontCalc(v)
@@ -73,18 +73,18 @@ export const px = (value: string | number) => {
 
   // 이미 단위가 있는 경우
   if (/[a-z%]$/i.test(v)) return value
-  
+
   // 숫자만 있는 경우 px 추가
-  if (/^\d+(\.\d+)?$/.test(v)) return v + 'px'
-  
+  if (/^-?\d+(\.\d+)?$/.test(v)) return v + 'px'
+
   // CSS 함수나 키워드인 경우
   if (v.includes('(') || /^(auto|inherit|initial|unset|none|max-content|min-content|fit-content)$/.test(v)) {
     return value
   }
-  
+
   // 유효하지 않은 값
   if (!v.match(/^[\w\-.%]+$/)) return '0'
-  
+
   return value
 }
 
@@ -94,16 +94,16 @@ export const deg = (value: string | number) => {
   if (value === 0 || value === '0') return 0
 
   const v = String(value)
-  
+
   // CSS 변수 처리
   if (v.startsWith('--')) return cssvar('' + value)
-  
+
   // 이미 단위가 있는 경우
   if (/[a-z%]$/i.test(v)) return value
-  
+
   // 숫자만 있는 경우 deg 추가
-  if (/^\d+(\.\d+)?$/.test(v)) return v + 'deg'
-  
+  if (/^-?\d+(\.\d+)?$/.test(v)) return v + 'deg'
+
   return value
 }
 

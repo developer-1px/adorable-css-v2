@@ -7,9 +7,9 @@ import { RulePriority } from './types';
 import type { RuleHandler, KeywordRuleHandler } from './types';
 
 // Import all rule modules - centralized from index files
-import { 
-  displayRules, sizeRules, spacingRules, gridRules, 
-  overflowRules, insetRules, scrollMt, scrollMb, scrollMl, scrollMr, scrollM 
+import {
+  displayRules, sizeRules, spacingRules, gridRules,
+  overflowRules, insetRules, scrollMt, scrollMb, scrollMl, scrollMr, scrollM
 } from './layout';
 import { typographyRules, visualRules } from './style';
 import { colorRules } from '../02-design_tokens/design-system/colors/colors';
@@ -19,8 +19,8 @@ import { utilityRules } from './utilities/utilities';
 import { effectsRules } from './effects';
 
 // Extensions
-import { 
-  glowRules, glassRules, figmaComponents, 
+import {
+  glowRules, glassRules, figmaComponents,
   animationRules, glassmorphismRules
 } from '../05-plugins';
 
@@ -187,15 +187,20 @@ export const RULE_GROUPS: RuleDefinitions = {
           mb: spacingRules.mb,
           ml: spacingRules.ml,
           mr: spacingRules.mr,
+          // Negative Margins
+          '-m': spacingRules.m_neg,
+          '-mx': spacingRules.mx_neg,
+          '-my': spacingRules.my_neg,
+          '-mt': spacingRules.mt_neg,
+          '-mb': spacingRules.mb_neg,
+          '-ml': spacingRules.ml_neg,
+          '-mr': spacingRules.mr_neg,
         },
       },
       display: {
         name: 'Display',
         rules: {
           block: displayRules.block,
-          inline: displayRules.inline,
-          'inline-block': displayRules['inline-block'],
-          // 'inline-flex': displayRules['inline-flex'], // Deprecated - use hbox/vbox
           none: displayRules.none,
           hidden: displayRules.hidden,
         },
@@ -225,11 +230,6 @@ export const RULE_GROUPS: RuleDefinitions = {
         name: 'Positioning',
         rules: {
           ...insetRules,
-          'scroll-mt': scrollMt,
-          'scroll-mb': scrollMb,
-          'scroll-ml': scrollMl,
-          'scroll-mr': scrollMr,
-          'scroll-m': scrollM,
         },
       },
       container: {
@@ -337,13 +337,13 @@ export const STRING_RULE_GROUPS = {
  */
 export function flattenRuleGroups(groups: RuleDefinitions): Record<string, RuleHandler | KeywordRuleHandler> {
   const flatRules: Record<string, RuleHandler | KeywordRuleHandler> = {};
-  
+
   Object.values(groups).forEach(group => {
     Object.values(group.subgroups).forEach(subgroup => {
       Object.assign(flatRules, subgroup.rules);
     });
   });
-  
+
   return flatRules;
 }
 

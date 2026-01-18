@@ -4,7 +4,7 @@ import { inset, insetX, insetY } from '../../../03-rules/layout/inset';
 describe('inset 03-rules', () => {
   describe('inset', () => {
     it('should handle single value', () => {
-      expect(inset('0')).toEqual({ inset: '0px' });
+      expect(inset('0')).toEqual({ inset: '0' });
       expect(inset('10')).toEqual({ inset: '10px' });
       expect(inset('auto')).toEqual({ inset: 'auto' });
     });
@@ -27,7 +27,7 @@ describe('inset 03-rules', () => {
 
   describe('insetX', () => {
     it('should apply horizontal inset', () => {
-      expect(insetX('0')).toEqual({ left: '0px', right: '0px' });
+      expect(insetX('0')).toEqual({ left: '0', right: '0' });
       expect(insetX('10')).toEqual({ left: '10px', right: '10px' });
       expect(insetX('auto')).toEqual({ left: 'auto', right: 'auto' });
     });
@@ -44,7 +44,7 @@ describe('inset 03-rules', () => {
 
   describe('insetY', () => {
     it('should apply vertical inset', () => {
-      expect(insetY('0')).toEqual({ top: '0px', bottom: '0px' });
+      expect(insetY('0')).toEqual({ top: '0', bottom: '0' });
       expect(insetY('10')).toEqual({ top: '10px', bottom: '10px' });
       expect(insetY('auto')).toEqual({ top: 'auto', bottom: 'auto' });
     });

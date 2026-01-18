@@ -1,0 +1,10 @@
+{
+    "extends": "../../tsconfig.app.json",
+    "compilerOptions": {
+        "moduleResolution": "Node",
+        "noEmit": false
+    },
+    "include": [
+        "src"
+    ]
+}

@@ -80,7 +80,7 @@ function _parseAdorableCSS(input: string) {
   function SimpleSelector(): any {
     return options(
       () => Position(),
-      () => CSSLiteral(),
+
       () => FunctionCall(),
       () => Range(),
       () => consume("(ident)"),
@@ -309,47 +309,7 @@ function _parseAdorableCSS(input: string) {
     };
   }
 
-  function CSSLiteral(): any {
-    const value: any[] = [];
 
-    consume("{");
-
-    many(() => {
-      optional(() => value.push(consume(";")));
-
-      value.push(consume("(ident)"));
-      value.push(consume(":"));
-
-      value.push(
-        ...many(() =>
-          options(
-            () => consume("(dimension)"),
-            () => consume("(hexcolor)"),
-            () => consume("(string)"),
-            () => CSSFunc(),
-            () => consume("(ident)")
-          )
-        )
-      );
-
-      optional(() => value.push(consume("!important")));
-      optional(() => value.push(consume(";")));
-    });
-
-    consume("}");
-
-    return {
-      type: "css_literal",
-      value,
-      image:
-        "{" +
-        value
-          .map((v: any) => v.image)
-          .join("")
-          .replace(/_/g, " ") +
-        "}",
-    };
-  }
 
   const r = SelectorList();
   eof(r);

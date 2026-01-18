@@ -33,6 +33,7 @@ export default defineConfig({
 	// Enable debug mode
 	logLevel: 'info',
 	server: {
+		port: 3000,
 		// Enable HMR debug
 		hmr: {
 			overlay: true

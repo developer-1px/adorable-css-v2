@@ -6,15 +6,15 @@ import { RulePriority } from '../03-rules/types';
 describe('String Rules System', () => {
   beforeEach(() => {
     // Clear any existing string 03-rules to ensure clean state
-    priorityRegistry['stringRules'].clear();
+    priorityRegistry.clear();
   });
 
   describe('Basic String Rule Registration', () => {
     it('should register and retrieve string 03-rules', () => {
       const testHandler = (args?: string) => `vbox(center) p(${args || 'lg'})`;
-      
+
       priorityRegistry.registerString('test-component', testHandler, RulePriority.COMPONENT);
-      
+
       expect(priorityRegistry.hasString('test-component')).toBe(true);
       expect(priorityRegistry.getStringHandler('test-component')).toBe(testHandler);
     });
@@ -24,9 +24,9 @@ describe('String Rules System', () => {
         'comp-a': () => 'vbox p(lg)',
         'comp-b': (args?: string) => `hbox gap(${args || 'md'})`
       };
-      
+
       priorityRegistry.registerStringBulk(stringRules, RulePriority.COMPONENT);
-      
+
       expect(priorityRegistry.hasString('comp-a')).toBe(true);
       expect(priorityRegistry.hasString('comp-b')).toBe(true);
     });
@@ -42,9 +42,9 @@ describe('String Rules System', () => {
 
     it('should resolve simple string rule to CSS', () => {
       priorityRegistry.registerString('simple-hero', () => 'vbox center p(20)', RulePriority.COMPONENT);
-      
+
       const css = generateCSSFromAdorableCSS('simple-hero');
-      
+
       expect(css).toContain('display:flex');
       expect(css).toContain('flex-direction:column');
       expect(css).toContain('justify-content:center');
@@ -57,10 +57,10 @@ describe('String Rules System', () => {
         if (args === 'compact') return 'vbox center p(10)';
         return 'vbox center p(20)';
       }, RulePriority.COMPONENT);
-      
+
       const compactCSS = generateCSSFromAdorableCSS('hero(compact)');
       const defaultCSS = generateCSSFromAdorableCSS('hero');
-      
+
       expect(compactCSS).toContain('padding:10px');
       expect(defaultCSS).toContain('padding:20px');
     });
@@ -68,12 +68,12 @@ describe('String Rules System', () => {
     it('should handle nested string 03-rules', () => {
       // Register a base string rule
       priorityRegistry.registerString('base-layout', () => 'vbox center', RulePriority.COMPONENT);
-      
+
       // Register a string rule that references the base
       priorityRegistry.registerString('full-hero', () => 'base-layout p(40)', RulePriority.COMPONENT);
-      
+
       const css = generateCSSFromAdorableCSS('full-hero');
-      
+
       expect(css).toContain('display:flex');
       expect(css).toContain('flex-direction:column');
       expect(css).toContain('justify-content:center');
@@ -85,10 +85,10 @@ describe('String Rules System', () => {
       // Create circular dependency: rule-a -> rule-b -> rule-a
       priorityRegistry.registerString('rule-a', () => 'rule-b p(10)', RulePriority.COMPONENT);
       priorityRegistry.registerString('rule-b', () => 'rule-a center', RulePriority.COMPONENT);
-      
+
       // Should not throw, should handle gracefully
       const css = generateCSSFromAdorableCSS('rule-a');
-      
+
       // Should return some CSS (from the non-circular parts)
       expect(css).toBeDefined();
     });
@@ -101,14 +101,14 @@ describe('String Rules System', () => {
 
     it('should preserve priority from string 03-rules', () => {
       priorityRegistry.registerString('high-priority-comp', () => 'p(30)', RulePriority.COMPONENT);
-      
+
       const rule = priorityRegistry.getStringRule('high-priority-comp');
       expect(rule?.priority).toBe(RulePriority.COMPONENT);
     });
 
     it('should inherit priority when resolving to CSS', () => {
       priorityRegistry.registerString('component-hero', () => 'p(25)', RulePriority.COMPONENT);
-      
+
       const css = generateCSSFromAdorableCSS('component-hero');
       expect(css).toContain('padding:25px');
       expect(css).toContain('.component-hero');
@@ -136,7 +136,7 @@ describe('String Rules System', () => {
   describe('Error Handling', () => {
     it('should handle string 03-rules that return empty strings', () => {
       priorityRegistry.registerString('empty-rule', () => '', RulePriority.COMPONENT);
-      
+
       const css = generateCSSFromAdorableCSS('empty-rule');
       expect(css).toBe('');
     });
@@ -145,7 +145,7 @@ describe('String Rules System', () => {
       priorityRegistry.registerString('error-rule', () => {
         throw new Error('Test error');
       }, RulePriority.COMPONENT);
-      
+
       // Should not throw, should handle gracefully
       const css = generateCSSFromAdorableCSS('error-rule');
       expect(css).toBe('');
@@ -153,7 +153,7 @@ describe('String Rules System', () => {
 
     it('should handle string 03-rules with invalid AdorableCSS syntax', () => {
       priorityRegistry.registerString('invalid-rule', () => 'invalid-{{-syntax', RulePriority.COMPONENT);
-      
+
       // Should not throw, should handle gracefully
       const css = generateCSSFromAdorableCSS('invalid-rule');
       expect(css).toBeDefined();
@@ -171,10 +171,10 @@ describe('Hero String Rules Integration', () => {
         });
       }
     });
-    
+
     // Register the necessary base utilities that hero string 03-rules use
-    priorityRegistry.register('vbox', (args?: string) => ({ 
-      display: 'flex', 
+    priorityRegistry.register('vbox', (args?: string) => ({
+      display: 'flex',
       'flex-direction': 'column',
       ...(args === 'center' ? { 'justify-content': 'center', 'align-items': 'center' } : {})
     }), RulePriority.LAYOUT);
@@ -189,9 +189,9 @@ describe('Hero String Rules Integration', () => {
       if (args === 'compact') return 'vbox min-h(50vh) relative';
       return 'vbox min-h(100vh) relative clip';
     }, RulePriority.COMPONENT);
-    
+
     const css = generateCSSFromAdorableCSS('test-hero(compact)');
-    
+
     // Should contain some CSS
     expect(css).toBeTruthy();
     expect(css.length).toBeGreaterThan(0);

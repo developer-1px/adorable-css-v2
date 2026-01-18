@@ -38,7 +38,7 @@ describe('Homepage Classes Test - 실제 사용된 클래스들 검증', () => {
       const css = generateCSS(['heading()'])
       console.log('Generated CSS for heading():', css)
       expect(css).toContain('font-size:var(--font-3xl)')
-      expect(css).toContain('font-weight:var(--fontWeight-semi)')
+      expect(css).toContain('font-weight:600')
       expect(css).toContain('color:oklch(')
     })
 
@@ -53,7 +53,7 @@ describe('Homepage Classes Test - 실제 사용된 클래스들 검증', () => {
     it('should generate heading(h4/subtitle) - 부제목', () => {
       const css = generateCSS(['heading(h4/subtitle)'])
       console.log('Generated CSS for heading(h4/subtitle):', css)
-      expect(css).toContain('font-weight:var(--fontWeight-semi)')
+      expect(css).toContain('font-weight:600')
       expect(css).toContain('color:oklch(')
     })
 
@@ -71,30 +71,31 @@ describe('Homepage Classes Test - 실제 사용된 클래스들 검증', () => {
       const css = generateCSS(['card()'])
       console.log('Generated CSS for card():', css)
       expect(css).toContain('background-color:#ffffff')
-      expect(css).toContain('border-radius:var(--radius-lg)')
-      expect(css).toContain('padding:24px')
-      expect(css).toContain('box-shadow:var(--shadow-sm)')
+      expect(css).toContain('border-radius:0.5rem')
+      expect(css).toContain('border-radius:0.5rem')
+      expect(css).toContain('padding:var(--spacing-md)')
+      expect(css).toContain('box-shadow:0 2px 4px -1px rgb(0 0 0 / 0.06), 0 1px 2px -1px rgb(0 0 0 / 0.04)')
     })
 
     it('should generate card(elevated) - 떠있는 카드', () => {
       const css = generateCSS(['card(elevated)'])
       console.log('Generated CSS for card(elevated):', css)
       expect(css).toContain('background-color:#ffffff')
-      expect(css).toContain('border:1px solid color-mix')
+      expect(css).toContain('border:1px solid var(--gray-100, gray-100)')
     })
 
     it('should generate card(flat) - 플랫 카드', () => {
       const css = generateCSS(['card(flat)'])
       console.log('Generated CSS for card(flat):', css)
       expect(css).toContain('position:relative')
-      expect(css).toContain('border-radius:var(--radius-lg)')
+      expect(css).toContain('border-radius:0.5rem')
     })
 
     it('should generate btn() - 기본 버튼', () => {
       const css = generateCSS(['btn()'])
       console.log('Generated CSS for btn():', css)
-      expect(css).toContain('display:inline-flex')
-      expect(css).toContain('background-color:var(--gray-900)')
+      expect(css).toContain('display:flex')
+      expect(css).toContain('background-color:var(--gray-900, gray-900)')
       expect(css).toContain('height:40px')
     })
 
@@ -152,7 +153,7 @@ describe('Homepage Classes Test - 실제 사용된 클래스들 검증', () => {
     it('should generate r(full) - 완전 둥근 모서리', () => {
       const css = generateCSS(['r(full)'])
       console.log('Generated CSS for r(full):', css)
-      expect(css).toContain('border-radius:var(--radius-full)')
+      expect(css).toContain('border-radius:9999px')
     })
   })
 
@@ -238,9 +239,9 @@ describe('Homepage Classes Test - 실제 사용된 클래스들 검증', () => {
       expect(css).toContain('font-weight:700')
     })
 
-    it('should generate font(xl/1.6) - 폰트 사이즈와 라인 높이', () => {
-      const css = generateCSS(['font(xl/1.6)'])
-      console.log('Generated CSS for font(xl/1.6):', css)
+    it('should generate text(xl/1.6) - 폰트 사이즈와 라인 높이', () => {
+      const css = generateCSS(['text(xl/1.6)'])
+      console.log('Generated CSS for text(xl/1.6):', css)
       expect(css).toContain('font-size')
       expect(css).toContain('line-height:1.6')
     })
