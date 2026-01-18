@@ -4,7 +4,7 @@
   // Focuses on the core grammar of AdorableCSS
 </script>
 
-<div class="min-h-screen bg(white)">
+<div class="min-h(screen) bg(white)">
   <!-- Hero -->
   <div class="border-b(1/gray-100) bg(gray-50/50)">
     <Container size="lg">

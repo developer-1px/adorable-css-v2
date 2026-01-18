@@ -8,7 +8,7 @@
     : 'size(18) bd(2/solid/gray-300) r(full) bg(white) transition'
 </script>
 
-<label class="hbox(middle) gap(8) cursor(pointer)">
+<label class="hbox(middle) gap(sm) cursor(pointer)">
   <div class="relative">
     <input type="radio" bind:group={value} {name} {checked} class="sr-only" />
     <div class={radioClasses}>

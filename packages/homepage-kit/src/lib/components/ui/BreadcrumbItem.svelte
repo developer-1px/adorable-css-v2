@@ -7,7 +7,7 @@
     : 'c(gray-600) hover:c(gray-900) transition'
 </script>
 
-<div class="hbox gap(8)">
+<div class="hbox gap(sm)">
   <a class={linkClasses} {href}>
     <slot />
   </a>

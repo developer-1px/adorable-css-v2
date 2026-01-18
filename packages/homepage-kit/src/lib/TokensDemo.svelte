@@ -50,7 +50,7 @@
         <h4 class="500 font(md)">Font Sizes</h4>
         {#each Object.entries(customTokens.fontSize) as [key, value]}
           <div class="hbox(middle) gap(md)">
-            <label class="w(80) font(sm)">{key}:</label>
+            <label class="w(80px) font(sm)">{key}:</label>
             <input 
               type="text" 
               bind:value={customTokens.fontSize[key]}
@@ -66,7 +66,7 @@
         <h4 class="500 font(md)">Spacing</h4>
         {#each Object.entries(customTokens.spacing) as [key, value]}
           <div class="hbox(middle) gap(md)">
-            <label class="w(80) font(sm)">{key}:</label>
+            <label class="w(80px) font(sm)">{key}:</label>
             <input 
               type="text" 
               bind:value={customTokens.spacing[key]}
@@ -82,7 +82,7 @@
         <h4 class="500 font(md)">Border Radius</h4>
         {#each Object.entries(customTokens.borderRadius).slice(0, 5) as [key, value]}
           <div class="hbox(middle) gap(md)">
-            <label class="w(80) font(sm)">{key}:</label>
+            <label class="w(80px) font(sm)">{key}:</label>
             <input 
               type="text" 
               bind:value={customTokens.borderRadius[key]}

@@ -1,7 +1,7 @@
 export const ruleExamples: Record<string, string[]> = {
     // Layout & Spacing
-    gap: ['gap(md)', 'gap(4)', 'gap(10px)'],
-    p: ['p(md)', 'p(10px)', 'p(4)'],
+    gap: ['gap(md)', 'gap(xs)', 'gap(10px)'],
+    p: ['p(md)', 'p(10px)', 'p(xs)'],
     m: ['m(auto)', 'm(lg)', 'm(0)'],
     w: ['w(full)', 'w(screen)', 'w(300px)', 'w(1/2)'],
     h: ['h(full)', 'h(screen)', 'h(64px)'],

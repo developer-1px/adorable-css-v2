@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { defineComponent, defineThemedComponent } from '../04-components/defineComponent-unified';
+import { defineComponent, defineThemedComponent } from '../04-components/defineComponent';
 
 describe('defineComponent (unified)', () => {
   describe('basic functionality', () => {

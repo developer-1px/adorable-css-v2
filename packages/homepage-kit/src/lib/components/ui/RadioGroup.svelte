@@ -1,6 +1,6 @@
 <script lang="ts">
 </script>
 
-<div class="vbox gap(12)">
+<div class="vbox gap(md)">
   <slot />
 </div>

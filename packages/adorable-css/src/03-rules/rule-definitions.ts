@@ -235,8 +235,8 @@ export const RULE_GROUPS: RuleDefinitions = {
       container: {
         name: 'Container',
         rules: containerRules,
-      }
-    }
+      },
+    },
   },
 
   // Interaction Group - Figma Prototype
@@ -268,6 +268,16 @@ export const RULE_GROUPS: RuleDefinitions = {
       misc: {
         name: 'Miscellaneous',
         rules: utilityRules,
+      },
+      scroll: {
+        name: 'Scroll',
+        rules: {
+          scrollMt,
+          scrollMb,
+          scrollMl,
+          scrollMr,
+          scrollM,
+        },
       }
     }
   },

@@ -1,6 +1,6 @@
 <script lang="ts">
 </script>
 
-<nav class="hbox gap(8)">
+<nav class="hbox gap(sm)">
   <slot />
 </nav>

@@ -2,11 +2,14 @@
   import { createEventDispatcher } from 'svelte';
   
   export let variant: 'default' | 'secondary' | 'destructive' | 'outline' | 'ghost' | 'link' = 'default';
-  export let size: 'default' | 'sm' | 'lg' | 'icon' = 'default';
+  export let size: 'default' | 'sm' | 'lg' | 'xl' | 'icon' = 'default';
   export let disabled = false;
   export let loading = false;
   export let asChild = false;
   export let href: string | undefined = undefined;
+  
+  let className: string | undefined = undefined;
+  export { className as class };
   
   const dispatch = createEventDispatcher();
   
@@ -24,7 +27,7 @@
     ? `btn(${getVariantName(variant)})`
     : `btn(${getVariantName(variant)}/${size})`
     
-  $: classes = `${btnClass} ${disabledClasses}`
+  $: classes = `${btnClass} ${disabledClasses} ${className || ''}`
   
   function handleClick(event: MouseEvent) {
     if (!disabled && !loading) {
@@ -40,6 +43,7 @@
     on:click={handleClick}
     role="button"
     tabindex="0"
+    {...$$restProps}
   >
     {#if loading}
       <div class="size(16) mr(xs) bd(2/solid/currentColor) bt(2/solid/transparent) r(full) animate(spin)"></div>
@@ -52,6 +56,7 @@
     class={classes}
     disabled={disabled || loading}
     on:click={handleClick}
+    {...$$restProps}
   >
     {#if loading}
       <div class="size(16) mr(xs) bd(2/solid/currentColor) bt(2/solid/transparent) r(full) animate(spin)"></div>

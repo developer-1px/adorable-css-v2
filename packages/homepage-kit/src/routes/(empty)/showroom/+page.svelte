@@ -141,7 +141,7 @@
           { icon: 'rocket', title: 'Zero-Config Deploy', desc: 'Push to git, deploy to production. Instant rollbacks, A/B testing, and canary releases built-in.' }
         ] as feature}
           <div class="p(2xl) bg(white) r(xl) shadow(card) hover:shadow(hover) transition hover:translate-y(-4) transform vbox gap(lg)">
-            <div class="w(48) h(48) hbox(center/middle) r(lg) bg(primary.1) c(primary) hover:bg(primary) hover:c(white) transition">
+            <div class="w(48px) h(48px) hbox(center/middle) r(lg) bg(primary.1) c(primary) hover:bg(primary) hover:c(white) transition">
               {@html icons[feature.icon]}
             </div>
             <div class="vbox gap(sm)">
@@ -168,7 +168,7 @@
         <div class="vbox gap(lg)">
           {#each ['Natural language to production code in seconds', 'Automatic test generation with 95%+ coverage', 'Real-time security vulnerability detection', 'One-click deployment to any cloud provider'] as item}
             <div class="hbox gap(md) items(start)">
-              <div class="w(24) h(24) r(full) bg(success.1) c(success) hbox(center/middle)">
+              <div class="w(2xl) h(2xl) r(full) bg(success.1) c(success) hbox(center/middle)">
                 {@html icons.check}
               </div>
               <p class="body(md) c(primary)">{item}</p>
@@ -182,7 +182,7 @@
           <div class="absolute inset(0) bg(135deg/primary.1..primary.2)"></div>
           <div class="absolute inset(0) hbox(center/middle)">
             <div class="size(80) r(full) bg(white) shadow(lg) hbox(center/middle) hover:scale(1.1) transition cursor(pointer)">
-              <svg class="size(32) c(primary) ml(4)" viewBox="0 0 24 24" fill="currentColor">
+              <svg class="size(32) c(primary) ml(xs)" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M8 5v14l11-7z"/>
               </svg>
             </div>
@@ -211,7 +211,7 @@
           { name: 'Priya Patel', role: 'Engineering Director at Netflix', company: 'netflix', rating: 5, text: 'The real-time collaboration features transformed our distributed team. Engineers pair program with AI assistance. Productivity up 3x.' }
         ] as testimonial}
           <div class="p(2xl) bg(white) r(xl) shadow(card) hover:shadow(hover) transition">
-            <div class="hbox gap(2) mb(lg)">
+            <div class="hbox gap(2px) mb(lg)">
               {#each Array(testimonial.rating) as _}
                 <div class="size(20) c(warning)">
                   {@html icons.star}
@@ -241,7 +241,7 @@
         </p>
         
         <!-- Billing Toggle -->
-        <div class="inline-flex r(full) bg(neutral-100) p(4)">
+        <div class="inline-flex r(full) bg(neutral-100) p(xs)">
           <button 
             class="px(xl) py(sm) r(full) transition {activeTab === 'monthly' ? 'bg(white) shadow(sm)' : ''}"
             on:click={() => activeTab = 'monthly'}
@@ -346,7 +346,7 @@
               <span class="caption c(neutral-500)">from last month</span>
             </div>
           </div>
-          <div class="h(120) bg(neutral-100) r(lg)"></div>
+          <div class="h(120px) bg(neutral-100) r(lg)"></div>
         </div>
         
         <!-- Active Users -->
@@ -441,7 +441,7 @@
       <!-- Timeline -->
       <div class="relative">
         <!-- Timeline Line -->
-        <div class="absolute left(50%) top(0) bottom(0) w(2) bg(neutral-200) ..md:left(20)"></div>
+        <div class="absolute left(50%) top(0) bottom(0) w(2px) bg(neutral-200) ..md:left(xl)"></div>
         
         <!-- Timeline Items -->
         <div class="vbox gap(3xl)">
@@ -452,7 +452,7 @@
             { year: '2021', title: 'Company Founded', desc: 'Started with a simple idea', align: 'right' }
           ] as item, i}
             <div class="relative hbox {item.align === 'left' ? '' : 'justify(end)'} ..md:justify(start)">
-              <div class="w(full) max-w(lg) {item.align === 'left' ? 'pr(3xl)' : 'pl(3xl)'} ..md:pl(24) ..md:pr(0)">
+              <div class="w(full) max-w(lg) {item.align === 'left' ? 'pr(3xl)' : 'pl(3xl)'} ..md:pl(2xl) ..md:pr(0)">
                 <div class="glassmorphism(md) p(2xl) r(xl) vbox gap(lg) hover:shadow(xl) transition">
                   <div class="caption c(primary)">{item.year}</div>
                   <h3 class="title(xl) c(neutral-900)">{item.title}</h3>
@@ -460,7 +460,7 @@
                 </div>
               </div>
               <!-- Timeline Dot -->
-              <div class="absolute left(50%) top(50%) translate-x(-50%) translate-y(-50%) size(20) r(full) bg(primary) border(4/white) ..md:left(20)"></div>
+              <div class="absolute left(50%) top(50%) translate-x(-50%) translate-y(-50%) size(20) r(full) bg(primary) border(4/white) ..md:left(xl)"></div>
             </div>
           {/each}
         </div>
@@ -557,7 +557,7 @@
               <span class="caption c(success)">+12%</span>
             </div>
             <h4 class="title(xl) c(primary)">$84.5K</h4>
-            <div class="h(40) bg(success.1) r(sm)"></div>
+            <div class="h(4xl) bg(success.1) r(sm)"></div>
           </div>
           <div class="bg(white) p(xl) r(lg) vbox gap(lg) bt(1/neutral-100) shadow(sm)">
             <div class="hbox(between/middle)">
@@ -565,7 +565,7 @@
               <span class="caption c(primary)">+8%</span>
             </div>
             <h4 class="title(xl) c(primary)">12,459</h4>
-            <div class="h(40) bg(primary.1) r(sm)"></div>
+            <div class="h(4xl) bg(primary.1) r(sm)"></div>
           </div>
           <div class="bg(white) p(xl) r(lg) vbox gap(lg) bt(1/neutral-100) shadow(sm)">
             <div class="hbox(between/middle)">
@@ -573,7 +573,7 @@
               <span class="caption c(neutral-600)">0%</span>
             </div>
             <h4 class="title(xl) c(primary)">3.24%</h4>
-            <div class="h(40) bg(neutral-100) r(sm)"></div>
+            <div class="h(4xl) bg(neutral-100) r(sm)"></div>
           </div>
           <div class="bg(white) p(xl) r(lg) vbox gap(lg) bt(1/neutral-100) shadow(sm)">
             <div class="hbox(between/middle)">
@@ -581,7 +581,7 @@
               <span class="caption c(success)">+25%</span>
             </div>
             <h4 class="title(xl) c(primary)">1.2M</h4>
-            <div class="h(40) bg(success.1) r(sm)"></div>
+            <div class="h(4xl) bg(success.1) r(sm)"></div>
           </div>
           <div class="bg(white) p(xl) r(lg) vbox gap(lg) bt(1/neutral-100) shadow(sm)">
             <div class="hbox(between/middle)">
@@ -589,7 +589,7 @@
               <span class="caption c(success)">-15%</span>
             </div>
             <h4 class="title(xl) c(primary)">48ms</h4>
-            <div class="h(40) bg(success.1) r(sm)"></div>
+            <div class="h(4xl) bg(success.1) r(sm)"></div>
           </div>
           <div class="bg(white) p(xl) r(lg) vbox gap(lg) bt(1/neutral-100) shadow(sm)">
             <div class="hbox(between/middle)">
@@ -597,7 +597,7 @@
               <span class="caption c(success)">-32%</span>
             </div>
             <h4 class="title(xl) c(primary)">0.12%</h4>
-            <div class="h(40) bg(success.1) r(sm)"></div>
+            <div class="h(4xl) bg(success.1) r(sm)"></div>
           </div>
         </div>
       </div>
@@ -621,7 +621,7 @@
             </button>
           </div>
           <div class="bg(white) p(lg) r(lg) vbox gap(md) bt(1/neutral-100) shadow(sm)">
-            <div class="h(80) bg(neutral-50) r(sm)"></div>
+            <div class="h(80px) bg(neutral-50) r(sm)"></div>
             <h4 class="body(sm) bold(600) c(primary)">Form Builder</h4>
             <p class="caption c(neutral-600)">$29/mo</p>
           </div>
@@ -640,17 +640,17 @@
             </div>
           </div>
           <div class="bg(white) p(lg) r(lg) vbox gap(md) bt(1/neutral-100) shadow(sm)">
-            <div class="h(80) bg(neutral-50) r(sm)"></div>
+            <div class="h(80px) bg(neutral-50) r(sm)"></div>
             <h4 class="body(sm) bold(600) c(primary)">API Tools</h4>
             <p class="caption c(neutral-600)">$19/mo</p>
           </div>
           <div class="bg(white) p(lg) r(lg) vbox gap(md) bt(1/neutral-100) shadow(sm)">
-            <div class="h(80) bg(neutral-50) r(sm)"></div>
+            <div class="h(80px) bg(neutral-50) r(sm)"></div>
             <h4 class="body(sm) bold(600) c(primary)">Testing Suite</h4>
             <p class="caption c(neutral-600)">$39/mo</p>
           </div>
           <div class="bg(white) p(lg) r(lg) vbox gap(md) bt(1/neutral-100) shadow(sm)">
-            <div class="h(80) bg(neutral-50) r(sm)"></div>
+            <div class="h(80px) bg(neutral-50) r(sm)"></div>
             <h4 class="body(sm) bold(600) c(primary)">Deploy Agent</h4>
             <p class="caption c(neutral-600)">$49/mo</p>
           </div>

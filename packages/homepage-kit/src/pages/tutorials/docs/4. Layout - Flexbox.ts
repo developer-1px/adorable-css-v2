@@ -62,53 +62,53 @@ vbox
 
 <h1>Box Model</h1>
 
-<div class="vbox gap(20) bg(#fff) p(10)">
+<div class="vbox gap(xl) bg(#fff) p(10px)">
 
-  <h2>hbox + gap(20)</h2>
+  <h2>hbox + gap(xl)</h2>
 
-  <div class="hbox gap(20) p(10) b(orange)">
-    <div class="w(48) h(48) bg(orange) pack">h</div>
-    <div class="w(48) h(48) bg(orange) pack">b</div>
-    <div class="w(48) h(48) bg(orange) pack">o</div>
-    <div class="w(48) h(48) bg(orange) pack">x</div>
+  <div class="hbox gap(xl) p(10px) b(orange)">
+    <div class="w(48px) h(48px) bg(orange) pack">h</div>
+    <div class="w(48px) h(48px) bg(orange) pack">b</div>
+    <div class="w(48px) h(48px) bg(orange) pack">o</div>
+    <div class="w(48px) h(48px) bg(orange) pack">x</div>
   </div> 
   
   <h2>hbox + ✨gap(auto)</h2>
 
-  <div class="hbox gap(auto) p(10) b(orange)">
-    <div class="w(48) h(48) bg(orange) pack">h</div>
-    <div class="w(48) h(48) bg(orange) pack">b</div>
-    <div class="w(48) h(48) bg(orange) pack">o</div>
-    <div class="w(48) h(48) bg(orange) pack">x</div>
+  <div class="hbox gap(auto) p(10px) b(orange)">
+    <div class="w(48px) h(48px) bg(orange) pack">h</div>
+    <div class="w(48px) h(48px) bg(orange) pack">b</div>
+    <div class="w(48px) h(48px) bg(orange) pack">o</div>
+    <div class="w(48px) h(48px) bg(orange) pack">x</div>
   </div> 
 
 
   <h2>hbox(top)</h2>  
-  <div class="hbox(top) gap(10) b(orange) p(10)">
-    <div class="w(48) h(48) bg(orange) pack">h</div>
-    <div class="w(48) h(100) bg(orange) pack">b</div>
-    <div class="p(10) bg(orange) pack">o</div>
-    <div class="w(48) h(24) bg(orange) pack">x</div>
-    <div class="w(48) h(50) bg(orange) pack">(top)</div>
+  <div class="hbox(top) gap(10px) b(orange) p(10px)">
+    <div class="w(48px) h(48px) bg(orange) pack">h</div>
+    <div class="w(48px) h(100px) bg(orange) pack">b</div>
+    <div class="p(10px) bg(orange) pack">o</div>
+    <div class="w(48px) h(2xl) bg(orange) pack">x</div>
+    <div class="w(48px) h(50px) bg(orange) pack">(top)</div>
   </div>
   
   <h2>hbox(bottom+right)</h2>  
-  <div class="hbox(bottom+right) gap(10) b(orange) p(10)">
-    <div class="w(48) h(48) bg(orange) pack">h</div>
-    <div class="w(48) h(100) bg(orange) pack">b</div>
-    <div class="p(10) bg(orange) pack">o</div>
-    <div class="w(48) h(24) bg(orange) pack">x</div>
-    <div class="p(10) h(50) bg(orange) pack">(bottom+right)</div>
+  <div class="hbox(bottom+right) gap(10px) b(orange) p(10px)">
+    <div class="w(48px) h(48px) bg(orange) pack">h</div>
+    <div class="w(48px) h(100px) bg(orange) pack">b</div>
+    <div class="p(10px) bg(orange) pack">o</div>
+    <div class="w(48px) h(2xl) bg(orange) pack">x</div>
+    <div class="p(10px) h(50px) bg(orange) pack">(bottom+right)</div>
   </div>
 
   <h2>pack</h2>  
-  <div class="hbox pack b(orange) p(10) h(100)">
-    <div class="p(10) bg(orange) pack">pack</div>
+  <div class="hbox pack b(orange) p(10px) h(100px)">
+    <div class="p(10px) bg(orange) pack">pack</div>
   </div>
 
   <h2>vpack</h2>  
-  <div class="vpack b(orange) p(10) h(100)">
-    <div class="vpack p(10) bg(orange)">
+  <div class="vpack b(orange) p(10px) h(100px)">
+    <div class="vpack p(10px) bg(orange)">
       <div>vpack</div>
       <div>column</div>
     </div>
@@ -117,30 +117,30 @@ vbox
   <br/>
     
   <h2>hbox(fill)</h2>  
-  <div class="hbox(fill) gap(10) b(orange) p(10) h(200)">
-    <div class="w(48) bg(orange) pack">h</div>
-    <div class="w(72) h(hug) bg(orange) pack">h(hug)크기를 지정하면<br/>컨텐츠 크기</div>
-    <div class="p(10) bg(orange) pack">o</div>
-    <div class="w(48) bg(orange) pack">x</div>
-    <div class="p(10) bg(orange) pack">(fill)</div>
+  <div class="hbox(fill) gap(10px) b(orange) p(10px) h(200px)">
+    <div class="w(48px) bg(orange) pack">h</div>
+    <div class="w(72px) h(hug) bg(orange) pack">h(hug)크기를 지정하면<br/>컨텐츠 크기</div>
+    <div class="p(10px) bg(orange) pack">o</div>
+    <div class="w(48px) bg(orange) pack">x</div>
+    <div class="p(10px) bg(orange) pack">(fill)</div>
   </div>
 
   <h2>✨w(fill)</h2>  
-  <div class="hbox gap(10) b(orange) p(10)">
-    <div class="w(48) h(48) bg(orange) pack">h</div>
-    <div class="w(48) h(100) bg(orange) pack">b</div>
-    <div class="w(fill) h(100) bg(orange) pack">w(fill)</div>
-    <div class="w(48) p(10) bg(orange) pack">o</div>
-    <div class="w(48) h(24) bg(orange) pack">x</div>
+  <div class="hbox gap(10px) b(orange) p(10px)">
+    <div class="w(48px) h(48px) bg(orange) pack">h</div>
+    <div class="w(48px) h(100px) bg(orange) pack">b</div>
+    <div class="w(fill) h(100px) bg(orange) pack">w(fill)</div>
+    <div class="w(48px) p(10px) bg(orange) pack">o</div>
+    <div class="w(48px) h(2xl) bg(orange) pack">x</div>
   </div>
 
   <h2>✨h(fill)</h2>  
-  <div class="hbox gap(10) b(orange) p(10)">
-    <div class="w(48) h(48) bg(orange) pack">h</div>
-    <div class="w(48) h(100) bg(orange) pack">b</div>
-    <div class="p(10) bg(orange) pack">o</div>
-    <div class="w(48) h(24) bg(orange) pack">x</div>
-    <div class="p(10) h(fill) bg(orange) pack">h(fill)</div>
+  <div class="hbox gap(10px) b(orange) p(10px)">
+    <div class="w(48px) h(48px) bg(orange) pack">h</div>
+    <div class="w(48px) h(100px) bg(orange) pack">b</div>
+    <div class="p(10px) bg(orange) pack">o</div>
+    <div class="w(48px) h(2xl) bg(orange) pack">x</div>
+    <div class="p(10px) h(fill) bg(orange) pack">h(fill)</div>
   </div>
 </div>
 

@@ -45,9 +45,9 @@
   let sheetOpen = false
 </script>
 
-<div class="vbox gap(48) py(48)">
+<div class="vbox gap(48px) py(48px)">
   <!-- Header -->
-  <section class="vbox gap(16) container mx(auto) px(24)">
+  <section class="vbox gap(lg) container mx(auto) px(2xl)">
     <h1 class="font(4xl/bold) c(gray-900)">Component Library</h1>
     <p class="font(lg) c(gray-600) max-w(4xl)">
       shadcn/ui에서 영감을 받아 AdorableCSS로 구현한 컴포넌트 라이브러리입니다.
@@ -56,11 +56,11 @@
   </section>
 
   <!-- Buttons -->
-  <section class="vbox gap(24) container mx(auto) px(24)">
+  <section class="vbox gap(2xl) container mx(auto) px(2xl)">
     <h2 class="font(2xl/bold) c(gray-900)">Buttons</h2>
     
-    <div class="vbox gap(16) p(24) r(lg) bg(gray-50)">
-      <div class="hbox(wrap) gap(12)">
+    <div class="vbox gap(lg) p(2xl) r(lg) bg(gray-50)">
+      <div class="hbox(wrap) gap(md)">
         <Button>Default</Button>
         <Button variant="secondary">Secondary</Button>
         <Button variant="outline">Outline</Button>
@@ -71,7 +71,7 @@
       
       <Separator />
       
-      <div class="hbox(wrap) gap(12)">
+      <div class="hbox(wrap) gap(md)">
         <Button size="sm">Small</Button>
         <Button>Default</Button>
         <Button size="lg">Large</Button>
@@ -80,7 +80,7 @@
       
       <Separator />
       
-      <div class="hbox gap(12)">
+      <div class="hbox gap(md)">
         <Button disabled>Disabled</Button>
         <Button loading>Loading</Button>
       </div>
@@ -88,18 +88,18 @@
   </section>
 
   <!-- Form Components -->
-  <section class="vbox gap(24) container mx(auto) px(24)">
+  <section class="vbox gap(2xl) container mx(auto) px(2xl)">
     <h2 class="font(2xl/bold) c(gray-900)">Form Components</h2>
     
-    <div class="grid(1) md:grid(2) gap(24) p(24) r(lg) bg(gray-50)">
-      <div class="vbox gap(16)">
-        <div class="vbox gap(8)">
+    <div class="grid(1) md:grid(2) gap(2xl) p(2xl) r(lg) bg(gray-50)">
+      <div class="vbox gap(lg)">
+        <div class="vbox gap(sm)">
           <Label>Text Input</Label>
           <Input />
           <Input variant="error" />
         </div>
         
-        <div class="vbox gap(8)">
+        <div class="vbox gap(sm)">
           <Label>Select</Label>
           <Select>
             <option>Option 1</option>
@@ -108,20 +108,20 @@
           </Select>
         </div>
         
-        <div class="vbox gap(8)">
+        <div class="vbox gap(sm)">
           <Label>Textarea</Label>
           <Textarea />
         </div>
       </div>
       
-      <div class="vbox gap(16)">
-        <div class="vbox gap(8)">
+      <div class="vbox gap(lg)">
+        <div class="vbox gap(sm)">
           <Label>Checkboxes</Label>
           <Checkbox>Option 1</Checkbox>
           <Checkbox checked>Option 2 (checked)</Checkbox>
         </div>
         
-        <div class="vbox gap(8)">
+        <div class="vbox gap(sm)">
           <Label>Radio Buttons</Label>
           <RadioGroup>
             <RadioButton>Option A</RadioButton>
@@ -130,15 +130,15 @@
           </RadioGroup>
         </div>
         
-        <div class="vbox gap(8)">
+        <div class="vbox gap(sm)">
           <Label>Switch</Label>
-          <div class="hbox gap(16)">
+          <div class="hbox gap(lg)">
             <Switch />
             <Switch checked />
           </div>
         </div>
         
-        <div class="vbox gap(8)">
+        <div class="vbox gap(sm)">
           <Label>Slider</Label>
           <Slider value={30} />
         </div>
@@ -147,29 +147,29 @@
   </section>
 
   <!-- Layout Components -->
-  <section class="vbox gap(24) container mx(auto) px(24)">
+  <section class="vbox gap(2xl) container mx(auto) px(2xl)">
     <h2 class="font(2xl/bold) c(gray-900)">Layout Components</h2>
     
-    <div class="vbox gap(24)">
+    <div class="vbox gap(2xl)">
       <!-- Cards -->
-      <div class="vbox gap(12)">
+      <div class="vbox gap(md)">
         <h3 class="font(xl/semibold)">Cards</h3>
-        <div class="grid(1) md:grid(3) gap(16)">
+        <div class="grid(1) md:grid(3) gap(lg)">
           <Card>
-            <div class="p(20)">
-              <h4 class="font(lg/semibold) mb(8)">Card Title</h4>
+            <div class="p(xl)">
+              <h4 class="font(lg/semibold) mb(sm)">Card Title</h4>
               <p class="c(gray-600)">This is a basic card component with some content.</p>
             </div>
           </Card>
           <Card>
-            <div class="p(20)">
-              <h4 class="font(lg/semibold) mb(8)">Another Card</h4>
+            <div class="p(xl)">
+              <h4 class="font(lg/semibold) mb(sm)">Another Card</h4>
               <p class="c(gray-600)">Cards are great for organizing content.</p>
             </div>
           </Card>
           <Card>
-            <div class="p(20)">
-              <h4 class="font(lg/semibold) mb(8)">Third Card</h4>
+            <div class="p(xl)">
+              <h4 class="font(lg/semibold) mb(sm)">Third Card</h4>
               <p class="c(gray-600)">They can contain any type of content.</p>
             </div>
           </Card>
@@ -177,7 +177,7 @@
       </div>
 
       <!-- Accordion -->
-      <div class="vbox gap(12)">
+      <div class="vbox gap(md)">
         <h3 class="font(xl/semibold)">Accordion</h3>
         <Accordion variant="bordered">
           <AccordionItem>
@@ -196,7 +196,7 @@
       </div>
 
       <!-- Tabs -->
-      <div class="vbox gap(12)">
+      <div class="vbox gap(md)">
         <h3 class="font(xl/semibold)">Tabs</h3>
         <Tabs>
           <TabsList>
@@ -213,14 +213,14 @@
   </section>
 
   <!-- Data Display -->
-  <section class="vbox gap(24) container mx(auto) px(24)">
+  <section class="vbox gap(2xl) container mx(auto) px(2xl)">
     <h2 class="font(2xl/bold) c(gray-900)">Data Display</h2>
     
-    <div class="vbox gap(24)">
+    <div class="vbox gap(2xl)">
       <!-- Badges -->
-      <div class="vbox gap(12)">
+      <div class="vbox gap(md)">
         <h3 class="font(xl/semibold)">Badges</h3>
-        <div class="hbox(wrap) gap(8)">
+        <div class="hbox(wrap) gap(sm)">
           <Badge>Default</Badge>
           <Badge variant="secondary">Secondary</Badge>
           <Badge variant="outline">Outline</Badge>
@@ -229,9 +229,9 @@
       </div>
 
       <!-- Avatars -->
-      <div class="vbox gap(12)">
+      <div class="vbox gap(md)">
         <h3 class="font(xl/semibold)">Avatars</h3>
-        <div class="hbox gap(12)">
+        <div class="hbox gap(md)">
           <Avatar size="sm">JD</Avatar>
           <Avatar>JD</Avatar>
           <Avatar size="lg">JD</Avatar>
@@ -239,7 +239,7 @@
       </div>
 
       <!-- Alerts -->
-      <div class="vbox gap(12)">
+      <div class="vbox gap(md)">
         <h3 class="font(xl/semibold)">Alerts</h3>
         <Alert>This is a default alert</Alert>
         <Alert variant="destructive">This is a destructive alert</Alert>
@@ -247,13 +247,13 @@
       </div>
 
       <!-- Progress -->
-      <div class="vbox gap(12)">
+      <div class="vbox gap(md)">
         <h3 class="font(xl/semibold)">Progress</h3>
         <Progress value={60} />
       </div>
 
       <!-- Table -->
-      <div class="vbox gap(12)">
+      <div class="vbox gap(md)">
         <h3 class="font(xl/semibold)">Table</h3>
         <Table>
           <TableHeader>
@@ -288,9 +288,9 @@
       </div>
 
       <!-- Skeleton -->
-      <div class="vbox gap(12)">
+      <div class="vbox gap(md)">
         <h3 class="font(xl/semibold)">Skeleton</h3>
-        <div class="vbox gap(8)">
+        <div class="vbox gap(sm)">
           <Skeleton width="250px" />
           <Skeleton width="200px" />
           <Skeleton width="150px" />
@@ -300,12 +300,12 @@
   </section>
 
   <!-- Navigation -->
-  <section class="vbox gap(24) container mx(auto) px(24)">
+  <section class="vbox gap(2xl) container mx(auto) px(2xl)">
     <h2 class="font(2xl/bold) c(gray-900)">Navigation</h2>
     
-    <div class="vbox gap(24)">
+    <div class="vbox gap(2xl)">
       <!-- Breadcrumbs -->
-      <div class="vbox gap(12)">
+      <div class="vbox gap(md)">
         <h3 class="font(xl/semibold)">Breadcrumbs</h3>
         <Breadcrumb>
           <BreadcrumbItem>Home</BreadcrumbItem>
@@ -315,7 +315,7 @@
       </div>
 
       <!-- Navigation Menu -->
-      <div class="vbox gap(12)">
+      <div class="vbox gap(md)">
         <h3 class="font(xl/semibold)">Navigation Menu</h3>
         <NavigationMenu>
           <NavigationMenuItem active>Home</NavigationMenuItem>
@@ -326,7 +326,7 @@
       </div>
 
       <!-- Pagination -->
-      <div class="vbox gap(12)">
+      <div class="vbox gap(md)">
         <h3 class="font(xl/semibold)">Pagination</h3>
         <Pagination />
       </div>
@@ -334,14 +334,14 @@
   </section>
 
   <!-- Overlays -->
-  <section class="vbox gap(24) container mx(auto) px(24)">
+  <section class="vbox gap(2xl) container mx(auto) px(2xl)">
     <h2 class="font(2xl/bold) c(gray-900)">Overlays</h2>
     
-    <div class="vbox gap(24)">
+    <div class="vbox gap(2xl)">
       <!-- Toast -->
-      <div class="vbox gap(12)">
+      <div class="vbox gap(md)">
         <h3 class="font(xl/semibold)">Toast</h3>
-        <div class="vbox gap(12)">
+        <div class="vbox gap(md)">
           <Toast>
             <p class="font(sm/semibold)">Default Toast</p>
             <p class="font(sm) c(gray-600)">This is a default notification.</p>
@@ -362,14 +362,14 @@
       </div>
 
       <!-- Dialog Demo -->
-      <div class="vbox gap(12)">
+      <div class="vbox gap(md)">
         <h3 class="font(xl/semibold)">Dialog</h3>
         <Button on:click={() => dialogOpen = true}>Open Dialog</Button>
         <Dialog open={dialogOpen}>
-          <div class="vbox gap(16)">
+          <div class="vbox gap(lg)">
             <h3 class="font(xl/semibold)">Dialog Title</h3>
             <p class="c(gray-600)">This is a dialog component. You can put any content here.</p>
-            <div class="hbox(right) gap(12)">
+            <div class="hbox(right) gap(md)">
               <Button variant="outline" on:click={() => dialogOpen = false}>Cancel</Button>
               <Button on:click={() => dialogOpen = false}>Confirm</Button>
             </div>
@@ -378,11 +378,11 @@
       </div>
 
       <!-- Sheet Demo -->
-      <div class="vbox gap(12)">
+      <div class="vbox gap(md)">
         <h3 class="font(xl/semibold)">Sheet</h3>
         <Button on:click={() => sheetOpen = true}>Open Sheet</Button>
         <Sheet open={sheetOpen}>
-          <div class="p(24) vbox gap(16)">
+          <div class="p(2xl) vbox gap(lg)">
             <h3 class="font(xl/semibold)">Sheet Title</h3>
             <p class="c(gray-600)">This is a sheet component sliding from the right.</p>
             <Button variant="outline" on:click={() => sheetOpen = false}>Close</Button>
@@ -393,20 +393,20 @@
   </section>
 
   <!-- Other Components -->
-  <section class="vbox gap(24) container mx(auto) px(24)">
+  <section class="vbox gap(2xl) container mx(auto) px(2xl)">
     <h2 class="font(2xl/bold) c(gray-900)">Other Components</h2>
     
-    <div class="vbox gap(24)">
+    <div class="vbox gap(2xl)">
       <!-- Calendar -->
-      <div class="vbox gap(12)">
+      <div class="vbox gap(md)">
         <h3 class="font(xl/semibold)">Calendar</h3>
         <Calendar />
       </div>
 
       <!-- Separator -->
-      <div class="vbox gap(12)">
+      <div class="vbox gap(md)">
         <h3 class="font(xl/semibold)">Separator</h3>
-        <div class="vbox gap(16)">
+        <div class="vbox gap(lg)">
           <p>Some content above</p>
           <Separator />
           <p>Some content below</p>

@@ -44,6 +44,8 @@ export const utilityRules = {
   isolation,
   objectFit,
   objectPosition,
+  object: objectFit,
+  scroll: scrollBehavior,
   ...transitionRules,
   ...focusRules,
   ...transformRules

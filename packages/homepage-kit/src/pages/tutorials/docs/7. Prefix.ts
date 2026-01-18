@@ -24,24 +24,24 @@ https://www.youtube.com/watch?v=12YGCglbdrY&list=PLiyB-5pV363Q2_itR2K2FIr6qe3kNW
 "placeholder:": {selector: \`&::placeholder\`},
 -->
 
-<div class="vbox gap(20) bg(#fff) p(10)">
+<div class="vbox gap(xl) bg(#fff) p(10px)">
   <div>
     <h2>:hover</h2>
-    <div class="w(100) h(100) b(#000) font(12) pack pointer hover:bg(orange) hover:c(#fff) hover:font(18) transition(.5s)">Hover Me</div>
+    <div class="w(100px) h(100px) b(#000) font(12) pack pointer hover:bg(orange) hover:c(#fff) hover:font(18) transition(.5s)">Hover Me</div>
   </div>
 
   <div>
     <h2>:hover vs group-hover</h2>
-    <div class="w(400) h(200) b(#000) font(12) pack gap(10)">
-      <div class="w(100) h(100) b(#000) font(12) pack pointer hover:bg(orange) hover:c(#fff) hover:font(18) transition(.5s) pointer">hover1</div>
-      <div class="w(100) h(100) b(#000) font(12) pack pointer hover:bg(red) hover:c(#fff) hover:font(18) transition(.5s) pointer">hover2</div>
+    <div class="w(400px) h(200px) b(#000) font(12) pack gap(10px)">
+      <div class="w(100px) h(100px) b(#000) font(12) pack pointer hover:bg(orange) hover:c(#fff) hover:font(18) transition(.5s) pointer">hover1</div>
+      <div class="w(100px) h(100px) b(#000) font(12) pack pointer hover:bg(red) hover:c(#fff) hover:font(18) transition(.5s) pointer">hover2</div>
     </div>
   </div>
     
   <div>
-    <div class="group w(400) h(200) b(#000) font(12) pack gap(10) pointer">
-      <div class="w(100) h(100) b(#000) font(12) pack pointer group-hover:bg(orange) group-hover:c(#fff) group-hover:font(18) transition(.5s)">group-hover1</div>
-      <div class="w(100) h(100) b(#000) font(12) pack pointer group-hover:bg(red) group-hover:c(#fff) group-hover:font(18) transition(.5s)">group-hover2</div>
+    <div class="group w(400px) h(200px) b(#000) font(12) pack gap(10px) pointer">
+      <div class="w(100px) h(100px) b(#000) font(12) pack pointer group-hover:bg(orange) group-hover:c(#fff) group-hover:font(18) transition(.5s)">group-hover1</div>
+      <div class="w(100px) h(100px) b(#000) font(12) pack pointer group-hover:bg(red) group-hover:c(#fff) group-hover:font(18) transition(.5s)">group-hover2</div>
     </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
-import { defineComponent } from '../../defineComponent-unified';
-import type { ComponentDefinition } from '../../defineComponent-unified';
+import { defineComponent } from '../../defineComponent';
+import type { ComponentDefinition } from '../../defineComponent';
 
 // Heading component definition with VitePress-inspired styling using 02-design_tokens
 export const headingDefinition: ComponentDefinition = {

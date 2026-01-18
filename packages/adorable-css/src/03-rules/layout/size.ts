@@ -65,6 +65,14 @@ export const h: RuleHandler = (args?: string): CSSRule => {
   return { height: String(pxWithClamp(args)) };
 };
 
+// Aspect ratio utilities
+export const aspect: RuleHandler = (args?: string): CSSRule => {
+  if (!args) return {};
+  if (args === 'square') return { 'aspect-ratio': '1 / 1' };
+  if (args === 'video') return { 'aspect-ratio': '16 / 9' };
+  return { 'aspect-ratio': args };
+};
+
 // Min-width utilities
 export const minW: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
@@ -226,4 +234,5 @@ export const sizeRules = {
   'max-w': maxW,
   'min-h': minH,
   'max-h': maxH,
+  aspect,
 };

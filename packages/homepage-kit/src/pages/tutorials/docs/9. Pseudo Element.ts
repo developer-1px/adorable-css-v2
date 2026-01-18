@@ -46,7 +46,7 @@ https://developer.mozilla.org/ko/docs/Web/CSS/Pseudo-elements
 
   <div>-webkit-scrollbar-*</div>
 
-  <div class="bg(#fff) h(100) scroll-y -webkit-scrollbar::w(4) -webkit-scrollbar-thumb::bg(red)">
+  <div class="bg(#fff) h(100px) scroll-y -webkit-scrollbar::w(xs) -webkit-scrollbar-thumb::bg(red)">
     <div>first</div>
     <div>second</div>
     <div>third</div>

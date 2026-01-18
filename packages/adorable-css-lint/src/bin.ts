@@ -9,9 +9,16 @@ const { red, green, yellow, gray, bold } = picocolors;
 
 async function main() {
     const args = process.argv.slice(2);
+    const cssFlagIndex = args.indexOf('--css');
+    let showCss = false;
+
+    if (cssFlagIndex !== -1) {
+        showCss = true;
+        args.splice(cssFlagIndex, 1);
+    }
+
     const pattern = args[0] || "**/*.{ts,tsx,html,jsx}";
 
-    // Custom suggestions/deprecations
     // Custom suggestions/deprecations
     const SUGGESTIONS: Record<string, string> = {
         // "hbox(center)": "...", // Removed as per user request (it is valid)
@@ -29,6 +36,28 @@ async function main() {
         return null;
     }
 
+    // Strict Unitless Check
+    function checkUnitless(cls: string): string | null {
+        // Target spacing/sizing rules: p, m, gap, w, h, min-w, max-w, top, bottom, left, right
+        // Pattern: rule + optional direction + ( + number + )
+        // We want to catch cases like p(10) but allow p(10px) or p(md) or p(0)
+
+        // Match rule(number) or rule(number.number)
+        const match = cls.match(/^(p|m|gap|[wh]|min-[wh]|max-[wh]|top|bottom|left|right)[xytblr]?\((\d+(\.\d+)?)\)$/);
+
+        if (match) {
+            const value = parseFloat(match[2]);
+            if (value !== 0) {
+                return `❌ Unitless value forbidden. You must strictly specify a unit (e.g. ${match[1]}(${match[2]}px)) or use a token.`;
+            }
+        }
+        return null;
+    }
+
+    function getLineNumber(content: string, index: number): number {
+        return content.substring(0, index).split('\n').length;
+    }
+
     const customIssues = new Map<string, { files: string[], reason: string }>();
 
     console.log(gray(`🔍 Scanning files matching: ${pattern}...`));
@@ -44,6 +73,15 @@ async function main() {
     let totalErrors = 0;
     const unknownClasses = new Map<string, string[]>(); // class -> file[]
 
+    // For CSS Output
+    interface ClassGroup {
+        file: string;
+        line: number;
+        originalAttribute: string;
+        css: string;
+    }
+    const cssGroups: ClassGroup[] = [];
+
     for (const file of files) {
         const content = await fs.readFile(file, 'utf-8');
 
@@ -53,88 +91,101 @@ async function main() {
         // Also support template literals inside braces? e.g. className={`...`} - simple regex won't catch complex cases but good for MVP.
         const complexMatches = content.matchAll(/(?:class|className)\s*[:=]\s*\{`([^`]+)`\}/g);
 
-        const allClasses = new Set<string>();
+        const processMatch = (match: RegExpMatchArray) => {
+            const classString = match[1];
+            const index = match.index || 0;
+            const line = getLineNumber(content, index);
+            const classesInGroup = new Set<string>();
+            let groupCss = "";
 
-        for (const match of classMatches) {
-            match[1].split(/\s+/).forEach(c => allClasses.add(c));
-        }
-        for (const match of complexMatches) {
-            match[1].split(/\s+/).forEach(c => allClasses.add(c));
-        }
+            classString.split(/\s+/).forEach(c => {
+                if (c.trim()) classesInGroup.add(c);
+            });
 
-        // Special case for simple template strings usage like `bg-red-500 ${variable}` - we might capture parts.
-        // Ideally we use a real parser or a smarter regex, but for "adorable-lint" MVP, regex is standard practice for tailwind-like linters initially.
+            // Validate individual classes
+            for (const cls of classesInGroup) {
+                if (!cls.trim()) continue;
+                if (cls.includes("${")) continue; // dynamic interpolation
 
-        // Custom suggestions/deprecations (Moved to top)
-
-        for (const cls of allClasses) {
-            if (!cls.trim()) continue;
-            if (cls.includes("${")) continue;
-
-            // Check specific suggestions first
-            if (SUGGESTIONS[cls]) {
-                if (!unknownClasses.has(cls)) {
-                    unknownClasses.set(cls, []);
-                }
-                unknownClasses.get(cls)?.push(file);
-                continue;
-            }
-
-            // Check for legacy syntax (dynamic)
-            const legacyMsg = checkLegacySyntax(cls);
-            if (legacyMsg) {
-                if (!unknownClasses.has(cls)) {
-                    // Store the warning message in a map or repurpose unknownClasses to store reason?
-                    // For MVP, we'll just log it as an "invalid" class but maybe print the reason in a separate map if we refactored.
-                    // But looking at existing code: unknownClasses is Map<string, string[]>.
-                    // To support custom messages without refactoring everything, let's inject it into SUGGESTIONS dynamically?
-                    // No, SUGGESTIONS is const.
-                    // Let's just treat it as valid but warn? OR treat as invalid.
-                    // User wants it to Warn. 
-                    // Let's modify the report section to handle a new `warnings` map.
-                    // But to minimize changes, let's hack it: add to SUGGESTIONS dynamically if possible? No.
-                    // Let's just create a new map for custom issues.
-                    if (!customIssues.has(cls)) {
-                        customIssues.set(cls, { files: [], reason: legacyMsg });
-                    }
-                    customIssues.get(cls)?.files.push(file);
-                }
-                continue;
-            }
-
-            // Mute console.warn from adorable-css during check
-            const originalWarn = console.warn;
-            console.warn = () => { };
-
-            try {
-                const css = generateCSSFromAdorableCSS(cls);
-
-                if (!css) {
+                // Custom Suggestions
+                if (SUGGESTIONS[cls]) {
                     if (!unknownClasses.has(cls)) {
                         unknownClasses.set(cls, []);
                     }
                     unknownClasses.get(cls)?.push(file);
+                    continue;
                 }
-            } catch (e) {
-                // ignore crash, treat as invalid
-                if (!unknownClasses.has(cls)) {
-                    unknownClasses.set(cls, []);
+
+                // Legacy
+                const legacyMsg = checkLegacySyntax(cls);
+                if (legacyMsg) {
+                    if (!customIssues.has(cls)) {
+                        customIssues.set(cls, { files: [], reason: legacyMsg });
+                    }
+                    customIssues.get(cls)?.files.push(file);
+                    continue;
                 }
-                unknownClasses.get(cls)?.push(file);
-            } finally {
-                console.warn = originalWarn;
+
+                // Strict Unitless Check
+                const unitlessMsg = checkUnitless(cls);
+                if (unitlessMsg) {
+                    if (!customIssues.has(cls)) {
+                        customIssues.set(cls, { files: [], reason: unitlessMsg });
+                    }
+                    customIssues.get(cls)?.files.push(file);
+                    continue;
+                }
+
+                // Check Validity & Generate CSS
+                const originalWarn = console.warn;
+                console.warn = () => { };
+
+                try {
+                    const css = generateCSSFromAdorableCSS(cls);
+                    if (!css) {
+                        if (!unknownClasses.has(cls)) {
+                            unknownClasses.set(cls, []);
+                        }
+                        unknownClasses.get(cls)?.push(file);
+                    } else if (showCss) {
+                        // Append to group CSS
+                        // We generated it again here, but that's fine for now.
+                        // Or we could try to format it nicely.
+                        // For grouping, let's just append the full rule.
+                        groupCss += css + "\n";
+                    }
+                } catch (e) {
+                    if (!unknownClasses.has(cls)) {
+                        unknownClasses.set(cls, []);
+                    }
+                    unknownClasses.get(cls)?.push(file);
+                } finally {
+                    console.warn = originalWarn;
+                }
             }
-        }
+
+            if (showCss && groupCss.trim()) {
+                cssGroups.push({
+                    file,
+                    line,
+                    originalAttribute: classString,
+                    css: groupCss.trim()
+                });
+            }
+        };
+
+        for (const match of classMatches) processMatch(match);
+        for (const match of complexMatches) processMatch(match);
     }
 
-    // Report
+    // Report Logic
     if (unknownClasses.size === 0 && customIssues.size === 0) {
-        console.log(green("\n✨ All AdorableCSS classes are valid!"));
+        if (!showCss) console.log(green("\n✨ All AdorableCSS classes are valid!"));
     } else {
         const totalIssues = unknownClasses.size + customIssues.size;
         console.log(red(`\n❌ Found ${totalIssues} issues:\n`));
 
-        // Report Unknown/Invalid
+        // Report Unknown
         for (const [cls, fileList] of unknownClasses.entries()) {
             if (SUGGESTIONS[cls]) {
                 console.log(`${yellow("⚠")} ${bold(cls)}`);
@@ -145,13 +196,34 @@ async function main() {
             printFiles(fileList);
         }
 
-        // Report Custom Issues (Legacy etc)
+        // Report Custom
         for (const [cls, issue] of customIssues.entries()) {
             console.log(`${yellow("⚠")} ${bold(cls)}`);
             console.log(yellow(`  -> ${issue.reason}`));
             printFiles(issue.files);
         }
 
+        if (!showCss) process.exit(1);
+    }
+
+    if (showCss) {
+        console.log(green(`\n🎨 Generated CSS Groups:\n`));
+
+        // Sort by file and line
+        cssGroups.sort((a, b) => {
+            if (a.file === b.file) return a.line - b.line;
+            return a.file.localeCompare(b.file);
+        });
+
+        for (const group of cssGroups) {
+            const rel = group.file.replace(process.cwd() + '/', '');
+            console.log(gray(`/* ${rel}:${group.line} */`));
+            console.log(gray(`/* class="${group.originalAttribute}" */`));
+            console.log(`${group.css}\n`);
+        }
+    }
+
+    if ((unknownClasses.size > 0 || customIssues.size > 0) && !showCss) {
         process.exit(1);
     }
 }

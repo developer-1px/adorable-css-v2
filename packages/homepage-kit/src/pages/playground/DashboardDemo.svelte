@@ -69,7 +69,7 @@
 
 <div class="dashboard vbox w(fill) min-h(screen) bg(#fafbfc)">
   <!-- Modern Header -->
-  <header class="header hbox(between+center) h(64) px(2xl) bg(white.8) backdrop(blur/12) border-bottom(1/#f0f0f2) sticky top(0) z(50)">
+  <header class="header hbox(between+center) h(6xl) px(2xl) bg(white.8) backdrop(blur/12) border-bottom(1/#f0f0f2) sticky top(0) z(50)">
     <div class="hbox(pack) gap(2xl)">
       <!-- Logo -->
       <div class="logo hbox(pack) gap(xs)">
@@ -87,7 +87,7 @@
       <nav class="nav hbox gap(xs)">
         <a href="#" class="nav-item px(md) py(sm) r(sm) c(#0a0a0a) font(sm) medium hover:bg(#f5f5f5) transition relative group">
           Dashboard
-          <span class="nav-indicator absolute bottom(0) left(md) right(md) h(2) bg(#0a0a0a) r(none) scale-x(1)"></span>
+          <span class="nav-indicator absolute bottom(0) left(md) right(md) h(2px) bg(#0a0a0a) r(none) scale-x(1)"></span>
         </a>
         <a href="#" class="nav-item px(md) py(sm) r(sm) c(#737373) font(sm) hover:c(#0a0a0a) hover:bg(#f5f5f5) transition">Analytics</a>
         <a href="#" class="nav-item px(md) py(sm) r(sm) c(#737373) font(sm) hover:c(#0a0a0a) hover:bg(#f5f5f5) transition">Products</a>
@@ -101,9 +101,9 @@
         <input 
           type="search"
           placeholder="Search anything..."
-          class="search-input w(280) h(40) pl(40) pr(md) r(2xl) bg(#f5f5f5) border(1/transparent) font(sm) c(#0a0a0a) placeholder:c(#a3a3a3) focus:bg(white) focus:border(1/#e5e5e5) focus:shadow(0/0/0/4px/#00000008) transition"
+          class="search-input w(280px) h(4xl) pl(4xl) pr(md) r(2xl) bg(#f5f5f5) border(1/transparent) font(sm) c(#0a0a0a) placeholder:c(#a3a3a3) focus:bg(white) focus:border(1/#e5e5e5) focus:shadow(0/0/0/4px/#00000008) transition"
         />
-        <span class="search-icon absolute left(14) y(center) c(#737373) font(md)">🔍</span>
+        <span class="search-icon absolute left(14px) y(center) c(#737373) font(md)">🔍</span>
       </div>
       
       <!-- Actions -->
@@ -111,7 +111,7 @@
         <span class="font(md)">🔔</span>
       </Button>
       
-      <div class="divider w(1) h(24) bg(#e5e5e5)"></div>
+      <div class="divider w(1px) h(2xl) bg(#e5e5e5)"></div>
       
       <!-- User -->
       <button class="user-menu hbox(pack) gap(xs) px(xs) py(xs) r(2xl) hover:bg(#f5f5f5) transition">
@@ -178,11 +178,11 @@
           </div>
           
           <!-- Chart Area -->
-          <div class="chart-area relative h(320) bg(#fafbfc) r(xl) p(xl)">
+          <div class="chart-area relative h(320px) bg(#fafbfc) r(xl) p(xl)">
             <div class="chart-grid layer(top:xl/right:xl/bottom:xl/left:xl)">
               <!-- Grid lines -->
               {#each [0, 1, 2, 3, 4] as i}
-                <div class="grid-line absolute w(fill) h(1) bg(#e5e5e5.5)" style="bottom: {i * 25}%"></div>
+                <div class="grid-line absolute w(fill) h(1px) bg(#e5e5e5.5)" style="bottom: {i * 25}%"></div>
               {/each}
               
               <!-- Bars -->
@@ -203,7 +203,7 @@
             </div>
             
             <!-- Y-axis labels -->
-            <div class="y-axis absolute left(0) top(24) bottom(24) w(20) vbox(between) text(right)">
+            <div class="y-axis absolute left(0) top(2xl) bottom(2xl) w(xl) vbox(between) text(right)">
               {#each ['$10k', '$8k', '$6k', '$4k', '$2k', '$0'] as label}
                 <span class="font(xs) c(#a3a3a3)">{label}</span>
               {/each}
@@ -254,7 +254,7 @@
           
           <div class="hbox gap(xs)">
             <div class="filter-wrapper relative">
-              <select class="filter-select h(36) pl(xs) pr(2xl) r(sm) bg(white) border(1/#e5e5e5) font(sm) c(#0a0a0a) appearance(none) cursor(pointer)">
+              <select class="filter-select h(36px) pl(xs) pr(2xl) r(sm) bg(white) border(1/#e5e5e5) font(sm) c(#0a0a0a) appearance(none) cursor(pointer)">
                 <option>All Status</option>
                 <option>Completed</option>
                 <option>Pending</option>

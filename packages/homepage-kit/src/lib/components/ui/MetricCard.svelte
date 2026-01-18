@@ -56,7 +56,7 @@
   </div>
   
   <!-- Enhanced sparkline with better animation -->
-  <div class="sparkline mt(auto) h(32) relative clip group-hover:h(48) transition-all duration(normal)">
+  <div class="sparkline mt(auto) h(3xl) relative clip group-hover:h(48px) transition-all duration(normal)">
     <svg viewBox="0 0 200 32" class="w(fill) h(fill)">
       <!-- Gradient area under the line -->
       <defs>

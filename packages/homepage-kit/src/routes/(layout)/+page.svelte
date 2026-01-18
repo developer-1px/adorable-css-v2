@@ -25,11 +25,11 @@
 
         <h1 class="text(64px) sm:text(80px) lg:text(96px) font(black) tracking(tighter) leading(0.95) c(gray-900)">
           Styling for the<br/>
-          <span class="bg(clip-text) c(transparent) bg(linear-to-r/indigo-600..fuchsia-500..violet-600) animate(gradient-x)">Intelligence Age</span>
+          <span class="bg(clip-text) c(transparent) bg(linear-to-r/indigo-600..fuchsia-500..violet-600) animate(gradient-x)">Adorable Web</span>
         </h1>
         
         <p class="text(20px) sm:text(24px) c(gray-500) leading(1.5) max-w(720px) font(medium)">
-          The first design engine built for LLMs and Humans.
+          The most intuitive design engine built for Humans.
           <br class="hidden sm:block" />
           Stop writing styles—declare your <span class="c(gray-900) font(bold)">intent</span>.
         </p>
@@ -126,13 +126,13 @@
            
            <!-- The actual rendered output -->
            <div class="relative w(full) max-w(380px)">
-              <div class="bg(white) p(6) r(24px) shadow(2xl) shadow(indigo-500/10) border(1/white) vbox gap(6)">
+              <div class="bg(white) p(6px) r(24px) shadow(2xl) shadow(indigo-500/10) border(1/white) vbox gap(6px)">
                  <!-- User Header -->
-                 <div class="hbox(middle) gap(4)">
+                 <div class="hbox(middle) gap(xs)">
                     <div class="size(12) r(full) bg(linear-to-tr/indigo-400..violet-500)"></div>
                     <div class="vbox">
-                       <div class="w(24) h(4) bg(gray-900) r(full) mb(1.5)"></div>
-                       <div class="w(16) h(3) bg(gray-200) r(full)"></div>
+                       <div class="w(2xl) h(xs) bg(gray-900) r(full) mb(1.5px)"></div>
+                       <div class="w(lg) h(3px) bg(gray-200) r(full)"></div>
                     </div>
                     <div class="spacer"></div>
                     <div class="size(8) r(full) bg(gray-50) hover:bg(gray-100) icon-center c(gray-400)">
@@ -147,22 +147,22 @@
                  </div>
 
                  <!-- Action Bar -->
-                 <div class="hbox(between) pt(2)">
-                    <div class="hbox gap(2)">
-                       <div class="h(8) w(20) bg(gray-100) r(full)"></div>
-                       <div class="h(8) w(12) bg(gray-100) r(full)"></div>
+                 <div class="hbox(between) pt(2px)">
+                    <div class="hbox gap(2px)">
+                       <div class="h(sm) w(xl) bg(gray-100) r(full)"></div>
+                       <div class="h(sm) w(md) bg(gray-100) r(full)"></div>
                     </div>
-                    <button class="bg(gray-900) hover:bg(indigo-600) c(white) px(5) py(2) r(full) text(xs) font(bold) transition hover:shadow(lg) hover:shadow(indigo-500/30) hover:-translate-y(0.5)">
+                    <button class="bg(gray-900) hover:bg(indigo-600) c(white) px(5px) py(2px) r(full) text(xs) font(bold) transition hover:shadow(lg) hover:shadow(indigo-500/30) hover:-translate-y(0.5)">
                        Generate
                     </button>
                  </div>
               </div>
 
               <!-- Floating Tooltips/Indicators representing generic design tokens -->
-              <div class="absolute -right(12) top(20) bg(gray-900) c(white) px(3) py(1) r(md) text(xs) font(mono) shadow(lg) animate(bounce-slow)">
-                 p(6)
+              <div class="absolute -right(md) top(xl) bg(gray-900) c(white) px(3px) py(1px) r(md) text(xs) font(mono) shadow(lg) animate(bounce-slow)">
+                 p(6px)
               </div>
-              <div class="absolute -left(4) bottom(32) bg(indigo-600) c(white) px(3) py(1) r(md) text(xs) font(mono) shadow(lg) animate(bounce-slow) animation-delay(1s)">
+              <div class="absolute -left(xs) bottom(3xl) bg(indigo-600) c(white) px(3px) py(1px) r(md) text(xs) font(mono) shadow(lg) animate(bounce-slow) animation-delay(1s)">
                  shadow(2xl)
               </div>
            </div>
@@ -181,8 +181,8 @@
         Why we built this.
       </h2>
       <p class="text(xl) c(gray-500)">
-        We reimagined CSS to be cleaner for humans and unambiguous for machines. 
-        It's not just a utility library; it's a language.
+        We reimagined CSS to be cleaner, simpler, and more lovable. 
+        It's not just a utility library; it's a language for humans.
       </p>
     </div>
 
@@ -194,9 +194,9 @@
            <div class="s(64) r(20px) bg(indigo-50) c(indigo-600) hbox(center) mb(32px)">
              <Wand2 size="32" strokeWidth={2.5} />
            </div>
-           <h3 class="text(28px) font(bold) c(gray-900) mb(sm)">Hallucination-Free AI</h3>
+           <h3 class="text(28px) font(bold) c(gray-900) mb(sm)">Human-Friendly Syntax</h3>
            <p class="text(18px) c(gray-500) leading(1.6)">
-             LLMs struggle with names like <code class="text(sm) bg(gray-100) px(1) r(sm)">flex-row-reverse</code>. AdorableCSS uses semantic, predictable tokens like <code class="text(sm) bg(indigo-50) c(indigo-700) px(1) r(sm)">hbox(reverse)</code> that AI guesses right 99% of the time.
+             Stop guessing class names like <code class="text(sm) bg(gray-100) px(1px) r(sm)">justify-between</code>. AdorableCSS uses semantic, predictable tokens like <code class="text(sm) bg(indigo-50) c(indigo-700) px(1px) r(sm)">hbox(between)</code> that you can read and write naturally.
            </p>
          </div>
          <!-- Decorative -->
@@ -279,7 +279,7 @@
     </p>
 
     <div class="hbox(center) gap(md) mt(lg) wrap">
-      <a href="/docs/getting-started" class="bg(indigo-600) hover:bg(indigo-700) c(white) px(48px) py(20px) r(full) text(xl) font(bold) shadow(xl) shadow(indigo-500/30) hover:scale(1.05) transition text(none) hbox(center) gap(3)">
+      <a href="/docs/getting-started" class="bg(indigo-600) hover:bg(indigo-700) c(white) px(48px) py(20px) r(full) text(xl) font(bold) shadow(xl) shadow(indigo-500/30) hover:scale(1.05) transition text(none) hbox(center) gap(3px)">
         Get Started Now
       </a>
     </div>
@@ -295,7 +295,7 @@
         <span class="font(bold) text(lg)">AdorableCSS</span>
       </div>
       <p class="text(sm) c(gray-500) leading(1.6)">
-        The design engine for the AI era. Open source.
+        The most adorable design engine. Open source.
       </p>
       <div class="text(sm) c(gray-400)">
         &copy; 2026 AdorableCSS

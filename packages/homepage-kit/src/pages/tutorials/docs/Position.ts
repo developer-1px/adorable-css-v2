@@ -40,7 +40,7 @@ z(value) => z-index: value;
 : absolute(10~20,30~40) => position:absolute; left:10px; right:20px; top:30px; bottom:40px;
 -->
 
-<div class="relative w(400) h(300) b(#ff6347)">
+<div class="relative w(400px) h(300px) b(#ff6347)">
   <div class="(center,center) bg(yellow)">(center,center)</div>
 
   <div class="absolute bg(yellow)">absolute</div>

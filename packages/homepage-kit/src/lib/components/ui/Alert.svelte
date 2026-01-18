@@ -7,7 +7,7 @@
     warning: 'bg(warning-50) b(warning-200) c(warning-900)'
   }
   
-  $: classes = `p(16) r(lg) ${variantClasses[variant]}`
+  $: classes = `p(lg) r(lg) ${variantClasses[variant]}`
 </script>
 
 <div class={classes}>

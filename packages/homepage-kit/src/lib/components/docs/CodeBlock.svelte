@@ -36,9 +36,9 @@
   {#if showCopy}
     <button
       on:click={copyToClipboard}
-      class="absolute top(16) right(16) px(12) py(8) r(8) bg(white.1) hover:bg(white.2) 
+      class="absolute top(lg) right(lg) px(md) py(sm) r(8) bg(white.1) hover:bg(white.2) 
              transition-all opacity(0) group-hover:opacity(100) backdrop(blur/10)
-             hbox(middle) gap(6) caption(xs) c(white.8) hover:c(white)"
+             hbox(middle) gap(6px) caption(xs) c(white.8) hover:c(white)"
       title="Copy code"
     >
       {#if copied}

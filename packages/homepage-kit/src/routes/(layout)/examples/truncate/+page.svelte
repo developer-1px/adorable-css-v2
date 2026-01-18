@@ -116,7 +116,7 @@
                   In this comprehensive guide, we'll explore the essential patterns and practices for building scalable web applications. From architecture decisions to performance optimization, we'll cover everything you need to know to create robust, maintainable applications that can grow with your business needs.
                 </p>
                 <div class="hbox(middle) gap(md)">
-                  <div class="w(32) h(32) r(full) bg(mute-200)"></div>
+                  <div class="w(3xl) h(3xl) r(full) bg(mute-200)"></div>
                   <div class="vbox gap(xs)">
                     <p class="label(sm) c(mute-800) truncate">
                       Dr. Sarah Johnson, Senior Software Engineer
@@ -134,7 +134,7 @@
                 <div class="vbox gap(lg)">
                   {#each [1, 2, 3] as i}
                     <div class="hbox gap(lg) pb(lg) border-b(1/mute-100)">
-                      <div class="w(40) h(40) r(full) bg(primary.1) flex-shrink(0)"></div>
+                      <div class="w(4xl) h(4xl) r(full) bg(primary.1) flex-shrink(0)"></div>
                       <div class="vbox gap(xs) flex(1) min-w(0)">
                         <div class="hbox(middle) gap(sm)">
                           <p class="label(sm) c(mute-900) truncate">

@@ -22,11 +22,11 @@ text(right+bottom): text-align:left;display:flex;flex-flow:column;justify-conten
 text(pack): {text-align:left;display:flex;flex-flow:column;justify-content:center;
 -->
 
-<div class="vbox gap(20)">
-  <div class="w(200) h(150) b(#000) text(left)">This is <br/>text(left)</div>
-  <div class="w(200) h(150) b(#000) text(middle+right)">This is <br/>text(middle+right)</div>
-  <div class="w(200) h(150) b(#000) text(center+bottom)">This is<br/> text(center+bottom)</div>
-  <div class="w(200) h(150) b(#000) text(pack)">This is<br/> text(pack)</div>
+<div class="vbox gap(xl)">
+  <div class="w(200px) h(150px) b(#000) text(left)">This is <br/>text(left)</div>
+  <div class="w(200px) h(150px) b(#000) text(middle+right)">This is <br/>text(middle+right)</div>
+  <div class="w(200px) h(150px) b(#000) text(center+bottom)">This is<br/> text(center+bottom)</div>
+  <div class="w(200px) h(150px) b(#000) text(pack)">This is<br/> text(pack)</div>
 </div>
 
 `.trim()

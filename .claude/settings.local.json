@@ -124,7 +124,8 @@
       "Bash(basename:*)",
       "Bash(fi)",
       "Bash(awk:*)",
-      "Bash(pnpm --filter adorable-css typecheck:*)"
+      "Bash(pnpm --filter adorable-css typecheck:*)",
+      "Bash(pnpm:*)"
     ],
     "deny": []
   }

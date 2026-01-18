@@ -8,8 +8,8 @@
 ## 배경
 
 TailwindCSS가 나왔을 때 유틸리티 CSS의 생산성은 좋았지만, 문법의 가독성이 떨어진다고 생각했습니다.
-AI 시대가 오면서 TailwindCSS가 사실상 표준이 되어 이 프로젝트의 의미는 퇴색되었지만,
-그래도 CSS 속성을 더 쉽게 이해하는 데 도움이 되었으면 합니다.
+우리는 개발자가 코드를 읽을 때 더 직관적이고 아름다운 경험을 하기를 바랍니다.
+이 프로젝트가 CSS 속성을 더 쉽고 즐겁게 이해하는 영감이 되었으면 합니다.
 
 ## 주요 특징
 
@@ -56,25 +56,23 @@ import 'adorable-css'
 
 ```html
 <!-- 레이아웃 -->
-<div class="vbox gap(16)">
-  <div>Item 1</div>
-  <div>Item 2</div>
+<!-- Figma Card Component -->
+<div class="vbox(fill) w(fill) p(24) r(12) bg(#fff) shadow(md) gap(16)">
+  <img class="w(fill) h(200) r(8) cover" src="...">
+  <div class="vbox gap(8)">
+    <h3 class="font(Inter/20/28/-1%/600) c(#000)">Card Title</h3>
+    <p class="font(14/20) c(#666) clamp(2)">Description text...</p>
+  </div>
+  <button class="hbox(center) w(fill) h(48) r(8) bg(blue) c(#fff) hover:bg(darkblue) active:scale(.98)">
+    Click me
+  </button>
 </div>
 
-<!-- 카드 -->
-<div class="vbox p(24) r(12) bg(white) shadow(md)">
-  <h3 class="font(lg) 600">Title</h3>
-  <p class="c(gray-600)">Description</p>
-</div>
-
-<!-- 버튼 -->
-<button class="
-  px(lg) py(sm)
-  bg(blue) c(white) r(md)
-  hover:bg(blue-600)
-">
-  Click me
-</button>
+<!-- Figma Auto Layout Examples -->
+<nav class="hbox() gap(auto) w(fill) h(64) px(32) bg(#fff) shadow(sm)">
+  <div class="hbox gap(32)">...</div>
+  <div class="hbox gap(16)">...</div>
+</nav>
 ```
 
 ## Tailwind와의 차이

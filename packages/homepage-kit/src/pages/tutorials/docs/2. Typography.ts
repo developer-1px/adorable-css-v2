@@ -62,7 +62,7 @@ capitalize {text-transform:capitalize}
 -->
 
 
-<div class="bg(#fff) p(20) >h1:font(20)+bb(#ccc)+m(40/0/20)" style="--css-var: green">
+<div class="bg(#fff) p(xl) >h1:font(20)+bb(#ccc)+m(40/0/20)" style="--css-var: green">
 
   <h1>Font</h1>
   
@@ -72,7 +72,7 @@ capitalize {text-transform:capitalize}
 
   <h1>line-height</h1>
 
-  <div class="hbox gap(10)">
+  <div class="hbox gap(10px)">
     <div class="font(20/1.5)">font<br/>(20/1.5)</div>
     <div class="font(20/2)">font<br/>(20/2)</div>
     <div class="font(20/3)">font<br/>(20/3)</div>

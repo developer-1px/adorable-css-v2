@@ -11,7 +11,7 @@ Tip:
 ex)
 -->
 
-<div class="bg(#fff) dark:bg(#222) p(20)">
+<div class="bg(#fff) dark:bg(#222) p(xl)">
   <div class="c(#555) dark:c(#fff) bold font(20)">제목입니다.</div>
   <p class="c(#888) dark:c(#ccc) font(14)">라이크모트와 다크모드를 토글해보세요!</p>
 </div>

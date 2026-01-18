@@ -123,7 +123,7 @@
           UI Elements
         </h4>
         <div class="vbox gap(md)">
-          <button class="px(lg) py(md) bg(orange-500) c(white) r(sm) hover:r(md) transition-all duration-300">
+          <button class="px(lg) py(md) bg(orange-500) c(white) r(sm) hover:r(md) transition-all duration(300ms)">
             Button r(sm)
           </button>
           <div class="px(md) py(sm) bg(orange-50) border(1px/orange-200) r(md)">

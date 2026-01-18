@@ -2,28 +2,10 @@
 
 > 5분 안에 첫 번째 컴포넌트 만들기
 
-## 1. 설치 (30초)
+## 1. 사용해보기
 
-```bash
-# npm
-npm install adorable-css
-
-# pnpm
-pnpm add adorable-css
-
-# yarn
-yarn add adorable-css
-```
-
-## 2. 프로젝트에 추가 (30초)
-
-```javascript
-// main.js 또는 index.js
-import 'adorable-css'
-
-// 또는 HTML에서
-<link rel="stylesheet" href="https://unpkg.com/adorable-css/dist/adorable.css">
-```
+아래 예제들은 AdorableCSS의 직관적인 문법을 보여줍니다.
+(참고: 현재 이 프로젝트는 아카이브 상태이며, 신규 프로젝트 설치는 권장하지 않습니다.)
 
 ## 3. 첫 번째 버튼 만들기 (1분)
 

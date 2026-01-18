@@ -20,7 +20,7 @@ const navItems = [
   <!-- Glass Background -->
   <div class="absolute inset(0) bg(white/80) backdrop-blur(20px) border-b(1/gray-200/50)"></div>
 
-  <div class="relative hbox(between) h(72) px(xl) max-w(1440px) mx(auto)">
+  <div class="relative hbox(between) h(72px) px(xl) max-w(1440px) mx(auto)">
     <!-- Logo & Brand -->
     <a href="/" class="hbox(middle) gap(sm) text(none) group">
       <div class="relative transition-transform duration(300) group-hover:scale(1.1) group-hover:rotate(-5deg)">
@@ -60,7 +60,7 @@ const navItems = [
 
         <a 
           href="/docs/getting-started" 
-          class="h(40) px(xl) hbox(center) r(full) bg(gray-900) c(white) text(sm) font(bold) hover:bg(black) hover:scale(1.05) transition shadow(lg) shadow(indigo-500/20) text(none)"
+          class="h(4xl) px(xl) hbox(center) r(full) bg(gray-900) c(white) text(sm) font(bold) hover:bg(black) hover:scale(1.05) transition shadow(lg) shadow(indigo-500/20) text(none)"
         >
           Get Started
         </a>

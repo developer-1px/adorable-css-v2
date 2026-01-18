@@ -1,6 +1,6 @@
 <script lang="ts">
 </script>
 
-<th class="px(24) py(12) font(sm/semibold) text(left) c(gray-700)">
+<th class="px(2xl) py(md) font(sm/semibold) text(left) c(gray-700)">
   <slot />
 </th>

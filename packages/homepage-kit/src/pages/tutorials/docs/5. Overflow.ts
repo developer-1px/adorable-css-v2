@@ -31,47 +31,47 @@ line-clamp(value) {display:-webkit-box;-webkit-line-clamp:<value>;-webkit-box-or
 
 <h1>Overflow</h1>
 
-<div class="vbox gap(20)">
+<div class="vbox gap(xl)">
   
   <h2>default (=overflow:visible)</h2>
-  <div class="w(200) h(100) bg(#eee) b(red)">You can use the overflow property when you want to have better control of the layout. The overflow property specifies what happens if content overflows an element's box.
+  <div class="w(200px) h(100px) bg(#eee) b(red)">You can use the overflow property when you want to have better control of the layout. The overflow property specifies what happens if content overflows an element's box.
   </div>
 
-  <div class="h(50)"></div>
+  <div class="h(50px)"></div>
 
   <h2>clip (=overflow:hidden)</h2>
-  <div class="w(200) h(50) bg(#eee) b(red) clip">You can use the overflow property when you want to have better control of the layout. The overflow property specifies what happens if content overflows an element's box.
+  <div class="w(200px) h(50px) bg(#eee) b(red) clip">You can use the overflow property when you want to have better control of the layout. The overflow property specifies what happens if content overflows an element's box.
   </div>
 
   <h2>scroll</h2>
-  <div class="w(200) h(50) bg(#eee) b(red) scroll">You can use the overflow property when you want to have better control of the layout. The overflow property specifies what happens if content overflows an element's box.
+  <div class="w(200px) h(50px) bg(#eee) b(red) scroll">You can use the overflow property when you want to have better control of the layout. The overflow property specifies what happens if content overflows an element's box.
   </div>
 </div>
 
 
-<h1 class="mt(50)">Overflow with Text</h1>
+<h1 class="mt(50px)">Overflow with Text</h1>
 
-<div class="vbox gap(20)">
+<div class="vbox gap(xl)">
 
   <h2>nowrap</h2>
   <div class="bg(#eee) b(red) nowrap">You can use the overflow property when you want to have better control of the layout. The overflow property specifies what happens if content overflows an element's box.
   </div>
 
   <h2>nowrap clip</h2>
-  <div class="w(200) bg(#eee) b(red) nowrap clip">You can use the overflow property when you want to have better control of the layout. The overflow property specifies what happens if content overflows an element's box.
+  <div class="w(200px) bg(#eee) b(red) nowrap clip">You can use the overflow property when you want to have better control of the layout. The overflow property specifies what happens if content overflows an element's box.
   </div>
 
   <h2>nowrap...</h2>
-  <div class="w(200) bg(#eee) b(red) nowrap...">You can use the overflow property when you want to have better control of the layout. The overflow property specifies what happens if content overflows an element's box.
+  <div class="w(200px) bg(#eee) b(red) nowrap...">You can use the overflow property when you want to have better control of the layout. The overflow property specifies what happens if content overflows an element's box.
   </div>
 
   <h2>line-clamp(2)</h2>
-  <div class="w(200) bg(#eee) b(red)">
+  <div class="w(200px) bg(#eee) b(red)">
     <div class="line-clamp(2)">You can use the overflow property when you want to have better control of the layout. The overflow property specifies what happens if content overflows an element's box.</div>
   </div>
 
   <h2>max-lines(3)</h2>
-  <div class="w(200) bg(#eee) b(red)">
+  <div class="w(200px) bg(#eee) b(red)">
     <div class="max-lines(3)">You can use the overflow property when you want to have better control of the layout. The overflow property specifies what happens if content overflows an element's box.</div>
   </div>
 </div>

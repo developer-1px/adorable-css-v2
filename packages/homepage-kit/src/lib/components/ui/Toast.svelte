@@ -2,7 +2,7 @@
   export let variant: 'default' | 'success' | 'error' | 'warning' = 'default'
 </script>
 
-<div class="hbox(middle) gap(12) min-w(320) p(16) r(lg) shadow(lg) bg(white) b(gray-200) animate(slideIn)">
+<div class="hbox(middle) gap(md) min-w(320px) p(lg) r(lg) shadow(lg) bg(white) b(gray-200) animate(slideIn)">
   {#if variant === 'success'}
     <div class="size(20) r(full) bg(green) hbox(pack)">
       <svg class="size(12)" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3">
@@ -21,7 +21,7 @@
       <span class="c(white) font(sm/bold)">!</span>
     </div>
   {/if}
-  <div class="vbox gap(4) flex-1">
+  <div class="vbox gap(xs) flex-1">
     <slot />
   </div>
 </div>

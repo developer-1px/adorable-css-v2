@@ -137,12 +137,32 @@ export const caretC: RuleHandler = (args?: string): CSSRule => {
 
 // Export all typography utilities
 // White space handler
+
+// Text Align handler
+export const align: RuleHandler = (args?: string): CSSRule => {
+  const allowed = ['left', 'center', 'right', 'justify', 'start', 'end'];
+  if (args && allowed.includes(args)) {
+    return { 'text-align': args };
+  }
+  return {};
+};
+
+// Text Case/Transform handler
+export const textCase: RuleHandler = (args?: string): CSSRule => {
+  const allowed = ['uppercase', 'lowercase', 'capitalize', 'none'];
+  if (args && allowed.includes(args)) {
+    return { 'text-transform': args };
+  }
+  return {};
+};
+
+// Export all typography utilities
 export const whiteSpace: RuleHandler = (args?: string): CSSRule => {
   const allowed = ['normal', 'nowrap', 'pre', 'pre-line', 'pre-wrap', 'break-spaces'];
   if (args && allowed.includes(args)) {
     return { 'white-space': args };
   }
-  return { 'white-space': 'nowrap' }; // Default to nowrap if used as utility e.g. white-space() or just nowrap (if mapped)
+  return { 'white-space': 'nowrap' };
 };
 
 // Export all typography utilities
@@ -171,6 +191,8 @@ export const typographyUtilityRules = {
   'line-clamp': truncate, // Alias
   'max-lines': truncate,   // Alias
   'white-space': whiteSpace,
+  align, // New
+  case: textCase, // New
   nowrap: () => ({ 'white-space': 'nowrap' }),
   'vertical-align': (v?: string) => v ? { 'vertical-align': v } : {},
   'vertical': (v?: string) => v ? { 'vertical-align': v } : {},

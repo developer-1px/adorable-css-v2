@@ -135,10 +135,10 @@
   <!-- Mobile Navigation Drawer -->
   {#if showMobileNav}
     <div class="fixed inset(0) z(100) bg(black/20) backdrop-blur(sm)" on:click={() => showMobileNav = false}>
-      <div class="absolute right(0) top(0) h(full) w(320) bg(white) shadow(2xl) p(2xl) scroll(y) border-l(1/gray-100)" on:click|stopPropagation>
+      <div class="absolute right(0) top(0) h(full) w(320px) bg(white) shadow(2xl) p(2xl) scroll(y) border-l(1/gray-100)" on:click|stopPropagation>
          <div class="hbox(between) mb(2xl)">
            <h2 class="font(bold) text(xl) c(gray-900)">Documentation</h2>
-           <button on:click={() => showMobileNav = false} class="p(2) hover:bg(gray-100) r(md) c(gray-500)">
+           <button on:click={() => showMobileNav = false} class="p(2px) hover:bg(gray-100) r(md) c(gray-500)">
              <X size="20" />
            </button>
          </div>
@@ -151,7 +151,7 @@
                  <li>
                    <a 
                      href={item.href} 
-                     class="block py(2) px(sm) -mx(sm) r(md) text(sm) transition-colors
+                     class="block py(2px) px(sm) -mx(sm) r(md) text(sm) transition-colors
                            {$page.url.pathname === item.href 
                              ? 'bg(indigo-50) c(indigo-700) font(semibold)' 
                              : 'c(gray-600) hover:bg(gray-50) hover:c(gray-900)'}" 
@@ -171,10 +171,10 @@
   <!-- Mobile TOC Drawer -->
   {#if showMobileToc}
     <div class="fixed inset(0) z(100) bg(black/20) backdrop-blur(sm)" on:click={() => showMobileToc = false}>
-      <div class="absolute right(0) top(0) h(full) w(320) bg(white) shadow(2xl) p(2xl) scroll(y) border-l(1/gray-100)" on:click|stopPropagation>
+      <div class="absolute right(0) top(0) h(full) w(320px) bg(white) shadow(2xl) p(2xl) scroll(y) border-l(1/gray-100)" on:click|stopPropagation>
          <div class="hbox(between) mb(2xl)">
            <h2 class="font(bold) text(xl) c(gray-900)">On this page</h2>
-           <button on:click={() => showMobileToc = false} class="p(2) hover:bg(gray-100) r(md) c(gray-500)">
+           <button on:click={() => showMobileToc = false} class="p(2px) hover:bg(gray-100) r(md) c(gray-500)">
              <X size="20" />
            </button>
          </div>
@@ -199,10 +199,10 @@
     </div>
   {/if}
 
-  <div class="max-w(1440) mx(auto) hbox(top)">
+  <div class="max-w(1440px) mx(auto) hbox(top)">
     
     <!-- Left Sidebar (Desktop) -->
-    <nav class="hidden lg:block sticky top(88) w(280) h(calc(100vh-88px)) scroll(y) py(3xl) pl(xl) pr(lg)">
+    <nav class="hidden lg:block sticky top(88px) w(280px) h(calc(100vh-88px)) scroll(y) py(3xl) pl(xl) pr(lg)">
       <div class="vbox gap(2xl)">
         {#each docsConfig as section}
           <div>
@@ -222,7 +222,7 @@
                     <div class="hbox(between)">
                       <span>{item.title}</span>
                       {#if item.badge}
-                        <span class="text(9px) px(1.5) py(0.5) r(full) font(bold) uppercase {getBadgeColor(item.badge)}">
+                        <span class="text(9px) px(1.5px) py(0.5px) r(full) font(bold) uppercase {getBadgeColor(item.badge)}">
                           {item.badge}
                         </span>
                       {/if}
@@ -284,7 +284,7 @@
     </main>
     
     <!-- Right Sidebar (TOC) -->
-    <aside class="hidden xl:block sticky top(88) w(240) h(calc(100vh-88px)) py(5xl) pr(xl) overflow-y-auto">
+    <aside class="hidden xl:block sticky top(88px) w(240px) h(calc(100vh-88px)) py(5xl) pr(xl) overflow-y-auto">
       {#if mounted && tocItems.length > 0}
         <div class="vbox gap(lg)">
            <h4 class="text(xs) font(bold) uppercase c(gray-900) tracking(widest) pl(lg)">On this page</h4>

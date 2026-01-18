@@ -37,7 +37,7 @@
           <div class="size(32) bg(indigo-600) r(lg)"></div>
           <h3 class="text(xl/-/tight) bold c(gray-900)">AdorableCSS</h3>
         </div>
-        <p class="text(md/relaxed) c(gray-500) max-w(300)">
+        <p class="text(md/relaxed) c(gray-500) max-w(300px)">
           Beautifully designed components built with Figma and AdorableCSS. Copy and paste into your apps.
         </p>
       </div>

@@ -45,7 +45,7 @@
           <div class="group relative flex(1) min-w(0)">
             <!-- Shadow card -->
             <div class="bg(white) h(9xl) w(full) shadow({key}) 
-                        hover:shadow(2xl) transition-all duration-300 
+                        hover:shadow(2xl) transition-all duration(300ms) 
                         hover:translate-y(-8px) hover:z(10) cursor-pointer
                         border-y(1px/gray-100) 
                         {index === 0 ? 'border-l(1px/gray-100) r(l-lg)' : ''}
@@ -80,7 +80,7 @@
         {#each shadows as { key }, index}
           <div class="flex(1) hbox(pack) relative group">
             <div 
-              class="w(full) bg(to-t/indigo-500..indigo-300) transition-all duration-300
+              class="w(full) bg(to-t/indigo-500..indigo-300) transition-all duration(300ms)
                      group-hover:bg(to-t/indigo-600..indigo-400)"
               style="height: {index * 15}%; max-height: 100%"
             >
@@ -101,7 +101,7 @@
     <div class="grid(3) gap(2xl) max-w(4xl) mx(auto)">
       <div class="group cursor-pointer">
         <div class="bg(white) r(xl) p(xl) shadow(sm) 
-                    group-hover:shadow(xl) transition-all duration-300 
+                    group-hover:shadow(xl) transition-all duration(300ms) 
                     group-hover:translate-y(-4px) group-hover:rotate(-1deg)">
           <MousePointer class="size(2xl) c(indigo-600) mb(lg) mx(auto)" />
           <h4 class="font(lg) bold c(gray-900) text(center) mb(sm)">Hover Effect</h4>
@@ -111,7 +111,7 @@
       
       <div class="group cursor-pointer">
         <div class="bg(white) r(xl) p(xl) shadow(md) 
-                    group-hover:shadow(2xl) transition-all duration-500 
+                    group-hover:shadow(2xl) transition-all duration(500ms) 
                     group-hover:scale(1.05)">
           <Sparkles class="size(2xl) c(purple-600) mb(lg) mx(auto)" />
           <h4 class="font(lg) bold c(gray-900) text(center) mb(sm)">Scale & Shadow</h4>
@@ -121,7 +121,7 @@
       
       <div class="group cursor-pointer">
         <div class="bg(white) r(xl) p(xl) shadow(lg) 
-                    group-hover:shadow(none) transition-all duration-300 
+                    group-hover:shadow(none) transition-all duration(300ms) 
                     group-hover:border(2px/indigo-500)">
           <Layers class="size(2xl) c(pink-600) mb(lg) mx(auto)" />
           <h4 class="font(lg) bold c(gray-900) text(center) mb(sm)">Press Effect</h4>
@@ -146,7 +146,7 @@
       {#each elevationLevels as elevation}
         <div class="group relative">
           <div class="bg(white) h(120px) shadow({elevation.level}) 
-                      hover:shadow(2xl) transition-all duration-300 
+                      hover:shadow(2xl) transition-all duration(300ms) 
                       hover:translate-y(-4px) cursor-pointer
                       border(1px/gray-100) r(xl) p(xl)
                       hbox(center/middle)">

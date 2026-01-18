@@ -475,7 +475,7 @@
           <h3 class="heading(h3) c(blue-900) mb(md)">Usage Guide</h3>
           <div class="vbox gap(md)">
             <p class="c(blue-800)">• All components use AdorableCSS v2 syntax with parentheses notation</p>
-            <p class="c(blue-800)">• Most components support variants using slash notation: <code class="font(mono) bg(white) px(xs) py(1) r(sm)">component(variant/size)</code></p>
+            <p class="c(blue-800)">• Most components support variants using slash notation: <code class="font(mono) bg(white) px(xs) py(1px) r(sm)">component(variant/size)</code></p>
             <p class="c(blue-800)">• Components integrate seamlessly with utility classes for customization</p>
             <p class="c(blue-800)">• Use these components as starting points and enhance with utility classes</p>
           </div>

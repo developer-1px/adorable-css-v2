@@ -31,7 +31,7 @@ c(linear-gradient(90deg,#f00,#00f))
 -->
 
 
-<div class="font(20/200%) bg(#fff) p(20)" style="--css-var: green">
+<div class="font(20/200%) bg(#fff) p(xl)" style="--css-var: green">
 
   <div class="c(red)">c(red)</div>
 

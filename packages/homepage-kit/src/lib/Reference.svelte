@@ -78,7 +78,7 @@
         title: 'Size',
         icon: '📏',
         items: [
-          { syntax: 'w(200)', desc: '200px', example: 'w(200)' },
+          { syntax: 'w(200px)', desc: '200px', example: 'w(200px)' },
           { syntax: 'w(fill)', desc: '100%', example: 'w(fill)' },
           { syntax: 'w(hug)', desc: 'fit-content', example: 'w(hug)' },
           { syntax: 'w(50%)', desc: '50%', example: 'w(50%)' },
@@ -110,7 +110,7 @@
           { syntax: 'x(center)', desc: '가로 중앙 (left 50% + translateX)', example: 'layer(center)' },
           { syntax: 'xy(center)', desc: '정중앙', example: 'layer(center)' },
           { syntax: 'layer(fill)', desc: '모든 방향 0 (absolute 포함)', example: 'layer(fill)' },
-          { syntax: 'top(20)', desc: 'top: 20px', example: 'layer(top:20/left:20)' },
+          { syntax: 'top(xl)', desc: 'top: 20px', example: 'layer(top:20/left:20)' },
           { syntax: 'layer(top:20/left:30)', desc: '복합 위치', example: 'layer(top:20/left:30)' }
         ]
       }
@@ -159,30 +159,30 @@
         title: 'Padding',
         icon: '📦',
         items: [
-          { syntax: 'p(20)', desc: '모든 방향', example: 'p(20)' },
+          { syntax: 'p(xl)', desc: '모든 방향', example: 'p(xl)' },
           { syntax: 'p(sm)', desc: '토큰', example: 'p(sm)' },
-          { syntax: 'px(20)', desc: '좌우', example: 'px(20)' },
-          { syntax: 'py(20)', desc: '상하', example: 'py(20)' },
+          { syntax: 'px(xl)', desc: '좌우', example: 'px(xl)' },
+          { syntax: 'py(xl)', desc: '상하', example: 'py(xl)' },
           { syntax: 'p(20/40)', desc: '상하/좌우', example: 'p(20/40)' },
           { syntax: 'p(10/20/30/40)', desc: '상/우/하/좌', example: 'p(10/20/30/40)' },
-          { syntax: 'pt(20)', desc: '위', example: 'pt(20)' },
-          { syntax: 'pr(20)', desc: '오른쪽', example: 'pr(20)' },
-          { syntax: 'pb(20)', desc: '아래', example: 'pb(20)' },
-          { syntax: 'pl(20)', desc: '왼쪽', example: 'pl(20)' }
+          { syntax: 'pt(xl)', desc: '위', example: 'pt(xl)' },
+          { syntax: 'pr(xl)', desc: '오른쪽', example: 'pr(xl)' },
+          { syntax: 'pb(xl)', desc: '아래', example: 'pb(xl)' },
+          { syntax: 'pl(xl)', desc: '왼쪽', example: 'pl(xl)' }
         ]
       },
       {
         title: 'Margin',
         icon: '🔲',
         items: [
-          { syntax: 'm(20)', desc: '모든 방향', example: 'm(20)' },
+          { syntax: 'm(xl)', desc: '모든 방향', example: 'm(xl)' },
           { syntax: 'm(md)', desc: '토큰', example: 'm(md)' },
           { syntax: 'mx(auto)', desc: '가로 중앙', example: 'mx(auto)' },
-          { syntax: 'my(20)', desc: '상하', example: 'my(20)' },
-          { syntax: 'mt(20)', desc: '위', example: 'mt(20)' },
-          { syntax: 'mr(20)', desc: '오른쪽', example: 'mr(20)' },
-          { syntax: 'mb(20)', desc: '아래', example: 'mb(20)' },
-          { syntax: 'ml(20)', desc: '왼쪽', example: 'ml(20)' }
+          { syntax: 'my(xl)', desc: '상하', example: 'my(xl)' },
+          { syntax: 'mt(xl)', desc: '위', example: 'mt(xl)' },
+          { syntax: 'mr(xl)', desc: '오른쪽', example: 'mr(xl)' },
+          { syntax: 'mb(xl)', desc: '아래', example: 'mb(xl)' },
+          { syntax: 'ml(xl)', desc: '왼쪽', example: 'ml(xl)' }
         ]
       }
     ],
@@ -304,7 +304,7 @@
           { syntax: 'sm:', desc: '640px+', example: 'sm:hidden' },
           { syntax: 'md:', desc: '768px+', example: 'md:grid(2)' },
           { syntax: 'lg:', desc: '1024px+', example: 'lg:font(20)' },
-          { syntax: 'xl:', desc: '1280px+', example: 'xl:w(1200)' },
+          { syntax: 'xl:', desc: '1280px+', example: 'xl:w(1200px)' },
           { syntax: '~sm:', desc: '~640px', example: '~sm:hidden' },
           { syntax: '~md:', desc: '~768px', example: '~md:vbox' }
         ]
@@ -375,27 +375,27 @@
 
 <div class="reference-container vbox w(fill) min-h(screen) bg(#f8fafc)">
   <!-- Header -->
-  <header class="reference-header vbox gap(sm) p(12) bg(white) border-bottom(1/#e5e7eb)">
+  <header class="reference-header vbox gap(sm) p(md) bg(white) border-bottom(1/#e5e7eb)">
     <div class="vbox gap(sm) text(center)">
       <h1 class="700 font(20) c(#0f172a) letter-spacing(-0.02em)">AdorableCSS v2 Reference</h1>
       <p class="font(12) c(#64748b)">모든 유틸리티 클래스와 사용법</p>
     </div>
     
     <!-- Controls -->
-    <div class="controls hbox gap(sm) w(500) mx(auto)">
+    <div class="controls hbox gap(sm) w(500px) mx(auto)">
       <div class="search-wrapper relative flex">
         <input
           type="search"
           bind:value={searchQuery}
           placeholder="유틸리티 검색... (예: hbox, font, bg)"
-          class="search-input w(fill) h(32) pl(32) pr(10) r(16) bg(#f1f5f9) border(1/transparent) font(12) c(#0f172a) placeholder:c(#94a3b8) focus:bg(white) focus:border(1/#3b82f6) focus:shadow(0/0/0/2px/#3b82f620) transition"
+          class="search-input w(fill) h(3xl) pl(3xl) pr(10px) r(16) bg(#f1f5f9) border(1/transparent) font(12) c(#0f172a) placeholder:c(#94a3b8) focus:bg(white) focus:border(1/#3b82f6) focus:shadow(0/0/0/2px/#3b82f620) transition"
         />
-        <span class="search-icon absolute left(10) y(center) c(#64748b) font(12) pointer(none)">🔍</span>
+        <span class="search-icon absolute left(10px) y(center) c(#64748b) font(12) pointer(none)">🔍</span>
       </div>
       
       <select
         bind:value={selectedCategory}
-        class="category-select h(32) px(12) r(16) bg(white) border(1/#e5e7eb) font(12) c(#0f172a) cursor(pointer) hover:border(1/#3b82f6) transition"
+        class="category-select h(3xl) px(md) r(16) bg(white) border(1/#e5e7eb) font(12) c(#0f172a) cursor(pointer) hover:border(1/#3b82f6) transition"
       >
         {#each categories as cat}
           <option value={cat.id}>{cat.icon} {cat.name}</option>
@@ -405,7 +405,7 @@
   </header>
   
   <!-- Content -->
-  <main class="reference-content px(12) py(12)">
+  <main class="reference-content px(md) py(md)">
     <div class="content-wrapper w(fill) mx(auto) vbox gap(lg)">
       {#each categoryData as [categoryId, sections]}
         {#each filterSections(sections) as section}
@@ -417,12 +417,12 @@
             
             <div class="items-grid grid(8) gap(sm)">
               {#each section.items as item}
-                <div class="reference-card vbox gap(xs) p(8) r(6) bg(white) border(1/#e5e7eb) hover:border(1/#3b82f6) hover:shadow(0/2px/6px/#00000008) transition group">
+                <div class="reference-card vbox gap(xs) p(sm) r(6) bg(white) border(1/#e5e7eb) hover:border(1/#3b82f6) hover:shadow(0/2px/6px/#00000008) transition group">
                   <!-- Syntax -->
                   <div class="card-header hbox gap(auto) items-start">
                     <code class="syntax 700 font(11) c(#3b82f6) font-family(mono) break-all">{item.syntax}</code>
                     <button
-                      class="copy-btn opacity(0) group-hover:opacity(1) transition cursor(pointer) p(1) r(2) hover:bg(#f1f5f9) font(10)"
+                      class="copy-btn opacity(0) group-hover:opacity(1) transition cursor(pointer) p(1px) r(2) hover:bg(#f1f5f9) font(10)"
                       on:click={() => copyToClipboard(item.syntax)}
                     >
                       {copiedItem === item.syntax ? '✅' : '📋'}
@@ -434,21 +434,21 @@
                   
                   <!-- Generated CSS -->
                   <div class="css-output vbox gap(xs)">
-                    <code class="css font(10) c(#475569) font-family(mono) bg(#f8fafc) p(4) r(2) line-height(1.1)">
+                    <code class="css font(10) c(#475569) font-family(mono) bg(#f8fafc) p(xs) r(2) line-height(1.1)">
                       {getGeneratedCSS(item.syntax)}
                     </code>
                   </div>
                   
                   <!-- Example -->
                   {#if item.example}
-                    <code class="example-code font(10) c(#059669) font-family(mono) bg(#ecfdf5.5) p(2) r(2) line-height(1.1)">
+                    <code class="example-code font(10) c(#059669) font-family(mono) bg(#ecfdf5.5) p(2px) r(2) line-height(1.1)">
                       {item.example}
                     </code>
                   {/if}
                   
                   <!-- Visual Preview (for some items) -->
                   {#if item.syntax.includes('shadow') || item.syntax.includes('r(') || item.syntax.includes('bg(')}
-                    <div class="preview-box w(fill) h(24) {item.syntax} {item.syntax.includes('shadow') ? 'bg(white)' : ''}"></div>
+                    <div class="preview-box w(fill) h(2xl) {item.syntax} {item.syntax.includes('shadow') ? 'bg(white)' : ''}"></div>
                   {/if}
                 </div>
               {/each}

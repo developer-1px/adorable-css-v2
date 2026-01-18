@@ -153,7 +153,7 @@
   <div class="container(7xl) mx(auto) px(2xl) py(xl)">
     <div class="grid(2) gap(4xl) items(start) ..lg:grid(1)">
       <!-- Product Images -->
-      <div class="vbox gap(md) sticky top(20)">
+      <div class="vbox gap(md) sticky top(xl)">
         <!-- Main Image -->
         <div class="relative">
           <img 
@@ -395,11 +395,11 @@
               <div class="vbox gap(xs) flex-1 max-w(sm)">
                 {#each [5,4,3,2,1] as stars}
                   <div class="hbox gap(sm) items(center)">
-                    <span class="text(2xs) c(neutral-500) w(8)">{stars}</span>
-                    <div class="flex-1 h(4) bg(neutral-100) r(full) clip">
+                    <span class="text(2xs) c(neutral-500) w(sm)">{stars}</span>
+                    <div class="flex-1 h(xs) bg(neutral-100) r(full) clip">
                       <div class="h(full) bg(neutral-900) r(full)" style="width: {stars === 5 ? 70 : stars === 4 ? 20 : 5}%"></div>
                     </div>
-                    <span class="text(2xs) c(neutral-500) w(24)">{stars === 5 ? '70%' : stars === 4 ? '20%' : '5%'}</span>
+                    <span class="text(2xs) c(neutral-500) w(2xl)">{stars === 5 ? '70%' : stars === 4 ? '20%' : '5%'}</span>
                   </div>
                 {/each}
               </div>

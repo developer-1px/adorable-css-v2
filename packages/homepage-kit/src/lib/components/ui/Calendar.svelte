@@ -1,13 +1,13 @@
 <script lang="ts">
 </script>
 
-<div class="w(320) bg(white) r(lg) shadow(lg) b(gray-200) p(16)">
-  <div class="hbox(between+middle) mb(16)">
+<div class="w(320px) bg(white) r(lg) shadow(lg) b(gray-200) p(lg)">
+  <div class="hbox(between+middle) mb(lg)">
     <button class="size(32) r(md) hover:bg(gray-100) hbox(pack) transition">←</button>
     <h3 class="font(md/medium)">December 2023</h3>
     <button class="size(32) r(md) hover:bg(gray-100) hbox(pack) transition">→</button>
   </div>
-  <div class="grid(7x5) gap(4) text-center">
+  <div class="grid(7x5) gap(xs) text-center">
     {#each ['S', 'M', 'T', 'W', 'T', 'F', 'S'] as day}
       <div class="font(xs/medium) c(gray-500)">{day}</div>
     {/each}

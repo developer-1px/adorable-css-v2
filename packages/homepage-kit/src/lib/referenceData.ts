@@ -145,7 +145,7 @@ export const referenceData: ReferenceData = {
         syntax: [
           "(10,20)",
           "(50%, 100)",
-          "top(10)",
+          "top(10px)",
           "left(50%)",
           "right(0)",
           "bottom(0)",
@@ -154,34 +154,34 @@ export const referenceData: ReferenceData = {
       { property: "z-index", syntax: ["z(10)", "z(999)"] },
     ],
     Spacing: [
-      { property: "padding", syntax: ["p(16)", "p(16/24)", "p(10/20/10/20)"] },
+      { property: "padding", syntax: ["p(lg)", "p(16/24)", "p(10/20/10/20)"] },
       {
         property: "padding-directional",
-        syntax: ["px(16)", "py(24)", "pt(10)"],
+        syntax: ["px(lg)", "py(2xl)", "pt(10px)"],
       },
-      { property: "margin", syntax: ["m(16)", "m(auto)", "m(10/20)"] },
+      { property: "margin", syntax: ["m(lg)", "m(auto)", "m(10/20)"] },
       {
         property: "margin-directional",
-        syntax: ["mx(auto)", "my(16)", "mt(10)"],
+        syntax: ["mx(auto)", "my(lg)", "mt(10px)"],
       },
-      { property: "gap", syntax: ["gap(16)", "gap(16/24)"] },
+      { property: "gap", syntax: ["gap(lg)", "gap(16/24)"] },
     ],
   },
   "크기 및 제한 (Size & Constraints)": {
     Width: [
-      { property: "width", syntax: ["w(300)", "w(fill)", "w(hug)", "w(auto)"] },
+      { property: "width", syntax: ["w(300px)", "w(fill)", "w(hug)", "w(auto)"] },
     ],
     Height: [
       {
         property: "height",
-        syntax: ["h(200)", "h(fill)", "h(hug)", "h(screen)"],
+        syntax: ["h(200px)", "h(fill)", "h(hug)", "h(screen)"],
       },
     ],
     Size: [{ property: "size", syntax: ["300x200"] }],
     "Min/Max Size": [
       {
         property: "constraints",
-        syntax: ["w(300)", "h(200)", "w(hug)", "w(fill)"],
+        syntax: ["w(300px)", "h(200px)", "w(hug)", "w(fill)"],
       },
     ],
     "Aspect Ratio": [
@@ -325,7 +325,7 @@ export const referenceData: ReferenceData = {
       },
     ],
     Responsive: [
-      { property: "responsive", syntax: ["sm:vbox", "md:p(32)", "lg:hbox"] },
+      { property: "responsive", syntax: ["sm:vbox", "md:p(3xl)", "lg:hbox"] },
     ],
     "Dark Mode": [{ property: "dark-mode", syntax: [".dark:bg(#000)"] }],
     Transition: [

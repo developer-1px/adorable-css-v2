@@ -1,5 +1,5 @@
-import { defineComponent } from '../../defineComponent-unified';
-import type { ComponentDefinition } from '../../defineComponent-unified';
+import { defineComponent } from '../../defineComponent';
+import type { ComponentDefinition } from '../../defineComponent';
 
 // Label component - for functional UI text
 export const labelDefinition: ComponentDefinition = {

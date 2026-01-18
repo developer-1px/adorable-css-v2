@@ -1,4 +1,4 @@
-import { defineComponent } from '../defineComponent-unified';
+import { defineComponent } from '../defineComponent';
 import type { StringRuleHandler } from '../../03-rules/types';
 
 // Link component for consistent link styling

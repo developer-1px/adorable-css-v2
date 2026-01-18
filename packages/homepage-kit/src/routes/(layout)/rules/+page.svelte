@@ -120,7 +120,7 @@
       <a href="/reference/rules" class="group block">
         <div class="h(full) p(2xl) border(1/gray-200) r(2xl) hover:border(indigo-200) hover:shadow(lg) hover:-translate-y(1) transition-all bg(white)">
           <div class="vbox gap(xl)">
-            <div class="w(48) h(48) r(xl) bg(indigo-50) hbox(center) c(indigo-600) group-hover:bg(indigo-600) group-hover:c(white) transition">
+            <div class="w(48px) h(48px) r(xl) bg(indigo-50) hbox(center) c(indigo-600) group-hover:bg(indigo-600) group-hover:c(white) transition">
               <BookOpen size="24" />
             </div>
             <div class="vbox gap(sm)">
@@ -140,7 +140,7 @@
       <a href="/tokens" class="group block">
         <div class="h(full) p(2xl) border(1/gray-200) r(2xl) hover:border(pink-200) hover:shadow(lg) hover:-translate-y(1) transition-all bg(white)">
           <div class="vbox gap(xl)">
-            <div class="w(48) h(48) r(xl) bg(pink-50) hbox(center) c(pink-600) group-hover:bg(pink-600) group-hover:c(white) transition">
+            <div class="w(48px) h(48px) r(xl) bg(pink-50) hbox(center) c(pink-600) group-hover:bg(pink-600) group-hover:c(white) transition">
               <Search size="24" />
             </div>
             <div class="vbox gap(sm)">

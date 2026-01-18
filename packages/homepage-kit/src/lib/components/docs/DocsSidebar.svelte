@@ -86,7 +86,7 @@
                         {/if}
                         {item.title}
                         {#if section.badge}
-                          <span class="font(xs) px(xs) py(0.5) r(sm) uppercase {section.badge === 'new' ? 'bg(success-100) c(success-700)' : section.badge === 'beta' ? 'bg(warning-100) c(warning-700)' : 'bg(neutral-100) c(neutral-700)'}">
+                          <span class="font(xs) px(xs) py(0.5px) r(sm) uppercase {section.badge === 'new' ? 'bg(success-100) c(success-700)' : section.badge === 'beta' ? 'bg(warning-100) c(warning-700)' : 'bg(neutral-100) c(neutral-700)'}">
                             {section.badge}
                           </span>
                         {/if}

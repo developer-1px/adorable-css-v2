@@ -1,6 +1,6 @@
 <script lang="ts">
 </script>
 
-<div class="hbox p(4) bg(gray-100) r(lg) gap(4)">
+<div class="hbox p(xs) bg(gray-100) r(lg) gap(xs)">
   <slot />
 </div>

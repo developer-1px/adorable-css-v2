@@ -69,21 +69,21 @@
 <div class="hbox w(full) h(screen) bg(gray-50) overflow(hidden)">
   
   <!-- Sidebar -->
-  <aside class="w(280) h(full) overflow-y(auto) border-r(1/gray-200) bg(white) p(10) shrink(0)">
-    <div class="vbox gap(2) mb(12)">
+  <aside class="w(280px) h(full) overflow-y(auto) border-r(1px/gray-200) bg(white) p(10px) shrink(0)">
+    <div class="vbox gap(2px) mb(12px)">
       <h1 class="font(title-lg) bold(800) c(gray-900)">System</h1>
       <p class="font(body-sm) c(gray-500)">Design Tokens</p>
     </div>
 
-    <div class="vbox gap(10)">
+    <div class="vbox gap(10px)">
       {#each Object.entries(sections) as [category, items]}
-        <div class="vbox gap(4)">
+        <div class="vbox gap(xs)">
           <h3 class="font(caption) c(gray-400) bold(600) uppercase tracking(wider)">{category}</h3>
-          <div class="vbox gap(1)">
+          <div class="vbox gap(1px)">
             {#each items as item}
               <a 
                 href="#{toId(item)}"
-                class="p(2) -ml(2) r(md) c(gray-600) hover:bg(gray-50) hover:c(gray-900) transition text(sm) font(medium) block text(none)"
+                class="p(2px) -ml(2px) r(md) c(gray-600) hover:bg(gray-50) hover:c(gray-900) transition text(sm) font(medium) block text(none)"
               >
                 {item}
               </a>
@@ -95,26 +95,26 @@
   </aside>
 
   <!-- Main Content -->
-  <main class="flex(1) h(full) overflow-y(auto) scroll-smooth">
-    <div class="max-w(1200px) mx(auto) w(full) p(24) vbox gap(32)">
+  <main class="flex(1) h(full) overflow-y(auto) scroll(smooth)">
+    <div class="max-w(1200px) mx(auto) w(full) p(24px) vbox gap(3xl)">
       
       <!-- Colors -->
-      <section id="colors" class="vbox gap(8)">
-        <div class="pb(4) border-b(1/gray-200) mt(8)">
+      <section id="colors" class="vbox gap(8px)">
+        <div class="pb(xs) border-b(1px/gray-200) mt(8px)">
           <h2 class="font(display-sm) bold(800) c(gray-900)">Colors</h2>
         </div>
-        <div class="vbox gap(12)">
+        <div class="vbox gap(12px)">
           {#each colorCategories as category}
-            <div class="vbox gap(6) p(8) bg(white) r(xl) shadow(sm) border(1/gray-100)">
+            <div class="vbox gap(6px) p(sm) bg(white) r(xl) shadow(sm) border(1px/gray-100)">
               <h3 class="font(title-md) c(gray-800)">{category.name}</h3>
-              <div class="grid(5) md:grid-cols(10) gap(3)">
+              <div class="grid(5) md:grid-cols(10) gap(3px)">
                 {#each category.colors as color}
-                  <div class="vbox gap(2) group cursor-pointer">
+                  <div class="vbox gap(2px) group cursor-pointer">
                     <div 
-                      class="h(20) w(full) r(md) transition hover:scale(1.05)"
+                      class="h(20px) w(full) r(md) transition hover:scale(1.05)"
                       style="background-color: {color.value}"
                     />
-                    <div class="opacity(0) group-hover:opacity(100) transition text-align(center)">
+                    <div class="opacity(0) group-hover:opacity(100) transition text(center)">
                       <span class="font(caption) c(gray-400)">{color.name.split('-')[1] || 'base'}</span>
                     </div>
                   </div>
@@ -126,15 +126,15 @@
       </section>
 
       <!-- Typography -->
-      <section id="typography" class="vbox gap(8)">
-        <div class="pb(4) border-b(1/gray-200) mt(8)">
+      <section id="typography" class="vbox gap(sm)">
+        <div class="pb(xs) border-b(1px/gray-200) mt(sm)">
           <h2 class="font(display-sm) bold(800) c(gray-900)">Typography</h2>
         </div>
-        <div class="vbox gap(4) p(8) bg(white) r(xl) shadow(sm) border(1/gray-100)">
+        <div class="vbox gap(xs) p(sm) bg(white) r(xl) shadow(sm) border(1px/gray-100)">
           {#each typographyScale as type}
-            <div class="hbox(middle) gap(8) p(4) r(lg) hover:bg(gray-50) transition group">
-              <div class="w(140)">
-                <code class="font(caption) c(indigo-500) bg(indigo-50) px(2) py(1) r(sm)">{type.name}</code>
+            <div class="hbox(middle) gap(sm) p(xs) r(lg) hover:bg(gray-50) transition group">
+              <div class="w(140px)">
+                <code class="font(caption) c(indigo-500) bg(indigo-50) px(2px) py(1px) r(sm)">{type.name}</code>
               </div>
               <div class="flex(1)">
                 <p style="font-size: {type.size}; font-weight: {type.weight};" class="c(gray-900)">
@@ -150,16 +150,16 @@
       </section>
 
       <!-- Spacing -->
-      <section id="spacing" class="vbox gap(8)">
-        <div class="pb(4) border-b(1/gray-200) mt(8)">
+      <section id="spacing" class="vbox gap(sm)">
+        <div class="pb(xs) border-b(1px/gray-200) mt(sm)">
           <h2 class="font(display-sm) bold(800) c(gray-900)">Spacing</h2>
         </div>
-        <div class="grid(2) sm:grid-cols(3) md:grid-cols(4) gap(8) p(8) bg(white) r(xl) shadow(sm) border(1/gray-100)">
+        <div class="grid(2) sm:grid-cols(3) md:grid-cols(4) gap(sm) p(sm) bg(white) r(xl) shadow(sm) border(1px/gray-100)">
           {#each spacingSystem as space}
-            <div class="hbox(middle) gap(4)">
-              <code class="w(32) font(caption) c(gray-500)">{space.name}</code>
+            <div class="hbox(middle) gap(xs)">
+              <code class="w(32px) font(caption) c(gray-500)">{space.name}</code>
               <div 
-                class="h(8) bg(indigo-500) r(full) opacity(80)"
+                class="h(8px) bg(indigo-500) r(full) opacity(80)"
                 style="width: {space.value}"
               />
               <span class="font(caption) c(gray-400)">{space.value}</span>
@@ -169,38 +169,38 @@
       </section>
 
       <!-- Components -->
-      <section id="components" class="vbox gap(8)">
-        <div class="pb(4) border-b(1/gray-200) mt(8)">
+      <section id="components" class="vbox gap(sm)">
+        <div class="pb(xs) border-b(1px/gray-200) mt(sm)">
           <h2 class="font(display-sm) bold(800) c(gray-900)">Components</h2>
         </div>
         
-        <div class="grid(1) lg:grid-cols(2) gap(8)">
+        <div class="grid(1) lg:grid-cols(2) gap(sm)">
           <!-- Buttons Card -->
-          <div id="buttons" class="vbox gap(6) p(8) bg(white) r(xl) shadow(sm) border(1/gray-100)">
+          <div id="buttons" class="vbox gap(6px) p(sm) bg(white) r(xl) shadow(sm) border(1px/gray-100)">
             <h3 class="font(title-md) c(gray-800)">Buttons</h3>
-            <div class="hbox gap(4) flex-wrap">
-              <button class="px(6) py(2) r(md) bg(indigo-600) c(white) font(bold) hover:bg(indigo-700) transition shadow(sm) active:scale(0.98)">Primary</button>
-              <button class="px(6) py(2) r(md) bg(white) b(1/gray-200) c(gray-700) font(medium) hover:bg(gray-50) transition shadow(sm)">Secondary</button>
-              <button class="px(6) py(2) r(md) c(gray-600) hover:bg(gray-50) transition font(medium)">Ghost</button>
+            <div class="hbox gap(xs) flex-wrap">
+              <button class="px(6px) py(2px) r(md) bg(indigo-600) c(white) font(bold) hover:bg(indigo-700) transition shadow(sm) active:scale(0.98)">Primary</button>
+              <button class="px(6px) py(2px) r(md) bg(white) b(1px/gray-200) c(gray-700) font(medium) hover:bg(gray-50) transition shadow(sm)">Secondary</button>
+              <button class="px(6px) py(2px) r(md) c(gray-600) hover:bg(gray-50) transition font(medium)">Ghost</button>
             </div>
           </div>
 
           <!-- Cards Card -->
-          <div id="cards" class="vbox gap(6) p(8) bg(white) r(xl) shadow(sm) border(1/gray-100)">
+          <div id="cards" class="vbox gap(6px) p(sm) bg(white) r(xl) shadow(sm) border(1px/gray-100)">
             <h3 class="font(title-md) c(gray-800)">Cards</h3>
-            <div class="vbox gap(4)">
-               <div class="vbox gap(4) p(6) r(lg) bg(white) shadow(md) border(1/gray-100)">
-                  <div class="hbox(middle) gap(3)">
-                    <div class="size(10) r(full) bg(indigo-100) hbox(center) c(indigo-600)">
-                      <svg class="size(5)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            <div class="vbox gap(xs)">
+               <div class="vbox gap(xs) p(6px) r(lg) bg(white) shadow(md) border(1px/gray-100)">
+                  <div class="hbox(middle) gap(3px)">
+                    <div class="size(10px) r(full) bg(indigo-100) hbox(center) c(indigo-600)">
+                      <svg class="size(5px)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
                     </div>
                     <span class="font(medium) c(gray-900)">Elevated Surface</span>
                   </div>
                </div>
-               <div class="vbox gap(4) p(6) r(lg) bg(gray-50) border(1/gray-200)">
-                  <div class="hbox(middle) gap(3)">
-                    <div class="size(10) r(full) bg(white) shadow(sm) hbox(center) c(gray-900)">
-                       <svg class="size(5)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+               <div class="vbox gap(xs) p(6px) r(lg) bg(gray-50) border(1px/gray-200)">
+                  <div class="hbox(middle) gap(3px)">
+                    <div class="size(10px) r(full) bg(white) shadow(sm) hbox(center) c(gray-900)">
+                       <svg class="size(5px)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
                     </div>
                     <span class="font(medium) c(gray-900)">Flat Surface</span>
                   </div>
@@ -210,7 +210,7 @@
         </div>
       </section>
 
-      <div class="h(100)"></div> <!-- Bottom spacer -->
+      <div class="h(100px)"></div> <!-- Bottom spacer -->
     </div>
   </main>
 

@@ -98,11 +98,11 @@
     <div class="p(2xl)">
       <div class="vbox gap(xl)">
         {#each durationVariants as { key, value, usage }, index}
-          <div class="group relative p(2xl) r(2xl) bg(gray-50) hover:bg(white transition-all duration-500 hover:shadow(xl) hover:shadow(primary-100.2) b(1/transparent) hover:b(1/primary-200) cursor-pointer"
+          <div class="group relative p(2xl) r(2xl) bg(gray-50) hover:bg(white transition-all duration(500ms) hover:shadow(xl) hover:shadow(primary-100.2) b(1/transparent) hover:b(1/primary-200) cursor-pointer"
                on:click={() => copyCode(`duration(${key})`)}>
             
             <!-- Copy indicator -->
-            <div class="absolute top(md) right(md) opacity(0) group-hover:opacity(100) transition-all duration-300">
+            <div class="absolute top(md) right(md) opacity(0) group-hover:opacity(100) transition-all duration(300ms)">
               {#if copiedCode === `duration(${key})`}
                 <div class="px(sm) py(xs) r(full) bg(primary-100) c(primary-700) text(xs) bold">
                   ✓ Copied!
@@ -161,11 +161,11 @@
     <div class="p(2xl)">
       <div class="grid(2) gap(xl)">
         {#each easeVariants as { key, value, usage }, index}
-          <div class="group relative p(2xl) r(2xl) bg(gray-50) hover:bg(white transition-all duration-500 hover:shadow(xl) hover:shadow(primary-100.2) b(1/transparent) hover:b(1/primary-200) cursor-pointer"
+          <div class="group relative p(2xl) r(2xl) bg(gray-50) hover:bg(white transition-all duration(500ms) hover:shadow(xl) hover:shadow(primary-100.2) b(1/transparent) hover:b(1/primary-200) cursor-pointer"
                on:click={() => copyCode(`ease(${key})`)}>
             
             <!-- Copy indicator -->
-            <div class="absolute top(md) right(md) opacity(0) group-hover:opacity(100) transition-all duration-300">
+            <div class="absolute top(md) right(md) opacity(0) group-hover:opacity(100) transition-all duration(300ms)">
               {#if copiedCode === `ease(${key})`}
                 <div class="px(sm) py(xs) r(full) bg(primary-100) c(primary-700) text(xs) bold">
                   ✓ Copied!

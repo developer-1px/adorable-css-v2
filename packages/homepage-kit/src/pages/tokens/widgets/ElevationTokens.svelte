@@ -116,7 +116,7 @@
     <div class="grid(3) gap(xl) ..md:grid(2) ..sm:grid(1)">
       {#each elevationVariants as { level, usage, description, example }, index}
         <div 
-          class="group relative p(2xl) r(2xl) bg(white) hover:bg(gray-50) transition-all duration-300 cursor-pointer border(1px/gray-200) hover:border(purple-200) elevation({level})"
+          class="group relative p(2xl) r(2xl) bg(white) hover:bg(gray-50) transition-all duration(300ms) cursor-pointer border(1px/gray-200) hover:border(purple-200) elevation({level})"
           role="button"
           tabindex="0"
           on:click={() => copyCode(`elevation(${level})`, index)}

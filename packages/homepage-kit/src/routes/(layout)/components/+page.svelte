@@ -353,7 +353,7 @@ import Tooltip from '$lib/components/ui/Tooltip.svelte'
       <div class="container(6xl)">
         <div class="hbox gap(4xl)">
           <!-- Registration Form -->
-          <div class="w(480) vbox gap(2xl)">
+          <div class="w(480px) vbox gap(2xl)">
             <Card size="xl">
               <div class="vbox gap(xl)">
                 <!-- Header -->
@@ -493,16 +493,16 @@ import Tooltip from '$lib/components/ui/Tooltip.svelte'
 
           <div class="hbox gap(3xl)">
             <!-- Product Images -->
-            <div class="w(480) vbox gap(lg)">
-              <div class="aspect-square bg(mute-100) r(xl) pack">
+            <div class="w(480px) vbox gap(lg)">
+              <div class="aspect(square) bg(mute-100) r(xl) pack">
                 <p class="body(lg) c(mute-600)">Product Image</p>
               </div>
 
               <div class="hbox gap(md)">
-                <div class="w(80) h(80) bg(mute-100) r(md)"></div>
-                <div class="w(80) h(80) bg(mute-100) r(md)"></div>
-                <div class="w(80) h(80) bg(mute-100) r(md)"></div>
-                <div class="w(80) h(80) bg(mute-100) r(md)"></div>
+                <div class="w(80px) h(80px) bg(mute-100) r(md)"></div>
+                <div class="w(80px) h(80px) bg(mute-100) r(md)"></div>
+                <div class="w(80px) h(80px) bg(mute-100) r(md)"></div>
+                <div class="w(80px) h(80px) bg(mute-100) r(md)"></div>
               </div>
             </div>
 
@@ -562,7 +562,7 @@ import Tooltip from '$lib/components/ui/Tooltip.svelte'
 
                 <div class="vbox gap(sm)">
                   <Label>Quantity</Label>
-                  <div class="hbox gap(md) w(120)">
+                  <div class="hbox gap(md) w(120px)">
                     <Button variant="outline" size="sm">-</Button>
                     <Input value="1" class="text(center)"/>
                     <Button variant="outline" size="sm">+</Button>
@@ -592,16 +592,16 @@ import Tooltip from '$lib/components/ui/Tooltip.svelte'
               <h3 class="heading(h4) c(mute-900)">Loading States</h3>
               <div class="vbox gap(lg)">
                 <div class="hbox gap(md)">
-                  <Skeleton class="w(60) h(60) r(full)"/>
+                  <Skeleton class="w(60px) h(60px) r(full)"/>
                   <div class="vbox gap(sm)">
-                    <Skeleton class="w(200) h(20)"/>
-                    <Skeleton class="w(150) h(16)"/>
+                    <Skeleton class="w(200px) h(xl)"/>
+                    <Skeleton class="w(150px) h(lg)"/>
                   </div>
                 </div>
                 <div class="vbox gap(sm)">
-                  <Skeleton class="w(full) h(200)"/>
-                  <Skeleton class="w(80%) h(16)"/>
-                  <Skeleton class="w(60%) h(16)"/>
+                  <Skeleton class="w(full) h(200px)"/>
+                  <Skeleton class="w(80%) h(lg)"/>
+                  <Skeleton class="w(60%) h(lg)"/>
                 </div>
               </div>
             </div>

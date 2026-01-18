@@ -2,116 +2,12 @@
 
 > 새 프로젝트에서 AdorableCSS 시작하기
 
-## 📋 Quick Setup
+## 📋 프로젝트 설정 (Archived)
 
-### 1분 설정 (CDN)
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <link rel="stylesheet" href="https://unpkg.com/adorable-css/dist/adorable.css">
-</head>
-<body>
-  <div class="hbox(fill) min-h(screen)">
-    <h1 class="heading(xl)">Hello AdorableCSS!</h1>
-  </div>
-</body>
-</html>
-```
+**알림**: 이 프로젝트는 아카이브 상태입니다. 신규 프로젝트 설정보다는 기존 프로젝트의 구조를 참고하는 용도로 확인해주세요.
 
-### 5분 설정 (NPM/Yarn/PNPM)
-
-```bash
-# NPM
-npm install adorable-css
-
-# Yarn
-yarn add adorable-css
-
-# PNPM (추천)
-pnpm add adorable-css
-```
-
-## 🔧 프레임워크별 설정
-
-### Next.js 14+
-
-```javascript
-// app/layout.tsx
-import 'adorable-css'
-
-export default function RootLayout({ children }) {
-  return (
-    <html lang="ko">
-      <body>{children}</body>
-    </html>
-  )
-}
-```
-
-```javascript
-// next.config.js
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  // CSS 최적화
-  compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
-  },
-}
-
-module.exports = nextConfig
-```
-
-### Vite + React
-
-```javascript
-// main.tsx
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import 'adorable-css'  // 최상단에 import
-import App from './App'
-
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-)
-```
-
-```javascript
-// vite.config.ts
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-
-export default defineConfig({
-  plugins: [react()],
-  css: {
-    // PostCSS 설정 (선택사항)
-    postcss: './postcss.config.js'
-  }
-})
-```
-
-### SvelteKit
-
-```javascript
-// app.html
-<link rel="stylesheet" href="%sveltekit.assets%/adorable.css">
-
-// 또는 app.css
-@import 'adorable-css';
-```
-
-### Vue 3
-
-```javascript
-// main.js
-import { createApp } from 'vue'
-import 'adorable-css'
-import App from './App.vue'
-
-createApp(App).mount('#app')
-```
+## 📁 권장 프로젝트 구조 (참고용)
+(아래 내용은 AdorableCSS를 사용하던 시점의 권장 구조입니다)
 
 ## 📁 권장 프로젝트 구조
 

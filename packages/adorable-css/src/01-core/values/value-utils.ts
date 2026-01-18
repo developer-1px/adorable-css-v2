@@ -3,7 +3,7 @@
  * makeValue.ts에서 분리하여 코드 라인수 감소
  */
 
-import { isToken } from './is-token'
+import { isToken } from '../../02-design_tokens/design-system/tokens/index'
 import { generateSpacingCalc, generateFontCalc, generateSizeCalc } from '../../02-design_tokens/dynamicTokens'
 
 // CSS 변수 처리

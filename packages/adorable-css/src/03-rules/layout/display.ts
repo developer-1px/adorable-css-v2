@@ -4,8 +4,7 @@ import type { CSSRule, KeywordRuleHandler, RuleHandler } from '../types';
 export const block: KeywordRuleHandler = () => ({ display: 'block' });
 export const inline: KeywordRuleHandler = () => ({ display: 'inline' });
 export const inlineBlock: KeywordRuleHandler = () => ({ display: 'inline-block' });
-// inline-flex is deprecated - use hbox() or vbox() instead
-// export const inlineFlex: KeywordRuleHandler = () => ({ display: 'inline-flex' });
+export const inlineFlex: KeywordRuleHandler = () => ({ display: 'inline-flex' });
 export const none: KeywordRuleHandler = () => ({ display: 'none' });
 export const hidden = none;
 // grid is exported from ./grid.ts with advanced features
@@ -90,7 +89,12 @@ export const vbox: RuleHandler = (v = '') => {
   };
 };
 
-export const wrap = hbox;
+export const wrap: RuleHandler = (v = '') => {
+  return {
+    ...hbox(v),
+    'flex-wrap': 'wrap'
+  }
+};
 export const pack: KeywordRuleHandler = () => flexbox('row', 'center', 'center');
 export const vpack: KeywordRuleHandler = () => flexbox('column', 'center', 'center');
 
@@ -102,7 +106,7 @@ export const shrink: RuleHandler = (v?: string): CSSRule => v ? { 'flex-shrink':
 export const grow: RuleHandler = (v?: string): CSSRule => v ? { 'flex-grow': v } : {};
 
 export const displayRules = {
-  block, inline, 'inline-block': inlineBlock,
+  block, inline, 'inline-block': inlineBlock, 'inline-flex': inlineFlex,
   none, hidden, hbox, vbox, wrap, pack, vpack,
   // Low-level CSS props deprecated for AI-friendliness
   // flex, 'flex-wrap': flexWrap, items, justify, shrink, grow

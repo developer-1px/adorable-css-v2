@@ -42,10 +42,10 @@ Extension
 
 <h2>Position</h2>
 
-<div class="vbox gap(20) bg(#fff) p(10)">
+<div class="vbox gap(xl) bg(#fff) p(10px)">
 
   <h2>layer</h2>
-  <div class="relative w(100) h(100) b(#ff6347) pack">
+  <div class="relative w(100px) h(100px) b(#ff6347) pack">
     <div class="font(90)">🐳</div>
     <div class="layer pack bg(#ff6347.5)">layer</div>
   </div>
@@ -53,23 +53,23 @@ Extension
 
   <h2>layer(top) layer(right) layer(bottom) layer(left)</h2>
   
-  <div class="hbox gap(10)">
-    <div class="relative w(100) h(100) b(#ff6347) pack">
+  <div class="hbox gap(10px)">
+    <div class="relative w(100px) h(100px) b(#ff6347) pack">
       <div class="font(90)">🐳</div>
       <div class="layer(top) pack bg(#ff6347.5)">layer(top)</div>
     </div>
     
-    <div class="relative w(100) h(100) b(#ff6347) pack">
+    <div class="relative w(100px) h(100px) b(#ff6347) pack">
       <div class="font(90)">🐳</div>
       <div class="layer(right) pack bg(#ff6347.5)">layer(right)</div>
     </div>
     
-    <div class="relative w(100) h(100) b(#ff6347) pack">
+    <div class="relative w(100px) h(100px) b(#ff6347) pack">
       <div class="font(90)">🐳</div>
       <div class="layer(bottom) pack bg(#ff6347.5)">layer(bottom)</div>
     </div>
     
-    <div class="relative w(100) h(100) b(#ff6347) pack">
+    <div class="relative w(100px) h(100px) b(#ff6347) pack">
       <div class="font(90)">🐳</div>
       <div class="layer(left) pack bg(#ff6347.5)">layer(left)</div>
     </div>
@@ -78,23 +78,23 @@ Extension
 
   <h2>layer(top+left) / layer(top+right) / layer(bottom+right) / layer(bottom+right) </h2>
   
-  <div class="hbox gap(10)">
-    <div class="relative w(100) h(100) b(#ff6347) pack">
+  <div class="hbox gap(10px)">
+    <div class="relative w(100px) h(100px) b(#ff6347) pack">
       <div class="font(90)">🐳</div>
       <div class="layer(top+left) pack bg(#ff6347.5) text(center)">layer<br/>(top+left)</div>
     </div>
     
-    <div class="relative w(100) h(100) b(#ff6347) pack">
+    <div class="relative w(100px) h(100px) b(#ff6347) pack">
       <div class="font(90)">🐳</div>
       <div class="layer(top+right) pack bg(#ff6347.5) text(center)">layer<br/>(top+right)</div>
     </div>
     
-    <div class="relative w(100) h(100) b(#ff6347) pack">
+    <div class="relative w(100px) h(100px) b(#ff6347) pack">
       <div class="font(90)">🐳</div>
       <div class="layer(bottom+left) pack bg(#ff6347.5) text(center)">layer<br/>(bottom<br/>+left)</div>
     </div>
     
-    <div class="relative w(100) h(100) b(#ff6347) pack">
+    <div class="relative w(100px) h(100px) b(#ff6347) pack">
       <div class="font(90)">🐳</div>
       <div class="layer(bottom+right) pack bg(#ff6347.5) text(center)">layer<br/>(bottom<br/>+right)</div>
     </div>
@@ -103,13 +103,13 @@ Extension
 
   <h2>layer(top:10) / layer(top:50%)</h2>
 
-  <div class="hbox gap(10)">
-    <div class="relative w(200) h(100) b(#ff6347) pack">
+  <div class="hbox gap(10px)">
+    <div class="relative w(200px) h(100px) b(#ff6347) pack">
       <div class="font(90)">🐳</div>
       <div class="layer(top:10) pack bg(#ff6347.5)">layer(top:10)</div>
     </div>
     
-    <div class="relative w(200) h(100) b(#ff6347) pack">
+    <div class="relative w(200px) h(100px) b(#ff6347) pack">
       <div class="font(90)">🐳</div>
       <div class="layer(top:50%) pack bg(#ff6347.5)">layer(top:50%)</div>
     </div>    
@@ -118,11 +118,11 @@ Extension
 
   <h2>layer + outside</h2>
 
-  <div class="hbox gap(10)">
-    <div class="relative w(200) h(200) b(#ff6347) pack">
+  <div class="hbox gap(10px)">
+    <div class="relative w(200px) h(200px) b(#ff6347) pack">
       <div class="font(90)">🐳</div>
       <div class="layer(top+outside) pack bg(#ff6347.5)">layer(top+outside)</div>
-      <div class="layer(right+outside) pack bg(#ff6347.5) w(150)">layer(top+outside)</div>
+      <div class="layer(right+outside) pack bg(#ff6347.5) w(150px)">layer(top+outside)</div>
       <div class="layer(bottom+outside) pack bg(#ff6347.5)">layer(bottom+outside)</div>
     </div>    
   </div>

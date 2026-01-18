@@ -115,9 +115,9 @@
 
 <!-- Permanent Indicator -->
 <div class="class-inspector fixed bottom(lg) right(lg) z(100)">
-  <div class="{isModifierKeyPressed ? 'bg(green-600) c(white)' : 'bg(gray-700) c(gray-300)'} px(md) py(sm) r(md) shadow(lg) text(xs) transition-all duration-200 hbox gap(xs) items(center)">
+  <div class="{isModifierKeyPressed ? 'bg(green-600) c(white)' : 'bg(gray-700) c(gray-300)'} px(md) py(sm) r(md) shadow(lg) text(xs) transition-all duration(200ms) hbox gap(xs) items(center)">
     <span class="text(xs)">Class Inspector:</span>
-    <kbd class="bg({isModifierKeyPressed ? 'green-500' : 'gray-600'}) c(white) px(xs) py(xxs) r(xs) font(mono) text(xxs) transition-all duration-200">
+    <kbd class="bg({isModifierKeyPressed ? 'green-500' : 'gray-600'}) c(white) px(xs) py(xxs) r(xs) font(mono) text(xxs) transition-all duration(200ms)">
       {navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'}
     </kbd>
     <span class="text(xs)">+ hover</span>

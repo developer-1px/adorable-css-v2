@@ -150,7 +150,7 @@
             </button>
           {/each}
           
-          <div class="h(1) bg(gray-100) my(md)"></div>
+          <div class="h(1px) bg(gray-100) my(md)"></div>
           <button 
              on:click={() => scrollTo('generated-css')}
              class="text(left) text(xs) font(medium) c(gray-400) hover:c(gray-900) transition uppercase tracking(wider)"
@@ -199,21 +199,21 @@
                 <div class="grid(1) gap(lg)">
                    {#each category.tokens as token}
                     <div class="hbox items(center) gap(xl) p(lg) border(1/gray-100) r(lg) bg(white)">
-                      <div class="w(100) shrink(0) vbox gap(xs)">
+                      <div class="w(100px) shrink(0) vbox gap(xs)">
                          <span class="font(mono) text(sm) c(indigo-600)">{token}</span>
                          <span class="font(mono) text(xs) c(gray-400)">{tokenValues[categoryKey]?.[token] || '-'}</span>
                       </div>
                       
                       <!-- Visual Metaphor: Two items with gap -->
                       <div class="hbox items(center) gap(md) flex(1)">
-                        <div class="bg(gray-100) h(32) r(md) px(md) hbox(pack) text(xs) c(gray-500)">Item</div>
+                        <div class="bg(gray-100) h(3xl) r(md) px(md) hbox(pack) text(xs) c(gray-500)">Item</div>
                         <!-- The Gap -->
-                        <div class="h(24) bg(indigo-500/20) relative" style="width: var(--spacing-{token})">
+                        <div class="h(2xl) bg(indigo-500/20) relative" style="width: var(--spacing-{token})">
                           <div class="absolute inset(0) hbox(pack)">
                             <span class="text(9px) c(indigo-700) font(mono)">{tokenValues[categoryKey]?.[token]}</span>
                           </div>
                         </div>
-                        <div class="bg(gray-100) h(32) r(md) px(md) hbox(pack) text(xs) c(gray-500)">Item</div>
+                        <div class="bg(gray-100) h(3xl) r(md) px(md) hbox(pack) text(xs) c(gray-500)">Item</div>
                       </div>
                     </div>
                    {/each}
@@ -242,7 +242,7 @@
                 <div class="grid(2) md:grid(3) gap(2xl) py(lg)">
                    {#each category.tokens as token}
                      <div class="vbox gap(lg)">
-                        <div class="h(120) bg(white) r(lg) hbox(pack)" style="box-shadow: {tokenValues[categoryKey]?.[token] || 'none'}">
+                        <div class="h(120px) bg(white) r(lg) hbox(pack)" style="box-shadow: {tokenValues[categoryKey]?.[token] || 'none'}">
                            <span class="text(sm) font(medium) c(gray-500)">Surface</span>
                         </div>
                         <div class="hbox(between) items(center) px(sm)">
@@ -272,8 +272,8 @@
         <section id="generated-css" class="scroll-mt(120px) pt(10xl) border-t(1/gray-100)">
           <div class="vbox gap(lg)">
             <h2 class="text(2xl) font(semibold) c(gray-900)">Generated CSS</h2>
-            <div class="bg(gray-900) p(xl) radius(lg) overflow(hidden)">
-              <pre class="text(xs) font(mono) c(gray-300) whitespace(pre-wrap) max-h(400) overflow(auto)">{generatedCSS}</pre>
+            <div class="bg(gray-900) p(xl) r(lg) overflow(hidden)">
+              <pre class="text(xs) font(mono) c(gray-300) whitespace(pre-wrap) max-h(400px) overflow(auto)">{generatedCSS}</pre>
             </div>
           </div>
         </section>

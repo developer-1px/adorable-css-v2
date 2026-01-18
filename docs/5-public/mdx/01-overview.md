@@ -1,116 +1,69 @@
-# AdorableCSS
+# AdorableCSS와의 아름다운 이별 🐱💕
 
-> TailwindCSS의 가독성을 개선한 CSS 유틸리티 프레임워크
+## 5년간의 여정을 마무리하며
 
-## 배경
+안녕하세요. AdorableCSS를 만든 개발자입니다.
 
-TailwindCSS가 나왔을 때 유틸리티 CSS의 생산성은 좋았지만, 문법의 가독성이 떨어진다고 생각했습니다.
-AI 시대가 오면서 TailwindCSS가 사실상 표준이 되어 이 프로젝트의 의미는 퇴색되었지만,
-그래도 CSS 속성을 더 쉽게 이해하는 데 도움이 되었으면 합니다.
+오늘은 5년간 함께한 AdorableCSS와 작별을 고하는 글을 쓰게 되었습니다. 프로젝트를 완전히 포기하는 것은 아니지만, 더 이상 범용 CSS 프레임워크로서의 발전은 멈추고 아카이빙 단계로 접어들게 되었습니다.
 
-## 주요 특징
+## 시작은 앞서간 아이디어였습니다
 
-### 1. 더 읽기 쉬운 문법
+2019년, TailwindCSS가 JIT(Just-In-Time) 컴파일 기능을 내놓기 전에 이미 AdorableCSS는 온디맨드 CSS 생성을 구현하고 있었습니다. 당시만 해도 “필요한 스타일만 실시간으로 생성한다”는 개념이 생소했는데, 지금 생각해보면 시대를 좀 앞서간 아이디어였던 것 같습니다.
 
-```html
-<!-- Tailwind -->
-<div class="flex items-center justify-center gap-4 p-6">
+원래 목표는 피그마와 코드 간의 완벽한 일치였습니다. 디자이너가 피그마에서 `Auto Layout`으로 만든 컴포넌트가 개발자의 코드에서도 정확히 `hbox(center)`로 표현되기를 바랐습니다. CSS 속성명을 그대로 축약한 TailwindCSS보다는, 디자이너도 이해할 수 있는 직관적인 언어를 만들고 싶었습니다.
 
-<!-- AdorableCSS -->
-<div class="hbox(center) gap(4) p(6)">
-```
+## 기술은 좋았지만 현실의 벽이 높았습니다
 
-### 2. CSS 네이티브 값 사용
+실제로 사용해본 사람들의 반응은 좋았습니다. 학습곡선이 완만하고 직관적이라는 평가를 받았죠. `justify-content: space-between`을 `hbox(between)`으로, `width: 300px; height: 200px`를 `300x200`으로 표현하는 문법은 분명 더 읽기 쉬웠습니다.
 
-```css
-/* CSS 표준 값 그대로 사용 */
-scale(1.05)      /* transform: scale(1.05) */
-opacity(0.5)     /* opacity: 0.5 */
-rotate(45deg)    /* transform: rotate(45deg) */
-```
+하지만 “좋은 기술”이 “성공하는 기술”이 되는 것은 별개의 문제였습니다. 가장 큰 벽은 **커뮤니티와 생태계**였습니다.
 
-### 3. 간단한 문법
+특히 제가 이직하게 되면서 결정타가 되었습니다. 기존 팀은 “AdorableCSS를 아는 사람이 없어진” 상황에서 유지보수 부담을 느꼈고, 새로운 팀은 “검증된 TailwindCSS 대신 왜 모르는 걸 써야 하나”라는 합리적 의문을 가졌습니다. 양쪽 모두 틀린 판단이 아니었죠.
 
-```html
-<!-- 레이아웃 -->
-<div class="vbox gap(16)">          <!-- 세로 배치 + 16px 간격 -->
-<div class="hbox(pack)">            <!-- 가로 배치 + space-between -->
+## 시장이 우리를 따라잡았습니다
 
-<!-- 크기 -->
-<div class="w(320) h(240)">         <!-- width: 320px, height: 240px -->
+아이러니하게도 AdorableCSS가 추구했던 방향들이 하나씩 현실이 되고 있습니다.
 
-<!-- 색상 -->
-<div class="bg(blue) c(white)">     <!-- background: blue, color: white -->
+AI 코드 생성 도구들이 등장했고, Figma에서 CSS로의 변환이 가능해졌습니다. 심지어 Figma에서 자체 CMS 기능까지 발표한다고 하니, 원래 저희가 해결하려던 “피그마-코드 간 격차” 문제가 다른 방식으로 해결되고 있는 셈입니다.
 
-<!-- 투명도 (dot notation) -->
-<div class="bg(black.5)">           <!-- background: rgba(0,0,0,0.5) -->
-```
+제가 만들려던 “피그마 디자인을 CMS로 관리하는 서비스”도 이제 거대 플랫폼의 영역이 되어버렸습니다. 개인이나 작은 팀이 경쟁하기엔 무리가 있죠.
 
-## 설치
+## 한국에서 오픈소스의 현실
 
-```bash
-npm install adorable-css
-```
+솔직히 말하면, 한국에서 커뮤니티가 필요한 라이브러리를 개인이 만드는 건 정말 어려운 시도였습니다.
 
-```typescript
-// main.ts
-import 'adorable-css'
-```
+글로벌 생태계에 비해 규모가 작고, 새로운 기술보다는 검증된 기술을 선호하는 문화, 그리고 무엇보다 “개인 주도 프로젝트”에 대한 신뢰도가 낮습니다. React, Vue, TailwindCSS 같은 이미 성공한 것들만 살아남고, 새로운 시도는 설 자리가 없어지는 구조죠.
 
-## 기본 사용법
+하지만 이것도 현실이고, 받아들여야 할 부분이라고 생각합니다.
 
-### Flexbox 레이아웃
+## 그래도 의미 있는 실험이었습니다
 
-```html
-<!-- 세로 정렬 -->
-<div class="vbox gap(md)">
-  <div>Item 1</div>
-  <div>Item 2</div>
-</div>
+AdorableCSS가 완전히 헛된 노력은 아니었다고 생각합니다.
 
-<!-- 가로 정렬 -->
-<div class="hbox(center) gap(lg)">
-  <button>Cancel</button>
-  <button>OK</button>
-</div>
-```
+지금 AI 도구들이 CSS를 생성할 때나, Figma 같은 회사들이 더 직관적인 디자인-코드 변환을 고민할 때, 혹시 AdorableCSS가 제시했던 방향성을 참고할 수도 있을 겁니다. “CSS 속성명을 줄이는 것”을 넘어서 “디자이너와 개발자가 공통으로 이해할 수 있는 언어”를 만드는 것의 가치를 보여준 것만으로도 의미가 있다고 봅니다.
 
-### 반응형
+## 새로운 시작을 위한 마무리
 
-```html
-<div class="
-  vbox
-  md:hbox
-  gap(sm)
-  md:gap(lg)
-">
-  <!-- 모바일: 세로, 데스크탑: 가로 -->
-</div>
-```
+앞으로 AdorableCSS는 사내 프로젝트에서 피그마-웹 브릿지 역할로 조용히 활용될 예정입니다. 범용 프레임워크로서의 꿈은 접지만, 특정 목적을 위한 도구로서는 여전히 유용하니까요.
 
-### 상태
+오픈소스로 공개된 코드와 문서들은 그대로 남겨둘 예정입니다. 혹시 비슷한 문제의식을 가진 분들이 참고하시거나, 더 나은 아이디어를 발전시키는 데 도움이 되기를 바랍니다.
 
-```html
-<button class="
-  bg(blue) c(white)
-  hover:bg(blue-600)
-  active:scale(0.95)
-">
-  Click me
-</button>
-```
+## 감사의 말씀
 
-## Tailwind와의 차이
+5년간 AdorableCSS에 관심을 가져주시고, 피드백을 주시고, 때로는 비판도 해주신 모든 분들께 감사드립니다. 특히 GitHub에 이슈를 남겨주시고, 실제 프로젝트에서 사용해보신 분들 덕분에 여기까지 올 수 있었습니다.
 
-| Tailwind | AdorableCSS | 설명 |
-|----------|-------------|------|
-| `flex items-center justify-center` | `hbox(center)` | 더 간결함 |
-| `bg-white/50` | `bg(white.5)` | Dot notation |
-| `scale-95` | `scale(0.95)` | CSS 표준 값 |
-| `mt-4 mb-6` | `vbox gap(...)` | margin 대신 gap |
+개발자로서 “내가 만든 것이 누군가에게 도움이 되는” 경험을 할 수 있었던 것만으로도 충분히 가치 있는 시간이었습니다.
 
-## 다음 단계
+-----
 
-- [문법 가이드](/docs/syntax-guide) - 전체 문법 참조
-- [Tailwind 차이점](/docs/common-mistakes-tailwind) - Tailwind 사용자를 위한 가이드
-- [Cheat Sheet](/docs/cheat-sheet) - 빠른 참조
+AdorableCSS와의 이별이 슬프지만, 동시에 새로운 시작을 위한 깔끔한 마무리이기도 합니다.
+
+다음에는 더 현실적이고, 더 지속가능한 프로젝트로 찾아뵙겠습니다.
+
+그동안 정말 고마웠습니다. 🐱💕
+
+-----
+
+*AdorableCSS (2019-2024)*  
+*GitHub: [developer-1px/adorable-css](https://github.com/developer-1px/adorable-css)*  
+*NPM: [adorable-css](https://www.npmjs.com/package/adorable-css)*

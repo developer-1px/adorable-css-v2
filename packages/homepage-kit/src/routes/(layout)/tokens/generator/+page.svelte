@@ -372,7 +372,7 @@ const tokens = generateTokenScales({
           on:click={copyConfig}
           class="btn(ghost/sm) hbox gap(sm)"
         >
-          <svg class="w(16) h(16)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg class="w(lg) h(lg)" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
           </svg>
           Copy Config
@@ -405,9 +405,9 @@ const tokens = generateTokenScales({
         {#each Object.entries(spacingScale) as [step, value]}
           <div class="hbox(between) p(md) r(md) bg(gray-50)">
             <div class="hbox gap(lg)">
-              <code class="mono body(sm) c(purple-600) w(48)">{step}</code>
+              <code class="mono body(sm) c(purple-600) w(48px)">{step}</code>
               <div 
-                class="h(24) bg(purple-500) r(sm)"
+                class="h(2xl) bg(purple-500) r(sm)"
                 style="width: {value}"
               ></div>
             </div>
@@ -423,11 +423,11 @@ const tokens = generateTokenScales({
       
       <div class="vbox gap(md) overflow(x-auto)">
         {#each Object.entries(containerScale) as [step, value]}
-          <div class="hbox(between) p(md) r(md) bg(gray-50) min-w(400)">
+          <div class="hbox(between) p(md) r(md) bg(gray-50) min-w(400px)">
             <div class="hbox gap(lg)">
-              <code class="mono body(sm) c(purple-600) w(48)">{step}</code>
+              <code class="mono body(sm) c(purple-600) w(48px)">{step}</code>
               <div 
-                class="h(40) bg(purple-100) border(2/purple-300) r(sm) hbox(center)"
+                class="h(4xl) bg(purple-100) border(2/purple-300) r(sm) hbox(center)"
                 style="width: {value}; max-width: 100%"
               >
                 <span class="caption c(purple-700)">Container</span>

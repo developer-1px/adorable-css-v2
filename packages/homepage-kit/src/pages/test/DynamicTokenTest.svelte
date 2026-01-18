@@ -116,15 +116,15 @@
       </p>
       <div class="vbox gap(md) mt(lg)">
         <div class="hbox gap(sm) items(center)">
-          <div class="w(3) h(3) bg(green-500) r(full)"></div>
+          <div class="w(3px) h(3px) bg(green-500) r(full)"></div>
           <span class="text(sm)">Tokens are generated on-demand as classes are used</span>
         </div>
         <div class="hbox gap(sm) items(center)">
-          <div class="w(3) h(3) bg(green-500) r(full)"></div>
+          <div class="w(3px) h(3px) bg(green-500) r(full)"></div>
           <span class="text(sm)">Both CSS rules and tokens update dynamically</span>
         </div>
         <div class="hbox gap(sm) items(center)">
-          <div class="w(3) h(3) bg(green-500) r(full)"></div>
+          <div class="w(3px) h(3px) bg(green-500) r(full)"></div>
           <span class="text(sm)">No need to pre-register tokens manually</span>
         </div>
       </div>

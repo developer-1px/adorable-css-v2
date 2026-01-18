@@ -206,7 +206,7 @@
                             <Copy size="16" class="c(white)" />
                           {/if}
                         </div>
-                        <div class="absolute bottom(4) left(0) right(0) text(center)">
+                        <div class="absolute bottom(xs) left(0) right(0) text(center)">
                           <span class="text(2xs) c({parseInt(shade) >= 600 ? 'white.8' : 'black.6'}) font(medium)">{shade}</span>
                         </div>
                       </div>
