@@ -16,12 +16,11 @@ import { generateTokenCSS, defaultTokens, setTokenContext } from '../../02-desig
 import { generateUsedTokensCSS } from '../../02-design_tokens/tokenRegistry';
 import type { DesignTokens } from '../../02-design_tokens/design-system/tokens/index';
 import { createParsedSelector } from './ast-helpers';
-import { AnimationHandler } from './animation-handler';
 import { cssObjectToString } from './css-object-generator';
 import { createMediaQuery } from './breakpoints';
-import { extractImportanceLevel, addImportanceToSelector } from './importance-utils';
 import { createMemo } from '../utils/memo';
 import { resetCSS } from '../reset';
+import { getAllKeyframes } from '../../05-plugins/animations/animations';
 
 // Helper function to get layer from priority
 function getLayerFromPriority(priority: number): string {
@@ -29,6 +28,36 @@ function getLayerFromPriority(priority: number): string {
   if (priority >= RulePriority.UTILITY) return 'utility';
   if (priority >= RulePriority.LAYOUT) return 'layout';
   return 'component';
+}
+
+// Extract importance level from class name (! marks)
+interface ImportanceInfo {
+  level: number;
+  className: string;
+}
+
+function extractImportanceLevel(className: string): ImportanceInfo {
+  const importanceMatch = className.match(/(!+)$/);
+  const level = importanceMatch ? importanceMatch[1].length : 0;
+
+  return {
+    level,
+    className: level > 0 ? className.slice(0, -level) : className
+  };
+}
+
+// Prepend animation keyframes if needed
+function prependKeyframesIfNeeded(css: string, classNames: string[]): string {
+  const hasAnimations = classNames.some(c =>
+    c.includes('fade-') || c.includes('scale-') ||
+    c.includes('slide-') || c.includes('bounce-') ||
+    c.includes('float') || c.includes('animate(')
+  );
+
+  if (hasAnimations) {
+    return getAllKeyframes() + "\n" + css;
+  }
+  return css;
 }
 
 // Extract CSS properties from generated CSS string
@@ -252,7 +281,7 @@ function _generateCSSFromAdorableCSS(value: string): string {
   extractImportanceLevel(value);
 
   const rawSelector = "." + cssEscape(value);
-  let actualSelector = addImportanceToSelector(rawSelector);
+  let actualSelector = rawSelector;
 
   const allCSSResults: { mainCSS: string; nestedCSS: string[]; priority?: number }[] = [];
   let hasValidRules = false;
@@ -261,7 +290,7 @@ function _generateCSSFromAdorableCSS(value: string): string {
     const cssResult = v.combinators?.length > 0 && v.combinators[0].combinator === ":"
       ? (() => {
         const { selector, cssResult } = handlePseudoClass(v, rawSelector);
-        actualSelector = addImportanceToSelector(selector);
+        actualSelector = selector;
         return cssResult;
       })()
       : handleRegularSelector(v, rawSelector);
@@ -389,12 +418,11 @@ function generateResponsiveCSS(responsiveClassName: string): string {
   const rule = priorityRegistry.getAnyRule(ruleName.split('(')[0]);
   const _utilityLayer = rule ? getLayerFromPriority(rule.priority) : 'utility';
 
-  // Build final selector with importance
+  // Build final selector
   const responsiveSelector = "." + cssEscape(cleanClassName);
-  const finalSelector = addImportanceToSelector(responsiveSelector);
 
   // Wrap in media query
-  return `${mediaQuery}{${finalSelector}{${cssProperties}}}`;
+  return `${mediaQuery}{${responsiveSelector}{${cssProperties}}}`;
 }
 
 // Internal implementation
@@ -458,7 +486,7 @@ function _generateCSS(classList: string[]): string {
   const finalCSS = usedTokensCSS + '\n\n' + cssRules;
 
   // Include keyframes if animations are used
-  return AnimationHandler.prependKeyframesIfNeeded(finalCSS, uniqueClasses);
+  return prependKeyframesIfNeeded(finalCSS, uniqueClasses);
 }
 
 // Export directly (array input, not suitable for simple memo)

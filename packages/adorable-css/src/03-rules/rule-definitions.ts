@@ -9,14 +9,17 @@ import type { RuleHandler, KeywordRuleHandler } from './types';
 // Import all rule modules - centralized from index files
 import {
   displayRules, sizeRules, spacingRules, gridRules,
-  overflowRules, insetRules, scrollMt, scrollMb, scrollMl, scrollMr, scrollM
+  overflowRules, insetRules, divideRules, scrollMt, scrollMb, scrollMl, scrollMr, scrollM
 } from './layout';
 import { typographyRules, visualRules } from './style';
 import { colorRules } from '../02-design_tokens/design-system/colors/colors';
 import { positionCategoryRules } from './position';
-import { interactionRules } from './interaction';
+import { interactionRules, transitionRules } from './interaction';
 import { utilityRules } from './utilities/utilities';
 import { effectsRules } from './effects';
+import { letterSpacing } from './text/text-misc';
+import { bold, medium, semibold, light } from './text/bold';
+import { duration } from './interaction/transitions';
 
 // Extensions
 import {
@@ -82,7 +85,14 @@ export const RULE_GROUPS: RuleDefinitions = {
       layout: {
         name: 'Text Layout',
         rules: {
-          text: typographyRules.text
+          text: typographyRules.text,
+          tracking: letterSpacing, // Map tracking to letterSpacing handler
+          leading: typographyRules.line, // Map leading to line-height handler while we are at it
+          font: typographyRules.font, // Ensure font is mapped
+          bold: bold,
+          medium: medium,
+          semibold: semibold,
+          light: light,
         },
       }
     }
@@ -112,6 +122,11 @@ export const RULE_GROUPS: RuleDefinitions = {
         rules: {
           hbox: displayRules.hbox,
           vbox: displayRules.vbox,
+          block: displayRules.block,
+          inline: displayRules.inline,
+          "inline-block": displayRules["inline-block"],
+          none: displayRules.none,
+          hidden: displayRules.hidden,
           wrap: displayRules.wrap,
           pack: displayRules.pack,
           grid: gridRules.grid,
@@ -146,6 +161,10 @@ export const RULE_GROUPS: RuleDefinitions = {
         name: 'Sizing',
         rules: sizeRules,
       },
+      overflow: {
+        name: 'Overflow',
+        rules: overflowRules,
+      },
     }
   },
 
@@ -162,7 +181,8 @@ export const RULE_GROUPS: RuleDefinitions = {
       borders: {
         name: 'Borders & Radius',
         rules: {
-          ...visualRules
+          ...visualRules,
+          ...divideRules,
         },
       },
       Radius: {
@@ -220,7 +240,10 @@ export const RULE_GROUPS: RuleDefinitions = {
     subgroups: {
       states: {
         name: 'States',
-        rules: interactionRules,
+        rules: {
+          ...interactionRules,
+          ...transitionRules,
+        },
       },
       animation: {
         name: 'Animation',

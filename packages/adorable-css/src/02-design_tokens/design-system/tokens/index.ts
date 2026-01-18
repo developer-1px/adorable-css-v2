@@ -321,7 +321,7 @@ export function isToken(value: string, category: string): boolean {
     }
 
     // Check for basic size 02-design_tokens (xs, sm, md, lg, xl)
-    if (['4xs', '3xs', '2xs', 'xs', 'sm', 'md', 'lg', 'xl'].includes(value)) {
+    if (['4xs', '3xs', '2xs', 'xxs', 'xs', 'sm', 'md', 'lg', 'xl'].includes(value)) {
       return true;
     }
   }

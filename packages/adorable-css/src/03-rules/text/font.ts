@@ -12,11 +12,21 @@ export const font: RuleHandler = (args?: string): CSSRule => {
     return fontFamily(args);
   }
 
-  // For backward compatibility during migration, we could forward to text() logic if it looks like a size
-  // But strictly per request, font() should be family only or eventually deprecated/merged.
-  // Given we are "fixing" the mental model, let's keep font() for family only.
+  // Support font weights (bold, medium, etc.) via font() for consistency
+  const weightKeywords = ['bold', 'semibold', 'medium', 'light', 'normal'];
+  if (weightKeywords.includes(args)) {
+    const weightMap: Record<string, string> = {
+      bold: '700',
+      semibold: '600',
+      medium: '500',
+      normal: '400',
+      light: '300'
+    };
+    return { 'font-weight': weightMap[args] };
+  }
 
-  return {};
+  // Support arbitrary font family string
+  return { 'font-family': args };
 };
 
 // Font family presets

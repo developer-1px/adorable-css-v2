@@ -36,7 +36,7 @@ describe('dynamicTokens', () => {
     })
 
     it('should handle numeric 02-design_tokens', () => {
-      expect(generateSpacingCalc('0')).toBe('0')
+      expect(generateSpacingCalc('0')).toBe('var(--spacing-0)')
       expect(generateSpacingCalc('1')).toBe('var(--spacing-1)')
       expect(generateSpacingCalc('10')).toBe('var(--spacing-10)')
     })
@@ -77,9 +77,9 @@ describe('dynamicTokens', () => {
     })
 
     it('should handle numeric size 02-design_tokens', () => {
-      expect(generateSizeCalc('0')).toBe('0')
-      expect(generateSizeCalc('100')).toBe('100rem')
-      expect(generateSizeCalc('50')).toBe('50rem')
+      expect(generateSizeCalc('0')).toBe('var(--size-0)')
+      expect(generateSizeCalc('100')).toBe('var(--size-100)')
+      expect(generateSizeCalc('50')).toBe('var(--size-50)')
     })
 
     it('should register 02-design_tokens when generating', () => {

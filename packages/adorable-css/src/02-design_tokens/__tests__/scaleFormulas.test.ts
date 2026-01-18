@@ -1,72 +1,71 @@
 import { describe, it, expect } from 'vitest'
 import {
-  calculateSpacingMultiplier,
-  calculateFontMultiplier,
+  calculateMultiplier,
   formatMultiplier
 } from '../scaleFormulas'
 
 describe('scaleFormulas', () => {
-  describe('calculateSpacingMultiplier', () => {
+  describe('calculateMultiplier (spacing)', () => {
     it('should calculate linear spacing correctly', () => {
       const config = { mode: 'linear' as const }
-      
-      expect(calculateSpacingMultiplier(1, config)).toBe(1)
-      expect(calculateSpacingMultiplier(5, config)).toBe(5)
-      expect(calculateSpacingMultiplier(10, config)).toBe(10)
+
+      expect(calculateMultiplier(1, config, 'spacing')).toBe(1)
+      expect(calculateMultiplier(5, config, 'spacing')).toBe(5)
+      expect(calculateMultiplier(10, config, 'spacing')).toBe(10)
     })
 
     it('should calculate exponential spacing correctly', () => {
       const config = { mode: 'exponential' as const, factor: 2 }
-      
-      expect(calculateSpacingMultiplier(1, config)).toBe(1)
-      expect(calculateSpacingMultiplier(2, config)).toBe(2)
-      expect(calculateSpacingMultiplier(3, config)).toBe(4)
-      expect(calculateSpacingMultiplier(4, config)).toBe(8)
+
+      expect(calculateMultiplier(1, config, 'spacing')).toBe(1)
+      expect(calculateMultiplier(2, config, 'spacing')).toBe(2)
+      expect(calculateMultiplier(3, config, 'spacing')).toBe(4)
+      expect(calculateMultiplier(4, config, 'spacing')).toBe(8)
     })
 
     it('should calculate ratio spacing correctly', () => {
       const config = { mode: 'ratio' as const, ratio: 1.5 }
-      
-      expect(calculateSpacingMultiplier(1, config)).toBe(1)
-      expect(calculateSpacingMultiplier(2, config)).toBe(1.5)
-      expect(calculateSpacingMultiplier(3, config)).toBe(2.25)
+
+      expect(calculateMultiplier(1, config, 'spacing')).toBe(1)
+      expect(calculateMultiplier(2, config, 'spacing')).toBe(1.5)
+      expect(calculateMultiplier(3, config, 'spacing')).toBe(2.25)
     })
 
     it('should use custom spacing values when provided', () => {
-      const config = { 
-        mode: 'custom' as const, 
-        values: { '1': 0.5, '2': 1, '3': 2 } 
+      const config = {
+        mode: 'custom' as const,
+        values: { '1': 0.5, '2': 1, '3': 2 }
       }
-      
-      expect(calculateSpacingMultiplier(1, config)).toBe(0.5)
-      expect(calculateSpacingMultiplier(2, config)).toBe(1)
-      expect(calculateSpacingMultiplier(3, config)).toBe(2)
-      expect(calculateSpacingMultiplier(4, config)).toBeCloseTo(1.953125, 4) // Falls back to ratio
+
+      expect(calculateMultiplier(1, config, 'spacing')).toBe(0.5)
+      expect(calculateMultiplier(2, config, 'spacing')).toBe(1)
+      expect(calculateMultiplier(3, config, 'spacing')).toBe(2)
+      expect(calculateMultiplier(4, config, 'spacing')).toBeCloseTo(1.953125, 4) // Falls back to ratio
     })
   })
 
-  describe('calculateFontMultiplier', () => {
+  describe('calculateMultiplier (font)', () => {
     it('should calculate font multipliers with ratio', () => {
       const config = { mode: 'ratio' as const, ratio: 1.25 }
-      
-      expect(calculateFontMultiplier(-2, config)).toBeCloseTo(0.64, 2)
-      expect(calculateFontMultiplier(-1, config)).toBeCloseTo(0.8, 2)
-      expect(calculateFontMultiplier(0, config)).toBe(1)
-      expect(calculateFontMultiplier(1, config)).toBe(1.25)
-      expect(calculateFontMultiplier(2, config)).toBeCloseTo(1.5625, 4)
+
+      expect(calculateMultiplier(-2, config, 'font')).toBeCloseTo(0.64, 2)
+      expect(calculateMultiplier(-1, config, 'font')).toBeCloseTo(0.8, 2)
+      expect(calculateMultiplier(0, config, 'font')).toBe(1)
+      expect(calculateMultiplier(1, config, 'font')).toBe(1.25)
+      expect(calculateMultiplier(2, config, 'font')).toBeCloseTo(1.5625, 4)
     })
 
     it('should use custom font values when provided', () => {
-      const config = { 
+      const config = {
         mode: 'custom' as const,
         ratio: 1.25,
-        values: { '-1': 0.875, '0': 1, '1': 1.125 } 
+        values: { '-1': 0.875, '0': 1, '1': 1.125 }
       }
-      
-      expect(calculateFontMultiplier(-1, config)).toBe(0.875)
-      expect(calculateFontMultiplier(0, config)).toBe(1)
-      expect(calculateFontMultiplier(1, config)).toBe(1.125)
-      expect(calculateFontMultiplier(2, config)).toBeCloseTo(1.5625, 4) // Falls back to ratio
+
+      expect(calculateMultiplier(-1, config, 'font')).toBe(0.875)
+      expect(calculateMultiplier(0, config, 'font')).toBe(1)
+      expect(calculateMultiplier(1, config, 'font')).toBe(1.125)
+      expect(calculateMultiplier(2, config, 'font')).toBeCloseTo(1.5625, 4) // Falls back to ratio
     })
   })
 

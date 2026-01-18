@@ -25,10 +25,5 @@ export function calculateMultiplier(
   }
 }
 
-// Legacy functions for backwards compatibility
-export const calculateSpacingMultiplier = (step: number, config: TokenScaleConfig) => calculateMultiplier(step, config, 'spacing');
-export const calculateFontMultiplier = (step: number, config: TokenScaleConfig) => calculateMultiplier(step, config, 'font');
-export const calculateSizeMultiplier = (step: number, config: TokenScaleConfig) => calculateMultiplier(step, config, 'size');
-
-export const formatMultiplier = (value: number): string => 
+export const formatMultiplier = (value: number): string =>
   value === Math.floor(value) ? value.toString() : value.toFixed(4).replace(/\.?0+$/, '');

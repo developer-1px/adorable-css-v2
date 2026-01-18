@@ -47,9 +47,14 @@ export const DEFAULT_SCALE_CONFIG: Required<ScaleConfig> = {
   unit: 'px'  // Default to px
 };
 
-// Base token order (smallest to largest)
-const TOKEN_ORDER = ['xs', 'sm', 'md', 'lg', 'xl'] as const;
-const MD_INDEX = 2; // md is at index 2
+// Base step values for t-shirt sizes
+const BASE_STEPS: Record<string, number> = {
+  'xs': -2,
+  'sm': -1,
+  'md': 0,
+  'lg': 1,
+  'xl': 2
+};
 
 /**
  * Get step value for a token dynamically
@@ -57,43 +62,32 @@ const MD_INDEX = 2; // md is at index 2
  * @param category - The category of the token for category-specific scaling
  */
 export function getTokenStep(token: string, category?: 'font' | 'spacing' | 'size' | 'container'): number {
-  // Handle pure numeric 02-design_tokens (e.g., "10", "20")
+  // Handle pure numeric tokens (e.g., "10", "20")
   const numericValue = parseInt(token);
   if (!isNaN(numericValue) && token === numericValue.toString()) {
     return numericValue;
   }
-  
-  // Handle numbered xs 02-design_tokens (4xs, 3xs, 2xs)
-  const xsMatch = token.match(/^(\d+)xs$/);
-  if (xsMatch) {
-    const num = parseInt(xsMatch[1]);
-    return -num + 1; // 4xs = -3, 3xs = -2, 2xs = -1
-  }
-  
-  // Handle numbered xl 02-design_tokens (2xl, 3xl, etc.)
+
+  // Handle numbered xl tokens (2xl, 3xl, etc.)
   const xlMatch = token.match(/^(\d+)xl$/);
   if (xlMatch) {
     const num = parseInt(xlMatch[1]);
-    if (category === 'font') {
-      // For font: 2xl = 3, 3xl = 4, etc.
-      return num + 1;
-    } else {
-      // For spacing/size: 2xl = 6, 3xl = 7, etc.
-      return num + 4;
-    }
+    return category === 'font' ? num + 1 : num + 4;
   }
-  
-  // Handle base 02-design_tokens
-  const baseIndex = TOKEN_ORDER.indexOf(token as any);
-  if (baseIndex !== -1) {
-    if (category === 'font') {
-      // For font: md = 0 (base 16px)
-      return baseIndex - MD_INDEX; // xs=-2, sm=-1, md=0, lg=1, xl=2
-    } else {
-      // For spacing/size: md = 3
-      return baseIndex + 1; // xs=1, sm=2, md=3, lg=4, xl=5
-    }
+
+  // Handle numbered xs tokens (2xs, 3xs, etc.)
+  const xsMatch = token.match(/^(\d+)xs$/);
+  if (xsMatch) {
+    const num = parseInt(xsMatch[1]);
+    return -num + 1; // 2xs = -1, 3xs = -2, 4xs = -3
   }
-  
-  return category === 'font' ? 0 : 3; // default to md
+
+  // Handle base tokens
+  const baseStep = BASE_STEPS[token];
+  if (baseStep !== undefined) {
+    return category === 'font' ? baseStep : baseStep + 3;
+  }
+
+  // Default to md
+  return category === 'font' ? 0 : 3;
 }

@@ -5,6 +5,11 @@ import type { CSSRule, RuleHandler } from '../types';
 
 // Responsive type scale with fluid sizing
 const responsiveScale = {
+  xxs: {
+    mobile: '0.625rem',   // 10px
+    tablet: '0.6875rem',  // 11px
+    desktop: '0.75rem',   // 12px
+  },
   xs: {
     mobile: '0.75rem',    // 12px
     tablet: '0.8125rem',  // 13px
@@ -71,9 +76,9 @@ export const textResponsive: RuleHandler = (scale?: string): CSSRule => {
   if (!scale || !responsiveScale[scale as keyof typeof responsiveScale]) {
     return {};
   }
-  
+
   const sizes = responsiveScale[scale as keyof typeof responsiveScale];
-  
+
   return {
     'font-size': sizes.mobile,
     '@media (min-width: 768px)': {
@@ -90,7 +95,7 @@ export const textFluid: RuleHandler = (scale?: string): CSSRule => {
   if (!scale || !fluidScale[scale as keyof typeof fluidScale]) {
     return {};
   }
-  
+
   return {
     'font-size': fluidScale[scale as keyof typeof fluidScale],
   };
@@ -106,7 +111,7 @@ export const typographyPreset: RuleHandler = (preset?: string): CSSRule => {
       'letter-spacing': '-0.05em',
       'font-weight': '900',
     },
-    
+
     // Page title
     'page-title': {
       'font-size': 'clamp(2rem, 1.5rem + 2.5vw, 3.5rem)',
@@ -114,7 +119,7 @@ export const typographyPreset: RuleHandler = (preset?: string): CSSRule => {
       'letter-spacing': '-0.025em',
       'font-weight': '800',
     },
-    
+
     // Section heading
     'section-heading': {
       'font-size': 'clamp(1.5rem, 1.25rem + 1.25vw, 2.25rem)',
@@ -122,28 +127,28 @@ export const typographyPreset: RuleHandler = (preset?: string): CSSRule => {
       'letter-spacing': '-0.025em',
       'font-weight': '700',
     },
-    
+
     // Card title
     'card-title': {
       'font-size': 'clamp(1.125rem, 1rem + 0.625vw, 1.375rem)',
       'line-height': '1.4',
       'font-weight': '600',
     },
-    
+
     // Body text
     'body': {
       'font-size': 'clamp(1rem, 0.95rem + 0.25vw, 1.125rem)',
       'line-height': '1.6',
       'font-weight': '400',
     },
-    
+
     // Small text
     'small': {
       'font-size': 'clamp(0.875rem, 0.85rem + 0.125vw, 0.9375rem)',
       'line-height': '1.5',
       'font-weight': '400',
     },
-    
+
     // Caption
     'caption': {
       'font-size': 'clamp(0.75rem, 0.725rem + 0.125vw, 0.8125rem)',
@@ -151,7 +156,7 @@ export const typographyPreset: RuleHandler = (preset?: string): CSSRule => {
       'font-weight': '400',
     },
   };
-  
+
   return presets[preset || ''] || {};
 };
 
@@ -164,11 +169,11 @@ export const leadingResponsive: RuleHandler = (value?: string): CSSRule => {
     relaxed: '1.6',
     loose: '1.8',
   };
-  
+
   if (!value || !leadingValues[value]) {
     return {};
   }
-  
+
   return {
     'line-height': leadingValues[value],
   };
