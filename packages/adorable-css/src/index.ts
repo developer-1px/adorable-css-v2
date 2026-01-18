@@ -9,7 +9,6 @@ import "./01-core/runtime/auto-inject";
 export * from "./01-core/parser";
 export * from "./03-rules";
 export * from "./01-core/values/makeValue";
-export * from "./01-core/values/scaleUtilities";
 export * from "./02-design_tokens";
 export * from "./02-design_tokens/design-system/tokens/index";
 export * from "./02-design_tokens/design-system/colors";

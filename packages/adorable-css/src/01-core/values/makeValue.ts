@@ -1,7 +1,7 @@
 
 import { colorPalette } from '../../02-design_tokens/design-system/colors/colors'
 import { BASE_COLOR_VALUES, TONE_VALUES } from './color-data'
-import { makeColor, makeHEX, makeHLS, makeRGB } from './color-processor'
+import { makeColor } from './color-processor'
 import {
   cssvar, cssString, splitValues, makeValues, makeCommaValues,
   makeNumber, makeRatio, percentToEm, px, pxGrid, deg, makeSide
@@ -12,7 +12,7 @@ import { isToken } from '../../02-design_tokens/design-system/tokens/index'
 
 // Re-export all functions for backward compatibility
 export {
-  makeColor, makeHEX, makeHLS, makeRGB,
+  makeColor,
   cssvar, cssString, splitValues, makeValues, makeCommaValues,
   makeNumber, makeRatio, percentToEm, px, pxGrid, deg, makeSide
 }

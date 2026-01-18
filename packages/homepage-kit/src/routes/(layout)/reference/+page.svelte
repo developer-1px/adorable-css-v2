@@ -3,6 +3,32 @@
   import { Search, Hash, Copy, Check, ChevronRight } from 'lucide-svelte';
   import { fade, fly } from 'svelte/transition';
   import { onDestroy } from 'svelte';
+  import { generateCSS } from 'adorable-css';
+
+  // Helper to get CSS content
+  function getGeneratedCSS(syntax: string): string {
+    try {
+      const css = generateCSS([syntax]);
+      
+      // 1. Simulate CSS escaping (match how AdorableCSS generates class names)
+      //    It adds a backslash before any non-alphanumeric character (except hyphen)
+      const cssClass = "." + syntax.replace(/([^a-zA-Z0-9-])/g, '\\$1');
+
+      // 2. Escape valid CSS class string for Regex usage
+      //    Escape characters that have special meaning in regex: \ ^ $ . * + ? ( ) [ ] { } |
+      const regexSource = cssClass.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+      
+      // 3. Match the class name followed by the content inside braces
+      //    [^\{]* matches spaces or other chars before the brace
+      //    \{([^\}]+)\} captures the content inside braces
+      const regex = new RegExp(regexSource + "[^\\{]*\\{([^\\}]+)\\}");
+
+      const match = css.match(regex);
+      return match ? match[1].trim() : '';
+    } catch (e) {
+      return '';
+    }
+  }
 
   let searchQuery = '';
   let activeCategory = '';
@@ -155,8 +181,8 @@
     </aside>
 
     <!-- Main Content -->
-    <main class="flex(1) min-w(0) px(2xl) py(4xl) lg:px(4xl) lg:py(5xl)">
-      <div class="vbox gap(4xl)">
+    <main class="flex(1) min-w(0) px(xl) py(2xl) lg:px(2xl) lg:py(4xl)">
+      <div class="vbox gap(2xl)">
         
         {#if Object.keys(filteredData).length === 0}
           <div class="vbox(center) py(6xl) gap(xl)">
@@ -179,70 +205,65 @@
 
           <section id={toId(category)} class="scroll-mt(100px)" use:spy>
             <!-- Category Header -->
-            <div class="vbox gap(sm) mb(2xl) pb(xl) border-b(1px/gray-100)">
-              <div class="hbox(middle) gap(md)">
-                <div class="p(sm) bg(indigo-50) c(indigo-600) r(lg)">
-                  <Hash size={24} />
+            <div class="vbox gap(xs) mb(xl) pb(lg) border-b(1px/gray-100)">
+              <div class="hbox(middle) gap(sm)">
+                <div class="p(xs) bg(indigo-50) c(indigo-600) r(md)">
+                  <Hash size={18} />
                 </div>
-                <h2 class="font(display-sm) bold(800) c(gray-900) tracking(tight)">{categoryTitle}</h2>
+                <h2 class="font(title-sm) bold(700) c(gray-900) tracking(tight)">{categoryTitle}</h2>
+                {#if categorySubtitle}
+                  <span class="font(body-sm) c(gray-400)">{categorySubtitle}</span>
+                {/if}
               </div>
-              {#if categorySubtitle}
-                <p class="font(body) c(gray-500) pl(4xl)">{categorySubtitle}</p>
-              {/if}
             </div>
 
             <!-- Subcategories -->
-            <div class="vbox gap(3xl)">
+            <div class="vbox gap(xl)">
               {#each Object.entries(subcategories) as [subcategory, items]}
-                <div class="vbox gap(lg)">
-                  <h3 class="font(title-md) bold(700) c(gray-800) hbox(middle) gap(sm)">
-                    <div class="w(4px) h(24px) bg(indigo-500) r(full)"></div>
+                <div class="vbox gap(md)">
+                  <h3 class="font(body-sm) bold(600) c(gray-700) hbox(middle) gap(xs)">
+                    <div class="size(4px) bg(indigo-500) r(full)"></div>
                     {subcategory}
                   </h3>
 
-                  <!-- Props Table -->
-                  <div class="w(full) border(1px/gray-200) r(xl) overflow(hidden) shadow(sm)">
-                    <table class="w(full) text(left) border-collapse">
-                      <thead class="bg(gray-50/50) border-b(1px/gray-200)">
-                        <tr>
-                          <th class="py(md) px(xl) font(medium) text(xs) c(gray-500) uppercase tracking(wider) w(200px)">Property</th>
-                          <th class="py(md) px(xl) font(medium) text(xs) c(gray-500) uppercase tracking(wider)">Syntax Examples</th>
-                        </tr>
-                      </thead>
-                      <tbody class="divide-y(1/gray-100) bg(white)">
-                        {#each items as item}
-                          <tr class="group hover:bg(gray-50/50) transition">
-                            <td class="py(lg) px(xl) align(top)">
-                              <code class="font(mono) text(sm) c(indigo-600) bg(indigo-50) px(xs) py(2px) r(md) bold(600)">
-                                {item.property}
-                              </code>
-                            </td>
-                            <td class="py(lg) px(xl)">
-                              <div class="hbox flex-wrap gap(sm)">
-                                {#each item.syntax as syntax}
-                                  <button
-                                    class="hbox(middle) gap(xs) px(sm) py(xs) r(md) bg(gray-100) hover:bg(gray-200) border(1px/transparent) hover:border(gray-300) transition cursor(pointer) group/btn text(left)"
-                                    on:click={() => copyToClipboard(syntax)}
-                                    title="Click to copy"
-                                  >
-                                    <code class="font(mono) text(sm) c(gray-700)">{syntax}</code>
-                                    {#if copiedSyntax === syntax}
-                                      <span in:fade={{ duration: 150 }} class="c(green-600)">
-                                        <Check size={12} />
-                                      </span>
-                                    {:else}
-                                      <span class="opacity(0) group-hover/btn:opacity(100) transition c(gray-400)">
-                                        <Copy size={12} />
-                                      </span>
-                                    {/if}
-                                  </button>
-                                {/each}
+                  <!-- Props Grid -->
+                  <div class="grid(cols-1) sm:grid(cols-2) xl:grid(cols-3) gap(md)">
+                    {#each items as item}
+                      <div class="vbox gap(sm) p(md) r(lg) bg(gray-50/50) hover:bg(gray-50) transition group">
+                        <!-- Property Name -->
+                        <div class="hbox(middle) gap(sm)">
+                          <code class="font(mono) text(xs) c(indigo-600) bg(indigo-50) px(xs) py(2px) r(md) bold(600)">
+                            {item.property}
+                          </code>
+                          <div class="h(1px) flex(1) bg(gray-200/50)"></div>
+                        </div>
+
+                        <!-- Syntax Items -->
+                        <div class="vbox gap(2px)">
+                          {#each item.syntax as syntax}
+                             {@const css = getGeneratedCSS(syntax)}
+                            <!-- svelte-ignore a11y-click-events-have-key-events -->
+                            <div 
+                              class="hbox(top) gap(sm) p(sm) r(md) hover:bg(white) hover:shadow(sm) border(1px/transparent) hover:border(gray-200) transition cursor(pointer) relative"
+                              on:click={() => copyToClipboard(syntax)}
+                              role="button"
+                              tabindex="0"
+                            >
+                              <div class="vbox gap(2px) flex(1) min-w(0)">
+                                <code class="font(mono) text(sm) c(gray-700)">{syntax}</code>
+                                <code class="font(mono) text(xs) c(gray-400) break-all">{css}</code>
                               </div>
-                            </td>
-                          </tr>
-                        {/each}
-                      </tbody>
-                    </table>
+
+                              {#if copiedSyntax === syntax}
+                                <span in:fade={{ duration: 150 }} class="c(green-600) absolute top(sm) right(sm)">
+                                  <Check size={14} />
+                                </span>
+                              {/if}
+                            </div>
+                          {/each}
+                        </div>
+                      </div>
+                    {/each}
                   </div>
                 </div>
               {/each}

@@ -141,12 +141,8 @@
             </div>
             <div class="vbox gap(sm)">
                 <code class="font(mono) c(slate-300) text(sm) hbox gap(md)">
-                   <span class="c(emerald-400) bold(700)">$</span> 
-                   <span>npm install adorable-css</span>
-                </code>
-                <code class="font(mono) c(slate-300) text(sm) hbox gap(md)">
-                   <span class="c(emerald-400) bold(700)">$</span> 
-                   <span>npx adorable-init</span>
+                   <span class="c(emerald-400) bold(700)">#</span> 
+                   <span>Project Archived</span>
                 </code>
             </div>
          </div>

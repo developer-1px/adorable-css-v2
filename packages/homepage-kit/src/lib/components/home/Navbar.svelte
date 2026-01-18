@@ -23,10 +23,10 @@ const navItems = [
   <div class="relative hbox(between) h(72px) px(xl) max-w(1440px) mx(auto)">
     <!-- Logo & Brand -->
     <a href="/" class="hbox(middle) gap(sm) text(none) group">
-      <div class="relative transition-transform duration(300) group-hover:scale(1.1) group-hover:rotate(-5deg)">
+      <div class="relative">
         <Logo size={36} filled />
       </div>
-      <span class="text(xl) font(800) tracking(tight) c(gray-900)">
+      <span class="font(xl) bold(800) tracking(tight) c(gray-900)">
         Adorable<span class="c(indigo-600)">CSS</span>
       </span>
     </a>
@@ -38,9 +38,9 @@ const navItems = [
         {#each navItems as item}
           <a
             href={item.href}
-            class="px(lg) py(6px) r(full) text(sm) font(medium) transition-all duration(200) text(none)
+            class="px(lg) py(6px) r(full) font(sm) bold(medium) text(none)
                    {currentPath.startsWith(item.href) 
-                     ? 'bg(white) c(indigo-600) shadow(sm) font(bold)' 
+                     ? 'bg(white) c(indigo-600) shadow(sm) bold' 
                      : 'c(gray-600) hover:c(gray-900) hover:bg(gray-200/50)'}"
           >
             {item.label}
@@ -53,14 +53,14 @@ const navItems = [
         <a
           href="https://github.com/adorablecss/adorable-css"
           target="_blank"
-          class="size(40) hbox(center) r(full) c(gray-500) hover:bg(gray-100) hover:c(black) transition"
+          class="size(40) hbox(pack) r(full) c(gray-500) hover:bg(gray-100) hover:c(black)"
         >
           <Github size="20" />
         </a>
 
         <a 
           href="/docs/getting-started" 
-          class="h(4xl) px(xl) hbox(center) r(full) bg(gray-900) c(white) text(sm) font(bold) hover:bg(black) hover:scale(1.05) transition shadow(lg) shadow(indigo-500/20) text(none)"
+          class="h(40px) px(xl) hbox(pack) r(full) bg(gray-900) c(white) font(sm) bold hover:bg(black) shadow(lg) shadow(indigo-500/20) text(none)"
         >
           Get Started
         </a>
@@ -69,7 +69,7 @@ const navItems = [
 
     <!-- Mobile Menu Button -->
     <button
-      class="size(40) hbox(center) hover:bg(gray-100) r(md) transition lg:hidden c(gray-600)"
+      class="size(40) hbox(pack) hover:bg(gray-100) r(md) lg:hidden c(gray-600)"
       on:click={() => menuOpen = !menuOpen}
     >
       {#if menuOpen}
@@ -82,11 +82,11 @@ const navItems = [
 
   <!-- Mobile Navigation -->
   {#if menuOpen}
-    <div class="absolute top(full) left(0) right(0) h(calc(100vh-72px)) bg(white) border-t(1/gray-200) lg:hidden p(2xl) vbox gap(xl) overflow-y-auto">
+  <div class="absolute top(full) left(0) right(0) h(calc(100vh-72px)) bg(white) border-t(1/gray-200) lg:hidden p(2xl) vbox gap(xl) overflow-y-auto">
       {#each navItems as item}
         <a
           href={item.href}
-          class="text(2xl) font(bold) c(gray-900) hover:c(indigo-600) text(none)"
+          class="font(2xl) bold c(gray-900) hover:c(indigo-600) text(none)"
           on:click={() => menuOpen = false}
         >
           {item.label}
@@ -95,7 +95,7 @@ const navItems = [
       <div class="w(full) h(1px) bg(gray-100)"></div>
       <a 
         href="/docs/getting-started" 
-        class="w(full) py(lg) r(lg) bg(indigo-600) c(white) text(center) font(bold) text(lg)"
+        class="w(full) py(lg) r(lg) bg(indigo-600) c(white) text(center) bold font(lg)"
         on:click={() => menuOpen = false}
       >
         Get Started

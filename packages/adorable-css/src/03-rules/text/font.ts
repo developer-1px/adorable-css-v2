@@ -63,6 +63,14 @@ export const font: RuleHandler = (v?: string): CSSRule => {
           result['letter-spacing'] = String(px(part));
         }
       }
+
+      // Fourth part - font weight
+      if (index === 3) {
+        if (+part || ['bold', 'semibold', 'medium', 'normal', 'light'].includes(part)) {
+          const weightMap: Record<string, string> = { bold: '700', semibold: '600', medium: '500', normal: '400', light: '300' };
+          result['font-weight'] = weightMap[part] || String(part);
+        }
+      }
     });
 
     if (Object.keys(result).length > 0) return result;

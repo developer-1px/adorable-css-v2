@@ -4,7 +4,7 @@ import type { ComponentDefinition } from '../defineComponent';
 // VitePress-inspired prose component with refined typography
 const proseDefinition: ComponentDefinition = {
   // Base typography with optimal reading experience
-  base: 'text(16/1.75) c(neutral-800)',
+  base: 'text(16/1.75) c(neutral-800) break-words',
 
   selectors: {
     // Typography hierarchy using heading component with margin
@@ -16,7 +16,7 @@ const proseDefinition: ComponentDefinition = {
     'h6': 'heading(h6) c(neutral-900) mt(lg) mb(sm)',
 
     // Body & inline elements - VitePress inspired
-    'p': 'text(16/1.75) mb(20) c(neutral-800)',
+    'p': 'text(16/1.75) mb(20) c(neutral-800) break-words',
     'strong': 'bold(700) c(neutral-900)',
     'em': 'italic',
     'mark': 'bg(warning.2) px(4) py(1) r(2)',

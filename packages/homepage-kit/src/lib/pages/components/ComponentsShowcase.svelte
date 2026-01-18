@@ -1,115 +1,95 @@
 <script lang="ts">
-  import ComponentVariantsPreview from '$lib/components/docs/ComponentVariantsPreview.svelte';
+  import ComponentCard from '$lib/components/docs/ComponentCard.svelte';
   
-  // Import AdorableCSS components and their definitions
+  // Import AdorableCSS components
   import { 
     btnString, 
     badgeString, 
     cardString, 
     headingString, 
     inputString, 
-    textareaString,
-    buttonDefinition,
-    badgeDefinition,
-    cardDefinition,
-    headingDefinition,
-    inputDefinition,
-    textareaDefinition
+    textareaString
   } from 'adorable-css';
+
+  const components = [
+    {
+      title: "Button",
+      description: "Interactive button element",
+      fn: btnString,
+      args: "primary/lg",
+      children: "Button",
+      renderAs: "button"
+    },
+    {
+      title: "Badge",
+      description: "Status indicator",
+      fn: badgeString,
+      args: "neutral/md",
+      children: "Badge",
+      renderAs: "span"
+    },
+    {
+      title: "Card",
+      description: "Container for content",
+      fn: cardString,
+      args: "elevated/lg",
+      children: "Card Content",
+      renderAs: "div"
+    },
+    {
+      title: "Heading",
+      description: "Section titles",
+      fn: headingString,
+      args: "h3",
+      children: "Typography",
+      renderAs: "h3"
+    },
+    {
+      title: "Input",
+      description: "Form input field",
+      fn: inputString,
+      args: "text",
+      children: "Type something...",
+      renderAs: "input"
+    },
+    {
+      title: "Textarea",
+      description: "Multi-line input",
+      fn: textareaString,
+      args: "resize",
+      children: "Type a message...",
+      renderAs: "textarea"
+    }
+  ] as const;
 </script>
 
-<div class="min-h(screen) bg(gray-50)">
+<div class="min-h(screen) bg(white)">
   <!-- Header -->
-  <header class="pt(4xl) pb(2xl) px(2xl) bg(white) border-b(1/gray-200)">
-    <div class="max-w(full)">
-      <h1 class="display(lg) text(center) mb(lg)">
-        Component Showcase
+  <header class="py(4xl) px(xl) border-b(1/gray-100)">
+    <div class="max-w(7xl) mx(auto)">
+      <h1 class="font(bold) text(4xl) tracking(tight) mb(md)">
+        Components
       </h1>
-      <p class="text(xl) text(center) c(gray-600) max-w(4xl) mx(auto)">
-        Explore all component variants and combinations with live preview and code generation
+      <p class="text(xl) c(gray-500) max-w(3xl)">
+        Beautifully designed components built with AdorableCSS. 
+        Copy and paste into your apps.
       </p>
     </div>
   </header>
   
-  <!-- Main Content -->
-  <main class="py(4xl)">
-    <div class="max-w(full) px(2xl)">
-      <div class="vbox gap(6xl)">
-        
-        <!-- Button Component -->
-        <section>
-          <ComponentVariantsPreview
-            componentName="btn"
-            componentFunction={btnString}
-            definition={buttonDefinition}
-            showCode={false}
-            childrenContent="Button"
-          />
-        </section>
-        
-        <!-- Badge Component -->
-        <section>
-          <ComponentVariantsPreview
-            componentName="badge"
-            componentFunction={badgeString}
-            definition={badgeDefinition}
-            showCode={false}
-            childrenContent="Badge"
-          />
-        </section>
-        
-        <!-- Card Component -->
-        <section>
-          <ComponentVariantsPreview
-            componentName="card"
-            componentFunction={cardString}
-            definition={cardDefinition}
-            showCode={false}
-            childrenContent="Card content goes here"
-            customExamples={[
-              {
-                label: 'Card with content',
-                args: 'elevated/lg',
-                children: 'This is a card with some example content to show how it looks with real data.'
-              }
-            ]}
-          />
-        </section>
-        
-        <!-- Heading Component -->
-        <section>
-          <ComponentVariantsPreview
-            componentName="heading"
-            componentFunction={headingString}
-            definition={headingDefinition}
-            showCode={false}
-            childrenContent="Heading Text"
-          />
-        </section>
-        
-        <!-- Input Component -->
-        <section>
-          <ComponentVariantsPreview
-            componentName="input"
-            componentFunction={inputString}
-            definition={inputDefinition}
-            showCode={false}
-            childrenContent="Placeholder text..."
-          />
-        </section>
-        
-        <!-- Textarea Component -->
-        <section>
-          <ComponentVariantsPreview
-            componentName="textarea"
-            componentFunction={textareaString}
-            definition={textareaDefinition}
-            showCode={false}
-            childrenContent="Enter your message..."
-          />
-        </section>
-        
-      </div>
+  <!-- Main Grid -->
+  <main class="max-w(7xl) mx(auto) px(xl) py(4xl)">
+    <div class="grid gap(xl) grid-cols(1) sm:grid-cols(2) lg:grid-cols(3)">
+      {#each components as comp}
+        <ComponentCard
+          title={comp.title}
+          description={comp.description}
+          componentFunction={comp.fn}
+          exampleArgs={comp.args}
+          children={comp.children}
+          renderAs={comp.renderAs}
+        />
+      {/each}
     </div>
   </main>
 </div>

@@ -94,45 +94,5 @@ export class DefaultColorProcessor implements ColorProcessor {
   }
 }
 
-// HEX 색상 처리기
-export class HexColorProcessor implements ColorProcessor {
-  process(value: string): string {
-    const [rgb, a] = value.split('.')
-    if (a && rgb.length === 4) {
-      return `rgba(${parseInt(rgb[1] + rgb[1], 16)},${parseInt(rgb[2] + rgb[2], 16)},${parseInt(rgb[3] + rgb[3], 16)},${a.includes('.') ? a : '0.' + a})`
-    }
-    return value
-  }
-}
-
-// HSL 색상 처리기  
-export class HslColorProcessor implements ColorProcessor {
-  process(value: string): string {
-    const [h, s, l, a] = value.split(',')
-    return 'hsl' + (a ? 'a' : '') + '(' + [h, s, l, a].filter(Boolean).map(cssvar).join() + ')'
-  }
-}
-
-// RGB 색상 처리기
-export class RgbColorProcessor implements ColorProcessor {
-  process(value: string): string {
-    const [r, g, b, a] = value.split(',')
-    return 'rgb' + (a ? 'a' : '') + '(' + [r, g, b, a].filter(Boolean).map(cssvar).join() + ')'
-  }
-}
-
-// 팩토리 함수
-export function createColorProcessor(type: 'default' | 'hex' | 'hsl' | 'rgb' = 'default'): ColorProcessor {
-  switch (type) {
-    case 'hex': return new HexColorProcessor()
-    case 'hsl': return new HslColorProcessor() 
-    case 'rgb': return new RgbColorProcessor()
-    default: return new DefaultColorProcessor()
-  }
-}
-
-// 편의 함수들 (기존 API 호환성)
-export const makeColor = (value?: string) => createColorProcessor('default').process(value || 'transparent')
-export const makeHEX = (value: string) => createColorProcessor('hex').process(value)
-export const makeHLS = (value: string) => createColorProcessor('hsl').process(value)  
-export const makeRGB = (value: string) => createColorProcessor('rgb').process(value)
+// 편의 함수 (기존 API 호환성)
+export const makeColor = (value?: string) => new DefaultColorProcessor().process(value || 'transparent')

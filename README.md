@@ -2,7 +2,7 @@
 
 > TailwindCSS의 가독성을 개선한 CSS 유틸리티 프레임워크
 
-[![npm version](https://img.shields.io/npm/v/adorable-css.svg)](https://www.npmjs.com/package/adorable-css)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 ## 배경
@@ -41,16 +41,9 @@ bg-white/50
 bg(white.5)
 ```
 
-## 설치
-
-```bash
-npm install adorable-css
-```
-
-```typescript
-// main.ts
-import 'adorable-css'
-```
+## 상태 (Status)
+이 프로젝트는 **아카이브** 되었습니다. 새로운 기능 개발은 중단되었으며, 사내 프로젝트 및 교육 목적으로만 유지됩니다.
+자세한 내용은 [이별 편지](docs/5-public/mdx/01-overview.md)를 참고해주세요.
 
 ## 기본 사용법
 
@@ -60,7 +53,7 @@ import 'adorable-css'
 <div class="vbox(fill) w(fill) p(24) r(12) bg(#fff) shadow(md) gap(16)">
   <img class="w(fill) h(200) r(8) cover" src="...">
   <div class="vbox gap(8)">
-    <h3 class="font(Inter/20/28/-1%/600) c(#000)">Card Title</h3>
+    <h3 class="font(Inter) font(20/28/-1%/600) c(#000)">Card Title</h3>
     <p class="font(14/20) c(#666) clamp(2)">Description text...</p>
   </div>
   <button class="hbox(center) w(fill) h(48) r(8) bg(blue) c(#fff) hover:bg(darkblue) active:scale(.98)">

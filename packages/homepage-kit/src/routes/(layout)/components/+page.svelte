@@ -626,14 +626,13 @@ import Tooltip from '$lib/components/ui/Tooltip.svelte'
               <Accordion>
                 <AccordionItem>
                   <summary class="p(lg) cursor(pointer) hbox(between) hover:bg(mute-200) transition-colors">
-                    <p class="body(base) c(mute-900)">How do I install AdorableCSS components?</p>
+                    <p class="body(base) c(mute-900)">How do I use these components?</p>
                   </summary>
                   <div class="p(lg) pt(0) vbox gap(md)">
-                    <p class="body(sm) c(mute-700)">You can install our components using npm or yarn. Simply run the
-                      installation command and import the components you need.</p>
-                    <div class="p(md) bg(mute-900) r(md)">
-                      <code class="caption mono c(white)">npm install adorable-css-components</code>
-                    </div>
+                     <p class="body(sm) c(mute-700)">These components are provided as a reference implementation. You can copy the code directly into your project.</p>
+                     <div class="p(md) bg(mute-900) r(md)">
+                       <code class="caption mono c(white)">Copy code from GitHub</code>
+                     </div>
                   </div>
                 </AccordionItem>
 

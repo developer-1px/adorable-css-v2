@@ -66,37 +66,8 @@
   ];
 </script>
 
-<div class="hbox w(full) h(screen) bg(gray-50) overflow(hidden)">
-  
-  <!-- Sidebar -->
-  <aside class="w(280px) h(full) overflow-y(auto) border-r(1px/gray-200) bg(white) p(10px) shrink(0)">
-    <div class="vbox gap(2px) mb(12px)">
-      <h1 class="font(title-lg) bold(800) c(gray-900)">System</h1>
-      <p class="font(body-sm) c(gray-500)">Design Tokens</p>
-    </div>
 
-    <div class="vbox gap(10px)">
-      {#each Object.entries(sections) as [category, items]}
-        <div class="vbox gap(xs)">
-          <h3 class="font(caption) c(gray-400) bold(600) uppercase tracking(wider)">{category}</h3>
-          <div class="vbox gap(1px)">
-            {#each items as item}
-              <a 
-                href="#{toId(item)}"
-                class="p(2px) -ml(2px) r(md) c(gray-600) hover:bg(gray-50) hover:c(gray-900) transition text(sm) font(medium) block text(none)"
-              >
-                {item}
-              </a>
-            {/each}
-          </div>
-        </div>
-      {/each}
-    </div>
-  </aside>
-
-  <!-- Main Content -->
-  <main class="flex(1) h(full) overflow-y(auto) scroll(smooth)">
-    <div class="max-w(1200px) mx(auto) w(full) p(24px) vbox gap(3xl)">
+    <div class="vbox gap(3xl)">
       
       <!-- Colors -->
       <section id="colors" class="vbox gap(8px)">
@@ -212,6 +183,3 @@
 
       <div class="h(100px)"></div> <!-- Bottom spacer -->
     </div>
-  </main>
-
-</div>

@@ -74,19 +74,9 @@
 <div class="layer(center)">
 ```
 
-## 🚀 30초 마이그레이션 체크리스트
-
-```javascript
-// 1. 설치
-npm install adorable-css
-
-// 2. import (Tailwind와 공존 가능!)
-import 'adorable-css'
-
-// 3. 점진적 전환
-// ✅ 새 컴포넌트는 AdorableCSS로
-// ✅ 기존 코드는 천천히 마이그레이션
-```
+## 🚀 아키텍처 비교
+TailwindCSS와 AdorableCSS는 모두 유틸리티 퍼스트지만, AdorableCSS는 더 '함수형'에 가깝습니다.
+현재 이 프로젝트는 아카이빙된 상태이므로, 아이디어를 참고하는 용도로 봐주세요.
 
 ## 💡 Tailwind 개발자가 좋아할 기능
 
