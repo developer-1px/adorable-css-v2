@@ -90,7 +90,7 @@ export const heroString: StringRuleHandler = (args?: string): string | (string |
     ],
     
     // Minimal hero
-    minimal: 'vbox(center) min-h(60vh) px(24) py(clamp(4rem,10vw,8rem)) bg(white)'
+    minimal: ['vbox(center) min-h(60vh) px(24) py(clamp(4rem,10vw,8rem)) bg(white)']
   };
   
   return heroVariants[args] || heroVariants.full;

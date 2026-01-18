@@ -14,8 +14,7 @@ export {
 
 // Re-export 04-components
 export { glowRules } from '../04-components/features/glow';
-export { glassRules } from '../04-components/features/glass';
-export { figmaComponents } from '../04-components/features/figma';
+export { debugUIComponents } from '../04-components/features/debug-ui';
 export { containerRules } from '../04-components/patterns/container';
 export { proseRules } from '../04-components/patterns/prose';
 

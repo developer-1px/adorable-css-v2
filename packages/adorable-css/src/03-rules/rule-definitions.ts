@@ -20,7 +20,7 @@ import { effectsRules } from './effects';
 
 // Extensions
 import {
-  glowRules, glassRules, figmaComponents,
+  glowRules, debugUIComponents,
   animationRules, glassmorphismRules
 } from '../05-plugins';
 
@@ -114,6 +114,14 @@ export const RULE_GROUPS: RuleDefinitions = {
           vbox: displayRules.vbox,
           wrap: displayRules.wrap,
           pack: displayRules.pack,
+          grid: gridRules.grid,
+          "grid-cols": gridRules["grid-cols"],
+          "grid-rows": gridRules["grid-rows"],
+          "col-span": gridRules["col-span"],
+          "row-span": gridRules["row-span"],
+          "grid-align": gridRules["grid-align"],
+          "grid-justify": gridRules["grid-justify"],
+          "grid-place": gridRules["grid-place"],
         },
       },
       gap: {
@@ -197,41 +205,6 @@ export const RULE_GROUPS: RuleDefinitions = {
           '-mr': spacingRules.mr_neg,
         },
       },
-      display: {
-        name: 'Display',
-        rules: {
-          block: displayRules.block,
-          none: displayRules.none,
-          hidden: displayRules.hidden,
-        },
-      },
-
-      flexbox: {
-        name: 'Flexbox',
-        rules: {
-          items: displayRules.items,
-          justify: displayRules.justify,
-          flex: displayRules.flex,
-          shrink: displayRules.shrink,
-          grow: displayRules.grow,
-          'flex-wrap': displayRules['flex-wrap'],
-        },
-      },
-
-      grid: {
-        name: 'Grid',
-        rules: gridRules,
-      },
-      overflow: {
-        name: 'Overflow',
-        rules: overflowRules,
-      },
-      positioning: {
-        name: 'Positioning',
-        rules: {
-          ...insetRules,
-        },
-      },
       container: {
         name: 'Container',
         rules: containerRules,
@@ -290,14 +263,13 @@ export const RULE_GROUPS: RuleDefinitions = {
       patterns: {
         name: 'Patterns',
         rules: {
-          ...figmaComponents,
+          ...debugUIComponents,
         },
       },
       features: {
         name: 'Features',
         rules: {
           ...glowRules,
-          ...glassRules,
           ...glassmorphismRules,
         },
       }

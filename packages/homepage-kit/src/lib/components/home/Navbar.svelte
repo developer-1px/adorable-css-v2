@@ -10,40 +10,30 @@ $: isFoundationActive = currentPath.startsWith('/foundation')
 
 const navItems = [
   {href: '/docs', label: 'Docs'},
-  {href: '/syntax', label: 'Syntax'},
-  {href: '/rules', label: 'Rules'},
-  {href: '/tokens', label: 'Tokens'},
-  {href: '/foundation', label: 'Foundation'},
-  {href: '/components', label: 'Components'},
-  {href: '/design-system', label: 'Design System'},
+  {href: '/reference', label: 'Reference'},
   {href: '/playground', label: 'Playground'},
-  {href: '/showroom', label: 'Showroom'}
 ]
 </script>
 
-<nav class="fixed! layer(top) z(50) bg(white) border-b(1/neutral-200)">
-  <div class="hbox(middle) gap(auto) h(60) px(24) lg:px(32) max-w(1400px) mx(auto)">
+<nav class="sticky top(0) z(100) w(full) bg(white/80) backdrop-blur(20px) border-b(1/gray-200/50)">
+  <div class="hbox(between) h(64) px(xl) max-w(1400px) mx(auto)">
     <!-- Logo -->
-    <a href="/" class="hbox(middle) gap(8) c(neutral-900) hover:c(neutral-700) transition">
-      <svg viewBox="0 0 32 32" class="size(28) c(primary)" fill="currentColor">
-        <rect x="4" y="4" width="10" height="10" rx="2"/>
-        <rect x="18" y="4" width="10" height="10" rx="2"/>
-        <rect x="4" y="18" width="10" height="10" rx="2"/>
-        <rect x="18" y="18" width="10" height="10" rx="2"/>
-      </svg>
-      <span class="title(lg) bold(600) c(neutral-900)">AdorableCSS</span>
+    <a href="/" class="hbox(middle) gap(sm) c(gray-900) hover:c(black) transition text(none)">
+      <div class="size(32) bg(indigo-600) r(8px) hbox(center)">
+        <span class="c(white) font(bold) text(lg)">A</span>
+      </div>
+      <span class="text(lg) bold c(gray-900)">AdorableCSS</span>
     </a>
 
     <!-- Desktop Navigation -->
-    <div class="hbox(middle) gap(40) ..lg:hidden">
+    <div class="hbox(middle) gap(xl) ..lg:hidden">
       <!-- Nav Links -->
-      <div class="hbox gap(32)">
+      <div class="hbox(middle) gap(lg)">
         {#each navItems as item}
           <a
             href={item.href}
-            class="body(sm) c(neutral-600) hover:c(neutral-900) transition py(4)"
-            class:c(neutral-900)={item.href === '/tokens' ? isTokensActive : item.href === '/foundation' ? isFoundationActive : currentPath.startsWith(item.href)}
-            class:bold(600)={item.href === '/tokens' ? isTokensActive : item.href === '/foundation' ? isFoundationActive : currentPath.startsWith(item.href)}
+            class="text(sm) font(medium) c(gray-600) hover:c(gray-900) transition text(none)"
+            class:selected={currentPath.startsWith(item.href)}
           >
             {item.label}
           </a>
@@ -51,20 +41,22 @@ const navItems = [
       </div>
 
       <!-- Actions -->
-      <div class="hbox(middle) gap(20)">
-        <button class="p(8) hover:bg(neutral-100) r(8) transition">
-          <Search size="20" class="c(neutral-600)"/>
-        </button>
+      <div class="hbox(middle) gap(md)">
+        <div class="w(1px) h(20px) bg(gray-200)"></div>
+        
         <a
           href="https://github.com/adorablecss/adorable-css"
           target="_blank"
           rel="noopener"
-          class="p(8) hover:bg(neutral-100) r(8) transition"
+          class="size(36) hbox(center) hover:bg(gray-100) r(full) c(gray-500) hover:c(gray-900) transition"
         >
-          <Github size="20" class="c(neutral-600)"/>
+          <Github size="20" />
         </a>
-        <div class="w(1px) h(24) bg(neutral-200)"></div>
-        <a href="/packages/homepage-kit/src/routes/(layout)/docs/getting-started" class="px(16) py(8) r(8) bg(neutral-900) c(white) label(button) hover:bg(neutral-800) transition">
+
+        <a 
+          href="/docs/getting-started" 
+          class="px(lg) py(2) r(full) bg(indigo-600) c(white) text(sm) font(bold) hover:bg(indigo-700) hover:scale(1.05) transition text(none)"
+        >
           Get Started
         </a>
       </div>
@@ -72,38 +64,42 @@ const navItems = [
 
     <!-- Mobile Menu Button -->
     <button
-      class="p(8) hover:bg(neutral-100) r(8) transition lg:hidden"
+      class="size(40) hbox(center) hover:bg(gray-100) r(md) transition lg:hidden c(gray-600)"
       on:click={() => menuOpen = !menuOpen}
     >
       {#if menuOpen}
-        <X size="20" class="c(neutral-600)" />
+        <X size="24" />
       {:else}
-        <Menu size="20" class="c(neutral-600)" />
+        <Menu size="24" />
       {/if}
     </button>
   </div>
 
   <!-- Mobile Navigation -->
   {#if menuOpen}
-    <div class="absolute top(60) left(0) right(0) bg(white) border-b(1/neutral-200) shadow(lg) lg:hidden">
-      <div class="vbox p(16)">
-        {#each navItems as item}
-          <a
-            href={item.href}
-            class="px(16) py(12) body(sm) c(neutral-600) hover:bg(neutral-50) hover:c(neutral-900) r(8) transition"
-            class:c(neutral-900)={item.href === '/tokens' ? isTokensActive : item.href === '/foundation' ? isFoundationActive : currentPath.startsWith(item.href)}
-            class:bold(600)={item.href === '/tokens' ? isTokensActive : item.href === '/foundation' ? isFoundationActive : currentPath.startsWith(item.href)}
-            on:click={() => menuOpen = false}
-          >
-            {item.label}
-          </a>
-        {/each}
-        <div class="mt(16) pt(16) border-t(1/neutral-100)">
-          <a href="/packages/homepage-kit/src/routes/(layout)/docs/getting-started" class="block w(full) px(16) py(8) r(8) bg(neutral-900) c(white) text(center) label(button) hover:bg(neutral-800) transition">
-            Get Started
-          </a>
-        </div>
-      </div>
+    <div class="absolute top(full) left(0) right(0) bg(white) border-b(1/gray-200) shadow(xl) lg:hidden p(xl) vbox gap(lg)">
+      {#each navItems as item}
+        <a
+          href={item.href}
+          class="text(lg) font(medium) c(gray-600) hover:c(gray-900) text(none)"
+          on:click={() => menuOpen = false}
+        >
+          {item.label}
+        </a>
+      {/each}
+      <div class="w(full) h(1px) bg(gray-100)"></div>
+       <a 
+          href="/docs/getting-started" 
+          class="w(full) py(3) r(lg) bg(indigo-600) c(white) text(center) font(bold)"
+        >
+          Get Started
+        </a>
     </div>
   {/if}
 </nav>
+
+<style>
+  .selected {
+    color: var(--c-indigo-600);
+  }
+</style>

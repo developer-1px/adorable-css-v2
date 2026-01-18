@@ -128,7 +128,7 @@
   </header>
   
   <!-- Main Content -->
-  <main class="main-content flex vbox p(2xl) gap(2xl)">
+  <main class="main-content vbox p(2xl) gap(2xl)">
     <!-- Page Title Section -->
     <div class="page-header vbox gap(md)">
       <div class="hbox(between+center)">
@@ -188,7 +188,7 @@
               <!-- Bars -->
               <div class="bars layer(left+right+bottom) hbox(middle) gap(auto) gap(xs)">
                 {#each Array(30) as _, i}
-                  <div class="bar-wrapper flex vbox(end) group">
+                  <div class="bar-wrapper vbox(end) group">
                     <div 
                       class="bar w(fill) bg(#3b82f6..#2563eb/to-bottom) r(xs/xs/none/none) transition hover:bg(#2563eb..#1d4ed8/to-bottom) relative"
                       style="height: {Math.random() * 80 + 20}%"
@@ -226,7 +226,7 @@
                 <div class="activity-icon size(40) r(lg) bg(#f5f5f5) font(lg)">
                   {activity.icon}
                 </div>
-                <div class="activity-content vbox gap(xs) flex">
+                <div class="activity-content vbox gap(xs)">
                   <p class="font(sm) medium c(#0a0a0a)">{activity.title}</p>
                   <p class="font(sm) c(#737373)">{activity.desc}</p>
                 </div>

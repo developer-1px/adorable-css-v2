@@ -30,11 +30,4 @@ export function addImportanceToSelector(selector: string): string {
   return selector;
 }
 
-/**
- * Add importance to CSS rule
- */
-export function addImportanceToCSS(css: string): string {
-  // Simply return the css without modification
-  // Layer system handles priority now
-  return css;
-}
+// addImportanceToCSS removed - layer system handles priority now

@@ -13,8 +13,7 @@ async function main() {
 
     // Custom suggestions/deprecations
     const SUGGESTIONS: Record<string, string> = {
-        "hbox(center)": "Use 'hbox(middle)' or just 'hbox' (default is middle). 'center' applies to justification (horizontal), which might be unintentional.",
-        // Add more as needed
+        // "hbox(center)": "...", // Removed as per user request (it is valid)
     };
 
     console.log(gray(`🔍 Scanning files matching: ${pattern}...`));

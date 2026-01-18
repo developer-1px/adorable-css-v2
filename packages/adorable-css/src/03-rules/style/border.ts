@@ -20,7 +20,7 @@ const parseBorder = (args: string): string => {
 // Handlers
 export const b: RuleHandler = (args?: string): CSSRule => !args ? { border: '1px solid currentColor' } : args.startsWith('/') ? { border: `1px solid ${makeColor(args.slice(1))}` } : { border: parseBorder(args) };
 
-export const r: RuleHandler = (args?: string): CSSRule => ({ 'border-radius': !args ? getTokenVar('radius', 'md') : isToken(args, 'radius') ? getTokenVar('radius', args) : args.includes('/') ? args.split('/').map(v => isToken(v, 'radius') ? getTokenVar('radius', v) : px(v || '0')).join(' ') : px(args) });
+export const r: RuleHandler = (args?: string): CSSRule => ({ 'border-radius': !args ? getTokenVar('radius', 'md') : isToken(args, 'radius') ? getTokenVar('radius', args) : args.includes('/') ? args.split('/').map(v => isToken(v, 'radius') ? getTokenVar('radius', v) : px(v || '0')).join(' ') : String(px(args)) });
 
 const side = (s: string): RuleHandler => (args?: string): CSSRule => args ? { [`border-${s}`]: parseBorder(args) } : {};
 

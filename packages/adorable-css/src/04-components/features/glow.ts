@@ -1,5 +1,6 @@
 import type { CSSRule, RuleHandler } from '../../03-rules/types';
 import { makeColor, px } from '../../01-core/values/makeValue';
+import { hexToRgba, adjustRgbaAlpha } from '../../01-core/utils/color-utils';
 
 // glow(color) - 기본 glow 효과
 // glow(color/size) - 크기 조절
@@ -26,34 +27,19 @@ export const glow: RuleHandler = (args?: string): CSSRule => {
   const glowColor = makeColor(color);
   const shadowSize = px(size);
   const dropShadowSize = px(size / 2);
-  
-  // RGB 값 추출을 위한 간단한 로직
-  let rgbaColor = glowColor;
+
+  // Convert color to rgba with intensity
+  let rgbaColor: string;
   if (glowColor.startsWith('#')) {
-    // hex to rgba 변환
-    const hex = glowColor.slice(1);
-    let r, g, b;
-    if (hex.length === 3) {
-      r = parseInt(hex[0] + hex[0], 16);
-      g = parseInt(hex[1] + hex[1], 16);
-      b = parseInt(hex[2] + hex[2], 16);
-    } else if (hex.length === 6) {
-      r = parseInt(hex.substring(0, 2), 16);
-      g = parseInt(hex.substring(2, 4), 16);
-      b = parseInt(hex.substring(4, 6), 16);
-    } else {
-      r = 99; g = 102; b = 241; // fallback
-    }
-    rgbaColor = `rgba(${r}, ${g}, ${b}, ${intensity})`;
+    rgbaColor = hexToRgba(glowColor, intensity);
   } else if (glowColor.includes('rgba')) {
-    // 이미 rgba인 경우 intensity로 조정
-    rgbaColor = glowColor.replace(/[\d.]+\)$/, `${intensity})`);
+    rgbaColor = adjustRgbaAlpha(glowColor, intensity);
   } else {
-    // 다른 색상 포맷인 경우 기본값 사용
+    // Fallback for other color formats
     rgbaColor = `rgba(99, 102, 241, ${intensity})`;
   }
 
-  const dropShadowRgba = rgbaColor.replace(/[\d.]+\)$/, `${intensity * 0.6})`);
+  const dropShadowRgba = adjustRgbaAlpha(rgbaColor, intensity * 0.6);
 
   return {
     'box-shadow': `0 0 ${shadowSize} ${rgbaColor}`,

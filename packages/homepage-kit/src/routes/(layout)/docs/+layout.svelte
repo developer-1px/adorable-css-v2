@@ -150,7 +150,7 @@
                              ? 'c(indigo-600) font(semibold) bg(indigo-50)' 
                              : 'c(gray-500) hover:c(gray-900) hover:bg(gray-100)'}"
                   >
-                    <div class="hbox(center) justify-between">
+                    <div class="hbox justify-between">
                       <span>{item.title}</span>
                       {#if item.badge}
                         <span class="text(9px) px(1.5) py(0.5) r(full) font(bold) uppercase {getBadgeColor(item.badge)}">
@@ -172,7 +172,7 @@
       <div class="max-w(3xl) mx(auto)">
         
         <!-- Breadcrumbs -->
-        <nav class="hbox(center) gap(sm) mb(2xl) text(sm) c(gray-500)">
+        <nav class="hbox gap(sm) mb(2xl) text(sm) c(gray-500)">
           <a href="/" class="hover:c(gray-900)">Home</a>
           <ChevronRight size="14" />
           <span class="c(gray-900)">Documentation</span>

@@ -1,5 +1,5 @@
 import type { CSSRule, RuleHandler } from "../types";
-import { px as toPx, pxWithClamp } from '../../01-core/values/makeValue';
+import { px as toPx, pxWithClamp, pxGrid as toPxGrid, pxGridWithClamp } from '../../01-core/values/makeValue';
 import { isToken } from '../../02-design_tokens/design-system/tokens/index';
 import { generateSpacingCalc } from '../../02-design_tokens/dynamicTokens';
 
@@ -27,7 +27,7 @@ const makeSpacingRule = (type: 'padding' | 'margin', prefix: Prefix, isNegative:
     } else if (v === 'auto') {
       return 'auto';
     } else {
-      const processed = String(pxWithClamp(v));
+      const processed = String(pxGridWithClamp(v));
       // Reject invalid tokens that return themselves
       if (processed === v && !v.match(/^\d+(\.\d+)?(px|rem|em|%)?$/)) {
         return '0'; // Default to 0 for invalid values
@@ -78,7 +78,7 @@ export const mr_neg = makeSpacingRule('margin', 'r', true);
 export const gap: RuleHandler = (args?: string): CSSRule => {
   if (!args) return { gap: generateSpacingCalc('md') }; // Use dynamic calc
   if (args === 'auto') return { gap: 'auto', 'justify-content': 'space-between', 'align-content': 'space-between' };
-  return { gap: isToken(args, 'spacing') ? generateSpacingCalc(args) : String(toPx(args)) };
+  return { gap: isToken(args, 'spacing') ? generateSpacingCalc(args) : String(toPxGrid(args)) };
 };
 
 export const spacingRules = {

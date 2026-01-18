@@ -4,7 +4,7 @@ import { BASE_COLOR_VALUES, TONE_VALUES } from './color-data'
 import { makeColor, makeHEX, makeHLS, makeRGB } from './color-processor'
 import {
   cssvar, cssString, splitValues, makeValues, makeCommaValues,
-  makeNumber, makeRatio, percentToEm, px, deg, makeSide
+  makeNumber, makeRatio, percentToEm, px, pxGrid, deg, makeSide
 } from './value-utils'
 
 // Local implementation of isToken (removed external import)
@@ -14,7 +14,7 @@ import { isToken } from './is-token'
 export {
   makeColor, makeHEX, makeHLS, makeRGB,
   cssvar, cssString, splitValues, makeValues, makeCommaValues,
-  makeNumber, makeRatio, percentToEm, px, deg, makeSide
+  makeNumber, makeRatio, percentToEm, px, pxGrid, deg, makeSide
 }
 
 /**
@@ -245,6 +245,28 @@ export const pxWithClamp = (value: string | number) => {
 
   // Fall back to regular px processing
   return px(v);
+}
+
+// Enhanced pxGrid function with clamp and range support
+export const pxGridWithClamp = (value: string | number) => {
+  if (value === undefined || value === null) throw new Error('pxGridWithClamp: value is undefined')
+  if (value === 0 || value === '0') return 0
+
+  const v = String(value)
+
+  // Check for clamp syntax first
+  if (v.includes('clamp(')) {
+    return makeClamp(v);
+    // Note: makeClamp currently uses px() internally, might need update for full grid support in clamps later
+  }
+
+  // Check for range syntax
+  if (v.includes('..')) {
+    return makeRangeClamp(v);
+  }
+
+  // Fall back to regular pxGrid processing
+  return pxGrid(v);
 }
 
 // Enhanced cssvar with clamp support

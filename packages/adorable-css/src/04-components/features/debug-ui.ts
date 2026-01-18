@@ -1,6 +1,6 @@
 import type { CSSRule, RuleHandler } from '../../03-rules/types';
 
-export const figmaFrame: RuleHandler = (): CSSRule => ({
+export const debugFrame: RuleHandler = (): CSSRule => ({
   'position': 'relative',
   'border': '1px dashed #5e5ad2',
   'background': '#ffffff',
@@ -27,7 +27,7 @@ export const figmaFrame: RuleHandler = (): CSSRule => ({
   }
 });
 
-export const figmaSelected: RuleHandler = (): CSSRule => ({
+export const debugSelected: RuleHandler = (): CSSRule => ({
   'position': 'relative',
   'outline': '2px solid #0c8ce9',
   'outline-offset': '2px',
@@ -40,7 +40,7 @@ export const figmaSelected: RuleHandler = (): CSSRule => ({
   }
 });
 
-export const figmaAutolayout: RuleHandler = (): CSSRule => ({
+export const debugAutolayout: RuleHandler = (): CSSRule => ({
   'position': 'relative',
   'background': 'repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(94, 90, 210, 0.04) 10px, rgba(94, 90, 210, 0.04) 20px)',
   '&::before': {
@@ -58,7 +58,7 @@ export const figmaAutolayout: RuleHandler = (): CSSRule => ({
   }
 });
 
-export const figmaComponent: RuleHandler = (): CSSRule => ({
+export const debugComponent: RuleHandler = (): CSSRule => ({
   'position': 'relative',
   '&::before': {
     'content': '"◈"',
@@ -73,17 +73,17 @@ export const figmaComponent: RuleHandler = (): CSSRule => ({
   }
 });
 
-export const figmaLayer: RuleHandler = (): CSSRule => ({
+export const debugLayer: RuleHandler = (): CSSRule => ({
   'transition': 'all 0.2s ease',
   '&:hover': {
     'box-shadow': '0 0 0 1px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.05)'
   }
 });
 
-export const figmaComponents = {
-  'figma-frame': figmaFrame,
-  'figma-selected': figmaSelected,
-  'figma-autolayout': figmaAutolayout,
-  'figma-component': figmaComponent,
-  'figma-layer': figmaLayer
+export const debugUIComponents = {
+  'debug-frame': debugFrame,
+  'debug-selected': debugSelected,
+  'debug-autolayout': debugAutolayout,
+  'debug-component': debugComponent,
+  'debug-layer': debugLayer
 };

@@ -57,6 +57,7 @@ export const percentToEm = (value: string) => {
 }
 
 // 길이 단위 처리 (px)
+// 길이 단위 처리 (px) - Physical Units (Default)
 export const px = (value: string | number) => {
   if (value === undefined || value === null) throw new Error('px: value is undefined')
   if (value === 0 || value === '0') return 0
@@ -74,7 +75,7 @@ export const px = (value: string | number) => {
   // 이미 단위가 있는 경우
   if (/[a-z%]$/i.test(v)) return value
 
-  // 숫자만 있는 경우 px 추가
+  // 숫자만 있는 경우 px 추가 (Physical Pixel)
   if (/^-?\d+(\.\d+)?$/.test(v)) return v + 'px'
 
   // CSS 함수나 키워드인 경우
@@ -86,6 +87,28 @@ export const px = (value: string | number) => {
   if (!v.match(/^[\w\-.%]+$/)) return '0'
 
   return value
+}
+
+// 길이 단위 처리 (px) - Grid Units (4px Base)
+export const pxGrid = (value: string | number) => {
+  if (value === undefined || value === null) throw new Error('pxGrid: value is undefined')
+  if (value === 0 || value === '0') return 0
+
+  const v = String(value)
+
+  // CSS 변수 처리
+  if (v.startsWith('--')) return cssvar('' + value)
+
+  // 토큰 처리  
+  if (isToken(v, 'spacing')) return generateSpacingCalc(v)
+
+  // 이미 단위가 있는 경우
+  if (/[a-z%]$/i.test(v)) return value
+
+  // 숫자만 있는 경우 4배 후 px 추가 (4px Grid System)
+  if (/^-?\d+(\.\d+)?$/.test(v)) return (parseFloat(v) * 4) + 'px'
+
+  return px(value)
 }
 
 // 각도 단위 처리 (deg)

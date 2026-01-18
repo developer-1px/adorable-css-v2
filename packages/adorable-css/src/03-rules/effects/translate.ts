@@ -22,7 +22,7 @@ export const translateZ: RuleHandler = (v?: string): CSSRule => {
 // 3D translate shorthand
 export const translate3d: RuleHandler = (v?: string): CSSRule => {
   if (!v) return {};
-  const [x = '0', y = '0', z = '0'] = v.split('/').map(makeValue);
+  const [x = '0', y = '0', z = '0'] = v.split('/').map((val) => makeValue(val));
   return { transform: `translate3d(${x}, ${y}, ${z})` };
 };
 

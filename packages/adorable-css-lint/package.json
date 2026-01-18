@@ -7,7 +7,7 @@
     },
     "scripts": {
         "build": "tsup src/bin.ts --format esm --clean",
-        "dev": "tsup --watch"
+        "dev": "tsup src/bin.ts --format esm --watch"
     },
     "dependencies": {
         "adorable-css": "workspace:*",

@@ -8,7 +8,7 @@ export const inlineBlock: KeywordRuleHandler = () => ({ display: 'inline-block' 
 // export const inlineFlex: KeywordRuleHandler = () => ({ display: 'inline-flex' });
 export const none: KeywordRuleHandler = () => ({ display: 'none' });
 export const hidden = none;
-export const grid: KeywordRuleHandler = () => ({ display: 'grid' });
+// grid is exported from ./grid.ts with advanced features
 
 // Flexbox utilities
 const flexbox = (dir: string, align?: string, justify?: string): CSSRule => ({
@@ -18,7 +18,7 @@ const flexbox = (dir: string, align?: string, justify?: string): CSSRule => ({
   ...(justify && { 'justify-content': justify })
 });
 
-const parseAlign = (v: string) => v ? { 
+const parseAlign = (v: string) => v ? {
   top: 'flex-start', middle: 'center', bottom: 'flex-end', fill: 'stretch', stretch: 'stretch',
   left: 'flex-start', center: 'center', right: 'flex-end', end: 'flex-end',
   baseline: 'baseline'
@@ -36,16 +36,16 @@ export const hbox: RuleHandler = (v = '') => {
   const vals = v.split(/[+/]/);
   const align = vals.find(x => ['top', 'middle', 'bottom', 'fill', 'end', 'baseline'].includes(x));
   const justify = vals.find(x => ['left', 'right', 'center', 'end', 'between', 'around', 'evenly'].includes(x));
-  
+
   // Default to flex-start/flex-start if no alignment specified
   const defaultAlign = align ? parseAlign(align) : 'center';
   const defaultJustify = justify ? parseJustify(justify) : 'flex-start';
-  
+
   return {
     ...flexbox('row', defaultAlign, defaultJustify),
     ...(vals.includes('wrap') && { 'flex-wrap': 'wrap' }),
     ...(vals.includes('reverse') && { 'flex-direction': 'row-reverse' }),
-    ":where(&>*)": {"flex": "0 0 auto"}
+    ":where(&>*)": { "flex": "0 0 auto" }
   };
 };
 
@@ -54,20 +54,23 @@ export const vbox: RuleHandler = (v = '') => {
     ...flexbox('column', 'center', 'center'),
     'text-align': 'center'
   };
-  
+
   const vals = v.split(/[+/]/);
-  const align = vals.find(x => ['left', 'center', 'right', 'fill', 'stretch', 'end', 'baseline'].includes(x));
-  const justify = vals.find(x => ['top', 'middle', 'bottom', 'around', 'between', 'evenly', 'baseline'].includes(x));
-  
+  // Swapped center/middle to match hbox pattern (center=Main, middle=Cross)
+  // AI-Friendly Spec: 'center' works for Align (Cross) too, so vbox(center) -> Center/Center
+  const align = vals.find(x => ['left', 'middle', 'center', 'right', 'fill', 'stretch', 'end', 'baseline'].includes(x));
+  const justify = vals.find(x => ['top', 'center', 'bottom', 'around', 'between', 'evenly', 'baseline'].includes(x));
+
   // Default to stretch/flex-start if no alignment specified
   const defaultAlign = align ? parseAlign(align) : 'stretch';
   const defaultJustify = justify ? parseJustify(justify) : 'flex-start';
-  
+
   // Map alignment to text-align
   const getTextAlign = (align: string) => {
     switch (align) {
       case 'left': return 'left';
-      case 'center': return 'center';
+      case 'middle': return 'center'; // middle (Cross Axis) -> text-align: center
+      case 'center': return 'center'; // keep for safety
       case 'right': return 'right';
       case 'fill':
       case 'stretch': return 'justify';
@@ -75,15 +78,15 @@ export const vbox: RuleHandler = (v = '') => {
       default: return undefined;
     }
   };
-  
+
   const textAlign = align ? getTextAlign(align) : 'justify'
-  
+
   return {
     ...flexbox('column', defaultAlign, defaultJustify),
     ...(vals.includes('wrap') && { 'flex-wrap': 'wrap' }),
     ...(vals.includes('reverse') && { 'flex-direction': 'column-reverse' }),
     ...(textAlign && { 'text-align': textAlign }),
-    ":where(&>*)": {"flex": "0 0 auto"}
+    ":where(&>*)": { "flex": "0 0 auto" }
   };
 };
 
@@ -99,6 +102,7 @@ export const grow: RuleHandler = (v?: string): CSSRule => v ? { 'flex-grow': v }
 
 export const displayRules = {
   block, inline, 'inline-block': inlineBlock,
-  none, hidden, grid, hbox, vbox, wrap, pack,
-  flex, 'flex-wrap': flexWrap, items, justify, shrink, grow
+  none, hidden, hbox, vbox, wrap, pack,
+  // Low-level CSS props deprecated for AI-friendliness
+  // flex, 'flex-wrap': flexWrap, items, justify, shrink, grow
 };

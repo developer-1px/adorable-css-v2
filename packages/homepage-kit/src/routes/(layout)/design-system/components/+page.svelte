@@ -60,7 +60,7 @@
     <h2 class="font(2xl/bold) c(gray-900)">Buttons</h2>
     
     <div class="vbox gap(16) p(24) r(lg) bg(gray-50)">
-      <div class="hbox gap(12) flex-wrap">
+      <div class="hbox(wrap) gap(12)">
         <Button>Default</Button>
         <Button variant="secondary">Secondary</Button>
         <Button variant="outline">Outline</Button>
@@ -71,7 +71,7 @@
       
       <Separator />
       
-      <div class="hbox gap(12) flex-wrap">
+      <div class="hbox(wrap) gap(12)">
         <Button size="sm">Small</Button>
         <Button>Default</Button>
         <Button size="lg">Large</Button>
@@ -220,7 +220,7 @@
       <!-- Badges -->
       <div class="vbox gap(12)">
         <h3 class="font(xl/semibold)">Badges</h3>
-        <div class="hbox gap(8) flex-wrap">
+        <div class="hbox(wrap) gap(8)">
           <Badge>Default</Badge>
           <Badge variant="secondary">Secondary</Badge>
           <Badge variant="outline">Outline</Badge>
@@ -369,7 +369,7 @@
           <div class="vbox gap(16)">
             <h3 class="font(xl/semibold)">Dialog Title</h3>
             <p class="c(gray-600)">This is a dialog component. You can put any content here.</p>
-            <div class="hbox gap(12) justify-end">
+            <div class="hbox(right) gap(12)">
               <Button variant="outline" on:click={() => dialogOpen = false}>Cancel</Button>
               <Button on:click={() => dialogOpen = false}>Confirm</Button>
             </div>

@@ -116,7 +116,14 @@
       "Bash(pnpm tsx:*)",
       "Bash(pnpm find-unused:*)",
       "Bash(pnpm knip:*)",
-      "Bash(npx knip:*)"
+      "Bash(npx knip:*)",
+      "Bash(pnpm --filter adorable-css test --run)",
+      "Bash(pnpm --filter adorable-css typecheck)",
+      "Bash(if grep -q 'from \"\"\\./[^.]*\"\"' \"$file\")",
+      "Bash(then)",
+      "Bash(basename:*)",
+      "Bash(fi)",
+      "Bash(awk:*)"
     ],
     "deny": []
   }

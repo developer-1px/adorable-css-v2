@@ -122,7 +122,7 @@
       </div>
       
       <!-- Quick Stats -->
-      <div class="hbox(pack) gap(xl) flex-wrap">
+      <div class="hbox(center+wrap) gap(xl)">
         <div class="hbox(middle) gap(sm)">
           <div class="w(40px) h(40px) r(full) bg(neutral-100) hbox(pack)">
             <CheckCircle size="20" class="c(neutral-700)" />
@@ -231,7 +231,7 @@
             </div>
             
             <!-- Metadata -->
-            <div class="hbox gap(md) flex-wrap">
+            <div class="hbox(wrap) gap(md)">
               <span class="badge() bg(neutral-100) c(neutral-700) r(9999px)">
                 {tutorial.difficulty}
               </span>
@@ -319,7 +319,7 @@
           </p>
         </div>
         
-        <div class="hbox(pack) gap(lg) flex-wrap">
+        <div class="hbox(center+wrap) gap(lg)">
           <button
             class="btn(secondary/lg) px(2xl) py(lg) shadow(xl) 
                    hover:scale(1.05) hover:shadow(2xl) transition"

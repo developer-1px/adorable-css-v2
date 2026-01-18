@@ -1,203 +1,163 @@
 <script lang="ts">
-  import { Github, ArrowRight, MessageCircle, Users, Layers, Code, Palette, Grid } from 'lucide-svelte';
-  import CodeBlock from '$lib/components/ui/CodeBlock.svelte';
-  import Card from '$lib/components/ui/Card.svelte';
-  import Badge from '$lib/components/ui/Badge.svelte';
+  import { Github, ArrowRight, Zap, Layers, Code2, Sparkles, Wand2, BrainCircuit } from 'lucide-svelte';
   import Button from '$lib/components/ui/Button.svelte';
 </script>
 
 <!-- Hero Section -->
-<section class="relative min-h(100vh) vbox(center) bg(white)">
-  <div class="container(6xl) mx(auto) px(2xl) py(8xl)">
-    <div class="vbox(center) gap(6xl)">
+<section class="relative min-h(90vh) vbox(center) bg(white) overflow(hidden)">
+  <!-- Background Gradients -->
+  <div class="absolute top(-20%) left(-10%) size(800px) bg(indigo-500/10) r(full) blur(120px) pointer-events(none)"></div>
+  <div class="absolute bottom(-10%) right(-5%) size(600px) bg(violet-500/10) r(full) blur(100px) pointer-events(none)"></div>
+
+  <div class="w(full) max-w(1200px) mx(auto) px(xl) py(160px) relative z(10)">
+    <div class="vbox(center) gap(64px)">
       
       <!-- Main Heading -->
-      <div class="vbox(center) gap(3xl) max-w(4xl)">
-        <h1 class="heading(display/3xl) c(mute-900) leading(tight)">
-          CSS Framework that Speaks
-          <br />
-          <span class="c(mute-600)">Figma Language</span>
+      <div class="vbox(center) gap(32px) max-w(800px) text(center)">
+        <div class="hbox(center) gap(sm) bg(gray-50) border(1/gray-200) px(md) py(xs) r(full)">
+          <Sparkles size="14" class="c(indigo-600)" />
+          <span class="text(sm) font(bold) c(gray-600)">v2.0 is mostly ready</span>
+        </div>
+
+        <h1 class="text(72px) font(black) tracking(tight) leading(1) c(gray-900)">
+          CSS for the<br/>
+          <span class="c(transparent) bg-clip(text) bg(linear-to-r/indigo-600..violet-600)">AI Age</span>
         </h1>
         
-        <p class="body(xl) c(mute-600) max-w(4xl)">
-          Write CSS using the same terms designers use in Figma. 
-          <span class="c(mute-900)">hbox(), gap(), w(fill)</span> — no translation needed.
+        <p class="text(20px) c(gray-500) leading(1.6) max-w(640px)">
+          The first design-system engine built for LLMs and Humans.
+          Stop translating design into code—just declare your <span class="c(gray-900) font(bold)">intent</span>.
         </p>
+
+        <div class="hbox(center) gap(md) mt(lg)">
+          <Button size="lg" class="h(56px) px(40px) r(full) text(18px) bg(gray-900) hover:bg(black) hover:scale(1.05) transition">
+            Get Started
+            <ArrowRight size="20" class="ml(sm)" />
+          </Button>
+          <Button variant="outline" size="lg" class="h(56px) px(32px) r(full) text(18px) border(1/gray-200) hover:bg(gray-50)">
+            <Github size="20" class="mr(sm)" />
+            GitHub
+          </Button>
+        </div>
       </div>
-      
-      <!-- Simple Demo -->
-      <div class="p(3xl) bg(mute-50) r(2xl) max-w(4xl)">
-        <div class="vbox(center) gap(xl)">
-          <div class="hbox(center) gap(2xl)">
-            <div class="vbox(center) gap(sm)">
-              <p class="caption c(mute-700)">Designer</p>
-              <p class="body(lg) c(mute-900)">"hbox gap(16)"</p>
+
+      <!-- Interactive Demo Preview (Static for now) -->
+      <div class="w(full) max-w(900px) bg(gray-900) r(24px) border(1/gray-800) shadow(2xl) p(md) relative overflow(hidden)">
+        <!-- Mock Window Controls -->
+        <div class="hbox(middle) gap(sm) mb(lg) px(sm)">
+          <div class="size(12) r(full) bg(red-500)"></div>
+          <div class="size(12) r(full) bg(yellow-500)"></div>
+          <div class="size(12) r(full) bg(green-500)"></div>
+        </div>
+
+        <div class="grid(1) md:grid-cols(2) gap(0) border-t(1/gray-800)">
+          <!-- Code Side -->
+          <div class="p(xl) vbox gap(lg) border-r(1/gray-800)">
+            <div class="vbox gap(xs)">
+              <div class="hbox(middle) gap(sm) mb(sm)">
+                <BrainCircuit size="16" class="c(violet-400)" />
+                <span class="text(xs) font(bold) uppercase c(gray-500) tracking(widest)">AI Prompt</span>
+              </div>
+              <p class="font(mono) text(sm) c(gray-300)">"Make a user card with an avatar and details"</p>
             </div>
-            <ArrowRight size="24" class="c(mute-400)" />
-            <div class="vbox(center) gap(sm)">
-              <p class="caption c(mute-700)">Developer</p>
-              <code class="code(lg) c(mute-900)">hbox gap(16)</code>
+            
+            <div class="vbox gap(xs) mt(lg)">
+               <div class="hbox(middle) gap(sm) mb(sm)">
+                <Code2 size="16" class="c(indigo-400)" />
+                <span class="text(xs) font(bold) uppercase c(gray-500) tracking(widest)">Generated Code</span>
+              </div>
+              <code class="font(mono) text(sm) c(indigo-300) leading(1.6)">
+                &lt;div class="<span class="c(white) font(bold)">hbox gap(16) p(24) bg(white) r(xl)</span>"&gt;<br/>
+                &nbsp;&nbsp;&lt;Avatar /&gt;<br/>
+                &nbsp;&nbsp;&lt;div class="<span class="c(white) font(bold)">vbox gap(4)</span>"&gt;...&lt;/div&gt;<br/>
+                &lt;/div&gt;
+              </code>
             </div>
           </div>
-          <p class="caption c(mute-600)">Same language, perfect communication</p>
+
+          <!-- Preview Side -->
+          <div class="p(xl) bg(gray-50/5) hbox(center middle)">
+            <!-- Actual Rendered Component using AdorableCSS -->
+            <div class="hbox gap(4) p(6) bg(white) r(xl) shadow(lg) w(full) max-w(320px)">
+              <div class="size(48) r(full) bg(linear-to-br/indigo-500..violet-500)"></div>
+              <div class="vbox gap(4)">
+                <div class="w(120) h(16) bg(gray-200) r(sm)"></div>
+                <div class="w(80) h(12) bg(gray-100) r(sm)"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      
-      <!-- CTA -->
-      <div class="hbox(center) gap(lg)">
-        <Button size="lg" variant="default">
-          Try AdorableCSS
-        </Button>
-        <Button size="lg" variant="ghost">
-          <div class="hbox(middle) gap(sm)">
-            <Github size="20" />
-            <span>GitHub</span>
-          </div>
-        </Button>
-      </div>
-      
+    
     </div>
   </div>
 </section>
 
-<!-- Problem Section -->
-<section class="bg(mute-50) py(6xl)">
-  <div class="container(6xl) mx(auto) px(2xl)">
-    <div class="vbox(center) gap(4xl)">
+<!-- Values Section -->
+<section class="py(120px) bg(gray-50)">
+  <div class="w(full) max-w(1200px) mx(auto) px(xl)">
+    <div class="grid(1) md:grid-cols(3) gap(32px)">
       
-      <div class="vbox(center) gap(xl) max-w(4xl)">
-        <h2 class="heading(h1) c(mute-900)">
-          The Problem
-        </h2>
-        <p class="body(lg) c(mute-600)">
-          Designer: "Auto Layout Horizontal, 16px gap"
-          <br />
-          Developer: "display: flex; gap: 1rem"
-          <br />
-          <span class="c(mute-900)">Same intention, different vocabulary.</span>
-        </p>
-      </div>
-      
-    </div>
-  </div>
-</section>
-
-<!-- Solution Section -->
-<section class="bg(white) py(6xl)">
-  <div class="container(6xl) mx(auto) px(2xl)">
-    <div class="vbox(center) gap(4xl)">
-      
-      <div class="vbox(center) gap(xl) max-w(4xl)">
-        <h2 class="heading(h1) c(mute-900)">
-          The Solution
-        </h2>
-        <p class="body(lg) c(mute-600)">
-          Use the same terms in both design and code
-        </p>
-      </div>
-      
-      <!-- Simple Before/After -->
-      <div class="grid(2) gap(2xl) max-w(4xl)">
-        <div class="vbox(center) gap(lg) p(2xl) bg(mute-50) r(xl)">
-          <h3 class="heading(h3) c(mute-900)">Before</h3>
-          <div class="vbox(center) gap(md)">
-            <p class="body(md) c(mute-700)">"Auto Layout Vertical"</p>
-            <p class="caption c(mute-500)">↓ translation required</p>
-            <code class="code(sm) c(mute-800)">display: flex; flex-direction: column;</code>
-          </div>
+      <!-- Card 1 -->
+      <div class="vbox gap(6) p(8) bg(white) r(6) border(1/gray-200) hover:shadow(xl) transition duration(500) hover:-translate-y(1)">
+        <div class="size(56) r(4) bg(indigo-50) hbox(center) c(indigo-600)">
+          <Wand2 size="28" />
         </div>
-        
-        <div class="vbox(center) gap(lg) p(2xl) bg(white) r(xl) border(2/mute-200)">
-          <h3 class="heading(h3) c(mute-900)">AdorableCSS</h3>
-          <div class="vbox(center) gap(md)">
-            <p class="body(md) c(mute-700)">"vbox"</p>
-            <p class="caption c(mute-500)">↓ same term</p>
-            <code class="code(sm) c(mute-800)">vbox</code>
-          </div>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-</section>
-
-<!-- Features Section -->
-<section class="bg(mute-50) py(6xl)">
-  <div class="container(6xl) mx(auto) px(2xl)">
-    <div class="vbox(center) gap(4xl)">
-      
-      <div class="vbox(center) gap(xl) max-w(4xl)">
-        <h2 class="heading(h1) c(mute-900)">
-          Core Features
-        </h2>
-      </div>
-      
-      <!-- Feature Grid -->
-      <div class="grid(3) gap(xl) max-w(4xl)">
-        <div class="vbox(center) gap(lg) p(xl) bg(white) r(lg)">
-          <Grid size="32" class="c(mute-700)" />
-          <h3 class="heading(h3) c(mute-900)">Figma Terms</h3>
-          <p class="body(md) c(mute-600)">
-            hbox(), vbox(), gap(), w(fill) — use the same words designers use
-          </p>
-        </div>
-        
-        <div class="vbox(center) gap(lg) p(xl) bg(white) r(lg)">
-          <Palette size="32" class="c(mute-700)" />
-          <h3 class="heading(h3) c(mute-900)">Design Tokens</h3>
-          <p class="body(md) c(mute-600)">
-            c(primary), gap(lg), heading(h1) — semantic tokens, not hex codes
-          </p>
-        </div>
-        
-        <div class="vbox(center) gap(lg) p(xl) bg(white) r(lg)">
-          <Layers size="32" class="c(mute-700)" />
-          <h3 class="heading(h3) c(mute-900)">Components</h3>
-          <p class="body(md) c(mute-600)">
-            btn(primary/lg), card(elevated) — describe what you want
+        <div class="vbox gap(3)">
+          <h3 class="text(20px) font(bold) c(gray-900)">Hallucination-Free</h3>
+          <p class="text(16px) c(gray-500) leading(1.6)">
+            AI struggles with generic utility names. AdorableCSS provides semantic, unambiguous tokens that LLMs get right every time.
           </p>
         </div>
       </div>
-      
+
+      <!-- Card 2 -->
+      <div class="vbox gap(6) p(8) bg(white) r(6) border(1/gray-200) hover:shadow(xl) transition duration(500) hover:-translate-y(1)">
+        <div class="size(56) r(4) bg(violet-50) hbox(center) c(violet-600)">
+          <Layers size="28" />
+        </div>
+        <div class="vbox gap(3)">
+          <h3 class="text(20px) font(bold) c(gray-900)">Figma-Native</h3>
+          <p class="text(16px) c(gray-500) leading(1.6)">
+            Stop translating "Auto Layout" to "Flexbox". Use the same vocabulary your designers use: <code class="bg(gray-100) px(6px) py(2px) r(md) text(xs)">hbox</code>, <code class="bg(gray-100) px(6px) py(2px) r(md) text(xs)">gap</code>, <code class="bg(gray-100) px(6px) py(2px) r(md) text(xs)">fill</code>.
+          </p>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="vbox gap(6) p(8) bg(white) r(6) border(1/gray-200) hover:shadow(xl) transition duration(500) hover:-translate-y(1)">
+        <div class="size(56) r(4) bg(emerald-50) hbox(center) c(emerald-600)">
+          <Zap size="28" />
+        </div>
+        <div class="vbox gap(3)">
+          <h3 class="text(20px) font(bold) c(gray-900)">Zero Runtime</h3>
+          <p class="text(16px) c(gray-500) leading(1.6)">
+            Write with the speed of dynamic styles, ship with the performance of static CSS. It's the best of both worlds.
+          </p>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
 
-<!-- CTA Section -->
-<section class="bg(mute-900) py(6xl)">
-  <div class="container(5xl) mx(auto) px(2xl)">
-    <div class="vbox(center) gap(4xl)">
-      
-      <div class="vbox(center) gap(xl) max-w(4xl)">
-        <h2 class="heading(h1) c(white)">
-          Start Using AdorableCSS
-        </h2>
-        <p class="body(lg) c(white.8)">
-          Experience what it's like when designers and developers 
-          finally speak the same language.
-        </p>
-      </div>
-      
-      <div class="hbox(center) gap(lg)">
-        <Button size="lg" variant="secondary">
-          Try AdorableCSS
-        </Button>
-        <Button size="lg" variant="ghost">
-          <div class="hbox(middle) gap(sm) c(white)">
-            <Github size="20" />
-            <span>GitHub</span>
-          </div>
-        </Button>
-      </div>
-      
-      <!-- Install -->
-      <div class="p(xl) bg(white.1) r(lg) max-w(4xl)">
-        <div class="vbox(center) gap(md)">
-          <p class="caption c(white.7)">Install in 30 seconds</p>
-          <code class="code(lg) c(white) bg(transparent)">npm install adorable-css</code>
-        </div>
-      </div>
-      
-    </div>
+<!-- Manifesto / Philosophy -->
+<section class="py(120px) bg(white)">
+  <div class="w(full) max-w(800px) mx(auto) px(xl) text(center)">
+    <h2 class="text(40px) font(bold) c(gray-900) mb(24px)">Intent over Implementation</h2>
+    <p class="text(20px) c(gray-600) leading(1.8)">
+      Traditional CSS was built for documents. Modern tools like Tailwind brought utilities, but they still map 1:1 to CSS properties.
+      <br/><br/>
+      <strong>AdorableCSS is different.</strong> It's built for <span class="c(indigo-600) font(bold)">UI Design Intent</span>. 
+      When you say <code class="c(indigo-600)">hbox</code>, you mean "horizontal layout", not "display: flex; flex-direction: row". 
+      By raising the abstraction level, we make code more readable for humans and more writable for AI.
+    </p>
   </div>
 </section>
+
+<!-- Footer Simple -->
+<footer class="py(64px) border-t(1/gray-100) bg(white)">
+  <div class="text(center) c(gray-400) text(sm)">
+    &copy; 2026 AdorableCSS. Open Source.
+  </div>
+</footer>

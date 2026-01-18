@@ -4,7 +4,7 @@ import type { CSSRule } from '../../03-rules/types';
 // Responsive breakpoint definitions
 export const BREAKPOINTS = {
   sm: '640px',
-  md: '768px', 
+  md: '768px',
   lg: '1024px',
   xl: '1280px',
   '2xl': '1536px',
@@ -34,13 +34,13 @@ export interface CSSRuleDecorator {
 export class MediaQueryDecorator implements CSSRuleDecorator {
   decorate(rule: CSSRule, pattern: ResponsivePattern): CSSRule {
     const breakpointValue = BREAKPOINTS[pattern.breakpoint];
-    
+
     if (!breakpointValue) {
       return rule;
     }
 
     // Generate media query
-    const mediaQuery = pattern.isMaxWidth 
+    const mediaQuery = pattern.isMaxWidth
       ? `@media (max-width: ${breakpointValue})`
       : `@media (min-width: ${breakpointValue})`;
 
@@ -57,14 +57,14 @@ export class ResponsiveSelector {
 
   static analyze(className: string): ResponsivePattern | null {
     const match = className.match(this.RESPONSIVE_PATTERN);
-    
+
     if (!match) {
       return null;
     }
 
     const [, maxWidthPrefix, breakpoint, selector] = match;
     const isMaxWidth = maxWidthPrefix === '..';
-    
+
     if (!(breakpoint in BREAKPOINTS)) {
       return null;
     }
@@ -98,7 +98,7 @@ export class ResponsiveDecoratorFactory {
     // Group 03-rules by media query
     rules.forEach(({ className, cssRule }) => {
       const pattern = ResponsiveSelector.analyze(className);
-      
+
       if (!pattern) {
         // Non-responsive rule
         processedRules.push(cssRule);
@@ -135,33 +135,8 @@ export class ResponsiveDecoratorFactory {
 }
 
 // Utility functions for easier integration
-export function createResponsiveCSS(className: string, baseCSS: CSSRule): CSSRule | null {
-  const pattern = ResponsiveSelector.analyze(className);
-  if (!pattern) return null;
-
-  const factory = new ResponsiveDecoratorFactory();
-  return factory.createResponsiveRule(baseCSS, pattern);
-}
-
 export function isResponsiveClass(className: string): boolean {
   return ResponsiveSelector.isResponsive(className);
-}
-
-export function extractBaseClass(responsiveClassName: string): string {
-  const pattern = ResponsiveSelector.analyze(responsiveClassName);
-  return pattern ? pattern.selector : responsiveClassName;
-}
-
-// Debug helper
-export function debugResponsivePattern(className: string): void {
-  const pattern = ResponsiveSelector.analyze(className);
-  if (pattern) {
-    // Pattern found - debugging can be added here if needed
-    return;
-  } else {
-    // No pattern found - debugging can be added here if needed
-    return;
-  }
 }
 
 // State pattern definitions
@@ -174,18 +149,19 @@ export interface StatePattern {
 
 // State selector analyzer
 export class StateSelector {
-  private static readonly STATE_PATTERN = /^(group-)?(hover|focus|active|disabled|first|last|odd|even|checked|selected):(.*)/;
+  // Updated to include .class variants and explicit support for selected
+  private static readonly STATE_PATTERN = /^(group-)?(\.[a-zA-Z0-9_-]+|hover|focus|active|disabled|first|last|odd|even|checked|selected):(.*)/;
 
   static analyze(className: string): StatePattern | null {
     const match = className.match(this.STATE_PATTERN);
-    
+
     if (!match) {
       return null;
     }
 
     const [, groupPrefix, state, selector] = match;
     const isGroup = groupPrefix === 'group-';
-    
+
     return {
       state,
       selector,
@@ -203,15 +179,28 @@ export class StateSelector {
 export class StateDecorator {
   decorate(rule: CSSRule, pattern: StatePattern, classSelector: string): CSSRule {
     let pseudoSelector: string;
-    
-    if (pattern.isGroup) {
-      // Group state: .group:hover .current-class
-      pseudoSelector = `.group:${pattern.state} ${classSelector}`;
+
+    // Determine the state selector part
+    let statePart: string;
+    if (pattern.state.startsWith('.')) {
+      // It's already a class selector (e.g. .selected)
+      statePart = pattern.state;
+    } else if (pattern.state === 'selected') {
+      // Map 'selected' to '.selected' class by default for convenience
+      statePart = '.selected';
     } else {
-      // Regular state: .current-class:hover
-      pseudoSelector = `${classSelector}:${pattern.state}`;
+      // Default to pseudo-class
+      statePart = `:${pattern.state}`;
     }
-    
+
+    if (pattern.isGroup) {
+      // Group state: .group:hover .current-class or .group.selected .current-class
+      pseudoSelector = `.group${statePart} ${classSelector}`;
+    } else {
+      // Regular state: .current-class:hover or .current-class.selected
+      pseudoSelector = `${classSelector}${statePart}`;
+    }
+
     return {
       [pseudoSelector]: rule
     };
@@ -221,11 +210,6 @@ export class StateDecorator {
 // Helper functions
 export function isStateClass(className: string): boolean {
   return StateSelector.isState(className);
-}
-
-export function extractStateBaseClass(className: string): string {
-  const pattern = StateSelector.analyze(className);
-  return pattern ? pattern.selector : className;
 }
 
 export function createStateCSS(rule: CSSRule, pattern: StatePattern, classSelector: string): CSSRule {

@@ -145,7 +145,7 @@
 
 <div class="vbox gap(24)">
   <div class="vbox gap(16)">
-    <div class="hbox items(center) justify(between) gap(16) flex-wrap">
+    <div class="hbox(between wrap) gap(16)">
       <div>
         <h3 class="heading(h3) mb(8)">{componentName} Variants</h3>
         <p class="text(sm) c(neutral-600)">
@@ -169,7 +169,7 @@
     <!-- Filter Controls -->
     <div class="vbox gap(12)">
       <!-- Quick Filters -->
-      <div class="hbox gap(8) flex-wrap">
+      <div class="hbox(wrap) gap(8)">
         <button 
           on:click={() => { selectedVariant = 'all'; selectedSize = 'all'; }}
           class="btn(ghost/sm) {selectedVariant === 'all' && selectedSize === 'all' ? 'bg(primary-50) c(primary) b(1/primary-200)' : ''}"
@@ -203,7 +203,7 @@
       </div>
       
       <!-- Advanced Filters -->
-      <div class="hbox gap(16) flex-wrap items(center)">
+      <div class="hbox(wrap) gap(16)">
         <div class="hbox items(center) gap(8)">
           <label class="text(sm) c(neutral-600) bold(medium)">Variant:</label>
           <select 
@@ -251,11 +251,11 @@
   
   <!-- Definition details -->
   {#if definition.states || definition.compounds}
-    <div class="hbox gap(16) flex-wrap text(sm)">
+    <div class="hbox(wrap text-sm) gap(16)">
       {#if definition.states}
-        <div class="hbox items(center) gap(8)">
+        <div class="hbox gap(8)">
           <span class="c(neutral-500)">States:</span>
-          <div class="hbox gap(8) flex-wrap">
+          <div class="hbox(wrap) gap(8)">
             {#each Object.keys(definition.states) as state}
               <span class="badge(outline/sm)">{state}</span>
             {/each}

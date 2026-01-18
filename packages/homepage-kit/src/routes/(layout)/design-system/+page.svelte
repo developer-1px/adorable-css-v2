@@ -2,33 +2,10 @@
   import { onMount } from 'svelte';
   
   // Design system configuration
-  const designPrinciples = [
-    {
-      title: 'Consistency',
-      description: 'Unified design language across all components and patterns',
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="15" x2="15" y2="15"/></svg>`
-    },
-    {
-      title: 'Accessibility',
-      description: 'Interfaces designed for all users, regardless of ability',
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><circle cx="12" cy="12" r="4"/></svg>`
-    },
-    {
-      title: 'Scalability',
-      description: 'System that grows seamlessly with your project needs',
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>`
-    },
-    {
-      title: 'Performance',
-      description: 'Optimized for fast loading and smooth interactions',
-      icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`
-    }
-  ];
-
   const colorCategories = [
     {
       name: 'Primary',
-      description: 'Main brand colors',
+      description: 'Brand colors',
       colors: [
         { name: 'primary-50', value: 'var(--primary-50)' },
         { name: 'primary-100', value: 'var(--primary-100)' },
@@ -44,7 +21,7 @@
     },
     {
       name: 'Neutral',
-      description: 'Versatile grays for text and backgrounds',
+      description: 'Grays for text and structure',
       colors: [
         { name: 'neutral-50', value: 'var(--neutral-50)' },
         { name: 'neutral-100', value: 'var(--neutral-100)' },
@@ -57,379 +34,149 @@
         { name: 'neutral-800', value: 'var(--neutral-800)' },
         { name: 'neutral-900', value: 'var(--neutral-900)' }
       ]
-    },
-    {
-      name: 'Semantic',
-      description: 'Colors with specific meanings',
-      colors: [
-        { name: 'success', value: 'var(--success-600)', label: 'Success' },
-        { name: 'warning', value: 'var(--warning-500)', label: 'Warning' },
-        { name: 'error', value: 'var(--error-600)', label: 'Error' },
-        { name: 'info', value: 'var(--info-500)', label: 'Info' }
-      ]
     }
   ];
 
   const typographyScale = [
-    { name: 'display(xl)', size: '60px', lineHeight: '1.1', weight: '900', usage: 'Hero headings' },
-    { name: 'display(lg)', size: '48px', lineHeight: '1.1', weight: '900', usage: 'Large headings' },
-    { name: 'heading(xl)', size: '36px', lineHeight: '1.2', weight: '700', usage: 'Page titles' },
-    { name: 'heading(lg)', size: '30px', lineHeight: '1.2', weight: '700', usage: 'Section headings' },
-    { name: 'heading(md)', size: '24px', lineHeight: '1.3', weight: '600', usage: 'Sub sections' },
-    { name: 'title(lg)', size: '20px', lineHeight: '1.4', weight: '600', usage: 'Card titles' },
-    { name: 'title(md)', size: '18px', lineHeight: '1.4', weight: '600', usage: 'List headers' },
-    { name: 'body(lg)', size: '18px', lineHeight: '1.6', weight: '400', usage: 'Emphasized body' },
-    { name: 'body(md)', size: '16px', lineHeight: '1.6', weight: '400', usage: 'Default body' },
-    { name: 'body(sm)', size: '14px', lineHeight: '1.5', weight: '400', usage: 'Secondary text' },
-    { name: 'label(md)', size: '14px', lineHeight: '1.4', weight: '500', usage: 'Labels' },
-    { name: 'caption', size: '12px', lineHeight: '1.4', weight: '400', usage: 'Captions' }
+    { name: 'display(xl)', size: '60px', weight: '900', usage: 'Hero' },
+    { name: 'display(lg)', size: '48px', weight: '900', usage: 'Large' },
+    { name: 'heading(xl)', size: '36px', weight: '700', usage: 'Page' },
+    { name: 'heading(lg)', size: '30px', weight: '700', usage: 'Section' },
+    { name: 'body(lg)', size: '18px', weight: '400', usage: 'Body' },
+    { name: 'body(md)', size: '16px', weight: '400', usage: 'Base' },
+    { name: 'caption', size: '12px', weight: '400', usage: 'Caption' }
   ];
 
   const spacingSystem = [
-    { name: 'xs', value: '4px', usage: 'Tight spacing' },
-    { name: 'sm', value: '8px', usage: 'Small gaps' },
-    { name: 'md', value: '12px', usage: 'Default spacing' },
-    { name: 'lg', value: '16px', usage: 'Standard gaps' },
-    { name: 'xl', value: '20px', usage: 'Large spacing' },
-    { name: '2xl', value: '24px', usage: 'Section internal' },
-    { name: '3xl', value: '32px', usage: 'Between sections' },
-    { name: '4xl', value: '40px', usage: 'Component groups' },
-    { name: '5xl', value: '48px', usage: 'Page sections' },
-    { name: '6xl', value: '64px', usage: 'Hero sections' }
+    { name: 'xs', value: '4px' },
+    { name: 'sm', value: '8px' },
+    { name: 'md', value: '12px' },
+    { name: 'lg', value: '16px' },
+    { name: 'xl', value: '20px' },
+    { name: '2xl', value: '24px' },
+    { name: '3xl', value: '32px' },
+    { name: '4xl', value: '40px' },
+    { name: '6xl', value: '64px' }
   ];
 
-  const componentPatterns = [
-    {
-      name: '버튼',
-      variants: ['primary', 'secondary', 'ghost', 'danger'],
-      sizes: ['sm', 'md', 'lg']
-    },
-    {
-      name: '카드',
-      variants: ['default', 'elevated', 'bordered', 'interactive'],
-      sizes: ['compact', 'default', 'spacious']
-    },
-    {
-      name: '입력 필드',
-      variants: ['default', 'filled', 'outlined'],
-      states: ['default', 'focus', 'error', 'disabled']
-    }
-  ];
-
-  let activeTab = 'principles';
+  let activeTab = 'tokens';
 </script>
 
-<style>
-  :global(:root) {
-    /* Design System Variables */
-    --ds-radius-sm: 4px;
-    --ds-radius-md: 8px;
-    --ds-radius-lg: 12px;
-    --ds-radius-xl: 16px;
-    --ds-radius-full: 9999px;
-    
-    --ds-shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-    --ds-shadow-md: 0 4px 8px rgba(0, 0, 0, 0.08);
-    --ds-shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1);
-    --ds-shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.12);
-    
-    --ds-transition-fast: 150ms ease;
-    --ds-transition-base: 250ms ease;
-    --ds-transition-slow: 350ms ease;
-  }
-</style>
-
-<div class="vbox gap(3xl) py(5xl)">
-  <!-- Hero Section -->
-  <section class="vbox(center) gap(xl) text-align(center) container(7xl) mx(auto) px(2xl)">
-    <h1 class="display(xl) bold(900) bg(gradient) bg-clip(text) c(transparent)">
+<div class="vbox gap(24) py(32)">
+  <!-- Header -->
+  <section class="vbox gap(4) max-w(800px) mx(auto) px(6) text-align(center)">
+    <h1 class="font(display-lg) bold(900) c(gray-900)">
       Design System
     </h1>
-    <p class="title(lg) c(muted) max-w(prose) mx(auto)">
-      Build better experiences with our consistent, scalable design system
+    <p class="font(body-lg) c(gray-500)">
+      Tokens and primitives for building Adorable interfaces.
     </p>
   </section>
 
-  <!-- Tab Navigation -->
-  <nav class="hbox(pack) gap(md) container(7xl) mx(auto) px(2xl) border(b/1/muted)">
-    <button 
-      class="px(xl) py(md) border(b/2/{activeTab === 'principles' ? 'primary' : 'transparent'}) c({activeTab === 'principles' ? 'primary' : 'muted'}) bold(600) transition hover:c(primary)"
-      on:click={() => activeTab = 'principles'}
-    >
-      Design Principles
-    </button>
-    <button 
-      class="px(xl) py(md) border(b/2/{activeTab === 'colors' ? 'primary' : 'transparent'}) c({activeTab === 'colors' ? 'primary' : 'muted'}) bold(600) transition hover:c(primary)"
-      on:click={() => activeTab = 'colors'}
-    >
-      Color System
-    </button>
-    <button 
-      class="px(xl) py(md) border(b/2/{activeTab === 'typography' ? 'primary' : 'transparent'}) c({activeTab === 'typography' ? 'primary' : 'muted'}) bold(600) transition hover:c(primary)"
-      on:click={() => activeTab = 'typography'}
-    >
-      Typography
-    </button>
-    <button 
-      class="px(xl) py(md) border(b/2/{activeTab === 'spacing' ? 'primary' : 'transparent'}) c({activeTab === 'spacing' ? 'primary' : 'muted'}) bold(600) transition hover:c(primary)"
-      on:click={() => activeTab = 'spacing'}
-    >
-      Spacing System
-    </button>
-    <button 
-      class="px(xl) py(md) border(b/2/{activeTab === 'components' ? 'primary' : 'transparent'}) c({activeTab === 'components' ? 'primary' : 'muted'}) bold(600) transition hover:c(primary)"
-      on:click={() => activeTab = 'components'}
-    >
-      Components
-    </button>
-  </nav>
-
-  <!-- Content Sections -->
-  <div class="container(7xl) mx(auto) px(2xl)">
-    <!-- Design Principles -->
-    {#if activeTab === 'principles'}
-      <section class="vbox gap(3xl) fade-in">
-        <div class="vbox gap(lg)">
-          <h2 class="heading(xl) bold(700)">디자인 원칙</h2>
-          <p class="body(lg) c(muted)">
-            우리의 디자인 시스템은 네 가지 핵심 원칙을 기반으로 합니다
-          </p>
-        </div>
-        
-        <div class="grid(2) gap(2xl)">
-          {#each designPrinciples as principle}
-            <div class="vbox gap(lg) p(2xl) r(lg) bg(surface) border(1/muted) hover:shadow(lg) transition interactive(2)">
-              <div class="w(48) h(48) hbox(center/middle) r(md) bg(primary.1) c(primary)">
-                {@html principle.icon}
-              </div>
-              <h3 class="title(lg) bold(600)">{principle.title}</h3>
-              <p class="body(md) c(muted)">{principle.description}</p>
-            </div>
-          {/each}
-        </div>
-      </section>
-    {/if}
-
-    <!-- Color System -->
-    {#if activeTab === 'colors'}
-      <section class="vbox gap(3xl) fade-in">
-        <div class="vbox gap(lg)">
-          <h2 class="heading(xl) bold(700)">색상 시스템</h2>
-          <p class="body(lg) c(muted)">
-            OKLCH 기반의 체계적인 색상 팔레트로 일관된 비주얼 언어를 구현합니다
-          </p>
-        </div>
-
+  <!-- Content -->
+  <div class="max-w(1000px) mx(auto) w(full) px(6) vbox gap(32)">
+    
+    <!-- Colors -->
+    <section class="vbox gap(12)">
+      <h2 class="font(heading-lg) c(gray-900)">Colors</h2>
+      <div class="vbox gap(16)">
         {#each colorCategories as category}
-          <div class="vbox gap(xl)">
-            <div class="vbox gap(sm)">
-              <h3 class="title(lg) bold(600)">{category.name}</h3>
-              <p class="body(sm) c(muted)">{category.description}</p>
-            </div>
-            
-            <div class="grid({category.colors.length > 4 ? '5' : category.colors.length}) gap(md)">
+          <div class="vbox gap(4)">
+            <h3 class="font(title-md) c(gray-700)">{category.name}</h3>
+            <div class="grid(5) md:grid-cols(10) gap(2)">
               {#each category.colors as color}
-                <div class="vbox gap(sm) group cursor-pointer">
+                <div class="vbox gap(2) group cursor-pointer">
                   <div 
-                    class="h(80) r(md) shadow(sm) group-hover:shadow(lg) transition"
+                    class="h(16) w(full) r(md) transition hover:scale(105)"
                     style="background-color: {color.value}"
                   />
-                  <div class="vbox gap(xs)">
-                    <p class="label(md) bold(500)">{color.label || color.name}</p>
-                    <code class="caption c(muted) font(mono)">c({color.name})</code>
+                  <div class="opacity(0) group-hover:opacity(100) transition text-align(center)">
+                    <span class="font(caption) c(gray-400)">{color.name.split('-')[1] || 'base'}</span>
                   </div>
                 </div>
               {/each}
             </div>
           </div>
         {/each}
-      </section>
-    {/if}
+      </div>
+    </section>
 
     <!-- Typography -->
-    {#if activeTab === 'typography'}
-      <section class="vbox gap(3xl) fade-in">
-        <div class="vbox gap(lg)">
-          <h2 class="heading(xl) bold(700)">타이포그래피 스케일</h2>
-          <p class="body(lg) c(muted)">
-            명확한 계층 구조와 가독성을 위한 타이포그래피 시스템
-          </p>
-        </div>
-
-        <div class="vbox gap(2xl)">
-          {#each typographyScale as type}
-            <div class="grid(12) gap(xl) items(center) p(xl) r(lg) border(1/muted) hover:bg(surface) transition">
-              <div class="col-span(3)">
-                <code class="label(md) c(primary) font(mono)">{type.name}</code>
-              </div>
-              <div class="col-span(4)">
-                <p 
-                  class="truncate"
-                  style="font-size: {type.size}; line-height: {type.lineHeight}; font-weight: {type.weight}"
-                >
-                  가나다라 ABC 123
-                </p>
-              </div>
-              <div class="col-span(3) text-align(right)">
-                <p class="caption c(muted)">{type.size} / {type.weight}</p>
-              </div>
-              <div class="col-span(2) text-align(right)">
-                <p class="caption c(muted)">{type.usage}</p>
-              </div>
+    <section class="vbox gap(12)">
+      <h2 class="font(heading-lg) c(gray-900)">Typography</h2>
+      <div class="vbox gap(8)">
+        {#each typographyScale as type}
+          <div class="hbox(middle) gap(8) p(6) r(lg) hover:bg(gray-50) transition group">
+            <div class="w(120)">
+              <code class="font(caption) c(indigo-500) bg(indigo-50) px(2) py(1) r(sm)">{type.name}</code>
             </div>
-          {/each}
-        </div>
-      </section>
-    {/if}
-
-    <!-- Spacing System -->
-    {#if activeTab === 'spacing'}
-      <section class="vbox gap(3xl) fade-in">
-        <div class="vbox gap(lg)">
-          <h2 class="heading(xl) bold(700)">간격 시스템</h2>
-          <p class="body(lg) c(muted)">
-            4px 기반의 일관된 간격 시스템으로 조화로운 레이아웃을 만듭니다
-          </p>
-        </div>
-
-        <div class="vbox gap(xl)">
-          {#each spacingSystem as space}
-            <div class="hbox gap(xl) items(center)">
-              <div class="w(100) text-align(right)">
-                <code class="label(md) c(primary) font(mono)">{space.name}</code>
-              </div>
-              <div class="flex(1) h(40) hbox items(center)">
-                <div 
-                  class="h(full) bg(primary) r(sm)"
-                  style="width: {space.value}"
-                />
-              </div>
-              <div class="w(60) text-align(center)">
-                <p class="caption c(muted)">{space.value}</p>
-              </div>
-              <div class="w(150)">
-                <p class="caption c(muted)">{space.usage}</p>
-              </div>
+            <div class="flex(1)">
+              <p style="font-size: {type.size}; font-weight: {type.weight};" class="c(gray-900)">
+                The quick brown fox
+              </p>
             </div>
-          {/each}
-        </div>
-      </section>
-    {/if}
-
-    <!-- Components -->
-    {#if activeTab === 'components'}
-      <section class="vbox gap(3xl) fade-in">
-        <div class="vbox gap(lg)">
-          <h2 class="heading(xl) bold(700)">컴포넌트 패턴</h2>
-          <p class="body(lg) c(muted)">
-            재사용 가능한 컴포넌트로 일관된 사용자 경험을 제공합니다
-          </p>
-          <a 
-            href="/(layout)/design-system/components"
-            class="mt(lg) px(xl) py(md) r(md) bg(primary) c(white) bold(500) hover:bg(primary-600) transition w(fit) hbox gap(sm) items(center)"
-          >
-            전체 컴포넌트 보기
-            <svg class="size(20)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M9 18l6-6-6-6"/>
-            </svg>
-          </a>
-        </div>
-
-        <!-- Button Component -->
-        <div class="vbox gap(2xl) p(3xl) r(xl) bg(surface) border(1/muted)">
-          <h3 class="title(lg) bold(600)">버튼 컴포넌트</h3>
-          
-          <div class="vbox gap(xl)">
-            <p class="label(md) c(muted)">Variants</p>
-            <div class="hbox gap(lg) flex-wrap">
-              <button class="px(xl) py(md) r(md) bg(primary) c(white) bold(500) hover:bg(primary-600) transition">
-                Primary
-              </button>
-              <button class="px(xl) py(md) r(md) bg(neutral-100) c(neutral-700) bold(500) hover:bg(neutral-200) transition">
-                Secondary
-              </button>
-              <button class="px(xl) py(md) r(md) border(1/neutral-300) c(neutral-700) bold(500) hover:bg(neutral-50) transition">
-                Ghost
-              </button>
-              <button class="px(xl) py(md) r(md) bg(error) c(white) bold(500) hover:bg(error-600) transition">
-                Danger
-              </button>
+            <div class="c(gray-400) font(caption) opacity(0) group-hover:opacity(100)">
+              {type.size} / {type.weight}
             </div>
           </div>
+        {/each}
+      </div>
+    </section>
 
-          <div class="vbox gap(xl)">
-            <p class="label(md) c(muted)">Sizes</p>
-            <div class="hbox gap(lg) items(center) flex-wrap">
-              <button class="px(md) py(sm) r(md) bg(primary) c(white) bold(500) text(sm) hover:bg(primary-600) transition">
-                Small
-              </button>
-              <button class="px(xl) py(md) r(md) bg(primary) c(white) bold(500) hover:bg(primary-600) transition">
-                Medium
-              </button>
-              <button class="px(2xl) py(lg) r(md) bg(primary) c(white) bold(500) text(lg) hover:bg(primary-600) transition">
-                Large
-              </button>
-            </div>
+    <!-- Spacing -->
+    <section class="vbox gap(12)">
+      <h2 class="font(heading-lg) c(gray-900)">Spacing</h2>
+      <div class="grid(2) sm:grid-cols(3) md:grid-cols(4) gap(6)">
+        {#each spacingSystem as space}
+          <div class="hbox(middle) gap(4)">
+            <code class="w(32) font(caption) c(gray-500)">{space.name}</code>
+            <div 
+              class="h(8) bg(indigo-500) r(full) opacity(80)"
+              style="width: {space.value}"
+            />
+            <span class="font(caption) c(gray-400)">{space.value}</span>
+          </div>
+        {/each}
+      </div>
+    </section>
+
+    <!-- Components Preview -->
+    <section class="vbox gap(12)">
+      <h2 class="font(heading-lg) c(gray-900)">Components</h2>
+      <div class="hbox gap(8) flex-wrap">
+        <!-- Buttons -->
+        <button class="px(6) py(2) r(md) bg(indigo-600) c(white) font(bold) hover:bg(indigo-700) transition">Primary</button>
+        <button class="px(6) py(2) r(md) bg(gray-100) c(gray-700) font(bold) hover:bg(gray-200) transition">Secondary</button>
+        <button class="px(6) py(2) r(md) c(gray-600) hover:bg(gray-50) transition">Ghost</button>
+      </div>
+      
+      <!-- Cards -->
+      <div class="grid(1) sm:grid-cols(2) gap(8)">
+        <div class="vbox gap(4) p(8) r(xl) bg(white) shadow(sm) hover:shadow(md) transition">
+          <div class="size(12) r(full) bg(indigo-100) hbox(center) c(indigo-600)">
+            <svg class="size(6)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+          </div>
+          <div>
+            <h3 class="font(title-lg) c(gray-900)">Borderless Card</h3>
+            <p class="font(body-md) c(gray-500) mt(2)">
+              Defined by shadow and whitespace, not borders.
+            </p>
           </div>
         </div>
-
-        <!-- Card Component -->
-        <div class="vbox gap(2xl) p(3xl) r(xl) bg(surface) border(1/muted)">
-          <h3 class="title(lg) bold(600)">카드 컴포넌트</h3>
-          
-          <div class="grid(3) gap(xl)">
-            <div class="vbox gap(lg) p(xl) r(lg) bg(white) border(1/neutral-200)">
-              <h4 class="title(md) bold(600)">Default Card</h4>
-              <p class="body(sm) c(muted)">기본 카드 스타일</p>
-            </div>
-            
-            <div class="vbox gap(lg) p(xl) r(lg) bg(white) shadow(md) hover:shadow(lg) transition">
-              <h4 class="title(md) bold(600)">Elevated Card</h4>
-              <p class="body(sm) c(muted)">그림자가 있는 카드</p>
-            </div>
-            
-            <div class="vbox gap(lg) p(xl) r(lg) bg(gradient) c(white)">
-              <h4 class="title(md) bold(600)">Gradient Card</h4>
-              <p class="body(sm) c(white.8)">그라디언트 카드</p>
-            </div>
+        
+        <div class="vbox gap(4) p(8) r(xl) bg(gray-50) hover:bg(gray-100) transition">
+          <div class="size(12) r(full) bg(white) shadow(sm) hbox(center) c(gray-900)">
+            <svg class="size(6)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+          </div>
+          <div>
+            <h3 class="font(title-lg) c(gray-900)">Surface Card</h3>
+            <p class="font(body-md) c(gray-500) mt(2)">
+              Uses a subtle background fill to define its area.
+            </p>
           </div>
         </div>
+      </div>
+    </section>
 
-        <!-- Input Component -->
-        <div class="vbox gap(2xl) p(3xl) r(xl) bg(surface) border(1/muted)">
-          <h3 class="title(lg) bold(600)">입력 필드</h3>
-          
-          <div class="vbox gap(xl)">
-            <div class="vbox gap(sm)">
-              <label class="label(md) c(neutral-700)">Default Input</label>
-              <input 
-                type="text" 
-                placeholder="텍스트를 입력하세요"
-                class="w(full) px(lg) py(md) r(md) border(1/neutral-300) focus:border(primary) focus:ring(2/4/primary.2) transition"
-              />
-            </div>
-            
-            <div class="vbox gap(sm)">
-              <label class="label(md) c(neutral-700)">Filled Input</label>
-              <input 
-                type="text" 
-                placeholder="텍스트를 입력하세요"
-                class="w(full) px(lg) py(md) r(md) bg(neutral-100) border(1/transparent) focus:bg(white) focus:border(primary) focus:ring(2/4/primary.2) transition"
-              />
-            </div>
-            
-            <div class="vbox gap(sm)">
-              <label class="label(md) c(error)">Error State</label>
-              <input 
-                type="text" 
-                placeholder="오류가 있습니다"
-                class="w(full) px(lg) py(md) r(md) border(1/error) focus:ring(2/4/error.2) transition"
-              />
-              <p class="caption c(error)">유효하지 않은 입력입니다</p>
-            </div>
-          </div>
-        </div>
-      </section>
-    {/if}
   </div>
 </div>
