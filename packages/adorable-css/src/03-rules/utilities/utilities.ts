@@ -25,7 +25,15 @@ export const objectFit = (v?: string): CSSRule => v ? { 'object-fit': v } : {};
 export const objectPosition = (v?: string): CSSRule => v ? { 'object-position': v } : {};
 
 export const utilityRules = {
-  pointer: pointerEvents,
+  // Cursor pointer alias (fixes conflict)
+  pointer: () => ({ cursor: 'pointer' }),
+  'pointer-events': pointerEvents,
+
+  // Marker classes
+  group: () => ({ '--group': '1' }),
+  dark: () => ({ '--dark': '1' }),
+  selected: () => ({ '--selected': '1' }),
+
   'select-none': selectNone,
   select,
   transition,

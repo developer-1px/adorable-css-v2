@@ -56,22 +56,42 @@ function _parseAdorableCSS(input: string) {
 
   function SingleSelector() {
     const at = optional(() => consume("@"));
-    const selector = SimpleSelector();
+
+    // Optional base selector (default to & if starts with combinator)
+    const selector = optional(() => SimpleSelector());
+
     const important = many(() => consume("!"))
       .map((v) => v.image)
       .join("");
 
     const combinator = many(() => CombinatorSelector());
 
+    // If no selector and no combinators, fail? 
+    // But optional() returns null if no match. 
+    // parser-utils (many) returns empty array.
+    if (!selector && combinator.length === 0) {
+      // consume nothing -> fail? 
+      // Actually SingleSelector is inside optional() in SelectorList.
+      // So if this matches nothing, it's fine (returns null).
+      // But we need to ensure we don't consume nothing and return success if empty.
+      // createParser consumes. optional() backtracks if failure.
+      // If SimpleSelector fails, and combinator fails...
+      // We need to force at least one match?
+      // But optional() wraps this function.
+      throw new Error("No selector found");
+    }
+
+    const baseImage = selector ? selector.image : "&";
+
     return {
       type: "selector",
       combinator: "",
-      selector,
+      selector: selector || { image: "&", type: "implicit" },
       important,
       combinators: combinator,
       image:
         (at ? "@" : "") +
-        selector.image +
+        baseImage +
         important +
         combinator.map((c) => c.image).join(""),
     };
@@ -84,6 +104,7 @@ function _parseAdorableCSS(input: string) {
       () => FunctionCall(),
       () => Range(),
       () => consume("(ident)"),
+      () => consume("(dimension)"), // Allow numeric classes like 100, 200
       () => consume("&")
     );
   }
@@ -271,11 +292,15 @@ function _parseAdorableCSS(input: string) {
     return options(
       () => CSSFunc(),
       () => {
-        const minus = optional(() => consume("-"));
+        const op = optional(() => options(
+          () => consume("-"),
+          () => consume("~"),
+          () => consume("..")
+        ));
         const dimension = consume("(dimension)");
         return {
           ...dimension,
-          image: minus ? `-${dimension.image}` : dimension.image,
+          image: op ? `${op.image}${dimension.image}` : dimension.image,
         };
       },
       () => consume("(dimension-pair)"),

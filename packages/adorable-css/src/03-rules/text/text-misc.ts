@@ -21,12 +21,12 @@ export const underline: RuleHandler = (): CSSRule => ({
 // Decoration handler - decoration(underline), decoration(purple-600.3)
 export const decoration: RuleHandler = (args?: string): CSSRule => {
   if (!args) return { 'text-decoration': 'underline' };
-  
+
   // Handle decoration styles
   if (args === 'underline' || args === 'overline' || args === 'none') {
     return { 'text-decoration': args };
   }
-  
+
   // Handle color values - decoration(purple-600.3)
   return { 'text-decoration-color': String(makeColor(args)) };
 };
@@ -136,6 +136,16 @@ export const caretC: RuleHandler = (args?: string): CSSRule => {
 };
 
 // Export all typography utilities
+// White space handler
+export const whiteSpace: RuleHandler = (args?: string): CSSRule => {
+  const allowed = ['normal', 'nowrap', 'pre', 'pre-line', 'pre-wrap', 'break-spaces'];
+  if (args && allowed.includes(args)) {
+    return { 'white-space': args };
+  }
+  return { 'white-space': 'nowrap' }; // Default to nowrap if used as utility e.g. white-space() or just nowrap (if mapped)
+};
+
+// Export all typography utilities
 export const typographyUtilityRules = {
   italic,
   overline,
@@ -154,5 +164,18 @@ export const typographyUtilityRules = {
   line,
   'letter-spacing': letterSpacing,
   'caret-c': caretC,
+  'line-through': () => ({ 'text-decoration': 'line-through' }),
+  strike: () => ({ 'text-decoration': 'line-through' }),
+  del: () => ({ 'text-decoration': 'line-through' }),
   truncate,
+  'line-clamp': truncate, // Alias
+  'max-lines': truncate,   // Alias
+  'white-space': whiteSpace,
+  nowrap: () => ({ 'white-space': 'nowrap' }),
+  'vertical-align': (v?: string) => v ? { 'vertical-align': v } : {},
+  'vertical': (v?: string) => v ? { 'vertical-align': v } : {},
+  'valign': (v?: string) => v ? { 'vertical-align': v } : {},
+  'vertical-top': () => ({ 'vertical-align': 'top' }),
+  'AppleSD': () => ({ 'font-family': 'Apple SD Gothic Neo' }),
+  'nowrap...': truncate,
 };

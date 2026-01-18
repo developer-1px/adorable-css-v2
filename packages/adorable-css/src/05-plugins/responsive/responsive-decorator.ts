@@ -53,7 +53,7 @@ export class MediaQueryDecorator implements CSSRuleDecorator {
 
 // Responsive selector analyzer
 export class ResponsiveSelector {
-  private static readonly RESPONSIVE_PATTERN = /^(\.\.)?([a-z0-9]+):(.*)/;
+  private static readonly RESPONSIVE_PATTERN = /^(\.\.)?(@?[a-z0-9]+(?:\([^)]*\))?):(.*)/;
 
   static analyze(className: string): ResponsivePattern | null {
     const match = className.match(this.RESPONSIVE_PATTERN);
@@ -145,12 +145,13 @@ export interface StatePattern {
   selector: string;
   originalClass: string;
   isGroup: boolean; // true for group-hover, group-focus, etc.
+  separator: string;
 }
 
 // State selector analyzer
 export class StateSelector {
-  // Updated to include .class variants and explicit support for selected
-  private static readonly STATE_PATTERN = /^(group-)?(\.[a-zA-Z0-9_-]+|hover|focus|active|disabled|first|last|odd|even|checked|selected):(.*)/;
+  // Updated to include .class variants and explicit support for checks, selected, dark, pseudo-elements
+  private static readonly STATE_PATTERN = /^(group-)?(\.[a-zA-Z0-9_-]+|hover|focus|active|visited|disabled|first|last|odd|even|checked|selected|dark|empty|read-only|required|valid|invalid|indeterminate|first-of-type|last-of-type|only-of-type|only-child|before|after|first-line|first-letter|selection|placeholder|backdrop|file-selector-button|mark|marker|-webkit-scrollbar|-webkit-scrollbar-thumb|-webkit-scrollbar-track)(:{1,2})(.*)/;
 
   static analyze(className: string): StatePattern | null {
     const match = className.match(this.STATE_PATTERN);
@@ -159,14 +160,15 @@ export class StateSelector {
       return null;
     }
 
-    const [, groupPrefix, state, selector] = match;
+    const [, groupPrefix, state, separator, selector] = match;
     const isGroup = groupPrefix === 'group-';
 
     return {
       state,
       selector,
       originalClass: className,
-      isGroup
+      isGroup,
+      separator
     };
   }
 
@@ -179,25 +181,32 @@ export class StateSelector {
 export class StateDecorator {
   decorate(rule: CSSRule, pattern: StatePattern, classSelector: string): CSSRule {
     let pseudoSelector: string;
+    const state = pattern.state;
 
     // Determine the state selector part
     let statePart: string;
-    if (pattern.state.startsWith('.')) {
-      // It's already a class selector (e.g. .selected)
-      statePart = pattern.state;
-    } else if (pattern.state === 'selected') {
-      // Map 'selected' to '.selected' class by default for convenience
+
+    if (state === 'dark') {
+      // Dark mode: .dark .current-class
+      return {
+        [`.dark ${classSelector}`]: rule
+      };
+    } else if (state.startsWith('.')) {
+      // Class selector (e.g. .selected)
+      statePart = state;
+    } else if (state === 'selected') {
+      // Map 'selected' to '.selected' class
       statePart = '.selected';
     } else {
-      // Default to pseudo-class
-      statePart = `:${pattern.state}`;
+      // Use captured separator (Handles :root, ::before, :hover etc explicitly as user wrote)
+      statePart = `${pattern.separator}${state}`;
     }
 
     if (pattern.isGroup) {
-      // Group state: .group:hover .current-class or .group.selected .current-class
+      // Group state: .group:hover .current-class
       pseudoSelector = `.group${statePart} ${classSelector}`;
     } else {
-      // Regular state: .current-class:hover or .current-class.selected
+      // Regular state: .current-class:hover
       pseudoSelector = `${classSelector}${statePart}`;
     }
 

@@ -92,6 +92,7 @@ export const vbox: RuleHandler = (v = '') => {
 
 export const wrap = hbox;
 export const pack: KeywordRuleHandler = () => flexbox('row', 'center', 'center');
+export const vpack: KeywordRuleHandler = () => flexbox('column', 'center', 'center');
 
 export const flex: RuleHandler = (v?: string): CSSRule => v ? { flex: v } : { flex: '1 1 0%' };
 export const flexWrap: KeywordRuleHandler = () => ({ 'flex-wrap': 'wrap' });
@@ -102,7 +103,7 @@ export const grow: RuleHandler = (v?: string): CSSRule => v ? { 'flex-grow': v }
 
 export const displayRules = {
   block, inline, 'inline-block': inlineBlock,
-  none, hidden, hbox, vbox, wrap, pack,
+  none, hidden, hbox, vbox, wrap, pack, vpack,
   // Low-level CSS props deprecated for AI-friendliness
   // flex, 'flex-wrap': flexWrap, items, justify, shrink, grow
 };

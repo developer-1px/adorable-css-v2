@@ -18,7 +18,7 @@ export const truncate: RuleHandler = (value) => {
 
   // Parse numeric value for line clamping
   const lines = parseInt(value);
-  
+
   if (isNaN(lines) || lines < 1) {
     // Invalid value, fallback to single line
     return {
@@ -46,3 +46,6 @@ export const truncate: RuleHandler = (value) => {
     'text-overflow': 'ellipsis'
   };
 };
+
+export const lineClamp = truncate;
+export const maxLines = truncate;

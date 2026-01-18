@@ -30,19 +30,32 @@ function getLayerFromPriority(priority: number): string {
   return 'component';
 }
 
-// Extract importance level from class name (! marks)
+// Extract importance level from class name using parser AST
 interface ImportanceInfo {
   level: number;
   className: string;
 }
 
 function extractImportanceLevel(className: string): ImportanceInfo {
-  const importanceMatch = className.match(/(!+)$/);
-  const level = importanceMatch ? importanceMatch[1].length : 0;
+  try {
+    const parsed = parseAdorableCSS(className);
+    if (parsed.value.length > 0) {
+      const firstSelector = parsed.value[0];
+      const important = firstSelector.important || '';
+      const level = important.length;
+
+      return {
+        level,
+        className: level > 0 ? className.slice(0, -level) : className
+      };
+    }
+  } catch (e) {
+    // Fallback: if parsing fails, assume no importance
+  }
 
   return {
-    level,
-    className: level > 0 ? className.slice(0, -level) : className
+    level: 0,
+    className
   };
 }
 
@@ -224,10 +237,14 @@ const handlePseudoClass = (
   v: any,
   rawSelector: string
 ): { selector: string; cssResult: { mainCSS: string; nestedCSS: string[]; priority?: number } } => {
-  const combinator = v.combinators[0];
+  const combinatorItem = v.combinators[0];
+  const separator = combinatorItem.combinator; // : or ::
   const pseudoClass = v.selector.image;
-  const targetSelector = combinator.selector;
-  const pseudoSelector = `${rawSelector}:${pseudoClass}`;
+  const targetSelector = combinatorItem.selector;
+
+  // Construct pseudo selector using the correct separator
+  // e.g. .class:hover or .class::first-line
+  const pseudoSelector = `${rawSelector}${separator}${pseudoClass}`;
 
   return {
     selector: pseudoSelector,
@@ -287,7 +304,8 @@ function _generateCSSFromAdorableCSS(value: string): string {
   let hasValidRules = false;
 
   result.value.forEach((v: any) => {
-    const cssResult = v.combinators?.length > 0 && v.combinators[0].combinator === ":"
+    const combinator = v.combinators?.[0]?.combinator;
+    const cssResult = combinator === ":" || combinator === "::"
       ? (() => {
         const { selector, cssResult } = handlePseudoClass(v, rawSelector);
         actualSelector = selector;

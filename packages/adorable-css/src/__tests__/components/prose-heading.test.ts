@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import '../../03-rules/index'; // Register rules
 import { prose } from '../../04-components/patterns/prose';
 import { headingString } from '../../04-components/primitives/typography/heading';
 
@@ -12,15 +13,15 @@ describe('prose heading integration', () => {
 
   it('should properly handle heading component in selectors', () => {
     const result = prose();
-    
+
     if (Array.isArray(result)) {
-      const [classes, cssRule] = result;
+      const [classes, cssRule] = result as [string, import('../../03-rules/types').CSSRule];
       console.log('Prose classes:', classes);
       console.log('CSS Rule h1:', cssRule['& h1']);
-      
+
       // h1 selector should have CSS properties from heading component
       expect(cssRule['& h1']).toBeDefined();
-      
+
       // Log the actual CSS properties to debug
       const h1CSS = cssRule['& h1'];
       if (h1CSS && typeof h1CSS === 'object') {

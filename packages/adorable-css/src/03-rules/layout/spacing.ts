@@ -81,8 +81,18 @@ export const gap: RuleHandler = (args?: string): CSSRule => {
   return { gap: isToken(args, 'spacing') ? generateSpacingCalc(args) : String(toPx(args)) };
 };
 
+export const vgap: RuleHandler = (args?: string): CSSRule => {
+  if (!args) return { 'row-gap': generateSpacingCalc('md') };
+  return { 'row-gap': isToken(args, 'spacing') ? generateSpacingCalc(args) : String(toPx(args)) };
+};
+
+export const hgap: RuleHandler = (args?: string): CSSRule => {
+  if (!args) return { 'column-gap': generateSpacingCalc('md') };
+  return { 'column-gap': isToken(args, 'spacing') ? generateSpacingCalc(args) : String(toPx(args)) };
+};
+
 export const spacingRules = {
-  p, px, py, pt, pb, pl, pr, gap,
+  p, px, py, pt, pb, pl, pr, gap, vgap, hgap,
   m, mx, my, mt, mb, ml, mr,
   m_neg, mx_neg, my_neg, mt_neg, mb_neg, ml_neg, mr_neg
 };

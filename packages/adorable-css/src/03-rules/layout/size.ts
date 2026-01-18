@@ -6,22 +6,30 @@ import { generateSizeCalc, generateContainerCalc } from '../../02-design_tokens/
 // Width utilities
 export const w: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
-  
+
+  // Handle ~ or .. prefix (max-width) or suffix (min-width)
+  if (args.startsWith('~') || args.startsWith('..')) {
+    return { 'max-width': String(pxWithClamp(args.replace(/^(\.\.|~)/, ''))) };
+  }
+  if (args.endsWith('~') || args.endsWith('..')) {
+    return { 'min-width': String(pxWithClamp(args.replace(/(\.\.|~)$/, ''))) };
+  }
+
   // Special Figma-style values first
   if (args === 'fill') return { flex: '1' };  // Figma's "Fill container"
   if (args === 'hug') return { width: 'fit-content' };  // Figma's "Hug contents"
-  
+
   // Common size values
   if (args === 'full') return { width: '100%' };
   if (args === 'auto') return { width: 'auto' };
   if (args === 'screen') return { width: '100vw' };
   if (args === 'fit') return { width: 'fit-content' }; // Standard fit-content
-  
+
   // size 02-design_tokens for backward compatibility
   if (isToken(args, 'size')) {
     return { width: generateSizeCalc(args) };
   }
-  
+
   // w(300) or w(50%) with clamp support: w(sm..lg), w(300..800), w(clamp(300px,50vw,800px))
   return { width: String(pxWithClamp(args)) };
 };
@@ -29,22 +37,30 @@ export const w: RuleHandler = (args?: string): CSSRule => {
 // Height utilities
 export const h: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
-  
+
+  // Handle ~ or .. prefix (max-height) or suffix (min-height)
+  if (args.startsWith('~') || args.startsWith('..')) {
+    return { 'max-height': String(pxWithClamp(args.replace(/^(\.\.|~)/, ''))) };
+  }
+  if (args.endsWith('~') || args.endsWith('..')) {
+    return { 'min-height': String(pxWithClamp(args.replace(/(\.\.|~)$/, ''))) };
+  }
+
   // Special Figma-style values first
   if (args === 'fill') return { flex: '1' };  // Figma's "Fill container"
   if (args === 'hug') return { height: 'fit-content' };  // Figma's "Hug contents"
-  
+
   // Common size values
   if (args === 'full') return { height: '100%' };
   if (args === 'auto') return { height: 'auto' };
   if (args === 'screen') return { height: '100vh' };
   if (args === 'fit') return { height: 'fit-content' }; // Standard fit-content
-  
+
   // size 02-design_tokens for backward compatibility
   if (isToken(args, 'size')) {
     return { height: generateSizeCalc(args) };
   }
-  
+
   // h(200) or h(50%) with clamp support: h(sm..lg), h(200..600), h(clamp(200px,30vh,600px))
   return { height: String(pxWithClamp(args)) };
 };
@@ -52,97 +68,97 @@ export const h: RuleHandler = (args?: string): CSSRule => {
 // Min-width utilities
 export const minW: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
-  
+
   // Common size values
   if (args === 'full') return { 'min-width': '100%' };
   if (args === 'screen') return { 'min-width': '100vw' };
   if (args === 'auto') return { 'min-width': 'auto' };
-  
+
   // Check for container 02-design_tokens first
   if (isToken(args, 'container')) {
     return { 'min-width': generateContainerCalc(args) };
   }
-  
+
   // Fallback to size 02-design_tokens for backward compatibility
   if (isToken(args, 'size')) {
     return { 'min-width': generateSizeCalc(args) };
   }
-  
+
   return { 'min-width': String(pxWithClamp(args)) };
 };
 
 // Max-width utilities
 export const maxW: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
-  
+
   // Common size values
   if (args === 'full') return { 'max-width': '100%' };
   if (args === 'screen') return { 'max-width': '100vw' };
   if (args === 'none') return { 'max-width': 'none' };
   if (args === 'auto') return { 'max-width': 'auto' };
-  
+
   // Check for container 02-design_tokens first
   if (isToken(args, 'container')) {
     return { 'max-width': generateContainerCalc(args) };
   }
-  
+
   // Fallback to size 02-design_tokens for backward compatibility
   if (isToken(args, 'size')) {
     return { 'max-width': generateSizeCalc(args) };
   }
-  
+
   return { 'max-width': String(pxWithClamp(args)) };
 };
 
 // Min-height utilities
 export const minH: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
-  
+
   // Common size values
   if (args === 'full') return { 'min-height': '100%' };
   if (args === 'screen') return { 'min-height': '100vh' };
   if (args === 'auto') return { 'min-height': 'auto' };
-  
+
   // Check for container 02-design_tokens first
   if (isToken(args, 'container')) {
     return { 'min-height': generateContainerCalc(args) };
   }
-  
+
   // Fallback to size 02-design_tokens for backward compatibility
   if (isToken(args, 'size')) {
     return { 'min-height': generateSizeCalc(args) };
   }
-  
+
   return { 'min-height': String(pxWithClamp(args)) };
 };
 
 // Max-height utilities
 export const maxH: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
-  
+
   // Common size values
   if (args === 'full') return { 'max-height': '100%' };
   if (args === 'screen') return { 'max-height': '100vh' };
   if (args === 'none') return { 'max-height': 'none' };
   if (args === 'auto') return { 'max-height': 'auto' };
-  
+
   // Check for container 02-design_tokens first
   if (isToken(args, 'container')) {
     return { 'max-height': generateContainerCalc(args) };
   }
-  
+
   // Fallback to size 02-design_tokens for backward compatibility
   if (isToken(args, 'size')) {
     return { 'max-height': generateSizeCalc(args) };
   }
-  
+
   return { 'max-height': String(pxWithClamp(args)) };
 };
 
 // Unified size utility - supports multiple patterns
 export const size: RuleHandler = (args?: string): CSSRule => {
   if (!args) return {};
-  
+
   // Pattern 1: Aspect ratio (16:9, 4:3, 1:1, etc.)
   const ratioMatch = args.match(/^(\d+):(\d+)$/);
   if (ratioMatch) {
@@ -153,7 +169,7 @@ export const size: RuleHandler = (args?: string): CSSRule => {
       width: '100%' // Let aspect-ratio control the height
     };
   }
-  
+
   // Pattern 2: Explicit dimensions (320x200, 100x50, etc.)
   const dimensionMatch = args.match(/^([0-9]*\.?[0-9]+[%a-z]*)x([0-9]*\.?[0-9]+[%a-z]*)$/);
   if (dimensionMatch) {
@@ -163,11 +179,11 @@ export const size: RuleHandler = (args?: string): CSSRule => {
       height: String(px(heightValue))
     };
   }
-  
+
   // Pattern 3: Single value (apply to both width and height)
   // size(32) -> width: 32px; height: 32px;
   // size(sm) -> width: var(--size-sm); height: var(--size-sm);
-  
+
   // Handle special keywords first (before token check)
   if (args === 'full') {
     return { width: '100%', height: '100%' };
@@ -184,7 +200,7 @@ export const size: RuleHandler = (args?: string): CSSRule => {
   if (args === 'text') {
     return { width: 'max-content', height: 'max-content' };
   }
-  
+
   // Check for size 02-design_tokens
   if (isToken(args, 'size')) {
     const tokenValue = generateSizeCalc(args);
@@ -193,7 +209,7 @@ export const size: RuleHandler = (args?: string): CSSRule => {
       height: tokenValue
     };
   }
-  
+
   // Default: treat as pixel value for both dimensions
   const pixelValue = String(pxWithClamp(args));
   return {

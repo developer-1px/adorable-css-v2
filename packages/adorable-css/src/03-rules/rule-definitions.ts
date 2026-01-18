@@ -9,7 +9,7 @@ import type { RuleHandler, KeywordRuleHandler } from './types';
 // Import all rule modules - centralized from index files
 import {
   displayRules, sizeRules, spacingRules, gridRules,
-  overflowRules, insetRules, divideRules, scrollMt, scrollMb, scrollMl, scrollMr, scrollM
+  overflowRules, insetRules, divideRules, scrollMt, scrollMb, scrollMl, scrollMr, scrollM, visibilityRules
 } from './layout';
 import { typographyRules, visualRules } from './style';
 import { colorRules } from '../02-design_tokens/design-system/colors/colors';
@@ -129,6 +129,7 @@ export const RULE_GROUPS: RuleDefinitions = {
           hidden: displayRules.hidden,
           wrap: displayRules.wrap,
           pack: displayRules.pack,
+          vpack: displayRules.vpack,
           grid: gridRules.grid,
           "grid-cols": gridRules["grid-cols"],
           "grid-rows": gridRules["grid-rows"],
@@ -143,6 +144,8 @@ export const RULE_GROUPS: RuleDefinitions = {
         name: 'Gap',
         rules: {
           gap: spacingRules.gap,
+          vgap: spacingRules.vgap,
+          hgap: spacingRules.hgap,
         },
       },
       padding: {
@@ -164,6 +167,10 @@ export const RULE_GROUPS: RuleDefinitions = {
       overflow: {
         name: 'Overflow',
         rules: overflowRules,
+      },
+      visibility: {
+        name: 'Visibility',
+        rules: visibilityRules,
       },
     }
   },
