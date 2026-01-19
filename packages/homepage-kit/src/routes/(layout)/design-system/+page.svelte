@@ -70,19 +70,19 @@
     <div class="vbox gap(3xl)">
       
       <!-- Colors -->
-      <section id="colors" class="vbox gap(8px)">
-        <div class="pb(xs) border-b(1px/gray-200) mt(8px)">
+      <section id="colors" class="vbox gap(sm)">
+        <div class="pb(xs) border-b(1px/gray-200) mt(sm)">
           <h2 class="font(display-sm) bold(800) c(gray-900)">Colors</h2>
         </div>
-        <div class="vbox gap(12px)">
+        <div class="vbox gap(md)">
           {#each colorCategories as category}
-            <div class="vbox gap(6px) p(sm) bg(white) r(xl) shadow(sm) border(1px/gray-100)">
+            <div class="vbox gap(sm) p(sm) bg(white) r(xl) shadow(sm) border(1px/gray-100)">
               <h3 class="font(title-md) c(gray-800)">{category.name}</h3>
-              <div class="grid(5) md:grid-cols(10) gap(3px)">
+              <div class="grid(5) md:grid-cols(10) gap(xs)">
                 {#each category.colors as color}
-                  <div class="vbox gap(2px) group cursor-pointer">
-                    <div 
-                      class="h(20px) w(full) r(md) transition hover:scale(1.05)"
+                  <div class="vbox gap(xs) group cursor-pointer">
+                    <div
+                      class="h(xl) w(full) r(md) transition hover:scale(1.05)"
                       style="background-color: {color.value}"
                     />
                     <div class="opacity(0) group-hover:opacity(100) transition text(center)">
@@ -105,7 +105,7 @@
           {#each typographyScale as type}
             <div class="hbox(middle) gap(sm) p(xs) r(lg) hover:bg(gray-50) transition group">
               <div class="w(140px)">
-                <code class="font(caption) c(indigo-500) bg(indigo-50) px(2px) py(1px) r(sm)">{type.name}</code>
+                <code class="font(caption) c(indigo-500) bg(indigo-50) px(xs) py(xs) r(sm)">{type.name}</code>
               </div>
               <div class="flex(1)">
                 <p style="font-size: {type.size}; font-weight: {type.weight};" class="c(gray-900)">
@@ -129,8 +129,8 @@
           {#each spacingSystem as space}
             <div class="hbox(middle) gap(xs)">
               <code class="w(32px) font(caption) c(gray-500)">{space.name}</code>
-              <div 
-                class="h(8px) bg(indigo-500) r(full) opacity(80)"
+              <div
+                class="h(sm) bg(indigo-500) r(full) opacity(80)"
                 style="width: {space.value}"
               />
               <span class="font(caption) c(gray-400)">{space.value}</span>
@@ -147,31 +147,31 @@
         
         <div class="grid(1) lg:grid-cols(2) gap(sm)">
           <!-- Buttons Card -->
-          <div id="buttons" class="vbox gap(6px) p(sm) bg(white) r(xl) shadow(sm) border(1px/gray-100)">
+          <div id="buttons" class="vbox gap(sm) p(sm) bg(white) r(xl) shadow(sm) border(1px/gray-100)">
             <h3 class="font(title-md) c(gray-800)">Buttons</h3>
             <div class="hbox gap(xs) flex-wrap">
-              <button class="px(6px) py(2px) r(md) bg(indigo-600) c(white) font(bold) hover:bg(indigo-700) transition shadow(sm) active:scale(0.98)">Primary</button>
-              <button class="px(6px) py(2px) r(md) bg(white) b(1px/gray-200) c(gray-700) font(medium) hover:bg(gray-50) transition shadow(sm)">Secondary</button>
-              <button class="px(6px) py(2px) r(md) c(gray-600) hover:bg(gray-50) transition font(medium)">Ghost</button>
+              <button class="px(sm) py(xs) r(md) bg(indigo-600) c(white) font(bold) hover:bg(indigo-700) transition shadow(sm) active:scale(0.98)">Primary</button>
+              <button class="px(sm) py(xs) r(md) bg(white) border(1px/gray-200) c(gray-700) font(medium) hover:bg(gray-50) transition shadow(sm)">Secondary</button>
+              <button class="px(sm) py(xs) r(md) c(gray-600) hover:bg(gray-50) transition font(medium)">Ghost</button>
             </div>
           </div>
 
           <!-- Cards Card -->
-          <div id="cards" class="vbox gap(6px) p(sm) bg(white) r(xl) shadow(sm) border(1px/gray-100)">
+          <div id="cards" class="vbox gap(sm) p(sm) bg(white) r(xl) shadow(sm) border(1px/gray-100)">
             <h3 class="font(title-md) c(gray-800)">Cards</h3>
             <div class="vbox gap(xs)">
-               <div class="vbox gap(xs) p(6px) r(lg) bg(white) shadow(md) border(1px/gray-100)">
-                  <div class="hbox(middle) gap(3px)">
-                    <div class="size(10px) r(full) bg(indigo-100) hbox(center) c(indigo-600)">
-                      <svg class="size(5px)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+               <div class="vbox gap(xs) p(sm) r(lg) bg(white) shadow(md) border(1px/gray-100)">
+                  <div class="hbox(middle) gap(xs)">
+                    <div class="size(sm) r(full) bg(indigo-100) hbox(center) c(indigo-600)">
+                      <svg class="size(xs)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
                     </div>
                     <span class="font(medium) c(gray-900)">Elevated Surface</span>
                   </div>
                </div>
-               <div class="vbox gap(xs) p(6px) r(lg) bg(gray-50) border(1px/gray-200)">
-                  <div class="hbox(middle) gap(3px)">
-                    <div class="size(10px) r(full) bg(white) shadow(sm) hbox(center) c(gray-900)">
-                       <svg class="size(5px)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+               <div class="vbox gap(xs) p(sm) r(lg) bg(gray-50) border(1px/gray-200)">
+                  <div class="hbox(middle) gap(xs)">
+                    <div class="size(sm) r(full) bg(white) shadow(sm) hbox(center) c(gray-900)">
+                       <svg class="size(xs)" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
                     </div>
                     <span class="font(medium) c(gray-900)">Flat Surface</span>
                   </div>

@@ -55,7 +55,7 @@
     <div class="absolute top(-lg) left(50%) translate-x(-50%) w(12xl) h(xs) bg(to-r/transparent..primary-300..transparent) opacity(60)"></div>
     
     <div class="hbox(pack) gap(md) mb(xl)">
-      <div class="p(md) r(full) bg(to-br/primary-100..primary-200) b(1/primary-200)">
+      <div class="p(md) r(full) bg(to-br/primary-100..primary-200) border(1px/primary-200)">
         <Sparkles size="24" class="c(primary)" />
       </div>
       <h2 class="display(lg) c(to-r/primary..primary-700)">Effects & Animation</h2>
@@ -82,8 +82,8 @@
   </div>
 
   <!-- Animation Duration Tokens -->
-  <div class="bg(white) r(3xl) shadow(2xl) shadow(primary-100.3) overflow(hidden) b(1/neutral-100)">
-    <div class="bg(to-r/primary-50..neutral-50) p(2xl) bb(1/primary-100)">
+  <div class="bg(white) r(3xl) shadow(2xl) shadow(primary-100.3) overflow(hidden) border(1px/neutral-100)">
+    <div class="bg(to-r/primary-50..neutral-50) p(2xl) border-b(1px/primary-100)">
       <div class="hbox(between/middle) mb(xl)">
         <div>
           <h3 class="heading(h2) c(gray-900) mb(sm)">Animation Duration</h3>
@@ -98,7 +98,7 @@
     <div class="p(2xl)">
       <div class="vbox gap(xl)">
         {#each durationVariants as { key, value, usage }, index}
-          <div class="group relative p(2xl) r(2xl) bg(gray-50) hover:bg(white transition-all duration(500ms) hover:shadow(xl) hover:shadow(primary-100.2) b(1/transparent) hover:b(1/primary-200) cursor-pointer"
+          <div class="group relative p(2xl) r(2xl) bg(gray-50) hover:bg(white) transition-all duration(500ms) hover:shadow(xl) hover:shadow(primary-100.2) border(1px/transparent) hover:border(1px/primary-200) cursor-pointer"
                on:click={() => copyCode(`duration(${key})`)}>
             
             <!-- Copy indicator -->
@@ -130,7 +130,7 @@
               </div>
               
               <!-- Animation demo -->
-              <div class="flex(1) relative h(4xl) bg(primary-50) r(xl) b(1/primary-200) overflow(hidden)">
+              <div class="flex(1) relative h(4xl) bg(primary-50) r(xl) border(1px/primary-200) overflow(hidden)">
                 <div class="absolute left(md) top(50%) translate-y(-50%) w(2xl) h(2xl) bg(to-br/primary..primary-600) r(lg) shadow(lg) 
                            group-hover:translate-x(calc(100vw - 400px)) transition-transform duration({key}) ease(out)"></div>
                 <div class="absolute right(md) top(50%) translate-y(-50%) text(xs) c(primary) font(mono)">
@@ -145,8 +145,8 @@
   </div>
 
   <!-- Easing Functions -->
-  <div class="bg(white) r(3xl) shadow(2xl) shadow(primary-100.3) overflow(hidden) b(1/neutral-100)">
-    <div class="bg(to-r/primary-50..primary-100) p(2xl) bb(1/primary-100)">
+  <div class="bg(white) r(3xl) shadow(2xl) shadow(primary-100.3) overflow(hidden) border(1px/neutral-100)">
+    <div class="bg(to-r/primary-50..primary-100) p(2xl) border-b(1px/primary-100)">
       <div class="hbox(between/middle) mb(xl)">
         <div>
           <h3 class="heading(h2) c(gray-900) mb(sm)">Easing Functions</h3>
@@ -161,7 +161,7 @@
     <div class="p(2xl)">
       <div class="grid(2) gap(xl)">
         {#each easeVariants as { key, value, usage }, index}
-          <div class="group relative p(2xl) r(2xl) bg(gray-50) hover:bg(white transition-all duration(500ms) hover:shadow(xl) hover:shadow(primary-100.2) b(1/transparent) hover:b(1/primary-200) cursor-pointer"
+          <div class="group relative p(2xl) r(2xl) bg(gray-50) hover:bg(white) transition-all duration(500ms) hover:shadow(xl) hover:shadow(primary-100.2) border(1px/transparent) hover:border(1px/primary-200) cursor-pointer"
                on:click={() => copyCode(`ease(${key})`)}>
             
             <!-- Copy indicator -->
